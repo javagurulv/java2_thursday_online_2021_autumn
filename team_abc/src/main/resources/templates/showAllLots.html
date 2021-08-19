@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Auction demo project">
+    <meta name="author" content="HardCore">
+    <title>Show All Lots</title>
+</head>
+<body>
+<h3>All Lots</h3>
+
+<table>
+    <tr>
+        <td>Lot ID: </td>
+        <td>Lot name: </td>
+        <td>Lot start price: </td>
+        <td>User who created lot: </td>
+    </tr>
+
+    <td th:if="${lots != null}">
+        <tr th:each="lot : ${lots}">
+            <td th:text="${lot.Id}"/>
+            <td th:text="${lot.Name}"/>
+            <td th:text="${lot.startPrice}"/>
+            <td th:text="${lot.userID}"/>
+        </tr>
+    </td>
+
+
+</table>
+<br>
+    <form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit"/>
+    </form>
+
+</body>
+</html>

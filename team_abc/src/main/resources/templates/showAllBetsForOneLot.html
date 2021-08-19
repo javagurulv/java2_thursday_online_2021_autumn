@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Auction demo project">
+    <meta name="author" content="HardCore">
+    <title>Auction</title>
+</head>
+<body>
+<h3>Show all bets for one lot</h3>
+
+<table>
+<tr>
+    <td>Lot ID:</td>
+</tr>
+
+<tr>
+    <form action="/showAllBetsForOneLot" th:object="${request}" method="post">
+        <td><input type="text" th:field="${request.Id}"/></td>
+        <td>
+            <input type="submit" value="Add"/>
+            <input type="reset" value="Clear"/>
+        </td>
+    </form>
+</tr>
+
+</table>
+
+<table>
+    <tr th:if = "${bets != null}">
+        <td>Bet id:</td>
+        <td>Bet:</td>
+        <td>Lot id:</td>
+        <td>User who made bet</td>
+    </tr>
+    <td th:if = "${bets != null}">
+        <tr th:each="bet : ${bets}">
+            <td th:text="${bet.Id}"/>
+            <td th:text="${bet.Bet}"/>
+            <td th:text="${bet.LotId}"/>
+            <td th:text="${bet.UserID}"/>
+        </tr>
+    </td>
+
+</table>
+
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}"/>
+        <td th:text="${error.message}"/>
+    </tr>
+</td>
+<br>
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit"/>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Auction demo project">
+    <meta name="author" content="HardCore">
+    <title>Auction</title>
+</head>
+<body>
+
+<h3>Highest bet for lot</h3>
+
+<table>
+    <tr>
+        <td>Lot ID:</td>
+    </tr>
+
+    <tr>
+        <form action="/showHighestBet" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.Id}"/></td>
+            <td>
+                <input type="submit" value="Add"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+
+
+</table>
+
+<table>
+    <tr th:if = "${bet != null}">
+        <td>Bet id:</td>
+        <td>Bet:</td>
+        <td>Lot id:</td>
+        <td>User who made bet</td>
+    </tr>
+
+        <tr th:if = "${bet != null}">
+            <td th:text="${bet.Id}"/>
+            <td th:text="${bet.Bet}"/>
+            <td th:text="${bet.LotId}"/>
+            <td th:text="${bet.UserID}"/>
+        </tr>
+
+</table>
+
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}"/>
+        <td th:text="${error.message}"/>
+    </tr>
+</td>
+<br>
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit"/>
+</form>
+
+</body>
+</html>

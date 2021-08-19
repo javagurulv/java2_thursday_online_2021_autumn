@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Auction demo project">
+    <meta name="author" content="HardCore">
+    <title>Show All Bets</title>
+</head>
+<body>
+<h3>All bets</h3>
+
+<table>
+    <tr>
+        <td>Bet id:</td>
+        <td>Bet:</td>
+        <td>Lot id:</td>
+        <td>User who made bet</td>
+    </tr>
+    <td th:if="${bets != null}">
+        <tr th:each="bet : ${bets}">
+            <td th:text="${bet.Id}"/>
+            <td th:text="${bet.Bet}"/>
+            <td th:text="${bet.LotId}"/>
+            <td th:text="${bet.UserID}"/>
+        </tr>
+    </td>
+</table>
+
+<br>
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit"/>
+</form>
+
+</body>
+</html>
