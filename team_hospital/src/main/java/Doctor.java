@@ -1,15 +1,26 @@
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Doctor {
+    private static final AtomicInteger count = new AtomicInteger(0);
+    private int id;
     private String name;
     private String surname;
-    private int id;
-    private static int idCounter = 1;
+    private String speciality;
 
-    public Doctor(String name, String surname) {
+    public Doctor(String name, String surname, String speciality) {
         this.name = name;
         this.surname = surname;
-        this.id = idCounter++;
+        this.speciality = speciality;
+        this.id = count.incrementAndGet();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -28,12 +39,12 @@ public class Doctor {
         this.surname = surname;
     }
 
-    public int getId() {
-        return id;
+    public String getSpeciality() {
+        return speciality;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
     }
 
     @Override
@@ -41,20 +52,21 @@ public class Doctor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Doctor doctor = (Doctor) o;
-        return id == doctor.id && Objects.equals(name, doctor.name) && Objects.equals(surname, doctor.surname);
+        return id == doctor.id && Objects.equals(name, doctor.name) && Objects.equals(surname, doctor.surname) && Objects.equals(speciality, doctor.speciality);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, id);
+        return Objects.hash(id, name, surname, speciality);
     }
 
     @Override
     public String toString() {
         return "Doctor{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", id=" + id +
+                ", speciality='" + speciality + '\'' +
                 '}';
     }
 }

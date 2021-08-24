@@ -5,9 +5,9 @@ public class PatientActions {
     private final Scanner scanner = new Scanner(System.in);
 
     public void addPatient(List<Patient> list) {
-        System.out.println("Enter patient name and surname: ");
-        String[] nameSurname = scanner.nextLine().split(" ");
-        list.add(new Patient(nameSurname[0], nameSurname[1]));
+        System.out.println("Enter patient name and surname, and personal code: ");
+        String[] patientInfo = scanner.nextLine().split(" ");
+        list.add(new Patient(patientInfo[0], patientInfo[1], patientInfo[2]));
         System.out.println("Patient added.");
     }
 
