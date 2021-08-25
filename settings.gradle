@@ -11,4 +11,9 @@ include 'teacher:lesson_3_request_response_input_data_validation:step_2_input_da
 
 
 include 'team_abc'
+include 'team_hospital'
+include 'team_oddJobs'
+include 'team_qwe'
+
+
 
