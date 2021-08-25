@@ -38,27 +38,29 @@ public class Hospital {
     private void patientMenu() {
         int userInput;
         do {
-            System.out.println("1. Add patient");
+            System.out.println("1. Add a new patient");
             System.out.println("2. Show all patients");
-            System.out.println("3. Find patient by ID");
-            System.out.println("4. Delete patient by ID");
-            System.out.println("5. Exit");
+            System.out.println("3. Find the patient by ID");
+            System.out.println("4. Delete the patient by ID");
+            System.out.println("5. Edit the patient's information");
+            System.out.println("6. Exit");
             userInput = scanner.nextInt();
             patientUserActions(userInput);
-        } while (userInput != 5);
+        } while (userInput != 6);
     }
 
     private void doctorMenu() {
         int userInput;
         do {
-            System.out.println("1. Add doctor");
+            System.out.println("1. Add a new doctor");
             System.out.println("2. Show all doctors");
-            System.out.println("3. Find doctor by ID");
-            System.out.println("4. Delete doctor by ID");
-            System.out.println("5. Exit");
+            System.out.println("3. Find the doctor by ID");
+            System.out.println("4. Delete the doctor by ID");
+            System.out.println("5. Edit the doctor's information");
+            System.out.println("6. Exit");
             userInput = scanner.nextInt();
             doctorUserActions(userInput);
-        } while (userInput != 5);
+        } while (userInput != 6);
     }
 
     private void patientUserActions(int num) {
@@ -67,15 +69,17 @@ public class Hospital {
             case 2 -> patientActions.showAllPatients(patientsList);
             case 3 -> patientActions.findById(patientsList);
             case 4 -> patientActions.deleteById(patientsList);
+            case 5 -> patientActions.editPatient(patientsList);
         }
     }
 
-        private void doctorUserActions ( int num){
-            switch (num) {
-                case 1 -> doctorActions.addDoctor(doctorsList);
-                case 2 -> doctorActions.showAllDoctors(doctorsList);
-                case 3 -> doctorActions.findById(doctorsList);
-                case 4 -> doctorActions.deleteById(doctorsList);
-            }
+    private void doctorUserActions(int num) {
+        switch (num) {
+            case 1 -> doctorActions.addDoctor(doctorsList);
+            case 2 -> doctorActions.showAllDoctors(doctorsList);
+            case 3 -> doctorActions.findById(doctorsList);
+            case 4 -> doctorActions.deleteById(doctorsList);
+            case 5 -> doctorActions.editDoctor(doctorsList);
         }
     }
+}
