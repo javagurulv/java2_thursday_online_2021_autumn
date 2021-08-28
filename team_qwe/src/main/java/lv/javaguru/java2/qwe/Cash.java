@@ -13,8 +13,4 @@ class Cash extends Security {
                 '}';
     }
 
-
-
-
-
 }

@@ -79,8 +79,8 @@ class User {
                 entry(MIDDLE, 2),
                 entry(LOWER_MIDDLE, 1)
         );
-        mapAge.forEach((integerPredicate, integer) -> {
-            if (integerPredicate.test(age)) {
+        mapAge.forEach((agePredicate, integer) -> {
+            if (agePredicate.test(age)) {
                 riskTolerance = integer;
             }
         });

@@ -7,6 +7,10 @@ interface UserData {
 
     List<User> getUserList();
 
+    void addUser();
+
+    void removeUser(String name);
+
     void generatePortfolio(User user);
 
     void showListOfUsers(List<User> list);
@@ -18,5 +22,7 @@ interface UserData {
     void showUserPortfolioGroupedByIndustry(User user);
 
     void showUserInvestmentsByEachIndustry(User user);
+
+    void showPortfolioSummary(User user);
 
 }
