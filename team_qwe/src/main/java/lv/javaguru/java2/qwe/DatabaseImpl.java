@@ -20,6 +20,7 @@ class DatabaseImpl implements Database {
 
     DatabaseImpl() {
         this.securityList = new ArrayList<>();
+        securityList.add(new Cash());
     }
 
     @Override

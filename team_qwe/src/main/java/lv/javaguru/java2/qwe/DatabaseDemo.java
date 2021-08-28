@@ -11,6 +11,15 @@ class DatabaseDemo {
     public static void main(String[] args) {
 
         Database database = new DatabaseImpl();
+        executeCase1(database);
+        UserData userData = new UserDataImpl(database);
+        userData.showListOfUsers(userData.getUserList());
+        System.out.println(userData.findUserByName("Alexander"));
+        userData.generatePortfolio(userData.findUserByName("Alexander").orElseThrow());
+        userData.showUserPortfolio(userData.findUserByName("Alexander").orElseThrow());
+        userData.showUserPortfolioGroupedByIndustry(userData.findUserByName("Alexander").orElseThrow());
+        userData.showUserInvestmentsByEachIndustry(userData.findUserByName("Alexander").orElseThrow());
+
 
         String[] menu = {"IMPORT DATA FROM FILE", "ADD SECURITY", "REMOVE SECURITY", "SHOW LIST",
                 "FIND SECURITY BY NAME", "FILTER SECURITIES(STOCKS) BY ANY DOUBLE PARAMETER",
