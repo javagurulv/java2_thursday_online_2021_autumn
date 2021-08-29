@@ -3,7 +3,7 @@ package lv.javaguru.java2.qwe;
 import java.util.List;
 import java.util.Optional;
 
-interface UserData {
+public interface UserData {
 
     List<User> getUserList();
 

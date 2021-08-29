@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.*;
 import static javax.swing.JOptionPane.showMessageDialog;
 import static lv.javaguru.java2.qwe.Type.*;
-import static lv.javaguru.java2.qwe.DatabaseImpl.inputDialog;
-import static lv.javaguru.java2.qwe.DatabaseImpl.messageDialog;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
 class UserDataImpl implements UserData {
 

@@ -1,6 +1,5 @@
 package lv.javaguru.java2.qwe;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -10,11 +9,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static javax.swing.JOptionPane.showInputDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 import static java.util.Map.entry;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
-class DatabaseImpl implements Database {
+public class DatabaseImpl implements Database {
 
     private final ArrayList<Security> securityList;
 
@@ -204,21 +204,6 @@ class DatabaseImpl implements Database {
                 entry("=", security -> Stream.of(security).map(stock -> (Stock) stock)
                         .anyMatch(stock -> stock.getRiskWeight() == target))
         );
-    }
-
-    static String inputDialog(String text) {
-        return Optional.ofNullable(showInputDialog(null, text)).orElse("");
-    }
-
-    static String inputDialog(String request, String title, String[] arr) {
-        return Optional.ofNullable((String) showInputDialog(
-                null, request,
-                title, JOptionPane.QUESTION_MESSAGE, null,
-                arr, arr[0])).orElse("");
-    }
-
-    static void messageDialog(String text) {
-        showMessageDialog(null, text);
     }
 
 }

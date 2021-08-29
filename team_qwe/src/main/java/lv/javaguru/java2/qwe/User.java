@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import static java.util.Map.entry;
 import static lv.javaguru.java2.qwe.Type.*;
 
-class User {
+public class User {
 
     private final String name;
     private final int age;

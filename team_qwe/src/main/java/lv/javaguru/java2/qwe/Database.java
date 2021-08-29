@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-interface Database {
+public interface Database {
 
     ArrayList<Security> getSecurityList();
 
