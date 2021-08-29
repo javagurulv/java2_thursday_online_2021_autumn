@@ -19,9 +19,10 @@ class UserDataImpl implements UserData {
     public UserDataImpl(Database database) {
         this.userList = new ArrayList<>();
         this.database = database;
-        userList.add(new User("Alexander", 40, SUPER_RICH, 1_000_000));
+        userList.add(new User("Alexander", 25, SUPER_RICH, 1_000_000));
         userList.add(new User("Tatyana", 32, UPPER_MIDDLE, 125_000));
         userList.add(new User("Vladimir", 78, LOWER_MIDDLE, 30_000));
+        userList.add(new User("John", 55, MIDDLE, 50_000));
     }
 
     @Override
@@ -71,7 +72,7 @@ class UserDataImpl implements UserData {
 
         Map<String, List<Security>> listPerIndustry = investmentPerIndustry.entrySet().stream()
                 .collect(toMap(Map.Entry::getKey, doubles ->
-                        database.getSecurityList().stream()
+                        securitiesForRiskGroups().get(user.getRiskTolerance()).stream()
                                 .filter(security -> security.getIndustry().equals(doubles.getKey()))
                                 .limit(2) // количество бумаг от каждой индустрии в портфеле клиента
                                 .collect(Collectors.toList())
@@ -159,7 +160,7 @@ class UserDataImpl implements UserData {
                         )));
 
         Double portfolioAverageWeightedDividendYield = user.getPortfolio().stream()
-                .filter(position -> !position.getSecurity().getClass().getSimpleName().equals("Cash"))
+                .filter(position -> position.getSecurity().getClass().getSimpleName().equals("Stock"))
                 .map(position -> ((position.getAmount() * position.getSecurity().getMarketPrice()) / portfolioValue) *
                         Stream.of(position)
                                 .map(position1 -> (Stock) position1.getSecurity())
@@ -167,13 +168,24 @@ class UserDataImpl implements UserData {
                                 .findAny().orElse(0.))
                 .reduce(Double::sum).orElse(0.);
 
-        System.out.println("======================================================");
-        System.out.println("<PORTFOLIO SUMMARY>");
+        Double portfolioAverageWeightedRiskWeight = user.getPortfolio().stream()
+                .filter(position -> position.getSecurity().getClass().getSimpleName().equals("Stock"))
+                .map(position -> ((position.getAmount() * position.getSecurity().getMarketPrice()) / portfolioValue) *
+                        Stream.of(position)
+                                .map(position1 -> (Stock) position1.getSecurity())
+                                .map(Stock::getRiskWeight)
+                                .findAny().orElse(0.))
+                .reduce(Double::sum).orElse(0.);
+
+
+        System.out.println("===============PORTFOLIO SUMMARY======================");
         System.out.println("USER NAME: " + userName);
+        System.out.println("USER RISK TOLERANCE LEVEL: " + user.getRiskTolerance());
         System.out.println("AMOUNT OF POSITIONS: " + amountOfPositions);
         System.out.println("PORTFOLIO ALLOCATION:");
         portfolioAllocation.forEach((key, value) -> System.out.println(key + ": " + round(value * 100) + "%"));
         System.out.println("AVERAGE WEIGHTED DIVIDEND YIELD: " + round(portfolioAverageWeightedDividendYield) + "%");
+        System.out.println("AVERAGE WEIGHTED RISK WEIGHT: " + round(portfolioAverageWeightedRiskWeight));
         System.out.println("======================================================");
     }
 
@@ -183,8 +195,45 @@ class UserDataImpl implements UserData {
                         doubles -> doubles.getValue()[user.getRiskTolerance() - 1]));
     }
 
+    private Map<Integer, List<Security>> securitiesForRiskGroups() {
+        return Map.ofEntries(
+                Map.entry(1, database.getSecurityList().stream()
+                        .filter(security -> security.getClass().getSimpleName().equals("Stock"))
+                        .map(security -> (Stock) security)
+                        .filter(stock -> stock.getDividends() > 3)
+                        .filter(stock -> stock.getRiskWeight() < 1.2)
+                        .sorted(Comparator.comparingDouble(Stock::getRiskWeight))
+                        .collect(toList())),
+                Map.entry(2, database.getSecurityList().stream()
+                        .filter(security -> security.getClass().getSimpleName().equals("Stock"))
+                        .map(security -> (Stock) security)
+                        .filter(stock -> stock.getDividends() > 2)
+                        .filter(stock -> stock.getRiskWeight() < 1.2)
+                        .sorted(Comparator.comparingDouble(Stock::getRiskWeight).reversed())
+                        .collect(toList())),
+                Map.entry(3, database.getSecurityList().stream()
+                        .filter(security -> security.getClass().getSimpleName().equals("Stock"))
+                        .map(security -> (Stock) security)
+                        .filter(stock -> stock.getDividends() > 1)
+                        .filter(stock -> stock.getRiskWeight() < 1)
+                        .collect(toList())),
+                Map.entry(4, database.getSecurityList().stream()
+                        .filter(security -> security.getClass().getSimpleName().equals("Stock"))
+                        .map(security -> (Stock) security)
+                        .filter(stock -> stock.getDividends() < 1.5)
+                        .filter(stock -> stock.getRiskWeight() > 1.1)
+                        .sorted(Comparator.comparingDouble(Stock::getRiskWeight).reversed())
+                        .collect(toList())),
+                Map.entry(5, database.getSecurityList().stream()
+                        .filter(security -> security.getClass().getSimpleName().equals("Stock"))
+                        .map(security -> (Stock) security)
+                        .sorted(Comparator.comparingDouble(Stock::getRiskWeight).reversed())
+                        .collect(toList()))
+        );
+    }
+
     private int convertToInt(double amount) {
-        return (int) Math.round(amount);
+        return (int) amount;
     }
 
     private double round(double amount) {
