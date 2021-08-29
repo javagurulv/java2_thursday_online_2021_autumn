@@ -3,6 +3,7 @@ package lv.javaguru.java2.oddJobs;
 import java.util.Objects;
 
 public class Specialist {
+    private Long id;
     private String name;
     private String surname;
     private String profession;
@@ -11,6 +12,14 @@ public class Specialist {
         this.name = name;
         this.surname = surname;
         this.profession = profession;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -41,22 +50,22 @@ public class Specialist {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Specialist specialist = (Specialist) o;
-        return Objects.equals(name, specialist.name) && Objects.equals(surname, specialist.surname) && Objects.equals(profession, specialist.profession);
+        Specialist that = (Specialist) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(surname, that.surname) && Objects.equals(profession, that.profession);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, profession);
+        return Objects.hash(id, name, surname, profession);
     }
 
     @Override
     public String toString() {
         return "Specialist{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", profession='" + profession + '\'' +
                 '}';
     }
-
 }
