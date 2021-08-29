@@ -1,5 +1,9 @@
 package lv.javaguru.java2.qwe;
 
+import lv.javaguru.java2.qwe.database.Database;
+import lv.javaguru.java2.qwe.database.DatabaseImpl;
+import lv.javaguru.java2.qwe.database.UserData;
+import lv.javaguru.java2.qwe.database.UserDataImpl;
 import lv.javaguru.java2.qwe.ui_actions.ChooseDataMenuUIAction;
 import lv.javaguru.java2.qwe.ui_actions.ChooseUserMenuUIAction;
 

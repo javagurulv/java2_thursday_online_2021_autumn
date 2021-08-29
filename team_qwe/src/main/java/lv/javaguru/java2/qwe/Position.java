@@ -2,7 +2,7 @@ package lv.javaguru.java2.qwe;
 
 import java.util.Objects;
 
-class Position {
+public class Position {
 
     private final Security security;
     private final double amount;

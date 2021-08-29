@@ -1,16 +1,24 @@
-package lv.javaguru.java2.qwe;
+package lv.javaguru.java2.qwe.database;
+
+import lv.javaguru.java2.qwe.Bond;
+import lv.javaguru.java2.qwe.Cash;
+import lv.javaguru.java2.qwe.Security;
+import lv.javaguru.java2.qwe.Stock;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static javax.swing.JOptionPane.showMessageDialog;
 import static java.util.Map.entry;
+import static javax.swing.JOptionPane.showMessageDialog;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
@@ -18,7 +26,7 @@ public class DatabaseImpl implements Database {
 
     private final ArrayList<Security> securityList;
 
-    DatabaseImpl() {
+    public DatabaseImpl() {
         this.securityList = new ArrayList<>();
         securityList.add(new Cash());
     }

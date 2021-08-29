@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.utils;
 
 import lv.javaguru.java2.qwe.User;
-import lv.javaguru.java2.qwe.UserData;
+import lv.javaguru.java2.qwe.database.UserData;
 
 import javax.swing.*;
 import java.util.Optional;

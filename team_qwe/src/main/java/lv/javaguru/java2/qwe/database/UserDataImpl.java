@@ -1,4 +1,6 @@
-package lv.javaguru.java2.qwe;
+package lv.javaguru.java2.qwe.database;
+
+import lv.javaguru.java2.qwe.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,7 +13,7 @@ import static lv.javaguru.java2.qwe.Type.*;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
-class UserDataImpl implements UserData {
+public class UserDataImpl implements UserData {
 
     private final List<User> userList;
     private final Database database;

@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe;
 
-class Cash extends Security {
+public class Cash extends Security {
 
     public Cash() {
         super("Cash", "Cash", "USD", 1);
