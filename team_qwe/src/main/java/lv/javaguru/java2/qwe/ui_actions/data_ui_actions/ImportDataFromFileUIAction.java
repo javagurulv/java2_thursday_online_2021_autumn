@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.ui_actions.data_ui_actions;
 
-import lv.javaguru.java2.qwe.database.Database;
+import lv.javaguru.java2.qwe.services.data_services.ImportSecuritiesService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 import javax.swing.*;
@@ -10,10 +10,10 @@ import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
 public class ImportDataFromFileUIAction implements UIAction {
 
-    private final Database database;
+    private final ImportSecuritiesService importSecuritiesService;
 
-    public ImportDataFromFileUIAction(Database database) {
-        this.database = database;
+    public ImportDataFromFileUIAction(ImportSecuritiesService importSecuritiesService) {
+        this.importSecuritiesService = importSecuritiesService;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class ImportDataFromFileUIAction implements UIAction {
         if (result == JFileChooser.APPROVE_OPTION) {
             String path = fileChooser.getSelectedFile().getPath();
             try {
-                database.importSecurities(path);
+                importSecuritiesService.execute(path);
                 messageDialog("Data from " + path + " has been imported!");
             } catch (IOException e) {
                 System.out.println("ERROR!");
