@@ -6,8 +6,8 @@ import patient.services.PatientExistsService;
 import java.util.Scanner;
 
 public class EditPatientUIAction implements PatientUIActions {
-    EditPatientService editPatient;
-    PatientExistsService patientExists;
+    private final EditPatientService editPatient;
+    private final PatientExistsService patientExists;
 
     public EditPatientUIAction(EditPatientService editPatient, PatientExistsService patientExists) {
         this.editPatient = editPatient;

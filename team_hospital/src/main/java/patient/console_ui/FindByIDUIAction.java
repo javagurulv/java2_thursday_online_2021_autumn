@@ -6,8 +6,8 @@ import patient.services.PatientExistsService;
 import java.util.Scanner;
 
 public class FindByIDUIAction implements PatientUIActions {
-    FindPatientByIdService findById;
-    PatientExistsService patientExists;
+    private final FindPatientByIdService findById;
+    private final PatientExistsService patientExists;
 
     public FindByIDUIAction(FindPatientByIdService findById, PatientExistsService patientExists) {
         this.findById = findById;

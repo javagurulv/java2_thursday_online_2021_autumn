@@ -4,7 +4,7 @@ import patient.services.AddPatientService;
 import java.util.Scanner;
 
 public class AddPatientUIAction implements PatientUIActions {
-    AddPatientService addPatient;
+   private final AddPatientService addPatient;
 
     public AddPatientUIAction(AddPatientService addPatient) {
         this.addPatient = addPatient;

@@ -3,7 +3,7 @@ package patient.console_ui;
 import patient.services.ShowAllPatientsService;
 
 public class ShowAllPatientsUIAction implements PatientUIActions {
-    ShowAllPatientsService showAllPatients;
+    private final ShowAllPatientsService showAllPatients;
 
     public ShowAllPatientsUIAction(ShowAllPatientsService showAllPatients) {
         this.showAllPatients = showAllPatients;
