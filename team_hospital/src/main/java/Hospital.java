@@ -1,3 +1,7 @@
+import patient.InputNumChecker;
+import patient.console_ui.*;
+import patient.database.PatientDatabaseImpl;
+import patient.services.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,11 +12,19 @@ public class Hospital {
         test.action();
     }
 
-    private final List<Patient> patientsList = new ArrayList<>();
+    private final PatientDatabaseImpl patientDatabase = new PatientDatabaseImpl();
     private final List<Doctor> doctorsList = new ArrayList<>();
     private final Scanner scanner = new Scanner(System.in);
-    private final PatientActions patientActions = new PatientActions();
     private final DoctorActions doctorActions = new DoctorActions();
+    private final InputNumChecker inputNumChecker = new InputNumChecker();
+
+    private final PatientUIActions[] PatientUIActions = {
+            new AddPatientUIAction(new AddPatientService(patientDatabase)),
+            new ShowAllPatientsUIAction(new ShowAllPatientsService(patientDatabase)),
+            new FindByIDUIAction(new FindPatientByIdService(patientDatabase), new PatientExistsService(patientDatabase)),
+            new DeletePatientUIAction(new DeletePatientService(patientDatabase), new PatientExistsService(patientDatabase)),
+            new EditPatientUIAction(new EditPatientService(patientDatabase), new PatientExistsService(patientDatabase))};
+
 
     public void action() {
         while (true) {
@@ -24,7 +36,7 @@ public class Hospital {
             System.out.println();
 
             System.out.println("Enter menu item number to execute: ");
-            int userInput = scanner.nextInt();
+            int userInput = inputNumChecker.execute(1, 3, scanner.nextInt());
 
             switch (userInput) {
                 case 1 -> patientMenu();
@@ -44,8 +56,9 @@ public class Hospital {
             System.out.println("4. Delete the patient by ID");
             System.out.println("5. Edit the patient's information");
             System.out.println("6. Exit");
-            userInput = scanner.nextInt();
+            userInput = inputNumChecker.execute(1,6, scanner.nextInt());
             patientUserActions(userInput);
+            System.out.println();
         } while (userInput != 6);
     }
 
@@ -65,11 +78,11 @@ public class Hospital {
 
     private void patientUserActions(int num) {
         switch (num) {
-            case 1 -> patientActions.addPatient(patientsList);
-            case 2 -> patientActions.showAllPatients(patientsList);
-            case 3 -> patientActions.findById(patientsList);
-            case 4 -> patientActions.deleteById(patientsList);
-            case 5 -> patientActions.editPatient(patientsList);
+            case 1 -> PatientUIActions[0].execute();
+            case 2 -> PatientUIActions[1].execute();
+            case 3 -> PatientUIActions[2].execute();
+            case 4 -> PatientUIActions[3].execute();
+            case 5 -> PatientUIActions[4].execute();
         }
     }
 
