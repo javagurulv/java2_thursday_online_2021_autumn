@@ -4,14 +4,13 @@ import java.util.Scanner;
 
 public class InputNumChecker {
     public int execute(int inputMin, int inputMax) {
-        Scanner scanner = new Scanner(System.in);
         int input = askInt();
         if (input < inputMin || input > inputMax) {
             boolean check = false;
             while (!check) {
                 System.out.println("Please enter number from " + inputMin
                         + " to " + inputMax + ".");
-                input = scanner.nextInt();
+                input = askInt();
                 if (input >= inputMin && input <= inputMax) {
                     check = true;
                 }
