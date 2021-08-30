@@ -1,11 +1,13 @@
-package lv.javaguru.java2.qwe;
+package lv.javaguru.java2.qwe.database;
+
+import lv.javaguru.java2.qwe.Security;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-interface Database {
+public interface Database {
 
     ArrayList<Security> getSecurityList();
 

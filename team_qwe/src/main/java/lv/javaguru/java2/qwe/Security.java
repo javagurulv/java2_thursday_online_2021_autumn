@@ -2,7 +2,7 @@ package lv.javaguru.java2.qwe;
 
 import java.util.Objects;
 
-abstract class Security {
+public abstract class Security {
 
     private final String name;
     private final String industry;

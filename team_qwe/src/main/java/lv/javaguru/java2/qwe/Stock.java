@@ -2,7 +2,7 @@ package lv.javaguru.java2.qwe;
 
 import java.util.Objects;
 
-class Stock extends Security {
+public class Stock extends Security {
 
     private final double dividends;
     private final double riskWeight;
