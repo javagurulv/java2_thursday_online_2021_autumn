@@ -1,10 +1,7 @@
 package lv.javaguru.java2.qwe.database;
 
 import lv.javaguru.java2.qwe.*;
-
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
@@ -30,6 +27,11 @@ public class UserDataImpl implements UserData {
     @Override
     public List<User> getUserList() {
         return userList;
+    }
+
+    @Override
+    public Database getDatabase() {
+        return database;
     }
 
     @Override
@@ -61,49 +63,6 @@ public class UserDataImpl implements UserData {
         } else {
             messageDialog("No such user in the list!");
         }
-    }
-
-    @Override
-    public void generatePortfolio(User user) {
-
-        Map<String, Double> investmentPolicy = calculateInvestmentPolicy(user);
-
-        Map<String, Double> investmentPerIndustry = investmentPolicy.entrySet().stream()
-                .collect(toMap(Map.Entry::getKey,
-                        doubles -> user.getInitialInvestment() * (doubles.getValue() / 100)));
-
-        Map<String, List<Security>> listPerIndustry = investmentPerIndustry.entrySet().stream()
-                .collect(toMap(Map.Entry::getKey, doubles ->
-                        securitiesForRiskGroups().get(user.getRiskTolerance()).stream()
-                                .filter(security -> security.getIndustry().equals(doubles.getKey()))
-                                .limit(2) // количество бумаг от каждой индустрии в портфеле клиента
-                                .collect(Collectors.toList())
-                ));
-
-        List<Position> userPortfolio = listPerIndustry.entrySet().stream()
-                .map(entry -> IntStream.rangeClosed(0, entry.getValue().size() - 1)
-                        .mapToObj(i -> new Position(
-                                entry.getValue().get(i),
-                                convertToInt((investmentPerIndustry.get(entry.getKey()) / entry.getValue().size()) /
-                                        entry.getValue().get(i).getMarketPrice()),
-                                entry.getValue().get(i).getMarketPrice()
-                        ))
-                        .collect(toList()))
-                .flatMap(List::stream)
-                .collect(toList());
-
-        double portfolioTotalValue = userPortfolio.stream()
-                .map(position -> position.getAmount() * position.getPurchasePrice())
-                .reduce(Double::sum).orElse(0.);
-
-        userPortfolio.add(new Position(
-                new Cash(),
-                round(user.getInitialInvestment() - portfolioTotalValue),
-                1
-        ));
-
-        user.setPortfolio(userPortfolio);
-
     }
 
     @Override
@@ -145,45 +104,16 @@ public class UserDataImpl implements UserData {
 
     @Override
     public void showPortfolioSummary(User user) {
-        String userName = user.getName();
-
-        double portfolioValue = user.getPortfolio().stream()
-                .map(position -> position.getAmount() * position.getSecurity().getMarketPrice())
-                .reduce(Double::sum).orElse(0.);
-
-        int amountOfPositions = user.getPortfolio().stream()
-                .map(position -> 1)
-                .reduce(Integer::sum).orElse(0);
-
-        Map<String, Double> portfolioAllocation = user.getPortfolio().stream()
-                .collect(groupingBy(position -> position.getSecurity().getIndustry(),
-                        summingDouble(position ->
-                                (position.getAmount() * position.getSecurity().getMarketPrice()) / portfolioValue
-                        )));
-
-        Double portfolioAverageWeightedDividendYield = user.getPortfolio().stream()
-                .filter(position -> position.getSecurity().getClass().getSimpleName().equals("Stock"))
-                .map(position -> ((position.getAmount() * position.getSecurity().getMarketPrice()) / portfolioValue) *
-                        Stream.of(position)
-                                .map(position1 -> (Stock) position1.getSecurity())
-                                .map(Stock::getDividends)
-                                .findAny().orElse(0.))
-                .reduce(Double::sum).orElse(0.);
-
-        Double portfolioAverageWeightedRiskWeight = user.getPortfolio().stream()
-                .filter(position -> position.getSecurity().getClass().getSimpleName().equals("Stock"))
-                .map(position -> ((position.getAmount() * position.getSecurity().getMarketPrice()) / portfolioValue) *
-                        Stream.of(position)
-                                .map(position1 -> (Stock) position1.getSecurity())
-                                .map(Stock::getRiskWeight)
-                                .findAny().orElse(0.))
-                .reduce(Double::sum).orElse(0.);
-
+        double portfolioValue = calculatePortfolioValue(user);
+        Map<String, Double> portfolioAllocation = calculatePortfolioAllocation(user, portfolioValue);
+        double portfolioAverageWeightedDividendYield = calculateAvgWgtDividendYield(user, portfolioValue);
+        double portfolioAverageWeightedRiskWeight = calculateAvgWgtRiskWeight(user, portfolioValue);
 
         System.out.println("===============PORTFOLIO SUMMARY======================");
-        System.out.println("USER NAME: " + userName);
+        System.out.println("USER NAME: " + user.getName());
         System.out.println("USER RISK TOLERANCE LEVEL: " + user.getRiskTolerance());
-        System.out.println("AMOUNT OF POSITIONS: " + amountOfPositions);
+        System.out.println("PORTFOLIO VALUE: " + round(portfolioValue));
+        System.out.println("AMOUNT OF POSITIONS: " + calculateAmountOfPosition(user));
         System.out.println("PORTFOLIO ALLOCATION:");
         portfolioAllocation.forEach((key, value) -> System.out.println(key + ": " + round(value * 100) + "%"));
         System.out.println("AVERAGE WEIGHTED DIVIDEND YIELD: " + round(portfolioAverageWeightedDividendYield) + "%");
@@ -191,51 +121,46 @@ public class UserDataImpl implements UserData {
         System.out.println("======================================================");
     }
 
-    private Map<String, Double> calculateInvestmentPolicy(User user) {
-        return user.getDistribution().entrySet().stream()
-                .collect(toMap(Map.Entry::getKey,
-                        doubles -> doubles.getValue()[user.getRiskTolerance() - 1]));
+    private double calculatePortfolioValue(User user) {
+        return user.getPortfolio().stream()
+                .map(position -> position.getAmount() * position.getSecurity().getMarketPrice())
+                .reduce(Double::sum).orElse(0.);
     }
 
-    private Map<Integer, List<Security>> securitiesForRiskGroups() {
-        return Map.ofEntries(
-                Map.entry(1, database.getSecurityList().stream()
-                        .filter(security -> security.getClass().getSimpleName().equals("Stock"))
-                        .map(security -> (Stock) security)
-                        .filter(stock -> stock.getDividends() > 3)
-                        .filter(stock -> stock.getRiskWeight() < 1.2)
-                        .sorted(Comparator.comparingDouble(Stock::getRiskWeight))
-                        .collect(toList())),
-                Map.entry(2, database.getSecurityList().stream()
-                        .filter(security -> security.getClass().getSimpleName().equals("Stock"))
-                        .map(security -> (Stock) security)
-                        .filter(stock -> stock.getDividends() > 2)
-                        .filter(stock -> stock.getRiskWeight() < 1.2)
-                        .sorted(Comparator.comparingDouble(Stock::getRiskWeight).reversed())
-                        .collect(toList())),
-                Map.entry(3, database.getSecurityList().stream()
-                        .filter(security -> security.getClass().getSimpleName().equals("Stock"))
-                        .map(security -> (Stock) security)
-                        .filter(stock -> stock.getDividends() > 1)
-                        .filter(stock -> stock.getRiskWeight() < 1)
-                        .collect(toList())),
-                Map.entry(4, database.getSecurityList().stream()
-                        .filter(security -> security.getClass().getSimpleName().equals("Stock"))
-                        .map(security -> (Stock) security)
-                        .filter(stock -> stock.getDividends() < 1.5)
-                        .filter(stock -> stock.getRiskWeight() > 1.1)
-                        .sorted(Comparator.comparingDouble(Stock::getRiskWeight).reversed())
-                        .collect(toList())),
-                Map.entry(5, database.getSecurityList().stream()
-                        .filter(security -> security.getClass().getSimpleName().equals("Stock"))
-                        .map(security -> (Stock) security)
-                        .sorted(Comparator.comparingDouble(Stock::getRiskWeight).reversed())
-                        .collect(toList()))
-        );
+    private int calculateAmountOfPosition(User user) {
+        return user.getPortfolio().stream()
+                .map(position -> 1)
+                .reduce(Integer::sum).orElse(0);
     }
 
-    private int convertToInt(double amount) {
-        return (int) amount;
+    private Map<String, Double> calculatePortfolioAllocation(User user, double portfolioValue) {
+        return user.getPortfolio().stream()
+                .collect(groupingBy(position -> position.getSecurity().getIndustry(),
+                        summingDouble(position ->
+                                (position.getAmount() * position.getSecurity().getMarketPrice()) / portfolioValue
+                        )));
+    }
+
+    private double calculateAvgWgtDividendYield(User user, double portfolioValue) {
+        return user.getPortfolio().stream()
+                .filter(position -> position.getSecurity().getClass().getSimpleName().equals("Stock"))
+                .map(position -> ((position.getAmount() * position.getSecurity().getMarketPrice()) / portfolioValue) *
+                        Stream.of(position)
+                                .map(position1 -> (Stock) position1.getSecurity())
+                                .map(Stock::getDividends)
+                                .findAny().orElse(0.))
+                .reduce(Double::sum).orElse(0.);
+    }
+
+    private double calculateAvgWgtRiskWeight(User user, double portfolioValue) {
+        return user.getPortfolio().stream()
+                .filter(position -> position.getSecurity().getClass().getSimpleName().equals("Stock"))
+                .map(position -> ((position.getAmount() * position.getSecurity().getMarketPrice()) / portfolioValue) *
+                        Stream.of(position)
+                                .map(position1 -> (Stock) position1.getSecurity())
+                                .map(Stock::getRiskWeight)
+                                .findAny().orElse(0.))
+                .reduce(Double::sum).orElse(0.);
     }
 
     private double round(double amount) {

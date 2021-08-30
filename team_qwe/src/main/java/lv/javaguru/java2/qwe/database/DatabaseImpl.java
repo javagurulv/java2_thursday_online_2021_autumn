@@ -106,8 +106,8 @@ public class DatabaseImpl implements Database {
         try {
             securityList.add(new Stock(
                     inputDialog("Security name"),
-                    inputDialog("Industry"),
-                    inputDialog("Currency"),
+                    inputDialog("Industry", "CHOOSE INDUSTRY", generateIndustriesArray()),
+                    inputDialog("Currency", "CHOOSE CURRENCY", new String[]{"USD"}),
                     Double.parseDouble(inputDialog("Market price")),
                     Double.parseDouble(inputDialog("Dividend")),
                     Double.parseDouble(inputDialog("Risk weight"))));
@@ -121,8 +121,8 @@ public class DatabaseImpl implements Database {
         try {
             securityList.add(new Bond(
                     inputDialog("Security name"),
-                    inputDialog("Industry"),
-                    inputDialog("Currency"),
+                    inputDialog("Industry", "CHOOSE INDUSTRY", generateIndustriesArray()),
+                    inputDialog("Currency", "CHOOSE CURRENCY", new String[]{"USD"}),
                     Double.parseDouble(inputDialog("Market price")),
                     Double.parseDouble(inputDialog("Coupon")),
                     inputDialog("Rating"),
@@ -212,6 +212,12 @@ public class DatabaseImpl implements Database {
                 entry("=", security -> Stream.of(security).map(stock -> (Stock) stock)
                         .anyMatch(stock -> stock.getRiskWeight() == target))
         );
+    }
+
+    private String[] generateIndustriesArray() {
+        return new String[]{"Consumer Staples", "Utilities", "Communications", "Health Care",
+                "Technology", "Materials", "Energy", "Financials", "Real Estate",
+                "Industrials", "Consumer Discretionary"};
     }
 
 }

@@ -22,7 +22,7 @@ public class GeneratePortfolioForUserUIAction implements UIAction {
         Optional<User> user = generatePortfolioService.getUserData().findUserByName(
                 inputDialog("Enter name:", "GENERATE PORTFOLIO", convertToStringArray(generatePortfolioService.getUserData()))
         );
-        generatePortfolioService.getUserData().generatePortfolio(user.orElseThrow(
+        generatePortfolioService.execute(user.orElseThrow(
                 RuntimeException::new
         ));
     }

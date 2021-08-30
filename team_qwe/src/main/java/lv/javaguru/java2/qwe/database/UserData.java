@@ -9,11 +9,11 @@ public interface UserData {
 
     List<User> getUserList();
 
+    Database getDatabase();
+
     void addUser();
 
     void removeUser(String name);
-
-    void generatePortfolio(User user);
 
     void showListOfUsers(List<User> list);
 
