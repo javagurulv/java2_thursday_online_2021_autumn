@@ -1,73 +1,92 @@
 package lv.javaguru.java2.oddJobs;
 
-import java.util.ArrayList;
-import java.util.List;
+import lv.javaguru.java2.oddJobs.console_ui.*;
+import lv.javaguru.java2.oddJobs.database.Database;
+import lv.javaguru.java2.oddJobs.database.InMemoryDatabaseImpl;
+import lv.javaguru.java2.oddJobs.services.*;
+
 import java.util.Scanner;
 
 public class Application {
-    public static void main(String[] args) {
-        List<Specialist> specialists = new ArrayList<>();
-        List<Client> clients = new ArrayList<>();
+    private static Database database = new InMemoryDatabaseImpl();
+    private static AddClientService addClientService = new AddClientService(database);
+    private static UIAction addClient = new AddClientUIAction(addClientService);
+    private static AddSpecialistService addSpecialistService = new AddSpecialistService(database);
+    private static UIAction addSpecialist = new AddSpecialistUIAction(addSpecialistService);
+    private static DeleteClientService deleteClientService = new DeleteClientService(database);
+    private static UIAction deleteClient = new DeleteClientUIAction(deleteClientService);
+    private static DeleteSpecialistService deleteSpecialistService = new DeleteSpecialistService(database);
+    private static UIAction deleteSpecialist = new DeleteSpecialistUIAction(deleteSpecialistService);
+    private static FindSpecialistByProfessionService findSpecialistByProfessionService = new FindSpecialistByProfessionService(database);
+    private static UIAction findSpecialistByProfession = new FindSpecialistByProfessionUIAction(findSpecialistByProfessionService);
+    private static GetAllSpecialistsService getAllSpecialistsService = new GetAllSpecialistsService(database);
+    private static UIAction getAllSpecialists = new GetAllSpecialistUIAction(getAllSpecialistsService);
+    private static UIAction menuExit = new ExitUIAction();
 
+
+    public static void main(String[] args) {
 
         while (true) {
-            System.out.println("Menu:");
-            System.out.println("1. Create client account");
-            System.out.println("2. Create specialist account");
-            System.out.println("3. Find specialist by profession");
-            System.out.println("4. Show all specialist");
-            System.out.println("5. Exit");
-            Scanner scanner = new Scanner(System.in);
-            int userChoice = Integer.parseInt(scanner.nextLine());
-
-            switch (userChoice) {
-                case 1: {
-                    System.out.println("Enter your name");
-                    String clientName = scanner.nextLine();
-                    System.out.println("Enter your surname");
-                    String clientSurname = scanner.nextLine();
-                    Client client = new Client(clientName, clientSurname);
-                    clients.add(client);
-                    System.out.println("Registration OK");
-                    break;
-
-                }
-                case 2: {
-                    System.out.println("Enter your name");
-                    String specialistName = scanner.nextLine();
-                    System.out.println("Enter your surname");
-                    String specialistSurname = scanner.nextLine();
-                    System.out.println("Enter your profession");
-                    String specialistProfession = scanner.nextLine();
-                    Specialist specialist = new Specialist(specialistName, specialistSurname, specialistProfession);
-                    specialists.add(specialist);
-                    System.out.println("Registration OK");
-                    break;
-                }
-                case 3: {
-                    System.out.println("Enter profession");
-                    for (Specialist specialist : specialists) {
-                        if (specialist.getProfession().equals(scanner.nextLine()))
-                            System.out.println(specialist);
-                        else System.out.println("Specialists not found");
-                    }
-                    break;
-                }
-
-                case 4: {
-                    System.out.println("Specialists list: ");
-                    for (Specialist specialist : specialists) {
-                        System.out.println(specialist);
-                    }
-
-                    break;
-                }
-                case 5: {
-                    System.out.println("See you later, by!");
-                    System.exit(0);
+            printProgramMenu();
+            int menuNumber = GetUserChoice();
+            RunSelectedMenuNumber(menuNumber);
+        }
+    }
 
 
-                }
+    private static int GetUserChoice() {
+        System.out.println("Enter a menu number to continued");
+        Scanner scanner = new Scanner(System.in);
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    private static void printProgramMenu() {
+        System.out.println("Menu:");
+        System.out.println("1. Create client account");
+        System.out.println("2. Create specialist account");
+        System.out.println("3. Find specialist by profession");
+        System.out.println("4. Show all specialist");
+        System.out.println("5. Delete client account");
+        System.out.println("6. Delete specialist account");
+        System.out.println("7. Exit");
+    }
+
+
+    private static void RunSelectedMenuNumber(int selectedMenu) {
+        switch (selectedMenu) {
+            case 1: {
+                addClient.execute();
+                break;
+
+            }
+            case 2: {
+                addSpecialist.execute();
+                break;
+            }
+            case 3: {
+                findSpecialistByProfession.execute();
+                break;
+            }
+
+            case 4: {
+                getAllSpecialists.execute();
+
+                break;
+            }
+            case 5: {
+                deleteClient.execute();
+
+                break;
+            }
+            case 6: {
+                deleteSpecialist.execute();
+
+                break;
+            }
+            case 7: {
+                menuExit.execute();
+
+
             }
         }
     }
