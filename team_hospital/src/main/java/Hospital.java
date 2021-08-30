@@ -36,7 +36,7 @@ public class Hospital {
             System.out.println();
 
             System.out.println("Enter menu item number to execute: ");
-            int userInput = inputNumChecker.execute(1, 3, scanner.nextInt());
+            int userInput = inputNumChecker.execute(1, 3);
 
             switch (userInput) {
                 case 1 -> patientMenu();
@@ -56,7 +56,7 @@ public class Hospital {
             System.out.println("4. Delete the patient by ID");
             System.out.println("5. Edit the patient's information");
             System.out.println("6. Exit");
-            userInput = inputNumChecker.execute(1,6, scanner.nextInt());
+            userInput = inputNumChecker.execute(1,6);
             patientUserActions(userInput);
             System.out.println();
         } while (userInput != 6);
