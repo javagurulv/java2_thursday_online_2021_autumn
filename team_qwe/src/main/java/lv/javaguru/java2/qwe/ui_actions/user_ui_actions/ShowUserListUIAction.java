@@ -1,19 +1,19 @@
 package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 
-import lv.javaguru.java2.qwe.database.UserData;
+import lv.javaguru.java2.qwe.services.user_services.ShowUserListService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 public class ShowUserListUIAction implements UIAction {
 
-    private final UserData userData;
+    private final ShowUserListService showUserListService;
 
-    public ShowUserListUIAction(UserData userData) {
-        this.userData = userData;
+    public ShowUserListUIAction(ShowUserListService showUserListService) {
+        this.showUserListService = showUserListService;
     }
 
     @Override
     public void execute() {
-        userData.showListOfUsers(userData.getUserList());
+        showUserListService.getUserData().showListOfUsers(showUserListService.getUserData().getUserList());
     }
 
 }

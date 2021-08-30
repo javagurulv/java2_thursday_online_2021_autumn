@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 
 import lv.javaguru.java2.qwe.User;
-import lv.javaguru.java2.qwe.database.UserData;
+import lv.javaguru.java2.qwe.services.user_services.GeneratePortfolioService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 import java.util.Optional;
@@ -11,18 +11,18 @@ import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
 
 public class GeneratePortfolioForUserUIAction implements UIAction {
 
-    private final UserData userData;
+    private final GeneratePortfolioService generatePortfolioService;
 
-    public GeneratePortfolioForUserUIAction(UserData userData) {
-        this.userData = userData;
+    public GeneratePortfolioForUserUIAction(GeneratePortfolioService generatePortfolioService) {
+        this.generatePortfolioService = generatePortfolioService;
     }
 
     @Override
     public void execute() {
-        Optional<User> user = userData.findUserByName(
-                inputDialog("Enter name:", "GENERATE PORTFOLIO", convertToStringArray(userData))
+        Optional<User> user = generatePortfolioService.getUserData().findUserByName(
+                inputDialog("Enter name:", "GENERATE PORTFOLIO", convertToStringArray(generatePortfolioService.getUserData()))
         );
-        userData.generatePortfolio(user.orElseThrow(
+        generatePortfolioService.getUserData().generatePortfolio(user.orElseThrow(
                 RuntimeException::new
         ));
     }

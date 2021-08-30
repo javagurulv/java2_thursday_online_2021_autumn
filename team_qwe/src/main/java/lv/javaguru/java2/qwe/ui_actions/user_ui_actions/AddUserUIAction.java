@@ -1,19 +1,19 @@
 package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 
-import lv.javaguru.java2.qwe.database.UserData;
+import lv.javaguru.java2.qwe.services.user_services.AddUserService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 public class AddUserUIAction implements UIAction {
 
-    private final UserData userData;
+    private final AddUserService addUserService;
 
-    public AddUserUIAction(UserData userData) {
-        this.userData = userData;
+    public AddUserUIAction(AddUserService addUserService) {
+        this.addUserService = addUserService;
     }
 
     @Override
     public void execute() {
-        userData.addUser();
+        addUserService.getUserData().addUser();
     }
 
 }
