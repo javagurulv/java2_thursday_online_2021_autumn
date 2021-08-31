@@ -7,7 +7,7 @@ public abstract class Security {
     private final String name;
     private final String industry;
     private final String currency;
-    private final double marketPrice;
+    private double marketPrice;
 
     public Security(String name, String industry, String currency, double marketPrice) {
         this.name = name;
@@ -30,6 +30,10 @@ public abstract class Security {
 
     public double getMarketPrice() {
         return marketPrice;
+    }
+
+    public void setMarketPrice(double marketPrice) {
+        this.marketPrice = marketPrice;
     }
 
     @Override
