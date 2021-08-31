@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe;
 
-class Bond extends Security {
+public class Bond extends Security {
 
     private final Double coupon;
     private final String rating;

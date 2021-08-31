@@ -3,6 +3,7 @@ package lv.javaguru.java2.oddJobs;
 import java.util.Objects;
 
 public class Client {
+    private Long id;
     private String name;
     private String surname;
     private String service;
@@ -13,6 +14,13 @@ public class Client {
 
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -44,18 +52,19 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return Objects.equals(name, client.name) && Objects.equals(surname, client.surname) && Objects.equals(service, client.service);
+        return Objects.equals(id, client.id) && Objects.equals(name, client.name) && Objects.equals(surname, client.surname) && Objects.equals(service, client.service);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, service);
+        return Objects.hash(id, name, surname, service);
     }
 
     @Override
     public String toString() {
         return "Client{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", service='" + service + '\'' +
                 '}';

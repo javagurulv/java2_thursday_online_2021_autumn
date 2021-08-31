@@ -1,3 +1,5 @@
+package patient;
+
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -82,7 +84,7 @@ public class Patient {
 
     @Override
     public String toString() {
-        return "Patient{" +
+        return "patient_actions.Patient{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +

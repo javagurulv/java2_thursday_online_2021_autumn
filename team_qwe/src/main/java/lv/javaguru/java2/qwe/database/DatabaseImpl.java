@@ -1,25 +1,34 @@
-package lv.javaguru.java2.qwe;
+package lv.javaguru.java2.qwe.database;
 
-import javax.swing.*;
+import lv.javaguru.java2.qwe.Bond;
+import lv.javaguru.java2.qwe.Cash;
+import lv.javaguru.java2.qwe.Security;
+import lv.javaguru.java2.qwe.Stock;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static javax.swing.JOptionPane.showInputDialog;
-import static javax.swing.JOptionPane.showMessageDialog;
 import static java.util.Map.entry;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
-class DatabaseImpl implements Database {
+public class DatabaseImpl implements Database {
 
     private final ArrayList<Security> securityList;
 
-    DatabaseImpl() {
+    public DatabaseImpl() {
         this.securityList = new ArrayList<>();
+        securityList.add(new Cash());
     }
 
     @Override
@@ -97,8 +106,8 @@ class DatabaseImpl implements Database {
         try {
             securityList.add(new Stock(
                     inputDialog("Security name"),
-                    inputDialog("Industry"),
-                    inputDialog("Currency"),
+                    inputDialog("Industry", "CHOOSE INDUSTRY", generateIndustriesArray()),
+                    inputDialog("Currency", "CHOOSE CURRENCY", new String[]{"USD"}),
                     Double.parseDouble(inputDialog("Market price")),
                     Double.parseDouble(inputDialog("Dividend")),
                     Double.parseDouble(inputDialog("Risk weight"))));
@@ -112,8 +121,8 @@ class DatabaseImpl implements Database {
         try {
             securityList.add(new Bond(
                     inputDialog("Security name"),
-                    inputDialog("Industry"),
-                    inputDialog("Currency"),
+                    inputDialog("Industry", "CHOOSE INDUSTRY", generateIndustriesArray()),
+                    inputDialog("Currency", "CHOOSE CURRENCY", new String[]{"USD"}),
                     Double.parseDouble(inputDialog("Market price")),
                     Double.parseDouble(inputDialog("Coupon")),
                     inputDialog("Rating"),
@@ -205,19 +214,10 @@ class DatabaseImpl implements Database {
         );
     }
 
-    static String inputDialog(String text) {
-        return Optional.ofNullable(showInputDialog(null, text)).orElse("");
-    }
-
-    static String inputDialog(String request, String title, String[] arr) {
-        return Optional.ofNullable((String) showInputDialog(
-                null, request,
-                title, JOptionPane.QUESTION_MESSAGE, null,
-                arr, arr[0])).orElse("");
-    }
-
-    static void messageDialog(String text) {
-        showMessageDialog(null, text);
+    private String[] generateIndustriesArray() {
+        return new String[]{"Consumer Staples", "Utilities", "Communications", "Health Care",
+                "Technology", "Materials", "Energy", "Financials", "Real Estate",
+                "Industrials", "Consumer Discretionary"};
     }
 
 }
