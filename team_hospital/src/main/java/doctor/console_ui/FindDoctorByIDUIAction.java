@@ -3,12 +3,12 @@ package doctor.console_ui;
 import doctor.services.DoctorExistsService;
 import doctor.services.FindDoctorByIdService;
 
-public class FindByIDUIAction implements DoctorUIActions {
+public class FindDoctorByIDUIAction implements DoctorUIActions {
 
     private final FindDoctorByIdService findDoctorById;
     private final DoctorExistsService doctorExists;
 
-    public FindByIDUIAction(FindDoctorByIdService findDoctorById, DoctorExistsService doctorExists) {
+    public FindDoctorByIDUIAction(FindDoctorByIdService findDoctorById, DoctorExistsService doctorExists) {
         this.findDoctorById = findDoctorById;
         this.doctorExists = doctorExists;
     }

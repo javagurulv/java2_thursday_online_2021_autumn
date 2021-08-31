@@ -1,5 +1,3 @@
-import doctor.Doctor;
-import doctor.DoctorActions;
 import doctor.console_ui.*;
 import doctor.database.DoctorDatabaseImpl;
 import doctor.services.*;
@@ -7,9 +5,6 @@ import patient.InputNumChecker;
 import patient.console_ui.*;
 import patient.database.PatientDatabaseImpl;
 import patient.services.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class Hospital {
     public static void main(String[] args) {
@@ -19,23 +14,19 @@ public class Hospital {
 
     private final PatientDatabaseImpl patientDatabase = new PatientDatabaseImpl();
     private final DoctorDatabaseImpl doctorDatabase = new DoctorDatabaseImpl();
-    private final Scanner scanner = new Scanner(System.in);
-    private final DoctorActions doctorActions = new DoctorActions();
     private final InputNumChecker inputNumChecker = new InputNumChecker();
 
     private final PatientUIActions[] PatientUIActions = {
             new AddPatientUIAction(new AddPatientService(patientDatabase)),
             new ShowAllPatientsUIAction(new ShowAllPatientsService(patientDatabase)),
-            new FindByIDUIAction(new FindPatientByIdService(patientDatabase), new PatientExistsService(patientDatabase)),
+            new FindPatientByIDUIAction(new FindPatientByIdService(patientDatabase), new PatientExistsService(patientDatabase)),
             new DeletePatientUIAction(new DeletePatientService(patientDatabase), new PatientExistsService(patientDatabase)),
             new EditPatientUIAction(new EditPatientService(patientDatabase), new PatientExistsService(patientDatabase))};
-
-    private final PatientActions patientActions = new PatientActions();
 
     private final DoctorUIActions[] doctorUIActions = {
             new AddDoctorUIAction(new AddDoctorService(doctorDatabase)),
             new ShowAllDoctorsUIAction(new ShowAllDoctorsService(doctorDatabase)),
-            new FindByIDUIAction(new FindDoctorByIdService(doctorDatabase), new DoctorExistsService(doctorDatabase)),
+            new FindDoctorByIDUIAction(new FindDoctorByIdService(doctorDatabase), new DoctorExistsService(doctorDatabase)),
             new DeleteDoctorUIAction(new DeleteDoctorService(doctorDatabase), new DoctorExistsService(doctorDatabase)),
             new EditDoctorUIAction(new EditDoctorService(doctorDatabase), new DoctorExistsService(doctorDatabase))};
 
@@ -69,8 +60,9 @@ public class Hospital {
             System.out.println("4. Delete the patient by ID");
             System.out.println("5. Edit the patient's information");
             System.out.println("6. Exit");
-            userInput = scanner.nextInt();
+            userInput = inputNumChecker.execute(1, 6);
             patientUserActions(userInput);
+            System.out.println();
         } while (userInput != 6);
     }
 
@@ -83,8 +75,9 @@ public class Hospital {
             System.out.println("4. Delete the doctor by ID");
             System.out.println("5. Edit the doctor's information");
             System.out.println("6. Exit");
-            userInput = scanner.nextInt();
+            userInput = inputNumChecker.execute(1, 6);
             doctorUserActions(userInput);
+            System.out.println();
         } while (userInput != 6);
     }
 
