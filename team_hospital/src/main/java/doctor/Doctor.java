@@ -1,3 +1,5 @@
+package doctor;
+
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -62,7 +64,7 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "Doctor{" +
+        return "doctor_actions.Doctor{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
