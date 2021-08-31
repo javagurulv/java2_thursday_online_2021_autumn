@@ -1,3 +1,9 @@
+import doctor.Doctor;
+import doctor.DoctorActions;
+import doctor.console_ui.*;
+import doctor.database.DoctorDatabaseImpl;
+import doctor.services.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,10 +15,16 @@ public class Hospital {
     }
 
     private final List<Patient> patientsList = new ArrayList<>();
-    private final List<Doctor> doctorsList = new ArrayList<>();
+    private final DoctorDatabaseImpl doctorDatabase = new DoctorDatabaseImpl();
     private final Scanner scanner = new Scanner(System.in);
     private final PatientActions patientActions = new PatientActions();
-    private final DoctorActions doctorActions = new DoctorActions();
+
+    private final DoctorUIActions[] doctorUIActions = {
+            new AddDoctorUIAction(new AddDoctorService(doctorDatabase)),
+            new ShowAllDoctorsUIAction(new ShowAllDoctorsService(doctorDatabase)),
+            new FindByIDUIAction(new FindDoctorByIdService(doctorDatabase), new DoctorExistsService(doctorDatabase)),
+            new DeleteDoctorUIAction(new DeleteDoctorService(doctorDatabase), new DoctorExistsService(doctorDatabase)),
+            new EditDoctorUIAction(new EditDoctorService(doctorDatabase), new DoctorExistsService(doctorDatabase))};
 
     public void action() {
         while (true) {
@@ -75,11 +87,11 @@ public class Hospital {
 
     private void doctorUserActions(int num) {
         switch (num) {
-            case 1 -> doctorActions.addDoctor(doctorsList);
-            case 2 -> doctorActions.showAllDoctors(doctorsList);
-            case 3 -> doctorActions.findById(doctorsList);
-            case 4 -> doctorActions.deleteById(doctorsList);
-            case 5 -> doctorActions.editDoctor(doctorsList);
+            case 1 -> doctorUIActions[0].execute();
+            case 2 -> doctorUIActions[1].execute();
+            case 3 -> doctorUIActions[2].execute();
+            case 4 -> doctorUIActions[3].execute();
+            case 5 -> doctorUIActions[4].execute();
         }
     }
 }
