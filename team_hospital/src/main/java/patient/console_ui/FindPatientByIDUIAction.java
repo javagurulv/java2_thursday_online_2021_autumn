@@ -5,11 +5,11 @@ import patient.services.PatientExistsService;
 
 import java.util.Scanner;
 
-public class FindByIDUIAction implements PatientUIActions {
+public class FindPatientByIDUIAction implements PatientUIActions {
     private final FindPatientByIdService findById;
     private final PatientExistsService patientExists;
 
-    public FindByIDUIAction(FindPatientByIdService findById, PatientExistsService patientExists) {
+    public FindPatientByIDUIAction(FindPatientByIdService findById, PatientExistsService patientExists) {
         this.findById = findById;
         this.patientExists = patientExists;
     }
