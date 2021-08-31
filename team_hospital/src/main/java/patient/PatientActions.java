@@ -1,16 +1,17 @@
+package patient;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class PatientActions {
     private final Scanner scanner = new Scanner(System.in);
 
     public void addPatient(List<Patient> list) {
-        System.out.println("Please enter patient's name and surname, and personal code: ");
+        System.out.println("Please enter patient's name, surname and personal code: ");
         String[] patientInfo = scanner.nextLine().split(" ");
         list.add(new Patient(patientInfo[0], patientInfo[1], patientInfo[2]));
-        System.out.println("Patient " + patientInfo[0] + " " + patientInfo[1] + " was successfully added.");
+        System.out.println("patient_actions.Patient " + patientInfo[0] + " " + patientInfo[1] + " was successfully added.");
     }
 
     public void findById(List<Patient> list) {
@@ -32,7 +33,7 @@ public class PatientActions {
         int id = Integer.parseInt(scanner.nextLine());
         if (patientExists(list, id)) {
             list.removeIf(p -> p.getId() == id);
-            System.out.println("Patient with id = " + id + " was successfully deleted.");
+            System.out.println("patient_actions.Patient with id = " + id + " was successfully deleted.");
         } else {
             deleteById(list);
         }
