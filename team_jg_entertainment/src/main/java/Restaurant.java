@@ -22,16 +22,16 @@ public class Restaurant {
     private static RestaurantUIAction uiFindIdVisitors = new UIActionFindByIdVisitors(findByIdVisitors);
     private static RestaurantUIAction uiGetAllVisitorsAction = new UIActionShowListAllVisitors(showAllVisitorsService);
 
+    private static CheckUserNumberInConsole checkNumber = new CheckUserNumberInConsole();
     private static RestaurantUIAction uiExitAction = new UIActionExit();
 
     public static void main(String[] args) {
         while (true) {
             printProgramMenu();
-            int numberOfMenu = getNumberMenuFrom();
+            int numberOfMenu = checkNumber.getCorrectNumberInConsole(1,5);
             executeChooseMenu(numberOfMenu);
         }
     }
-
 
     private static void printProgramMenu() {
         System.out.println();
@@ -43,12 +43,6 @@ public class Restaurant {
         System.out.println("4. Show all visitor's in base of restaurant.");
         System.out.println("5. Exit! ");
         System.out.println();
-    }
-
-    private static int getNumberMenuFrom() {
-        System.out.println("Please, choose number of menu: ");
-        Scanner scanner = new Scanner(System.in);
-        return Integer.parseInt(scanner.nextLine());
     }
 
     private static void executeChooseMenu(int numberOfMenu) {
@@ -69,7 +63,6 @@ public class Restaurant {
                 uiGetAllVisitorsAction.execute();
                 break;
             }
-
             case 5: {
                 uiExitAction.execute();
                 break;
