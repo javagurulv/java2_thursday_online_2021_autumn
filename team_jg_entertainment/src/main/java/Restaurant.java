@@ -6,8 +6,6 @@ import service_visitors.ServiceDeleteVisitors;
 import service_visitors.ServiceFindByIdVisitors;
 import service_visitors.ServiceShowListVisitors;
 
-import java.util.Scanner;
-
 public class Restaurant {
 
     private static final Database databaseRestaurant = new ImplDatabaseRestaurant();
@@ -22,13 +20,13 @@ public class Restaurant {
     private static final RestaurantUIAction uiFindIdVisitors = new UIActionFindByIdVisitors(findByIdVisitors);
     private static final RestaurantUIAction uiGetAllVisitorsAction = new UIActionShowListAllVisitors(showAllVisitorsService);
 
-    private static final CheckUserNumberInConsole checkNumber = new CheckUserNumberInConsole();
+    private static final CheckMenuNumberFromConsole checkNumber = new CheckMenuNumberFromConsole();
     private static final RestaurantUIAction uiExitAction = new UIActionExit();
 
     public static void main(String[] args) {
         while (true) {
             printProgramMenu();
-            int numberOfMenu = checkNumber.getCorrectNumberInConsole(1,5);
+            int numberOfMenu = checkNumber.getCorrectNumberMenu(1,5);
             executeChooseMenu(numberOfMenu);
         }
     }
