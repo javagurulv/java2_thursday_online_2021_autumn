@@ -1,11 +1,11 @@
 package progmenu_hospital;
 
 import doctor.console_ui.*;
-import doctor.database.DoctorDatabaseImpl;
+import database.DoctorDatabaseImpl;
 import doctor.services.*;
 import patient.InputNumChecker;
 import patient.console_ui.*;
-import patient.database.PatientDatabaseImpl;
+import database.PatientDatabaseImpl;
 import patient.services.*;
 
 public class ProgMenuHospital {

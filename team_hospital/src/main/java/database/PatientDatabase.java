@@ -1,6 +1,6 @@
-package patient.database;
+package database;
 
-import patient.Patient;
+import domain.Patient;
 
 import java.util.List;
 

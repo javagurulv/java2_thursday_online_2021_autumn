@@ -1,6 +1,6 @@
-package doctor.database;
+package database;
 
-import doctor.Doctor;
+import domain.Doctor;
 
 import java.util.List;
 

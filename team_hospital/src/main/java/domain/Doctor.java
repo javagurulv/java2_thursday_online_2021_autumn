@@ -1,4 +1,4 @@
-package doctor;
+package domain;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;

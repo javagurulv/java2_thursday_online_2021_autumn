@@ -1,6 +1,6 @@
-package patient.database;
+package database;
 
-import patient.Patient;
+import domain.Patient;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PatientDatabaseImpl implements PatientDatabase {
 
-    private final ArrayList<Patient> patientsList = new ArrayList<>();
+    private final List<Patient> patientsList = new ArrayList<>();
 
     @Override
     public void add(Patient patient) {

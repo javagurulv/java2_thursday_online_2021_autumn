@@ -1,4 +1,4 @@
-package lv.javaguru.java2.library.core.services;
+package lv.javaguru.java2.library.core.services.validators;
 
 import java.util.ArrayList;
 import java.util.List;
