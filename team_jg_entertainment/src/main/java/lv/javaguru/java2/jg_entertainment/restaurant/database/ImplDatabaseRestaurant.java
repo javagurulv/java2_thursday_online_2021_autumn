@@ -1,6 +1,6 @@
-package database;
+package lv.javaguru.java2.jg_entertainment.restaurant.database;
 
-import service_visitors.Visitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.services.Visitors;
 
 import java.util.ArrayList;
 import java.util.List;

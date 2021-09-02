@@ -1,6 +1,6 @@
-package console_ui_visitors;
+package lv.javaguru.java2.jg_entertainment.restaurant.console_ui;
 
-import service_visitors.ServiceDeleteVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.services.ServiceDeleteVisitors;
 
 import java.util.Scanner;
 

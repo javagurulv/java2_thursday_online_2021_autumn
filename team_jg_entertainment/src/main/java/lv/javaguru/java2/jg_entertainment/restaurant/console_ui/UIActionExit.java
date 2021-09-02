@@ -1,4 +1,4 @@
-package console_ui_visitors;
+package lv.javaguru.java2.jg_entertainment.restaurant.console_ui;
 
 public class UIActionExit implements RestaurantUIAction {
     @Override

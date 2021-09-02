@@ -1,4 +1,4 @@
-package service_visitors;
+package lv.javaguru.java2.jg_entertainment.restaurant.services;
 
 import java.util.Objects;
 

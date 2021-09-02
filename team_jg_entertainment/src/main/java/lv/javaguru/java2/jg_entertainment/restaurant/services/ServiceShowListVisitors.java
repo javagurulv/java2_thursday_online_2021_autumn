@@ -1,6 +1,6 @@
-package service_visitors;
+package lv.javaguru.java2.jg_entertainment.restaurant.services;
 
-import database.Database;
+import lv.javaguru.java2.jg_entertainment.restaurant.database.Database;
 
 import java.util.List;
 

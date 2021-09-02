@@ -1,10 +1,12 @@
-import console_ui_visitors.*;
-import database.Database;
-import database.ImplDatabaseRestaurant;
-import service_visitors.ServiceAddAllVisitors;
-import service_visitors.ServiceDeleteVisitors;
-import service_visitors.ServiceFindByIdVisitors;
-import service_visitors.ServiceShowListVisitors;
+package lv.javaguru.java2.jg_entertainment.restaurant;
+
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.*;
+import lv.javaguru.java2.jg_entertainment.restaurant.database.Database;
+import lv.javaguru.java2.jg_entertainment.restaurant.database.ImplDatabaseRestaurant;
+import lv.javaguru.java2.jg_entertainment.restaurant.services.ServiceAddAllVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.services.ServiceDeleteVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.services.ServiceFindByIdVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.services.ServiceShowListVisitors;
 
 public class Restaurant {
 
