@@ -4,7 +4,11 @@ public class Table {
     private String table;
     private int tablePlaceQty;
 
-    public Table(String table, int tablePlaceQty) {
+    public Table(String table) {
+        this.table = table;
+    }
+
+    public Table(String table,int tablePlaceQty) {
         this.table = table;
         this.tablePlaceQty = tablePlaceQty;
     }
@@ -29,8 +33,8 @@ public class Table {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Table table = (Table) o;
-        return tablePlaceQty == table.tablePlaceQty && table.equals(table.table);
+        Table table1 = (Table) o;
+        return tablePlaceQty == table1.tablePlaceQty && table.equals(table1.table);
     }
 
     @Override
