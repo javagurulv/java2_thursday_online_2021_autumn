@@ -1,6 +1,7 @@
 package lv.javaguru.java2.qwe.database;
 
 import lv.javaguru.java2.qwe.*;
+
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -9,6 +10,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import static lv.javaguru.java2.qwe.Type.*;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.round;
 
 public class UserDataImpl implements UserData {
 
@@ -80,7 +82,12 @@ public class UserDataImpl implements UserData {
 
     @Override
     public void showUserPortfolio(User user) {
-        user.getPortfolio().forEach(System.out::println);
+        System.out.println("==========" + user.getName() + "=============");
+        user.getPortfolio().forEach(position -> System.out.println("company=" + position.getSecurity().getName() + ", amount=" +
+                position.getAmount() + ", purchase price=" + position.getPurchasePrice() + ", last market price=" +
+                position.getSecurity().getMarketPrice() + ", profit&loss=" +
+                round((position.getAmount() * position.getSecurity().getMarketPrice()) -
+                        (position.getAmount() * position.getPurchasePrice()))));
         System.out.println("\n");
     }
 
@@ -112,6 +119,8 @@ public class UserDataImpl implements UserData {
         System.out.println("===============PORTFOLIO SUMMARY======================");
         System.out.println("USER NAME: " + user.getName());
         System.out.println("USER RISK TOLERANCE LEVEL: " + user.getRiskTolerance());
+        System.out.println("USER INITIAL INVESTMENT: " + user.getInitialInvestment());
+        System.out.println("RETURN SINCE INCEPTION: " + round((portfolioValue / user.getInitialInvestment() - 1) * 100) + "%");
         System.out.println("PORTFOLIO VALUE: " + round(portfolioValue));
         System.out.println("AMOUNT OF POSITIONS: " + calculateAmountOfPosition(user));
         System.out.println("PORTFOLIO ALLOCATION:");
@@ -161,10 +170,6 @@ public class UserDataImpl implements UserData {
                                 .map(Stock::getRiskWeight)
                                 .findAny().orElse(0.))
                 .reduce(Double::sum).orElse(0.);
-    }
-
-    private double round(double amount) {
-        return Math.round(amount * 100.) / 100.;
     }
 
 }

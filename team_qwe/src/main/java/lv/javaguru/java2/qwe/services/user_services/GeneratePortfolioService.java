@@ -6,11 +6,14 @@ import lv.javaguru.java2.qwe.database.UserData;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.round;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.convertToInt;
+
 
 public class GeneratePortfolioService {
 
@@ -25,13 +28,18 @@ public class GeneratePortfolioService {
     }
 
     public void execute(User user) {
-        Map<String, Double> investmentPolicy = calculateInvestmentPolicy(user);
-        Map<String, Double> investmentPerIndustry = calculateInvestmentPerIndustry(user, investmentPolicy);
-        Map<String, List<Security>> listPerIndustry = calculateListOfSecuritiesPerIndustry(user, investmentPerIndustry);
-        List<Position> userPortfolio = generateUserPortfolio(listPerIndustry, investmentPerIndustry);
-        double portfolioTotalValue = calculatePortfolioTotalValue(userPortfolio);
-        addCashResidual(user, userPortfolio, portfolioTotalValue);
-        user.setPortfolio(userPortfolio);
+        if (user.getPortfolio().size() == 1) {
+            Map<String, Double> investmentPolicy = calculateInvestmentPolicy(user);
+            Map<String, Double> investmentPerIndustry = calculateInvestmentPerIndustry(user, investmentPolicy);
+            Map<String, List<Security>> listPerIndustry = calculateListOfSecuritiesPerIndustry(user, investmentPerIndustry);
+            List<Position> userPortfolio = generateUserPortfolio(listPerIndustry, investmentPerIndustry);
+            double portfolioTotalValue = calculatePortfolioTotalValue(userPortfolio);
+            addCashResidual(user, userPortfolio, portfolioTotalValue);
+            user.setPortfolio(userPortfolio);
+            messageDialog("Portfolio has been generated for " + user.getName());
+        } else {
+            messageDialog("FAILED to generate!\nPortfolio was already generated for this client!");
+        }
     }
 
     private Map<String, Double> calculateInvestmentPolicy(User user) {
@@ -52,7 +60,7 @@ public class GeneratePortfolioService {
                         securitiesForRiskGroups().get(user.getRiskTolerance()).stream()
                                 .filter(security -> security.getIndustry().equals(doubles.getKey()))
                                 .limit(2) // количество бумаг от каждой индустрии в портфеле клиента
-                                .collect(Collectors.toList())
+                                .collect(toList())
                 ));
     }
 
@@ -120,14 +128,6 @@ public class GeneratePortfolioService {
                         .sorted(Comparator.comparingDouble(Stock::getRiskWeight).reversed())
                         .collect(toList()))
         );
-    }
-
-    private int convertToInt(double amount) {
-        return (int) amount;
-    }
-
-    private double round(double amount) {
-        return Math.round(amount * 100.) / 100.;
     }
 
 }
