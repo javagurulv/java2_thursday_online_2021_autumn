@@ -4,8 +4,6 @@ import java.util.Objects;
 
 public class Book {
 
-	asdsafd
-
 	private Long id;
 	private String title;
 	private String author;
