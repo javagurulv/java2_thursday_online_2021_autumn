@@ -17,6 +17,6 @@ public class UIActionDeleteVisitors implements RestaurantUIAction {
         System.out.println("Write ID visitor's that will be deleted: ");
         Long idVisitors = Long.parseLong(scanner.nextLine());
         deleteVisitors.execute(idVisitors);
-        System.out.println("The visitor with ID " + idVisitors + " was deleted from list !");
+        System.out.println("The visitor with ID number " + idVisitors + "-> was deleted from list !");
     }
 }

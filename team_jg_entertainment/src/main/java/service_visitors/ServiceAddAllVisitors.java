@@ -10,8 +10,8 @@ public class ServiceAddAllVisitors {
         this.database = database;
     }
 
-    public void execute(String nameVisitors, String surnameVisitors, String age){
-        Visitors visitor = new Visitors(nameVisitors, surnameVisitors, age);
+    public void execute(String nameVisitors, String surnameVisitors, String age, long telephone){
+        Visitors visitor = new Visitors(nameVisitors, surnameVisitors, age, telephone);
         database.saveClientOfRestaurant(visitor);
     }
 }

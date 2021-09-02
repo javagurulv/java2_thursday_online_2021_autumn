@@ -9,10 +9,20 @@ public class Visitors {
     private String age;
     private Long idClient;
 
+    private long telephoneNumber;
+   // private String emailClient;
+
     public Visitors(String clientName, String surname,String age) {
         this.clientName = clientName;
         this.surname = surname;
         this.age = age;
+    }
+
+    public Visitors(String clientName, String surname,String age, long telephoneNumber) {
+        this.clientName = clientName;
+        this.surname = surname;
+        this.age = age;
+        this.telephoneNumber = telephoneNumber;
     }
 
     public String getClientName() {
@@ -47,6 +57,21 @@ public class Visitors {
         this.age = age;
     }
 
+    public long getTelephoneNumber() {
+        return telephoneNumber;
+    }
+
+    public void setTelephoneNumber(long telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+    }
+
+//    public String getEmailClient() {
+//        return emailClient;
+//    }
+
+//    public void setEmailClient(String emailClient) {
+//        this.emailClient = emailClient;
+//    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,12 +80,14 @@ public class Visitors {
         return Objects.equals(clientName, that.clientName)
                 && Objects.equals(idClient, that.idClient)
                 && Objects.equals(surname, that.surname)
-                && Objects.equals(age, that.age);
+                && Objects.equals(age, that.age)
+                && Objects.equals(telephoneNumber, that.telephoneNumber);
+             //   && Objects.equals(emailClient, that.emailClient);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(clientName, surname, age, idClient);
+        return Objects.hash(clientName, surname, age, idClient, telephoneNumber); //, emailClient
     }
 
     @Override
@@ -70,6 +97,8 @@ public class Visitors {
                 ", surname ->'" + surname + '\'' +
                 ", ID client ->" + idClient +
                 ", age client ->" + age +
+                ", telephone number ->" + telephoneNumber +
+//                ", email client ->" + emailClient +
                 '}';
     }
 }

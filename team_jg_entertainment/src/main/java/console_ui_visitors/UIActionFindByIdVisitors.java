@@ -21,7 +21,7 @@ public class UIActionFindByIdVisitors implements RestaurantUIAction {
         if (findByIdVisitors.execute(idVisitors)) {
             System.out.println(idVisitors + " -> ID client's was found successfully !");
         } else {
-            System.out.println("this ID" + idVisitors + " wasn't find in catalogue !");
+            System.out.println("ID number " + idVisitors + " wasn't find in catalogue !");
         }
     }
 }

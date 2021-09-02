@@ -22,8 +22,11 @@ public class UIActionAddVisitors implements RestaurantUIAction {
         String visitorsSurname = scanner.nextLine();
         System.out.println("Please, point your age:");
         String ageVisitor = scanner.nextLine();
-        serviceAddAllVisitors.execute(visitorsName, visitorsSurname, ageVisitor);
-        System.out.println("Visitor -> " + visitorsName + visitorsSurname + " is age = " + ageVisitor + " was added in restaurant !");
+        System.out.println("Enter your telephone number: ");
+        long telephoneNumber = scanner.nextLong();
+        serviceAddAllVisitors.execute(visitorsName, visitorsSurname, ageVisitor, telephoneNumber);
+        System.out.println("Visitor: " + visitorsName + visitorsSurname + " is age " + ageVisitor +
+                ", telephone " + telephoneNumber + "-> was added in restaurant !");
 
     }
 }

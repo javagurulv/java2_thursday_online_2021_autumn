@@ -17,4 +17,6 @@ public interface Database {
 
     //void editReservation();
 
+    //List<Visitors> showAllReservation();
+
 }

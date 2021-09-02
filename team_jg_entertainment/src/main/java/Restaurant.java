@@ -35,7 +35,7 @@ public class Restaurant {
         System.out.println();
         System.out.println("Hello !");
         System.out.println("Start with program menu, press number what do you want to do. ");
-        System.out.println("1. Add visitor to list of restaurant. ");
+        System.out.println("1. Add information about visitor to list of restaurant. ");
         System.out.println("2. Enter ID visitor that delete from list of restaurant. ");
         System.out.println("3. Find ID visitor's in catalogue. ");
         System.out.println("4. Show all visitor's in base of restaurant.");
