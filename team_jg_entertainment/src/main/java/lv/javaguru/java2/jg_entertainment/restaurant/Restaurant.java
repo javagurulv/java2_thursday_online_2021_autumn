@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.console_ui_visitors.*;
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.database.Database;
 import lv.javaguru.java2.jg_entertainment.restaurant.database.ImplDatabaseRestaurant;
 import lv.javaguru.java2.jg_entertainment.restaurant.services.ServiceAddAllVisitors;

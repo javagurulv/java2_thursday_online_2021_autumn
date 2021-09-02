@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.console_ui_visitors;
+package lv.javaguru.java2.jg_entertainment.restaurant.console_ui;
 
 import java.util.Scanner;
 
