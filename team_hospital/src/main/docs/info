@@ -1,10 +1,10 @@
-Hospital Management
+progmenu_hospital.Hospital Management
 
 Цель программы - симулировать работу системы управления больницей
 
 Описание объектов и функционала - https://docs.google.com/document/d/16QwH3N8Rbx7ejT2apbYoImsxcpCGg8JXame5EMSBBbo/edit?usp=sharing
 
-Trello board: https://trello.com/b/KUt5G94U/hospital
+Trello board: https://trello.com/b/KUt5G94U/progmenu_hospital
     Green labels - everything what is connected to patients
     Blue labels - everything what is connected to doctors
     Purple labels - everything what is connected to drugs

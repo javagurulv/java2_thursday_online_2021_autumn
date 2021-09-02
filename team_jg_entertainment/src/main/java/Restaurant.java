@@ -6,32 +6,30 @@ import service_visitors.ServiceDeleteVisitors;
 import service_visitors.ServiceFindByIdVisitors;
 import service_visitors.ServiceShowListVisitors;
 
-import java.util.Scanner;
-
 public class Restaurant {
 
-    private static Database databaseRestaurant = new ImplDatabaseRestaurant();
+    private static final Database databaseRestaurant = new ImplDatabaseRestaurant();
 
-    private static ServiceAddAllVisitors addVisitorsService = new ServiceAddAllVisitors(databaseRestaurant);
-    private static ServiceDeleteVisitors deleteVisitorsService = new ServiceDeleteVisitors(databaseRestaurant);
-    private static ServiceShowListVisitors showAllVisitorsService = new ServiceShowListVisitors(databaseRestaurant);
-    private static ServiceFindByIdVisitors findByIdVisitors = new ServiceFindByIdVisitors(databaseRestaurant);
+    private static final ServiceAddAllVisitors addVisitorsService = new ServiceAddAllVisitors(databaseRestaurant);
+    private static final ServiceDeleteVisitors deleteVisitorsService = new ServiceDeleteVisitors(databaseRestaurant);
+    private static final ServiceShowListVisitors showAllVisitorsService = new ServiceShowListVisitors(databaseRestaurant);
+    private static final ServiceFindByIdVisitors findByIdVisitors = new ServiceFindByIdVisitors(databaseRestaurant);
 
-    private static RestaurantUIAction uiAddVisitorAction = new UIActionAddVisitors(addVisitorsService);
-    private static RestaurantUIAction uiDeleteVisitorsAction = new UIActionDeleteVisitors(deleteVisitorsService);
-    private static RestaurantUIAction uiFindIdVisitors = new UIActionFindByIdVisitors(findByIdVisitors);
-    private static RestaurantUIAction uiGetAllVisitorsAction = new UIActionShowListAllVisitors(showAllVisitorsService);
+    private static final RestaurantUIAction uiAddVisitorAction = new UIActionAddVisitors(addVisitorsService);
+    private static final RestaurantUIAction uiDeleteVisitorsAction = new UIActionDeleteVisitors(deleteVisitorsService);
+    private static final RestaurantUIAction uiFindIdVisitors = new UIActionFindByIdVisitors(findByIdVisitors);
+    private static final RestaurantUIAction uiGetAllVisitorsAction = new UIActionShowListAllVisitors(showAllVisitorsService);
 
-    private static RestaurantUIAction uiExitAction = new UIActionExit();
+    private static final CheckMenuNumberFromConsole checkNumber = new CheckMenuNumberFromConsole();
+    private static final RestaurantUIAction uiExitAction = new UIActionExit();
 
     public static void main(String[] args) {
         while (true) {
             printProgramMenu();
-            int numberOfMenu = getNumberMenuFrom();
+            int numberOfMenu = checkNumber.getCorrectNumberMenu(1,5);
             executeChooseMenu(numberOfMenu);
         }
     }
-
 
     private static void printProgramMenu() {
         System.out.println();
@@ -43,12 +41,6 @@ public class Restaurant {
         System.out.println("4. Show all visitor's in base of restaurant.");
         System.out.println("5. Exit! ");
         System.out.println();
-    }
-
-    private static int getNumberMenuFrom() {
-        System.out.println("Please, choose number of menu: ");
-        Scanner scanner = new Scanner(System.in);
-        return Integer.parseInt(scanner.nextLine());
     }
 
     private static void executeChooseMenu(int numberOfMenu) {
@@ -69,7 +61,6 @@ public class Restaurant {
                 uiGetAllVisitorsAction.execute();
                 break;
             }
-
             case 5: {
                 uiExitAction.execute();
                 break;
