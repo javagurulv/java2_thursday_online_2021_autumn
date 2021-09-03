@@ -10,12 +10,12 @@
 @DIComponent
 public class AddBookService {
 
-	private Database database;
+	private Database lv.javaguru.java2.hospital.database;
 	private AddBookRequestValidator validator;
 
-	public AddBookService(Database database,
+	public AddBookService(Database lv.javaguru.java2.hospital.database,
 						  AddBookRequestValidator validator) {
-		this.database = database;
+		this.lv.javaguru.java2.hospital.database = lv.javaguru.java2.hospital.database;
 		this.validator = validator;
 	}
 
@@ -25,6 +25,6 @@ public class AddBookService {
 @DIComponent
 public class AddBookService {
 
-	@DIDependency private Database database;
+	@DIDependency private Database lv.javaguru.java2.hospital.database;
 	@DIDependency private AddBookRequestValidator validator;
 

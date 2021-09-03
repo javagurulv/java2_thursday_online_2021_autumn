@@ -24,4 +24,4 @@
 интерфейсов, а не сам класс. Это нужно для разрешения зависимостей
 вроде этой:
 
-  private Database database = new InMemoryDatabase();
+  private Database lv.javaguru.java2.hospital.database = new InMemoryDatabase();
