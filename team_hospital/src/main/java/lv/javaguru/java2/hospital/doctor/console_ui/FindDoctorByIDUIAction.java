@@ -16,7 +16,7 @@ public class FindDoctorByIDUIAction implements DoctorUIActions {
     @Override
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
-        int id = getUserInput.getUserNumericInput("Please enter lv.javaguru.java2.hospital.doctor's id: ");
+        int id = getUserInput.getUserNumericInput("Please enter doctor's id: ");
         if (doctorExists.execute(id)) {
             findDoctorById.execute(id);
         } else {

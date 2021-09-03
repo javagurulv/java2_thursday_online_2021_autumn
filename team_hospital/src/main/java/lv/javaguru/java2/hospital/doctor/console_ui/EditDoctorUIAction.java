@@ -17,13 +17,13 @@ public class EditDoctorUIAction implements DoctorUIActions {
     @Override
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
-        int id = getUserInput.getUserNumericInput("Please, enter the lv.javaguru.java2.hospital.doctor's id: ");
+        int id = getUserInput.getUserNumericInput("Please, enter the doctor's id: ");
         if (doctorExists.execute(id)) {
             printEditMenu();
             int userInput = getUserInput.getUserNumericInput("Enter edit menu number: ");
             editAction("", id, userInput);
         } else {
-            System.out.println("Can't find lv.javaguru.java2.hospital.doctor with such an Id.");
+            System.out.println("Can't find doctor with such an Id.");
         }
 
     }

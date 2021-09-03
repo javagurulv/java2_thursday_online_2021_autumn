@@ -16,7 +16,7 @@ public class FindPatientByIDUIAction implements PatientUIActions {
 
     public void execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter lv.javaguru.java2.hospital.patient`s ID: ");
+        System.out.println("Please enter patient`s ID: ");
         int id = Integer.parseInt(scanner.nextLine());
         if (patientExists.execute(id)) {
             findById.execute(id);

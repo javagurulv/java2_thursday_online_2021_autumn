@@ -21,7 +21,7 @@ public class AddDoctorUIAction implements DoctorUIActions {
 
     private String[] getUserStringsInput() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter lv.javaguru.java2.hospital.doctor's name and surname, and speciality: ");
+        System.out.println("Please enter doctor's name and surname, and speciality: ");
         return scanner.nextLine().split(" ");
     }
 }

@@ -17,13 +17,13 @@ public class EditPatientUIAction implements PatientUIActions {
     public void execute() {
         Scanner scanner = new Scanner(System.in);
         String changes = "";
-        System.out.print("Please enter lv.javaguru.java2.hospital.patient's ID: ");
+        System.out.print("Please enter patient's ID: ");
         int id = Integer.parseInt(scanner.nextLine());
         if (patientExists.execute(id)) {
             System.out.println("What information would you like to edit? ");
             System.out.println("1. Name");
             System.out.println("2. Surname");
-            System.out.println("3. Discharge the lv.javaguru.java2.hospital.patient today");
+            System.out.println("3. Discharge the patient today");
             int userInput = Integer.parseInt(scanner.nextLine());
             EditAction(scanner, changes, id, userInput);
         } else {

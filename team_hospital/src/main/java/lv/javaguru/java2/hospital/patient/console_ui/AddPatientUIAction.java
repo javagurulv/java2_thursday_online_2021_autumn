@@ -12,7 +12,7 @@ public class AddPatientUIAction implements PatientUIActions {
 
     public void execute(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter lv.javaguru.java2.hospital.patient's name, surname and personal code: ");
+        System.out.println("Please enter patient's name, surname and personal code: ");
         String[] patientInfo = scanner.nextLine().split(" ");
         addPatient.execute(patientInfo[0], patientInfo[1], patientInfo[2]);
         System.out.println(patientInfo[0] + " " + patientInfo[1] + " was successfully added.");
