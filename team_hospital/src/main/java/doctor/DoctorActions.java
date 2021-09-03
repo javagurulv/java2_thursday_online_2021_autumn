@@ -3,6 +3,8 @@ package doctor;
 import java.util.List;
 import java.util.Scanner;
 
+import domain.Doctor;
+
 public class DoctorActions {
 
     public void addDoctor(List<Doctor> list) {

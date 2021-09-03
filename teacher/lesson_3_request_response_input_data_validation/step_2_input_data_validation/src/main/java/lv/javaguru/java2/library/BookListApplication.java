@@ -10,7 +10,7 @@ import lv.javaguru.java2.library.console_ui.UIAction;
 import lv.javaguru.java2.library.core.database.Database;
 import lv.javaguru.java2.library.core.database.InMemoryDatabaseImpl;
 import lv.javaguru.java2.library.core.services.AddBookService;
-import lv.javaguru.java2.library.core.services.AddBookValidator;
+import lv.javaguru.java2.library.core.services.validators.AddBookValidator;
 import lv.javaguru.java2.library.core.services.GetAllBooksService;
 import lv.javaguru.java2.library.core.services.RemoveBookService;
 

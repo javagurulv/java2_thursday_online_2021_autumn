@@ -1,7 +1,7 @@
 package doctor.services;
 
-import doctor.Doctor;
-import doctor.database.DoctorDatabaseImpl;
+import domain.Doctor;
+import database.DoctorDatabaseImpl;
 
 import java.util.List;
 

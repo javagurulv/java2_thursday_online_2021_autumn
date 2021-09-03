@@ -1,7 +1,7 @@
 package patient.services;
 
-import patient.Patient;
-import patient.database.PatientDatabaseImpl;
+import domain.Patient;
+import database.PatientDatabaseImpl;
 
 public class AddPatientService {
     private final PatientDatabaseImpl database;

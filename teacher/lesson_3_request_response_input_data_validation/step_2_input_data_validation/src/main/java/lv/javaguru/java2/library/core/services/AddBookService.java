@@ -7,6 +7,7 @@ import lv.javaguru.java2.library.core.database.Database;
 import lv.javaguru.java2.library.core.requests.AddBookRequest;
 import lv.javaguru.java2.library.core.responses.AddBookResponse;
 import lv.javaguru.java2.library.core.responses.CoreError;
+import lv.javaguru.java2.library.core.services.validators.AddBookValidator;
 
 public class AddBookService {
 

@@ -1,7 +1,7 @@
 package patient.services;
 
-import patient.Patient;
-import patient.database.PatientDatabaseImpl;
+import domain.Patient;
+import database.PatientDatabaseImpl;
 import java.util.List;
 
 public class ShowAllPatientsService {
