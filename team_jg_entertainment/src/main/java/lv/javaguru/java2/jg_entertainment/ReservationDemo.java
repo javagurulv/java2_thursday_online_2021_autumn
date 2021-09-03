@@ -1,4 +1,4 @@
-package main.java;
+package lv.javaguru.java2.jg_entertainment;
 
 import java.util.ArrayList;
 import java.util.List;
