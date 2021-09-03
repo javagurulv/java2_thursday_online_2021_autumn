@@ -1,6 +1,6 @@
 package doctor.services;
 
-import doctor.database.DoctorDatabaseImpl;
+import database.DoctorDatabaseImpl;
 
 public class EditDoctorService {
     private final DoctorDatabaseImpl database;

@@ -1,6 +1,6 @@
 package patient.services;
 
-import patient.database.PatientDatabaseImpl;
+import database.PatientDatabaseImpl;
 
 public class PatientExistsService {
     private final PatientDatabaseImpl database;

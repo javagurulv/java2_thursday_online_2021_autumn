@@ -1,6 +1,6 @@
 package doctor.services;
 
-import doctor.database.DoctorDatabaseImpl;
+import database.DoctorDatabaseImpl;
 
 public class DeleteDoctorService {
     private final DoctorDatabaseImpl database;
