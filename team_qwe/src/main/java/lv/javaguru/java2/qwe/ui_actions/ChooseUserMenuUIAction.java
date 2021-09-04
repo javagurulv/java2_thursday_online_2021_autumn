@@ -2,6 +2,7 @@ package lv.javaguru.java2.qwe.ui_actions;
 
 import lv.javaguru.java2.qwe.database.UserData;
 import lv.javaguru.java2.qwe.services.user_services.*;
+import lv.javaguru.java2.qwe.services.validator.AddUserValidator;
 import lv.javaguru.java2.qwe.ui_actions.user_ui_actions.*;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
@@ -24,7 +25,7 @@ public class ChooseUserMenuUIAction implements UIAction {
         while (userMenuOpen) {
             String type = inputDialog("Choose operation", "USER MENU", userMenu);
             switch (type) {
-                case "ADD NEW USER" -> new AddUserUIAction(new AddUserService(userData)).execute();
+                case "ADD NEW USER" -> new AddUserUIAction(new AddUserService(userData, new AddUserValidator())).execute();
                 case "REMOVE USER" -> new RemoveUserUIAction(new RemoveUserService(userData)).execute();
                 case "SHOW USER LIST" -> new ShowUserListUIAction(new ShowUserListService(userData)).execute();
                 case "FIND USER BY NAME" -> new FindUserByNameUIAction(new FindUserByNameService(userData)).execute();

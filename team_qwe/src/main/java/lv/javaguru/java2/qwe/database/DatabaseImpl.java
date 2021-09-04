@@ -18,8 +18,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.Map.entry;
-import static javax.swing.JOptionPane.showMessageDialog;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
 public class DatabaseImpl implements Database {
@@ -45,12 +43,13 @@ public class DatabaseImpl implements Database {
     }
 
     @Override
-    public void addSecurity(String type) {
-        switch (type) {
-            case "Stock" -> addStock();
-            case "Bond" -> addBond();
-            default -> System.out.println("None!");
-        }
+    public void addStock(Stock stock) {
+        securityList.add(stock);
+    }
+
+    @Override
+    public void addBond(Bond bond) {
+        securityList.add(bond);
     }
 
     @Override
@@ -100,39 +99,6 @@ public class DatabaseImpl implements Database {
                 .filter(security -> security.getIndustry().equals(industry))
                 .map(security -> (Stock) security)
                 .collect(Collectors.toList());
-    }
-
-    private void addStock() {
-        try {
-            securityList.add(new Stock(
-                    inputDialog("Security name"),
-                    inputDialog("Industry", "CHOOSE INDUSTRY", generateIndustriesArray()),
-                    inputDialog("Currency", "CHOOSE CURRENCY", new String[]{"USD"}),
-                    Double.parseDouble(inputDialog("Market price")),
-                    Double.parseDouble(inputDialog("Dividend")),
-                    Double.parseDouble(inputDialog("Risk weight"))));
-        } catch (NumberFormatException e) {
-            showMessageDialog(null, "Wrong data!");
-            e.printStackTrace();
-        }
-    }
-
-    private void addBond() {
-        try {
-            securityList.add(new Bond(
-                    inputDialog("Security name"),
-                    inputDialog("Industry", "CHOOSE INDUSTRY", generateIndustriesArray()),
-                    inputDialog("Currency", "CHOOSE CURRENCY", new String[]{"USD"}),
-                    Double.parseDouble(inputDialog("Market price")),
-                    Double.parseDouble(inputDialog("Coupon")),
-                    inputDialog("Rating"),
-                    Integer.parseInt(inputDialog("Nominal")),
-                    inputDialog("Maturity")
-            ));
-        } catch (NumberFormatException e) {
-            showMessageDialog(null, "Wrong data!");
-            e.printStackTrace();
-        }
     }
 
     private void importSecurities(List<String> rawData) {
@@ -212,12 +178,6 @@ public class DatabaseImpl implements Database {
                 entry("=", security -> Stream.of(security).map(stock -> (Stock) stock)
                         .anyMatch(stock -> stock.getRiskWeight() == target))
         );
-    }
-
-    private String[] generateIndustriesArray() {
-        return new String[]{"Consumer Staples", "Utilities", "Communications", "Health Care",
-                "Technology", "Materials", "Energy", "Financials", "Real Estate",
-                "Industrials", "Consumer Discretionary"};
     }
 
 }

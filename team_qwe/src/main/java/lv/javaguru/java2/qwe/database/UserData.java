@@ -11,7 +11,7 @@ public interface UserData {
 
     Database getDatabase();
 
-    void addUser();
+    void addUser(User user);
 
     void removeUser(String name);
 

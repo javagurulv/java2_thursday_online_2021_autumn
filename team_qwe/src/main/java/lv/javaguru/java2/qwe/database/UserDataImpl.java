@@ -6,9 +6,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
-import static javax.swing.JOptionPane.showMessageDialog;
 import static lv.javaguru.java2.qwe.Type.*;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.round;
 
@@ -37,24 +35,8 @@ public class UserDataImpl implements UserData {
     }
 
     @Override
-    public void addUser() {
-        try {
-            userList.add(new User(
-                    inputDialog("User name:"),
-                    Integer.parseInt(inputDialog("User age:")),
-                    valueOf(inputDialog("User type:", "TYPE", new String[]{
-                            String.valueOf(LOWER_MIDDLE),
-                            String.valueOf(MIDDLE),
-                            String.valueOf(UPPER_MIDDLE),
-                            String.valueOf(WEALTHY),
-                            String.valueOf(SUPER_RICH)
-                    })),
-                    Double.parseDouble(inputDialog("Initial investment:"))
-            ));
-        } catch (NumberFormatException e) {
-            showMessageDialog(null, "Wrong data!");
-            e.printStackTrace();
-        }
+    public void addUser(User user) {
+        userList.add(user);
     }
 
     @Override

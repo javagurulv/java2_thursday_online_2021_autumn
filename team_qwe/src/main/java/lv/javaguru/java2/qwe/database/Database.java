@@ -1,6 +1,8 @@
 package lv.javaguru.java2.qwe.database;
 
+import lv.javaguru.java2.qwe.Bond;
 import lv.javaguru.java2.qwe.Security;
+import lv.javaguru.java2.qwe.Stock;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +15,9 @@ public interface Database {
 
     void importSecurities(String path) throws IOException;
 
-    void addSecurity(String type);
+    void addStock(Stock stock);
+
+    void addBond(Bond bond);
 
     void removeSecurity(String name);
 

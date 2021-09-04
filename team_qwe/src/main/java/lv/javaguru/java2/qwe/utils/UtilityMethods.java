@@ -47,6 +47,30 @@ public class UtilityMethods {
                 arr, arr[0])).orElse("");
     }
 
+    public static String[] generateIndustriesArray() {
+        return new String[]{"Consumer Staples", "Utilities", "Communications", "Health Care",
+                "Technology", "Materials", "Energy", "Financials", "Real Estate",
+                "Industrials", "Consumer Discretionary"};
+    }
+
+    public static boolean isNotDouble(String text) {
+        try {
+            Double.parseDouble(text);
+            return false;
+        } catch (NumberFormatException e) {
+            return true;
+        }
+    }
+
+    public static boolean isNotInteger(String text) {
+        try {
+            Integer.parseInt(text);
+            return false;
+        } catch (NumberFormatException e) {
+            return true;
+        }
+    }
+
     public static void messageDialog(String text) {
         showMessageDialog(null, text);
     }
