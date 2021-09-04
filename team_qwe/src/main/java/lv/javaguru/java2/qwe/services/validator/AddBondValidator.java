@@ -30,7 +30,7 @@ public class AddBondValidator extends AddSecurityValidator {
             entry(request -> isNotDouble(request.getCoupon()),
                     "Coupon: wrong format! Must be double!"),
             entry(request -> !isNotDouble(request.getCoupon()) && Double.parseDouble(request.getCoupon()) < 0,
-                    "Dividend: cannot be negative!"),
+                    "Coupon: cannot be negative!"),
             entry(request -> request.getRating() == null,
                     "Rating: is empty!"),
             entry(request -> request.getRating().length() < 1 || request.getRating().length() > 4,
@@ -41,8 +41,8 @@ public class AddBondValidator extends AddSecurityValidator {
                     "Nominal: cannot be negative!"),
             entry(request -> request.getMaturity() == null,
                     "Maturity: is empty!"),
-            entry(request -> request.getMaturity().length() < 1 || request.getMaturity().length() > 10,
-                    "Maturity: 1 to 10 symbols are required!")
+            entry(request -> request.getMaturity().length() != 10,
+                    "Maturity: 10 symbols are required!")
     );
 
     @Override
