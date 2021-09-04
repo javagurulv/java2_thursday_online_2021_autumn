@@ -8,6 +8,15 @@ include 'teacher:lesson_2_single_responsibility_principle:step_4_srp_level_appli
 include 'teacher:lesson_3_request_response_input_data_validation:step_1_request_response_model'
 include 'teacher:lesson_3_request_response_input_data_validation:step_2_input_data_validation'
 
+include 'teacher:lesson_4_git_brancing_pull_request_code_review:step_1_search'
+include 'teacher:lesson_4_git_brancing_pull_request_code_review:step_2_ordering'
+include 'teacher:lesson_4_git_brancing_pull_request_code_review:step_3_paging'
+
+include 'teacher:lesson_5_testing_with_junit_and_mockito:step_1_mockito'
+include 'teacher:lesson_5_testing_with_junit_and_mockito:step_2_application_context'
+include 'teacher:lesson_5_testing_with_junit_and_mockito:step_3_acceptance_tests'
+
+include 'teacher:lesson_6_dependency_injection_inversion_of_control:step_1_dependency_injection'
 
 
 include 'team_abc'

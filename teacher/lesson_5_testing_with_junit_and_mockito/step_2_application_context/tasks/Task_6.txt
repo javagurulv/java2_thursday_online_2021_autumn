@@ -1,0 +1,15 @@
+Удалите из класса BookListApplication код создания объектов:
+
+	private static Database lv.javaguru.java2.hospital.database = new InMemoryDatabaseImpl();
+	private static AddBookValidator addBookValidator = new AddBookValidator();
+	private static AddBookService addBookService = new AddBookService(lv.javaguru.java2.hospital.database, addBookValidator);
+	private static RemoveBookService removeBookService = new RemoveBookService(lv.javaguru.java2.hospital.database);
+	private static GetAllBooksService getAllBooksService = new GetAllBooksService(lv.javaguru.java2.hospital.database);
+	private static UIAction addBookUIAction = new AddBookUIAction(addBookService);
+	private static UIAction removeBookUIAction = new RemoveBookUIAction(removeBookService);
+	private static UIAction getAllBooksUIAction = new GetAllBooksUIAction(getAllBooksService);
+	private static UIAction exitUIAction = new ExitUIAction();
+
+В самом начале main() метода создавайте инстанцию класса
+ApplicationContext и в дальнейшем для получения инстанций
+ui action классов пользуйтесь методом applicationContext.getBean().

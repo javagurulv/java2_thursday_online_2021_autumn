@@ -1,0 +1,30 @@
+Во всех классах, которые помечены аннотацией
+@DIComponent удалите все конструкторы, так чтобы
+при компиляции Java добавляла в эти классы конструкторы
+по умолчанию.
+
+Над всеми зависимостями расставьте аннотации @DIDependency.
+
+До изменений:
+
+@DIComponent
+public class AddBookService {
+
+	private Database lv.javaguru.java2.hospital.database;
+	private AddBookRequestValidator validator;
+
+	public AddBookService(Database lv.javaguru.java2.hospital.database,
+						  AddBookRequestValidator validator) {
+		this.lv.javaguru.java2.hospital.database = lv.javaguru.java2.hospital.database;
+		this.validator = validator;
+	}
+
+
+После изменений:
+
+@DIComponent
+public class AddBookService {
+
+	@DIDependency private Database lv.javaguru.java2.hospital.database;
+	@DIDependency private AddBookRequestValidator validator;
+
