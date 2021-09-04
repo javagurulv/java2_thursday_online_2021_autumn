@@ -25,7 +25,7 @@ public class ChooseUserMenuUIAction implements UIAction {
         while (userMenuOpen) {
             String type = inputDialog("Choose operation", "USER MENU", userMenu);
             switch (type) {
-                case "ADD NEW USER" -> new AddUserUIAction(new AddUserService(userData, new AddUserValidator())).execute();
+                case "ADD NEW USER" -> new AddUserUIAction(new AddUserService(userData, new AddUserValidator(userData))).execute();
                 case "REMOVE USER" -> new RemoveUserUIAction(new RemoveUserService(userData)).execute();
                 case "SHOW USER LIST" -> new ShowUserListUIAction(new ShowUserListService(userData)).execute();
                 case "FIND USER BY NAME" -> new FindUserByNameUIAction(new FindUserByNameService(userData)).execute();

@@ -9,7 +9,7 @@ import lv.javaguru.java2.qwe.ui_actions.ChooseUserMenuUIAction;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
-public class DatabaseDemo {
+public class ApplicationDemo {
 
     public static void main(String[] args) {
 

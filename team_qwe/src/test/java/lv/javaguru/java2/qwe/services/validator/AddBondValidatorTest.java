@@ -1,5 +1,8 @@
 package lv.javaguru.java2.qwe.services.validator;
 
+import lv.javaguru.java2.qwe.Bond;
+import lv.javaguru.java2.qwe.database.Database;
+import lv.javaguru.java2.qwe.database.DatabaseImpl;
 import lv.javaguru.java2.qwe.request.AddBondRequest;
 import org.junit.Test;
 
@@ -9,7 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AddBondValidatorTest {
 
-    private final AddBondValidator validator = new AddBondValidator();
+    private final Database database = new DatabaseImpl();
+    private final AddBondValidator validator = new AddBondValidator(database);
 
     @Test
     public void shouldReturnEmptyList() {
@@ -28,7 +32,7 @@ public class AddBondValidatorTest {
     }
 
     @Test
-    public void shouldReturnNameError() {
+    public void shouldReturnNameError1() {
         AddBondRequest request = new AddBondRequest(
                 "",
                 "Energy",
@@ -42,6 +46,25 @@ public class AddBondValidatorTest {
         List<String> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0), "Name: 3 to 100 symbols required!");
+    }
+
+    @Test
+    public void shouldReturnNameError2() {
+        database.addBond(new Bond("Gazprom 4.75 31/12/2031", "Energy", "USD", 108.75,
+                4.75, "BBB+", 1000, "31/12/2031"));
+        AddBondRequest request = new AddBondRequest(
+                "Gazprom 4.75 31/12/2031",
+                "Energy",
+                "USD",
+                "108.75",
+                "4.75",
+                "BBB+",
+                "1000",
+                "31/12/2031"
+        );
+        List<String> errorList = validator.validate(request);
+        assertEquals(errorList.size(), 1);
+        assertEquals(errorList.get(0), "Name: security with such name already exists in the database!");
     }
 
     @Test

@@ -1,5 +1,6 @@
 package lv.javaguru.java2.qwe.services.validator;
 
+import lv.javaguru.java2.qwe.database.UserData;
 import lv.javaguru.java2.qwe.request.AddUserRequest;
 
 import java.util.List;
@@ -13,11 +14,17 @@ import static lv.javaguru.java2.qwe.utils.UtilityMethods.isNotInteger;
 
 public class AddUserValidator {
 
+    private UserData userData;
+
+    public AddUserValidator(UserData userData) {
+        this.userData = userData;
+    }
+
     private final Map<Predicate<AddUserRequest>, String> validator = Map.ofEntries(
-            entry(request -> request.getName() == null,
-                    "Name: is empty!"),
             entry(request -> request.getName().length() < 3 || request.getName().length() > 100,
                     "Name: 3 to 100 symbols required!"),
+            entry(request -> userData.findUserByName(request.getName()).isPresent(),
+                    "Name: user with such name already exists in database!"),
             entry(request -> isNotInteger(request.getAge()),
                     "Age: wrong format! Must be integer!"),
             entry(request -> !isNotInteger(request.getAge()) && Integer.parseInt(request.getAge()) < 16,

@@ -1,5 +1,6 @@
 package lv.javaguru.java2.qwe.services.validator;
 
+import lv.javaguru.java2.qwe.database.Database;
 import lv.javaguru.java2.qwe.request.AddStockRequest;
 import lv.javaguru.java2.qwe.request.SecurityRequest;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.isNotDouble;
@@ -13,11 +14,17 @@ import static java.util.Map.entry;
 
 public class AddStockValidator extends AddSecurityValidator {
 
+    private Database database;
+
+    public AddStockValidator(Database database) {
+        this.database = database;
+    }
+
     private final Map<Predicate<AddStockRequest>, String> validator = Map.ofEntries(
-            entry(request -> request.getName() == null,
-                    "Name: is empty!"),
             entry(request -> request.getName().length() < 3 || request.getName().length() > 100,
                     "Name: 3 to 100 symbols required!"),
+            entry(request -> database.findSecurityByName(request.getName()).isPresent(),
+                    "Name: security with such name already exists in the database!"),
             entry(request -> request.getIndustry().isEmpty(),
                     "Industry: is empty!"),
             entry(request -> request.getCurrency().isEmpty(),

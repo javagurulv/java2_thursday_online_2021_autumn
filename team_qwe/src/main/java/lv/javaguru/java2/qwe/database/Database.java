@@ -13,8 +13,6 @@ public interface Database {
 
     ArrayList<Security> getSecurityList();
 
-    void importSecurities(String path) throws IOException;
-
     void addStock(Stock stock);
 
     void addBond(Bond bond);

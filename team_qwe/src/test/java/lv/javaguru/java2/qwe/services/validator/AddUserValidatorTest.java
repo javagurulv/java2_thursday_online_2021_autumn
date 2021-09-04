@@ -1,5 +1,8 @@
 package lv.javaguru.java2.qwe.services.validator;
 
+import lv.javaguru.java2.qwe.database.DatabaseImpl;
+import lv.javaguru.java2.qwe.database.UserData;
+import lv.javaguru.java2.qwe.database.UserDataImpl;
 import lv.javaguru.java2.qwe.request.AddUserRequest;
 import org.junit.Test;
 
@@ -9,12 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AddUserValidatorTest {
 
-    private final AddUserValidator validator = new AddUserValidator();
+    private final UserData userData = new UserDataImpl(new DatabaseImpl());
+    private final AddUserValidator validator = new AddUserValidator(userData);
 
     @Test
     public void shouldReturnEmptyList() {
         AddUserRequest request = new AddUserRequest(
-                "Alexander",
+                "Michael",
                 "40",
                 "SUPER_RICH",
                 "1000000"
@@ -52,7 +56,7 @@ public class AddUserValidatorTest {
     @Test
     public void shouldReturnNameError3() {
         AddUserRequest request = new AddUserRequest(
-                "Alexanderrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr" +
+                "Michaelrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr" +
                         "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr" +
                         "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
                 "40",
@@ -65,9 +69,22 @@ public class AddUserValidatorTest {
     }
 
     @Test
-    public void shouldReturnAgeError1() {
+    public void shouldReturnNameError4() {
         AddUserRequest request = new AddUserRequest(
                 "Alexander",
+                "40",
+                "SUPER_RICH",
+                "1000000"
+        );
+        List<String> errorList = validator.validate(request);
+        assertEquals(errorList.size(), 1);
+        assertEquals(errorList.get(0), "Name: user with such name already exists in database!");
+    }
+
+    @Test
+    public void shouldReturnAgeError1() {
+        AddUserRequest request = new AddUserRequest(
+                "Michael",
                 "a",
                 "SUPER_RICH",
                 "1000000"
@@ -80,7 +97,7 @@ public class AddUserValidatorTest {
     @Test
     public void shouldReturnAgeError2() {
         AddUserRequest request = new AddUserRequest(
-                "Alexander",
+                "Michael",
                 "",
                 "SUPER_RICH",
                 "1000000"
@@ -93,7 +110,7 @@ public class AddUserValidatorTest {
     @Test
     public void shouldReturnAgeError3() {
         AddUserRequest request = new AddUserRequest(
-                "Alexander",
+                "Michael",
                 "15",
                 "SUPER_RICH",
                 "1000000"
@@ -106,7 +123,7 @@ public class AddUserValidatorTest {
     @Test
     public void shouldReturnAgeError4() {
         AddUserRequest request = new AddUserRequest(
-                "Alexander",
+                "Michael",
                 "150",
                 "SUPER_RICH",
                 "1000000"
@@ -119,7 +136,7 @@ public class AddUserValidatorTest {
     @Test
     public void shouldReturnTypeError() {
         AddUserRequest request = new AddUserRequest(
-                "Alexander",
+                "Michael",
                 "40",
                 "",
                 "1000000"
@@ -132,7 +149,7 @@ public class AddUserValidatorTest {
     @Test
     public void shouldReturnInitialInvestmentError1() {
         AddUserRequest request = new AddUserRequest(
-                "Alexander",
+                "Michael",
                 "40",
                 "SUPER_RICH",
                 ""
@@ -145,7 +162,7 @@ public class AddUserValidatorTest {
     @Test
     public void shouldReturnInitialInvestmentError2() {
         AddUserRequest request = new AddUserRequest(
-                "Alexander",
+                "Michael",
                 "40",
                 "SUPER_RICH",
                 "9999.99"
@@ -158,7 +175,7 @@ public class AddUserValidatorTest {
     @Test
     public void shouldReturnInitialInvestmentError3() {
         AddUserRequest request = new AddUserRequest(
-                "Alexander",
+                "Michael",
                 "40",
                 "SUPER_RICH",
                 "150000000"

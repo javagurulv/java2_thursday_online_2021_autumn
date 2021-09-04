@@ -1,5 +1,8 @@
 package lv.javaguru.java2.qwe.services.validator;
 
+import lv.javaguru.java2.qwe.Stock;
+import lv.javaguru.java2.qwe.database.Database;
+import lv.javaguru.java2.qwe.database.DatabaseImpl;
 import lv.javaguru.java2.qwe.request.AddStockRequest;
 import org.junit.Test;
 
@@ -9,7 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AddStockValidatorTest {
 
-    private final AddStockValidator validator = new AddStockValidator();
+    private final Database database = new DatabaseImpl();
+    private final AddStockValidator validator = new AddStockValidator(database);
 
     @Test
     public void shouldReturnEmptyList() {
@@ -26,7 +30,7 @@ public class AddStockValidatorTest {
     }
 
     @Test
-    public void shouldReturnNameError() {
+    public void shouldReturnNameError1() {
         AddStockRequest request = new AddStockRequest(
                 "In",
                 "Technology",
@@ -38,6 +42,23 @@ public class AddStockValidatorTest {
         List<String> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0), "Name: 3 to 100 symbols required!");
+    }
+
+    @Test
+    public void shouldReturnNameError2() {
+        database.addStock(new Stock("Alibaba", "Technology", "USD", 165.23,
+                0, 1.32));
+        AddStockRequest request = new AddStockRequest(
+                "Alibaba",
+                "Technology",
+                "USD",
+                "54.23",
+                "1.15",
+                "1.09"
+        );
+        List<String> errorList = validator.validate(request);
+        assertEquals(errorList.size(), 1);
+        assertEquals(errorList.get(0), "Name: security with such name already exists in the database!");
     }
 
     @Test
@@ -204,6 +225,7 @@ public class AddStockValidatorTest {
                 ""
         );
         List<String> errorList = validator.validate(request);
+        errorList.forEach(System.out::println);
         assertEquals(errorList.size(), 6);
         assertTrue(errorList.contains("Name: 3 to 100 symbols required!"));
         assertTrue(errorList.contains("Industry: is empty!"));
