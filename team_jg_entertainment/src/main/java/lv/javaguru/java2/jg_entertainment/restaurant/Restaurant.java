@@ -1,12 +1,12 @@
 package lv.javaguru.java2.jg_entertainment.restaurant;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.*;
-import lv.javaguru.java2.jg_entertainment.restaurant.database.Database;
-import lv.javaguru.java2.jg_entertainment.restaurant.database.ImplDatabaseRestaurant;
-import lv.javaguru.java2.jg_entertainment.restaurant.services.ServiceAddAllVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.services.ServiceDeleteVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.services.ServiceFindByIdVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.services.ServiceShowListVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.Database;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.ImplDatabaseRestaurant;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.ServiceAddAllVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.ServiceDeleteVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.ServiceFindByIdVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.ServiceShowListVisitors;
 
 public class Restaurant {
 

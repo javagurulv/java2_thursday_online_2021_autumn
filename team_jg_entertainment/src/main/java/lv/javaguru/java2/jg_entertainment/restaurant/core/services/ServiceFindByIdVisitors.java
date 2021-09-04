@@ -1,6 +1,6 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.services;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.services;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.database.Database;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.Database;
 
 public class ServiceFindByIdVisitors {
 

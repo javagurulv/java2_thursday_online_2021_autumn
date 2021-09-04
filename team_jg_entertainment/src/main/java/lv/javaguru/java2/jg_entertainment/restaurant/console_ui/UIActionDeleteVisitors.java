@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.services.ServiceDeleteVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.ServiceDeleteVisitors;
 
 import java.util.Scanner;
 
