@@ -75,12 +75,10 @@ public class InMemoryDatabaseImpl implements Database {
     @Override
     public void findSpecialistByProfession(String profession) {
         for (Specialist specialist : specialists) {
-            if (profession.equals(specialist.getSpecialistProfession())) {
-                System.out.println(specialist);
-                if (!profession.equals(specialist.getSpecialistProfession())) {
-                    System.out.println("Specialist with current profession not found");
-                }
-            }
+            if (profession.equals(specialist.getSpecialistProfession())){
+                System.out.println("Founded specialists: " + specialist);}
+
+                else System.out.println("Specialist with current profession not found");
         }
     }
 

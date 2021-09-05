@@ -26,11 +26,8 @@ public class FindSpecialistByProfessionUIAction implements UIAction {
 
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError ->
-                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage())
-            );
-        } else {
-            System.out.println("Specialists founded: ");
-        }
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));
 
+        }
     }
 }
