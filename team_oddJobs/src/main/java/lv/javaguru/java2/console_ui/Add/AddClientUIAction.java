@@ -29,9 +29,13 @@ public class AddClientUIAction implements UIAction {
         AddClientRequest addClientRequest = new AddClientRequest(clientName, clientSurname);
         AddClientResponse addClientResponse = addClientService.execute(addClientRequest);
 
-        System.out.println("New client id is "+ addClientResponse.getClient().getClientId());
-        System.out.println("Specialist" + addClientResponse.getClient() + " created! ");
-
-
+        if (addClientResponse.hasErrors()) {
+            addClientResponse.getErrors().forEach(coreError ->
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage())
+            );
+        } else {
+            System.out.println("New client id was: " + addClientResponse.getClient().getClientId());
+            System.out.println("Your client account was added to list.");
+        }
     }
 }

@@ -11,6 +11,7 @@ import lv.javaguru.java2.console_ui.Get.GetAllSpecialistUIAction;
 import lv.javaguru.java2.console_ui.Remove.RemoveClientUIAction;
 import lv.javaguru.java2.console_ui.Remove.RemoveSpecialistUIAction;
 import lv.javaguru.java2.console_ui.UIAction;
+import lv.javaguru.java2.core.validations.*;
 import lv.javaguru.java2.database.Database;
 import lv.javaguru.java2.database.InMemoryDatabaseImpl;
 import lv.javaguru.java2.services.Add.AddAdvertismentService;
@@ -28,22 +29,27 @@ import java.util.Scanner;
 public class Application {
     private static final Database database = new InMemoryDatabaseImpl();
 
-    private static final AddClientService addClientService = new AddClientService(database);
+    private static AddClientValidator addClientValidator = new AddClientValidator();
+    private static final AddClientService addClientService = new AddClientService(database,addClientValidator);
     private static final UIAction addClient = new AddClientUIAction(addClientService);
 
-    private static final AddSpecialistService addSpecialistService = new AddSpecialistService(database);
+   private static AddSpecialistValidator addSpecialistValidator = new AddSpecialistValidator();
+    private static final AddSpecialistService addSpecialistService = new AddSpecialistService(database,addSpecialistValidator);
     private static final UIAction addSpecialist = new AddSpecialistUIAction(addSpecialistService);
 
     private static final AddAdvertismentService addAdvertisementService = new AddAdvertismentService(database);
     private static final UIAction addAdvertisement = new AddAdvertismentUIAction(addAdvertisementService);
 
-    private static final RemoveClientService deleteClientService = new RemoveClientService(database);
+    private static RemoveClientValidator removeClientValidator = new RemoveClientValidator();
+    private static final RemoveClientService deleteClientService = new RemoveClientService(database,removeClientValidator);
     private static final UIAction deleteClient = new RemoveClientUIAction(deleteClientService);
 
-    private static final RemoveSpecialistService deleteSpecialistService = new RemoveSpecialistService(database);
+    private static RemoveSpecialistValidator removeSpecialistValidator = new RemoveSpecialistValidator();
+    private static final RemoveSpecialistService deleteSpecialistService = new RemoveSpecialistService(database,removeSpecialistValidator);
     private static final UIAction deleteSpecialist = new RemoveSpecialistUIAction(deleteSpecialistService);
 
-    private static final FindSpecialistByProfessionService findSpecialistByProfessionService = new FindSpecialistByProfessionService(database);
+private static FindSpecialistByProfessionValidator findSpecialistByProfessionValidator = new FindSpecialistByProfessionValidator();
+    private static final FindSpecialistByProfessionService findSpecialistByProfessionService = new FindSpecialistByProfessionService(database,findSpecialistByProfessionValidator);
     private static final UIAction findSpecialistByProfession = new FindSpecialistByProfessionUIAction(findSpecialistByProfessionService);
 
     private static final FindClientByIdService findClientByIdService = new FindClientByIdService(database);

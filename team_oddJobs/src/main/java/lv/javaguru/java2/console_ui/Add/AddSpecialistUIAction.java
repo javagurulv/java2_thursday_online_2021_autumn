@@ -15,8 +15,6 @@ public class AddSpecialistUIAction implements UIAction {
         this.addSpecialistService = addSpecialistService;
     }
 
-    ;
-
 
     @Override
     public void execute() {
@@ -34,7 +32,13 @@ public class AddSpecialistUIAction implements UIAction {
         AddSpecialistRequest addSpecialistRequest = new AddSpecialistRequest(specialistName,specialistSurname,specialistProfession);
         AddSpecialistResponse addSpecialistResponse = addSpecialistService.execute(addSpecialistRequest);
 
-        System.out.println("New specialist id is "+ addSpecialistResponse.getSpecialist().getSpecialistId());
-        System.out.println("Specialist" + addSpecialistResponse.getSpecialist() + " created! ");
+        if (addSpecialistResponse.hasErrors()) {
+            addSpecialistResponse.getErrors().forEach(coreError ->
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage())
+            );
+        } else {
+            System.out.println("New specialist id is "+ addSpecialistResponse.getSpecialist().getSpecialistId());
+            System.out.println("Specialist" + addSpecialistResponse.getSpecialist() + " created! ");
+        }
     }
 }
