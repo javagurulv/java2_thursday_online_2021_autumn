@@ -7,6 +7,10 @@ import lv.javaguru.java2.qwe.database.UserDataImpl;
 import lv.javaguru.java2.qwe.ui_actions.ChooseDataMenuUIAction;
 import lv.javaguru.java2.qwe.ui_actions.ChooseUserMenuUIAction;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
 public class ApplicationDemo {
@@ -16,19 +20,15 @@ public class ApplicationDemo {
         Database database = new DatabaseImpl();
         UserData userData = new UserDataImpl(database);
 
-        //Отдельный поток для симуляции изменения рыночной цены!
-        Thread marketPriceSimulator = new Thread(() -> {
-            while (true) {
-                sleep(5000);
-                simulateMarketPrices(database.getSecurityList()); // обновляет рыночную цену в границах +-1% от предыдущей цены
-            }
-        });
-        marketPriceSimulator.start();
+        //Симуляция изменения рыночных цен!
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        Runnable simulator = () -> simulateMarketPrices(database.getSecurityList());
+        scheduledExecutorService.scheduleAtFixedRate(simulator, 5, 5, TimeUnit.SECONDS);
 
         String[] menu = {"DATA MENU", "USER MENU", "EXIT"};
 
         while (true) {
-            String type = inputDialog("Choose operation:", "MENU", menu);
+            String type = inputDialog("Choose operation:", "MAIN MENU", menu);
             switch (type) {
                 case "DATA MENU" -> new ChooseDataMenuUIAction(database).execute();
                 case "USER MENU" -> new ChooseUserMenuUIAction(userData).execute();

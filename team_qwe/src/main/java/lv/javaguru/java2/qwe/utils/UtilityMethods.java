@@ -25,14 +25,7 @@ public class UtilityMethods {
             IntStream.rangeClosed(0, list.size() - 1)
                     .filter(i -> !list.get(i).getClass().getSimpleName().equals("Cash"))
                     .forEach(i -> list.get(i).setMarketPrice(generateNextPrice(list.get(i).getMarketPrice())));
-        }
-    }
-
-    public static void sleep(int milliseconds) {
-        try {
-            Thread.sleep(milliseconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+//            System.out.println("Market prices updated!");
         }
     }
 
