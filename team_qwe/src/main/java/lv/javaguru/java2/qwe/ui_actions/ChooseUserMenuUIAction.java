@@ -1,8 +1,8 @@
 package lv.javaguru.java2.qwe.ui_actions;
 
-import lv.javaguru.java2.qwe.database.UserData;
-import lv.javaguru.java2.qwe.services.user_services.*;
-import lv.javaguru.java2.qwe.services.validator.AddUserValidator;
+import lv.javaguru.java2.qwe.core.database.UserData;
+import lv.javaguru.java2.qwe.core.services.user_services.*;
+import lv.javaguru.java2.qwe.core.services.validator.AddUserValidator;
 import lv.javaguru.java2.qwe.ui_actions.user_ui_actions.*;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;

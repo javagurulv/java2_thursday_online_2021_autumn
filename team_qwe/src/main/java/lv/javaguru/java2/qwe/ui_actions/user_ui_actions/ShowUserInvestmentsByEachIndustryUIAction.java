@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 
 import lv.javaguru.java2.qwe.User;
-import lv.javaguru.java2.qwe.services.user_services.ShowUserInvestmentsByEachIndustryService;
+import lv.javaguru.java2.qwe.core.services.user_services.ShowUserInvestmentsByEachIndustryService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 import java.util.Optional;

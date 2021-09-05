@@ -1,12 +1,14 @@
 package lv.javaguru.java2.qwe.ui_actions.data_ui_actions;
 
-import lv.javaguru.java2.qwe.request.AddBondRequest;
-import lv.javaguru.java2.qwe.request.SecurityRequest;
-import lv.javaguru.java2.qwe.services.data_services.AddBondService;
+import lv.javaguru.java2.qwe.core.requests.AddBondRequest;
+import lv.javaguru.java2.qwe.core.requests.SecurityRequest;
+import lv.javaguru.java2.qwe.core.responses.AddBondResponse;
+import lv.javaguru.java2.qwe.core.services.data_services.AddBondService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.generateIndustriesArray;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.printErrorList;
 
 public class AddBondUIAction implements UIAction {
 
@@ -28,7 +30,17 @@ public class AddBondUIAction implements UIAction {
         String maturity = inputDialog("Maturity");
         SecurityRequest bondRequest = new AddBondRequest(name, industry, currency,
                 marketPrice, coupon, rating, nominal, maturity);
-        addBondService.execute(bondRequest);
+        AddBondResponse bondResponse = addBondService.execute(bondRequest);
+        printResponse(bondResponse);
+    }
+
+    private void printResponse(AddBondResponse response) {
+        if (response.hasErrors()) {
+            messageDialog("FAILED TO ADD BOND!\n" +
+                    printErrorList(response));
+        } else {
+            messageDialog("Bond " + response.getNewBond().getName() + " has been added!");
+        }
     }
 
 }

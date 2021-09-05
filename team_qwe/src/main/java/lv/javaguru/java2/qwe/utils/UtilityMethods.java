@@ -2,11 +2,13 @@ package lv.javaguru.java2.qwe.utils;
 
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.User;
-import lv.javaguru.java2.qwe.database.UserData;
+import lv.javaguru.java2.qwe.core.database.UserData;
+import lv.javaguru.java2.qwe.core.responses.CoreResponse;
 
 import javax.swing.*;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static javax.swing.JOptionPane.showInputDialog;
@@ -44,6 +46,12 @@ public class UtilityMethods {
         return new String[]{"Consumer Staples", "Utilities", "Communications", "Health Care",
                 "Technology", "Materials", "Energy", "Financials", "Real Estate",
                 "Industrials", "Consumer Discretionary"};
+    }
+
+    public static String printErrorList(CoreResponse response) {
+        return response.getErrors().stream()
+                .map(error -> error.getField() + ": " + error.getMessage())
+                .collect(Collectors.joining("\n"));
     }
 
     public static boolean isNotDouble(String text) {

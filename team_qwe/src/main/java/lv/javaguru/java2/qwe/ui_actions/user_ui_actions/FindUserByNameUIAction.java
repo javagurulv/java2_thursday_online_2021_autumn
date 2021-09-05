@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 
-import lv.javaguru.java2.qwe.services.user_services.FindUserByNameService;
+import lv.javaguru.java2.qwe.core.services.user_services.FindUserByNameService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;

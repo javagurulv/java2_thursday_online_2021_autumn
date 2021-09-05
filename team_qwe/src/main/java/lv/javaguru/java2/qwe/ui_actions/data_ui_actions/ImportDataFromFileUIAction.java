@@ -1,12 +1,10 @@
 package lv.javaguru.java2.qwe.ui_actions.data_ui_actions;
 
-import lv.javaguru.java2.qwe.services.data_services.ImportSecuritiesService;
+import lv.javaguru.java2.qwe.core.services.data_services.ImportSecuritiesService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 import javax.swing.*;
 import java.io.IOException;
-
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
 public class ImportDataFromFileUIAction implements UIAction {
 

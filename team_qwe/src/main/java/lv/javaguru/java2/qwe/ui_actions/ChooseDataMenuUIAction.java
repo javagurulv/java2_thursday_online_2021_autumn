@@ -1,9 +1,9 @@
 package lv.javaguru.java2.qwe.ui_actions;
 
-import lv.javaguru.java2.qwe.database.Database;
-import lv.javaguru.java2.qwe.services.data_services.*;
-import lv.javaguru.java2.qwe.services.validator.AddBondValidator;
-import lv.javaguru.java2.qwe.services.validator.AddStockValidator;
+import lv.javaguru.java2.qwe.core.database.Database;
+import lv.javaguru.java2.qwe.core.services.data_services.*;
+import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
+import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
 import lv.javaguru.java2.qwe.ui_actions.data_ui_actions.*;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
