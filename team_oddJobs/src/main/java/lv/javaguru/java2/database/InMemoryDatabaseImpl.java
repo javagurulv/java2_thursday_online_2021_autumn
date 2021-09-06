@@ -147,6 +147,17 @@ public class InMemoryDatabaseImpl implements Database {
         return isAdvRemoved;
     }
 
+    @Override
+    public void findAdvertisementByTitle(String advTitle) {
+        for (Advertisement advertisement : advBoards) {
+            if (advTitle.equals(advertisement.getAdvTitle())) {
+                System.out.println(advertisement);
+            } else {
+                System.out.println("Advertisement is not found");
+            }
+        }
+    }
+
 
 //    @Override
 //    public void findClientById(Long id, String name, String surName) {
