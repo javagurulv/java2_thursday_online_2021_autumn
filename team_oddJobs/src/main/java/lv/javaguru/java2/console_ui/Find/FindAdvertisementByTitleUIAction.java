@@ -9,6 +9,10 @@ public class FindAdvertisementByTitleUIAction implements UIAction {
 
     private FindAdvertisementByTitleService findAdvertisementByTitleService;
 
+    public FindAdvertisementByTitleUIAction(FindAdvertisementByTitleService findAdvertisementByTitleService) {
+        this.findAdvertisementByTitleService = findAdvertisementByTitleService;
+    }
+
 
     @Override
     public void execute() {
