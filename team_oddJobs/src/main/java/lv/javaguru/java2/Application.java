@@ -74,9 +74,9 @@ private static FindSpecialistByProfessionValidator findSpecialistByProfessionVal
     private static final ExitMenuService exitMenuService = new ExitMenuService();
     private static final UIAction menuExit = new ExitMenuUIAction(exitMenuService);
 
-    private static final FindAdvertisementByTitleService findAdvertisementByTitleService = new FindAdvertisementByTitleService(database);
+    private static final FindAdvertisementByTitleValidator findAdvertisementByTitleValidator = new FindAdvertisementByTitleValidator();
+    private static final FindAdvertisementByTitleService findAdvertisementByTitleService = new FindAdvertisementByTitleService(database, findAdvertisementByTitleValidator);
     private static final UIAction findAdvertisementByTitle = new FindAdvertisementByTitleUIAction(findAdvertisementByTitleService);
-
 
     public static void main(String[] args) {
 
