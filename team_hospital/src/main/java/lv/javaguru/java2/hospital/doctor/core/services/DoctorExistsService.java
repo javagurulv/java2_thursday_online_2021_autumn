@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.doctor.services;
+package lv.javaguru.java2.hospital.doctor.core.services;
 
 import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 
@@ -9,7 +9,7 @@ public class DoctorExistsService {
         this.database = database;
     }
 
-    public boolean execute(int id) {
+    public boolean execute(long id) {
         return database.doctorExists(id);
     }
 }

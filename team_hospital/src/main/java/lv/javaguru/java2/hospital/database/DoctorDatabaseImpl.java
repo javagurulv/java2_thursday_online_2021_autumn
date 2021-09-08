@@ -4,6 +4,7 @@ import lv.javaguru.java2.hospital.domain.Doctor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class DoctorDatabaseImpl implements DoctorDatabase {
 
@@ -15,17 +16,30 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
     }
 
     @Override
-    public void findDoctorById(int id) {
-        for (Doctor doctor : doctorsList) {
-            if (doctor.getId() == id) {
-                System.out.println(doctor);
-            }
+    public boolean findDoctorById(long id) {
+        boolean isDoctorFound = false;
+        Optional<Doctor> doctorToFindOpt = doctorsList.stream()
+                .filter(doctor -> doctor.getId() == id)
+                .findFirst();
+        if (doctorToFindOpt.isPresent()) {
+            Doctor doctorToFind = doctorToFindOpt.get();
+            System.out.println(doctorToFind);
+            isDoctorFound = true;
         }
+        return isDoctorFound;
     }
 
     @Override
-    public void deleteDoctorById(int id) {
-        doctorsList.removeIf(doctor -> doctor.getId() == id);
+    public boolean deleteDoctorById(long id) {
+        boolean isDoctorDeleted = false;
+        Optional<Doctor> doctorToDeleteOpt = doctorsList.stream()
+                .filter(doctor -> doctor.getId() == id)
+                .findFirst();
+        if (doctorToDeleteOpt.isPresent()) {
+            Doctor doctorToDelete = doctorToDeleteOpt.get();
+            isDoctorDeleted = doctorsList.remove(doctorToDelete);
+        }
+        return isDoctorDeleted;
     }
 
     @Override
@@ -34,20 +48,25 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
     }
 
     @Override
-    public void editDoctor(int doctorId, int userInput, String changes) {
-        for (Doctor doctor : doctorsList) {
-            if (doctor.getId() == doctorId) {
-                switch (userInput) {
-                    case 1 -> doctor.setName(changes);
-                    case 2 -> doctor.setSurname(changes);
-                    case 3 -> doctor.setSpeciality(changes);
-                }
+    public boolean editDoctor(long doctorId, int userInput, String changes) {
+        boolean isDoctorEdited = false;
+        Optional<Doctor> doctorToEditOpt = doctorsList.stream()
+                .filter(doctor -> doctor.getId() == doctorId)
+                .findFirst();
+        if (doctorToEditOpt.isPresent()) {
+            Doctor doctorToEdit = doctorToEditOpt.get();
+            switch (userInput) {
+                case 1 -> doctorToEdit.setName(changes);
+                case 2 -> doctorToEdit.setSurname(changes);
+                case 3 -> doctorToEdit.setSpeciality(changes);
             }
+            isDoctorEdited = true;
         }
+        return isDoctorEdited;
     }
 
     @Override
-    public boolean doctorExists(int id) {
+    public boolean doctorExists(long id) {
         for (Doctor doctor : doctorsList) {
             if (doctor.getId() == id) {
                 return true;

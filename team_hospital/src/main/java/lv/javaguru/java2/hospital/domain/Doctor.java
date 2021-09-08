@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Doctor {
     private static final AtomicInteger count = new AtomicInteger(0);
-    private int id;
+    private long id;
     private String name;
     private String surname;
     private String speciality;
@@ -17,7 +17,7 @@ public class Doctor {
         this.id = count.incrementAndGet();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
