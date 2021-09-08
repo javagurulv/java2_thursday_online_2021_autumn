@@ -29,12 +29,23 @@ public class RemoveClientUIAction implements UIAction {
 
 //        deleteClientService.execute(clientId);
 
-        RemoveClientRequest request = new RemoveClientRequest(clientId, clientName, clientSurname);
-
+        RemoveClientRequest request = new RemoveClientRequest(clientName,clientSurname,clientId);
         RemoveClientResponse removeClientResponse = deleteClientService.execute(request);
 
+        if (removeClientResponse.hasErrors()) {
+            removeClientResponse.getErrors().forEach(coreError ->
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage())
+            );
+        } else {
+            if (removeClientResponse.isClientRemoved()) {
+                System.out.println("Your client account was deleted from list.");
+            } else {
+                System.out.println("Your client account was not deleted from list.");
+            }
+        }
 
-        System.out.println("Client deletion process" + removeClientResponse.toString());
+
+        //System.out.println("Client deletion process" + removeClientResponse.toString());
 
     }
 

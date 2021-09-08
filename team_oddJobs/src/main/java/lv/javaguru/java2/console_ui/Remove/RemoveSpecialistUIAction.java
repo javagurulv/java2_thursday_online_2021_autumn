@@ -30,6 +30,18 @@ public class RemoveSpecialistUIAction implements UIAction {
 
         RemoveSpecialistRequest request = new RemoveSpecialistRequest(specialistId, specialistName, specialistSurname);
         RemoveSpecialistResponse removeSpecialistResponse = deleteSpecialistService.execute(request);
-        System.out.println("Specialist deletion process" + removeSpecialistResponse);
+
+        if (removeSpecialistResponse.hasErrors()) {
+            removeSpecialistResponse.getErrors().forEach(coreError ->
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage())
+            );
+        } else {
+            if (removeSpecialistResponse.isSpecialistRemoved()) {
+                System.out.println("Your specialist account was deleted from list.");
+            } else {
+                System.out.println("Your specialist account was not deleted from list.");
+            }
+        }
+        //System.out.println("Specialist deletion process" + removeSpecialistResponse);
     }
 }

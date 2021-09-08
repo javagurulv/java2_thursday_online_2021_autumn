@@ -75,12 +75,10 @@ public class InMemoryDatabaseImpl implements Database {
     @Override
     public void findSpecialistByProfession(String profession) {
         for (Specialist specialist : specialists) {
-            if (profession.equals(specialist.getSpecialistProfession())) {
-                System.out.println(specialist);
-                if (!profession.equals(specialist.getSpecialistProfession())) {
-                    System.out.println("Specialist with current profession not found");
-                }
-            }
+            if (profession.equals(specialist.getSpecialistProfession())){
+                System.out.println("Founded specialists: " + specialist);}
+
+                else System.out.println("Specialist with current profession not found");
         }
     }
 
@@ -147,6 +145,17 @@ public class InMemoryDatabaseImpl implements Database {
             isAdvRemoved = advBoards.remove(advBoardToRemove);
         }
         return isAdvRemoved;
+    }
+
+    @Override
+    public void findAdvertisementByTitle(String advTitle) {
+        for (Advertisement advertisement : advBoards) {
+            if (advTitle.equals(advertisement.getAdvTitle())) {
+                System.out.println(advertisement);
+            } else {
+                System.out.println("Advertisement is not found");
+            }
+        }
     }
 
 

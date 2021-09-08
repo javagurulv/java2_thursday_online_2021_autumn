@@ -1,12 +1,12 @@
 package lv.javaguru.java2.qwe.ui_actions.data_ui_actions;
 
-import lv.javaguru.java2.qwe.request.AddStockRequest;
-import lv.javaguru.java2.qwe.request.SecurityRequest;
-import lv.javaguru.java2.qwe.services.data_services.AddStockService;
+import lv.javaguru.java2.qwe.core.requests.AddStockRequest;
+import lv.javaguru.java2.qwe.core.requests.SecurityRequest;
+import lv.javaguru.java2.qwe.core.responses.AddStockResponse;
+import lv.javaguru.java2.qwe.core.services.data_services.AddStockService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.generateIndustriesArray;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
 public class AddStockUIAction implements UIAction {
 
@@ -26,7 +26,17 @@ public class AddStockUIAction implements UIAction {
         String riskWeight = inputDialog("Risk weight");
         SecurityRequest stockRequest = new AddStockRequest(name, industry, currency,
                 marketPrice, dividend, riskWeight);
-        addStockService.execute(stockRequest);
+        AddStockResponse stockResponse = addStockService.execute(stockRequest);
+        printResponse(stockResponse);
+    }
+
+    private void printResponse(AddStockResponse response) {
+        if (response.hasErrors()) {
+            messageDialog("FAILED TO ADD STOCK!\n" +
+                    printErrorList(response));
+        } else {
+            messageDialog("Stock " + response.getNewStock().getName() + " has been added!");
+        }
     }
 
 }

@@ -2,17 +2,17 @@ package lv.javaguru.java2.core.requests.Remove;
 
 public class RemoveSpecialistRequest {
 
-    private long specialistId;
+    private Long specialistId;
     private String specialistName;
     private String specialistSurname;
 
-    public RemoveSpecialistRequest(long specialistId, String specialistName, String specialistSurname) {
+    public RemoveSpecialistRequest(Long specialistId, String specialistName, String specialistSurname) {
         this.specialistId = specialistId;
         this.specialistName = specialistName;
         this.specialistSurname = specialistSurname;
     }
 
-    public long getSpecialistId() {
+    public Long getSpecialistId() {
         return specialistId;
     }
 

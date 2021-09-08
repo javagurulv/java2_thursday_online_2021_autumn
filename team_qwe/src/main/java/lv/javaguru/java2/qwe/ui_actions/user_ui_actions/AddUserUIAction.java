@@ -1,12 +1,15 @@
 package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 
-import lv.javaguru.java2.qwe.request.AddUserRequest;
-import lv.javaguru.java2.qwe.services.user_services.AddUserService;
+import lv.javaguru.java2.qwe.core.requests.AddUserRequest;
+import lv.javaguru.java2.qwe.core.responses.AddStockResponse;
+import lv.javaguru.java2.qwe.core.responses.AddUserResponse;
+import lv.javaguru.java2.qwe.core.services.user_services.AddUserService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 import static lv.javaguru.java2.qwe.Type.*;
 import static lv.javaguru.java2.qwe.Type.SUPER_RICH;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
 public class AddUserUIAction implements UIAction {
 
@@ -29,7 +32,17 @@ public class AddUserUIAction implements UIAction {
         });
         String initialInvestment = inputDialog("Initial investment:");
         AddUserRequest userRequest = new AddUserRequest(name, age, type, initialInvestment);
-        addUserService.execute(userRequest);
+        AddUserResponse userResponse = addUserService.execute(userRequest);
+        printResponse(userResponse);
+    }
+
+    private void printResponse(AddUserResponse response) {
+        if (response.hasErrors()) {
+            messageDialog("FAILED TO ADD USER!\n" +
+                    printErrorList(response));
+        } else {
+            messageDialog("User " + response.getNewUser().getName() + " has been added!");
+        }
     }
 
 }

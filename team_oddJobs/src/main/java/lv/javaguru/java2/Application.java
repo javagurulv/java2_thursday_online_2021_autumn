@@ -11,6 +11,7 @@ import lv.javaguru.java2.console_ui.Get.GetAllSpecialistUIAction;
 import lv.javaguru.java2.console_ui.Remove.RemoveClientUIAction;
 import lv.javaguru.java2.console_ui.Remove.RemoveSpecialistUIAction;
 import lv.javaguru.java2.console_ui.UIAction;
+import lv.javaguru.java2.core.validations.*;
 import lv.javaguru.java2.database.Database;
 import lv.javaguru.java2.database.InMemoryDatabaseImpl;
 import lv.javaguru.java2.services.Add.AddAdvertismentService;
@@ -28,22 +29,27 @@ import java.util.Scanner;
 public class Application {
     private static final Database database = new InMemoryDatabaseImpl();
 
-    private static final AddClientService addClientService = new AddClientService(database);
+    private static AddClientValidator addClientValidator = new AddClientValidator();
+    private static final AddClientService addClientService = new AddClientService(database,addClientValidator);
     private static final UIAction addClient = new AddClientUIAction(addClientService);
 
-    private static final AddSpecialistService addSpecialistService = new AddSpecialistService(database);
+   private static AddSpecialistValidator addSpecialistValidator = new AddSpecialistValidator();
+    private static final AddSpecialistService addSpecialistService = new AddSpecialistService(database,addSpecialistValidator);
     private static final UIAction addSpecialist = new AddSpecialistUIAction(addSpecialistService);
 
     private static final AddAdvertismentService addAdvertisementService = new AddAdvertismentService(database);
     private static final UIAction addAdvertisement = new AddAdvertismentUIAction(addAdvertisementService);
 
-    private static final RemoveClientService deleteClientService = new RemoveClientService(database);
+    private static RemoveClientValidator removeClientValidator = new RemoveClientValidator();
+    private static final RemoveClientService deleteClientService = new RemoveClientService(database,removeClientValidator);
     private static final UIAction deleteClient = new RemoveClientUIAction(deleteClientService);
 
-    private static final RemoveSpecialistService deleteSpecialistService = new RemoveSpecialistService(database);
+    private static RemoveSpecialistValidator removeSpecialistValidator = new RemoveSpecialistValidator();
+    private static final RemoveSpecialistService deleteSpecialistService = new RemoveSpecialistService(database,removeSpecialistValidator);
     private static final UIAction deleteSpecialist = new RemoveSpecialistUIAction(deleteSpecialistService);
 
-    private static final FindSpecialistByProfessionService findSpecialistByProfessionService = new FindSpecialistByProfessionService(database);
+private static FindSpecialistByProfessionValidator findSpecialistByProfessionValidator = new FindSpecialistByProfessionValidator();
+    private static final FindSpecialistByProfessionService findSpecialistByProfessionService = new FindSpecialistByProfessionService(database,findSpecialistByProfessionValidator);
     private static final UIAction findSpecialistByProfession = new FindSpecialistByProfessionUIAction(findSpecialistByProfessionService);
 
     private static final FindClientByIdService findClientByIdService = new FindClientByIdService(database);
@@ -68,6 +74,9 @@ public class Application {
     private static final ExitMenuService exitMenuService = new ExitMenuService();
     private static final UIAction menuExit = new ExitMenuUIAction(exitMenuService);
 
+    private static final FindAdvertisementByTitleValidator findAdvertisementByTitleValidator = new FindAdvertisementByTitleValidator();
+    private static final FindAdvertisementByTitleService findAdvertisementByTitleService = new FindAdvertisementByTitleService(database, findAdvertisementByTitleValidator);
+    private static final UIAction findAdvertisementByTitle = new FindAdvertisementByTitleUIAction(findAdvertisementByTitleService);
 
     public static void main(String[] args) {
 
@@ -92,11 +101,12 @@ public class Application {
         System.out.println("3.  Create advertisement");
         System.out.println("4.  Find specialist by profession");
         System.out.println("5.  Find client by search criteria");
-        System.out.println("6.  Show all clients");
-        System.out.println("7.  Show all specialists");
-        System.out.println("8.  Delete client account");
-        System.out.println("9.  Delete specialist account");
-        System.out.println("10. Exit");
+        System.out.println("6.  Find advertisement by title");
+        System.out.println("7.  Show all clients");
+        System.out.println("8.  Show all specialists");
+        System.out.println("9.  Delete client account");
+        System.out.println("10.  Delete specialist account");
+        System.out.println("11. Exit");
     }
 
 
@@ -127,27 +137,32 @@ public class Application {
             }
 
             case 6: {
+                findAdvertisementByTitle.execute();
+
+                break;
+            }
+            case 7: {
                 getAllClients.execute();
 
                 break;
             }
 
-            case 7: {
+            case 8: {
                 getAllSpecialists.execute();
 
                 break;
             }
-            case 8: {
+            case 9: {
                 deleteClient.execute();
 
                 break;
             }
-            case 9: {
+            case 10: {
                 deleteSpecialist.execute();
 
                 break;
             }
-            case 10: {
+            case 11: {
                 menuExit.execute();
 
 

@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 
-import lv.javaguru.java2.qwe.services.user_services.ShowUserListService;
+import lv.javaguru.java2.qwe.core.services.user_services.ShowUserListService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 public class ShowUserListUIAction implements UIAction {

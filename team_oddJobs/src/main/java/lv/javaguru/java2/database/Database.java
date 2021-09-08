@@ -25,6 +25,7 @@ public interface Database {
 
     void addAdvertisement(Advertisement advBoard);
     boolean removeAdvertisement(Long advId, String advBoardTitle);
+    void findAdvertisementByTitle(String advTitle);
 
 //    void findClientBySearchCriteria(FindClientByIdService findClientBySearchCriteria);
 //    void findSpecialistBySearchCriteria (FindSpecialistBySearchCriteriaService findSpecialistBySearchCriteriaService)
