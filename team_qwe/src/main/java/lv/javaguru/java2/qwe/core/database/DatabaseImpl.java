@@ -41,19 +41,13 @@ public class DatabaseImpl implements Database {
     }
 
     @Override
-    public void removeSecurity(String name) {
-        boolean isRemoved = securityList.removeIf(security -> security.getName().equals(name));
-        if (isRemoved) {
-            messageDialog("Security " + name + " has been removed!");
-        } else {
-            messageDialog("No such security in the list!");
-        }
+    public boolean removeSecurity(String name) {
+        return securityList.removeIf(security -> security.getName().equals(name));
     }
 
     @Override
-    public void showListOfSecurities(List<Security> list) {
-        list.forEach(System.out::println);
-        System.out.print("\n");
+    public List<Security> showListOfSecurities() {
+        return getSecurityList();
     }
 
     @Override
