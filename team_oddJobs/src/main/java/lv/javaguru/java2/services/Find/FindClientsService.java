@@ -4,7 +4,7 @@ import lv.javaguru.java2.Client;
 import lv.javaguru.java2.core.requests.Find.FindClientsRequest;
 import lv.javaguru.java2.core.responce.CoreError;
 import lv.javaguru.java2.core.responce.Find.FindClientsResponse;
-import lv.javaguru.java2.core.validations.FindClientsRequestValidator;
+import lv.javaguru.java2.core.validations.FindClientsValidator;
 import lv.javaguru.java2.database.Database;
 
 import java.util.List;
@@ -12,9 +12,9 @@ import java.util.List;
 public class FindClientsService {
 
     private Database database;
-    private FindClientsRequestValidator validator;
+    private FindClientsValidator validator;
 
-    public FindClientsService(Database database, FindClientsRequestValidator validator) {
+    public FindClientsService(Database database, FindClientsValidator validator) {
         this.database = database;
         this.validator = validator;
     }

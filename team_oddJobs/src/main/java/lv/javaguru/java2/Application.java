@@ -52,7 +52,7 @@ private static FindSpecialistByProfessionValidator findSpecialistByProfessionVal
     private static final FindSpecialistByProfessionService findSpecialistByProfessionService = new FindSpecialistByProfessionService(database,findSpecialistByProfessionValidator);
     private static final UIAction findSpecialistByProfession = new FindSpecialistByProfessionUIAction(findSpecialistByProfessionService);
 
-    private static final FindClientsRequestValidator findClientsRequestValidator = new FindClientsRequestValidator();
+    private static final FindClientsValidator findClientsRequestValidator = new FindClientsValidator();
     private static final FindClientsService findClientBySearchCriteria = new FindClientsService(database,findClientsRequestValidator);
     private static final UIAction findClientBySearch = new FindClientsUIAction(findClientBySearchCriteria);
 
