@@ -19,16 +19,20 @@ public interface Database {
 
     void findSpecialistByProfession(String profession);
 
-    void findClientById(Long id);
-    void findClientByName(String name);
-    void findClientBySurname(String surName);
+    List<Client> findClientsById(Long clientId);
+
+    List<Client> findClientsByName(String clientName);
+
+    List<Client> findClientBySurname(String clientSurname);
+
+    List<Client> findClientByIdAndNameAndSurname(Long id, String clientName, String clientSurname);
 
     void addAdvertisement(Advertisement advBoard);
+
     boolean removeAdvertisement(Long advId, String advBoardTitle);
+
     void findAdvertisementByTitle(String advTitle);
 
-//    void findClientBySearchCriteria(FindClientByIdService findClientBySearchCriteria);
-//    void findSpecialistBySearchCriteria (FindSpecialistBySearchCriteriaService findSpecialistBySearchCriteriaService)
 
     List<Specialist> getAllSpecialist();
 

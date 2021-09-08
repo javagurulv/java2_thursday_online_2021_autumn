@@ -20,8 +20,10 @@ public class AddClientUIAction implements UIAction {
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("Enter your name");
         String clientName = scanner.nextLine();
+
         System.out.println("Enter your surname");
         String clientSurname = scanner.nextLine();
 
