@@ -5,6 +5,11 @@ Lesson 4 plan:
    team work always is a compromise,
    sacrifice yourself for the team.
 
+
+Code conflict
+Code conflict
+
+
 2. Stand up meeting (agile practice).
 
 3. Git branches.
