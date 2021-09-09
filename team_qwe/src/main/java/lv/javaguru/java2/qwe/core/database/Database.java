@@ -16,9 +16,9 @@ public interface Database {
 
     void addBond(Bond bond);
 
-    void removeSecurity(String name);
+    boolean removeSecurity(String name);
 
-    void showListOfSecurities(List<Security> list);
+    List<Security> showListOfSecurities();
 
     Optional<Security> findSecurityByName(String name);
 

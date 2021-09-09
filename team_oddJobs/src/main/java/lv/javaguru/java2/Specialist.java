@@ -14,6 +14,10 @@ public class Specialist {
         this.specialistProfession = profession;
     }
 
+    public Specialist(Long specialistId) {
+        this.specialistId = specialistId;
+    }
+
     public Specialist(String specialistProfession) {
         this.specialistProfession = specialistProfession;
     }

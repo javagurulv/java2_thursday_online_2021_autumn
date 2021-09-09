@@ -2,6 +2,7 @@ package lv.javaguru.java2.core.requests.Add;
 
 public class AddClientRequest {
 
+
     private String name;
     private String surname;
 

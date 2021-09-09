@@ -52,17 +52,9 @@ private static FindSpecialistByProfessionValidator findSpecialistByProfessionVal
     private static final FindSpecialistByProfessionService findSpecialistByProfessionService = new FindSpecialistByProfessionService(database,findSpecialistByProfessionValidator);
     private static final UIAction findSpecialistByProfession = new FindSpecialistByProfessionUIAction(findSpecialistByProfessionService);
 
-    private static final FindClientByIdService findClientByIdService = new FindClientByIdService(database);
-    private static final UIAction findClientByIdUI = new FindClientByIdUIAction(findClientByIdService);
-
-    private static final FindClientByNameService findClientByNameService = new FindClientByNameService(database);
-    private static final UIAction findClientByNameUI = new FindClientByNameUIAction(findClientByNameService);
-
-    private static final FindClientBySurnameService findClientBySurname = new FindClientBySurnameService(database);
-    private static final UIAction findClientBySurnameUI = new FindClientBySurnameUIAction(findClientBySurname);
-
-    private static final FindClientBySearchCriteriaService findClientBySearchCriteria = new FindClientBySearchCriteriaService(database);
-    private static final UIAction findClientBySearch = new FindClientBySearchCriteriaUIAction(findClientByIdService, findClientByNameService, findClientBySurname);
+    private static final FindClientsValidator findClientsRequestValidator = new FindClientsValidator();
+    private static final FindClientsService findClientBySearchCriteria = new FindClientsService(database,findClientsRequestValidator);
+    private static final UIAction findClientBySearch = new FindClientsUIAction(findClientBySearchCriteria);
 
 
     private static final GetAllSpecialistsService getAllSpecialistsService = new GetAllSpecialistsService(database);
@@ -74,9 +66,6 @@ private static FindSpecialistByProfessionValidator findSpecialistByProfessionVal
     private static final ExitMenuService exitMenuService = new ExitMenuService();
     private static final UIAction menuExit = new ExitMenuUIAction(exitMenuService);
 
-    private static final FindAdvertisementByTitleValidator findAdvertisementByTitleValidator = new FindAdvertisementByTitleValidator();
-    private static final FindAdvertisementByTitleService findAdvertisementByTitleService = new FindAdvertisementByTitleService(database, findAdvertisementByTitleValidator);
-    private static final UIAction findAdvertisementByTitle = new FindAdvertisementByTitleUIAction(findAdvertisementByTitleService);
 
     public static void main(String[] args) {
 
@@ -101,12 +90,11 @@ private static FindSpecialistByProfessionValidator findSpecialistByProfessionVal
         System.out.println("3.  Create advertisement");
         System.out.println("4.  Find specialist by profession");
         System.out.println("5.  Find client by search criteria");
-        System.out.println("6.  Find advertisement by title");
-        System.out.println("7.  Show all clients");
-        System.out.println("8.  Show all specialists");
-        System.out.println("9.  Delete client account");
-        System.out.println("10.  Delete specialist account");
-        System.out.println("11. Exit");
+        System.out.println("6.  Show all clients");
+        System.out.println("7.  Show all specialists");
+        System.out.println("8.  Delete client account");
+        System.out.println("9.  Delete specialist account");
+        System.out.println("10. Exit");
     }
 
 
@@ -137,32 +125,27 @@ private static FindSpecialistByProfessionValidator findSpecialistByProfessionVal
             }
 
             case 6: {
-                findAdvertisementByTitle.execute();
-
-                break;
-            }
-            case 7: {
                 getAllClients.execute();
 
                 break;
             }
 
-            case 8: {
+            case 7: {
                 getAllSpecialists.execute();
 
                 break;
             }
-            case 9: {
+            case 8: {
                 deleteClient.execute();
 
                 break;
             }
-            case 10: {
+            case 9: {
                 deleteSpecialist.execute();
 
                 break;
             }
-            case 11: {
+            case 10: {
                 menuExit.execute();
 
 
