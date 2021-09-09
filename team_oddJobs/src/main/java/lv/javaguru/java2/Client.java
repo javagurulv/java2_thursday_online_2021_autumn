@@ -3,14 +3,19 @@ package lv.javaguru.java2;
 import java.util.Objects;
 
 public class Client {
-    private Long clientId;;
+
+    private Long clientId;
     private String clientName;
     private String clientSurname;
     private String service;
 
-    public Client( String clientName, String clientSurname) {
+    public Client(String clientName, String clientSurname) {
         this.clientName = clientName;
         this.clientSurname = clientSurname;
+    }
+
+    public Client(Long clientId) {
+        this.clientId = clientId;
     }
 
     public Long getClientId() {
@@ -59,12 +64,14 @@ public class Client {
         return Objects.hash(clientId, clientName, clientSurname, service);
     }
 
+
+
     @Override
     public String toString() {
         return "Client{" +
-                "id=" + clientId +
-                ", name='" + clientName + '\'' +
-                ", surname='" + clientSurname + '\'' +
+                "clientId=" + clientId +
+                ", clientName='" + clientName + '\'' +
+                ", clientSurname='" + clientSurname + '\'' +
                 ", service='" + service + '\'' +
                 '}';
     }

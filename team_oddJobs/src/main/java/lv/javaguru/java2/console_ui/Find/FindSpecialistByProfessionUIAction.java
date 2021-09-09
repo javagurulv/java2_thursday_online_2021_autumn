@@ -21,6 +21,7 @@ public class FindSpecialistByProfessionUIAction implements UIAction {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter profession");
         String profession = scanner.nextLine();
+
         FindSpecialistByProfessionRequest request = new FindSpecialistByProfessionRequest(profession);
         FindSpecialistByProfessionResponse response = findSpecialistByProfessionService.execute(request);
 

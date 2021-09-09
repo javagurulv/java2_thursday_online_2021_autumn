@@ -26,9 +26,6 @@ public class AddSpecialistUIAction implements UIAction {
         System.out.println("Enter your profession");
         String specialistProfession = scanner.nextLine();
 
-//        Specialist specialist = new Specialist(specialistName, specialistSurname, specialistProfession);
-//        addSpecialistService.execute(specialistName, specialistSurname, specialistProfession);
-
         AddSpecialistRequest addSpecialistRequest = new AddSpecialistRequest(specialistName,specialistSurname,specialistProfession);
         AddSpecialistResponse addSpecialistResponse = addSpecialistService.execute(addSpecialistRequest);
 

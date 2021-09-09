@@ -2,17 +2,25 @@ package lv.javaguru.java2.hospital.progmenu_hospital;
 
 import lv.javaguru.java2.hospital.doctor.console_ui.*;
 import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
-import lv.javaguru.java2.hospital.doctor.services.*;
+import lv.javaguru.java2.hospital.doctor.core.services.*;
 import lv.javaguru.java2.hospital.InputNumChecker;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.DeleteDoctorValidator;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.EditDoctorValidator;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.FindDoctorByIdValidator;
 import lv.javaguru.java2.hospital.patient.console_ui.*;
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.patient.services.*;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.AddDoctorValidator;
 
 public class ProgMenuHospital {
 
     private static final PatientDatabaseImpl patientDatabase = new PatientDatabaseImpl();
     private static final DoctorDatabaseImpl doctorDatabase = new DoctorDatabaseImpl();
     private static final InputNumChecker inputNumChecker = new InputNumChecker();
+    private static AddDoctorValidator addBookValidator = new AddDoctorValidator();
+    private static DeleteDoctorValidator deleteDoctorValidator = new DeleteDoctorValidator();
+    private static FindDoctorByIdValidator findDoctorByIdValidator = new FindDoctorByIdValidator();
+    private static EditDoctorValidator editDoctorValidator = new EditDoctorValidator();
 
     private static final lv.javaguru.java2.hospital.patient.console_ui.PatientUIActions[] PatientUIActions = {
             new AddPatientUIAction(new AddPatientService(patientDatabase)),
@@ -22,11 +30,11 @@ public class ProgMenuHospital {
             new EditPatientUIAction(new EditPatientService(patientDatabase), new PatientExistsService(patientDatabase))};
 
     private static final DoctorUIActions[] doctorUIActions = {
-            new AddDoctorUIAction(new AddDoctorService(doctorDatabase)),
+            new AddDoctorUIAction(new AddDoctorService(doctorDatabase, addBookValidator)),
             new ShowAllDoctorsUIAction(new ShowAllDoctorsService(doctorDatabase)),
-            new FindDoctorByIDUIAction(new FindDoctorByIdService(doctorDatabase), new DoctorExistsService(doctorDatabase)),
-            new DeleteDoctorUIAction(new DeleteDoctorService(doctorDatabase), new DoctorExistsService(doctorDatabase)),
-            new EditDoctorUIAction(new EditDoctorService(doctorDatabase), new DoctorExistsService(doctorDatabase))};
+            new FindDoctorByIDUIAction(new FindDoctorByIdService(doctorDatabase, findDoctorByIdValidator), new DoctorExistsService(doctorDatabase)),
+            new DeleteDoctorUIAction(new DeleteDoctorService(doctorDatabase, deleteDoctorValidator), new DoctorExistsService(doctorDatabase)),
+            new EditDoctorUIAction(new EditDoctorService(doctorDatabase, editDoctorValidator), new DoctorExistsService(doctorDatabase))};
 
 
     //Menu

@@ -52,17 +52,9 @@ private static FindSpecialistByProfessionValidator findSpecialistByProfessionVal
     private static final FindSpecialistByProfessionService findSpecialistByProfessionService = new FindSpecialistByProfessionService(database,findSpecialistByProfessionValidator);
     private static final UIAction findSpecialistByProfession = new FindSpecialistByProfessionUIAction(findSpecialistByProfessionService);
 
-    private static final FindClientByIdService findClientByIdService = new FindClientByIdService(database);
-    private static final UIAction findClientByIdUI = new FindClientByIdUIAction(findClientByIdService);
-
-    private static final FindClientByNameService findClientByNameService = new FindClientByNameService(database);
-    private static final UIAction findClientByNameUI = new FindClientByNameUIAction(findClientByNameService);
-
-    private static final FindClientBySurnameService findClientBySurname = new FindClientBySurnameService(database);
-    private static final UIAction findClientBySurnameUI = new FindClientBySurnameUIAction(findClientBySurname);
-
-    private static final FindClientBySearchCriteriaService findClientBySearchCriteria = new FindClientBySearchCriteriaService(database);
-    private static final UIAction findClientBySearch = new FindClientBySearchCriteriaUIAction(findClientByIdService, findClientByNameService, findClientBySurname);
+    private static final FindClientsValidator findClientsRequestValidator = new FindClientsValidator();
+    private static final FindClientsService findClientBySearchCriteria = new FindClientsService(database,findClientsRequestValidator);
+    private static final UIAction findClientBySearch = new FindClientsUIAction(findClientBySearchCriteria);
 
 
     private static final GetAllSpecialistsService getAllSpecialistsService = new GetAllSpecialistsService(database);

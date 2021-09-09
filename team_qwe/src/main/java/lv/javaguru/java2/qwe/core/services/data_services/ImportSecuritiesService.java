@@ -1,9 +1,7 @@
 package lv.javaguru.java2.qwe.core.services.data_services;
 
-import lv.javaguru.java2.qwe.Bond;
 import lv.javaguru.java2.qwe.Stock;
 import lv.javaguru.java2.qwe.core.database.Database;
-import lv.javaguru.java2.qwe.core.requests.AddBondRequest;
 import lv.javaguru.java2.qwe.core.requests.AddStockRequest;
 import lv.javaguru.java2.qwe.core.requests.SecurityRequest;
 import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
@@ -35,7 +33,7 @@ public class ImportSecuritiesService {
         importSecurities(path);
     }
 
-    public void importSecurities(String path) throws IOException {
+    private void importSecurities(String path) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(path)).stream()
                 .skip(1)
                 .collect(Collectors.toList());
@@ -47,7 +45,7 @@ public class ImportSecuritiesService {
                 .map(data -> data.split(","))
                 .collect(Collectors.toList());
         importStocks(list);
-        importBonds(list);
+//        importBonds(list);
     }
 
     private void importStocks(List<String[]> list) {
@@ -63,6 +61,7 @@ public class ImportSecuritiesService {
 
         if (errorRequestList.isEmpty()) {
             importSt(list);
+            messageDialog("Data has been successfully imported!");
         } else {
             messageDialog("FAILED to add this list!\n" +
                     "Validation FAILED!");
@@ -73,7 +72,28 @@ public class ImportSecuritiesService {
         }
     }
 
-    private void importBonds(List<String[]> list) {
+    private void importSt(List<String[]> list) {
+        IntStream.rangeClosed(0, list.size() - 1)
+                .filter(i -> list.get(i)[0].equals("Stock"))
+                .forEach(i -> database.addStock(new Stock(
+                        list.get(i)[1],
+                        list.get(i)[2],
+                        list.get(i)[3],
+                        Double.parseDouble(list.get(i)[4]),
+                        Double.parseDouble(list.get(i)[5]),
+                        Double.parseDouble(list.get(i)[6])
+                )));
+    }
+
+    private List<SecurityRequest> generateErrorRequestList(List<SecurityRequest> requestList,
+                                                           AddSecurityValidator validator) {
+        return IntStream.rangeClosed(0, requestList.size() - 1)
+                .mapToObj(requestList::get)
+                .filter(request -> !validator.validate(request).isEmpty())
+                .collect(Collectors.toList());
+    }
+
+    /*    private void importBonds(List<String[]> list) {
         List<SecurityRequest> requestList = IntStream.rangeClosed(0, list.size() - 1)
                 .filter(i -> list.get(i)[0].equals("Bond"))
                 .mapToObj(i -> new AddBondRequest(
@@ -96,22 +116,9 @@ public class ImportSecuritiesService {
                     .forEach(request -> System.out.println("Validation failed for: " + request.getName()));
             System.out.println("Validation failed for " + errorRequestList.size() + " securities!");
         }
-    }
+    }*/
 
-    private void importSt(List<String[]> list) {
-        IntStream.rangeClosed(0, list.size() - 1)
-                .filter(i -> list.get(i)[0].equals("Stock"))
-                .forEach(i -> database.addStock(new Stock(
-                        list.get(i)[1],
-                        list.get(i)[2],
-                        list.get(i)[3],
-                        Double.parseDouble(list.get(i)[4]),
-                        Double.parseDouble(list.get(i)[5]),
-                        Double.parseDouble(list.get(i)[6])
-                )));
-    }
-
-    private void importBn(List<String[]> list) {
+    /*    private void importBn(List<String[]> list) {
         IntStream.rangeClosed(0, list.size() - 1)
                 .filter(i -> list.get(i)[0].equals("Bond"))
                 .forEach(i -> database.addBond(new Bond(
@@ -124,14 +131,6 @@ public class ImportSecuritiesService {
                         Integer.parseInt(list.get(i)[7]),
                         list.get(i)[8]
                 )));
-    }
-
-    private List<SecurityRequest> generateErrorRequestList(List<SecurityRequest> requestList,
-                                                           AddSecurityValidator validator) {
-        return IntStream.rangeClosed(0, requestList.size() - 1)
-                .mapToObj(requestList::get)
-                .filter(request -> !validator.validate(request).isEmpty())
-                .collect(Collectors.toList());
-    }
+    }*/
 
 }

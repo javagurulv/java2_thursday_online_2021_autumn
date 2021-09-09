@@ -1,9 +1,9 @@
 package lv.javaguru.java2.hospital.doctor.console_ui;
 
-import lv.javaguru.java2.hospital.doctor.services.DoctorExistsService;
-import lv.javaguru.java2.hospital.doctor.services.EditDoctorService;
-
-import java.util.Scanner;
+import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorRequest;
+import lv.javaguru.java2.hospital.doctor.core.responses.EditDoctorResponse;
+import lv.javaguru.java2.hospital.doctor.core.services.DoctorExistsService;
+import lv.javaguru.java2.hospital.doctor.core.services.EditDoctorService;
 
 public class EditDoctorUIAction implements DoctorUIActions {
     private final EditDoctorService editDoctor;
@@ -17,14 +17,25 @@ public class EditDoctorUIAction implements DoctorUIActions {
     @Override
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
-        int id = getUserInput.getUserNumericInput("Please, enter the doctor's id: ");
-        if (doctorExists.execute(id)) {
+        long id = getUserInput.getUserNumericInput("Please, enter the doctor's id: ");
+        printEditMenu();
+        int userInput = getUserInput.getUserNumericInput("Enter edit menu number: ");
+        String changes = getUserInput.getUserStringInput("Enter info for change: ");
+        EditDoctorRequest request = new EditDoctorRequest(id, userInput, changes);
+        EditDoctorResponse response = editDoctor.execute(request);
+        if (response.isDoctorEdited()) {
+            System.out.println("The doctor with id " + id + " was successfully edited.");
+        } else {
+            System.out.println("The doctor with id " + id + " was not edited.");
+        }
+
+        /*if (doctorExists.execute(id)) {
             printEditMenu();
             int userInput = getUserInput.getUserNumericInput("Enter edit menu number: ");
             editAction("", id, userInput);
         } else {
             System.out.println("Can't find doctor with such an Id.");
-        }
+        }*/
 
     }
 
@@ -35,13 +46,4 @@ public class EditDoctorUIAction implements DoctorUIActions {
         System.out.println("3. Speciality");
     }
 
-    private void editAction(String changes, int id, int userInput) {
-        Scanner scanner = new Scanner(System.in);
-        if (userInput == 1 || userInput == 2) {
-            System.out.println("Enter info for change: ");
-            changes = scanner.nextLine();
-        }
-        editDoctor.execute(id, userInput, changes);
-        System.out.println("Changes are done!");
-    }
 }

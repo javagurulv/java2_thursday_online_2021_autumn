@@ -1,4 +1,5 @@
 package lv.javaguru.java2.core.responce.Find;
+
 import lv.javaguru.java2.Specialist;
 import lv.javaguru.java2.core.responce.CoreError;
 import lv.javaguru.java2.core.responce.CoreResponse;
@@ -6,6 +7,7 @@ import lv.javaguru.java2.core.responce.CoreResponse;
 import java.util.List;
 
 public class FindSpecialistByProfessionResponse extends CoreResponse {
+
     private Specialist foundedSpecialist;
 
     public FindSpecialistByProfessionResponse(Specialist foundedSpecialist) {
@@ -16,5 +18,7 @@ public class FindSpecialistByProfessionResponse extends CoreResponse {
         super(errors);
     }
 
-    public Specialist getSpecialist(){return foundedSpecialist;}
+    public Specialist getSpecialist() {
+        return foundedSpecialist;
+    }
 }
