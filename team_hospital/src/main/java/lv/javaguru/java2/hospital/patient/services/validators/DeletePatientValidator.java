@@ -28,13 +28,10 @@ public class DeletePatientValidator {
     }
 
     private Optional<CoreError> validatePatientExists(DeletePatientRequest request) {
-        if (request.getIdRequest() == null || request.getIdRequest().isEmpty()) {
-            return Optional.empty();
-        } else {
-            return !database.patientExists(Long.parseLong(request.getIdRequest())) ?
-                    Optional.of(new CoreError("Patient", "does not exist."))
-                    : Optional.empty();
-        }
+       return  (request.getIdRequest() == null || request.getIdRequest().isEmpty())
+                ? Optional.empty() : database.patientExists(Long.parseLong(request.getIdRequest()))
+                ? Optional.empty()
+                : Optional.of(new CoreError("Patient", "does not exist."));
     }
 }
 
