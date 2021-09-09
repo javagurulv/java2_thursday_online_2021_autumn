@@ -42,7 +42,7 @@ public class FindClientsService {
             clients = database.findClientByIdAndNameAndSurname(request.getClientId(), request.getClientName(), request.getClientSurname());
         }
 
-        return new FindClientsResponse(clients, null);
+        return new FindClientsResponse(clients,null);
 
     }
 }

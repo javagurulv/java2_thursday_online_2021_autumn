@@ -101,6 +101,36 @@ public class InMemoryDatabaseImpl implements Database {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Specialist> findSpecialistById(Long specialistId) {
+        return specialists.stream()
+                .filter(specialist -> specialistId.equals(specialist.getSpecialistId()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Specialist> findSpecialistByName(String specialistName) {
+        return specialists.stream()
+                .filter(specialist -> specialistName.equals(specialist.getSpecialistName()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Specialist> findSpecialistBySurname(String specialistSurname) {
+        return specialists.stream()
+                .filter(specialist -> specialistSurname.equals(specialist.getSpecialistSurname()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Specialist> findSpecialistByIdAndNameAndSurname(Long specialistId, String specialistName, String specialistSurname) {
+        return specialists.stream()
+                .filter(specialist -> specialistId.equals(specialist.getSpecialistId()))
+                .filter(specialist -> specialistName.equals(specialist.getSpecialistName()))
+                .filter(specialist -> specialistSurname.equals(specialist.getSpecialistSurname()))
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public void addAdvertisement(Advertisement advBoard) {
