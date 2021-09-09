@@ -1,28 +1,28 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
+import lv.javaguru.java2.hospital.patient.requests.DeletePatientRequest;
+import lv.javaguru.java2.hospital.patient.responses.DeletePatientResponse;
 import lv.javaguru.java2.hospital.patient.services.DeletePatientService;
-import lv.javaguru.java2.hospital.patient.services.PatientExistsService;
-
 import java.util.Scanner;
 
 public class DeletePatientUIAction implements PatientUIActions {
     private final DeletePatientService deletePatient;
-    private final PatientExistsService patientExists;
 
-    public DeletePatientUIAction(DeletePatientService deletePatient, PatientExistsService patientExists) {
+    public DeletePatientUIAction(DeletePatientService deletePatient) {
         this.deletePatient = deletePatient;
-        this.patientExists = patientExists;
     }
 
     public void execute() {
-        System.out.println("Please, enter patient's ID: ");
         Scanner scanner = new Scanner(System.in);
-        int id = Integer.parseInt(scanner.nextLine());
-        if (patientExists.execute(id)) {
-            deletePatient.execute(id);
-            System.out.println("Patient with ID = " + id + " was successfully deleted.");
+        System.out.println("Please, enter patient's ID: ");
+        DeletePatientRequest request = new DeletePatientRequest(scanner.nextLine());
+        DeletePatientResponse response = deletePatient.execute(request);
+        if (response.hasErrors()) {
+            response.getErrors().forEach(coreError ->
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getDescription())
+            );
         } else {
-            System.out.println("Patient doesn't exist!");
+                System.out.println("Patient with ID " + request.getIdRequest() + " was successfully deleted.");
         }
     }
 }
