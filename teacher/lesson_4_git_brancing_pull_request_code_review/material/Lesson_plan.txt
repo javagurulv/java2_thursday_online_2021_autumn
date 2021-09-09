@@ -14,7 +14,13 @@ Code conflict
 
 3. Git branches.
 
+
+
+
 4. Work with pull requests
+
 5. Code with me plugin presentation (from students)
+
 6. Team leadership
+
 7. User stories (agile practice)
