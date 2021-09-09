@@ -11,6 +11,10 @@ import lv.javaguru.java2.hospital.patient.console_ui.*;
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.patient.services.*;
 import lv.javaguru.java2.hospital.doctor.core.services.validators.AddDoctorValidator;
+import lv.javaguru.java2.hospital.patient.services.validators.AddPatientValidator;
+import lv.javaguru.java2.hospital.patient.services.validators.DeletePatientValidator;
+import lv.javaguru.java2.hospital.patient.services.validators.EditPatientValidator;
+import lv.javaguru.java2.hospital.patient.services.validators.FindPatientByIDValidator;
 
 public class ProgMenuHospital {
 
@@ -22,12 +26,15 @@ public class ProgMenuHospital {
     private static FindDoctorByIdValidator findDoctorByIdValidator = new FindDoctorByIdValidator();
     private static EditDoctorValidator editDoctorValidator = new EditDoctorValidator();
 
-    private static final lv.javaguru.java2.hospital.patient.console_ui.PatientUIActions[] PatientUIActions = {
-            new AddPatientUIAction(new AddPatientService(patientDatabase)),
+    private static final PatientUIActions[] PatientUIActions = {
+            new AddPatientUIAction(new AddPatientService(patientDatabase, new AddPatientValidator())),
             new ShowAllPatientsUIAction(new ShowAllPatientsService(patientDatabase)),
-            new FindPatientByIDUIAction(new FindPatientByIdService(patientDatabase), new PatientExistsService(patientDatabase)),
-            new DeletePatientUIAction(new DeletePatientService(patientDatabase), new PatientExistsService(patientDatabase)),
-            new EditPatientUIAction(new EditPatientService(patientDatabase), new PatientExistsService(patientDatabase))};
+            new FindPatientByIDUIAction(new FindPatientByIdService(patientDatabase,
+                    new FindPatientByIDValidator(patientDatabase))),
+            new DeletePatientUIAction(new DeletePatientService(patientDatabase,
+                    new DeletePatientValidator(patientDatabase))),
+            new EditPatientUIAction(new EditPatientService(patientDatabase,
+                    new EditPatientValidator(patientDatabase)))};
 
     private static final DoctorUIActions[] doctorUIActions = {
             new AddDoctorUIAction(new AddDoctorService(doctorDatabase, addBookValidator)),
@@ -59,8 +66,8 @@ public class ProgMenuHospital {
 
     private static void programMenu() {
         System.out.println("Program menu: ");
-        System.out.println("Press 1 to see lv.javaguru.java2.hospital.patient actions.");
-        System.out.println("Press 2 to see lv.javaguru.java2.hospital.doctor actions.");
+        System.out.println("Press 1 to see patient actions.");
+        System.out.println("Press 2 to see doctor actions.");
         System.out.println("Press 3 for Exit.");
 
         System.out.println();
@@ -75,11 +82,11 @@ public class ProgMenuHospital {
 
     private static int menuPatient() {
         int userInput;
-        System.out.println("1. Add a new lv.javaguru.java2.hospital.patient");
+        System.out.println("1. Add a new patient");
         System.out.println("2. Show all patients");
-        System.out.println("3. Find the lv.javaguru.java2.hospital.patient by ID");
-        System.out.println("4. Delete the lv.javaguru.java2.hospital.patient by ID");
-        System.out.println("5. Edit the lv.javaguru.java2.hospital.patient's information");
+        System.out.println("3. Find the by ID");
+        System.out.println("4. Delete the by ID");
+        System.out.println("5. Edit the patient's information");
         System.out.println("6. Exit");
         userInput = inputNumChecker.execute(1, 6);
         patientUserActions(userInput);
@@ -96,11 +103,11 @@ public class ProgMenuHospital {
 
     private static int menuDoctor() {
         int userInput;
-        System.out.println("1. Add a new lv.javaguru.java2.hospital.doctor");
+        System.out.println("1. Add a new doctor");
         System.out.println("2. Show all doctors");
-        System.out.println("3. Find the lv.javaguru.java2.hospital.doctor by ID");
-        System.out.println("4. Delete the lv.javaguru.java2.hospital.doctor by ID");
-        System.out.println("5. Edit the lv.javaguru.java2.hospital.doctor's information");
+        System.out.println("3. Find the doctor by ID");
+        System.out.println("4. Delete the doctor by ID");
+        System.out.println("5. Edit the doctor's information");
         System.out.println("6. Exit");
         userInput = inputNumChecker.execute(1, 6);
         doctorUserActions(userInput);
