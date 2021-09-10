@@ -27,6 +27,14 @@ public interface Database {
 
     List<Client> findClientByIdAndNameAndSurname(Long id, String clientName, String clientSurname);
 
+    List<Specialist> findSpecialistById(Long specialistId);
+
+    List<Specialist> findSpecialistByName(String specialistName);
+
+    List<Specialist> findSpecialistBySurname(String specialistSurname);
+
+    List<Specialist> findSpecialistByIdAndNameAndSurname(Long specialistId, String specialistNamem, String specialistSurname);
+
     void addAdvertisement(Advertisement advBoard);
 
     boolean removeAdvertisement(Long advId, String advBoardTitle);

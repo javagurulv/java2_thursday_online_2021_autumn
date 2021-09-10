@@ -19,7 +19,6 @@ include 'teacher:lesson_5_testing_with_junit_and_mockito:step_3_acceptance_tests
 include 'teacher:lesson_6_dependency_injection_inversion_of_control:step_1_dependency_injection'
 
 
-include 'team_abc'
 include 'team_hospital'
 include 'team_oddJobs'
 include 'team_qwe'

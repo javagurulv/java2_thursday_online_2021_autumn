@@ -2,6 +2,9 @@ package lv.javaguru.java2.hospital.patient.services;
 
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+import lv.javaguru.java2.hospital.patient.requests.ShowAllPatientsRequest;
+import lv.javaguru.java2.hospital.patient.responses.ShowAllPatientsResponse;
+
 import java.util.List;
 
 public class ShowAllPatientsService {
@@ -11,7 +14,8 @@ public class ShowAllPatientsService {
         this.database = database;
     }
 
-    public List<Patient> execute() {
-        return database.showAllPatients();
+    public ShowAllPatientsResponse execute(ShowAllPatientsRequest request) {
+        List<Patient> patients = database.showAllPatients();
+        return new ShowAllPatientsResponse(patients);
     }
 }
