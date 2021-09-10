@@ -1,16 +1,30 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services;
 
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.Database;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.DeleteVisitorRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseDeleteVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.DeleteVisitorValidator;
+
+import java.util.List;
 
 public class ServiceDeleteVisitors {
-    private Database database;
+    private DatabaseVisitors database;
+    private DeleteVisitorValidator validator;
 
-    public ServiceDeleteVisitors(Database database) {
+    public ServiceDeleteVisitors(DatabaseVisitors database,
+                                 DeleteVisitorValidator validator) {
         this.database = database;
+        this.validator = validator;
     }
 
-    public void execute(Long idVisitor) {
-        database.deleteClientWithId(idVisitor);
+    public ResponseDeleteVisitors execute(DeleteVisitorRequest request) {
+        List<CoreError> coreErrors = validator.coreErrors(request);
+        if (!coreErrors.isEmpty()) {
+            return new ResponseDeleteVisitors(coreErrors);
+        }
+        boolean deleteId = database.deleteClientWithNameAndId(request.getNameVisitors(), request.getIdVisitor());
+        return new ResponseDeleteVisitors(deleteId);
     }
 }

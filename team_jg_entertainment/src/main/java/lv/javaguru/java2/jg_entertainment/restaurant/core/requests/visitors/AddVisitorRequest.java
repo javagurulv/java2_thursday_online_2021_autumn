@@ -1,12 +1,12 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.core.requests;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors;
 
 public class AddVisitorRequest {
 
     private String name;
     private String surname;
-    private long telephone;
+    private Long telephone;
 
-    public AddVisitorRequest(String name, String surname, long telephone) {
+    public AddVisitorRequest(String name, String surname, Long telephone) {
         this.name = name;
         this.surname = surname;
         this.telephone = telephone;
@@ -20,7 +20,7 @@ public class AddVisitorRequest {
         return surname;
     }
 
-    public long getTelephone() {
+    public Long getTelephone() {
         return telephone;
     }
 }

@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.console_ui;
+package lv.javaguru.java2.jg_entertainment.restaurant.console_ui_visitors;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.ServiceShowListVisitors;
 
@@ -12,7 +12,7 @@ public class UIActionShowListAllVisitors implements RestaurantUIAction {
 
     @Override
     public void execute() {
-        System.out.println("All clients in list: ");
+        System.out.println("Client's list: ");
         getAllVisitors.execute().forEach(System.out::println);
         System.out.println("This all list with visitors !");
     }
