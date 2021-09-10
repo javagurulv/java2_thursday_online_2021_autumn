@@ -8,8 +8,10 @@ import lv.javaguru.java2.Specialist;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class InMemoryDatabaseImpl implements Database {
+
     private Long nextId = 1L;
     private List<Specialist> specialists = new ArrayList<>();
     private List<Client> clients = new ArrayList<>();
@@ -32,12 +34,6 @@ public class InMemoryDatabaseImpl implements Database {
 
     @Override
     public boolean removeSpecialist(Long id, String name, String surname) {
-/*        specialists.stream()
-//                .filter(specialist -> specialist.getId().equals(id))
-//                .findFirst()
-               .ifPresent(specialist -> specialists.remove(specialist));
-
- */
 
         boolean isSpecialistDeleted = false;
         Optional<Specialist> specialistToDelete = specialists.stream()
@@ -52,12 +48,6 @@ public class InMemoryDatabaseImpl implements Database {
 
     @Override
     public boolean removeClient(Long id, String name, String surname) {
-/*        clients.stream()
-//                .filter(client -> client.getId().equals(id))
-//                .findFirst()
-                .ifPresent(client -> clients.remove(client));
-
- */
 
         boolean isClientRemoved = false;
 
@@ -75,55 +65,72 @@ public class InMemoryDatabaseImpl implements Database {
     @Override
     public void findSpecialistByProfession(String profession) {
         for (Specialist specialist : specialists) {
-            if (profession.equals(specialist.getSpecialistProfession())){
-                System.out.println("Founded specialists: " + specialist);}
-
-                else System.out.println("Specialist with current profession not found");
+            if (profession.equals(specialist.getSpecialistProfession())) {
+                System.out.println("Founded specialists: " + specialist);
+            } else System.out.println("Specialist with current profession not found");
         }
     }
 
     @Override
-    public void findClientById(Long id) {
-
-
-        for (Client client : clients) {
-            if (!id.equals(client.getClientId())) {
-                System.out.println("Client by such search criteria not found, please try again!");
-            } else {
-                System.out.println(client);
-
-            }
-        }
-
+    public List<Client> findClientsById(Long clientId) {
+        return clients.stream()
+                .filter(client -> client.getClientId().equals(clientId))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public void findClientByName(String name) {
-
-
-        for (Client client : clients) {
-            if (!name.equals(client.getClientName())) {
-                System.out.println("Client by such search criteria not found, please try again!");
-            } else {
-                System.out.println(client);
-            }
-        }
-
+    public List<Client> findClientsByName(String clientName) {
+        return clients.stream()
+                .filter(client -> client.getClientName().equals(clientName))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public void findClientBySurname(String surName) {
-
-
-        for (Client client : clients) {
-            if (!surName.equals(client.getClientName())) {
-                System.out.println("Client by such search criteria not found, please try again!");
-            } else {
-                System.out.println(client);
-            }
-        }
-
+    public List<Client> findClientBySurname(String clientSurname) {
+        return clients.stream()
+                .filter(client -> client.getClientSurname().equals(clientSurname))
+                .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Client> findClientByIdAndNameAndSurname(Long clientId, String clientName, String clientSurname) {
+        return clients.stream()
+                .filter(client -> client.getClientId().equals(clientId))
+                .filter(client -> client.getClientName().equals(clientName))
+                .filter(client -> client.getClientSurname().equals(clientSurname))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Specialist> findSpecialistById(Long specialistId) {
+        return specialists.stream()
+                .filter(specialist -> specialistId.equals(specialist.getSpecialistId()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Specialist> findSpecialistByName(String specialistName) {
+        return specialists.stream()
+                .filter(specialist -> specialistName.equals(specialist.getSpecialistName()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Specialist> findSpecialistBySurname(String specialistSurname) {
+        return specialists.stream()
+                .filter(specialist -> specialistSurname.equals(specialist.getSpecialistSurname()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Specialist> findSpecialistByIdAndNameAndSurname(Long specialistId, String specialistName, String specialistSurname) {
+        return specialists.stream()
+                .filter(specialist -> specialistId.equals(specialist.getSpecialistId()))
+                .filter(specialist -> specialistName.equals(specialist.getSpecialistName()))
+                .filter(specialist -> specialistSurname.equals(specialist.getSpecialistSurname()))
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public void addAdvertisement(Advertisement advBoard) {
@@ -158,20 +165,6 @@ public class InMemoryDatabaseImpl implements Database {
         }
     }
 
-
-//    @Override
-//    public void findClientById(Long id, String name, String surName) {
-//        for (Client client : clients) {
-//
-//            if (!id.equals(client.getClientId()) && name.equals(client.getClientName()) && surName.equals(client.getClientSurname())) {
-//                System.out.println("Client by such search criteria not found, please try again!");
-//            } else {
-//                System.out.println(client);
-//            }
-//        }
-//    }
-
-
     @Override
     public List<Specialist> getAllSpecialist() {
         return specialists;
@@ -181,6 +174,5 @@ public class InMemoryDatabaseImpl implements Database {
     public List<Client> getAllClients() {
         return clients;
     }
-
 
 }

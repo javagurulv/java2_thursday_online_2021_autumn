@@ -8,14 +8,14 @@ public interface DoctorDatabase {
 
     void addDoctor(Doctor doctor);
 
-    void findDoctorById(int id);
+    boolean findDoctorById(long id);
 
-    void deleteDoctorById(int id);
+    boolean deleteDoctorById(long id);
 
     List<Doctor> showAllDoctors();
 
-    void editDoctor(int doctorId, int userInput, String input);
+    boolean editDoctor(long doctorId, int userInput, String input);
 
-    boolean doctorExists(int id);
+    boolean doctorExists(long id);
 
 }

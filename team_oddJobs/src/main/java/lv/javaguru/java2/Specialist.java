@@ -8,10 +8,14 @@ public class Specialist {
     private String specialistSurname;
     private String specialistProfession;
 
-    public Specialist(String name, String surname, String profession) {
-        this.specialistName = name;
-        this.specialistSurname = surname;
-        this.specialistProfession = profession;
+    public Specialist(String specialistName, String specialistSurname, String specialistProfession) {
+        this.specialistName = specialistName;
+        this.specialistSurname = specialistSurname;
+        this.specialistProfession = specialistProfession;
+    }
+
+    public Specialist(Long specialistId) {
+        this.specialistId = specialistId;
     }
 
     public Specialist(String specialistProfession) {
