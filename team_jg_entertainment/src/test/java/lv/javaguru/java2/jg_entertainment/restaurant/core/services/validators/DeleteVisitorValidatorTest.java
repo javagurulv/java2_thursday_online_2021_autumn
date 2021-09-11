@@ -13,7 +13,7 @@ class DeleteVisitorValidatorTest {
 
     @Test
     public void coreErrorsNotEmpty() {
-        RequestDeleteVisitor request = new RequestDeleteVisitor(3256489742L, "Nika");
+        RequestDeleteVisitor request = new RequestDeleteVisitor(32L, "Nika");
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertTrue(coreErrorList.isEmpty());
     }
@@ -29,18 +29,21 @@ class DeleteVisitorValidatorTest {
 
     @Test
     public void coreErrorsHaveEmptyNameVisitor() {
-        RequestDeleteVisitor request = new RequestDeleteVisitor(326589L, "");
+        RequestDeleteVisitor request = new RequestDeleteVisitor(3289L, "");
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertEquals(coreErrorList.size(), 1);
         assertEquals(coreErrorList.get(0).getField(), "name visitor");
         assertEquals(coreErrorList.get(0).getMessageError(), "Can't be empty");
     }
+
     @Test
-    public void coreErrorsHaveNull() {
-        RequestDeleteVisitor request = new RequestDeleteVisitor(null, "Nika");
+    public void coreErrorsHaveNNotCorrectInformationInAllField() {
+        RequestDeleteVisitor request = new RequestDeleteVisitor(null, "");
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
-        assertEquals(coreErrorList.size(), 1);
+        assertEquals(coreErrorList.size(), 2);
         assertEquals(coreErrorList.get(0).getField(), "id visitor");
         assertEquals(coreErrorList.get(0).getMessageError(), "Can't be null");
+        assertEquals(coreErrorList.get(1).getField(), "name visitor");
+        assertEquals(coreErrorList.get(1).getMessageError(), "Can't be empty");
     }
 }
