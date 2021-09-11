@@ -2,7 +2,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitor
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.FindVisitorInformationRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseFindVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.visitors_services.ServiceFindByIdVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceFindByIdVisitors;
 
 import java.util.Scanner;
 

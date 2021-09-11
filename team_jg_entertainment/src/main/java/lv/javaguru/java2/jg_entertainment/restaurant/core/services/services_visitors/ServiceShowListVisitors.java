@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.core.services.visitors_services;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.Visitors;

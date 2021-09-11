@@ -1,8 +1,8 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.core.services_tables;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database_tables.TableDatabase;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests_tables.RemoveTableRequest;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses_tables.RemoveTableResponse;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.TableDatabase;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.RemoveTableRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.RemoveTableResponse;
 
 public class RemoveTableService {
 
