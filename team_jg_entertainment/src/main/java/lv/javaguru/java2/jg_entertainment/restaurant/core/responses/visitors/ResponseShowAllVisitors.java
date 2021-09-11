@@ -5,18 +5,19 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.services.Visitors;
 import java.util.List;
 
 public class ResponseShowAllVisitors extends CoreResponse{
-    private Visitors newVisitor;
+    private List<Visitors> newVisitor;
 
 
-    public ResponseShowAllVisitors(List<CoreError> errorsList) {
+    public ResponseShowAllVisitors(List<CoreError> errorsList, List<Visitors> newVisitor) {
         super(errorsList);
-    }
-
-    public ResponseShowAllVisitors(Visitors newVisitor) {
         this.newVisitor = newVisitor;
     }
 
-    public Visitors getNewVisitor() {
+    public ResponseShowAllVisitors(List<Visitors> newVisitor) {
+        this.newVisitor = newVisitor;
+    }
+
+    public List<Visitors> getNewVisitor() {
         return newVisitor;
     }
 }
