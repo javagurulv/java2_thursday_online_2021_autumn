@@ -9,11 +9,11 @@ public interface DatabaseVisitors {
 
     void saveClientToRestaurantList(Visitors clientInfo);
 
-    List<Visitors> findVisitorsByNameAndTelephoneNumber(String nameVisitors, Long telephoneNumber);//
+    List<Visitors> findVisitorsByNameAndTelephoneNumber(Long telephoneNumber, String nameVisitors);
 
     List<Visitors> findClientById(Long idVisitors);
 
-    boolean deleteClientWithNameAndId(String nameVisitors, Long id);
+    boolean deleteClientWithNameAndId(Long id, String nameVisitors);
 
     List<Visitors> showAllClientsInList();
 

@@ -43,6 +43,6 @@ class AddVisitorValidatorTest {
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertEquals(coreErrorList.size(), 1);
         assertEquals(coreErrorList.get(0).getField(), "telephone");
-        assertEquals(coreErrorList.get(0).getMessageError(), "not correct");
+        assertEquals(coreErrorList.get(0).getMessageError(), "not correct, telephone can't be null");
     }
 }

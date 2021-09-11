@@ -14,6 +14,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.Fi
 public class Restaurant {
 
     private static final DatabaseVisitors databaseRestaurant = new ImplDatabaseRestaurant();
+
     private static AddVisitorValidator validator = new AddVisitorValidator();
     private static final ServiceAddAllVisitors addVisitorsService = new ServiceAddAllVisitors(databaseRestaurant, validator);
     private static final RestaurantUIAction uiAddVisitorAction = new UIActionAddVisitors(addVisitorsService);

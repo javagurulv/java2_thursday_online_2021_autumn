@@ -5,7 +5,7 @@ public class FindVisitorInformationRequest {
     private String name;
     private Long idVisitors;
 
-    public FindVisitorInformationRequest(String name, Long idVisitors) {
+    public FindVisitorInformationRequest(Long idVisitors, String name) {
         this.name = name;
         this.idVisitors = idVisitors;
     }

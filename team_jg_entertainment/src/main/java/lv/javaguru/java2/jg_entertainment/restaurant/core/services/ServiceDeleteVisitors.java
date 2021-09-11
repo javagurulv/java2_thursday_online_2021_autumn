@@ -24,7 +24,7 @@ public class ServiceDeleteVisitors {
         if (!coreErrors.isEmpty()) {
             return new ResponseDeleteVisitors(coreErrors);
         }
-        boolean deleteId = database.deleteClientWithNameAndId(request.getNameVisitors(), request.getIdVisitor());
+        boolean deleteId = database.deleteClientWithNameAndId(request.getIdVisitor(),request.getNameVisitors());
         return new ResponseDeleteVisitors(deleteId);
     }
 }

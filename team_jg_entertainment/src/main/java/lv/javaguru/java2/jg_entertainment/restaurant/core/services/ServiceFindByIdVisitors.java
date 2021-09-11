@@ -23,7 +23,8 @@ public class ServiceFindByIdVisitors {
         if (!coreErrors.isEmpty()) {
             return new ResponseFindVisitors(coreErrors, null);
         }
-        database.findClientById(request.getIdVisitors());
-        return new ResponseFindVisitors(coreErrors, null);
+
+        List<Visitors> visitors = database.findClientById(request.getIdVisitors());
+        return new ResponseFindVisitors(null, visitors);
     }
 }

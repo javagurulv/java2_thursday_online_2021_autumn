@@ -2,6 +2,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.Visitors;
 
 import java.util.*;
 
@@ -29,7 +30,7 @@ public class AddVisitorValidator {
 
     private Optional<CoreError> validatorTelephone(AddVisitorRequest requestVisitor) {
         return (requestVisitor.getTelephone() == null)
-                ? Optional.of(new CoreError("telephone", "not correct"))
+                ? Optional.of(new CoreError("telephone", "not correct, telephone can't be null"))
                 : Optional.empty();
 
     }

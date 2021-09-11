@@ -20,7 +20,7 @@ public class ImplDatabaseRestaurant implements DatabaseVisitors {
     }
 
     @Override
-    public List<Visitors> findVisitorsByNameAndTelephoneNumber(String nameVisitors, Long telephoneNumber) {
+    public List<Visitors> findVisitorsByNameAndTelephoneNumber(Long telephoneNumber, String nameVisitors) {
         return clientInRestaurant.stream()
                 .filter(visitors -> visitors.getClientName().equals(nameVisitors))
                 .filter(visitors -> visitors.getTelephoneNumber() == telephoneNumber)
@@ -35,7 +35,7 @@ public class ImplDatabaseRestaurant implements DatabaseVisitors {
     }
 
     @Override
-    public boolean deleteClientWithNameAndId(String nameVisitor, Long id) {
+    public boolean deleteClientWithNameAndId(Long id, String nameVisitor) {
         boolean visitorDeleteFromRestaurantList = false;
         Optional<Visitors> visitorsOptional = clientInRestaurant.stream()
                 .filter(visitors -> visitors.getClientName().equals(nameVisitor) &&

@@ -16,6 +16,7 @@ public class UIActionDeleteVisitors implements RestaurantUIAction {
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("Write ID visitor's that will be deleted: ");
         Long idVisitors = Long.parseLong(scanner.nextLine());
         System.out.println("Enter visitor's name that will be deleted: ");

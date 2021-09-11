@@ -19,17 +19,18 @@ public class UIActionFindByIdVisitors implements RestaurantUIAction {
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter visitor's name that must be found : ");
-        String visitorsName = scanner.nextLine();
+
         System.out.println("Enter visitor's ID that must be found : ");
         Long idVisitors = Long.parseLong(scanner.nextLine());
+        System.out.println("Enter visitor's name that must be found : ");
+        String visitorsName = scanner.nextLine();
 
-        FindVisitorInformationRequest request = new FindVisitorInformationRequest(visitorsName, idVisitors);
+        FindVisitorInformationRequest request = new FindVisitorInformationRequest(idVisitors, visitorsName);
         ResponseFindVisitors response = findByIdVisitors.execute(request);
 
         if (response.hasError()) {
             response.getErrorsList().forEach(coreError ->
-            System.out.println("Error: " + coreError.getField() + " " + coreError.getMessageError()));
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessageError()));
         } else {
             System.out.println(response.getVisitors());
         }

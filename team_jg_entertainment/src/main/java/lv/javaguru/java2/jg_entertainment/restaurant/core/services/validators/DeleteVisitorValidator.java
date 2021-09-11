@@ -16,15 +16,15 @@ public class DeleteVisitorValidator {
         return errorList;
     }
 
-    private Optional<CoreError> validateNameVisitor(DeleteVisitorRequest request) {
-        return (request.getNameVisitors() == null || request.getNameVisitors().isEmpty())
-                ?Optional.of(new CoreError("name visitor", "Can't be empty"))
-                :Optional.empty();
-    }
-
     private Optional<CoreError> validateByID(DeleteVisitorRequest request) {
         return (request.getIdVisitor() == null)
                 ? Optional.of(new CoreError("id visitor", "Can't be null"))
+                : Optional.empty();
+    }
+
+    private Optional<CoreError> validateNameVisitor(DeleteVisitorRequest request) {
+        return (request.getNameVisitors() == null || request.getNameVisitors().isEmpty())
+                ? Optional.of(new CoreError("name visitor", "Can't be empty"))
                 : Optional.empty();
     }
 }
