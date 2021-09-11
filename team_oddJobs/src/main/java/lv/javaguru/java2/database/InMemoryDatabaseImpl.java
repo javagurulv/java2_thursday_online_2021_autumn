@@ -62,14 +62,6 @@ public class InMemoryDatabaseImpl implements Database {
     }
 
 
-    @Override
-    public void findSpecialistByProfession(String profession) {
-        for (Specialist specialist : specialists) {
-            if (profession.equals(specialist.getSpecialistProfession())) {
-                System.out.println("Founded specialists: " + specialist);
-            } else System.out.println("Specialist with current profession not found");
-        }
-    }
 
     @Override
     public List<Client> findClientsById(Long clientId) {
@@ -123,11 +115,19 @@ public class InMemoryDatabaseImpl implements Database {
     }
 
     @Override
-    public List<Specialist> findSpecialistByIdAndNameAndSurname(Long specialistId, String specialistName, String specialistSurname) {
+    public List<Specialist> findSpecialistByProfession(String profession) {
+        return specialists.stream()
+                .filter(specialist -> specialist.getSpecialistProfession().equals(profession))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Specialist> findSpecialistByIdAndNameAndSurnameAndProfession(Long specialistId, String specialistName, String specialistSurname, String specialistProfession) {
         return specialists.stream()
                 .filter(specialist -> specialistId.equals(specialist.getSpecialistId()))
                 .filter(specialist -> specialistName.equals(specialist.getSpecialistName()))
                 .filter(specialist -> specialistSurname.equals(specialist.getSpecialistSurname()))
+                .filter(specialist -> specialistProfession.equals(specialist.getSpecialistProfession()))
                 .collect(Collectors.toList());
     }
 
