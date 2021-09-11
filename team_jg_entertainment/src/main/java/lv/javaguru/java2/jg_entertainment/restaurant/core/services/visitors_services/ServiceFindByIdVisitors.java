@@ -1,9 +1,10 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.core.services;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.services.visitors_services;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.FindVisitorInformationRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseFindVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.Visitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.FindVisitorValidator;
 
 import java.util.List;

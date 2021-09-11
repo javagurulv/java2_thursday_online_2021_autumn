@@ -1,11 +1,9 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.console_ui_visitors;
+package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.FindVisitorInformationRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseFindVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.ServiceFindByIdVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.Visitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.visitors_services.ServiceFindByIdVisitors;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class UIActionFindByIdVisitors implements RestaurantUIAction {
