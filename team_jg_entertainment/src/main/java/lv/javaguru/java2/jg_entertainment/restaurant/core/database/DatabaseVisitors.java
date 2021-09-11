@@ -13,7 +13,7 @@ public interface DatabaseVisitors {
 
     List<Visitors> findClientById(Long idVisitors);
 
-    boolean deleteClientWithNameAndId(Long id, String nameVisitors);
+    boolean deleteClientWithIDAndName(Long id, String nameVisitors);
 
     List<Visitors> showAllClientsInList();
 

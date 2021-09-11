@@ -1,25 +1,25 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.FindVisitorInformationRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestFindVisitorInformation;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseFindVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.Visitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.FindVisitorValidator;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorFindVisitor;
 
 import java.util.List;
 
 public class ServiceFindByIdVisitors {
 
     private final DatabaseVisitors database;
-    private final FindVisitorValidator validator;
+    private final ValidatorFindVisitor validator;
 
-    public ServiceFindByIdVisitors(DatabaseVisitors database, FindVisitorValidator validator) {
+    public ServiceFindByIdVisitors(DatabaseVisitors database, ValidatorFindVisitor validator) {
         this.database = database;
         this.validator = validator;
     }
 
-    public ResponseFindVisitors execute(FindVisitorInformationRequest request) {
+    public ResponseFindVisitors execute(RequestFindVisitorInformation request) {
         List<CoreError> coreErrors = validator.coreErrors(request);
         if (!coreErrors.isEmpty()) {
             return new ResponseFindVisitors(coreErrors, null);

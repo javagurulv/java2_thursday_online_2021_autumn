@@ -2,11 +2,11 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitor
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceShowListVisitors;
 
-public class UIActionShowListAllVisitors implements RestaurantUIAction {
+public class UIActionShowListWithAllVisitors implements RestaurantUIAction {
 
     private final ServiceShowListVisitors getAllVisitors;
 
-    public UIActionShowListAllVisitors(ServiceShowListVisitors getAllVisitors) {
+    public UIActionShowListWithAllVisitors(ServiceShowListVisitors getAllVisitors) {
         this.getAllVisitors = getAllVisitors;
     }
 

@@ -1,16 +1,16 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.FindVisitorInformationRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestFindVisitorInformation;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseFindVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceFindByIdVisitors;
 
 import java.util.Scanner;
 
-public class UIActionFindByIdVisitors implements RestaurantUIAction {
+public class UIActionFindVisitors implements RestaurantUIAction {
 
     private final ServiceFindByIdVisitors findByIdVisitors;
 
-    public UIActionFindByIdVisitors(ServiceFindByIdVisitors findByIdVisitors) {
+    public UIActionFindVisitors(ServiceFindByIdVisitors findByIdVisitors) {
         this.findByIdVisitors = findByIdVisitors;
     }
 
@@ -23,7 +23,7 @@ public class UIActionFindByIdVisitors implements RestaurantUIAction {
         System.out.println("Enter visitor's name that must be found : ");
         String visitorsName = scanner.nextLine();
 
-        FindVisitorInformationRequest request = new FindVisitorInformationRequest(idVisitors, visitorsName);
+        RequestFindVisitorInformation request = new RequestFindVisitorInformation(idVisitors, visitorsName);
         ResponseFindVisitors response = findByIdVisitors.execute(request);
 
         if (response.hasError()) {

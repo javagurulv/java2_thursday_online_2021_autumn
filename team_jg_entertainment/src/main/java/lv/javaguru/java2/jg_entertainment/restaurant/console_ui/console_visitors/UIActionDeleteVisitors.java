@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.DeleteVisitorRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestDeleteVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseDeleteVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceDeleteVisitors;
 
@@ -22,7 +22,7 @@ public class UIActionDeleteVisitors implements RestaurantUIAction {
         System.out.println("Enter visitor's name that will be deleted: ");
         String nameVisitor = scanner.nextLine();
 
-        DeleteVisitorRequest request = new DeleteVisitorRequest(idVisitors, nameVisitor);
+        RequestDeleteVisitor request = new RequestDeleteVisitor(idVisitors, nameVisitor);
         ResponseDeleteVisitors responseDeleteVisitorsByID = deleteVisitors.execute(request);
 
         if (responseDeleteVisitorsByID.hasError()) {

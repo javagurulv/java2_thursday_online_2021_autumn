@@ -35,7 +35,7 @@ public class ImplDatabaseRestaurant implements DatabaseVisitors {
     }
 
     @Override
-    public boolean deleteClientWithNameAndId(Long id, String nameVisitor) {
+    public boolean deleteClientWithIDAndName(Long id, String nameVisitor) {
         boolean visitorDeleteFromRestaurantList = false;
         Optional<Visitors> visitorsOptional = clientInRestaurant.stream()
                 .filter(visitors -> visitors.getClientName().equals(nameVisitor) &&
