@@ -1,11 +1,11 @@
 package lv.javaguru.java2.jg_entertainment;
 
 import lv.javaguru.java2.jg_entertainment.console_ui.*;
-import lv.javaguru.java2.jg_entertainment.core.database.ImplDatabaseTable;
-import lv.javaguru.java2.jg_entertainment.core.database.TableDatabase;
-import lv.javaguru.java2.jg_entertainment.core.services.AddTableService;
-import lv.javaguru.java2.jg_entertainment.core.services.GetAllTablesService;
-import lv.javaguru.java2.jg_entertainment.core.services.RemoveTableService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database_tables.ImplDatabaseTable;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database_tables.TableDatabase;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services_tables.AddTableService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services_tables.GetAllTablesService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services_tables.RemoveTableService;
 
 import java.util.Scanner;
 

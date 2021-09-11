@@ -1,8 +1,8 @@
 package lv.javaguru.java2.jg_entertainment.console_ui;
 
-import lv.javaguru.java2.jg_entertainment.core.requests.GetAllTablesRequest;
-import lv.javaguru.java2.jg_entertainment.core.responses.GetAllTablesResponse;
-import lv.javaguru.java2.jg_entertainment.core.services.GetAllTablesService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests_tables.GetAllTablesRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses_tables.GetAllTablesResponse;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services_tables.GetAllTablesService;
 
 public class GetAllTablesUIAction implements UIAction {
 

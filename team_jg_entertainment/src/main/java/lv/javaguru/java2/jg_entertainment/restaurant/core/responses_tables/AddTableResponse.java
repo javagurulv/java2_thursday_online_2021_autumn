@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment.core.responses;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.responses_tables;
 
 import lv.javaguru.java2.jg_entertainment.Table;
 
