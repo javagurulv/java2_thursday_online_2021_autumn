@@ -1,9 +1,9 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.core.services_tables;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables;
 
 import lv.javaguru.java2.jg_entertainment.Table;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database_tables.TableDatabase;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests_tables.AddTableRequest;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses_tables.AddTableResponse;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.TableDatabase;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.AddTableRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.AddTableResponse;
 
 public class AddTableService {
 

@@ -2,7 +2,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitor
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.DeleteVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseDeleteVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.visitors_services.ServiceDeleteVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceDeleteVisitors;
 
 import java.util.Scanner;
 

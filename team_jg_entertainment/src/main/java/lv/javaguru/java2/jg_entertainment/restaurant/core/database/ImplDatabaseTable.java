@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.core.database_tables;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
 
 import lv.javaguru.java2.jg_entertainment.Table;
 
