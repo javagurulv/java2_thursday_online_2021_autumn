@@ -1,8 +1,8 @@
 package lv.javaguru.java2.jg_entertainment.console_ui;
 
-import lv.javaguru.java2.jg_entertainment.core.requests.AddTableRequest;
-import lv.javaguru.java2.jg_entertainment.core.responses.AddTableResponse;
-import lv.javaguru.java2.jg_entertainment.core.services.AddTableService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests_tables.AddTableRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses_tables.AddTableResponse;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services_tables.AddTableService;
 
 import java.util.Scanner;
 

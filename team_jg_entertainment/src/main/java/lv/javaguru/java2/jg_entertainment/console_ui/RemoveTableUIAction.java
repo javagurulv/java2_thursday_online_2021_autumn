@@ -1,8 +1,8 @@
 package lv.javaguru.java2.jg_entertainment.console_ui;
 
-import lv.javaguru.java2.jg_entertainment.core.requests.RemoveTableRequest;
-import lv.javaguru.java2.jg_entertainment.core.responses.RemoveTableResponse;
-import lv.javaguru.java2.jg_entertainment.core.services.RemoveTableService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests_tables.RemoveTableRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses_tables.RemoveTableResponse;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services_tables.RemoveTableService;
 
 import java.util.Scanner;
 
