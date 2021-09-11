@@ -43,11 +43,6 @@ public class FindSpecialistValidator {
             errors.add(new CoreError("specialistSurname", "Must not be empty!"));
             errors.add(new CoreError("specialistProfession", "Must not be empty!"));
         }
-        if(request.getSpecialistName().matches("[0-9]+") && request.getSpecialistSurname().matches("[0-9]+") && request.getSpecialistProfession().matches("[0-9]+")) {
-            errors.add(new CoreError("specialistName", "Must not contains numbers!"));
-            errors.add(new CoreError("specialistSurname", "Must not contains numbers!"));
-            errors.add(new CoreError("specialistProfession", "Must not contains numbers!"));
-        }
             return errors;
     }
     private boolean isEmpty(String str) {
