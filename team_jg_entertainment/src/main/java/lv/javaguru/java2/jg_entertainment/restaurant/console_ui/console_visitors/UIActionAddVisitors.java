@@ -1,8 +1,8 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.console_ui_visitors;
+package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseAddVisitor;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.ServiceAddAllVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.visitors_services.ServiceAddAllVisitors;
 
 import java.util.Scanner;
 

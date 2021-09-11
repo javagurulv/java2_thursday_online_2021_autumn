@@ -1,12 +1,12 @@
 package lv.javaguru.java2.jg_entertainment.restaurant;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.console_ui_visitors.*;
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.ImplDatabaseRestaurant;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.ServiceAddAllVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.ServiceDeleteVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.ServiceFindByIdVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.ServiceShowListVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.visitors_services.ServiceAddAllVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.visitors_services.ServiceDeleteVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.visitors_services.ServiceFindByIdVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.visitors_services.ServiceShowListVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.AddVisitorValidator;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.DeleteVisitorValidator;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.FindVisitorValidator;

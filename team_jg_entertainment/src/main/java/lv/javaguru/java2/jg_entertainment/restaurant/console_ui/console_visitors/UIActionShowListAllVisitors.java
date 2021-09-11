@@ -1,6 +1,6 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.console_ui_visitors;
+package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.ServiceShowListVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.visitors_services.ServiceShowListVisitors;
 
 public class UIActionShowListAllVisitors implements RestaurantUIAction {
 
