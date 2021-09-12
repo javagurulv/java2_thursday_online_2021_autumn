@@ -2,10 +2,9 @@ package lv.javaguru.java2.qwe.core.services.data_services;
 
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.core.database.Database;
-import lv.javaguru.java2.qwe.core.requests.AddMultiFilterRequest;
+import lv.javaguru.java2.qwe.core.requests.FilterStockByMultipleParametersRequest;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class FilterStocksByMultipleParametersService {
 
@@ -19,7 +18,7 @@ public class FilterStocksByMultipleParametersService {
         return database;
     }
 
-    public List<Security> execute(AddMultiFilterRequest request) {
+    public List<Security> execute(FilterStockByMultipleParametersRequest request) {
         return database.filterStocksByMultipleParameters(database.getSecurityList(), request, 0);
     }
 

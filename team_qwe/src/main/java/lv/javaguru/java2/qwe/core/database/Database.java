@@ -3,12 +3,11 @@ package lv.javaguru.java2.qwe.core.database;
 import lv.javaguru.java2.qwe.Bond;
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.Stock;
-import lv.javaguru.java2.qwe.core.requests.AddMultiFilterRequest;
+import lv.javaguru.java2.qwe.core.requests.FilterStockByMultipleParametersRequest;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 public interface Database {
 
@@ -29,6 +28,6 @@ public interface Database {
     List<Security> filterStocksByIndustry(String industry);
 
     List<Security> filterStocksByMultipleParameters(List<Security> list,
-                                                    AddMultiFilterRequest request, int i);
+                                                    FilterStockByMultipleParametersRequest request, int i);
 
 }

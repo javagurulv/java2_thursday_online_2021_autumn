@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.ui_actions.data_ui_actions;
 
 import lv.javaguru.java2.qwe.Security;
-import lv.javaguru.java2.qwe.core.requests.AddMultiFilterRequest;
+import lv.javaguru.java2.qwe.core.requests.FilterStockByMultipleParametersRequest;
 import lv.javaguru.java2.qwe.core.requests.FilterStockByAnyDoubleParameterRequest;
 import lv.javaguru.java2.qwe.core.services.data_services.FilterStocksByMultipleParametersService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
@@ -29,7 +29,7 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
         List<String> finalParameterList = setFilterParameters(parameters);
         messageDialog("You have chosen parameters:\n - " + printList(finalParameterList));
         List<FilterStockByAnyDoubleParameterRequest> requestList = createRequestList(finalParameterList, operators);
-        AddMultiFilterRequest multiFilterRequest = new AddMultiFilterRequest(requestList);
+        FilterStockByMultipleParametersRequest multiFilterRequest = new FilterStockByMultipleParametersRequest(requestList);
         List<Security> resultList = multipleParametersService.execute(multiFilterRequest);
         resultList.forEach(System.out::println);
         System.out.println("\n");

@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import static java.util.Map.entry;
 
-public class AddMultiFilterRequest {
+public class FilterStockByMultipleParametersRequest {
 
     private final List<FilterStockByAnyDoubleParameterRequest> requestList;
     private final List<Predicate<Security>> list = new ArrayList<>();
@@ -45,7 +45,7 @@ public class AddMultiFilterRequest {
             )));
 
 
-    public AddMultiFilterRequest(List<FilterStockByAnyDoubleParameterRequest> requestList) {
+    public FilterStockByMultipleParametersRequest(List<FilterStockByAnyDoubleParameterRequest> requestList) {
         this.requestList = requestList;
         setTargets();
         IntStream.rangeClosed(0, requestList.size() - 1)
@@ -91,7 +91,7 @@ public class AddMultiFilterRequest {
                 new FilterStockByAnyDoubleParameterRequest(null, null, null),
                 new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "0.8")
         );
-        AddMultiFilterRequest multiFilterRequest = new AddMultiFilterRequest(requestList);
+        FilterStockByMultipleParametersRequest multiFilterRequest = new FilterStockByMultipleParametersRequest(requestList);
         System.out.println("RESULT: " + multiFilterRequest.list.size());
         System.out.println("MARKET PRICE TARGET: " + multiFilterRequest.marketPriceTarget);
         System.out.println("DIVIDEND TARGET: " + multiFilterRequest.dividendTarget);

@@ -4,7 +4,7 @@ import lv.javaguru.java2.qwe.Bond;
 import lv.javaguru.java2.qwe.Cash;
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.Stock;
-import lv.javaguru.java2.qwe.core.requests.AddMultiFilterRequest;
+import lv.javaguru.java2.qwe.core.requests.FilterStockByMultipleParametersRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.Map.entry;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
 public class DatabaseImpl implements Database {
 
@@ -86,7 +85,7 @@ public class DatabaseImpl implements Database {
 
     @Override
     public final List<Security> filterStocksByMultipleParameters(List<Security> list,
-                                                                 AddMultiFilterRequest request, int i) {
+                                                                 FilterStockByMultipleParametersRequest request, int i) {
         List<Security> nextList = list;
         nextList = nextList.stream()
                 .filter(security -> security.getClass().getSimpleName().equals("Stock"))
