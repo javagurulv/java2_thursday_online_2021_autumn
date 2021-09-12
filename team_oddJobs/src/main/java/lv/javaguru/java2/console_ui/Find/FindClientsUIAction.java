@@ -3,6 +3,8 @@ package lv.javaguru.java2.console_ui.Find;
 import lv.javaguru.java2.console_ui.Exit.ExitMenuUIAction;
 import lv.javaguru.java2.console_ui.UIAction;
 import lv.javaguru.java2.core.requests.Find.FindClientsRequest;
+import lv.javaguru.java2.core.requests.Find.Ordering;
+import lv.javaguru.java2.core.requests.Find.Paging;
 import lv.javaguru.java2.core.responce.Find.FindClientsResponse;
 import lv.javaguru.java2.services.Find.FindClientsService;
 
@@ -31,6 +33,18 @@ public class FindClientsUIAction implements UIAction {
 
         System.out.println("provide Surname");
         String clientSurname = scanner.next();
+
+        System.out.println("Enter orderBy (clientName || clientSurname ): ");
+        String orderBy = scanner.nextLine();
+        System.out.println("Enter orderDirection (ASCENDING||DESCENDING): ");
+        String orderDirection = scanner.nextLine();
+        Ordering ordering = new Ordering(orderBy, orderDirection);
+
+        System.out.println("Enter pageNumber: ");
+        Integer pageNumber = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter pageSize: ");
+        Integer pageSize = Integer.parseInt(scanner.nextLine());
+        Paging paging = new Paging(pageNumber, pageSize);
 
         FindClientsRequest request = new FindClientsRequest(clientId, clientName, clientSurname);
         FindClientsResponse response = findClientsService.execute(request);
