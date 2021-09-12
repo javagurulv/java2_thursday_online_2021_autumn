@@ -175,15 +175,16 @@ public class InMemoryDatabaseImpl implements Database {
         return clients;
     }
 
-
-   
+    @Override
+    public List<Advertisement> getAllAdvertisemets() {
+        return advBoards;
     }
 
 
- @Override
-    public List<Advertisement> getAllAdvertisemets() {
-        return advBoards;
 }
+
+
+
 
 
 
