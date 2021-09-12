@@ -1,33 +1,77 @@
 package lv.javaguru.java2.services.Find;
 
 import lv.javaguru.java2.Client;
+import lv.javaguru.java2.Specialist;
 import lv.javaguru.java2.core.requests.Find.FindClientsRequest;
+import lv.javaguru.java2.core.requests.Find.Ordering;
+import lv.javaguru.java2.core.requests.Find.Paging;
 import lv.javaguru.java2.core.responce.CoreError;
 import lv.javaguru.java2.core.responce.Find.FindClientsResponse;
-import lv.javaguru.java2.core.validations.FindClientsValidator;
+import lv.javaguru.java2.core.validations.FindClientsRequestValidator;
 import lv.javaguru.java2.database.Database;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FindClientsService {
 
     private Database database;
-    private FindClientsValidator validator;
+    private FindClientsRequestValidator clientValidator;
 
-    public FindClientsService(Database database, FindClientsValidator validator) {
+    public FindClientsService(Database database, FindClientsRequestValidator validator) {
         this.database = database;
-        this.validator = validator;
+        this.clientValidator = validator;
     }
 
     public FindClientsResponse execute(FindClientsRequest request) {
 
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = clientValidator.validate(request);
 
         if (!errors.isEmpty()) {
             return new FindClientsResponse(null, errors);
         }
 
-        List<Client> clients = null;
+        List<Client> clients = find(request);
+        clients = order(clients, request.getOrdering());
+        clients = paging(clients, request.getPaging());
+
+        return new FindClientsResponse(clients, null);
+    }
+
+    private List<Client> order(List<Client> clients, Ordering ordering) {
+
+        if (ordering != null) {
+            Comparator<Client> comparator = ordering.getOrderBy().equals("clientSurname")
+                    ? Comparator.comparing(Client::getClientSurname)
+                    : Comparator.comparing(Client::getClientName);
+
+            if (ordering.getOrderDirection().equals("DESCENDING")) {
+                comparator = comparator.reversed();
+            }
+            return clients.stream().sorted(comparator).collect(Collectors.toList());
+        } else {
+            return clients;
+        }
+
+    }
+
+    private List<Client> paging(List<Client> clients, Paging paging) {
+        if (paging != null) {
+            int skip = (paging.getPageNumber() - 1) * paging.getPageSize();
+            return clients.stream()
+                    .skip(skip)
+                    .limit(paging.getPageSize())
+                    .collect(Collectors.toList());
+        } else {
+            return clients;
+        }
+    }
+
+    private List<Client> find(FindClientsRequest request) {
+
+        List<Client> clients = new ArrayList<>();
         if (request.isIdProvided() && !request.isNameProvided() && !request.isSurnameProvide()) {
             clients = database.findClientsById(request.getClientId());
         }
@@ -41,8 +85,7 @@ public class FindClientsService {
         if (request.isIdProvided() && request.isNameProvided() && request.isSurnameProvide()) {
             clients = database.findClientByIdAndNameAndSurname(request.getClientId(), request.getClientName(), request.getClientSurname());
         }
-
-        return new FindClientsResponse(clients,null);
-
+        return clients;
     }
+
 }

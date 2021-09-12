@@ -3,25 +3,28 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services;
 import java.util.Objects;
 
 public class Visitors {
-
+    private Long idClient;
     private String clientName;
     private String surname;
-    private String age;
-    private Long idClient;
+    private int age;
+    private Long telephoneNumber;
+    // private String emailClient;
 
-    private long telephoneNumber;
-   // private String emailClient;
-
-    public Visitors(String clientName, String surname,String age) {
+    public Visitors(String clientName, String surname) {
         this.clientName = clientName;
         this.surname = surname;
-        this.age = age;
     }
 
-    public Visitors(String clientName, String surname,String age, long telephoneNumber) {
+    public Visitors(String clientName, String surname, int age, long telephoneNumber) {
         this.clientName = clientName;
         this.surname = surname;
         this.age = age;
+        this.telephoneNumber = telephoneNumber;
+    }
+
+    public Visitors(String clientName, String surname, long telephoneNumber) {
+        this.clientName = clientName;
+        this.surname = surname;
         this.telephoneNumber = telephoneNumber;
     }
 
@@ -49,11 +52,11 @@ public class Visitors {
         this.idClient = idClient;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -65,10 +68,9 @@ public class Visitors {
         this.telephoneNumber = telephoneNumber;
     }
 
-//    public String getEmailClient() {
+    //    public String getEmailClient() {
 //        return emailClient;
 //    }
-
 //    public void setEmailClient(String emailClient) {
 //        this.emailClient = emailClient;
 //    }
@@ -82,7 +84,7 @@ public class Visitors {
                 && Objects.equals(surname, that.surname)
                 && Objects.equals(age, that.age)
                 && Objects.equals(telephoneNumber, that.telephoneNumber);
-             //   && Objects.equals(emailClient, that.emailClient);
+        //   && Objects.equals(emailClient, that.emailClient);
     }
 
     @Override
