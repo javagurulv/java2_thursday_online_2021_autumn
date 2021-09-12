@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment.menu;
+package lv.javaguru.java2.jg_entertainment;
 
 import java.util.Objects;
 
