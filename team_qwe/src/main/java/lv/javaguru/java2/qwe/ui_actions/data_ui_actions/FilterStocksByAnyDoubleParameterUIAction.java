@@ -33,7 +33,7 @@ public class FilterStocksByAnyDoubleParameterUIAction implements UIAction {
 
     private void printResponse(FilterStocksByAnyDoubleParameterResponse response) {
         if (response.hasErrors()) {
-            messageDialog("FAILED TO ADD STOCK!\n" +
+            messageDialog("FAILED TO FILTER!\n" +
                     printErrorList(response));
         } else {
             response.getList().forEach(System.out::println);

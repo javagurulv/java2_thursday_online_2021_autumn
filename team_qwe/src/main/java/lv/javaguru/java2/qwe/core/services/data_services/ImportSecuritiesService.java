@@ -61,7 +61,7 @@ public class ImportSecuritiesService {
 
         if (errorRequestList.isEmpty()) {
             importSt(list);
-            messageDialog("Data has been successfully imported!");
+//            messageDialog("Data has been successfully imported!");
         } else {
             messageDialog("FAILED to add this list!\n" +
                     "Validation FAILED!");

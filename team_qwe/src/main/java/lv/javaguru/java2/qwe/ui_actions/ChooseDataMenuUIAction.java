@@ -2,9 +2,7 @@ package lv.javaguru.java2.qwe.ui_actions;
 
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.services.data_services.*;
-import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
-import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
-import lv.javaguru.java2.qwe.core.services.validator.FilterStockByAnyDoubleParameterValidator;
+import lv.javaguru.java2.qwe.core.services.validator.*;
 import lv.javaguru.java2.qwe.ui_actions.data_ui_actions.*;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
@@ -39,11 +37,11 @@ public class ChooseDataMenuUIAction implements UIAction {
                 case "SHOW LIST" -> new ShowListUIAction(
                         new ShowListService(database)).execute();
                 case "FIND SECURITY BY NAME" -> new FindSecurityByNameUIAction(
-                        new FindSecurityByNameService(database)).execute();
+                        new FindSecurityByNameService(database, new FindSecurityByNameValidator())).execute();
                 case "FILTER SECURITIES(STOCKS) BY ANY DOUBLE PARAMETER" -> new FilterStocksByAnyDoubleParameterUIAction(
                         new FilterStocksByAnyDoubleParameterService(database, new FilterStockByAnyDoubleParameterValidator())).execute();
                 case "FILTER SECURITIES(STOCKS) BY MULTIPLE DOUBLE PARAMETERS" -> new FilterStocksByMultipleParametersUIAction(
-                        new FilterStocksByMultipleParametersService(database)).execute();
+                        new FilterStocksByMultipleParametersService(database, new FilterStockByMultipleParametersValidator())).execute();
                 case "FILTER SECURITIES(STOCKS) BY INDUSTRY" -> new FilterStocksByIndustryUIAction(
                         new FilterStocksByIndustryService(database)).execute();
                 default -> dataMenuOpen = false;

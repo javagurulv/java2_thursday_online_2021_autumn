@@ -14,7 +14,7 @@ import static java.util.Map.entry;
 
 public class FilterStockByMultipleParametersRequest {
 
-    private final List<FilterStockByAnyDoubleParameterRequest> requestList;
+    private final List<SecurityRequest> requestList;
     private final List<Predicate<Security>> list = new ArrayList<>();
     private String industryTarget;
     private double marketPriceTarget;
@@ -23,6 +23,7 @@ public class FilterStockByMultipleParametersRequest {
     private final Map<String, Map<String, Predicate<Security>>> map = Map.ofEntries(
             Map.entry("Industry", Map.ofEntries(Map.entry("Industry", security -> security.getIndustry().equals(industryTarget)))),
             Map.entry("Market price", Map.ofEntries(
+                    entry("", security -> true),
                     entry(">", security -> security.getMarketPrice() > marketPriceTarget),
                     entry(">=", security -> security.getMarketPrice() >= marketPriceTarget),
                     entry("<", security -> security.getMarketPrice() < marketPriceTarget),
@@ -30,6 +31,7 @@ public class FilterStockByMultipleParametersRequest {
                     entry("=", security -> security.getMarketPrice() == marketPriceTarget)
             )),
             Map.entry("Dividend", Map.ofEntries(
+                    entry("", security -> true),
                     entry(">", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() > dividendTarget)),
                     entry(">=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() >= dividendTarget)),
                     entry("<", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() < dividendTarget)),
@@ -37,6 +39,7 @@ public class FilterStockByMultipleParametersRequest {
                     entry("=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() == dividendTarget))
             )),
             Map.entry("Risk weight", Map.ofEntries(
+                    entry("", security -> true),
                     entry(">", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() > riskWeightTarget)),
                     entry(">=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() >= riskWeightTarget)),
                     entry("<", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() < riskWeightTarget)),
@@ -45,20 +48,46 @@ public class FilterStockByMultipleParametersRequest {
             )));
 
 
-    public FilterStockByMultipleParametersRequest(List<FilterStockByAnyDoubleParameterRequest> requestList) {
+    public FilterStockByMultipleParametersRequest(List<SecurityRequest> requestList) throws NumberFormatException {
         this.requestList = requestList;
-        setTargets();
+        setTargetsForDouble();
+        setIndustryTarget();
         IntStream.rangeClosed(0, requestList.size() - 1)
-                .filter(i -> requestList.get(i).getParameter() != null)
-                .forEach(i -> list.add(findPredicate(requestList.get(i))));
+                .filter(i -> requestList.get(i).getClass().getSimpleName().equals("FilterStockByAnyDoubleParameterRequest"))
+                .mapToObj(i -> (FilterStockByAnyDoubleParameterRequest) requestList.get(i))
+                .filter(request -> request.getParameter() != null)
+                .forEach(request -> list.add(findPredicateForDouble(request)));
+        IntStream.rangeClosed(0, requestList.size() - 1)
+                .filter(i -> requestList.get(i).getClass().getSimpleName().equals("FilterStockByIndustryRequest"))
+                .mapToObj(i -> (FilterStockByIndustryRequest) requestList.get(i))
+                .filter(request -> request.getIndustry() != null)
+                .forEach(request -> list.add(findPredicateForIndustry(request)));
     }
 
     public List<Predicate<Security>> getList() {
         return list;
     }
 
-    private void setTargets() {
+    public String getIndustryTarget() {
+        return industryTarget;
+    }
+
+    public double getMarketPriceTarget() {
+        return marketPriceTarget;
+    }
+
+    public double getDividendTarget() {
+        return dividendTarget;
+    }
+
+    public double getRiskWeightTarget() {
+        return riskWeightTarget;
+    }
+
+    private void setTargetsForDouble() throws NumberFormatException {
         requestList.stream()
+                .filter(request -> request.getClass().getSimpleName().equals("FilterStockByAnyDoubleParameterRequest"))
+                .map(request -> (FilterStockByAnyDoubleParameterRequest) request)
                 .filter(request -> request.getParameter() != null)
                 .forEach(request -> {
                     double targetValue = Double.parseDouble(request.getTargetAmount());
@@ -70,7 +99,15 @@ public class FilterStockByMultipleParametersRequest {
                 });
     }
 
-    private Predicate<Security> findPredicate(FilterStockByAnyDoubleParameterRequest request) {
+    private void setIndustryTarget() {
+        requestList.stream()
+                .filter(request -> request.getClass().getSimpleName().equals("FilterStockByIndustryRequest"))
+                .map(request -> (FilterStockByIndustryRequest) request)
+                .filter(request -> request.getIndustry() != null)
+                .forEach(request -> industryTarget = request.getIndustry());
+    }
+
+    private Predicate<Security> findPredicateForDouble(FilterStockByAnyDoubleParameterRequest request) {
         if (request.getParameter() == null) {
             return null;
         } else {
@@ -84,20 +121,16 @@ public class FilterStockByMultipleParametersRequest {
         }
     }
 
-    public static void main(String[] args) {
-
-        List<FilterStockByAnyDoubleParameterRequest> requestList = List.of(
-                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "100"),
-                new FilterStockByAnyDoubleParameterRequest(null, null, null),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "0.8")
-        );
-        FilterStockByMultipleParametersRequest multiFilterRequest = new FilterStockByMultipleParametersRequest(requestList);
-        System.out.println("RESULT: " + multiFilterRequest.list.size());
-        System.out.println("MARKET PRICE TARGET: " + multiFilterRequest.marketPriceTarget);
-        System.out.println("DIVIDEND TARGET: " + multiFilterRequest.dividendTarget);
-        System.out.println("RISK WEIGHT TARGET: " + multiFilterRequest.riskWeightTarget);
-
+    private Predicate<Security> findPredicateForIndustry(FilterStockByIndustryRequest request) {
+        if (request.getIndustry() == null) {
+            return null;
+        } else {
+            return map.entrySet().stream()
+                    .filter(entry -> entry.getKey().equals("Industry"))
+                    .map(Map.Entry::getValue)
+                    .map(entry1 -> entry1.get("Industry"))
+                    .findAny().get();
+        }
     }
-
 
 }

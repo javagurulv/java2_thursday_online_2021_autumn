@@ -5,7 +5,12 @@ import lv.javaguru.java2.qwe.Cash;
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.Stock;
 import lv.javaguru.java2.qwe.core.requests.FilterStockByMultipleParametersRequest;
+import lv.javaguru.java2.qwe.core.services.data_services.ImportSecuritiesService;
+import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
+import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +24,21 @@ import static java.util.Map.entry;
 public class DatabaseImpl implements Database {
 
     private final ArrayList<Security> securityList;
+    private File file;
+
+    public DatabaseImpl(File file) {
+        this.securityList = new ArrayList<>();
+        this.file = file;
+        securityList.add(new Cash());
+        file = new File("./team_qwe/src/main/docs/stocks_list_import.txt"); // автоматически импортирует данные в базу
+        ImportSecuritiesService service =
+                new ImportSecuritiesService(this, new AddStockValidator(this), new AddBondValidator(this));
+        try {
+            service.execute(file.getPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public DatabaseImpl() {
         this.securityList = new ArrayList<>();
