@@ -26,11 +26,15 @@ public class FindSecurityByNameUIAction implements UIAction {
         printResponse(response);
     }
 
-
     private void printResponse(FindSecurityByNameResponse response) {
-        if (response.getSecurity() == null) {
+        if (response.getSecurity() == null && !response.hasErrors()) {
             messageDialog("There is no security with such name!");
-        } else {
+        }
+        else if (response.hasErrors()) {
+            messageDialog("FAILED TO FILTER!\n" +
+                    printErrorList(response));
+        }
+        else {
             messageDialog(response.getSecurity().toString());
             System.out.println(response.getSecurity() + "\n");
         }

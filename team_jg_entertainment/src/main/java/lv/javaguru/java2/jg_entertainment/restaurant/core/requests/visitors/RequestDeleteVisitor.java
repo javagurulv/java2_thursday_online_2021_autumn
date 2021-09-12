@@ -1,11 +1,11 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors;
 
-public class DeleteVisitorRequest {
+public class RequestDeleteVisitor {
 
     private Long idVisitor;
     private String nameVisitors;
 
-    public DeleteVisitorRequest(Long idVisitor, String nameVisitors) {
+    public RequestDeleteVisitor(Long idVisitor, String nameVisitors) {
         this.idVisitor = idVisitor;
         this.nameVisitors = nameVisitors;
     }

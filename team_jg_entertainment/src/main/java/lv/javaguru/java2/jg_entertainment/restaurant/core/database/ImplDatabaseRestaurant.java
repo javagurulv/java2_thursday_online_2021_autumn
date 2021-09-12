@@ -3,9 +3,12 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.Visitors;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class ImplDatabaseRestaurant implements DatabaseVisitors {
 
@@ -35,7 +38,7 @@ public class ImplDatabaseRestaurant implements DatabaseVisitors {
     }
 
     @Override
-    public boolean deleteClientWithNameAndId(Long id, String nameVisitor) {
+    public boolean deleteClientWithIDAndName(Long id, String nameVisitor) {
         boolean visitorDeleteFromRestaurantList = false;
         Optional<Visitors> visitorsOptional = clientInRestaurant.stream()
                 .filter(visitors -> visitors.getClientName().equals(nameVisitor) &&
@@ -50,9 +53,14 @@ public class ImplDatabaseRestaurant implements DatabaseVisitors {
 
     @Override
     public List<Visitors> showAllClientsInList() {
-        return clientInRestaurant;
+        return clientInRestaurant.stream()
+                .sorted(Comparator.comparing(Visitors::getClientName).thenComparing(Visitors::getSurname))
+                .collect(toList());
     }
 }
+//sorted(Comparator.comparing(Person::getPersonId).thenComparing(Person::getAge)).forEach(person -> System.out.println(person.getName()));
+
+
 //@Override
 //    public void deleteClientWithId(Long id) {
 //        clientInRestaurant.stream()

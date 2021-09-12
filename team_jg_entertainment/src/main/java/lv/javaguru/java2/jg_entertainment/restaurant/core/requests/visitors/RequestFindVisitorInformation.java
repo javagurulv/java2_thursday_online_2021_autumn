@@ -1,11 +1,11 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors;
 
-public class FindVisitorInformationRequest {
+public class RequestFindVisitorInformation {
 
     private String name;
     private Long idVisitors;
 
-    public FindVisitorInformationRequest(Long idVisitors, String name) {
+    public RequestFindVisitorInformation(Long idVisitors, String name) {
         this.name = name;
         this.idVisitors = idVisitors;
     }

@@ -4,21 +4,34 @@ import lv.javaguru.java2.qwe.Bond;
 import lv.javaguru.java2.qwe.Cash;
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.Stock;
+import lv.javaguru.java2.qwe.core.requests.FilterStockByMultipleParametersRequest;
+import lv.javaguru.java2.qwe.core.services.data_services.ImportSecuritiesService;
+import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
+import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Predicate;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.util.Map.entry;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
 public class DatabaseImpl implements Database {
 
     private final ArrayList<Security> securityList;
+    private File file;
+
+    public DatabaseImpl(File file) {
+        this.securityList = new ArrayList<>();
+        this.file = file;
+        securityList.add(new Cash());
+        file = new File("./team_qwe/src/main/docs/stocks_list_import.txt"); // автоматически импортирует данные в базу
+        ImportSecuritiesService service =
+                new ImportSecuritiesService(this, new AddStockValidator(this), new AddBondValidator(this));
+        try {
+            service.execute(file.getPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public DatabaseImpl() {
         this.securityList = new ArrayList<>();
@@ -58,72 +71,43 @@ public class DatabaseImpl implements Database {
     }
 
     @Override
-    public List<Security> filterStocksByAnyDoubleParameter(String parameter, String operator, double target)
-            throws NumberFormatException {
-        Map<String, Predicate<Security>> map;
-        switch (parameter) {
-            case "Market price" -> map = getMarketPricePredicate(target);
-            case "Dividend" -> map = getDividendPredicate(target);
-            default -> map = getRiskWeightPredicate(target);
+    public final List<Security> filterStocksByMultipleParameters(List<Security> list,
+                                                                 FilterStockByMultipleParametersRequest request, int i) {
+        List<Security> nextList = list;
+        nextList = nextList.stream()
+                .filter(security -> security.getClass().getSimpleName().equals("Stock"))
+                .filter(request.getList().get(i))
+                .collect(Collectors.toList());
+        i++;
+        if (i == request.getList().size()) {
+            sortBy(nextList, request);
+            return nextList;
         }
-
-        return securityList.stream()
-                .filter(security -> security.getClass().getSimpleName().equals("Stock"))
-                .map(security -> (Stock) security)
-                .filter(map.get(operator))
-                .collect(Collectors.toList());
+        return filterStocksByMultipleParameters(nextList, request, i);
     }
 
-    @Override
-    public List<Security> filterStocksByIndustry(String industry) {
-        return securityList.stream()
-                .filter(security -> security.getClass().getSimpleName().equals("Stock"))
-                .filter(security -> security.getIndustry().equals(industry))
-                .map(security -> (Stock) security)
-                .collect(Collectors.toList());
+    private void sortBy(List<Security> list, FilterStockByMultipleParametersRequest request) {
+        if (request.getOrderBy() != null && !request.getOrderBy().isEmpty() && request.getOrderDirection().equals("ASCENDING")) {
+            list.sort((Comparator<? super Security>) getComparator(list, request));
+        }
+        if (request.getOrderBy() != null && !request.getOrderBy().isEmpty() && request.getOrderDirection().equals("DESCENDING")) {
+            list.sort((Comparator<? super Security>) getComparator(list, request).reversed());
+        }
     }
 
-    private Map<String, Predicate<Security>> getMarketPricePredicate(double target) {
-        return Map.ofEntries(
-                entry("", security -> true),
-                entry(">", security -> security.getMarketPrice() > target),
-                entry(">=", security -> security.getMarketPrice() >= target),
-                entry("<", security -> security.getMarketPrice() < target),
-                entry("<=", security -> security.getMarketPrice() <= target),
-                entry("=", security -> security.getMarketPrice() == target)
+    private Comparator<? extends Security> getComparator(List<Security> list, FilterStockByMultipleParametersRequest request) {
+        Map<String, Comparator<? extends Security>> map = Map.ofEntries(
+                Map.entry("Name", Comparator.comparing(Security::getName)),
+                Map.entry("Industry", Comparator.comparing(Security::getIndustry)),
+                Map.entry("Currency", Comparator.comparing(Security::getCurrency)),
+                Map.entry("Market price", Comparator.comparing(Security::getMarketPrice)),
+                Map.entry("Dividend", Comparator.comparing(Stock::getDividends)),
+                Map.entry("Risk weight", Comparator.comparing(Stock::getRiskWeight))
         );
-    }
-
-    private Map<String, Predicate<Security>> getDividendPredicate(double target) {
-        return Map.ofEntries(
-                entry("", security -> true),
-                entry(">", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getDividends() > target)),
-                entry(">=", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getDividends() >= target)),
-                entry("<", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getDividends() < target)),
-                entry("<=", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getDividends() <= target)),
-                entry("=", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getDividends() == target))
-        );
-    }
-
-    private Map<String, Predicate<Security>> getRiskWeightPredicate(double target) {
-        return Map.ofEntries(
-                entry("", security -> true),
-                entry(">", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getRiskWeight() > target)),
-                entry(">=", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getRiskWeight() >= target)),
-                entry("<", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getRiskWeight() < target)),
-                entry("<=", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getRiskWeight() <= target)),
-                entry("=", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getRiskWeight() == target))
-        );
+        return map.entrySet().stream()
+                .filter(entry -> entry.getKey().equals(request.getOrderBy()))
+                .map(Map.Entry::getValue)
+                .findAny().get();
     }
 
 }

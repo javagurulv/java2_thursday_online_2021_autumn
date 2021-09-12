@@ -6,10 +6,7 @@ import java.util.List;
 
 public class ShowListResponse {
 
-    private List<Security> list;
-
-    public ShowListResponse() {
-    }
+    private final List<Security> list;
 
     public ShowListResponse(List<Security> list) {
         this.list = list;

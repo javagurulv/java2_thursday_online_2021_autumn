@@ -1,6 +1,6 @@
 package lv.javaguru.java2.core.validations;
 
-import lv.javaguru.java2.core.requests.Find.FindSpecialistRequest;
+import lv.javaguru.java2.core.requests.Find.FindClientsRequest;
 import lv.javaguru.java2.core.requests.Find.Ordering;
 import lv.javaguru.java2.core.requests.Find.Paging;
 import lv.javaguru.java2.core.responce.CoreError;
@@ -9,24 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class FindSpecialistValidator {
+public class FindClientsRequestValidator {
 
-
-    public List<CoreError> validate(FindSpecialistRequest request) {
-
+    public List<CoreError> validate(FindClientsRequest request) {
         List<CoreError> errors = new ArrayList<>();
-//        validateId(request).ifPresent(errors::add);
-//        validateName(request).ifPresent(errors::add);
-//        validateSurname(request).ifPresent(errors::add);
-//        validateProfession(request).ifPresent(errors::add);
         errors.addAll(validateSearchFields(request));
-        //errors.addAll(validateProfessionNotContainsNumbers(request));
         if (request.getOrdering() != null) {
             validateOrderBy(request.getOrdering()).ifPresent(errors::add);
             validateOrderDirection(request.getOrdering()).ifPresent(errors::add);
             validateMandatoryOrderBy(request.getOrdering()).ifPresent(errors::add);
             validateMandatoryOrderDirection(request.getOrdering()).ifPresent(errors::add);
         }
+
         if (request.getPaging() != null) {
             validatePageNumber(request.getPaging()).ifPresent(errors::add);
             validatePageSize(request.getPaging()).ifPresent(errors::add);
@@ -34,63 +28,44 @@ public class FindSpecialistValidator {
             validateMandatoryPageSize(request.getPaging()).ifPresent(errors::add);
         }
         return errors;
-
-    }
-    private List<CoreError> validateSearchFields(FindSpecialistRequest request) {
-        List<CoreError> errors = new ArrayList<>();
-        if (isEmpty(request.getSpecialistName()) && isEmpty(request.getSpecialistSurname())&& isEmpty(request.getSpecialistProfession())) {
-            errors.add(new CoreError("specialistName", "Must not be empty!"));
-            errors.add(new CoreError("specialistSurname", "Must not be empty!"));
-            errors.add(new CoreError("specialistProfession", "Must not be empty!"));
-        }
-            return errors;
-    }
-    private boolean isEmpty(String str) {
-        return str == null || str.isEmpty();
     }
 
 
-//    private Optional<CoreError> validateId(FindSpecialistRequest request) {
-//        return (isEmpty(String.valueOf(request.getSpecialistId())))
-//                ? Optional.of(new CoreError("ID", "Must not be empty!"))
-//               : Optional.empty();
-//    }
-//
-//
-//    private Optional<CoreError> validateName(FindSpecialistRequest request) {
-//        return (isEmpty(request.getSpecialistName()))
+//    private Optional<CoreError> validateName(FindClientsRequest request) {
+//        return (request.getClientName() != null)
 //                ? Optional.of(new CoreError("NAME", "Must not be empty!"))
 //                : Optional.empty();
 //    }
 //
-//
-//    private Optional<CoreError> validateSurname(FindSpecialistRequest request) {
-//        return (isEmpty(request.getSpecialistSurname()))
+//    private Optional<CoreError> validateSurname(FindClientsRequest request) {
+//        return (request.getClientSurname() == null)
 //                ? Optional.of(new CoreError("SURNAME", "Must not be empty!"))
 //                : Optional.empty();
 //    }
-//
-//    private Optional<CoreError> validateProfession(FindSpecialistRequest request) {
-//        return (isEmpty(request.getSpecialistProfession()))
-//                ? Optional.of(new CoreError("Profession", "Must not be empty!"))
-//                : Optional.empty();
-   // }
 
-//    private List<CoreError> validateProfessionNotContainsNumbers(FindSpecialistRequest request) {
-//        List<CoreError> errors = new ArrayList<>();
-//        if (request.getSpecialistProfession().matches("[0-9]+"))
-//            errors.add(new CoreError("specialistProfession", "Doesn't contains numbers!"));
-//
-//        return errors;
-//    }
+    private List<CoreError> validateSearchFields(FindClientsRequest request) {
 
+        List<CoreError> errors = new ArrayList<>();
 
+        if (isIdEmpty(request.getClientId())) {
+            errors.add(new CoreError("ID", "Must not be empty!"));
+        }
+
+        if (isNameOrSurnameEmpty(request.getClientName())) {
+            errors.add(new CoreError("NAME", "Must not be empty!"));
+        }
+
+        if (isNameOrSurnameEmpty(request.getClientSurname())) {
+            errors.add(new CoreError("SURNAME", "Must not be empty!"));
+        }
+        return errors;
+    }
 
 
     private Optional<CoreError> validateOrderBy(Ordering ordering) {
         return (ordering.getOrderBy() != null
-                && !(ordering.getOrderBy().equals("specialistName") || ordering.getOrderBy().equals("specialistSurname") || ordering.getOrderBy().equals("specialistProfession")))
-                ? Optional.of(new CoreError("orderBy", "Must contain 'specialistName' or 'specialistSurname' or 'specialistProfession' only!"))
+                && !(ordering.getOrderBy().equals("ID") || ordering.getOrderBy().equals("NAME") || ordering.getOrderBy().equals("SURNAME")))
+                ? Optional.of(new CoreError("orderBy", "Must contain id,name or surname"))
                 : Optional.empty();
     }
 
@@ -138,4 +113,15 @@ public class FindSpecialistValidator {
                 ? Optional.of(new CoreError("pageSize", "Must not be empty!"))
                 : Optional.empty();
     }
+
+
+    private boolean isNameOrSurnameEmpty(String str) {
+        return str == null || str.isEmpty();
+    }
+
+    private boolean isIdEmpty(Long id) {
+        return id == null;
+    }
+
+
 }
