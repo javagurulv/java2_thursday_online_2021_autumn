@@ -56,17 +56,6 @@ public class Application { private static final Database database = new InMemory
     private static final RemoveAdvertismentService deleteAdvertismentService = new RemoveAdvertismentService(database,removeAdvertismentValidator);
     private static final UIAction deleteAdvertisment = new RemoveAdvertismentUIAction(deleteAdvertismentService);
 
-
-    private static FindSpecialistByProfessionValidator findSpecialistByProfessionValidator = new FindSpecialistByProfessionValidator();
-    private static final FindSpecialistByProfessionService findSpecialistByProfessionService = new FindSpecialistByProfessionService(database,findSpecialistByProfessionValidator);
-    private static final UIAction findSpecialistByProfession = new FindSpecialistByProfessionUIAction(findSpecialistByProfessionService);
-
-    private static final FindClientByIdService findClientByIdService = new FindClientByIdService(database);
-    private static final UIAction findClientByIdUI = new FindClientByIdUIAction(findClientByIdService);
-
-    private static final FindClientByNameService findClientByNameService = new FindClientByNameService(database);
-    private static final UIAction findClientByNameUI = new FindClientByNameUIAction(findClientByNameService);
-
     private static final FindSpecialistValidator findSpecialistValidator = new FindSpecialistValidator();
     private static final FindSpecialistService findSpecialistService = new FindSpecialistService(database,findSpecialistValidator);
     private static final UIAction findSpecialist = new FindSpecialistUIAction(findSpecialistService);
