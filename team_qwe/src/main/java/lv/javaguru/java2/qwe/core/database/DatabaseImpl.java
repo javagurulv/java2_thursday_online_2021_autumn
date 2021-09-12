@@ -4,6 +4,7 @@ import lv.javaguru.java2.qwe.Bond;
 import lv.javaguru.java2.qwe.Cash;
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.Stock;
+import lv.javaguru.java2.qwe.core.requests.AddMultiFilterRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +82,21 @@ public class DatabaseImpl implements Database {
                 .filter(security -> security.getIndustry().equals(industry))
                 .map(security -> (Stock) security)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public final List<Security> filterStocksByMultipleParameters(List<Security> list,
+                                                                 AddMultiFilterRequest request, int i) {
+        List<Security> nextList = list;
+        nextList = nextList.stream()
+                .filter(security -> security.getClass().getSimpleName().equals("Stock"))
+                .filter(request.getList().get(i))
+                .collect(Collectors.toList());
+        i++;
+        if (i == request.getList().size()) {
+            return nextList;
+        }
+        return filterStocksByMultipleParameters(nextList, request, i);
     }
 
     private Map<String, Predicate<Security>> getMarketPricePredicate(double target) {
