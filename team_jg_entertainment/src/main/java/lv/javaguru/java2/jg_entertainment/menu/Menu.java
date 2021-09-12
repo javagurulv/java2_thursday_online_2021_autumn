@@ -8,6 +8,10 @@ public class Menu {
     private String description;
     private int price;
 
+    public Menu(int number) {
+        this.number = number;
+    }
+
     public Menu(String title, int number, String description, int price) {
         this.title = title;
         this.number = number;
