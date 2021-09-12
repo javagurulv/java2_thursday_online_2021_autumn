@@ -1,10 +1,8 @@
 package lv.javaguru.java2.qwe.core.services.data_services;
 
-import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.core.database.Database;
+import lv.javaguru.java2.qwe.core.requests.ShowListRequest;
 import lv.javaguru.java2.qwe.core.responses.ShowListResponse;
-
-import java.util.List;
 
 public class ShowListService {
 
@@ -18,7 +16,7 @@ public class ShowListService {
         return database;
     }
 
-    public ShowListResponse execute() {
+    public ShowListResponse execute(ShowListRequest request) {
         return new ShowListResponse(database.showListOfSecurities());
     }
 
