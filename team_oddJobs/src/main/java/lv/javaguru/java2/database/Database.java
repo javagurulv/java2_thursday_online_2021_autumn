@@ -17,17 +17,31 @@ public interface Database {
 
     boolean removeClient(Long id, String name, String surName);
 
-    void findSpecialistByProfession(String profession);
 
-    void findClientById(Long id);
-    void findClientByName(String name);
-    void findClientBySurname(String surName);
+    List<Client> findClientsById(Long clientId);
+
+    List<Client> findClientsByName(String clientName);
+
+    List<Client> findClientBySurname(String clientSurname);
+
+    List<Client> findClientByIdAndNameAndSurname(Long id, String clientName, String clientSurname);
+
+    List<Specialist> findSpecialistById(Long specialistId);
+
+    List<Specialist> findSpecialistByName(String specialistName);
+
+    List<Specialist> findSpecialistBySurname(String specialistSurname);
+
+    List<Specialist> findSpecialistByProfession(String profession);
+
+    List<Specialist> findSpecialistByIdAndNameAndSurnameAndProfession(Long specialistId, String specialistName, String specialistSurname, String specialistProfession);
 
     void addAdvertisement(Advertisement advBoard);
+
     boolean removeAdvertisement(Long advId, String advBoardTitle);
 
-//    void findClientBySearchCriteria(FindClientByIdService findClientBySearchCriteria);
-//    void findSpecialistBySearchCriteria (FindSpecialistBySearchCriteriaService findSpecialistBySearchCriteriaService)
+    void findAdvertisementByTitle(String advTitle);
+
 
     List<Specialist> getAllSpecialist();
 

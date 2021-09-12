@@ -5,6 +5,8 @@ import lv.javaguru.java2.hospital.domain.Patient;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 public class PatientDatabaseImpl implements PatientDatabase {
 
@@ -15,18 +17,19 @@ public class PatientDatabaseImpl implements PatientDatabase {
         patientsList.add(patient);
     }
 
-    @Override
-    public void findById(int id) {
+   @Override
+    public Optional<Patient> findById(Long id) {
         for (Patient patient : patientsList) {
-            if (id == patient.getId()) {
-                System.out.println(patient);
+            if (Objects.equals(id, patient.getId())) {
+                return Optional.of(patient);
             }
         }
+        return Optional.empty();
     }
 
     @Override
-    public void deleteById(int id) {
-        patientsList.removeIf(patient -> patient.getId() == id);
+    public void deleteById(Long id) {
+        patientsList.removeIf(patient -> Objects.equals(patient.getId(), id));
     }
 
     @Override
@@ -35,22 +38,22 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public void editActions(int patientID, int userInput, String input) {
+    public void editActions(Long patientID, int userInput, String input) {
         for (Patient patient : patientsList) {
-            if (patient.getId() == patientID) {
+            if (Objects.equals(patient.getId(), patientID)) {
                 switch (userInput) {
                     case 1 -> patient.setName(input);
                     case 2 -> patient.setSurname(input);
-                    case 3 -> patient.setDateOut(LocalDate.now());
+                    case 3 -> patient.setPersonalCode(input);
                 }
             }
         }
     }
 
     @Override
-    public boolean patientExists(int id) {
+    public boolean patientExists(Long id) {
         for (Patient patient : patientsList) {
-            if (patient.getId() == id) {
+            if (Objects.equals(patient.getId(), id)) {
                 return true;
             }
         }

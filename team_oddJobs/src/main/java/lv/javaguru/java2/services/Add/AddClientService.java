@@ -23,7 +23,7 @@ public class AddClientService {
         if (!errors.isEmpty()) {
             return new AddClientResponse(errors);
         }
-        Client client = new Client(request.getName(), request.getSurname());
+        Client client = new Client(request.getName(),request.getSurname());
         database.addClient(client);
         return new AddClientResponse(client);
 

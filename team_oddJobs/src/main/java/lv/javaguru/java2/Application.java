@@ -27,9 +27,7 @@ import lv.javaguru.java2.services.Remove.RemoveClientService;
 import lv.javaguru.java2.services.Remove.RemoveSpecialistService;
 
 import java.util.Scanner;
-
-public class Application {
-    private static final Database database = new InMemoryDatabaseImpl();
+public class Application { private static final Database database = new InMemoryDatabaseImpl();
 
     private static AddClientValidator addClientValidator = new AddClientValidator();
     private static final AddClientService addClientService = new AddClientService(database,addClientValidator);
@@ -50,6 +48,10 @@ public class Application {
     private static final RemoveSpecialistService deleteSpecialistService = new RemoveSpecialistService(database,removeSpecialistValidator);
     private static final UIAction deleteSpecialist = new RemoveSpecialistUIAction(deleteSpecialistService);
 
+    private static final FindClientsRequestValidator findClientsRequestValidator = new FindClientsRequestValidator();
+    private static final FindClientsService findClientBySearchCriteria = new FindClientsService(database,findClientsRequestValidator);
+    private static final UIAction findClientBySearch = new FindClientsUIAction(findClientBySearchCriteria);
+
     private static RemoveAdvertismentValidator removeAdvertismentValidator = new RemoveAdvertismentValidator();
     private static final RemoveAdvertismentService deleteAdvertismentService = new RemoveAdvertismentService(database,removeAdvertismentValidator);
     private static final UIAction deleteAdvertisment = new RemoveAdvertismentUIAction(deleteAdvertismentService);
@@ -65,11 +67,9 @@ public class Application {
     private static final FindClientByNameService findClientByNameService = new FindClientByNameService(database);
     private static final UIAction findClientByNameUI = new FindClientByNameUIAction(findClientByNameService);
 
-    private static final FindClientBySurnameService findClientBySurname = new FindClientBySurnameService(database);
-    private static final UIAction findClientBySurnameUI = new FindClientBySurnameUIAction(findClientBySurname);
-
-    private static final FindClientBySearchCriteriaService findClientBySearchCriteria = new FindClientBySearchCriteriaService(database);
-    private static final UIAction findClientBySearch = new FindClientBySearchCriteriaUIAction(findClientByIdService, findClientByNameService, findClientBySurname);
+    private static final FindSpecialistValidator findSpecialistValidator = new FindSpecialistValidator();
+    private static final FindSpecialistService findSpecialistService = new FindSpecialistService(database,findSpecialistValidator);
+    private static final UIAction findSpecialist = new FindSpecialistUIAction(findSpecialistService);
 
 
     private static final GetAllSpecialistsService getAllSpecialistsService = new GetAllSpecialistsService(database);
@@ -103,7 +103,7 @@ public class Application {
         System.out.println("1.  Create client account");
         System.out.println("2.  Create specialist account");
         System.out.println("3.  Create advertisement");
-        System.out.println("4.  Find specialist by profession");
+        System.out.println("4.  Find specialist by search criteria");
         System.out.println("5.  Find client by search criteria");
         System.out.println("6.  Show all clients");
         System.out.println("7.  Show all specialists");
@@ -129,8 +129,9 @@ public class Application {
                 addAdvertisement.execute();
                 break;
             }
+
             case 4: {
-                findSpecialistByProfession.execute();
+                findSpecialist.execute();
                 break;
             }
 
