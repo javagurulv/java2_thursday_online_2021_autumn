@@ -25,9 +25,7 @@ import lv.javaguru.java2.services.Remove.RemoveClientService;
 import lv.javaguru.java2.services.Remove.RemoveSpecialistService;
 
 import java.util.Scanner;
-
-public class Application {
-    private static final Database database = new InMemoryDatabaseImpl();
+public class Application { private static final Database database = new InMemoryDatabaseImpl();
 
     private static AddClientValidator addClientValidator = new AddClientValidator();
     private static final AddClientService addClientService = new AddClientService(database,addClientValidator);
@@ -48,7 +46,7 @@ public class Application {
     private static final RemoveSpecialistService deleteSpecialistService = new RemoveSpecialistService(database,removeSpecialistValidator);
     private static final UIAction deleteSpecialist = new RemoveSpecialistUIAction(deleteSpecialistService);
 
-    private static final FindClientsValidator findClientsRequestValidator = new FindClientsValidator();
+    private static final FindClientsRequestValidator findClientsRequestValidator = new FindClientsRequestValidator();
     private static final FindClientsService findClientBySearchCriteria = new FindClientsService(database,findClientsRequestValidator);
     private static final UIAction findClientBySearch = new FindClientsUIAction(findClientBySearchCriteria);
 
