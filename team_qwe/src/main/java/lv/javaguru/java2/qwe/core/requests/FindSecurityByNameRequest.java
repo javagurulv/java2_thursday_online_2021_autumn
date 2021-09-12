@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.requests;
 
-public class FindSecurityByNameRequest {
+public class FindSecurityByNameRequest extends SecurityRequest {
 
     private final String name;
 

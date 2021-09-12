@@ -18,9 +18,9 @@ public class ChooseDataMenuUIAction implements UIAction {
     @Override
     public void execute() {
         String[] dataMenu = {"IMPORT DATA FROM FILE", "ADD STOCK", "ADD BOND", "REMOVE SECURITY",
-                "SHOW LIST", "FIND SECURITY BY NAME", "FILTER SECURITIES(STOCKS) BY ANY DOUBLE PARAMETER",
-                "FILTER SECURITIES(STOCKS) BY MULTIPLE DOUBLE PARAMETERS",
-                "FILTER SECURITIES(STOCKS) BY INDUSTRY", "RETURN TO MAIN MENU"};
+                "SHOW LIST", "FIND SECURITY BY NAME", /*"FILTER SECURITIES(STOCKS) BY ANY DOUBLE PARAMETER",*/
+                "FILTER SECURITIES(STOCKS) BY MULTIPLE PARAMETERS",
+                /*"FILTER SECURITIES(STOCKS) BY INDUSTRY",*/ "RETURN TO MAIN MENU"};
 
         boolean dataMenuOpen = true;
         while (dataMenuOpen) {
@@ -38,12 +38,12 @@ public class ChooseDataMenuUIAction implements UIAction {
                         new ShowListService(database)).execute();
                 case "FIND SECURITY BY NAME" -> new FindSecurityByNameUIAction(
                         new FindSecurityByNameService(database, new FindSecurityByNameValidator())).execute();
-                case "FILTER SECURITIES(STOCKS) BY ANY DOUBLE PARAMETER" -> new FilterStocksByAnyDoubleParameterUIAction(
-                        new FilterStocksByAnyDoubleParameterService(database, new FilterStockByAnyDoubleParameterValidator())).execute();
-                case "FILTER SECURITIES(STOCKS) BY MULTIPLE DOUBLE PARAMETERS" -> new FilterStocksByMultipleParametersUIAction(
+/*                case "FILTER SECURITIES(STOCKS) BY ANY DOUBLE PARAMETER" -> new FilterStocksByAnyDoubleParameterUIAction(
+                        new FilterStocksByAnyDoubleParameterService(database, new FilterStockByAnyDoubleParameterValidator())).execute();*/
+                case "FILTER SECURITIES(STOCKS) BY MULTIPLE PARAMETERS" -> new FilterStocksByMultipleParametersUIAction(
                         new FilterStocksByMultipleParametersService(database, new FilterStockByMultipleParametersValidator())).execute();
-                case "FILTER SECURITIES(STOCKS) BY INDUSTRY" -> new FilterStocksByIndustryUIAction(
-                        new FilterStocksByIndustryService(database)).execute();
+/*                case "FILTER SECURITIES(STOCKS) BY INDUSTRY" -> new FilterStocksByIndustryUIAction(
+                        new FilterStocksByIndustryService(database)).execute();*/
                 default -> dataMenuOpen = false;
             }
         }
