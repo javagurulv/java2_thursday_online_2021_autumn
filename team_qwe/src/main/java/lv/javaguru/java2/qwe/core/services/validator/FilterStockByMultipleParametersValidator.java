@@ -22,7 +22,11 @@ public class FilterStockByMultipleParametersValidator {
             entry(request -> request.getRiskWeightTarget() < 0,
                     new CoreError("Risk weight target", "cannot be negative!")),
             entry(request -> request.getIndustryTarget() != null && request.getIndustryTarget().isEmpty(),
-                    new CoreError("Industry target", "must not be empty!"))
+                    new CoreError("Industry target", "must not be empty!")),
+            entry(request -> request.getOrderBy().isEmpty() && !request.getOrderDirection().isEmpty(),
+                    new CoreError("Ordering", "both fields must be empty or filled!")),
+            entry(request -> !request.getOrderBy().isEmpty() && request.getOrderDirection().isEmpty(),
+                    new CoreError("Ordering", "both fields must be empty or filled!"))
     );
 
     public List<CoreError> validate(FilterStockByMultipleParametersRequest request) {

@@ -16,42 +16,20 @@ public class FilterStockByMultipleParametersRequest {
 
     private final List<SecurityRequest> requestList;
     private final List<Predicate<Security>> list = new ArrayList<>();
+    private String orderBy = "";
+    private String orderDirection = "";
     private String industryTarget;
     private double marketPriceTarget;
     private double dividendTarget;
     private double riskWeightTarget;
-    private final Map<String, Map<String, Predicate<Security>>> map = Map.ofEntries(
-            Map.entry("Industry", Map.ofEntries(Map.entry("Industry", security -> security.getIndustry().equals(industryTarget)))),
-            Map.entry("Market price", Map.ofEntries(
-                    entry("", security -> true),
-                    entry(">", security -> security.getMarketPrice() > marketPriceTarget),
-                    entry(">=", security -> security.getMarketPrice() >= marketPriceTarget),
-                    entry("<", security -> security.getMarketPrice() < marketPriceTarget),
-                    entry("<=", security -> security.getMarketPrice() <= marketPriceTarget),
-                    entry("=", security -> security.getMarketPrice() == marketPriceTarget)
-            )),
-            Map.entry("Dividend", Map.ofEntries(
-                    entry("", security -> true),
-                    entry(">", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() > dividendTarget)),
-                    entry(">=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() >= dividendTarget)),
-                    entry("<", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() < dividendTarget)),
-                    entry("<=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() <= dividendTarget)),
-                    entry("=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() == dividendTarget))
-            )),
-            Map.entry("Risk weight", Map.ofEntries(
-                    entry("", security -> true),
-                    entry(">", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() > riskWeightTarget)),
-                    entry(">=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() >= riskWeightTarget)),
-                    entry("<", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() < riskWeightTarget)),
-                    entry("<=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() <= riskWeightTarget)),
-                    entry("=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() == riskWeightTarget))
-            )));
-
+    private final Map<String, Map<String, Predicate<Security>>> predicateMap;
 
     public FilterStockByMultipleParametersRequest(List<SecurityRequest> requestList) throws NumberFormatException {
         this.requestList = requestList;
+        this.predicateMap = getPredicateMap();
         setTargetsForDouble();
         setIndustryTarget();
+        setOrdering();
         IntStream.rangeClosed(0, requestList.size() - 1)
                 .filter(i -> requestList.get(i).getClass().getSimpleName().equals("FilterStockByAnyDoubleParameterRequest"))
                 .mapToObj(i -> (FilterStockByAnyDoubleParameterRequest) requestList.get(i))
@@ -84,6 +62,14 @@ public class FilterStockByMultipleParametersRequest {
         return riskWeightTarget;
     }
 
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public String getOrderDirection() {
+        return orderDirection;
+    }
+
     private void setTargetsForDouble() throws NumberFormatException {
         requestList.stream()
                 .filter(request -> request.getClass().getSimpleName().equals("FilterStockByAnyDoubleParameterRequest"))
@@ -107,11 +93,22 @@ public class FilterStockByMultipleParametersRequest {
                 .forEach(request -> industryTarget = request.getIndustry());
     }
 
+    private void setOrdering() {
+        requestList.stream()
+                .filter(request -> request.getClass().getSimpleName().equals("OrderingRequest"))
+                .map(request -> (OrderingRequest) request)
+                .filter(request -> request.getOrderBy() != null && request.getOrderDirection() != null)
+                .forEach(request -> {
+                    orderBy = request.getOrderBy();
+                    orderDirection = request.getOrderDirection();
+                });
+    }
+
     private Predicate<Security> findPredicateForDouble(FilterStockByAnyDoubleParameterRequest request) {
         if (request.getParameter() == null) {
             return null;
         } else {
-            return map.entrySet().stream()
+            return predicateMap.entrySet().stream()
                     .filter(entry -> entry.getKey().equals(request.getParameter()))
                     .map(Map.Entry::getValue)
                     .flatMap(entry1 -> entry1.entrySet().stream()
@@ -125,12 +122,41 @@ public class FilterStockByMultipleParametersRequest {
         if (request.getIndustry() == null) {
             return null;
         } else {
-            return map.entrySet().stream()
+            return predicateMap.entrySet().stream()
                     .filter(entry -> entry.getKey().equals("Industry"))
                     .map(Map.Entry::getValue)
                     .map(entry1 -> entry1.get("Industry"))
                     .findAny().get();
         }
+    }
+
+    private Map<String, Map<String, Predicate<Security>>> getPredicateMap() {
+        return Map.ofEntries(
+                Map.entry("Industry", Map.ofEntries(Map.entry("Industry", security -> security.getIndustry().equals(industryTarget)))),
+                Map.entry("Market price", Map.ofEntries(
+                        entry("", security -> true),
+                        entry(">", security -> security.getMarketPrice() > marketPriceTarget),
+                        entry(">=", security -> security.getMarketPrice() >= marketPriceTarget),
+                        entry("<", security -> security.getMarketPrice() < marketPriceTarget),
+                        entry("<=", security -> security.getMarketPrice() <= marketPriceTarget),
+                        entry("=", security -> security.getMarketPrice() == marketPriceTarget)
+                )),
+                Map.entry("Dividend", Map.ofEntries(
+                        entry("", security -> true),
+                        entry(">", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() > dividendTarget)),
+                        entry(">=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() >= dividendTarget)),
+                        entry("<", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() < dividendTarget)),
+                        entry("<=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() <= dividendTarget)),
+                        entry("=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() == dividendTarget))
+                )),
+                Map.entry("Risk weight", Map.ofEntries(
+                        entry("", security -> true),
+                        entry(">", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() > riskWeightTarget)),
+                        entry(">=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() >= riskWeightTarget)),
+                        entry("<", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() < riskWeightTarget)),
+                        entry("<=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() <= riskWeightTarget)),
+                        entry("=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() == riskWeightTarget))
+                )));
     }
 
 }

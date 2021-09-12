@@ -1,9 +1,6 @@
 package lv.javaguru.java2.qwe.ui_actions.data_ui_actions;
 
-import lv.javaguru.java2.qwe.core.requests.FilterStockByIndustryRequest;
-import lv.javaguru.java2.qwe.core.requests.FilterStockByMultipleParametersRequest;
-import lv.javaguru.java2.qwe.core.requests.FilterStockByAnyDoubleParameterRequest;
-import lv.javaguru.java2.qwe.core.requests.SecurityRequest;
+import lv.javaguru.java2.qwe.core.requests.*;
 import lv.javaguru.java2.qwe.core.responses.FilterStockByMultipleParametersResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.FilterStocksByMultipleParametersService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
@@ -72,6 +69,15 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
                 .forEach(i -> requestList.add(new FilterStockByIndustryRequest(
                         inputDialog("Choose industry:", "FILTER", industries)
                 )));
+        String orderBy = inputDialog(
+                "Choose parameter:", "SORTING", new String[]
+                        {"Name", "Industry", "Currency", "Market price", "Dividend", "Risk weight"});
+        String orderDirection = inputDialog(
+                "Choose direction:", "SORTING", new String[]{"ASCENDING", "DESCENDING"}
+        );
+//        if (!orderBy.isEmpty() && !orderDirection.isEmpty()) {
+            requestList.add(new OrderingRequest(orderBy, orderDirection));
+//        }
         return requestList;
     }
 

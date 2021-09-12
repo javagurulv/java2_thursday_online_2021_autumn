@@ -11,9 +11,7 @@ import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class DatabaseImpl implements Database {
@@ -82,9 +80,34 @@ public class DatabaseImpl implements Database {
                 .collect(Collectors.toList());
         i++;
         if (i == request.getList().size()) {
+            sortBy(nextList, request);
             return nextList;
         }
         return filterStocksByMultipleParameters(nextList, request, i);
+    }
+
+    private void sortBy(List<Security> list, FilterStockByMultipleParametersRequest request) {
+        if (request.getOrderBy() != null && !request.getOrderBy().isEmpty() && request.getOrderDirection().equals("ASCENDING")) {
+            list.sort((Comparator<? super Security>) getComparator(list, request));
+        }
+        if (request.getOrderBy() != null && !request.getOrderBy().isEmpty() && request.getOrderDirection().equals("DESCENDING")) {
+            list.sort((Comparator<? super Security>) getComparator(list, request).reversed());
+        }
+    }
+
+    private Comparator<? extends Security> getComparator(List<Security> list, FilterStockByMultipleParametersRequest request) {
+        Map<String, Comparator<? extends Security>> map = Map.ofEntries(
+                Map.entry("Name", Comparator.comparing(Security::getName)),
+                Map.entry("Industry", Comparator.comparing(Security::getIndustry)),
+                Map.entry("Currency", Comparator.comparing(Security::getCurrency)),
+                Map.entry("Market price", Comparator.comparing(Security::getMarketPrice)),
+                Map.entry("Dividend", Comparator.comparing(Stock::getDividends)),
+                Map.entry("Risk weight", Comparator.comparing(Stock::getRiskWeight))
+        );
+        return map.entrySet().stream()
+                .filter(entry -> entry.getKey().equals(request.getOrderBy()))
+                .map(Map.Entry::getValue)
+                .findAny().get();
     }
 
 }

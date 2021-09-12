@@ -1,9 +1,6 @@
 package lv.javaguru.java2.qwe.core.services.validator;
 
-import lv.javaguru.java2.qwe.core.requests.FilterStockByAnyDoubleParameterRequest;
-import lv.javaguru.java2.qwe.core.requests.FilterStockByIndustryRequest;
-import lv.javaguru.java2.qwe.core.requests.FilterStockByMultipleParametersRequest;
-import lv.javaguru.java2.qwe.core.requests.SecurityRequest;
+import lv.javaguru.java2.qwe.core.requests.*;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import org.junit.Test;
 
@@ -122,6 +119,38 @@ public class FilterStockByMultipleParametersValidatorTest {
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Industry target");
         assertEquals(errorList.get(0).getMessage(), "must not be empty!");
+    }
+
+    @Test
+    public void shouldReturnOrderingError1() {
+        List<SecurityRequest> list = List.of(
+                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "30.10"),
+                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
+                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
+                new FilterStockByIndustryRequest("Technology"),
+                new OrderingRequest("", "ASCENDING")
+        );
+        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        List<CoreError> errorList = validator.validate(request);
+        assertEquals(errorList.size(), 1);
+        assertEquals(errorList.get(0).getField(), "Ordering");
+        assertEquals(errorList.get(0).getMessage(), "both fields must be empty or filled!");
+    }
+
+    @Test
+    public void shouldReturnOrderingError2() {
+        List<SecurityRequest> list = List.of(
+                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "30.10"),
+                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
+                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
+                new FilterStockByIndustryRequest("Technology"),
+                new OrderingRequest("Name", "")
+        );
+        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        List<CoreError> errorList = validator.validate(request);
+        assertEquals(errorList.size(), 1);
+        assertEquals(errorList.get(0).getField(), "Ordering");
+        assertEquals(errorList.get(0).getMessage(), "both fields must be empty or filled!");
     }
 
     @Test
