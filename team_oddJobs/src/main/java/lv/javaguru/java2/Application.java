@@ -8,6 +8,7 @@ import lv.javaguru.java2.console_ui.Exit.ExitMenuUIAction;
 import lv.javaguru.java2.console_ui.Find.*;
 import lv.javaguru.java2.console_ui.Get.GetAllClientsUIAction;
 import lv.javaguru.java2.console_ui.Get.GetAllSpecialistUIAction;
+import lv.javaguru.java2.console_ui.Remove.RemoveAdvertismentUIAction;
 import lv.javaguru.java2.console_ui.Remove.RemoveClientUIAction;
 import lv.javaguru.java2.console_ui.Remove.RemoveSpecialistUIAction;
 import lv.javaguru.java2.console_ui.UIAction;
@@ -21,6 +22,7 @@ import lv.javaguru.java2.services.Exit.ExitMenuService;
 import lv.javaguru.java2.services.Find.*;
 import lv.javaguru.java2.services.Get.GetAllClientsService;
 import lv.javaguru.java2.services.Get.GetAllSpecialistsService;
+import lv.javaguru.java2.services.Remove.RemoveAdvertismentService;
 import lv.javaguru.java2.services.Remove.RemoveClientService;
 import lv.javaguru.java2.services.Remove.RemoveSpecialistService;
 
@@ -48,7 +50,12 @@ public class Application {
     private static final RemoveSpecialistService deleteSpecialistService = new RemoveSpecialistService(database,removeSpecialistValidator);
     private static final UIAction deleteSpecialist = new RemoveSpecialistUIAction(deleteSpecialistService);
 
-private static FindSpecialistByProfessionValidator findSpecialistByProfessionValidator = new FindSpecialistByProfessionValidator();
+    private static RemoveAdvertismentValidator removeAdvertismentValidator = new RemoveAdvertismentValidator();
+    private static final RemoveAdvertismentService deleteAdvertismentService = new RemoveAdvertismentService(database,removeAdvertismentValidator);
+    private static final UIAction deleteAdvertisment = new RemoveAdvertismentUIAction(deleteAdvertismentService);
+
+
+    private static FindSpecialistByProfessionValidator findSpecialistByProfessionValidator = new FindSpecialistByProfessionValidator();
     private static final FindSpecialistByProfessionService findSpecialistByProfessionService = new FindSpecialistByProfessionService(database,findSpecialistByProfessionValidator);
     private static final UIAction findSpecialistByProfession = new FindSpecialistByProfessionUIAction(findSpecialistByProfessionService);
 

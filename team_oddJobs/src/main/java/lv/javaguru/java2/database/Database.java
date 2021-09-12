@@ -33,5 +33,6 @@ public interface Database {
 
     List<Client> getAllClients();
 
+    List<Advertisement> getAllAdvertisemets();
 
 }
