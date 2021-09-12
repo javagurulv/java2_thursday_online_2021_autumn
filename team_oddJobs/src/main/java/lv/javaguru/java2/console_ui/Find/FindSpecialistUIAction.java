@@ -1,8 +1,11 @@
 package lv.javaguru.java2.console_ui.Find;
 
+import lv.javaguru.java2.Specialist;
 import lv.javaguru.java2.console_ui.Exit.ExitMenuUIAction;
 import lv.javaguru.java2.console_ui.UIAction;
 import lv.javaguru.java2.core.requests.Find.FindSpecialistRequest;
+import lv.javaguru.java2.core.requests.Find.Ordering;
+import lv.javaguru.java2.core.requests.Find.Paging;
 import lv.javaguru.java2.core.responce.Find.FindSpecialistResponse;
 import lv.javaguru.java2.services.Find.FindSpecialistService;
 
@@ -22,23 +25,34 @@ public class FindSpecialistUIAction implements UIAction {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("provide ID");
-        long specialistId = scanner.nextLong();
+        System.out.println("Enter specialistName");
+        String specialistName = scanner.nextLine();
+        System.out.println("Enter specialistSurname");
+        String specialistSurname = scanner.nextLine();
+        System.out.println("Enter specialistProfession");
+        String specialistProfession = scanner.nextLine();
 
-        System.out.println("provide Name");
-        String specialistName = scanner.next();
+        System.out.println("Enter orderBy (specialistName || specialistSurname || specialistProfession): ");
+        String orderBy = scanner.nextLine();
+        System.out.println("Enter orderDirection (ASCENDING||DESCENDING): ");
+        String orderDirection = scanner.nextLine();
+        Ordering ordering = new Ordering(orderBy, orderDirection);
 
-        System.out.println("provide Surname");
-        String specialistSurname = scanner.next();
 
-        FindSpecialistRequest request = new FindSpecialistRequest(specialistId, specialistName, specialistSurname);
+        System.out.println("Enter pageNumber: ");
+        Integer pageNumber = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter pageSize: ");
+        Integer pageSize = Integer.parseInt(scanner.nextLine());
+        Paging paging = new Paging(pageNumber, pageSize);
+
+        FindSpecialistRequest request = new FindSpecialistRequest(specialistName, specialistSurname, specialistProfession, ordering, paging);
         FindSpecialistResponse response = findSpecialistService.execute(request);
 
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError ->
                     System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));
         } else {
-            System.out.println(response.getSpecialists());
+            response.getSpecialists().forEach(Specialist::toString);
         }
     }
 }
