@@ -8,6 +8,7 @@ import lv.javaguru.java2.console_ui.Exit.ExitMenuUIAction;
 import lv.javaguru.java2.console_ui.Find.*;
 import lv.javaguru.java2.console_ui.Get.GetAllClientsUIAction;
 import lv.javaguru.java2.console_ui.Get.GetAllSpecialistUIAction;
+import lv.javaguru.java2.console_ui.Remove.RemoveAdvertismentUIAction;
 import lv.javaguru.java2.console_ui.Remove.RemoveClientUIAction;
 import lv.javaguru.java2.console_ui.Remove.RemoveSpecialistUIAction;
 import lv.javaguru.java2.console_ui.UIAction;
@@ -21,6 +22,7 @@ import lv.javaguru.java2.services.Exit.ExitMenuService;
 import lv.javaguru.java2.services.Find.*;
 import lv.javaguru.java2.services.Get.GetAllClientsService;
 import lv.javaguru.java2.services.Get.GetAllSpecialistsService;
+import lv.javaguru.java2.services.Remove.RemoveAdvertismentService;
 import lv.javaguru.java2.services.Remove.RemoveClientService;
 import lv.javaguru.java2.services.Remove.RemoveSpecialistService;
 
@@ -49,6 +51,21 @@ public class Application { private static final Database database = new InMemory
     private static final FindClientsRequestValidator findClientsRequestValidator = new FindClientsRequestValidator();
     private static final FindClientsService findClientBySearchCriteria = new FindClientsService(database,findClientsRequestValidator);
     private static final UIAction findClientBySearch = new FindClientsUIAction(findClientBySearchCriteria);
+
+    private static RemoveAdvertismentValidator removeAdvertismentValidator = new RemoveAdvertismentValidator();
+    private static final RemoveAdvertismentService deleteAdvertismentService = new RemoveAdvertismentService(database,removeAdvertismentValidator);
+    private static final UIAction deleteAdvertisment = new RemoveAdvertismentUIAction(deleteAdvertismentService);
+
+
+    private static FindSpecialistByProfessionValidator findSpecialistByProfessionValidator = new FindSpecialistByProfessionValidator();
+    private static final FindSpecialistByProfessionService findSpecialistByProfessionService = new FindSpecialistByProfessionService(database,findSpecialistByProfessionValidator);
+    private static final UIAction findSpecialistByProfession = new FindSpecialistByProfessionUIAction(findSpecialistByProfessionService);
+
+    private static final FindClientByIdService findClientByIdService = new FindClientByIdService(database);
+    private static final UIAction findClientByIdUI = new FindClientByIdUIAction(findClientByIdService);
+
+    private static final FindClientByNameService findClientByNameService = new FindClientByNameService(database);
+    private static final UIAction findClientByNameUI = new FindClientByNameUIAction(findClientByNameService);
 
     private static final FindSpecialistValidator findSpecialistValidator = new FindSpecialistValidator();
     private static final FindSpecialistService findSpecialistService = new FindSpecialistService(database,findSpecialistValidator);
