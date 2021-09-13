@@ -1,8 +1,7 @@
 package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 
-import lv.javaguru.java2.qwe.core.requests.AddUserRequest;
-import lv.javaguru.java2.qwe.core.responses.AddStockResponse;
-import lv.javaguru.java2.qwe.core.responses.AddUserResponse;
+import lv.javaguru.java2.qwe.core.requests.user_requests.AddUserRequest;
+import lv.javaguru.java2.qwe.core.responses.user_responses.AddUserResponse;
 import lv.javaguru.java2.qwe.core.services.user_services.AddUserService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 

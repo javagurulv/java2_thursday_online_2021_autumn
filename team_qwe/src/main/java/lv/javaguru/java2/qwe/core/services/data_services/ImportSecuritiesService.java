@@ -2,8 +2,8 @@ package lv.javaguru.java2.qwe.core.services.data_services;
 
 import lv.javaguru.java2.qwe.Stock;
 import lv.javaguru.java2.qwe.core.database.Database;
-import lv.javaguru.java2.qwe.core.requests.AddStockRequest;
-import lv.javaguru.java2.qwe.core.requests.SecurityRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.SecurityRequest;
 import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
 import lv.javaguru.java2.qwe.core.services.validator.AddSecurityValidator;
 import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;

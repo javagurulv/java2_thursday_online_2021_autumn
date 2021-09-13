@@ -1,4 +1,4 @@
-package lv.javaguru.java2.qwe.core.requests;
+package lv.javaguru.java2.qwe.core.requests.data_requests;
 
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.Stock;
@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static java.util.Map.entry;
+import static java.util.Map.*;
 
 public class FilterStockByMultipleParametersRequest {
 
@@ -143,10 +143,10 @@ public class FilterStockByMultipleParametersRequest {
         } else {
             return predicateMap.entrySet().stream()
                     .filter(entry -> entry.getKey().equals(request.getParameter()))
-                    .map(Map.Entry::getValue)
+                    .map(Entry::getValue)
                     .flatMap(entry1 -> entry1.entrySet().stream()
                             .filter(entry2 -> entry2.getKey().equals(request.getOperator()))
-                            .map(Map.Entry::getValue))
+                            .map(Entry::getValue))
                     .findAny().get();
         }
     }
@@ -157,16 +157,16 @@ public class FilterStockByMultipleParametersRequest {
         } else {
             return predicateMap.entrySet().stream()
                     .filter(entry -> entry.getKey().equals("Industry"))
-                    .map(Map.Entry::getValue)
+                    .map(Entry::getValue)
                     .map(entry1 -> entry1.get("Industry"))
                     .findAny().get();
         }
     }
 
     private Map<String, Map<String, Predicate<Security>>> getPredicateMap() {
-        return Map.ofEntries(
-                Map.entry("Industry", Map.ofEntries(Map.entry("Industry", security -> security.getIndustry().equals(industryTarget)))),
-                Map.entry("Market price", Map.ofEntries(
+        return ofEntries(
+                entry("Industry", ofEntries(entry("Industry", security -> security.getIndustry().equals(industryTarget)))),
+                entry("Market price", ofEntries(
                         entry("", security -> true),
                         entry(">", security -> security.getMarketPrice() > marketPriceTarget),
                         entry(">=", security -> security.getMarketPrice() >= marketPriceTarget),
@@ -174,7 +174,7 @@ public class FilterStockByMultipleParametersRequest {
                         entry("<=", security -> security.getMarketPrice() <= marketPriceTarget),
                         entry("=", security -> security.getMarketPrice() == marketPriceTarget)
                 )),
-                Map.entry("Dividend", Map.ofEntries(
+                entry("Dividend", ofEntries(
                         entry("", security -> true),
                         entry(">", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() > dividendTarget)),
                         entry(">=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() >= dividendTarget)),
@@ -182,7 +182,7 @@ public class FilterStockByMultipleParametersRequest {
                         entry("<=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() <= dividendTarget)),
                         entry("=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getDividends() == dividendTarget))
                 )),
-                Map.entry("Risk weight", Map.ofEntries(
+                entry("Risk weight", ofEntries(
                         entry("", security -> true),
                         entry(">", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() > riskWeightTarget)),
                         entry(">=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() >= riskWeightTarget)),

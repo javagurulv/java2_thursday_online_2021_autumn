@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.services.validator;
 
-import lv.javaguru.java2.qwe.core.requests.*;
+import lv.javaguru.java2.qwe.core.requests.data_requests.*;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import org.junit.Test;
 

@@ -13,13 +13,11 @@ public interface UserData {
 
     void addUser(User user);
 
-    void removeUser(String name);
+    boolean removeUser(String name);
 
-    void showListOfUsers(List<User> list);
+    List<User> showUserList();
 
     Optional<User> findUserByName(String userName);
-
-    void showUserPortfolio(User user);
 
     void showUserPortfolioGroupedByIndustry(User user);
 

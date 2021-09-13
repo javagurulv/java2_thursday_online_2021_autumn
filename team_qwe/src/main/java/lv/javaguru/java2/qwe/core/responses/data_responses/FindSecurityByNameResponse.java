@@ -1,6 +1,8 @@
-package lv.javaguru.java2.qwe.core.responses;
+package lv.javaguru.java2.qwe.core.responses.data_responses;
 
 import lv.javaguru.java2.qwe.Security;
+import lv.javaguru.java2.qwe.core.responses.CoreError;
+import lv.javaguru.java2.qwe.core.responses.CoreResponse;
 
 import java.util.List;
 

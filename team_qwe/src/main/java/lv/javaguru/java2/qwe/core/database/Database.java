@@ -3,7 +3,7 @@ package lv.javaguru.java2.qwe.core.database;
 import lv.javaguru.java2.qwe.Bond;
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.Stock;
-import lv.javaguru.java2.qwe.core.requests.FilterStockByMultipleParametersRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.FilterStockByMultipleParametersRequest;
 
 import java.util.ArrayList;
 import java.util.List;

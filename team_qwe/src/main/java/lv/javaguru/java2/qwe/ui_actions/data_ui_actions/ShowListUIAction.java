@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.ui_actions.data_ui_actions;
 
-import lv.javaguru.java2.qwe.core.requests.ShowListRequest;
-import lv.javaguru.java2.qwe.core.responses.ShowListResponse;
+import lv.javaguru.java2.qwe.core.requests.data_requests.ShowListRequest;
+import lv.javaguru.java2.qwe.core.responses.data_responses.ShowListResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.ShowListService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 

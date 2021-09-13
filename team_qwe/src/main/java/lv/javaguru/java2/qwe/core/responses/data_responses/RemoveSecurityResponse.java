@@ -1,4 +1,4 @@
-package lv.javaguru.java2.qwe.core.responses;
+package lv.javaguru.java2.qwe.core.responses.data_responses;
 
 public class RemoveSecurityResponse {
 

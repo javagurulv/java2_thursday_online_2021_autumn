@@ -2,15 +2,13 @@ package lv.javaguru.java2.qwe.core.services.data_services;
 
 import lv.javaguru.java2.qwe.Bond;
 import lv.javaguru.java2.qwe.core.database.Database;
-import lv.javaguru.java2.qwe.core.requests.AddBondRequest;
-import lv.javaguru.java2.qwe.core.requests.SecurityRequest;
-import lv.javaguru.java2.qwe.core.responses.AddBondResponse;
+import lv.javaguru.java2.qwe.core.requests.data_requests.AddBondRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.SecurityRequest;
+import lv.javaguru.java2.qwe.core.responses.data_responses.AddBondResponse;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
 
 import java.util.List;
-
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
 public class AddBondService {
 

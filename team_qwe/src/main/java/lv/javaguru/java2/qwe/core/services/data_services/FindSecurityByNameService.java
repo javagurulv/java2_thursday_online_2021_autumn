@@ -2,9 +2,9 @@ package lv.javaguru.java2.qwe.core.services.data_services;
 
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.core.database.Database;
-import lv.javaguru.java2.qwe.core.requests.FindSecurityByNameRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.FindSecurityByNameRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
-import lv.javaguru.java2.qwe.core.responses.FindSecurityByNameResponse;
+import lv.javaguru.java2.qwe.core.responses.data_responses.FindSecurityByNameResponse;
 import lv.javaguru.java2.qwe.core.services.validator.FindSecurityByNameValidator;
 
 import java.util.List;

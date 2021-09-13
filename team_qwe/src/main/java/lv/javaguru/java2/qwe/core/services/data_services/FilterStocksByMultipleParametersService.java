@@ -2,9 +2,9 @@ package lv.javaguru.java2.qwe.core.services.data_services;
 
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.core.database.Database;
-import lv.javaguru.java2.qwe.core.requests.FilterStockByMultipleParametersRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.FilterStockByMultipleParametersRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
-import lv.javaguru.java2.qwe.core.responses.FilterStockByMultipleParametersResponse;
+import lv.javaguru.java2.qwe.core.responses.data_responses.FilterStockByMultipleParametersResponse;
 import lv.javaguru.java2.qwe.core.services.validator.FilterStockByMultipleParametersValidator;
 
 import java.util.ArrayList;

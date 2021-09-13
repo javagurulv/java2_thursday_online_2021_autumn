@@ -24,7 +24,6 @@ public class ImportDataFromFileUIAction implements UIAction {
             String path = fileChooser.getSelectedFile().getPath();
             try {
                 importSecuritiesService.execute(path);
-//                messageDialog("Data from " + path + " has been imported!");
             } catch (IOException e) {
                 System.out.println("ERROR!");
                 e.printStackTrace();

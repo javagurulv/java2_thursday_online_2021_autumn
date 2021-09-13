@@ -4,7 +4,7 @@ import lv.javaguru.java2.qwe.Bond;
 import lv.javaguru.java2.qwe.Cash;
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.Stock;
-import lv.javaguru.java2.qwe.core.requests.FilterStockByMultipleParametersRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.FilterStockByMultipleParametersRequest;
 import lv.javaguru.java2.qwe.core.services.data_services.ImportSecuritiesService;
 import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
 import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
@@ -13,6 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.util.Map.entry;
+import static java.util.Map.ofEntries;
 
 public class DatabaseImpl implements Database {
 
@@ -100,13 +103,13 @@ public class DatabaseImpl implements Database {
     }
 
     private Comparator<? extends Security> getComparator(FilterStockByMultipleParametersRequest request) {
-        Map<String, Comparator<? extends Security>> map = Map.ofEntries(
-                Map.entry("Name", Comparator.comparing(Security::getName)),
-                Map.entry("Industry", Comparator.comparing(Security::getIndustry)),
-                Map.entry("Currency", Comparator.comparing(Security::getCurrency)),
-                Map.entry("Market price", Comparator.comparing(Security::getMarketPrice)),
-                Map.entry("Dividend", Comparator.comparing(Stock::getDividends)),
-                Map.entry("Risk weight", Comparator.comparing(Stock::getRiskWeight))
+        Map<String, Comparator<? extends Security>> map = ofEntries(
+                entry("Name", Comparator.comparing(Security::getName)),
+                entry("Industry", Comparator.comparing(Security::getIndustry)),
+                entry("Currency", Comparator.comparing(Security::getCurrency)),
+                entry("Market price", Comparator.comparing(Security::getMarketPrice)),
+                entry("Dividend", Comparator.comparing(Stock::getDividends)),
+                entry("Risk weight", Comparator.comparing(Stock::getRiskWeight))
         );
         return map.entrySet().stream()
                 .filter(entry -> entry.getKey().equals(request.getOrderBy()))

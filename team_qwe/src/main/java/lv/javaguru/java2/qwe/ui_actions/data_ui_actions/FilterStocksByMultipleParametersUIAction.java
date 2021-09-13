@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.ui_actions.data_ui_actions;
 
-import lv.javaguru.java2.qwe.core.requests.*;
-import lv.javaguru.java2.qwe.core.responses.FilterStockByMultipleParametersResponse;
+import lv.javaguru.java2.qwe.core.requests.data_requests.*;
+import lv.javaguru.java2.qwe.core.responses.data_responses.FilterStockByMultipleParametersResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.FilterStocksByMultipleParametersService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
