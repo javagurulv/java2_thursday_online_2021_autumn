@@ -60,6 +60,9 @@ public class Application { private static final Database database = new InMemory
     private static final FindSpecialistService findSpecialistService = new FindSpecialistService(database,findSpecialistValidator);
     private static final UIAction findSpecialist = new FindSpecialistUIAction(findSpecialistService);
 
+    private static final FindAdvertisementByTitleValidator findAdvertisementByTitleValidator = new FindAdvertisementByTitleValidator();
+    private static final FindAdvertisementByTitleService findAdvertisementByTitleService = new FindAdvertisementByTitleService(database,findAdvertisementByTitleValidator);
+    private static final UIAction findAdverisementByTitle = new FindAdvertisementByTitleUIAction(findAdvertisementByTitleService);
 
     private static final GetAllSpecialistsService getAllSpecialistsService = new GetAllSpecialistsService(database);
     private static final UIAction getAllSpecialists = new GetAllSpecialistUIAction(getAllSpecialistsService);
@@ -94,11 +97,12 @@ public class Application { private static final Database database = new InMemory
         System.out.println("3.  Create advertisement");
         System.out.println("4.  Find specialist by search criteria");
         System.out.println("5.  Find client by search criteria");
-        System.out.println("6.  Show all clients");
-        System.out.println("7.  Show all specialists");
-        System.out.println("8.  Delete client account");
-        System.out.println("9.  Delete specialist account");
-        System.out.println("10. Exit");
+        System.out.println("6.  Find advertisement by title");
+        System.out.println("7.  Show all clients");
+        System.out.println("8.  Show all specialists");
+        System.out.println("9.  Delete client account");
+        System.out.println("10.  Delete specialist account");
+        System.out.println("11. Exit");
     }
 
 
@@ -130,27 +134,32 @@ public class Application { private static final Database database = new InMemory
             }
 
             case 6: {
+                findAdverisementByTitle.execute();
+                break;
+            }
+
+            case 7: {
                 getAllClients.execute();
 
                 break;
             }
 
-            case 7: {
+            case 8: {
                 getAllSpecialists.execute();
 
                 break;
             }
-            case 8: {
+            case 9: {
                 deleteClient.execute();
 
                 break;
             }
-            case 9: {
+            case 10: {
                 deleteSpecialist.execute();
 
                 break;
             }
-            case 10: {
+            case 11: {
                 menuExit.execute();
 
 
