@@ -10,7 +10,7 @@ public class FindAdvertisementByTitleResponse {
         this.foundAdvertisment = foundAdvertisment;
     }
 
-    public Advertisement getFoundAdvertisment() {
+    public Advertisement getFoundAdvertisement() {
         return foundAdvertisment;
     }
 }

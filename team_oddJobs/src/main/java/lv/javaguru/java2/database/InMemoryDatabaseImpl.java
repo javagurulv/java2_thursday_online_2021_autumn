@@ -166,6 +166,17 @@ public class InMemoryDatabaseImpl implements Database {
     }
 
     @Override
+    public void findAdvertisementById(long advId) {
+        for (Advertisement advertisement : advBoards) {
+            if (advId==(advertisement.getAdvId())) {
+                System.out.println(advertisement);
+            } /*else {
+                System.out.println("Advertisement is not found");
+            }*/
+        }
+    }
+
+    @Override
     public List<Specialist> getAllSpecialist() {
         return specialists;
     }
