@@ -26,7 +26,13 @@ public class FilterStockByMultipleParametersValidator {
             entry(request -> request.getOrderBy().isEmpty() && !request.getOrderDirection().isEmpty(),
                     new CoreError("Ordering", "both fields must be empty or filled!")),
             entry(request -> !request.getOrderBy().isEmpty() && request.getOrderDirection().isEmpty(),
-                    new CoreError("Ordering", "both fields must be empty or filled!"))
+                    new CoreError("Ordering", "both fields must be empty or filled!")),
+            entry(request -> request.getPageNumber() == 0 && request.getPageSize() != 0,
+                    new CoreError("Paging", "both fields must be empty or filled!")),
+            entry(request -> request.getPageNumber() != 0 && request.getPageSize() == 0,
+                    new CoreError("Paging", "both fields must be empty or filled!")),
+            entry(request -> request.getPageNumber() < 0 || request.getPageSize() < 0,
+                    new CoreError("Paging", "cannot be negative!"))
     );
 
     public List<CoreError> validate(FilterStockByMultipleParametersRequest request) {

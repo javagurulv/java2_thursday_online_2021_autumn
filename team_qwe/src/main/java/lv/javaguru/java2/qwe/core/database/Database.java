@@ -23,10 +23,6 @@ public interface Database {
 
     Optional<Security> findSecurityByName(String name);
 
-/*    List<Security> filterStocksByAnyDoubleParameter(String parameter, String operator, double target);
-
-    List<Security> filterStocksByIndustry(String industry);*/
-
     List<Security> filterStocksByMultipleParameters(List<Security> list,
                                                     FilterStockByMultipleParametersRequest request, int i);
 

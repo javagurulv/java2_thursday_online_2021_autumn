@@ -19,7 +19,7 @@ public class ShowListUIAction implements UIAction {
         ShowListResponse response = showListService.execute(request);
         System.out.println("LIST STARTS:");
         response.getList().forEach(System.out::println);
-        System.out.println("LIST ENDS");
+        System.out.println("LIST ENDS.");
     }
 
 }

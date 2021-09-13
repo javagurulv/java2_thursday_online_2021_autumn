@@ -18,6 +18,8 @@ public class FilterStockByMultipleParametersRequest {
     private final List<Predicate<Security>> list = new ArrayList<>();
     private String orderBy = "";
     private String orderDirection = "";
+    private int pageNumber;
+    private int pageSize;
     private String industryTarget;
     private double marketPriceTarget;
     private double dividendTarget;
@@ -27,19 +29,12 @@ public class FilterStockByMultipleParametersRequest {
     public FilterStockByMultipleParametersRequest(List<SecurityRequest> requestList) throws NumberFormatException {
         this.requestList = requestList;
         this.predicateMap = getPredicateMap();
-        setTargetsForDouble();
-        setIndustryTarget();
+        setTargetsForDoubleParameters();
+        setTargetForIndustryParameter();
+        setPredicatesForDoubleParameters();
+        setPredicateForIndustryParameter();
         setOrdering();
-        IntStream.rangeClosed(0, requestList.size() - 1)
-                .filter(i -> requestList.get(i).getClass().getSimpleName().equals("FilterStockByAnyDoubleParameterRequest"))
-                .mapToObj(i -> (FilterStockByAnyDoubleParameterRequest) requestList.get(i))
-                .filter(request -> request.getParameter() != null)
-                .forEach(request -> list.add(findPredicateForDouble(request)));
-        IntStream.rangeClosed(0, requestList.size() - 1)
-                .filter(i -> requestList.get(i).getClass().getSimpleName().equals("FilterStockByIndustryRequest"))
-                .mapToObj(i -> (FilterStockByIndustryRequest) requestList.get(i))
-                .filter(request -> request.getIndustry() != null)
-                .forEach(request -> list.add(findPredicateForIndustry(request)));
+        setPaging();
     }
 
     public List<Predicate<Security>> getList() {
@@ -70,7 +65,15 @@ public class FilterStockByMultipleParametersRequest {
         return orderDirection;
     }
 
-    private void setTargetsForDouble() throws NumberFormatException {
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    private void setTargetsForDoubleParameters() throws NumberFormatException {
         requestList.stream()
                 .filter(request -> request.getClass().getSimpleName().equals("FilterStockByAnyDoubleParameterRequest"))
                 .map(request -> (FilterStockByAnyDoubleParameterRequest) request)
@@ -85,12 +88,28 @@ public class FilterStockByMultipleParametersRequest {
                 });
     }
 
-    private void setIndustryTarget() {
+    private void setTargetForIndustryParameter() {
         requestList.stream()
                 .filter(request -> request.getClass().getSimpleName().equals("FilterStockByIndustryRequest"))
                 .map(request -> (FilterStockByIndustryRequest) request)
                 .filter(request -> request.getIndustry() != null)
                 .forEach(request -> industryTarget = request.getIndustry());
+    }
+
+    private void setPredicatesForDoubleParameters() {
+        IntStream.rangeClosed(0, requestList.size() - 1)
+                .filter(i -> requestList.get(i).getClass().getSimpleName().equals("FilterStockByAnyDoubleParameterRequest"))
+                .mapToObj(i -> (FilterStockByAnyDoubleParameterRequest) requestList.get(i))
+                .filter(request -> request.getParameter() != null)
+                .forEach(request -> list.add(findPredicateForDouble(request)));
+    }
+
+    private void setPredicateForIndustryParameter() {
+        IntStream.rangeClosed(0, requestList.size() - 1)
+                .filter(i -> requestList.get(i).getClass().getSimpleName().equals("FilterStockByIndustryRequest"))
+                .mapToObj(i -> (FilterStockByIndustryRequest) requestList.get(i))
+                .filter(request -> request.getIndustry() != null)
+                .forEach(request -> list.add(findPredicateForIndustry(request)));
     }
 
     private void setOrdering() {
@@ -101,6 +120,20 @@ public class FilterStockByMultipleParametersRequest {
                 .forEach(request -> {
                     orderBy = request.getOrderBy();
                     orderDirection = request.getOrderDirection();
+                });
+    }
+
+    private void setPaging() throws NumberFormatException {
+        requestList.stream()
+                .filter(request -> request.getClass().getSimpleName().equals("PagingRequest"))
+                .map(request -> (PagingRequest) request)
+                .forEach(request -> {
+                    if (!request.getPageNumber().isEmpty()) {
+                        pageNumber = Integer.parseInt(request.getPageNumber());
+                    }
+                    if (!request.getPageSize().isEmpty()) {
+                        pageSize = Integer.parseInt(request.getPageSize());
+                    }
                 });
     }
 
@@ -156,7 +189,8 @@ public class FilterStockByMultipleParametersRequest {
                         entry("<", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() < riskWeightTarget)),
                         entry("<=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() <= riskWeightTarget)),
                         entry("=", security -> Stream.of(security).map(stock -> (Stock) stock).anyMatch(stock -> stock.getRiskWeight() == riskWeightTarget))
-                )));
+                ))
+        );
     }
 
 }

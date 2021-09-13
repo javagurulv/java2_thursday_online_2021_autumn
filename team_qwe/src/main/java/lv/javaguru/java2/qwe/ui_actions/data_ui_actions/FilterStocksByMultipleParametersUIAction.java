@@ -15,6 +15,11 @@ import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 public class FilterStocksByMultipleParametersUIAction implements UIAction {
 
     private final FilterStocksByMultipleParametersService multipleParametersService;
+    private final String[] parameters = {"Industry", "Market price", "Dividend", "Risk weight", "none"};
+    private final String[] operators = {">", ">=", "<", "<=", "="};
+    private final String[] industries = new String[]{"Consumer Staples", "Utilities", "Communications",
+            "Health Care", "Technology", "Materials", "Energy", "Financials", "Real Estate",
+            "Industrials", "Consumer Discretionary"};
 
     public FilterStocksByMultipleParametersUIAction(FilterStocksByMultipleParametersService multipleParametersService) {
         this.multipleParametersService = multipleParametersService;
@@ -23,13 +28,8 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
     @Override
     public void execute() {
         try {
-            String[] parameters = {"Industry", "Market price", "Dividend", "Risk weight", "none"};
-            String[] operators = {">", ">=", "<", "<=", "="};
-            String[] industries = new String[]{"Consumer Staples", "Utilities", "Communications", "Health Care",
-                    "Technology", "Materials", "Energy", "Financials", "Real Estate",
-                    "Industrials", "Consumer Discretionary"};
             List<String> finalParameterList = setFilterParameters(parameters);
-            messageDialog("You have chosen parameters:\n - " + printList(finalParameterList));
+            messageDialog("You have chosen parameters:\n - " + printList(finalParameterList) + ";");
             List<SecurityRequest> requestList = createRequestList(finalParameterList, operators, industries);
             FilterStockByMultipleParametersRequest multiFilterRequest = new FilterStockByMultipleParametersRequest(requestList);
             FilterStockByMultipleParametersResponse response = multipleParametersService.execute(multiFilterRequest);
@@ -43,7 +43,7 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
     private List<String> setFilterParameters(String[] parameters) {
         List<String> finalParameterList = new ArrayList<>();
         while (Arrays.asList(parameters).contains("none") && parameters.length != 1) {
-            String result = inputDialog("Choose parameter", "FILTER", parameters);
+            String result = inputDialog("Choose parameter:", "FILTER", parameters);
             if (result.equals("none") || result.isEmpty()) {
                 break;
             }
@@ -57,6 +57,15 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
 
     private List<SecurityRequest> createRequestList(List<String> finalParameterList, String[] operators, String[] industries) {
         List<SecurityRequest> requestList = new ArrayList<>();
+        addDoubleParametersRequests(requestList, finalParameterList, operators);
+        addIndustryParameterRequest(requestList, finalParameterList, industries);
+        addOrderingRequest(requestList);
+        addPagingRequest(requestList);
+        return requestList;
+    }
+
+    private void addDoubleParametersRequests(List<SecurityRequest> requestList,
+                                             List<String> finalParameterList, String[] operators) {
         IntStream.rangeClosed(0, finalParameterList.size() - 1)
                 .filter(i -> !finalParameterList.get(i).equals("Industry"))
                 .forEach(i -> requestList.add(new FilterStockByAnyDoubleParameterRequest(
@@ -64,25 +73,35 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
                         inputDialog("Choose operator:", "PARAMETER " + finalParameterList.get(i), operators),
                         inputDialog("Enter target amount for " + finalParameterList.get(i) + ":")
                 )));
+    }
+
+    private void addIndustryParameterRequest(List<SecurityRequest> requestList,
+                                             List<String> finalParameterList, String[] industries) {
         IntStream.rangeClosed(0, finalParameterList.size() - 1)
                 .filter(i -> finalParameterList.get(i).equals("Industry"))
                 .forEach(i -> requestList.add(new FilterStockByIndustryRequest(
                         inputDialog("Choose industry:", "FILTER", industries)
                 )));
+    }
+
+    private void addOrderingRequest(List<SecurityRequest> requestList) {
         String orderBy = inputDialog(
-                "Choose parameter:", "SORTING", new String[]
+                "Choose parameter:", "ORDERING", new String[]
                         {"Name", "Industry", "Currency", "Market price", "Dividend", "Risk weight"});
         String orderDirection = inputDialog(
-                "Choose direction:", "SORTING", new String[]{"ASCENDING", "DESCENDING"}
+                "Choose ordering direction:", "ORDERING", new String[]{"ASCENDING", "DESCENDING"}
         );
-//        if (!orderBy.isEmpty() && !orderDirection.isEmpty()) {
-            requestList.add(new OrderingRequest(orderBy, orderDirection));
-//        }
-        return requestList;
+        requestList.add(new OrderingRequest(orderBy, orderDirection));
+    }
+
+    private void addPagingRequest(List<SecurityRequest> requestList) {
+        String pageNumber = inputDialog("Enter page number:");
+        String pageSize = inputDialog("Enter page size:");
+        requestList.add(new PagingRequest(pageNumber, pageSize));
     }
 
     private String printList(List<String> list) {
-        return String.join("\n - ", list);
+        return String.join(";\n - ", list);
     }
 
     private void printResponse(FilterStockByMultipleParametersResponse response) {

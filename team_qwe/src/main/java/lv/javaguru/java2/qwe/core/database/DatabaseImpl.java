@@ -23,14 +23,7 @@ public class DatabaseImpl implements Database {
         this.securityList = new ArrayList<>();
         this.file = file;
         securityList.add(new Cash());
-        file = new File("./team_qwe/src/main/docs/stocks_list_import.txt"); // автоматически импортирует данные в базу
-        ImportSecuritiesService service =
-                new ImportSecuritiesService(this, new AddStockValidator(this), new AddBondValidator(this));
-        try {
-            service.execute(file.getPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        importData();  // автоматически импортирует данные в базу
     }
 
     public DatabaseImpl() {
@@ -71,8 +64,8 @@ public class DatabaseImpl implements Database {
     }
 
     @Override
-    public final List<Security> filterStocksByMultipleParameters(List<Security> list,
-                                                                 FilterStockByMultipleParametersRequest request, int i) {
+    public final List<Security> filterStocksByMultipleParameters(
+            List<Security> list, FilterStockByMultipleParametersRequest request, int i) {
         List<Security> nextList = list;
         nextList = nextList.stream()
                 .filter(security -> security.getClass().getSimpleName().equals("Stock"))
@@ -81,21 +74,32 @@ public class DatabaseImpl implements Database {
         i++;
         if (i == request.getList().size()) {
             sortBy(nextList, request);
-            return nextList;
+            return getPage(nextList, request);
         }
         return filterStocksByMultipleParameters(nextList, request, i);
     }
 
     private void sortBy(List<Security> list, FilterStockByMultipleParametersRequest request) {
         if (request.getOrderBy() != null && !request.getOrderBy().isEmpty() && request.getOrderDirection().equals("ASCENDING")) {
-            list.sort((Comparator<? super Security>) getComparator(list, request));
+            list.sort((Comparator<? super Security>) getComparator(request));
         }
         if (request.getOrderBy() != null && !request.getOrderBy().isEmpty() && request.getOrderDirection().equals("DESCENDING")) {
-            list.sort((Comparator<? super Security>) getComparator(list, request).reversed());
+            list.sort((Comparator<? super Security>) getComparator(request).reversed());
         }
     }
 
-    private Comparator<? extends Security> getComparator(List<Security> list, FilterStockByMultipleParametersRequest request) {
+    private List<Security> getPage(List<Security> list, FilterStockByMultipleParametersRequest request) {
+        if (request.getPageNumber() != 0) {
+            return list.stream()
+                    .skip((long) request.getPageNumber() * request.getPageSize() - 1)
+                    .limit(request.getPageSize())
+                    .collect(Collectors.toList());
+        } else {
+            return list;
+        }
+    }
+
+    private Comparator<? extends Security> getComparator(FilterStockByMultipleParametersRequest request) {
         Map<String, Comparator<? extends Security>> map = Map.ofEntries(
                 Map.entry("Name", Comparator.comparing(Security::getName)),
                 Map.entry("Industry", Comparator.comparing(Security::getIndustry)),
@@ -108,6 +112,20 @@ public class DatabaseImpl implements Database {
                 .filter(entry -> entry.getKey().equals(request.getOrderBy()))
                 .map(Map.Entry::getValue)
                 .findAny().get();
+    }
+
+    private void importData() {
+        file = new File("./team_qwe/src/main/docs/stocks_list_import.txt");
+        ImportSecuritiesService service =
+                new ImportSecuritiesService(this,
+                        new AddStockValidator(this),
+                        new AddBondValidator(this));
+        try {
+            service.execute(file.getPath());
+            System.out.println("Data imported to database!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
