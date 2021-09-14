@@ -3,6 +3,7 @@ package lv.javaguru.java2.qwe.core.database;
 import lv.javaguru.java2.qwe.User;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface UserData {
@@ -19,10 +20,8 @@ public interface UserData {
 
     Optional<User> findUserByName(String userName);
 
-    void showUserPortfolioGroupedByIndustry(User user);
+    Map<String, List<String>> showUserPortfolioGroupedByIndustry(User user);
 
-    void showUserInvestmentsByEachIndustry(User user);
-
-    void showPortfolioSummary(User user);
+    Map<String, Double> showUserInvestmentsByEachIndustry(User user);
 
 }
