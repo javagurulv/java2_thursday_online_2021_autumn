@@ -5,6 +5,7 @@ import lv.javaguru.java2.hospital.domain.Doctor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class DoctorDatabaseImpl implements DoctorDatabase {
 
@@ -73,6 +74,28 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<Doctor> findByName(String name) {
+        return doctorsList.stream()
+                .filter(doctor -> doctor.getName().equals(name))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Doctor> findBySurname(String surname) {
+        return doctorsList.stream()
+                .filter(doctor -> doctor.getSurname().equals(surname))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Doctor> findByNameAndSurname(String name, String surname) {
+        return doctorsList.stream()
+                .filter(doctor -> doctor.getName().equals(name))
+                .filter(doctor -> doctor.getSurname().equals(surname))
+                .collect(Collectors.toList());
     }
 
 }

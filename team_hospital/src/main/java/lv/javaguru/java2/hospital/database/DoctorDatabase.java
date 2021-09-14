@@ -18,4 +18,10 @@ public interface DoctorDatabase {
 
     boolean doctorExists(long id);
 
+    List<Doctor> findByName(String name);
+
+    List<Doctor> findBySurname(String surname);
+
+    List<Doctor> findByNameAndSurname(String name, String surname);
+
 }
