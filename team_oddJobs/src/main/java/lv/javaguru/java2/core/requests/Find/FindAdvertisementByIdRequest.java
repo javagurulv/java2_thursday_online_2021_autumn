@@ -6,5 +6,9 @@ public class FindAdvertisementByIdRequest {
 
     public FindAdvertisementByIdRequest(long advId) {this.advId = advId;}
 
-    public long getAdvId() {return advId;}
+    public Long getAdvId() {return advId;}
+
+    public boolean isIdProvided() {
+        return this.advId != 0;
+    }
 }

@@ -155,25 +155,17 @@ public class InMemoryDatabaseImpl implements Database {
     }
 
     @Override
-    public void findAdvertisementByTitle(String advTitle) {
-        for (Advertisement advertisement : advBoards) {
-            if (advTitle.equals(advertisement.getAdvTitle())) {
-                System.out.println(advertisement);
-            } else {
-                System.out.println("Advertisement is not found");
-            }
-        }
+    public List<Advertisement> findAdvertisementByTitle(String advTitle) {
+        return advBoards.stream()
+                .filter(advBoard -> advBoard.getAdvTitle().equals(advTitle))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public void findAdvertisementById(long advId) {
-        for (Advertisement advertisement : advBoards) {
-            if (advId==(advertisement.getAdvId())) {
-                System.out.println(advertisement);
-            } /*else {
-                System.out.println("Advertisement is not found");
-            }*/
-        }
+    public List<Advertisement> findAdvertisementById(long advId) {
+        return advBoards.stream()
+                .filter(advBoard -> advBoard.getAdvId().equals(advId))
+                .collect(Collectors.toList());
     }
 
     @Override

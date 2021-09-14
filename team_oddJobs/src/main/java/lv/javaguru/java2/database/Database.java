@@ -40,9 +40,9 @@ public interface Database {
 
     boolean removeAdvertisement(Long advId, String advBoardTitle);
 
-    void findAdvertisementByTitle(String advTitle);
+    List<Advertisement> findAdvertisementByTitle(String advTitle);
 
-    void findAdvertisementById(long advId);
+    List<Advertisement> findAdvertisementById(long advId);
 
     List<Specialist> getAllSpecialist();
 
