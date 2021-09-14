@@ -40,19 +40,13 @@ public class UserDataImpl implements UserData {
     }
 
     @Override
-    public void removeUser(String name) {
-        boolean isRemoved = userList.removeIf(user -> user.getName().equals(name));
-        if (isRemoved) {
-            messageDialog("User " + name + " has been removed!");
-        } else {
-            messageDialog("No such user in the list!");
-        }
+    public boolean removeUser(String name) {
+        return userList.removeIf(user -> user.getName().equals(name));
     }
 
     @Override
-    public void showListOfUsers(List<User> list) {
-        list.forEach(System.out::println);
-        System.out.print("\n");
+    public List<User> showUserList() {
+        return getUserList();
     }
 
     @Override
@@ -60,17 +54,6 @@ public class UserDataImpl implements UserData {
         return userList.stream()
                 .filter(user -> user.getName().equals(userName))
                 .findAny();
-    }
-
-    @Override
-    public void showUserPortfolio(User user) {
-        System.out.println("==========" + user.getName() + "=============");
-        user.getPortfolio().forEach(position -> System.out.println("company=" + position.getSecurity().getName() + ", amount=" +
-                position.getAmount() + ", purchase price=" + position.getPurchasePrice() + ", last market price=" +
-                position.getSecurity().getMarketPrice() + ", profit&loss=" +
-                round((position.getAmount() * position.getSecurity().getMarketPrice()) -
-                        (position.getAmount() * position.getPurchasePrice()))));
-        System.out.println("\n");
     }
 
     @Override

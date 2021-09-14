@@ -7,6 +7,7 @@ import lv.javaguru.java2.qwe.core.database.UserDataImpl;
 import lv.javaguru.java2.qwe.ui_actions.ChooseDataMenuUIAction;
 import lv.javaguru.java2.qwe.ui_actions.ChooseUserMenuUIAction;
 
+import java.io.File;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -17,7 +18,7 @@ public class ApplicationDemo {
 
     public static void main(String[] args) {
 
-        Database database = new DatabaseImpl();
+        Database database = new DatabaseImpl(new File(""));
         UserData userData = new UserDataImpl(database);
 
         //Симуляция изменения рыночных цен!

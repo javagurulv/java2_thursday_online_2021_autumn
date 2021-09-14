@@ -1,13 +1,11 @@
 package lv.javaguru.java2.qwe.ui_actions.data_ui_actions;
 
-import lv.javaguru.java2.qwe.core.requests.FindSecurityByNameRequest;
-import lv.javaguru.java2.qwe.core.responses.AddStockResponse;
-import lv.javaguru.java2.qwe.core.responses.FindSecurityByNameResponse;
+import lv.javaguru.java2.qwe.core.requests.data_requests.FindSecurityByNameRequest;
+import lv.javaguru.java2.qwe.core.responses.data_responses.FindSecurityByNameResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.FindSecurityByNameService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
 public class FindSecurityByNameUIAction implements UIAction {
 
@@ -26,11 +24,15 @@ public class FindSecurityByNameUIAction implements UIAction {
         printResponse(response);
     }
 
-
     private void printResponse(FindSecurityByNameResponse response) {
-        if (response.getSecurity() == null) {
+        if (response.getSecurity() == null && !response.hasErrors()) {
             messageDialog("There is no security with such name!");
-        } else {
+        }
+        else if (response.hasErrors()) {
+            messageDialog("WRONG INPUT!\n" +
+                    printErrorList(response));
+        }
+        else {
             messageDialog(response.getSecurity().toString());
             System.out.println(response.getSecurity() + "\n");
         }

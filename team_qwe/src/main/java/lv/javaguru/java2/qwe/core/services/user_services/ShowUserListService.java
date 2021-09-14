@@ -1,9 +1,8 @@
 package lv.javaguru.java2.qwe.core.services.user_services;
 
-import lv.javaguru.java2.qwe.User;
 import lv.javaguru.java2.qwe.core.database.UserData;
-
-import java.util.List;
+import lv.javaguru.java2.qwe.core.requests.user_requests.ShowUserListRequest;
+import lv.javaguru.java2.qwe.core.responses.user_responses.ShowUserListResponse;
 
 public class ShowUserListService {
 
@@ -17,8 +16,8 @@ public class ShowUserListService {
         return userData;
     }
 
-    public void execute(List<User> list) {
-        userData.showListOfUsers(list);
+    public ShowUserListResponse execute(ShowUserListRequest request) {
+        return new ShowUserListResponse(userData.showUserList());
     }
 
 }

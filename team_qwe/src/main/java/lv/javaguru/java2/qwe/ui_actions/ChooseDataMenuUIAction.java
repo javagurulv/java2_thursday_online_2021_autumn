@@ -2,8 +2,7 @@ package lv.javaguru.java2.qwe.ui_actions;
 
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.services.data_services.*;
-import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
-import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
+import lv.javaguru.java2.qwe.core.services.validator.*;
 import lv.javaguru.java2.qwe.ui_actions.data_ui_actions.*;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
@@ -19,8 +18,8 @@ public class ChooseDataMenuUIAction implements UIAction {
     @Override
     public void execute() {
         String[] dataMenu = {"IMPORT DATA FROM FILE", "ADD STOCK", "ADD BOND", "REMOVE SECURITY",
-                "SHOW LIST", "FIND SECURITY BY NAME", "FILTER SECURITIES(STOCKS) BY ANY DOUBLE PARAMETER",
-                "FILTER SECURITIES(STOCKS) BY INDUSTRY", "RETURN TO MAIN MENU"};
+                "SHOW LIST", "FIND SECURITY BY NAME", "FILTER SECURITIES(STOCKS) BY MULTIPLE PARAMETERS",
+                "RETURN TO MAIN MENU"};
 
         boolean dataMenuOpen = true;
         while (dataMenuOpen) {
@@ -37,11 +36,9 @@ public class ChooseDataMenuUIAction implements UIAction {
                 case "SHOW LIST" -> new ShowListUIAction(
                         new ShowListService(database)).execute();
                 case "FIND SECURITY BY NAME" -> new FindSecurityByNameUIAction(
-                        new FindSecurityByNameService(database)).execute();
-                case "FILTER SECURITIES(STOCKS) BY ANY DOUBLE PARAMETER" -> new FilterStocksByAnyDoubleParameterUIAction(
-                        new FilterStocksByAnyDoubleParameterService(database)).execute();
-                case "FILTER SECURITIES(STOCKS) BY INDUSTRY" -> new FilterStocksByIndustryUIAction(
-                        new FilterStocksByIndustryService(database)).execute();
+                        new FindSecurityByNameService(database, new FindSecurityByNameValidator())).execute();
+                case "FILTER SECURITIES(STOCKS) BY MULTIPLE PARAMETERS" -> new FilterStocksByMultipleParametersUIAction(
+                        new FilterStocksByMultipleParametersService(database, new FilterStockByMultipleParametersValidator())).execute();
                 default -> dataMenuOpen = false;
             }
         }

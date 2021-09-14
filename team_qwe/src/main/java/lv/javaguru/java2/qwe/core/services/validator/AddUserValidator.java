@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.core.services.validator;
 
 import lv.javaguru.java2.qwe.core.database.UserData;
-import lv.javaguru.java2.qwe.core.requests.AddUserRequest;
+import lv.javaguru.java2.qwe.core.requests.user_requests.AddUserRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 
 import java.util.List;

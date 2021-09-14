@@ -4,13 +4,10 @@ import lv.javaguru.java2.hospital.doctor.console_ui.*;
 import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import lv.javaguru.java2.hospital.doctor.core.services.*;
 import lv.javaguru.java2.hospital.InputNumChecker;
-import lv.javaguru.java2.hospital.doctor.core.services.validators.DeleteDoctorValidator;
-import lv.javaguru.java2.hospital.doctor.core.services.validators.EditDoctorValidator;
-import lv.javaguru.java2.hospital.doctor.core.services.validators.FindDoctorByIdValidator;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.*;
 import lv.javaguru.java2.hospital.patient.console_ui.*;
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.patient.services.*;
-import lv.javaguru.java2.hospital.doctor.core.services.validators.AddDoctorValidator;
 import lv.javaguru.java2.hospital.patient.services.validators.AddPatientValidator;
 import lv.javaguru.java2.hospital.patient.services.validators.DeletePatientValidator;
 import lv.javaguru.java2.hospital.patient.services.validators.EditPatientValidator;
@@ -21,10 +18,6 @@ public class ProgMenuHospital {
     private static final PatientDatabaseImpl patientDatabase = new PatientDatabaseImpl();
     private static final DoctorDatabaseImpl doctorDatabase = new DoctorDatabaseImpl();
     private static final InputNumChecker inputNumChecker = new InputNumChecker();
-    private static AddDoctorValidator addBookValidator = new AddDoctorValidator();
-    private static DeleteDoctorValidator deleteDoctorValidator = new DeleteDoctorValidator();
-    private static FindDoctorByIdValidator findDoctorByIdValidator = new FindDoctorByIdValidator();
-    private static EditDoctorValidator editDoctorValidator = new EditDoctorValidator();
 
     private static final PatientUIActions[] PatientUIActions = {
             new AddPatientUIAction(new AddPatientService(patientDatabase, new AddPatientValidator())),
@@ -37,11 +30,11 @@ public class ProgMenuHospital {
                     new EditPatientValidator(patientDatabase)))};
 
     private static final DoctorUIActions[] doctorUIActions = {
-            new AddDoctorUIAction(new AddDoctorService(doctorDatabase, addBookValidator)),
+            new AddDoctorUIAction(new AddDoctorService(doctorDatabase, new AddDoctorValidator())),
             new ShowAllDoctorsUIAction(new ShowAllDoctorsService(doctorDatabase)),
-            new FindDoctorByIDUIAction(new FindDoctorByIdService(doctorDatabase, findDoctorByIdValidator), new DoctorExistsService(doctorDatabase)),
-            new DeleteDoctorUIAction(new DeleteDoctorService(doctorDatabase, deleteDoctorValidator), new DoctorExistsService(doctorDatabase)),
-            new EditDoctorUIAction(new EditDoctorService(doctorDatabase, editDoctorValidator), new DoctorExistsService(doctorDatabase))};
+            new DeleteDoctorUIAction(new DeleteDoctorService(doctorDatabase, new DeleteDoctorValidator()), new DoctorExistsService(doctorDatabase)),
+            new EditDoctorUIAction(new EditDoctorService(doctorDatabase, new EditDoctorValidator()), new DoctorExistsService(doctorDatabase)),
+            new SearchDoctorsUIAction(new SearchDoctorsService(doctorDatabase, new SearchDoctorsRequestValidator()))};
 
 
     //Menu
@@ -105,11 +98,11 @@ public class ProgMenuHospital {
         int userInput;
         System.out.println("1. Add a new doctor");
         System.out.println("2. Show all doctors");
-        System.out.println("3. Find the doctor by ID");
-        System.out.println("4. Delete the doctor by ID");
-        System.out.println("5. Edit the doctor's information");
+        System.out.println("3. Delete the doctor by ID");
+        System.out.println("4. Edit the doctor's information");
+        System.out.println("5. Search doctors");
         System.out.println("6. Exit");
-        userInput = inputNumChecker.execute(1, 6);
+        userInput = inputNumChecker.execute(1, 7);
         doctorUserActions(userInput);
         System.out.println();
         return userInput;
@@ -122,6 +115,7 @@ public class ProgMenuHospital {
             case 3 -> PatientUIActions[2].execute();
             case 4 -> PatientUIActions[3].execute();
             case 5 -> PatientUIActions[4].execute();
+            case 6 -> programMenu();
         }
     }
 
@@ -132,6 +126,7 @@ public class ProgMenuHospital {
             case 3 -> doctorUIActions[2].execute();
             case 4 -> doctorUIActions[3].execute();
             case 5 -> doctorUIActions[4].execute();
+            case 6 -> programMenu();
         }
     }
 }

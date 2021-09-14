@@ -1,8 +1,8 @@
 package lv.javaguru.java2.qwe.ui_actions.data_ui_actions;
 
-import lv.javaguru.java2.qwe.core.requests.AddStockRequest;
-import lv.javaguru.java2.qwe.core.requests.SecurityRequest;
-import lv.javaguru.java2.qwe.core.responses.AddStockResponse;
+import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.SecurityRequest;
+import lv.javaguru.java2.qwe.core.responses.data_responses.AddStockResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.AddStockService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 

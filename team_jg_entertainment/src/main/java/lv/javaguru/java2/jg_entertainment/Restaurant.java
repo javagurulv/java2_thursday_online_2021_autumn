@@ -7,26 +7,26 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visi
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceDeleteVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceFindByIdVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceShowListVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.AddVisitorValidator;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.DeleteVisitorValidator;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.FindVisitorValidator;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorAddVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorDeleteVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorFindVisitor;
 
 public class Restaurant {
 
     private static final DatabaseVisitors databaseRestaurant = new ImplDatabaseRestaurant();
 
-    private static AddVisitorValidator validator = new AddVisitorValidator();
+    private static ValidatorAddVisitor validator = new ValidatorAddVisitor();
     private static final ServiceAddAllVisitors addVisitorsService = new ServiceAddAllVisitors(databaseRestaurant, validator);
     private static final RestaurantUIAction uiAddVisitorAction = new UIActionAddVisitors(addVisitorsService);
-    private static DeleteVisitorValidator validatorDelete = new DeleteVisitorValidator();
+    private static ValidatorDeleteVisitor validatorDelete = new ValidatorDeleteVisitor();
     private static final ServiceDeleteVisitors deleteVisitorsService = new ServiceDeleteVisitors(databaseRestaurant, validatorDelete);
     private static final RestaurantUIAction uiDeleteVisitorsAction = new UIActionDeleteVisitors(deleteVisitorsService);
-    private static FindVisitorValidator validatorFindVisitor = new FindVisitorValidator();
+    private static ValidatorFindVisitor validatorFindVisitor = new ValidatorFindVisitor();
     private static final ServiceFindByIdVisitors findByIdVisitors = new ServiceFindByIdVisitors(databaseRestaurant,validatorFindVisitor);
-    private static final RestaurantUIAction uiFindIdVisitors = new UIActionFindByIdVisitors(findByIdVisitors);
+    private static final RestaurantUIAction uiFindIdVisitors = new UIActionFindVisitors(findByIdVisitors);
 
     private static final ServiceShowListVisitors showAllVisitorsService = new ServiceShowListVisitors(databaseRestaurant);
-    private static final RestaurantUIAction uiGetAllVisitorsAction = new UIActionShowListAllVisitors(showAllVisitorsService);
+    private static final RestaurantUIAction uiGetAllVisitorsAction = new UIActionShowListWithAllVisitors(showAllVisitorsService);
 
 
     private static final CheckMenuNumberFromConsole checkNumber = new CheckMenuNumberFromConsole();
