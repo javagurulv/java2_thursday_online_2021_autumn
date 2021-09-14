@@ -16,9 +16,11 @@ public class SearchDoctorsRequestValidator {
 
     private List<CoreError> validateSearchFields(SearchDoctorsRequest request) {
         List<CoreError> errors = new ArrayList<>();
-        if (isEmpty(request.getName()) && isEmpty(request.getSurname())) {
+        if (isEmpty(request.getId()) && isEmpty(request.getName()) && isEmpty(request.getSurname()) && isEmpty(request.getSpeciality())) {
+            errors.add(new CoreError("id", "Must not be empty!"));
             errors.add(new CoreError("name", "Must not be empty!"));
             errors.add(new CoreError("surname", "Must not be empty!"));
+            errors.add(new CoreError("speciality", "Must not be empty!"));
         }
         return errors;
     }

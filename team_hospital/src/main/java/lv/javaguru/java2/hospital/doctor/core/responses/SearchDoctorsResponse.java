@@ -4,7 +4,7 @@ import lv.javaguru.java2.hospital.domain.Doctor;
 
 import java.util.List;
 
-public class SearchDoctorsResponse extends CoreResponse{
+public class SearchDoctorsResponse extends CoreResponse {
 
     private List<Doctor> doctors;
 

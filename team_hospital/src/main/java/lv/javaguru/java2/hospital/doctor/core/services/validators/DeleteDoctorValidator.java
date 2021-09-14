@@ -1,6 +1,5 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators;
 
-import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.requests.DeleteDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 
@@ -18,8 +17,8 @@ public class DeleteDoctorValidator {
 
 
     private Optional<CoreError> validateId(DeleteDoctorRequest request) {
-        return (request.getDoctorIdToDelete() == 0)
-                ? Optional.of(new CoreError("id", "Must not be 0!"))
+        return (request.getDoctorIdToDelete() == null || request.getDoctorIdToDelete().isEmpty())
+                ? Optional.of(new CoreError("id", "Must not be empty!"))
                 : Optional.empty();
     }
 }

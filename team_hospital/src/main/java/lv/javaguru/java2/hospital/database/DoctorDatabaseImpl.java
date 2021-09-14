@@ -16,19 +16,6 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
         doctorsList.add(doctor);
     }
 
-    @Override
-    public boolean findDoctorById(long id) {
-        boolean isDoctorFound = false;
-        Optional<Doctor> doctorToFindOpt = doctorsList.stream()
-                .filter(doctor -> doctor.getId() == id)
-                .findFirst();
-        if (doctorToFindOpt.isPresent()) {
-            Doctor doctorToFind = doctorToFindOpt.get();
-            System.out.println(doctorToFind);
-            isDoctorFound = true;
-        }
-        return isDoctorFound;
-    }
 
     @Override
     public boolean deleteDoctorById(long id) {
@@ -95,6 +82,45 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
         return doctorsList.stream()
                 .filter(doctor -> doctor.getName().equals(name))
                 .filter(doctor -> doctor.getSurname().equals(surname))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Doctor> findById(long id) {
+        return doctorsList.stream()
+                .filter(doctor -> doctor.getId() == id)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Doctor> findBySpeciality(String speciality) {
+        return doctorsList.stream()
+                .filter(doctor -> doctor.getSpeciality().equals(speciality))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Doctor> findByNameAndSpeciality(String name, String speciality) {
+        return doctorsList.stream()
+                .filter(doctor -> doctor.getName().equals(name))
+                .filter(doctor -> doctor.getSpeciality().equals(speciality))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Doctor> findBySurnameAndSpeciality(String surname, String speciality) {
+        return doctorsList.stream()
+                .filter(doctor -> doctor.getSurname().equals(surname))
+                .filter(doctor -> doctor.getSpeciality().equals(speciality))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Doctor> findByNameAndSurnameAndSpeciality(String name, String surname, String speciality) {
+        return doctorsList.stream()
+                .filter(doctor -> doctor.getName().equals(name))
+                .filter(doctor -> doctor.getSurname().equals(surname))
+                .filter(doctor -> doctor.getSpeciality().equals(speciality))
                 .collect(Collectors.toList());
     }
 

@@ -28,7 +28,7 @@ public class InputNumChecker {
                 value = Integer.parseInt(scanner.nextLine());
                 invalid = false;
             } catch (NumberFormatException nfe) {
-                System.out.println("Please enter validate data again.");
+                System.out.println("Please enter valid data again.");
             }
         } while (invalid);
         return value;

@@ -32,7 +32,6 @@ public class ProgMenuHospital {
     private static final DoctorUIActions[] doctorUIActions = {
             new AddDoctorUIAction(new AddDoctorService(doctorDatabase, new AddDoctorValidator())),
             new ShowAllDoctorsUIAction(new ShowAllDoctorsService(doctorDatabase)),
-            new FindDoctorByIDUIAction(new FindDoctorByIdService(doctorDatabase, new FindDoctorByIdValidator()), new DoctorExistsService(doctorDatabase)),
             new DeleteDoctorUIAction(new DeleteDoctorService(doctorDatabase, new DeleteDoctorValidator()), new DoctorExistsService(doctorDatabase)),
             new EditDoctorUIAction(new EditDoctorService(doctorDatabase, new EditDoctorValidator()), new DoctorExistsService(doctorDatabase)),
             new SearchDoctorsUIAction(new SearchDoctorsService(doctorDatabase, new SearchDoctorsRequestValidator()))};
@@ -99,11 +98,10 @@ public class ProgMenuHospital {
         int userInput;
         System.out.println("1. Add a new doctor");
         System.out.println("2. Show all doctors");
-        System.out.println("3. Find the doctor by ID");
-        System.out.println("4. Delete the doctor by ID");
-        System.out.println("5. Edit the doctor's information");
-        System.out.println("6. Search doctors");
-        System.out.println("7. Exit");
+        System.out.println("3. Delete the doctor by ID");
+        System.out.println("4. Edit the doctor's information");
+        System.out.println("5. Search doctors");
+        System.out.println("6. Exit");
         userInput = inputNumChecker.execute(1, 7);
         doctorUserActions(userInput);
         System.out.println();
@@ -128,8 +126,7 @@ public class ProgMenuHospital {
             case 3 -> doctorUIActions[2].execute();
             case 4 -> doctorUIActions[3].execute();
             case 5 -> doctorUIActions[4].execute();
-            case 6 -> doctorUIActions[5].execute();
-            case 7 -> programMenu();
+            case 6 -> programMenu();
         }
     }
 }

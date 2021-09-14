@@ -16,14 +16,14 @@ public class DeleteDoctorUIAction implements DoctorUIActions {
 
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
-        long id = getUserInput.getUserNumericInput("Please, enter the doctor's id: ");
+        String id = getUserInput.getUserStringInput("Please, enter the doctor's id: ");
         DeleteDoctorRequest request = new DeleteDoctorRequest(id);
         DeleteDoctorResponse response = deleteDoctor.execute(request);
-        if(response.hasErrors()) {
+        if (response.hasErrors()) {
             response.getErrors().forEach(coreError ->
                     System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));
         } else {
-            if(response.isDoctorDeleted()){
+            if (response.isDoctorDeleted()) {
                 System.out.println("The doctor with id " + id + " was successfully deleted.");
             } else {
                 System.out.println("The doctor with id " + id + " was not deleted.");
