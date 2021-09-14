@@ -14,7 +14,7 @@ public class AddTableService {
 	}
 
 	public AddTableResponse execute(AddTableRequest request) {
-		Table table = new Table(request.getTitle(), request.getTableCapacity());
+		Table table = new Table(request.getTitle(), request.getTableCapacity(),request.getPrice());
 		tableDatabase.save(table);
 		return new AddTableResponse(table);
 	}

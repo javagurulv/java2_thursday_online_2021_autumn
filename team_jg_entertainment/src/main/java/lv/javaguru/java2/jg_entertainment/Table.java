@@ -7,10 +7,12 @@ public class Table {
 	private Long id;
 	private String title;
 	private int tableCapacity;
+	private double price;
 
-	public Table(String title, int tableCapacity) {
+	public Table(String title, int tableCapacity,double price) {
 		this.title = title;
 		this.tableCapacity = tableCapacity;
+		this.price = price;
 	}
 
 	public Long getId() {
@@ -37,6 +39,14 @@ public class Table {
 		this.tableCapacity = tableCapacity;
 	}
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -46,12 +56,14 @@ public class Table {
 		Table table = (Table) o;
 		return Objects.equals(id, table.id) &&
 				Objects.equals(title, table.title) &&
-				Objects.equals(tableCapacity, table.tableCapacity);
+				Objects.equals(tableCapacity, table.tableCapacity) &&
+				Objects.equals(price, table.price);
+
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, title, tableCapacity);
+		return Objects.hash(id, title, tableCapacity, price);
 	}
 
 	@Override
@@ -60,6 +72,7 @@ public class Table {
 				"id=" + id +
 				", title='" + title + '\'' +
 				", tableCapacity='" + tableCapacity + '\'' +
+				", price='" + price + '\'' +
 				'}';
 	}
 }
