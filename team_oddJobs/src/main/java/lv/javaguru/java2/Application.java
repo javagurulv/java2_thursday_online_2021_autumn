@@ -60,6 +60,13 @@ public class Application { private static final Database database = new InMemory
     private static final FindSpecialistService findSpecialistService = new FindSpecialistService(database,findSpecialistValidator);
     private static final UIAction findSpecialist = new FindSpecialistUIAction(findSpecialistService);
 
+    private static final FindAdvertisementByTitleValidator findAdvertisementByTitleValidator = new FindAdvertisementByTitleValidator();
+    private static final FindAdvertisementByTitleService findAdvertisementByTitleService = new FindAdvertisementByTitleService(database,findAdvertisementByTitleValidator);
+    private static final UIAction findAdvertisementByTitle = new FindAdvertisementByTitleUIAction(findAdvertisementByTitleService);
+
+    private static final FindAdvertisementByIdValidator findAdvertisementByIdValidator = new FindAdvertisementByIdValidator();
+    private static final FindAdvertisementByIdService findAdvertisementByIdService = new FindAdvertisementByIdService(database,findAdvertisementByIdValidator);
+    private static final UIAction findAdvertisementById = new FindAdvertisementByIdUIAction(findAdvertisementByIdService);
 
     private static final GetAllSpecialistsService getAllSpecialistsService = new GetAllSpecialistsService(database);
     private static final UIAction getAllSpecialists = new GetAllSpecialistUIAction(getAllSpecialistsService);
@@ -94,11 +101,13 @@ public class Application { private static final Database database = new InMemory
         System.out.println("3.  Create advertisement");
         System.out.println("4.  Find specialist by search criteria");
         System.out.println("5.  Find client by search criteria");
-        System.out.println("6.  Show all clients");
-        System.out.println("7.  Show all specialists");
-        System.out.println("8.  Delete client account");
-        System.out.println("9.  Delete specialist account");
-        System.out.println("10. Exit");
+        System.out.println("6.  Find advertisement by title");
+        System.out.println("7.  Find advertisement by ID");
+        System.out.println("8.  Show all clients");
+        System.out.println("9.  Show all specialists");
+        System.out.println("10.  Delete client account");
+        System.out.println("11.  Delete specialist account");
+        System.out.println("12. Exit");
     }
 
 
@@ -130,27 +139,37 @@ public class Application { private static final Database database = new InMemory
             }
 
             case 6: {
+                findAdvertisementByTitle.execute();
+                break;
+            }
+
+            case 7: {
+                findAdvertisementById.execute();
+                break;
+            }
+
+            case 8: {
                 getAllClients.execute();
 
                 break;
             }
 
-            case 7: {
+            case 9: {
                 getAllSpecialists.execute();
 
                 break;
             }
-            case 8: {
+            case 10: {
                 deleteClient.execute();
 
                 break;
             }
-            case 9: {
+            case 11: {
                 deleteSpecialist.execute();
 
                 break;
             }
-            case 10: {
+            case 12: {
                 menuExit.execute();
 
 

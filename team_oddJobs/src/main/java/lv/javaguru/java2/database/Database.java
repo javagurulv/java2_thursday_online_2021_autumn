@@ -42,6 +42,7 @@ public interface Database {
 
     void findAdvertisementByTitle(String advTitle);
 
+    void findAdvertisementById(long advId);
 
     List<Specialist> getAllSpecialist();
 
