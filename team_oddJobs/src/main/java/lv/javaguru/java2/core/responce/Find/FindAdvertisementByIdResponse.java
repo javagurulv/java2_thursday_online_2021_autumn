@@ -16,4 +16,15 @@ public class FindAdvertisementByIdResponse extends CoreResponse {
     }
 
     public List<Advertisement> getFoundAdvertisements() {return foundAdvertisements;}
+
+// public class FindAdvertisementByIdResponse {
+
+//     private Advertisement foundAdvertisement;
+
+//     public FindAdvertisementByIdResponse(Advertisement foundAdvertisement) {
+//         this.foundAdvertisement = foundAdvertisement;
+//     }
+
+//     public Advertisement getFoundAdvertisement() {return foundAdvertisement;}
+
 }

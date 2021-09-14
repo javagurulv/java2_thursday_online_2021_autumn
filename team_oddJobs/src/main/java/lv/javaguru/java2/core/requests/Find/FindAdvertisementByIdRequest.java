@@ -11,4 +11,5 @@ public class FindAdvertisementByIdRequest {
     public boolean isIdProvided() {
         return this.advId != 0;
     }
+//     public long getAdvId() {return advId;}
 }

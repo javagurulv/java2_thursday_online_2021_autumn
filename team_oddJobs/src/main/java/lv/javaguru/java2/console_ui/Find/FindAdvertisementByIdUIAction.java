@@ -5,6 +5,7 @@ import lv.javaguru.java2.Specialist;
 import lv.javaguru.java2.console_ui.UIAction;
 import lv.javaguru.java2.core.requests.Find.FindAdvertisementByIdRequest;
 import lv.javaguru.java2.core.responce.Find.FindAdvertisementByIdResponse;
+import lv.javaguru.java2.console_ui.UIAction;
 import lv.javaguru.java2.services.Find.FindAdvertisementByIdService;
 
 import java.util.Scanner;
@@ -35,5 +36,7 @@ public class FindAdvertisementByIdUIAction implements UIAction {
         } else {
             response.getFoundAdvertisements().forEach(Advertisement::toString);
         }
+        findAdvertisementByIdService.execute(advId);
+        System.out.println();
     }
 }

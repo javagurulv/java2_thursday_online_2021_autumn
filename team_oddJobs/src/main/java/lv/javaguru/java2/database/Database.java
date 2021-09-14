@@ -42,7 +42,11 @@ public interface Database {
 
     List<Advertisement> findAdvertisementByTitle(String advTitle);
 
+
     List<Advertisement> findAdvertisementById(long advId);
+
+    void findAdvertisementById(long advId);
+
 
     List<Specialist> getAllSpecialist();
 
