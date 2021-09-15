@@ -1,6 +1,7 @@
 package lv.javaguru.java2.jg_entertainment;
 
 import lv.javaguru.java2.jg_entertainment.menu.*;
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.*;
 
 import java.util.Scanner;
 

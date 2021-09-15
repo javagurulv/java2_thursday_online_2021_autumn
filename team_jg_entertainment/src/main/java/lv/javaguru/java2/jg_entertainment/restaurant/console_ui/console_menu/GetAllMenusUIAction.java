@@ -1,4 +1,7 @@
-package lv.javaguru.java2.jg_entertainment.menu;
+package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu;
+
+import lv.javaguru.java2.jg_entertainment.menu.DatabaseMenu;
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.UIAction;
 
 public class GetAllMenusUIAction implements UIAction {
 
