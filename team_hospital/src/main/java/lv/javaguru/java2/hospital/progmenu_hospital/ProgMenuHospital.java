@@ -8,10 +8,7 @@ import lv.javaguru.java2.hospital.doctor.core.services.validators.*;
 import lv.javaguru.java2.hospital.patient.console_ui.*;
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.patient.services.*;
-import lv.javaguru.java2.hospital.patient.services.validators.AddPatientValidator;
-import lv.javaguru.java2.hospital.patient.services.validators.DeletePatientValidator;
-import lv.javaguru.java2.hospital.patient.services.validators.EditPatientValidator;
-import lv.javaguru.java2.hospital.patient.services.validators.FindPatientByIDValidator;
+import lv.javaguru.java2.hospital.patient.services.validators.*;
 
 public class ProgMenuHospital {
 
