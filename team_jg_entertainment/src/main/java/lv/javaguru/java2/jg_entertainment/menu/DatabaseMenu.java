@@ -8,7 +8,7 @@ public interface DatabaseMenu {
 
     void save(Menu menu);
 
-    void deleteByNr(int number);
+    boolean deleteByNr(Long number);
 
     List<Menu> getAllMenus();
 

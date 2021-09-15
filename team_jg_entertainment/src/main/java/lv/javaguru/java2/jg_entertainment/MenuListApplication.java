@@ -67,7 +67,7 @@ public class MenuListApplication {
     private static void removeMenuAction(List<Menu> menus) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter menu number: ");
-        int number = scanner.nextInt();
+        Long number = scanner.nextLong();
         menus.remove(new Menu(number));
         System.out.println("That menu was removed from the order.");
     }
@@ -75,7 +75,7 @@ public class MenuListApplication {
     private static void addMenuAction(List<Menu> menus) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter menu number: ");
-        int number = scanner.nextInt();
+        Long number = scanner.nextLong();
         Menu menu = new Menu(number);
         menus.add(menu);
         System.out.println("Your menu was added to the order.");

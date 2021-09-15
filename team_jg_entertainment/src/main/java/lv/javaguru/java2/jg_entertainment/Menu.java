@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class Menu {
     private String title;
-    private int number;
+    private Long number;
     private String description;
     private int price;
 
-    public Menu(int number) {
+    public Menu(Long number) {
         this.number = number;
     }
 
-    public Menu(String title, int number, String description, int price) {
+    public Menu(String title, Long number, String description, int price) {
         this.title = title;
         this.number = number;
         this.description = description;
@@ -23,7 +23,7 @@ public class Menu {
         return title;
     }
 
-    public int getNumber() {
+    public Long getNumber() {
         return number;
     }
 
@@ -39,7 +39,7 @@ public class Menu {
         this.title = title;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(Long number) {
         this.number = number;
     }
 
@@ -56,9 +56,9 @@ public class Menu {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Menu menu = (Menu) o;
-        return number == menu.number &&
-                price == menu.price &&
+        return price == menu.price &&
                 Objects.equals(title, menu.title) &&
+                Objects.equals(number, menu.number) &&
                 Objects.equals(description, menu.description);
     }
 
