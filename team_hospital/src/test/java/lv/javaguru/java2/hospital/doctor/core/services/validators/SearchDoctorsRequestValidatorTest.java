@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators;
 
+import lv.javaguru.java2.hospital.doctor.core.requests.Ordering;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import org.junit.jupiter.api.Test;
@@ -64,7 +65,7 @@ class SearchDoctorsRequestValidatorTest {
     }
 
     @Test
-    public void shouldReturnNameAndSurnameErrors() {
+    public void shouldReturnIdNameSurnameAndSpecialityErrors() {
         SearchDoctorsRequest request = new SearchDoctorsRequest("", "", "", "");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
@@ -77,7 +78,46 @@ class SearchDoctorsRequestValidatorTest {
         assertEquals(errorList.get(2).getMessage(), "Must not be empty!");
         assertEquals(errorList.get(3).getField(), "speciality");
         assertEquals(errorList.get(3).getMessage(), "Must not be empty!");
+    }
 
+    @Test
+    public void shouldReturnErrorWhenOrderDirectionAreEmpty() {
+        Ordering ordering = new Ordering("name", null);
+        SearchDoctorsRequest request = new SearchDoctorsRequest("1", "name", "surname", "speciality", ordering);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "orderDirection");
+        assertEquals(errors.get(0).getMessage(), "Must not be empty!");
+    }
+
+    @Test
+    public void shouldReturnErrorWhenOrderByAreEmpty() {
+        Ordering ordering = new Ordering(null, "ASCENDING");
+        SearchDoctorsRequest request = new SearchDoctorsRequest("1", "name", "surname", "speciality", ordering);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "orderBy");
+        assertEquals(errors.get(0).getMessage(), "Must not be empty!");
+    }
+
+    @Test
+    public void shouldReturnErrorWhenOrderByContainNotValidValue() {
+        Ordering ordering = new Ordering("notValidValue", "ASCENDING");
+        SearchDoctorsRequest request = new SearchDoctorsRequest("1", "name", "surname", "speciality", ordering);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "orderBy");
+        assertEquals(errors.get(0).getMessage(), "Must contain 'name', 'surname' or 'speciality' only!");
+    }
+
+    @Test
+    public void shouldReturnErrorWhenOrderDirectionContainNotValidValue() {
+        Ordering ordering = new Ordering("name", "notValidValue");
+        SearchDoctorsRequest request = new SearchDoctorsRequest("1", "name", "surname", "speciality", ordering);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "orderDirection");
+        assertEquals(errors.get(0).getMessage(), "Must contain 'ASCENDING' or 'DESCENDING' only!");
     }
 
 }
