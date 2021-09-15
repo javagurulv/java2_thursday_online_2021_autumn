@@ -1,20 +1,25 @@
 package lv.javaguru.java2.jg_entertainment;
 
-import java.util.ArrayList;
-import java.util.List;
+import lv.javaguru.java2.jg_entertainment.menu.*;
+
 import java.util.Scanner;
 
 public class MenuListApplication {
+    private static DatabaseMenu databaseMenu = new ImplDatabaseMenu();
+    private static UIAction addMenuUIAction = new AddMenuUIAction(databaseMenu);
+    private static UIAction removeMenuUIAction = new RemoveMenuUIAction(databaseMenu);
+    private static UIAction getAllMenusUIAction = new GetAllMenusUIAction(databaseMenu);
+    private static UIAction exitUIAction = new ExitUIAction();
+
     public static void main(String[] args) {
-        List<Menu> menus = new ArrayList<>();
         while (true) {
             printProgramMenu();
             int menuNumber = getMenuNumberFromUser();
-            executeSelectedMenuItem(menus, menuNumber);
+            executeSelectedMenuItem(menuNumber);
         }
     }
 
-    private static void printProgramMenu() {
+        private static void printProgramMenu() {
         System.out.println("Program menu:");
         System.out.println("1. Add menu to list");
         System.out.println("2. Delete menu from list");
@@ -29,55 +34,25 @@ public class MenuListApplication {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    private static void executeSelectedMenuItem(List<Menu> menus, int selectedMenu) {
+    private static void executeSelectedMenuItem(int selectedMenu) {
         switch (selectedMenu) {
             case 1: {
-                addMenuAction(menus);
+                addMenuUIAction.execute();
                 break;
             }
             case 2: {
-                removeMenuAction(menus);
+                removeMenuUIAction.execute();
                 break;
             }
             case 3: {
-                printAllMenusAction(menus);
+                getAllMenusUIAction.execute();
                 break;
             }
             case 4: {
-                exitProgramAction();
+                exitUIAction.execute();
                 break;
 
             }
         }
-    }
-
-    private static void exitProgramAction() {
-        System.out.println("Good by!");
-        System.exit(0);
-    }
-
-    private static void printAllMenusAction(List<Menu> menus) {
-        System.out.println("Menu list: ");
-        for ( Menu menu : menus ) {
-            System.out.println(menu);
-        }
-        System.out.println("Menu list end.");
-    }
-
-    private static void removeMenuAction(List<Menu> menus) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter menu number: ");
-        Long number = scanner.nextLong();
-        menus.remove(new Menu(number));
-        System.out.println("That menu was removed from the order.");
-    }
-
-    private static void addMenuAction(List<Menu> menus) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter menu number: ");
-        Long number = scanner.nextLong();
-        Menu menu = new Menu(number);
-        menus.add(menu);
-        System.out.println("Your menu was added to the order.");
     }
 }
