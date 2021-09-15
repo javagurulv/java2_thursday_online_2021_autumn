@@ -3,7 +3,7 @@ package lv.javaguru.java2.qwe.core.services.data_services;
 import lv.javaguru.java2.qwe.Stock;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
-import lv.javaguru.java2.qwe.core.requests.data_requests.SecurityRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
 import lv.javaguru.java2.qwe.core.services.validator.AddSecurityValidator;
 import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
@@ -45,11 +45,10 @@ public class ImportSecuritiesService {
                 .map(data -> data.split(","))
                 .collect(Collectors.toList());
         importStocks(list);
-//        importBonds(list);
     }
 
     private void importStocks(List<String[]> list) {
-        List<SecurityRequest> requestList = IntStream.rangeClosed(0, list.size() - 1)
+        List<CoreRequest> requestList = IntStream.rangeClosed(0, list.size() - 1)
                 .filter(i -> list.get(i)[0].equals("Stock"))
                 .mapToObj(i -> new AddStockRequest(
                         list.get(i)[1], list.get(i)[2], list.get(i)[3],
@@ -57,11 +56,10 @@ public class ImportSecuritiesService {
                 ))
                 .collect(Collectors.toList());
 
-        List<SecurityRequest> errorRequestList = generateErrorRequestList(requestList, stockValidator);
+        List<CoreRequest> errorRequestList = generateErrorRequestList(requestList, stockValidator);
 
         if (errorRequestList.isEmpty()) {
             importSt(list);
-//            messageDialog("Data has been successfully imported!");
         } else {
             messageDialog("FAILED to add this list!\n" +
                     "Validation FAILED!");
@@ -85,52 +83,12 @@ public class ImportSecuritiesService {
                 )));
     }
 
-    private List<SecurityRequest> generateErrorRequestList(List<SecurityRequest> requestList,
+    private List<CoreRequest> generateErrorRequestList(List<CoreRequest> requestList,
                                                            AddSecurityValidator validator) {
         return IntStream.rangeClosed(0, requestList.size() - 1)
                 .mapToObj(requestList::get)
                 .filter(request -> !validator.validate(request).isEmpty())
                 .collect(Collectors.toList());
     }
-
-    /*    private void importBonds(List<String[]> list) {
-        List<SecurityRequest> requestList = IntStream.rangeClosed(0, list.size() - 1)
-                .filter(i -> list.get(i)[0].equals("Bond"))
-                .mapToObj(i -> new AddBondRequest(
-                        list.get(i)[1], list.get(i)[2], list.get(i)[3],
-                        list.get(i)[4], list.get(i)[5], list.get(i)[6],
-                        list.get(i)[7], list.get(i)[8]
-                ))
-                .collect(Collectors.toList());
-
-        List<SecurityRequest> errorRequestList = generateErrorRequestList(requestList, bondValidator);
-
-        if (errorRequestList.isEmpty()) {
-            importBn(list);
-            messageDialog("Data has been successfully imported!");
-        } else {
-            messageDialog("FAILED to add this list!\n" +
-                    "Validation FAILED!");
-            errorRequestList.stream()
-                    .map(request -> (AddBondRequest) request)
-                    .forEach(request -> System.out.println("Validation failed for: " + request.getName()));
-            System.out.println("Validation failed for " + errorRequestList.size() + " securities!");
-        }
-    }*/
-
-    /*    private void importBn(List<String[]> list) {
-        IntStream.rangeClosed(0, list.size() - 1)
-                .filter(i -> list.get(i)[0].equals("Bond"))
-                .forEach(i -> database.addBond(new Bond(
-                        list.get(i)[1],
-                        list.get(i)[2],
-                        list.get(i)[3],
-                        Double.parseDouble(list.get(i)[4]),
-                        Double.parseDouble(list.get(i)[5]),
-                        list.get(i)[6],
-                        Integer.parseInt(list.get(i)[7]),
-                        list.get(i)[8]
-                )));
-    }*/
 
 }

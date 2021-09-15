@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.requests.data_requests;
 
-public class PagingRequest extends SecurityRequest {
+public class PagingRequest extends CoreRequest {
 
     private final String pageNumber;
     private final String pageSize;

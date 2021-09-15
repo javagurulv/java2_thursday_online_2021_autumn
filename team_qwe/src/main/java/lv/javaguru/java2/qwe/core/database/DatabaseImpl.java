@@ -4,7 +4,7 @@ import lv.javaguru.java2.qwe.Bond;
 import lv.javaguru.java2.qwe.Cash;
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.Stock;
-import lv.javaguru.java2.qwe.core.requests.data_requests.FilterStockByMultipleParametersRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.FilterStocksByMultipleParametersRequest;
 import lv.javaguru.java2.qwe.core.services.data_services.ImportSecuritiesService;
 import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
 import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
@@ -68,7 +68,7 @@ public class DatabaseImpl implements Database {
 
     @Override
     public final List<Security> filterStocksByMultipleParameters(
-            List<Security> list, FilterStockByMultipleParametersRequest request, int i) {
+            List<Security> list, FilterStocksByMultipleParametersRequest request, int i) {
         List<Security> nextList = list;
         nextList = nextList.stream()
                 .filter(security -> security.getClass().getSimpleName().equals("Stock"))
@@ -82,7 +82,7 @@ public class DatabaseImpl implements Database {
         return filterStocksByMultipleParameters(nextList, request, i);
     }
 
-    private void sortBy(List<Security> list, FilterStockByMultipleParametersRequest request) {
+    private void sortBy(List<Security> list, FilterStocksByMultipleParametersRequest request) {
         if (request.getOrderBy() != null && !request.getOrderBy().isEmpty() && request.getOrderDirection().equals("ASCENDING")) {
             list.sort((Comparator<? super Security>) getComparator(request));
         }
@@ -91,7 +91,7 @@ public class DatabaseImpl implements Database {
         }
     }
 
-    private List<Security> getPage(List<Security> list, FilterStockByMultipleParametersRequest request) {
+    private List<Security> getPage(List<Security> list, FilterStocksByMultipleParametersRequest request) {
         if (request.getPageNumber() != 0) {
             return list.stream()
                     .skip((long) request.getPageNumber() * request.getPageSize() - 1)
@@ -102,7 +102,7 @@ public class DatabaseImpl implements Database {
         }
     }
 
-    private Comparator<? extends Security> getComparator(FilterStockByMultipleParametersRequest request) {
+    private Comparator<? extends Security> getComparator(FilterStocksByMultipleParametersRequest request) {
         Map<String, Comparator<? extends Security>> map = ofEntries(
                 entry("Name", Comparator.comparing(Security::getName)),
                 entry("Industry", Comparator.comparing(Security::getIndustry)),

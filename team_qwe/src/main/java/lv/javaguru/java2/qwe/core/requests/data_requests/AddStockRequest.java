@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.requests.data_requests;
 
-public class AddStockRequest extends SecurityRequest {
+public class AddStockRequest extends CoreRequest {
 
     private final String name;
     private final String industry;

@@ -23,10 +23,8 @@ public class FindSecurityByNameService {
     public FindSecurityByNameResponse execute(FindSecurityByNameRequest request) {
         List<CoreError> errors = validator.validate(request);
         Optional<Security> result = database.findSecurityByName(request.getName());
-        if (errors.isEmpty() && result.isPresent()) {
-            return new FindSecurityByNameResponse(result.get());
-        }
-        return new FindSecurityByNameResponse(errors);
+        return (errors.isEmpty() && result.isPresent()) ?
+                new FindSecurityByNameResponse(result.get()) : new FindSecurityByNameResponse(errors);
     }
 
 }

@@ -3,7 +3,7 @@ package lv.javaguru.java2.qwe.core.database;
 import lv.javaguru.java2.qwe.Bond;
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.Stock;
-import lv.javaguru.java2.qwe.core.requests.data_requests.FilterStockByMultipleParametersRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.FilterStocksByMultipleParametersRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +24,6 @@ public interface Database {
     Optional<Security> findSecurityByName(String name);
 
     List<Security> filterStocksByMultipleParameters(List<Security> list,
-                                                    FilterStockByMultipleParametersRequest request, int i);
+                                                    FilterStocksByMultipleParametersRequest request, int i);
 
 }

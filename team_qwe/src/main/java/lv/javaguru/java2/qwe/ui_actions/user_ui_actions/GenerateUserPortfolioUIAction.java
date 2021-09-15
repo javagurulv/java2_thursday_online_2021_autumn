@@ -2,7 +2,7 @@ package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 
 import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRequest;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GenerateUserPortfolioResponse;
-import lv.javaguru.java2.qwe.core.services.user_services.GeneratePortfolioService;
+import lv.javaguru.java2.qwe.core.services.user_services.GenerateUserPortfolioService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
@@ -10,10 +10,10 @@ import static lv.javaguru.java2.qwe.utils.UtilityMethods.printErrorList;
 
 public class GenerateUserPortfolioUIAction implements UIAction {
 
-    private final GeneratePortfolioService generatePortfolioService;
+    private final GenerateUserPortfolioService generatePortfolioService;
     private String userName;
 
-    public GenerateUserPortfolioUIAction(GeneratePortfolioService generatePortfolioService) {
+    public GenerateUserPortfolioUIAction(GenerateUserPortfolioService generatePortfolioService) {
         this.generatePortfolioService = generatePortfolioService;
     }
 

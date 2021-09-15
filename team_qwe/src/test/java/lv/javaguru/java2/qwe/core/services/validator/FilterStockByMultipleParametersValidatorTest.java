@@ -10,79 +10,79 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class FilterStockByMultipleParametersValidatorTest {
 
-    private final FilterStockByMultipleParametersValidator validator = new FilterStockByMultipleParametersValidator();
+    private final FilterStocksByMultipleParametersValidator validator = new FilterStocksByMultipleParametersValidator();
 
     @Test
     public void shouldReturnEmptyList1() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "30.10"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
-                new FilterStockByIndustryRequest("Technology")
+        List<CoreRequest> list = List.of(
+                new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "30.10"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
+                new FilterStocksByIndustryRequest("Technology")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnEmptyList2() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByIndustryRequest("Utility"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "0.8"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "1.")
+        List<CoreRequest> list = List.of(
+                new FilterStocksByIndustryRequest("Utility"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "0.8"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "1.")
 
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnEmptyList3() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "0"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "0"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "0"),
-                new FilterStockByIndustryRequest("Technology")
+        List<CoreRequest> list = List.of(
+                new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "0"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "0"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "0"),
+                new FilterStocksByIndustryRequest("Technology")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnEmptyList4() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByIndustryRequest("Utility"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "0.8"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "1."),
+        List<CoreRequest> list = List.of(
+                new FilterStocksByIndustryRequest("Utility"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "0.8"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "1."),
                 new OrderingRequest("Dividend", "ASCENDING"),
                 new PagingRequest("3", "5")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnEmptyList5() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByIndustryRequest("Utility"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "0.8"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "1."),
+        List<CoreRequest> list = List.of(
+                new FilterStocksByIndustryRequest("Utility"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "0.8"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "1."),
                 new OrderingRequest("", ""),
                 new PagingRequest("", "")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnNoParameterError() {
-        List<SecurityRequest> list = List.of();
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        List<CoreRequest> list = List.of();
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Choose parameter");
@@ -91,13 +91,13 @@ public class FilterStockByMultipleParametersValidatorTest {
 
     @Test
     public void shouldReturnMarketPriceTargetError() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "-30.10"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
-                new FilterStockByIndustryRequest("Technology")
+        List<CoreRequest> list = List.of(
+                new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "-30.10"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
+                new FilterStocksByIndustryRequest("Technology")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Market price target");
@@ -106,13 +106,13 @@ public class FilterStockByMultipleParametersValidatorTest {
 
     @Test
     public void shouldReturnDividendTargetError() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "30.10"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "-2.05"),
-                new FilterStockByIndustryRequest("Technology")
+        List<CoreRequest> list = List.of(
+                new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "30.10"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "-2.05"),
+                new FilterStocksByIndustryRequest("Technology")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Dividend target");
@@ -121,13 +121,13 @@ public class FilterStockByMultipleParametersValidatorTest {
 
     @Test
     public void shouldReturnRiskWeightTargetError() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "30.10"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "-1.0"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
-                new FilterStockByIndustryRequest("Technology")
+        List<CoreRequest> list = List.of(
+                new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "30.10"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "-1.0"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
+                new FilterStocksByIndustryRequest("Technology")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Risk weight target");
@@ -136,13 +136,13 @@ public class FilterStockByMultipleParametersValidatorTest {
 
     @Test
     public void shouldReturnIndustryTargetError() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "30.10"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
-                new FilterStockByIndustryRequest("")
+        List<CoreRequest> list = List.of(
+                new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "30.10"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
+                new FilterStocksByIndustryRequest("")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Industry target");
@@ -151,14 +151,14 @@ public class FilterStockByMultipleParametersValidatorTest {
 
     @Test
     public void shouldReturnOrderingError1() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "30.10"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
-                new FilterStockByIndustryRequest("Technology"),
+        List<CoreRequest> list = List.of(
+                new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "30.10"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
+                new FilterStocksByIndustryRequest("Technology"),
                 new OrderingRequest("", "ASCENDING")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Ordering");
@@ -167,14 +167,14 @@ public class FilterStockByMultipleParametersValidatorTest {
 
     @Test
     public void shouldReturnOrderingError2() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "30.10"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
-                new FilterStockByIndustryRequest("Technology"),
+        List<CoreRequest> list = List.of(
+                new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "30.10"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
+                new FilterStocksByIndustryRequest("Technology"),
                 new OrderingRequest("Name", "")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Ordering");
@@ -183,15 +183,15 @@ public class FilterStockByMultipleParametersValidatorTest {
 
     @Test
     public void shouldReturnPagingError1() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "30.10"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
-                new FilterStockByIndustryRequest("Technology"),
+        List<CoreRequest> list = List.of(
+                new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "30.10"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
+                new FilterStocksByIndustryRequest("Technology"),
                 new OrderingRequest("Risk weight", "ASCENDING"),
                 new PagingRequest("", "5")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Paging");
@@ -200,15 +200,15 @@ public class FilterStockByMultipleParametersValidatorTest {
 
     @Test
     public void shouldReturnPagingError2() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "30.10"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
-                new FilterStockByIndustryRequest("Technology"),
+        List<CoreRequest> list = List.of(
+                new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "30.10"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
+                new FilterStocksByIndustryRequest("Technology"),
                 new OrderingRequest("Risk weight", "ASCENDING"),
                 new PagingRequest("3", "")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Paging");
@@ -217,15 +217,15 @@ public class FilterStockByMultipleParametersValidatorTest {
 
     @Test
     public void shouldReturnPagingError3() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "30.10"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
-                new FilterStockByIndustryRequest("Technology"),
+        List<CoreRequest> list = List.of(
+                new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "30.10"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
+                new FilterStocksByIndustryRequest("Technology"),
                 new OrderingRequest("Risk weight", "ASCENDING"),
                 new PagingRequest("-3", "5")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Paging");
@@ -234,15 +234,15 @@ public class FilterStockByMultipleParametersValidatorTest {
 
     @Test
     public void shouldReturnPagingError4() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "30.10"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
-                new FilterStockByIndustryRequest("Technology"),
+        List<CoreRequest> list = List.of(
+                new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "30.10"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
+                new FilterStocksByIndustryRequest("Technology"),
                 new OrderingRequest("Risk weight", "ASCENDING"),
                 new PagingRequest("3", "-5")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Paging");
@@ -251,14 +251,14 @@ public class FilterStockByMultipleParametersValidatorTest {
 
     @Test
     public void shouldReturnMultipleErrors() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "-30.10"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
-                new FilterStockByIndustryRequest(""),
+        List<CoreRequest> list = List.of(
+                new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "-30.10"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
+                new FilterStocksByIndustryRequest(""),
                 new PagingRequest("3", "-5")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 3);
         assertTrue(errorList.contains(new CoreError("Market price target", "cannot be negative!")));
@@ -268,15 +268,15 @@ public class FilterStockByMultipleParametersValidatorTest {
 
     @Test
     public void shouldReturnAllErrors() {
-        List<SecurityRequest> list = List.of(
-                new FilterStockByAnyDoubleParameterRequest("Market price", ">", "-30.10"),
-                new FilterStockByAnyDoubleParameterRequest("Risk weight", "<=", "-1.0"),
-                new FilterStockByAnyDoubleParameterRequest("Dividend", ">=", "-2.05"),
-                new FilterStockByIndustryRequest(""),
+        List<CoreRequest> list = List.of(
+                new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "-30.10"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "-1.0"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "-2.05"),
+                new FilterStocksByIndustryRequest(""),
                 new OrderingRequest("Risk weight", ""),
                 new PagingRequest("-3", "")
         );
-        FilterStockByMultipleParametersRequest request = new FilterStockByMultipleParametersRequest(list);
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 7);
         assertTrue(errorList.contains(new CoreError("Market price target", "cannot be negative!")));

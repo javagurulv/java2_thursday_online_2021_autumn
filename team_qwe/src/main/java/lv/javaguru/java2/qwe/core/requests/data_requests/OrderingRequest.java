@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.requests.data_requests;
 
-public class OrderingRequest extends SecurityRequest {
+public class OrderingRequest extends CoreRequest {
 
     private final String orderBy;
     private final String orderDirection;
