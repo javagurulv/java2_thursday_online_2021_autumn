@@ -21,7 +21,7 @@ public class MenuListApplication {
         }
     }
 
-        private static void printProgramMenu() {
+    private static void printProgramMenu() {
         System.out.println("Program menu:");
         System.out.println("1. Add menu to list");
         System.out.println("2. Delete menu from list");
