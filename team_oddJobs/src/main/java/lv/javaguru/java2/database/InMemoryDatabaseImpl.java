@@ -62,14 +62,6 @@ public class InMemoryDatabaseImpl implements Database {
     }
 
 
-    @Override
-    public void findSpecialistByProfession(String profession) {
-        for (Specialist specialist : specialists) {
-            if (profession.equals(specialist.getSpecialistProfession())) {
-                System.out.println("Founded specialists: " + specialist);
-            } else System.out.println("Specialist with current profession not found");
-        }
-    }
 
     @Override
     public List<Client> findClientsById(Long clientId) {
@@ -101,6 +93,44 @@ public class InMemoryDatabaseImpl implements Database {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Specialist> findSpecialistById(Long specialistId) {
+        return specialists.stream()
+                .filter(specialist -> specialistId.equals(specialist.getSpecialistId()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Specialist> findSpecialistByName(String specialistName) {
+        return specialists.stream()
+                .filter(specialist -> specialistName.equals(specialist.getSpecialistName()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Specialist> findSpecialistBySurname(String specialistSurname) {
+        return specialists.stream()
+                .filter(specialist -> specialistSurname.equals(specialist.getSpecialistSurname()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Specialist> findSpecialistByProfession(String profession) {
+        return specialists.stream()
+                .filter(specialist -> specialist.getSpecialistProfession().equals(profession))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Specialist> findSpecialistByIdAndNameAndSurnameAndProfession(Long specialistId, String specialistName, String specialistSurname, String specialistProfession) {
+        return specialists.stream()
+                .filter(specialist -> specialistId.equals(specialist.getSpecialistId()))
+                .filter(specialist -> specialistName.equals(specialist.getSpecialistName()))
+                .filter(specialist -> specialistSurname.equals(specialist.getSpecialistSurname()))
+                .filter(specialist -> specialistProfession.equals(specialist.getSpecialistProfession()))
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public void addAdvertisement(Advertisement advBoard) {
@@ -125,15 +155,40 @@ public class InMemoryDatabaseImpl implements Database {
     }
 
     @Override
-    public void findAdvertisementByTitle(String advTitle) {
-        for (Advertisement advertisement : advBoards) {
-            if (advTitle.equals(advertisement.getAdvTitle())) {
-                System.out.println(advertisement);
-            } else {
-                System.out.println("Advertisement is not found");
-            }
-        }
+    public List<Advertisement> findAdvertisementByTitle(String advTitle) {
+        return advBoards.stream()
+                .filter(advBoard -> advBoard.getAdvTitle().equals(advTitle))
+                .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Advertisement> findAdvertisementById(long advId) {
+        return advBoards.stream()
+                .filter(advBoard -> advBoard.getAdvId().equals(advId))
+                .collect(Collectors.toList());
+    }
+//
+//    @Override
+//    public void findAdvertisementById(long advId) {
+//        for (Advertisement advertisement : advBoards) {
+//            if (advId==(advertisement.getAdvId())) {
+//                System.out.println(advertisement);
+//            } /*else {
+//                System.out.println("Advertisement is not found");
+//            }*/
+//        }
+//    }
+
+//    @Override
+//    public void findAdvertisementById(long advId) {
+//        for (Advertisement advertisement : advBoards) {
+//            if (advId==(advertisement.getAdvId())) {
+//                System.out.println(advertisement);
+//            } /*else {
+//                System.out.println("Advertisement is not found");
+//            }*/
+//        }
+//    }
 
     @Override
     public List<Specialist> getAllSpecialist() {
@@ -145,4 +200,18 @@ public class InMemoryDatabaseImpl implements Database {
         return clients;
     }
 
+    @Override
+    public List<Advertisement> getAllAdvertisemets() {
+        return advBoards;
+    }
+
+
 }
+
+
+
+
+
+
+
+

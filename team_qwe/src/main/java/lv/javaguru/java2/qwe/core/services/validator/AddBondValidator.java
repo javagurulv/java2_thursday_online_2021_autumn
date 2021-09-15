@@ -1,8 +1,8 @@
 package lv.javaguru.java2.qwe.core.services.validator;
 
 import lv.javaguru.java2.qwe.core.database.Database;
-import lv.javaguru.java2.qwe.core.requests.AddBondRequest;
-import lv.javaguru.java2.qwe.core.requests.SecurityRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.AddBondRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.SecurityRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 
 import java.util.List;

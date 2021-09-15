@@ -14,18 +14,18 @@ class DeleteDoctorValidatorTest {
 
     @Test
     public void shouldReturnEmptyList() {
-        DeleteDoctorRequest request = new DeleteDoctorRequest(123);
+        DeleteDoctorRequest request = new DeleteDoctorRequest("123");
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnIdError() {
-        DeleteDoctorRequest request = new DeleteDoctorRequest(0);
+        DeleteDoctorRequest request = new DeleteDoctorRequest("");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "id");
-        assertEquals(errorList.get(0).getMessage(), "Must not be 0!");
+        assertEquals(errorList.get(0).getMessage(), "Must not be empty!");
     }
 }

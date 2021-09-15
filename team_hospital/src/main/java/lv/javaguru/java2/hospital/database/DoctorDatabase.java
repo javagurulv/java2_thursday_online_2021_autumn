@@ -8,8 +8,6 @@ public interface DoctorDatabase {
 
     void addDoctor(Doctor doctor);
 
-    boolean findDoctorById(long id);
-
     boolean deleteDoctorById(long id);
 
     List<Doctor> showAllDoctors();
@@ -17,5 +15,21 @@ public interface DoctorDatabase {
     boolean editDoctor(long doctorId, int userInput, String input);
 
     boolean doctorExists(long id);
+
+    List<Doctor> findByName(String name);
+
+    List<Doctor> findBySurname(String surname);
+
+    List<Doctor> findByNameAndSurname(String name, String surname);
+
+    List<Doctor> findById(long id);
+
+    List<Doctor> findBySpeciality(String speciality);
+
+    List<Doctor> findByNameAndSpeciality(String name, String speciality);
+
+    List<Doctor> findBySurnameAndSpeciality(String surname, String speciality);
+
+    List<Doctor> findByNameAndSurnameAndSpeciality(String name, String surname, String speciality);
 
 }

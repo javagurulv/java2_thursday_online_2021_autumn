@@ -1,14 +1,12 @@
 package lv.javaguru.java2.qwe.ui_actions.data_ui_actions;
 
-import lv.javaguru.java2.qwe.core.requests.AddBondRequest;
-import lv.javaguru.java2.qwe.core.requests.SecurityRequest;
-import lv.javaguru.java2.qwe.core.responses.AddBondResponse;
+import lv.javaguru.java2.qwe.core.requests.data_requests.AddBondRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.SecurityRequest;
+import lv.javaguru.java2.qwe.core.responses.data_responses.AddBondResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.AddBondService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.printErrorList;
 
 public class AddBondUIAction implements UIAction {
 

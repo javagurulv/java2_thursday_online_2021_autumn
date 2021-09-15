@@ -21,10 +21,10 @@ public class AddSpecialistService {
 
     public AddSpecialistResponse execute(AddSpecialistRequest request) {
         List<CoreError> errors = validator.validate(request);
-        if (!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             return new AddSpecialistResponse(errors);
         }
-        Specialist specialist = new Specialist(request.getName(),request.getSurname(),request.getProfession());
+        Specialist specialist = new Specialist(request.getName(), request.getSurname(), request.getProfession());
         database.addSpecialist(specialist);
         return new AddSpecialistResponse(specialist);
 

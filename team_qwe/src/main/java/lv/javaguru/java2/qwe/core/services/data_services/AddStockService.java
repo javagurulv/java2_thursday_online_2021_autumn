@@ -2,15 +2,13 @@ package lv.javaguru.java2.qwe.core.services.data_services;
 
 import lv.javaguru.java2.qwe.Stock;
 import lv.javaguru.java2.qwe.core.database.Database;
-import lv.javaguru.java2.qwe.core.requests.AddStockRequest;
-import lv.javaguru.java2.qwe.core.requests.SecurityRequest;
-import lv.javaguru.java2.qwe.core.responses.AddStockResponse;
+import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.SecurityRequest;
+import lv.javaguru.java2.qwe.core.responses.data_responses.AddStockResponse;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
 
 import java.util.List;
-
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
 public class AddStockService {
 

@@ -2,43 +2,55 @@ package lv.javaguru.java2.qwe.core.services.user_services;
 
 import lv.javaguru.java2.qwe.*;
 import lv.javaguru.java2.qwe.core.database.UserData;
+import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRequest;
+import lv.javaguru.java2.qwe.core.responses.CoreError;
+import lv.javaguru.java2.qwe.core.responses.user_responses.GenerateUserPortfolioResponse;
+import lv.javaguru.java2.qwe.core.services.validator.GenerateUserPortfolioValidator;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.round;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.convertToInt;
-
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
 public class GeneratePortfolioService {
 
     private final UserData userData;
+    private final GenerateUserPortfolioValidator validator;
 
-    public GeneratePortfolioService(UserData userData) {
+    public GeneratePortfolioService(UserData userData, GenerateUserPortfolioValidator validator) {
         this.userData = userData;
+        this.validator = validator;
     }
 
     public UserData getUserData() {
         return userData;
     }
 
-    public void execute(User user) {
-        if (user.getPortfolio().size() == 1) {
-            Map<String, Double> investmentPolicy = calculateInvestmentPolicy(user);
-            Map<String, Double> investmentPerIndustry = calculateInvestmentPerIndustry(user, investmentPolicy);
-            Map<String, List<Security>> listPerIndustry = calculateListOfSecuritiesPerIndustry(user, investmentPerIndustry);
+    public GenerateUserPortfolioResponse execute(GenerateUserPortfolioRequest request) {
+        List<CoreError> errors = validator.validate(request);
+        Optional<User> user = userData.findUserByName(request.getUserName());
+        if (user.isPresent() && user.get().getPortfolio().size() > 1) {
+            errors.add(new CoreError("", "portfolio has been already generated for this user!"));
+            List<Position> positions = new ArrayList<>();
+            return new GenerateUserPortfolioResponse(errors, positions);
+        }
+        if (user.isPresent() && user.get().getPortfolio().size() == 1) {
+            User user1 = user.get();
+            Map<String, Double> investmentPolicy = calculateInvestmentPolicy(user1);
+            Map<String, Double> investmentPerIndustry = calculateInvestmentPerIndustry(user1, investmentPolicy);
+            Map<String, List<Security>> listPerIndustry = calculateListOfSecuritiesPerIndustry(user1, investmentPerIndustry);
             List<Position> userPortfolio = generateUserPortfolio(listPerIndustry, investmentPerIndustry);
             double portfolioTotalValue = calculatePortfolioTotalValue(userPortfolio);
-            addCashResidual(user, userPortfolio, portfolioTotalValue);
-            user.setPortfolio(userPortfolio);
-            messageDialog("Portfolio has been generated for " + user.getName());
+            addCashResidual(user1, userPortfolio, portfolioTotalValue);
+            user1.setPortfolio(userPortfolio);
+            return new GenerateUserPortfolioResponse(userPortfolio);
+//            messageDialog("Portfolio has been generated for " + user1.getName());
         } else {
-            messageDialog("FAILED to generate!\nPortfolio was already generated for this client!");
+            List<Position> positions = new ArrayList<>();
+            return new GenerateUserPortfolioResponse(errors, positions);
+//            messageDialog("FAILED to generate!\nPortfolio was already generated for this client!");
         }
     }
 

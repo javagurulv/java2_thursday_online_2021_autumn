@@ -17,7 +17,6 @@ public interface Database {
 
     boolean removeClient(Long id, String name, String surName);
 
-    void findSpecialistByProfession(String profession);
 
     List<Client> findClientsById(Long clientId);
 
@@ -27,16 +26,32 @@ public interface Database {
 
     List<Client> findClientByIdAndNameAndSurname(Long id, String clientName, String clientSurname);
 
+    List<Specialist> findSpecialistById(Long specialistId);
+
+    List<Specialist> findSpecialistByName(String specialistName);
+
+    List<Specialist> findSpecialistBySurname(String specialistSurname);
+
+    List<Specialist> findSpecialistByProfession(String profession);
+
+    List<Specialist> findSpecialistByIdAndNameAndSurnameAndProfession(Long specialistId, String specialistName, String specialistSurname, String specialistProfession);
+
     void addAdvertisement(Advertisement advBoard);
 
     boolean removeAdvertisement(Long advId, String advBoardTitle);
 
-    void findAdvertisementByTitle(String advTitle);
+    List<Advertisement> findAdvertisementByTitle(String advTitle);
+
+
+    List<Advertisement> findAdvertisementById(long advId);
+
+//    void findAdvertisementById(long advId);
 
 
     List<Specialist> getAllSpecialist();
 
     List<Client> getAllClients();
 
+    List<Advertisement> getAllAdvertisemets();
 
 }

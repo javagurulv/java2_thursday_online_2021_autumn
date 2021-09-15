@@ -4,21 +4,30 @@ import lv.javaguru.java2.qwe.Bond;
 import lv.javaguru.java2.qwe.Cash;
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.Stock;
+import lv.javaguru.java2.qwe.core.requests.data_requests.FilterStockByMultipleParametersRequest;
+import lv.javaguru.java2.qwe.core.services.data_services.ImportSecuritiesService;
+import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
+import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Predicate;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.util.Map.entry;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
+import static java.util.Map.ofEntries;
 
 public class DatabaseImpl implements Database {
 
     private final ArrayList<Security> securityList;
+    private File file;
+
+    public DatabaseImpl(File file) {
+        this.securityList = new ArrayList<>();
+        this.file = file;
+        securityList.add(new Cash());
+        importData();  // автоматически импортирует данные в базу
+    }
 
     public DatabaseImpl() {
         this.securityList = new ArrayList<>();
@@ -58,72 +67,68 @@ public class DatabaseImpl implements Database {
     }
 
     @Override
-    public List<Security> filterStocksByAnyDoubleParameter(String parameter, String operator, double target)
-            throws NumberFormatException {
-        Map<String, Predicate<Security>> map;
-        switch (parameter) {
-            case "Market price" -> map = getMarketPricePredicate(target);
-            case "Dividend" -> map = getDividendPredicate(target);
-            default -> map = getRiskWeightPredicate(target);
+    public final List<Security> filterStocksByMultipleParameters(
+            List<Security> list, FilterStockByMultipleParametersRequest request, int i) {
+        List<Security> nextList = list;
+        nextList = nextList.stream()
+                .filter(security -> security.getClass().getSimpleName().equals("Stock"))
+                .filter(request.getList().get(i))
+                .collect(Collectors.toList());
+        i++;
+        if (i == request.getList().size()) {
+            sortBy(nextList, request);
+            return getPage(nextList, request);
         }
-
-        return securityList.stream()
-                .filter(security -> security.getClass().getSimpleName().equals("Stock"))
-                .map(security -> (Stock) security)
-                .filter(map.get(operator))
-                .collect(Collectors.toList());
+        return filterStocksByMultipleParameters(nextList, request, i);
     }
 
-    @Override
-    public List<Security> filterStocksByIndustry(String industry) {
-        return securityList.stream()
-                .filter(security -> security.getClass().getSimpleName().equals("Stock"))
-                .filter(security -> security.getIndustry().equals(industry))
-                .map(security -> (Stock) security)
-                .collect(Collectors.toList());
+    private void sortBy(List<Security> list, FilterStockByMultipleParametersRequest request) {
+        if (request.getOrderBy() != null && !request.getOrderBy().isEmpty() && request.getOrderDirection().equals("ASCENDING")) {
+            list.sort((Comparator<? super Security>) getComparator(request));
+        }
+        if (request.getOrderBy() != null && !request.getOrderBy().isEmpty() && request.getOrderDirection().equals("DESCENDING")) {
+            list.sort((Comparator<? super Security>) getComparator(request).reversed());
+        }
     }
 
-    private Map<String, Predicate<Security>> getMarketPricePredicate(double target) {
-        return Map.ofEntries(
-                entry("", security -> true),
-                entry(">", security -> security.getMarketPrice() > target),
-                entry(">=", security -> security.getMarketPrice() >= target),
-                entry("<", security -> security.getMarketPrice() < target),
-                entry("<=", security -> security.getMarketPrice() <= target),
-                entry("=", security -> security.getMarketPrice() == target)
+    private List<Security> getPage(List<Security> list, FilterStockByMultipleParametersRequest request) {
+        if (request.getPageNumber() != 0) {
+            return list.stream()
+                    .skip((long) request.getPageNumber() * request.getPageSize() - 1)
+                    .limit(request.getPageSize())
+                    .collect(Collectors.toList());
+        } else {
+            return list;
+        }
+    }
+
+    private Comparator<? extends Security> getComparator(FilterStockByMultipleParametersRequest request) {
+        Map<String, Comparator<? extends Security>> map = ofEntries(
+                entry("Name", Comparator.comparing(Security::getName)),
+                entry("Industry", Comparator.comparing(Security::getIndustry)),
+                entry("Currency", Comparator.comparing(Security::getCurrency)),
+                entry("Market price", Comparator.comparing(Security::getMarketPrice)),
+                entry("Dividend", Comparator.comparing(Stock::getDividends)),
+                entry("Risk weight", Comparator.comparing(Stock::getRiskWeight))
         );
+        return map.entrySet().stream()
+                .filter(entry -> entry.getKey().equals(request.getOrderBy()))
+                .map(Map.Entry::getValue)
+                .findAny().get();
     }
 
-    private Map<String, Predicate<Security>> getDividendPredicate(double target) {
-        return Map.ofEntries(
-                entry("", security -> true),
-                entry(">", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getDividends() > target)),
-                entry(">=", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getDividends() >= target)),
-                entry("<", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getDividends() < target)),
-                entry("<=", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getDividends() <= target)),
-                entry("=", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getDividends() == target))
-        );
-    }
-
-    private Map<String, Predicate<Security>> getRiskWeightPredicate(double target) {
-        return Map.ofEntries(
-                entry("", security -> true),
-                entry(">", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getRiskWeight() > target)),
-                entry(">=", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getRiskWeight() >= target)),
-                entry("<", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getRiskWeight() < target)),
-                entry("<=", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getRiskWeight() <= target)),
-                entry("=", security -> Stream.of(security).map(stock -> (Stock) stock)
-                        .anyMatch(stock -> stock.getRiskWeight() == target))
-        );
+    private void importData() {
+        file = new File("./team_qwe/src/main/docs/stocks_list_import.txt");
+        ImportSecuritiesService service =
+                new ImportSecuritiesService(this,
+                        new AddStockValidator(this),
+                        new AddBondValidator(this));
+        try {
+            service.execute(file.getPath());
+            System.out.println("Data imported to database!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

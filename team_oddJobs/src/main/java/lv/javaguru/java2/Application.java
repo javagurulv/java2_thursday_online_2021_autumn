@@ -8,6 +8,7 @@ import lv.javaguru.java2.console_ui.Exit.ExitMenuUIAction;
 import lv.javaguru.java2.console_ui.Find.*;
 import lv.javaguru.java2.console_ui.Get.GetAllClientsUIAction;
 import lv.javaguru.java2.console_ui.Get.GetAllSpecialistUIAction;
+import lv.javaguru.java2.console_ui.Remove.RemoveAdvertismentUIAction;
 import lv.javaguru.java2.console_ui.Remove.RemoveClientUIAction;
 import lv.javaguru.java2.console_ui.Remove.RemoveSpecialistUIAction;
 import lv.javaguru.java2.console_ui.UIAction;
@@ -21,13 +22,12 @@ import lv.javaguru.java2.services.Exit.ExitMenuService;
 import lv.javaguru.java2.services.Find.*;
 import lv.javaguru.java2.services.Get.GetAllClientsService;
 import lv.javaguru.java2.services.Get.GetAllSpecialistsService;
+import lv.javaguru.java2.services.Remove.RemoveAdvertismentService;
 import lv.javaguru.java2.services.Remove.RemoveClientService;
 import lv.javaguru.java2.services.Remove.RemoveSpecialistService;
 
 import java.util.Scanner;
-
-public class Application {
-    private static final Database database = new InMemoryDatabaseImpl();
+public class Application { private static final Database database = new InMemoryDatabaseImpl();
 
     private static AddClientValidator addClientValidator = new AddClientValidator();
     private static final AddClientService addClientService = new AddClientService(database,addClientValidator);
@@ -48,14 +48,25 @@ public class Application {
     private static final RemoveSpecialistService deleteSpecialistService = new RemoveSpecialistService(database,removeSpecialistValidator);
     private static final UIAction deleteSpecialist = new RemoveSpecialistUIAction(deleteSpecialistService);
 
-private static FindSpecialistByProfessionValidator findSpecialistByProfessionValidator = new FindSpecialistByProfessionValidator();
-    private static final FindSpecialistByProfessionService findSpecialistByProfessionService = new FindSpecialistByProfessionService(database,findSpecialistByProfessionValidator);
-    private static final UIAction findSpecialistByProfession = new FindSpecialistByProfessionUIAction(findSpecialistByProfessionService);
-
-    private static final FindClientsValidator findClientsRequestValidator = new FindClientsValidator();
+    private static final FindClientsRequestValidator findClientsRequestValidator = new FindClientsRequestValidator();
     private static final FindClientsService findClientBySearchCriteria = new FindClientsService(database,findClientsRequestValidator);
     private static final UIAction findClientBySearch = new FindClientsUIAction(findClientBySearchCriteria);
 
+    private static RemoveAdvertismentValidator removeAdvertismentValidator = new RemoveAdvertismentValidator();
+    private static final RemoveAdvertismentService deleteAdvertismentService = new RemoveAdvertismentService(database,removeAdvertismentValidator);
+    private static final UIAction deleteAdvertisment = new RemoveAdvertismentUIAction(deleteAdvertismentService);
+
+    private static final FindSpecialistValidator findSpecialistValidator = new FindSpecialistValidator();
+    private static final FindSpecialistService findSpecialistService = new FindSpecialistService(database,findSpecialistValidator);
+    private static final UIAction findSpecialist = new FindSpecialistUIAction(findSpecialistService);
+
+    private static final FindAdvertisementByTitleValidator findAdvertisementByTitleValidator = new FindAdvertisementByTitleValidator();
+    private static final FindAdvertisementByTitleService findAdvertisementByTitleService = new FindAdvertisementByTitleService(database,findAdvertisementByTitleValidator);
+    private static final UIAction findAdvertisementByTitle = new FindAdvertisementByTitleUIAction(findAdvertisementByTitleService);
+
+    private static final FindAdvertisementByIdValidator findAdvertisementByIdValidator = new FindAdvertisementByIdValidator();
+    private static final FindAdvertisementByIdService findAdvertisementByIdService = new FindAdvertisementByIdService(database,findAdvertisementByIdValidator);
+    private static final UIAction findAdvertisementById = new FindAdvertisementByIdUIAction(findAdvertisementByIdService);
 
     private static final GetAllSpecialistsService getAllSpecialistsService = new GetAllSpecialistsService(database);
     private static final UIAction getAllSpecialists = new GetAllSpecialistUIAction(getAllSpecialistsService);
@@ -88,13 +99,15 @@ private static FindSpecialistByProfessionValidator findSpecialistByProfessionVal
         System.out.println("1.  Create client account");
         System.out.println("2.  Create specialist account");
         System.out.println("3.  Create advertisement");
-        System.out.println("4.  Find specialist by profession");
+        System.out.println("4.  Find specialist by search criteria");
         System.out.println("5.  Find client by search criteria");
-        System.out.println("6.  Show all clients");
-        System.out.println("7.  Show all specialists");
-        System.out.println("8.  Delete client account");
-        System.out.println("9.  Delete specialist account");
-        System.out.println("10. Exit");
+        System.out.println("6.  Find advertisement by title");
+        System.out.println("7.  Find advertisement by ID");
+        System.out.println("8.  Show all clients");
+        System.out.println("9.  Show all specialists");
+        System.out.println("10.  Delete client account");
+        System.out.println("11.  Delete specialist account");
+        System.out.println("12. Exit");
     }
 
 
@@ -114,8 +127,9 @@ private static FindSpecialistByProfessionValidator findSpecialistByProfessionVal
                 addAdvertisement.execute();
                 break;
             }
+
             case 4: {
-                findSpecialistByProfession.execute();
+                findSpecialist.execute();
                 break;
             }
 
@@ -125,27 +139,37 @@ private static FindSpecialistByProfessionValidator findSpecialistByProfessionVal
             }
 
             case 6: {
+                findAdvertisementByTitle.execute();
+                break;
+            }
+
+            case 7: {
+                findAdvertisementById.execute();
+                break;
+            }
+
+            case 8: {
                 getAllClients.execute();
 
                 break;
             }
 
-            case 7: {
+            case 9: {
                 getAllSpecialists.execute();
 
                 break;
             }
-            case 8: {
+            case 10: {
                 deleteClient.execute();
 
                 break;
             }
-            case 9: {
+            case 11: {
                 deleteSpecialist.execute();
 
                 break;
             }
-            case 10: {
+            case 12: {
                 menuExit.execute();
 
 
