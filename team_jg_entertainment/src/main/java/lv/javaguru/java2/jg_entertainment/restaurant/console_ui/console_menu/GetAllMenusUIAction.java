@@ -9,6 +9,7 @@ public class GetAllMenusUIAction implements UIAction {
     public GetAllMenusUIAction(DatabaseMenu database) {
         this.database = database;
     }
+
     @Override
     public void execute() {
         System.out.println("Menu list: ");
