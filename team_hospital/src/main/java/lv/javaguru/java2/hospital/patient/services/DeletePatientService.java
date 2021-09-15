@@ -21,9 +21,8 @@ public class DeletePatientService {
         List<CoreError> errors = validator.validate(request);
         if (!errors.isEmpty()) {
             return new DeletePatientResponse(errors);
-        } else {
-            database.deleteById(Long.parseLong(request.getIdRequest()));
         }
+        database.deleteById(Long.parseLong(request.getIdRequest()));
         return new DeletePatientResponse(request.getIdRequest());
     }
 }

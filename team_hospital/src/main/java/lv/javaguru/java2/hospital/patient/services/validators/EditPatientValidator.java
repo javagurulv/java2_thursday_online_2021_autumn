@@ -2,6 +2,7 @@ package lv.javaguru.java2.hospital.patient.services.validators;
 
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.patient.requests.EditPatientRequest;
+import lv.javaguru.java2.hospital.patient.requests.FindPatientByIdRequest;
 import lv.javaguru.java2.hospital.patient.responses.CoreError;
 
 import java.util.ArrayList;
@@ -41,9 +42,8 @@ public class EditPatientValidator {
     }
 
     private Optional<CoreError> validatePatientExists(EditPatientRequest request) {
-        return (request.getPatientID() == null || request.getPatientID().isEmpty())
-                ? Optional.empty() : database.patientExists(Long.parseLong(request.getPatientID()))
-                ? Optional.empty()
-                : Optional.of(new CoreError("Patient", "does not exist."));
-    }
+            return (request.getPatientID() == null || request.getPatientID().isEmpty())
+                    ? Optional.empty() : database.patientExists(Long.valueOf(request.getPatientID()))
+                    ? Optional.empty() : Optional.of(new CoreError("Patient", "does not exist."));
+        }
 }
