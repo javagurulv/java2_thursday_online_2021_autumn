@@ -2,7 +2,7 @@ package lv.javaguru.java2.qwe.core.services.validator;
 
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
-import lv.javaguru.java2.qwe.core.requests.data_requests.SecurityRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.isNotDouble;
@@ -46,7 +46,7 @@ public class AddStockValidator extends AddSecurityValidator {
     );
 
     @Override
-    public List<CoreError> validate(SecurityRequest request) {
+    public List<CoreError> validate(CoreRequest request) {
         return validator.entrySet().stream()
                 .filter(entry -> entry.getKey().test((AddStockRequest) request))
                 .map(Map.Entry::getValue)

@@ -33,12 +33,12 @@ public class ChooseDataMenuUIAction implements UIAction {
                         new AddBondService(database, new AddBondValidator(database))).execute();
                 case "REMOVE SECURITY" -> new RemoveSecurityUIAction(
                         new RemoveSecurityService(database)).execute();
-                case "SHOW LIST" -> new ShowListUIAction(
-                        new ShowListService(database)).execute();
+                case "SHOW LIST" -> new GetAllSecurityListUIAction(
+                        new GetAllSecurityListService(database)).execute();
                 case "FIND SECURITY BY NAME" -> new FindSecurityByNameUIAction(
                         new FindSecurityByNameService(database, new FindSecurityByNameValidator())).execute();
                 case "FILTER SECURITIES(STOCKS) BY MULTIPLE PARAMETERS" -> new FilterStocksByMultipleParametersUIAction(
-                        new FilterStocksByMultipleParametersService(database, new FilterStockByMultipleParametersValidator())).execute();
+                        new FilterStocksByMultipleParametersService(database, new FilterStocksByMultipleParametersValidator())).execute();
                 default -> dataMenuOpen = false;
             }
         }

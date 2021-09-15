@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.ui_actions.data_ui_actions;
 
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddBondRequest;
-import lv.javaguru.java2.qwe.core.requests.data_requests.SecurityRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.AddBondResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.AddBondService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
@@ -26,7 +26,7 @@ public class AddBondUIAction implements UIAction {
         String rating = inputDialog("Rating");
         String nominal = inputDialog("Nominal");
         String maturity = inputDialog("Maturity");
-        SecurityRequest bondRequest = new AddBondRequest(name, industry, currency,
+        CoreRequest bondRequest = new AddBondRequest(name, industry, currency,
                 marketPrice, coupon, rating, nominal, maturity);
         AddBondResponse bondResponse = addBondService.execute(bondRequest);
         printResponse(bondResponse);

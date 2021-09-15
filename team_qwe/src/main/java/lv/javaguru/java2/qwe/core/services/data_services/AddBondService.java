@@ -3,7 +3,7 @@ package lv.javaguru.java2.qwe.core.services.data_services;
 import lv.javaguru.java2.qwe.Bond;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddBondRequest;
-import lv.javaguru.java2.qwe.core.requests.data_requests.SecurityRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.AddBondResponse;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
@@ -20,15 +20,14 @@ public class AddBondService {
         this.validator = validator;
     }
 
-    public AddBondResponse execute(SecurityRequest request) {
+    public AddBondResponse execute(CoreRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (errors.isEmpty()) {
             Bond bond = addBond((AddBondRequest) request);
             database.addBond(bond);
             return new AddBondResponse(bond);
-        } else {
-            return new AddBondResponse(errors);
         }
+        return new AddBondResponse(errors);
     }
 
     private Bond addBond(AddBondRequest request) {

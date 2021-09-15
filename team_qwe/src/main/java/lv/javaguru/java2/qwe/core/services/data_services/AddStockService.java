@@ -3,7 +3,7 @@ package lv.javaguru.java2.qwe.core.services.data_services;
 import lv.javaguru.java2.qwe.Stock;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
-import lv.javaguru.java2.qwe.core.requests.data_requests.SecurityRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.AddStockResponse;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
@@ -20,15 +20,14 @@ public class AddStockService {
         this.validator = validator;
     }
 
-    public AddStockResponse execute(SecurityRequest request) {
+    public AddStockResponse execute(CoreRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (errors.isEmpty()) {
             Stock stock = addStock((AddStockRequest) request);
             database.addStock(stock);
             return new AddStockResponse(stock);
-        } else {
-            return new AddStockResponse(errors);
         }
+        return new AddStockResponse(errors);
     }
 
     private Stock addStock(AddStockRequest request) {

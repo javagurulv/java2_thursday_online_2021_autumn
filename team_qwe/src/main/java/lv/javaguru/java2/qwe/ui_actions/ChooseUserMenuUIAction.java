@@ -31,27 +31,27 @@ public class ChooseUserMenuUIAction implements UIAction {
                 case "REMOVE USER" -> new RemoveUserUIAction(
                         new RemoveUserService(
                                 userData)).execute();
-                case "SHOW USER LIST" -> new ShowUserListUIAction(
-                        new ShowUserListService(
+                case "SHOW USER LIST" -> new GetUserListUIAction(
+                        new GetAllUserListService(
                                 userData)).execute();
                 case "FIND USER BY NAME" -> new FindUserByNameUIAction(
                         new FindUserByNameService(
                                 userData, new FindUserByNameValidator())).execute();
                 case "GENERATE PORTFOLIO FOR USER" -> new GenerateUserPortfolioUIAction(
-                        new GeneratePortfolioService(
+                        new GenerateUserPortfolioService(
                                 userData, new GenerateUserPortfolioValidator())).execute();
-                case "SHOW USER PORTFOLIO" -> new ShowUserPortfolioUIAction(
-                        new ShowUserPortfolioService(
-                                userData, new ShowUserPortfolioValidator())).execute();
-                case "SHOW USER PORTFOLIO GROUPED BY INDUSTRY" -> new ShowUserPortfolioGroupedByIndustryUIAction(
-                        new ShowUserPortfolioGroupedByIndustryService(
-                                userData, new ShowUserPortfolioGroupedByIndustryValidator())).execute();
-                case "SHOW USER INVESTMENTS BY EACH INDUSTRY" -> new ShowUserInvestmentsByEachIndustryUIAction(
-                        new ShowUserInvestmentsByEachIndustryService(
-                                userData, new ShowUserInvestmentsByEachIndustryValidator())).execute();
-                case "SHOW PORTFOLIO SUMMARY" -> new ShowPortfolioSummaryUIAction(
-                        new ShowPortfolioSummaryService(
-                                userData, new ShowUserPortfolioSummaryValidator())).execute();
+                case "SHOW USER PORTFOLIO" -> new GetUserPortfolioUIAction(
+                        new GetUserPortfolioService(
+                                userData, new GetUserPortfolioValidator())).execute();
+                case "SHOW USER PORTFOLIO GROUPED BY INDUSTRY" -> new GetUserPortfolioGroupedByIndustryUIAction(
+                        new GetUserPortfolioGroupedByIndustryService(
+                                userData, new GetUserPortfolioGroupedByIndustryValidator())).execute();
+                case "SHOW USER INVESTMENTS BY EACH INDUSTRY" -> new GetUserInvestmentsByEachIndustryUIAction(
+                        new GetUserInvestmentsByEachIndustryService(
+                                userData, new GetUserInvestmentsByEachIndustryValidator())).execute();
+                case "SHOW PORTFOLIO SUMMARY" -> new GetUserPortfolioSummaryUIAction(
+                        new GetUserPortfolioSummaryService(
+                                userData, new GetUserPortfolioSummaryValidator())).execute();
                 default -> userMenuOpen = false;
             }
         }
