@@ -45,7 +45,7 @@ public interface Database {
 
     List<Advertisement> findAdvertisementById(long advId);
 
-    void findAdvertisementById(long advId);
+//    void findAdvertisementById(long advId);
 
 
     List<Specialist> getAllSpecialist();
