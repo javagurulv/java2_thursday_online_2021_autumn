@@ -24,8 +24,6 @@ public class FindAdvertisementByIdUIAction implements UIAction {
         System.out.println("Enter advertisement ID: ");
         long advId = in.nextLong();
 
-        /*findAdvertisementByIdService.execute(advId);
-        System.out.println();*/
 
         FindAdvertisementByIdRequest request = new FindAdvertisementByIdRequest(advId);
         FindAdvertisementByIdResponse response = findAdvertisementByIdService.execute(request);

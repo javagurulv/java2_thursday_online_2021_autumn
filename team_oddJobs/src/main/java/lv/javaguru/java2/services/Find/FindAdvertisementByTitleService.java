@@ -21,7 +21,6 @@ public class FindAdvertisementByTitleService {
     }
 
     public FindAdvertisementByTitleResponse execute(FindAdvertisementByTitleRequest request) {
-        //FindAdvertisementByTitleRequest request = new FindAdvertisementByTitleRequest(req);
         List<CoreError> errors = validator.validate(request);
 
         if(!errors.isEmpty()) {
@@ -35,7 +34,7 @@ public class FindAdvertisementByTitleService {
     private List<Advertisement> find(FindAdvertisementByTitleRequest request) {
         List<Advertisement> advertisements = new ArrayList<>();
 
-        if (request.isTitleProvided()) {
+        if (!request.isTitleProvided()) {
             advertisements = database.findAdvertisementByTitle(request.getTitle());
         }
 

@@ -19,8 +19,6 @@ public class FindAdvertisementByTitleResponse extends CoreResponse {
     public List<Advertisement> getAdvertisements() {
         return advertisements;
 
-//     public Advertisement getFoundAdvertisement() {
-//         return foundAdvertisment;
 
     }
 }

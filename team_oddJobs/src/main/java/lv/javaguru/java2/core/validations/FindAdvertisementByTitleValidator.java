@@ -11,13 +11,16 @@ public class FindAdvertisementByTitleValidator {
 
     public List<CoreError> validate(FindAdvertisementByTitleRequest request) {
         List<CoreError> errors = new ArrayList<>();
-        validateTitle(request).ifPresent(errors::add);
+        errors.addAll(validateTitle(request));
         return errors;
     }
 
-    private Optional<CoreError> validateTitle(FindAdvertisementByTitleRequest request) {
-        return (request.getTitle() == null || request.getTitle().isEmpty())
-                ? Optional.of(new CoreError("Title", "Must not be empty!"))
-                : Optional.empty();
+    private List<CoreError> validateTitle(FindAdvertisementByTitleRequest request) {
+        List<CoreError> errors = new ArrayList<>();
+
+        if(request.isTitleProvided()) {
+            errors.add(new CoreError("Title", "Must not be empty!"));
+        }
+        return errors;
     }
 }
