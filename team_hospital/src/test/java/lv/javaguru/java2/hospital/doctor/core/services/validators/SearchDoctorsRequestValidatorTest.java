@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators;
 
 import lv.javaguru.java2.hospital.doctor.core.requests.Ordering;
+import lv.javaguru.java2.hospital.doctor.core.requests.Paging;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import org.junit.jupiter.api.Test;
@@ -118,6 +119,46 @@ class SearchDoctorsRequestValidatorTest {
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderDirection");
         assertEquals(errors.get(0).getMessage(), "Must contain 'ASCENDING' or 'DESCENDING' only!");
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPageNumberContainNotValidValue() {
+        Paging paging = new Paging(0, 1);
+        SearchDoctorsRequest request = new SearchDoctorsRequest("1", "name", "surname", "speciality", paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "pageNumber");
+        assertEquals(errors.get(0).getMessage(), "Must be greater then 0!");
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPageSizeContainNotValidValue() {
+        Paging paging = new Paging(1, 0);
+        SearchDoctorsRequest request = new SearchDoctorsRequest("1", "name", "surname", "speciality", paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "pageSize");
+        assertEquals(errors.get(0).getMessage(), "Must be greater then 0!");
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPageNumberAreEmpty() {
+        Paging paging = new Paging(null, 1);
+        SearchDoctorsRequest request = new SearchDoctorsRequest("1", "name", "surname", "speciality", paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "pageNumber");
+        assertEquals(errors.get(0).getMessage(), "Must not be empty!");
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPageSizeAreEmpty() {
+        Paging paging = new Paging(1, null);
+        SearchDoctorsRequest request = new SearchDoctorsRequest("1", "name", "surname", "speciality", paging);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "pageSize");
+        assertEquals(errors.get(0).getMessage(), "Must not be empty!");
     }
 
 }

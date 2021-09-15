@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.console_ui;
 
 import lv.javaguru.java2.hospital.doctor.core.requests.Ordering;
+import lv.javaguru.java2.hospital.doctor.core.requests.Paging;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.SearchDoctorsResponse;
 import lv.javaguru.java2.hospital.doctor.core.services.SearchDoctorsService;
@@ -25,7 +26,11 @@ public class SearchDoctorsUIAction implements DoctorUIActions {
         String orderDirection = getUserInput.getUserStringInput("Enter orderDirection (ASCENDING||DESCENDING): ");
         Ordering ordering = new Ordering(orderBy, orderDirection);
 
-        SearchDoctorsRequest request = new SearchDoctorsRequest(id, name, surname, speciality, ordering);
+        Integer pageNumber = getUserInput.getUserNumericInput("Enter pageNumber: ");
+        Integer pageSize = getUserInput.getUserNumericInput("Enter pageSize: ");
+        Paging paging = new Paging(pageNumber, pageSize);
+
+        SearchDoctorsRequest request = new SearchDoctorsRequest(id, name, surname, speciality, ordering, paging);
         SearchDoctorsResponse response = searchDoctorsService.execute(request);
 
         if (response.hasErrors()) {
