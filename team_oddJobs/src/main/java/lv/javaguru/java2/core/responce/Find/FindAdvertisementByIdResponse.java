@@ -1,14 +1,30 @@
 package lv.javaguru.java2.core.responce.Find;
 
 import lv.javaguru.java2.Advertisement;
+import lv.javaguru.java2.core.responce.CoreError;
+import lv.javaguru.java2.core.responce.CoreResponse;
 
-public class FindAdvertisementByIdResponse {
+import java.util.List;
 
-    private Advertisement foundAdvertisement;
+public class FindAdvertisementByIdResponse extends CoreResponse {
 
-    public FindAdvertisementByIdResponse(Advertisement foundAdvertisement) {
-        this.foundAdvertisement = foundAdvertisement;
+    private List<Advertisement> foundAdvertisements;
+
+    public FindAdvertisementByIdResponse(List<Advertisement> foundAdvertisements, List<CoreError> errors) {
+        super(errors);
+        this.foundAdvertisements = foundAdvertisements;
     }
 
-    public Advertisement getFoundAdvertisement() {return foundAdvertisement;}
+    public List<Advertisement> getFoundAdvertisements() {return foundAdvertisements;}
+
+// public class FindAdvertisementByIdResponse {
+
+//     private Advertisement foundAdvertisement;
+
+//     public FindAdvertisementByIdResponse(Advertisement foundAdvertisement) {
+//         this.foundAdvertisement = foundAdvertisement;
+//     }
+
+//     public Advertisement getFoundAdvertisement() {return foundAdvertisement;}
+
 }

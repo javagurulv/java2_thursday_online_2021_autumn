@@ -7,12 +7,40 @@ public class SearchDoctorsRequest {
     private String surname;
     private String speciality;
 
+    private Ordering ordering;
+    private Paging paging;
+
 
     public SearchDoctorsRequest(String id, String name, String surname, String speciality) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.speciality = speciality;
+    }
+
+    public SearchDoctorsRequest(String id, String name, String surname, String speciality, Ordering ordering) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.speciality = speciality;
+        this.ordering = ordering;
+    }
+
+    public SearchDoctorsRequest(String id, String name, String surname, String speciality, Paging paging) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.speciality = speciality;
+        this.paging = paging;
+    }
+
+    public SearchDoctorsRequest(String id, String name, String surname, String speciality, Ordering ordering, Paging paging) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.speciality = speciality;
+        this.ordering = ordering;
+        this.paging = paging;
     }
 
     public String getId() {
@@ -47,4 +75,11 @@ public class SearchDoctorsRequest {
         return this.speciality != null && !this.speciality.isEmpty();
     }
 
+    public Ordering getOrdering() {
+        return ordering;
+    }
+
+    public Paging getPaging() {
+        return paging;
+    }
 }

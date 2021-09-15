@@ -8,10 +8,7 @@ import lv.javaguru.java2.hospital.doctor.core.services.validators.*;
 import lv.javaguru.java2.hospital.patient.console_ui.*;
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.patient.services.*;
-import lv.javaguru.java2.hospital.patient.services.validators.AddPatientValidator;
-import lv.javaguru.java2.hospital.patient.services.validators.DeletePatientValidator;
-import lv.javaguru.java2.hospital.patient.services.validators.EditPatientValidator;
-import lv.javaguru.java2.hospital.patient.services.validators.FindPatientByIDValidator;
+import lv.javaguru.java2.hospital.patient.services.validators.*;
 
 public class ProgMenuHospital {
 
@@ -27,7 +24,9 @@ public class ProgMenuHospital {
             new DeletePatientUIAction(new DeletePatientService(patientDatabase,
                     new DeletePatientValidator(patientDatabase))),
             new EditPatientUIAction(new EditPatientService(patientDatabase,
-                    new EditPatientValidator(patientDatabase)))};
+                    new EditPatientValidator(patientDatabase))),
+            new SearchPatientsUIAction(new SearchPatientsService(patientDatabase,
+                    new SearchPatientsValidator()))};
 
     private static final DoctorUIActions[] doctorUIActions = {
             new AddDoctorUIAction(new AddDoctorService(doctorDatabase, new AddDoctorValidator())),
@@ -70,18 +69,19 @@ public class ProgMenuHospital {
         int userInput;
         do {
             userInput = menuPatient();
-        } while (userInput != 6);
+        } while (userInput != 7);
     }
 
     private static int menuPatient() {
         int userInput;
         System.out.println("1. Add a new patient");
         System.out.println("2. Show all patients");
-        System.out.println("3. Find the by ID");
+        System.out.println("3. Find patient by ID");
         System.out.println("4. Delete the by ID");
         System.out.println("5. Edit the patient's information");
-        System.out.println("6. Exit");
-        userInput = inputNumChecker.execute(1, 6);
+        System.out.println("6. Patient`s search");
+        System.out.println("7. Exit");
+        userInput = inputNumChecker.execute(1, 7);
         patientUserActions(userInput);
         System.out.println();
         return userInput;
@@ -115,7 +115,7 @@ public class ProgMenuHospital {
             case 3 -> PatientUIActions[2].execute();
             case 4 -> PatientUIActions[3].execute();
             case 5 -> PatientUIActions[4].execute();
-            case 6 -> programMenu();
+            case 6 -> PatientUIActions[5].execute();
         }
     }
 

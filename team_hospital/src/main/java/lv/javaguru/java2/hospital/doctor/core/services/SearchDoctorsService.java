@@ -1,13 +1,18 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
 import lv.javaguru.java2.hospital.database.DoctorDatabase;
+import lv.javaguru.java2.hospital.doctor.core.requests.Ordering;
+import lv.javaguru.java2.hospital.doctor.core.requests.Paging;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.doctor.core.responses.SearchDoctorsResponse;
 import lv.javaguru.java2.hospital.doctor.core.services.validators.SearchDoctorsRequestValidator;
 import lv.javaguru.java2.hospital.domain.Doctor;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SearchDoctorsService {
 
@@ -25,7 +30,35 @@ public class SearchDoctorsService {
             return new SearchDoctorsResponse(null, errors);
         }
 
-        List<Doctor> doctors = null;
+        List<Doctor> doctors = search(request);
+        doctors = order(doctors, request.getOrdering());
+        doctors = paging(doctors, request.getPaging());
+
+        return new SearchDoctorsResponse(doctors, null);
+    }
+
+    private List<Doctor> order(List<Doctor> doctors, Ordering ordering) {
+        if (ordering != null) {
+            Comparator<Doctor> comparator;
+            if (ordering.getOrderBy().equals("name")) {
+                comparator = Comparator.comparing(Doctor::getName);
+            } else if (ordering.getOrderBy().equals("surname")) {
+                comparator = Comparator.comparing(Doctor::getSurname);
+            } else {
+                comparator = Comparator.comparing(Doctor::getSpeciality);
+            }
+            if (ordering.getOrderDirection().equals("DESCENDING")) {
+                comparator = comparator.reversed();
+            }
+            return doctors.stream().sorted(comparator).collect(Collectors.toList());
+        } else {
+            return doctors;
+        }
+    }
+
+
+    private List<Doctor> search(SearchDoctorsRequest request) {
+        List<Doctor> doctors = new ArrayList<>();
         if (request.isIdProvided()) {
             doctors = database.findById(Long.parseLong(request.getId()));
         } else if (request.isNameProvided() && request.isSurnameProvided() && request.isSpecialityProvided()) {
@@ -43,17 +76,18 @@ public class SearchDoctorsService {
         } else if (request.isSpecialityProvided()) {
             doctors = database.findBySpeciality(request.getSpeciality());
         }
+        return doctors;
+    }
 
-
-       /* if(request.isNameProvided() && !request.isSurnameProvided()) {
-            doctors = database.findByName(request.getName());
+    private List<Doctor> paging(List<Doctor> doctors, Paging paging) {
+        if (paging != null) {
+            int skip = (paging.getPageNumber() - 1) * paging.getPageSize();
+            return doctors.stream()
+                    .skip(skip)
+                    .limit(paging.getPageSize())
+                    .collect(Collectors.toList());
+        } else {
+            return doctors;
         }
-        if(!request.isNameProvided() && request.isSurnameProvided()) {
-            doctors = database.findBySurname(request.getSurname());
-        }
-        if(request.isNameProvided() && request.isSurnameProvided()) {
-            doctors = database.findByNameAndSurname(request.getName(), request.getSurname());
-        }*/
-        return new SearchDoctorsResponse(doctors, null);
     }
 }
