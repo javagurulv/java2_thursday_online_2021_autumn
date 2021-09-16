@@ -7,7 +7,7 @@ import java.util.List;
 public class GetAllMenusResponse {
     private List<Menu> menus;
 
-    public GetAllMenusResponse(List<Menu> books) {
+    public GetAllMenusResponse(List<Menu> menus) {
         this.menus = menus;
     }
 
