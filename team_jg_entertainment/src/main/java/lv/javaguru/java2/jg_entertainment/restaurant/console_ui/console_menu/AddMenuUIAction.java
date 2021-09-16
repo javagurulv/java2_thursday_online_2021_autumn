@@ -16,9 +16,15 @@ public class AddMenuUIAction implements UIAction {
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter menu title: ");
+        String title = scanner.nextLine();
         System.out.println("Enter menu number: ");
         Long number = scanner.nextLong();
-        Menu menu = new Menu(number);
+        System.out.println("Enter menu description: ");
+        String description = scanner.nextLine();
+        System.out.println("Enter menu price: ");
+        int price = scanner.nextInt();
+        Menu menu = new Menu(title,number, description,price);
         database.save(menu);
         System.out.println("Your menu was added to the order.");
     }
