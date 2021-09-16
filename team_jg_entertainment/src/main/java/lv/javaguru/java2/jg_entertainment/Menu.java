@@ -12,6 +12,12 @@ public class Menu {
         this.number = number;
     }
 
+    public Menu(String title, String description, int price) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+    }
+
     public Menu(String title, Long number, String description, int price) {
         this.title = title;
         this.number = number;
