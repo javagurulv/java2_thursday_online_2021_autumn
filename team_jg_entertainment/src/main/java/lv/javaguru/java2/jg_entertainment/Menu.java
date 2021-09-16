@@ -8,7 +8,7 @@ public class Menu {
     private String description;
     private double price;
 
-      public Menu(String title, String description, double price) {
+    public Menu(String title, String description, double price) {
         this.title = title;
         this.description = description;
         this.price = price;
