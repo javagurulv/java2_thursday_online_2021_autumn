@@ -3,14 +3,20 @@ package lv.javaguru.java2.jg_entertainment;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.ImplDatabaseMenu;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.AddMenuService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.GetAllMenusService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.RemoveMenuService;
 
 import java.util.Scanner;
 
 public class MenuListApplication {
     private static DatabaseMenu databaseMenu = new ImplDatabaseMenu();
-    private static UIAction addMenuUIAction = new AddMenuUIAction(databaseMenu);
-    private static UIAction removeMenuUIAction = new RemoveMenuUIAction(databaseMenu);
-    private static UIAction getAllMenusUIAction = new GetAllMenusUIAction(databaseMenu);
+    private static AddMenuService addMenuService = new AddMenuService(databaseMenu);
+    private static RemoveMenuService removeMenuService = new RemoveMenuService(databaseMenu);
+    private static GetAllMenusService getAllMenusService = new GetAllMenusService(databaseMenu);
+    private static UIAction addMenuUIAction = new AddMenuUIAction(addMenuService);
+    private static UIAction removeMenuUIAction = new RemoveMenuUIAction(removeMenuService);
+    private static UIAction getAllMenusUIAction = new GetAllMenusUIAction(getAllMenusService);
     private static UIAction exitUIAction = new ExitUIAction();
 
     public static void main(String[] args) {

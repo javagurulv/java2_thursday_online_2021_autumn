@@ -1,15 +1,18 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenu;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.RemoveMenuRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.RemoveMenuResponse;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.RemoveMenuService;
 
 import java.util.Scanner;
 
 public class RemoveMenuUIAction implements UIAction {
 
-    private DatabaseMenu database;
+    private RemoveMenuService removeMenuService;
 
-    public RemoveMenuUIAction(DatabaseMenu database) {
-        this.database = database;
+    public RemoveMenuUIAction(RemoveMenuService removeMenuService) {
+        this.removeMenuService = removeMenuService;
     }
 
     @Override
@@ -17,7 +20,12 @@ public class RemoveMenuUIAction implements UIAction {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter menu number: ");
         Long number = Long.parseLong(scanner.nextLine());
-        database.deleteByNr(number);
-        System.out.println("That menu was removed from the order.");
+        RemoveMenuRequest request = new RemoveMenuRequest(number);
+        RemoveMenuResponse response = removeMenuService.execute(request);
+        if (response.isMenuRemoved()) {
+            System.out.println("That menu was removed from the order.");
+        } else {
+            System.out.println("That menu not removed from list.");
+        }
     }
 }

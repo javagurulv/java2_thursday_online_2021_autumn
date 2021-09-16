@@ -1,19 +1,23 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenu;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.GetAllMenusRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.GetAllMenusResponse;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.GetAllMenusService;
 
 public class GetAllMenusUIAction implements UIAction {
 
-    private DatabaseMenu database;
+    private GetAllMenusService getAllMenusService;
 
-    public GetAllMenusUIAction(DatabaseMenu database) {
-        this.database = database;
+    public GetAllMenusUIAction(GetAllMenusService getAllMenusService) {
+        this.getAllMenusService = getAllMenusService;
     }
 
     @Override
     public void execute() {
         System.out.println("Menu list: ");
-        database.getAllMenus().forEach(System.out::println);
+        GetAllMenusRequest request = new GetAllMenusRequest();
+        GetAllMenusResponse response = getAllMenusService.execute(request);
+        response.getMenus().forEach(System.out::println);
         System.out.println("Menu list end.");
     }
 }

@@ -6,9 +6,9 @@ public class Menu {
     private String title;
     private Long number;
     private String description;
-    private int price;
+    private double price;
 
-      public Menu(String title, String description, int price) {
+      public Menu(String title, String description, double price) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -26,7 +26,7 @@ public class Menu {
         return description;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -42,7 +42,7 @@ public class Menu {
         this.description = description;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

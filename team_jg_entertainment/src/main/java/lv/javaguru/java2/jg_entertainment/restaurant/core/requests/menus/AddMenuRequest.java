@@ -4,7 +4,7 @@ public class AddMenuRequest {
 
     private String title;
     private String description;
-    private int price;
+    private double price;
 
     public AddMenuRequest(String title, String description, int price) {
         this.title = title;
@@ -20,7 +20,7 @@ public class AddMenuRequest {
         return description;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 }
