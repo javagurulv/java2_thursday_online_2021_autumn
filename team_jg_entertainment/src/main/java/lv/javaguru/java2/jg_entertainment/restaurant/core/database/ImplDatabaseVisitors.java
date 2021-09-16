@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-public class ImplDatabaseRestaurant implements DatabaseVisitors {
+public class ImplDatabaseVisitors implements DatabaseVisitors {
 
     List<Visitors> clientInRestaurant = new ArrayList<>();
     private Long idClient = 1L;
@@ -22,8 +22,8 @@ public class ImplDatabaseRestaurant implements DatabaseVisitors {
         clientInRestaurant.add(clientInfo);
     }
 
-    @Override
-    public List<Visitors> findVisitorsByNameAndTelephoneNumber(Long telephoneNumber, String nameVisitors) {
+    @Override /// +surname + v find
+    public List<Visitors> findVisitorsByNameAndTelephoneNumber(String nameVisitors, Long telephoneNumber) {
         return clientInRestaurant.stream()
                 .filter(visitors -> visitors.getClientName().equals(nameVisitors))
                 .filter(visitors -> visitors.getTelephoneNumber() == telephoneNumber)
@@ -34,6 +34,28 @@ public class ImplDatabaseRestaurant implements DatabaseVisitors {
     public List<Visitors> findClientById(Long idVisitors) {
         return clientInRestaurant.stream()
                 .filter(visitors -> visitors.getIdClient().equals(idVisitors))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visitors> findByNameVisitor(String nameVisitor) {
+        return clientInRestaurant.stream()
+                .filter(visitors -> visitors.getClientName().equals(nameVisitor))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visitors> findBySurnameVisitor(String surnameVisitor) {
+        return clientInRestaurant.stream()
+                .filter(visitors -> visitors.getSurname().equals(surnameVisitor))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visitors> findByNameAndSurname(String name, String surname) {
+        return clientInRestaurant.stream()
+                .filter(visitors -> visitors.getClientName().equals(name))
+                .filter(visitors -> visitors.getSurname().equals(surname))
                 .collect(Collectors.toList());
     }
 
@@ -58,8 +80,6 @@ public class ImplDatabaseRestaurant implements DatabaseVisitors {
                 .collect(toList());
     }
 }
-//sorted(Comparator.comparing(Person::getPersonId).thenComparing(Person::getAge)).forEach(person -> System.out.println(person.getName()));
-
 
 //@Override
 //    public void deleteClientWithId(Long id) {

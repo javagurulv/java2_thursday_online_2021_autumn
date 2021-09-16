@@ -9,17 +9,18 @@ public interface DatabaseVisitors {
 
     void saveClientToRestaurantList(Visitors clientInfo);
 
-    List<Visitors> findVisitorsByNameAndTelephoneNumber(Long telephoneNumber, String nameVisitors);
+    List<Visitors> findVisitorsByNameAndTelephoneNumber(String nameVisitors, Long telephoneNumber);
 
     List<Visitors> findClientById(Long idVisitors);
+
+    List<Visitors> findByNameVisitor(String nameVisitor);
+
+    List<Visitors> findBySurnameVisitor(String surnameVisitor);
+
+    List<Visitors> findByNameAndSurname (String nameVisitor, String surnameVisitor);
 
     boolean deleteClientWithIDAndName(Long id, String nameVisitors);
 
     List<Visitors> showAllClientsInList();
-
-
-    //void editReservation();
-
-    //List<Visitors> showAllReservation();
 
 }

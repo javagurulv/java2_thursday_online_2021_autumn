@@ -1,41 +1,44 @@
 package lv.javaguru.java2.jg_entertainment;
 
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.UIAction;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.ImplDatabaseRestaurant;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceAddAllVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceDeleteVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceFindByIdVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceShowListVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.ImplDatabaseVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.*;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.SearchVisitorsRequestValidator;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorAddVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorDeleteVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorFindVisitor;
 
 public class Restaurant {
 
-    private static final DatabaseVisitors databaseRestaurant = new ImplDatabaseRestaurant();
+    private static final DatabaseVisitors databaseRestaurant = new ImplDatabaseVisitors();
 
     private static ValidatorAddVisitor validator = new ValidatorAddVisitor();
-    private static final ServiceAddAllVisitors addVisitorsService = new ServiceAddAllVisitors(databaseRestaurant, validator);
-    private static final RestaurantUIAction uiAddVisitorAction = new UIActionAddVisitors(addVisitorsService);
     private static ValidatorDeleteVisitor validatorDelete = new ValidatorDeleteVisitor();
-    private static final ServiceDeleteVisitors deleteVisitorsService = new ServiceDeleteVisitors(databaseRestaurant, validatorDelete);
-    private static final RestaurantUIAction uiDeleteVisitorsAction = new UIActionDeleteVisitors(deleteVisitorsService);
     private static ValidatorFindVisitor validatorFindVisitor = new ValidatorFindVisitor();
-    private static final ServiceFindByIdVisitors findByIdVisitors = new ServiceFindByIdVisitors(databaseRestaurant,validatorFindVisitor);
-    private static final RestaurantUIAction uiFindIdVisitors = new UIActionFindVisitors(findByIdVisitors);
+    private static SearchVisitorsRequestValidator searchVisitorsRequestValidator = new SearchVisitorsRequestValidator();
 
-    private static final ServiceShowListVisitors showAllVisitorsService = new ServiceShowListVisitors(databaseRestaurant);
-    private static final RestaurantUIAction uiGetAllVisitorsAction = new UIActionShowListWithAllVisitors(showAllVisitorsService);
+    private static ServiceAddAllVisitors addVisitorsService = new ServiceAddAllVisitors(databaseRestaurant, validator);
+    private static ServiceDeleteVisitors deleteVisitorsService = new ServiceDeleteVisitors(databaseRestaurant, validatorDelete);
+    private static ServiceFindByIdVisitors findByIdVisitors = new ServiceFindByIdVisitors(databaseRestaurant, validatorFindVisitor);
+    private static ServiceShowListVisitors showAllVisitorsService = new ServiceShowListVisitors(databaseRestaurant);
+    private static SearchVisitorsService searchVisitorsService = new SearchVisitorsService(databaseRestaurant, searchVisitorsRequestValidator);
 
+    private static RestaurantUIAction uiAddVisitorAction = new UIActionAddVisitors(addVisitorsService);
+    private static RestaurantUIAction uiDeleteVisitorsAction = new UIActionDeleteVisitors(deleteVisitorsService);
+    private static RestaurantUIAction uiFindIdVisitors = new UIActionFindVisitors(findByIdVisitors);
+    private static RestaurantUIAction uiGetAllVisitorsAction = new UIActionShowListWithAllVisitors(showAllVisitorsService);
+    private static RestaurantUIAction searchUIAction = new SearchVisitorsUIAction(searchVisitorsService);
 
-    private static final CheckMenuNumberFromConsole checkNumber = new CheckMenuNumberFromConsole();
-    private static final RestaurantUIAction uiExitAction = new UIActionExit();
+    private static CheckMenuNumberFromConsole checkNumber = new CheckMenuNumberFromConsole();
+    private static RestaurantUIAction uiExitAction = new UIActionExit();
 
     public static void main(String[] args) {
         while (true) {
             printProgramMenu();
-            int numberOfMenu = checkNumber.getCorrectNumberMenu(1, 5);
+            int numberOfMenu = checkNumber.getCorrectNumberMenu(1, 6);
             executeChooseMenu(numberOfMenu);
         }
     }
@@ -48,7 +51,8 @@ public class Restaurant {
         System.out.println("2. Enter ID visitor that delete from list of restaurant-> ");
         System.out.println("3. Find ID visitor's in catalogue-> ");
         System.out.println("4. Show all visitor's in base of restaurant->");
-        System.out.println("5. Exit! ");
+        System.out.println("5. Search visitor's->");
+        System.out.println("6. Exit! ");
         System.out.println();
     }
 
@@ -71,6 +75,9 @@ public class Restaurant {
                 break;
             }
             case 5: {
+                searchUIAction.execute();
+            }
+            case 6: {
                 uiExitAction.execute();
                 break;
             }
