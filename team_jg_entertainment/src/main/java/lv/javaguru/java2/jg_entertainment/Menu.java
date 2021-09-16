@@ -8,19 +8,8 @@ public class Menu {
     private String description;
     private int price;
 
-    public Menu(Long number) {
-        this.number = number;
-    }
-
-    public Menu(String title, String description, int price) {
+      public Menu(String title, String description, int price) {
         this.title = title;
-        this.description = description;
-        this.price = price;
-    }
-
-    public Menu(String title, Long number, String description, int price) {
-        this.title = title;
-        this.number = number;
         this.description = description;
         this.price = price;
     }
