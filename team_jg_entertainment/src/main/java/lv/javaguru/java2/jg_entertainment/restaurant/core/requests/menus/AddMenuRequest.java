@@ -6,7 +6,7 @@ public class AddMenuRequest {
     private String description;
     private double price;
 
-    public AddMenuRequest(String title, String description, int price) {
+    public AddMenuRequest(String title, String description, double price) {
         this.title = title;
         this.description = description;
         this.price = price;

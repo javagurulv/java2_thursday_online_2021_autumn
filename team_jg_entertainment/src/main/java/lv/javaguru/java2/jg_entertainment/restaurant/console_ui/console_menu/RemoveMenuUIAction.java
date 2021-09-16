@@ -1,6 +1,5 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.RemoveMenuRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.RemoveMenuResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.RemoveMenuService;
