@@ -15,8 +15,7 @@ public class AddMenuService {
 
     public AddMenuResponse execute(AddMenuRequest request) {
         Menu menu = new Menu(request.getTitle(), request.getDescription(), request.getPrice());
-               databaseMenu.save(menu);
+        databaseMenu.save(menu);
         return new AddMenuResponse(menu);
     }
-
 }
