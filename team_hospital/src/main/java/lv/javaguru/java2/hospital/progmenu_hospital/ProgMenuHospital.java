@@ -33,7 +33,9 @@ public class ProgMenuHospital {
             new ShowAllDoctorsUIAction(new ShowAllDoctorsService(doctorDatabase)),
             new DeleteDoctorUIAction(new DeleteDoctorService(doctorDatabase, new DeleteDoctorValidator()), new DoctorExistsService(doctorDatabase)),
             new EditDoctorUIAction(new EditDoctorService(doctorDatabase, new EditDoctorValidator()), new DoctorExistsService(doctorDatabase)),
-            new SearchDoctorsUIAction(new SearchDoctorsService(doctorDatabase, new SearchDoctorsRequestValidator()))};
+            new SearchDoctorsUIAction(new SearchDoctorsService(doctorDatabase, new SearchDoctorsRequestValidator(
+            		new OrderingValidator(), new PagingValidator()
+			)))};
 
 
     //Menu
