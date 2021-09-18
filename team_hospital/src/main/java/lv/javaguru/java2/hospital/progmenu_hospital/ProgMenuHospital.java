@@ -1,13 +1,15 @@
 package lv.javaguru.java2.hospital.progmenu_hospital;
 
+import lv.javaguru.java2.hospital.InputNumChecker;
+import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
+import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.database.VisitDatabaseImpl;
 import lv.javaguru.java2.hospital.doctor.console_ui.*;
-import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import lv.javaguru.java2.hospital.doctor.core.services.*;
-import lv.javaguru.java2.hospital.InputNumChecker;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.OrderingValidator;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.PagingValidator;
 import lv.javaguru.java2.hospital.doctor.core.services.validators.*;
 import lv.javaguru.java2.hospital.patient.console_ui.*;
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.patient.services.*;
 import lv.javaguru.java2.hospital.patient.services.validators.*;
 import lv.javaguru.java2.hospital.visits.console_ui.PatientVisitUIAction;
@@ -34,16 +36,16 @@ public class ProgMenuHospital {
             new EditPatientUIAction(new EditPatientService(patientDatabase,
                     new EditPatientValidator(patientDatabase))),
             new SearchPatientsUIAction(new SearchPatientsService(patientDatabase,
-                    new SearchPatientsValidator()))};
+                    new SearchPatientsValidator(new lv.javaguru.java2.hospital.patient.services.validators.OrderingValidator(),
+                            new lv.javaguru.java2.hospital.patient.services.validators.PagingValidator())))};
 
     private static final DoctorUIActions[] doctorUIActions = {
             new AddDoctorUIAction(new AddDoctorService(doctorDatabase, new AddDoctorValidator())),
             new ShowAllDoctorsUIAction(new ShowAllDoctorsService(doctorDatabase)),
             new DeleteDoctorUIAction(new DeleteDoctorService(doctorDatabase, new DeleteDoctorValidator()), new DoctorExistsService(doctorDatabase)),
             new EditDoctorUIAction(new EditDoctorService(doctorDatabase, new EditDoctorValidator()), new DoctorExistsService(doctorDatabase)),
-            new SearchDoctorsUIAction(new SearchDoctorsService(doctorDatabase, new SearchDoctorsRequestValidator(
-            		new OrderingValidator(), new PagingValidator()
-			)))};
+            new SearchDoctorsUIAction(new SearchDoctorsService(doctorDatabase,
+                    new SearchDoctorsRequestValidator(new OrderingValidator(), new PagingValidator())))};
 
 
     //Menu

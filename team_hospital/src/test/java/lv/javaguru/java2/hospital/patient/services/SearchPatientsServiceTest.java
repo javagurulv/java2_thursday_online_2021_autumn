@@ -4,6 +4,8 @@ import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.responses.SearchPatientsResponse;
+import lv.javaguru.java2.hospital.patient.services.validators.OrderingValidator;
+import lv.javaguru.java2.hospital.patient.services.validators.PagingValidator;
 import lv.javaguru.java2.hospital.patient.services.validators.SearchPatientsValidator;
 import org.junit.jupiter.api.Test;
 import java.util.List;
@@ -12,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SearchPatientsServiceTest {
     private final PatientDatabaseImpl patientDatabase = new PatientDatabaseImpl();
     private final SearchPatientsService searchPatientsService
-            = new SearchPatientsService(patientDatabase, new SearchPatientsValidator());
+            = new SearchPatientsService(patientDatabase, new SearchPatientsValidator(new OrderingValidator(), new PagingValidator()));
 
     @Test
     public void findByName() {
