@@ -16,11 +16,7 @@ class SearchPatientsServiceTest {
 
     @Test
     public void findByName() {
-        patientDatabase.add(new Patient("Valerij", "Petrov", "1212"));
-        patientDatabase.add(new Patient("Aleksandr", "Kornev", "2121"));
-        patientDatabase.add(new Patient("Stanislav", "Cherkasov", "1234"));
-        patientDatabase.add(new Patient("Anton", "Grigorjev", "4321"));
-        patientDatabase.add(new Patient("Petr", "Ivanov", "2323"));
+        addPatients();
         SearchPatientsRequest request =
                 new SearchPatientsRequest("Stanislav", "", "", null, null);
         SearchPatientsResponse response = searchPatientsService.execute(request);
@@ -33,11 +29,7 @@ class SearchPatientsServiceTest {
 
     @Test
     public void findBySurname() {
-        patientDatabase.add(new Patient("Valerij", "Petrov", "1212"));
-        patientDatabase.add(new Patient("Aleksandr", "Kornev", "2121"));
-        patientDatabase.add(new Patient("Stanislav", "Cherkasov", "1234"));
-        patientDatabase.add(new Patient("Anton", "Grigorjev", "4321"));
-        patientDatabase.add(new Patient("Petr", "Ivanov", "2323"));
+        addPatients();
         SearchPatientsRequest request =
                 new SearchPatientsRequest("", "Grigorjev", "", null, null);
         SearchPatientsResponse response = searchPatientsService.execute(request);
@@ -50,11 +42,7 @@ class SearchPatientsServiceTest {
 
     @Test
     public void findByPersonalCode() {
-        patientDatabase.add(new Patient("Valerij", "Petrov", "1212"));
-        patientDatabase.add(new Patient("Aleksandr", "Kornev", "2121"));
-        patientDatabase.add(new Patient("Stanislav", "Cherkasov", "1234"));
-        patientDatabase.add(new Patient("Anton", "Grigorjev", "4321"));
-        patientDatabase.add(new Patient("Petr", "Ivanov", "2323"));
+        addPatients();
         SearchPatientsRequest request =
                 new SearchPatientsRequest("", "", "2121", null, null);
         SearchPatientsResponse response = searchPatientsService.execute(request);
@@ -67,11 +55,7 @@ class SearchPatientsServiceTest {
 
     @Test
     public void findByNameAndSurname() {
-        patientDatabase.add(new Patient("Valerij", "Petrov", "1212"));
-        patientDatabase.add(new Patient("Aleksandr", "Kornev", "2121"));
-        patientDatabase.add(new Patient("Stanislav", "Cherkasov", "1234"));
-        patientDatabase.add(new Patient("Anton", "Grigorjev", "4321"));
-        patientDatabase.add(new Patient("Petr", "Ivanov", "2323"));
+        addPatients();
         SearchPatientsRequest request =
                 new SearchPatientsRequest("Petr", "Ivanov", "", null, null);
         SearchPatientsResponse response = searchPatientsService.execute(request);
@@ -84,11 +68,7 @@ class SearchPatientsServiceTest {
 
     @Test
     public void findByNameAndPersonalCode() {
-        patientDatabase.add(new Patient("Valerij", "Petrov", "1212"));
-        patientDatabase.add(new Patient("Aleksandr", "Kornev", "2121"));
-        patientDatabase.add(new Patient("Stanislav", "Cherkasov", "1234"));
-        patientDatabase.add(new Patient("Anton", "Grigorjev", "4321"));
-        patientDatabase.add(new Patient("Petr", "Ivanov", "2323"));
+        addPatients();
         SearchPatientsRequest request =
                 new SearchPatientsRequest("Aleksandr", "", "2121", null, null);
         SearchPatientsResponse response = searchPatientsService.execute(request);
@@ -97,5 +77,13 @@ class SearchPatientsServiceTest {
         assertEquals(patients.get(0).getName(), "Aleksandr");
         assertEquals(patients.get(0).getSurname(), "Kornev");
         assertEquals(patients.get(0).getPersonalCode(), "2121");
+    }
+
+    private void addPatients() {
+        patientDatabase.add(new Patient("Valerij", "Petrov", "1212"));
+        patientDatabase.add(new Patient("Aleksandr", "Kornev", "2121"));
+        patientDatabase.add(new Patient("Stanislav", "Cherkasov", "1234"));
+        patientDatabase.add(new Patient("Anton", "Grigorjev", "4321"));
+        patientDatabase.add(new Patient("Petr", "Ivanov", "2323"));
     }
 }

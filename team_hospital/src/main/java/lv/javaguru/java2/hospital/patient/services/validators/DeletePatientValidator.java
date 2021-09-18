@@ -2,7 +2,6 @@ package lv.javaguru.java2.hospital.patient.services.validators;
 
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.patient.requests.DeletePatientRequest;
-import lv.javaguru.java2.hospital.patient.requests.FindPatientByIdRequest;
 import lv.javaguru.java2.hospital.patient.responses.CoreError;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class DeletePatientValidator {
     public List<CoreError> validate(DeletePatientRequest request) {
         List<CoreError> errors = new ArrayList<>();
         validateID(request).ifPresent(errors::add);
-        //validatePatientExists(request).ifPresent(errors::add);
+        validatePatientExists(request).ifPresent(errors::add);
         return errors;
     }
 
