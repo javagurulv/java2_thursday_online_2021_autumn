@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SearchPatientsValidatorTest {
 
-    private final SearchPatientsValidator validator = new SearchPatientsValidator();
+    private final SearchPatientsValidator validator = new SearchPatientsValidator(new OrderingValidator(), new PagingValidator());
 
 
     @Test

@@ -2,7 +2,6 @@ package lv.javaguru.java2.hospital.patient.services.validators;
 
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.patient.requests.DeletePatientRequest;
-import lv.javaguru.java2.hospital.patient.requests.FindPatientByIdRequest;
 import lv.javaguru.java2.hospital.patient.responses.CoreError;
 
 import java.util.ArrayList;
@@ -29,10 +28,10 @@ public class DeletePatientValidator {
                 ? Optional.of(new CoreError("ID", "Must not be empty!")) : Optional.empty();
     }
 
-    private Optional<CoreError> validatePatientExists(DeletePatientRequest request) {
+   /* private Optional<CoreError> validatePatientExists(DeletePatientRequest request) {
         return (request.getIdRequest() == null || request.getIdRequest().isEmpty())
                 ? Optional.empty() : database.patientExists(Long.valueOf(request.getIdRequest()))
                 ? Optional.empty() : Optional.of(new CoreError("Patient", "does not exist."));
-    }
+    } */
 }
 

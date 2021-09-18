@@ -1,20 +1,30 @@
 package lv.javaguru.java2.hospital.progmenu_hospital;
 
-import lv.javaguru.java2.hospital.doctor.console_ui.*;
-import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
-import lv.javaguru.java2.hospital.doctor.core.services.*;
 import lv.javaguru.java2.hospital.InputNumChecker;
+import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
+import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+import lv.javaguru.java2.hospital.database.VisitDatabaseImpl;
+import lv.javaguru.java2.hospital.doctor.console_ui.*;
+import lv.javaguru.java2.hospital.doctor.core.services.*;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.OrderingValidator;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.PagingValidator;
 import lv.javaguru.java2.hospital.doctor.core.services.validators.*;
 import lv.javaguru.java2.hospital.patient.console_ui.*;
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.patient.services.*;
 import lv.javaguru.java2.hospital.patient.services.validators.*;
+import lv.javaguru.java2.hospital.visits.console_ui.PatientVisitUIAction;
+import lv.javaguru.java2.hospital.visits.services.PatientsVisitService;
+import lv.javaguru.java2.hospital.visits.services.validators.PatientVisitValidator;
 
 public class ProgMenuHospital {
 
     private static final PatientDatabaseImpl patientDatabase = new PatientDatabaseImpl();
     private static final DoctorDatabaseImpl doctorDatabase = new DoctorDatabaseImpl();
     private static final InputNumChecker inputNumChecker = new InputNumChecker();
+    private static final PatientVisitUIAction patientVisit =
+            new PatientVisitUIAction(new PatientsVisitService
+                    (patientDatabase, doctorDatabase,
+                            new VisitDatabaseImpl(), new PatientVisitValidator()));
 
     private static final PatientUIActions[] PatientUIActions = {
             new AddPatientUIAction(new AddPatientService(patientDatabase, new AddPatientValidator())),
@@ -26,16 +36,16 @@ public class ProgMenuHospital {
             new EditPatientUIAction(new EditPatientService(patientDatabase,
                     new EditPatientValidator(patientDatabase))),
             new SearchPatientsUIAction(new SearchPatientsService(patientDatabase,
-                    new SearchPatientsValidator()))};
+                    new SearchPatientsValidator(new lv.javaguru.java2.hospital.patient.services.validators.OrderingValidator(),
+                            new lv.javaguru.java2.hospital.patient.services.validators.PagingValidator())))};
 
     private static final DoctorUIActions[] doctorUIActions = {
             new AddDoctorUIAction(new AddDoctorService(doctorDatabase, new AddDoctorValidator())),
             new ShowAllDoctorsUIAction(new ShowAllDoctorsService(doctorDatabase)),
             new DeleteDoctorUIAction(new DeleteDoctorService(doctorDatabase, new DeleteDoctorValidator()), new DoctorExistsService(doctorDatabase)),
             new EditDoctorUIAction(new EditDoctorService(doctorDatabase, new EditDoctorValidator()), new DoctorExistsService(doctorDatabase)),
-            new SearchDoctorsUIAction(new SearchDoctorsService(doctorDatabase, new SearchDoctorsRequestValidator(
-            		new OrderingValidator(), new PagingValidator()
-			)))};
+            new SearchDoctorsUIAction(new SearchDoctorsService(doctorDatabase,
+                    new SearchDoctorsRequestValidator(new OrderingValidator(), new PagingValidator())))};
 
 
     //Menu
@@ -48,6 +58,7 @@ public class ProgMenuHospital {
                 case 1 -> patientMenu();
                 case 2 -> doctorMenu();
                 case 3 -> System.exit(0);
+                case 4 -> patientVisit.execute();
             }
             System.out.println();
         }
@@ -55,7 +66,7 @@ public class ProgMenuHospital {
 
     private static int getUserInput() {
         System.out.println("Enter menu item number to execute: ");
-        return inputNumChecker.execute(1, 3);
+        return inputNumChecker.execute(1, 4);
     }
 
     private static void programMenu() {
@@ -63,6 +74,7 @@ public class ProgMenuHospital {
         System.out.println("Press 1 to see patient actions.");
         System.out.println("Press 2 to see doctor actions.");
         System.out.println("Press 3 for Exit.");
+        System.out.println("Press 4 to make a visit.");
 
         System.out.println();
     }

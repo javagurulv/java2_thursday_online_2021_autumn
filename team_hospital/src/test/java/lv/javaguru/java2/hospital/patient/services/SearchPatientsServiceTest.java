@@ -4,6 +4,8 @@ import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.responses.SearchPatientsResponse;
+import lv.javaguru.java2.hospital.patient.services.validators.OrderingValidator;
+import lv.javaguru.java2.hospital.patient.services.validators.PagingValidator;
 import lv.javaguru.java2.hospital.patient.services.validators.SearchPatientsValidator;
 import org.junit.jupiter.api.Test;
 import java.util.List;
@@ -12,15 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SearchPatientsServiceTest {
     private final PatientDatabaseImpl patientDatabase = new PatientDatabaseImpl();
     private final SearchPatientsService searchPatientsService
-            = new SearchPatientsService(patientDatabase, new SearchPatientsValidator());
+            = new SearchPatientsService(patientDatabase, new SearchPatientsValidator(new OrderingValidator(), new PagingValidator()));
 
     @Test
     public void findByName() {
-        patientDatabase.add(new Patient("Valerij", "Petrov", "1212"));
-        patientDatabase.add(new Patient("Aleksandr", "Kornev", "2121"));
-        patientDatabase.add(new Patient("Stanislav", "Cherkasov", "1234"));
-        patientDatabase.add(new Patient("Anton", "Grigorjev", "4321"));
-        patientDatabase.add(new Patient("Petr", "Ivanov", "2323"));
+        addPatients();
         SearchPatientsRequest request =
                 new SearchPatientsRequest("Stanislav", "", "", null, null);
         SearchPatientsResponse response = searchPatientsService.execute(request);
@@ -33,11 +31,7 @@ class SearchPatientsServiceTest {
 
     @Test
     public void findBySurname() {
-        patientDatabase.add(new Patient("Valerij", "Petrov", "1212"));
-        patientDatabase.add(new Patient("Aleksandr", "Kornev", "2121"));
-        patientDatabase.add(new Patient("Stanislav", "Cherkasov", "1234"));
-        patientDatabase.add(new Patient("Anton", "Grigorjev", "4321"));
-        patientDatabase.add(new Patient("Petr", "Ivanov", "2323"));
+        addPatients();
         SearchPatientsRequest request =
                 new SearchPatientsRequest("", "Grigorjev", "", null, null);
         SearchPatientsResponse response = searchPatientsService.execute(request);
@@ -50,11 +44,7 @@ class SearchPatientsServiceTest {
 
     @Test
     public void findByPersonalCode() {
-        patientDatabase.add(new Patient("Valerij", "Petrov", "1212"));
-        patientDatabase.add(new Patient("Aleksandr", "Kornev", "2121"));
-        patientDatabase.add(new Patient("Stanislav", "Cherkasov", "1234"));
-        patientDatabase.add(new Patient("Anton", "Grigorjev", "4321"));
-        patientDatabase.add(new Patient("Petr", "Ivanov", "2323"));
+        addPatients();
         SearchPatientsRequest request =
                 new SearchPatientsRequest("", "", "2121", null, null);
         SearchPatientsResponse response = searchPatientsService.execute(request);
@@ -67,11 +57,7 @@ class SearchPatientsServiceTest {
 
     @Test
     public void findByNameAndSurname() {
-        patientDatabase.add(new Patient("Valerij", "Petrov", "1212"));
-        patientDatabase.add(new Patient("Aleksandr", "Kornev", "2121"));
-        patientDatabase.add(new Patient("Stanislav", "Cherkasov", "1234"));
-        patientDatabase.add(new Patient("Anton", "Grigorjev", "4321"));
-        patientDatabase.add(new Patient("Petr", "Ivanov", "2323"));
+        addPatients();
         SearchPatientsRequest request =
                 new SearchPatientsRequest("Petr", "Ivanov", "", null, null);
         SearchPatientsResponse response = searchPatientsService.execute(request);
@@ -84,11 +70,7 @@ class SearchPatientsServiceTest {
 
     @Test
     public void findByNameAndPersonalCode() {
-        patientDatabase.add(new Patient("Valerij", "Petrov", "1212"));
-        patientDatabase.add(new Patient("Aleksandr", "Kornev", "2121"));
-        patientDatabase.add(new Patient("Stanislav", "Cherkasov", "1234"));
-        patientDatabase.add(new Patient("Anton", "Grigorjev", "4321"));
-        patientDatabase.add(new Patient("Petr", "Ivanov", "2323"));
+        addPatients();
         SearchPatientsRequest request =
                 new SearchPatientsRequest("Aleksandr", "", "2121", null, null);
         SearchPatientsResponse response = searchPatientsService.execute(request);
@@ -97,5 +79,13 @@ class SearchPatientsServiceTest {
         assertEquals(patients.get(0).getName(), "Aleksandr");
         assertEquals(patients.get(0).getSurname(), "Kornev");
         assertEquals(patients.get(0).getPersonalCode(), "2121");
+    }
+
+    private void addPatients() {
+        patientDatabase.add(new Patient("Valerij", "Petrov", "1212"));
+        patientDatabase.add(new Patient("Aleksandr", "Kornev", "2121"));
+        patientDatabase.add(new Patient("Stanislav", "Cherkasov", "1234"));
+        patientDatabase.add(new Patient("Anton", "Grigorjev", "4321"));
+        patientDatabase.add(new Patient("Petr", "Ivanov", "2323"));
     }
 }
