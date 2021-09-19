@@ -41,8 +41,7 @@ public class Stock extends Security {
         if (!super.equals(o)) return false;
         Stock stock = (Stock) o;
         return Double.compare(stock.dividends, dividends) == 0
-                && Objects.equals(riskWeight, stock.riskWeight)
-                && Objects.equals(((Stock) o).getName(), stock.getName());
+                && Objects.equals(riskWeight, stock.riskWeight);
     }
 
 }

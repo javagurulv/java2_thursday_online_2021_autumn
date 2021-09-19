@@ -26,7 +26,7 @@ public class GetAllSecurityListServiceTest {
     private GetAllSecurityListService service;
 
     @Test
-    public void shouldGetBooksFromDb() {
+    public void shouldGetAllSecuritiesFromDatabase() {
         List<Security> securityList = new ArrayList<>();
         securityList.add(new Stock("Alibaba", "Technology", "USD",
                 175.32, 0, 1.32));

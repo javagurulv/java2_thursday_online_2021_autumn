@@ -81,6 +81,10 @@ public class UtilityMethods {
     }
 
     public static double round(double amount) {
+        return Math.round(amount);
+    }
+
+    public static double roundToTwoDecimal(double amount) {
         return Math.round(amount * 100.) / 100.;
     }
 
