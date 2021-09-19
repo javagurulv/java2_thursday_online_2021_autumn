@@ -6,6 +6,7 @@ import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.database.UserDataImpl;
 import lv.javaguru.java2.qwe.ui_actions.ChooseDataMenuUIAction;
 import lv.javaguru.java2.qwe.ui_actions.ChooseUserMenuUIAction;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
 
 import java.io.File;
 import java.util.concurrent.Executors;
@@ -22,9 +23,9 @@ public class ApplicationDemo {
         UserData userData = new UserDataImpl(database);
 
         //Симуляция изменения рыночных цен!
-        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+/*        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
         Runnable simulator = () -> simulateMarketPrices(database.getSecurityList());
-        scheduledExecutorService.scheduleAtFixedRate(simulator, 5, 5, TimeUnit.SECONDS);
+        scheduledExecutorService.scheduleAtFixedRate(simulator, 5, 5, TimeUnit.SECONDS);*/
 
         String[] menu = {"DATA MENU", "USER MENU", "EXIT"};
 

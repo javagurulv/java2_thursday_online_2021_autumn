@@ -1,5 +1,7 @@
 package lv.javaguru.java2.qwe;
 
+import java.util.Objects;
+
 public class Bond extends Security {
 
     private final Double coupon;
@@ -44,6 +46,18 @@ public class Bond extends Security {
                 ", nominal=" + nominal +
                 ", maturity=" + maturity +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Bond bond = (Bond) o;
+        return Objects.equals(coupon, bond.coupon)
+                && Objects.equals(rating, bond.rating)
+                && Objects.equals(nominal, bond.nominal)
+                && Objects.equals(maturity, bond.maturity);
     }
 
 }

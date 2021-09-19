@@ -16,7 +16,6 @@ public class User {
     private List<Position> portfolio = new ArrayList<>();
     private final Map<String, Double[]> distribution = createDistributionMatrix();
 
-
     public User(String name, int age, Type type, double initialInvestment) {
         this.name = name;
         this.age = age;
@@ -116,6 +115,15 @@ public class User {
                 ", initialInvestment=" + initialInvestment +
                 ", riskTolerance=" + riskTolerance +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return age == user.age && Double.compare(user.initialInvestment, initialInvestment) == 0
+                && Objects.equals(name, user.name) && type == user.type;
     }
 
 }

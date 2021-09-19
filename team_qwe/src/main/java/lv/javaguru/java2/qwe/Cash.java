@@ -13,4 +13,8 @@ public class Cash extends Security {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        return true;
+    }
 }

@@ -31,9 +31,8 @@ public class AddUserService {
             User user = addUser(request);
             userData.addUser(user);
             return new AddUserResponse(user);
-        } else {
-            return new AddUserResponse(errors);
         }
+        return new AddUserResponse(errors);
     }
 
     private User addUser(AddUserRequest request) {

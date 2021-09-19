@@ -29,6 +29,13 @@ public class DatabaseImpl implements Database {
         importData();  // автоматически импортирует данные в базу
     }
 
+    //конструктор для тестов
+    public DatabaseImpl(String s) {
+        this.securityList = new ArrayList<>();
+        securityList.add(new Cash());
+        importDataForTests();
+    }
+
     public DatabaseImpl() {
         this.securityList = new ArrayList<>();
         securityList.add(new Cash());
@@ -94,7 +101,7 @@ public class DatabaseImpl implements Database {
     private List<Security> getPage(List<Security> list, FilterStocksByMultipleParametersRequest request) {
         if (request.getPageNumber() != 0) {
             return list.stream()
-                    .skip((long) request.getPageNumber() * request.getPageSize() - 1)
+                    .skip((long) request.getPageSize() * (request.getPageNumber() - 1))
                     .limit(request.getPageSize())
                     .collect(Collectors.toList());
         } else {
@@ -119,6 +126,20 @@ public class DatabaseImpl implements Database {
 
     private void importData() {
         file = new File("./team_qwe/src/main/docs/stocks_list_import.txt");
+        ImportSecuritiesService service =
+                new ImportSecuritiesService(this,
+                        new AddStockValidator(this),
+                        new AddBondValidator(this));
+        try {
+            service.execute(file.getPath());
+            System.out.println("Data imported to database!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void importDataForTests() {
+        file = new File("./src/test/docs/stocks_list_import.txt");
         ImportSecuritiesService service =
                 new ImportSecuritiesService(this,
                         new AddStockValidator(this),
