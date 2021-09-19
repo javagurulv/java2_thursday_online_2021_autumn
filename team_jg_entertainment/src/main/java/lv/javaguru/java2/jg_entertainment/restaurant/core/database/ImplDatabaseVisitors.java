@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.Visitors;
+import lv.javaguru.java2.jg_entertainment.Visitors;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -22,7 +22,7 @@ public class ImplDatabaseVisitors implements DatabaseVisitors {
         clientInRestaurant.add(clientInfo);
     }
 
-    @Override /// +surname + v find
+    @Override
     public List<Visitors> findVisitorsByNameAndTelephoneNumber(String nameVisitors, Long telephoneNumber) {
         return clientInRestaurant.stream()
                 .filter(visitors -> visitors.getClientName().equals(nameVisitors))

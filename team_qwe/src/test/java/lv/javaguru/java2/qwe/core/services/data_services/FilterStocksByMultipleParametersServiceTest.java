@@ -18,7 +18,6 @@ import java.util.List;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FilterStocksByMultipleParametersServiceTest {
@@ -32,6 +31,7 @@ public class FilterStocksByMultipleParametersServiceTest {
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
+
         List<CoreRequest> requestList = List.of(
                 new FilterStocksByIndustryRequest("Technology"),
                 new FilterStocksByAnyDoubleParameterRequest("Dividend", ">", "-1"),

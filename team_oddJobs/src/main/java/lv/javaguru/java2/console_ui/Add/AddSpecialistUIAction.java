@@ -20,13 +20,13 @@ public class AddSpecialistUIAction implements UIAction {
     public void execute() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your name");
-        String specialistName = scanner.nextLine();
+        String name = scanner.nextLine();
         System.out.println("Enter your surname");
-        String specialistSurname = scanner.nextLine();
+        String surname = scanner.nextLine();
         System.out.println("Enter your profession");
-        String specialistProfession = scanner.nextLine();
+        String profession = scanner.nextLine();
 
-        AddSpecialistRequest addSpecialistRequest = new AddSpecialistRequest(specialistName,specialistSurname,specialistProfession);
+        AddSpecialistRequest addSpecialistRequest = new AddSpecialistRequest(name,surname,profession);
         AddSpecialistResponse addSpecialistResponse = addSpecialistService.execute(addSpecialistRequest);
 
         if (addSpecialistResponse.hasErrors()) {

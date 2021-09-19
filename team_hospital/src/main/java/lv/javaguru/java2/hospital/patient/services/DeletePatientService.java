@@ -22,7 +22,7 @@ public class DeletePatientService {
         if (!errors.isEmpty()) {
             return new DeletePatientResponse(errors);
         }
-        database.deleteById(Long.parseLong(request.getIdRequest()));
-        return new DeletePatientResponse(request.getIdRequest());
+        boolean removedOrNot = database.deleteById(Long.parseLong(request.getIdRequest()));
+        return new DeletePatientResponse(request.getIdRequest(), removedOrNot);
     }
 }

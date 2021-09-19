@@ -19,7 +19,7 @@ public interface Database {
 
     boolean removeSecurity(String name);
 
-    List<Security> showListOfSecurities();
+    List<Security> getAllSecurityList();
 
     Optional<Security> findSecurityByName(String name);
 

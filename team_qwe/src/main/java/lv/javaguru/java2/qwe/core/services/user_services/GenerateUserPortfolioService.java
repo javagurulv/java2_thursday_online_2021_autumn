@@ -82,8 +82,8 @@ public class GenerateUserPortfolioService {
                 .map(entry -> IntStream.rangeClosed(0, entry.getValue().size() - 1)
                         .mapToObj(i -> new Position(
                                 entry.getValue().get(i),
-                                convertToInt((investmentPerIndustry.get(entry.getKey()) / entry.getValue().size()) /
-                                        entry.getValue().get(i).getMarketPrice()),
+                                convertToInt(round((investmentPerIndustry.get(entry.getKey()) / entry.getValue().size()) /
+                                        entry.getValue().get(i).getMarketPrice())),
                                 entry.getValue().get(i).getMarketPrice()
                         ))
                         .collect(toList()))

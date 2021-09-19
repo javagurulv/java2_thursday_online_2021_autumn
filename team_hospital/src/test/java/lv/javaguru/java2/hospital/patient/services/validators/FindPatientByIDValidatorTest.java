@@ -30,12 +30,4 @@ class FindPatientByIDValidatorTest {
         assertEquals(errorList.get(0).getField(), "ID");
         assertEquals(errorList.get(0).getDescription(), "Must not be empty!");
     }
-
-   /* @Test public void shouldReturnPatientDoesNotExist(){
-        FindPatientByIdRequest request = new FindPatientByIdRequest("1");
-        List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "Patient");
-        assertEquals(errors.get(0).getDescription(), "does not exist.");
-    }*/
 }

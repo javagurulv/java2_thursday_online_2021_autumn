@@ -3,6 +3,7 @@ package lv.javaguru.java2.hospital.patient.console_ui;
 import lv.javaguru.java2.hospital.patient.requests.DeletePatientRequest;
 import lv.javaguru.java2.hospital.patient.responses.DeletePatientResponse;
 import lv.javaguru.java2.hospital.patient.services.DeletePatientService;
+
 import java.util.Scanner;
 
 public class DeletePatientUIAction implements PatientUIActions {
@@ -22,7 +23,12 @@ public class DeletePatientUIAction implements PatientUIActions {
                     System.out.println("Error: " + coreError.getField() + " " + coreError.getDescription())
             );
         } else {
+            if (response.isPatientDeleted()) {
                 System.out.println("Patient with ID " + request.getIdRequest() + " was successfully deleted.");
+            } else {
+                System.out.println("User with ID:" + response.getIdResponse() + " not found!");
+            }
+
         }
     }
 }

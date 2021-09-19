@@ -10,11 +10,11 @@ import static lv.javaguru.java2.qwe.utils.UtilityMethods.printErrorList;
 
 public class GetUserPortfolioSummaryUIAction implements UIAction {
 
-    private final GetUserPortfolioSummaryService showPortfolioSummaryService;
+    private final GetUserPortfolioSummaryService summaryService;
     private String userName;
 
-    public GetUserPortfolioSummaryUIAction(GetUserPortfolioSummaryService showPortfolioSummaryService) {
-        this.showPortfolioSummaryService = showPortfolioSummaryService;
+    public GetUserPortfolioSummaryUIAction(GetUserPortfolioSummaryService summaryService) {
+        this.summaryService = summaryService;
     }
 
     @Override
@@ -23,11 +23,11 @@ public class GetUserPortfolioSummaryUIAction implements UIAction {
                 new GetUserPortfolioSummaryRequest(inputDialog(
                         "Choose user:",
                         "SHOW PORTFOLIO SUMMARY",
-                        convertToStringArray(showPortfolioSummaryService.getUserData())
+                        convertToStringArray(summaryService.getUserData())
                 ));
         userName = request.getUserName();
         GetUserPortfolioSummaryResponse response =
-                showPortfolioSummaryService.execute(request);
+                summaryService.execute(request);
         printResponse(response);
 
     }

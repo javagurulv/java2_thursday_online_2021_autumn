@@ -17,7 +17,7 @@ public class GetAllUserListService {
     }
 
     public GetAllUserListResponse execute(GetAllUserListRequest request) {
-        return new GetAllUserListResponse(userData.showUserList());
+        return new GetAllUserListResponse(userData.getAllUserList());
     }
 
 }

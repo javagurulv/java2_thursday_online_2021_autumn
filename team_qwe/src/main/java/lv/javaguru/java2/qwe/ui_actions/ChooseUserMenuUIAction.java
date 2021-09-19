@@ -1,19 +1,11 @@
 package lv.javaguru.java2.qwe.ui_actions;
 
-import lv.javaguru.java2.qwe.core.database.UserData;
-import lv.javaguru.java2.qwe.core.services.user_services.*;
-import lv.javaguru.java2.qwe.core.services.validator.*;
 import lv.javaguru.java2.qwe.ui_actions.user_ui_actions.*;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
+import static lv.javaguru.java2.qwe.ApplicationDemo.getApplicationContext;
 
 public class ChooseUserMenuUIAction implements UIAction {
-
-    private final UserData userData;
-
-    public ChooseUserMenuUIAction(UserData userData) {
-        this.userData = userData;
-    }
 
     @Override
     public void execute() {
@@ -25,33 +17,51 @@ public class ChooseUserMenuUIAction implements UIAction {
         while (userMenuOpen) {
             String type = inputDialog("Choose operation", "USER MENU", userMenu);
             switch (type) {
-                case "ADD NEW USER" -> new AddUserUIAction(
-                        new AddUserService(
-                                userData, new AddUserValidator(userData))).execute();
-                case "REMOVE USER" -> new RemoveUserUIAction(
-                        new RemoveUserService(
-                                userData)).execute();
-                case "SHOW USER LIST" -> new GetUserListUIAction(
-                        new GetAllUserListService(
-                                userData)).execute();
-                case "FIND USER BY NAME" -> new FindUserByNameUIAction(
-                        new FindUserByNameService(
-                                userData, new FindUserByNameValidator())).execute();
-                case "GENERATE PORTFOLIO FOR USER" -> new GenerateUserPortfolioUIAction(
-                        new GenerateUserPortfolioService(
-                                userData, new GenerateUserPortfolioValidator())).execute();
-                case "SHOW USER PORTFOLIO" -> new GetUserPortfolioUIAction(
-                        new GetUserPortfolioService(
-                                userData, new GetUserPortfolioValidator())).execute();
-                case "SHOW USER PORTFOLIO GROUPED BY INDUSTRY" -> new GetUserPortfolioGroupedByIndustryUIAction(
-                        new GetUserPortfolioGroupedByIndustryService(
-                                userData, new GetUserPortfolioGroupedByIndustryValidator())).execute();
-                case "SHOW USER INVESTMENTS BY EACH INDUSTRY" -> new GetUserInvestmentsByEachIndustryUIAction(
-                        new GetUserInvestmentsByEachIndustryService(
-                                userData, new GetUserInvestmentsByEachIndustryValidator())).execute();
-                case "SHOW PORTFOLIO SUMMARY" -> new GetUserPortfolioSummaryUIAction(
-                        new GetUserPortfolioSummaryService(
-                                userData, new GetUserPortfolioSummaryValidator())).execute();
+                case "ADD NEW USER" -> {
+                    AddUserUIAction uiAction =
+                            getApplicationContext().getBean(AddUserUIAction.class);
+                    uiAction.execute();
+                }
+                case "REMOVE USER" -> {
+                    RemoveUserUIAction uiAction =
+                            getApplicationContext().getBean(RemoveUserUIAction.class);
+                    uiAction.execute();
+                }
+                case "SHOW USER LIST" -> {
+                    GetUserListUIAction uiAction =
+                            getApplicationContext().getBean(GetUserListUIAction.class);
+                    uiAction.execute();
+                }
+                case "FIND USER BY NAME" -> {
+                    FindUserByNameUIAction uiAction =
+                            getApplicationContext().getBean(FindUserByNameUIAction.class);
+                    uiAction.execute();
+                }
+                case "GENERATE PORTFOLIO FOR USER" -> {
+                    GenerateUserPortfolioUIAction uiAction =
+                            getApplicationContext().getBean(GenerateUserPortfolioUIAction.class);
+                    uiAction.execute();
+                }
+                case "SHOW USER PORTFOLIO" -> {
+                    GetUserPortfolioUIAction uiAction =
+                            getApplicationContext().getBean(GetUserPortfolioUIAction.class);
+                    uiAction.execute();
+                }
+                case "SHOW USER PORTFOLIO GROUPED BY INDUSTRY" -> {
+                    GetUserPortfolioGroupedByIndustryUIAction uiAction =
+                            getApplicationContext().getBean(GetUserPortfolioGroupedByIndustryUIAction.class);
+                    uiAction.execute();
+                }
+                case "SHOW USER INVESTMENTS BY EACH INDUSTRY" -> {
+                    GetUserInvestmentsByEachIndustryUIAction uiAction =
+                            getApplicationContext().getBean(GetUserInvestmentsByEachIndustryUIAction.class);
+                    uiAction.execute();
+                }
+                case "SHOW PORTFOLIO SUMMARY" -> {
+                    GetUserPortfolioSummaryUIAction uiAction =
+                            getApplicationContext().getBean(GetUserPortfolioSummaryUIAction.class);
+                    uiAction.execute();
+                }
                 default -> userMenuOpen = false;
             }
         }

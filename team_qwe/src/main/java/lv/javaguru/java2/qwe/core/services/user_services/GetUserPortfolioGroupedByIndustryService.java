@@ -28,7 +28,7 @@ public class GetUserPortfolioGroupedByIndustryService {
         Optional<User> user = userData.findUserByName(request.getUserName());
         if (errors.isEmpty() && user.isPresent()) {
             return new GetUserPortfolioGroupedByIndustryResponse(
-                    userData.showUserPortfolioGroupedByIndustry(user.get()));
+                    userData.getUserPortfolioGroupedByIndustry(user.get()));
         }
         return new GetUserPortfolioGroupedByIndustryResponse(errors);
     }

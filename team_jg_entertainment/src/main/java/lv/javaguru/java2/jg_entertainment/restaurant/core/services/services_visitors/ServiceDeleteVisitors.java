@@ -5,7 +5,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisit
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestDeleteVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseDeleteVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorDeleteVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorDeleteVisitor;
 
 import java.util.List;
 

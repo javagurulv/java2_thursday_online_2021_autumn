@@ -17,7 +17,7 @@ public class GetAllSecurityListService {
     }
 
     public GetAllSecurityListResponse execute(GetAllSecurityListRequest request) {
-        return new GetAllSecurityListResponse(database.showListOfSecurities());
+        return new GetAllSecurityListResponse(database.getAllSecurityList());
     }
 
 }

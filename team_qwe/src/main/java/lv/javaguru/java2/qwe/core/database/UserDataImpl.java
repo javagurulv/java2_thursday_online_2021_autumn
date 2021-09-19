@@ -42,7 +42,7 @@ public class UserDataImpl implements UserData {
     }
 
     @Override
-    public List<User> showUserList() {
+    public List<User> getAllUserList() {
         return getUserList();
     }
 
@@ -54,14 +54,14 @@ public class UserDataImpl implements UserData {
     }
 
     @Override
-    public Map<String, List<String>> showUserPortfolioGroupedByIndustry(User user) {
+    public Map<String, List<String>> getUserPortfolioGroupedByIndustry(User user) {
         return user.getPortfolio().stream()
                 .map(Position::getSecurity)
                 .collect(groupingBy(Security::getIndustry, mapping(Security::getName, toList())));
     }
 
     @Override
-    public Map<String, Double> showUserInvestmentsByEachIndustry(User user) {
+    public Map<String, Double> getUserInvestmentsByEachIndustry(User user) {
         return user.getPortfolio().stream()
                 .collect(groupingBy(position -> position.getSecurity().getIndustry(),
                         summingDouble(security -> security.getAmount() * security.getPurchasePrice())));
