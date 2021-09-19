@@ -33,5 +33,4 @@ public class FindPatientByIDValidator {
                 ? Optional.empty() : database.patientExists(Long.valueOf(request.getIdRequest()))
                 ? Optional.empty() : Optional.of(new CoreError("Patient", "does not exist."));
     }
-
 }

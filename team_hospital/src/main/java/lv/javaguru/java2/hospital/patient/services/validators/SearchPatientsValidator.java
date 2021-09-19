@@ -31,8 +31,8 @@ public class SearchPatientsValidator {
 
     private void validateOrderingIfNeeded(SearchPatientsRequest request, List<CoreError> errors) {
         if (request != null) {
-            List<CoreError> pagingErrors = orderingValidator.validate(request.getOrdering());
-            errors.addAll(pagingErrors);
+            List<CoreError> orderingErrors = orderingValidator.validate(request.getOrdering());
+            errors.addAll(orderingErrors);
         }
     }
 
