@@ -5,14 +5,16 @@ import lv.javaguru.java2.hospital.patient.requests.Paging;
 import lv.javaguru.java2.hospital.patient.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.responses.CoreError;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SearchPatientsValidatorTest {
 
-    private final SearchPatientsValidator validator = new SearchPatientsValidator(new OrderingValidator(), new PagingValidator());
-
+    private OrderingValidator orderingValidator = new OrderingValidator();
+    private PagingValidator pagingValidator = new PagingValidator();
+    private SearchPatientsValidator validator = new SearchPatientsValidator(orderingValidator, pagingValidator);
 
     @Test
     public void shouldNotReturnErrorWhenNameNotProvided(){
@@ -61,12 +63,12 @@ class SearchPatientsValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenOrderByISEmpty() {
-        Ordering ordering = new Ordering(null, "ascending");
+        Ordering ordering = new Ordering(null, "Ascending");
         SearchPatientsRequest request = new SearchPatientsRequest("name", "surname",
                 "1212", ordering);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "Order By");
+        assertEquals(errors.get(0).getField(), "orderBy");
         assertEquals(errors.get(0).getDescription(), "must not be empty!");
     }
 
@@ -77,7 +79,7 @@ class SearchPatientsValidatorTest {
                 new SearchPatientsRequest("Name", "Surname","1212", ordering);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "Order By");
+        assertEquals(errors.get(0).getField(), "orderBy");
         assertEquals(errors.get(0).getDescription(), "must contain 'NAME' or 'SURNAME' only!");
     }
 

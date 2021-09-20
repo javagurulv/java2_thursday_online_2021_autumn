@@ -22,9 +22,9 @@ public class OrderingValidator {
 
     private Optional<CoreError> validateOrderBy(Ordering ordering){
         return (ordering.getOrderBy() != null
-                && !(ordering.getOrderBy().toLowerCase(Locale.ROOT).equals("name")
-                || ordering.getOrderBy().toLowerCase(Locale.ROOT).equals("surname")))
-                ? Optional.of(new CoreError("Order By", "must contain 'NAME' or 'SURNAME' only!"))
+                && !(ordering.getOrderBy().toUpperCase(Locale.ROOT).equals("NAME")
+                || ordering.getOrderBy().toUpperCase(Locale.ROOT).equals("SURNAME")))
+                ? Optional.of(new CoreError("orderBy", "must contain 'NAME' or 'SURNAME' only!"))
                 : Optional.empty();
 
     }
@@ -39,7 +39,7 @@ public class OrderingValidator {
 
     private Optional<CoreError> validateMandatoryOrderBy(Ordering ordering) {
         return (ordering.getOrderDirection() != null && ordering.getOrderBy() == null)
-                ? Optional.of(new CoreError("Order By", "must not be empty!"))
+                ? Optional.of(new CoreError("orderBy", "must not be empty!"))
                 : Optional.empty();
     }
 

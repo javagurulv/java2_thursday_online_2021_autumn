@@ -63,13 +63,4 @@ class EditPatientValidatorTest {
         assertEquals(errorList.get(2).getField(), "Changes");
         assertEquals(errorList.get(2).getDescription(), "Must not be empty!");
     }
-
-   /* @Test
-    public void shouldReturnPatientDoesNotExist(){
-        EditPatientRequest request = new EditPatientRequest("1", "1","Name");
-        List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "Patient");
-        assertEquals(errors.get(0).getDescription(), "does not exist.");
-    }*/
 }

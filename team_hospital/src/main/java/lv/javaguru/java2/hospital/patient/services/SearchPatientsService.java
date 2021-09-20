@@ -2,13 +2,14 @@ package lv.javaguru.java2.hospital.patient.services;
 
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Patient;
-import lv.javaguru.java2.hospital.patient.search_criteria.*;
 import lv.javaguru.java2.hospital.patient.requests.Ordering;
 import lv.javaguru.java2.hospital.patient.requests.Paging;
 import lv.javaguru.java2.hospital.patient.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.responses.CoreError;
 import lv.javaguru.java2.hospital.patient.responses.SearchPatientsResponse;
+import lv.javaguru.java2.hospital.patient.search_criteria.*;
 import lv.javaguru.java2.hospital.patient.services.validators.SearchPatientsValidator;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
@@ -30,8 +31,8 @@ public class SearchPatientsService {
         }
 
         List<Patient> patients = search(request);
-        patients = returnPaging(patients, request.getPaging());
         patients = returnOrdering(patients, request.getOrdering());
+        patients = returnPaging(patients, request.getPaging());
 
         return new SearchPatientsResponse(null, patients);
     }
@@ -72,10 +73,10 @@ public class SearchPatientsService {
 
     public List<Patient> returnOrdering(List<Patient> patients, Ordering ordering) {
         if (ordering != null) {
-            Comparator<Patient> comparator = ordering.getOrderBy().toLowerCase(Locale.ROOT).equals("name")
+            Comparator<Patient> comparator = ordering.getOrderBy().toUpperCase(Locale.ROOT).equals("NAME")
                     ? Comparator.comparing(Patient::getName)
                     : Comparator.comparing(Patient::getSurname);
-            if (ordering.getOrderDirection().toLowerCase(Locale.ROOT).equals("descending")) {
+            if (ordering.getOrderDirection().equals("DESCENDING")) {
                 comparator = comparator.reversed();
             }
             return patients.stream().sorted(comparator).collect(Collectors.toList());

@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class CheckMenuNumberFromConsole {
 
     private static int getNumberMenuFromConsole() {
-        System.out.println("Please, choose number of menu: ");
+        System.out.println("number--> ");
         Scanner scanner = new Scanner(System.in);
         return Integer.parseInt(scanner.nextLine());
     }
