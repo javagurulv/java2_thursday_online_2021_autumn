@@ -39,9 +39,9 @@ public class FindSpecialistValidator {
     private List<CoreError> validateSearchFields(FindSpecialistRequest request) {
         List<CoreError> errors = new ArrayList<>();
         if (isEmpty(request.getSpecialistName()) && isEmpty(request.getSpecialistSurname())&& isEmpty(request.getSpecialistProfession())) {
-            errors.add(new CoreError("specialistName", "Must not be empty!"));
-            errors.add(new CoreError("specialistSurname", "Must not be empty!"));
-            errors.add(new CoreError("specialistProfession", "Must not be empty!"));
+            errors.add(new CoreError("Name", "Must not be empty!"));
+            errors.add(new CoreError("Surname", "Must not be empty!"));
+            errors.add(new CoreError("Profession", "Must not be empty!"));
         }
             return errors;
     }
@@ -89,8 +89,8 @@ public class FindSpecialistValidator {
 
     private Optional<CoreError> validateOrderBy(Ordering ordering) {
         return (ordering.getOrderBy() != null
-                && !(ordering.getOrderBy().equals("specialistName") || ordering.getOrderBy().equals("specialistSurname") || ordering.getOrderBy().equals("specialistProfession")))
-                ? Optional.of(new CoreError("orderBy", "Must contain 'specialistName' or 'specialistSurname' or 'specialistProfession' only!"))
+                && !(ordering.getOrderBy().equals("Name") || ordering.getOrderBy().equals("Surname") || ordering.getOrderBy().equals("Profession")))
+                ? Optional.of(new CoreError("orderBy", "Must contain 'Name' or 'Surname' or 'Profession' only!"))
                 : Optional.empty();
     }
 

@@ -28,7 +28,7 @@ public class AddSpecialistValidator {
                 : Optional.empty();
     }
     private Optional<CoreError> validateProfession(AddSpecialistRequest request) {
-        return (request.getSurname() == null || request.getSurname().isEmpty())
+        return (request.getProfession() == null || request.getProfession().isEmpty())
                 ? Optional.of(new CoreError("Profession", "Must not be empty!"))
                 : Optional.empty();
     }

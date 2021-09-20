@@ -40,19 +40,19 @@ public class FindSpecialistService {
         return new FindSpecialistResponse(specialists, null);
     }
 
-        private List<Specialist> ordering(List<Specialist>specialists,Ordering ordering) {
-            if (ordering != null) {
-                Comparator<Specialist> comparator = ordering.getOrderBy().equals("specialistSurname")
-                        ? Comparator.comparing(Specialist::getSpecialistSurname)
-                        : Comparator.comparing(Specialist::getSpecialistName);
-                if (ordering.getOrderDirection().equals("DESCENDING")) {
-                    comparator = comparator.reversed();
-                }
-                return specialists.stream().sorted(comparator).collect(Collectors.toList());
-            } else {
-                return specialists;
+    private List<Specialist> ordering(List<Specialist> specialists, Ordering ordering) {
+        if (ordering != null) {
+            Comparator<Specialist> comparator = ordering.getOrderBy().equals("Name")
+            ?Comparator.comparing(Specialist::getSpecialistName)
+            :Comparator.comparing(Specialist::getSpecialistSurname);
+            if (ordering.getOrderDirection().equals("DESCENDING")) {
+                comparator = comparator.reversed();
             }
+            return specialists.stream().sorted(comparator).collect(Collectors.toList());
+        } else {
+            return specialists;
         }
+    }
 
     private List<Specialist> paging(List<Specialist> specialists, Paging paging) {
         if (paging != null) {
@@ -67,22 +67,22 @@ public class FindSpecialistService {
     }
 
 
-        private List<Specialist> find(FindSpecialistRequest request){
+    private List<Specialist> find(FindSpecialistRequest request) {
         List<Specialist> specialists = new ArrayList<>();
-        if (request.isIdProvided() && !request.isNameProvided() && !request.isSurnameProvided() && !request.isProfessionProvided()) {
+        if (!request.isNameProvided() && !request.isSurnameProvided() && !request.isProfessionProvided()) {
             specialists = database.findSpecialistById(request.getSpecialistId());
         }
-        if (!request.isIdProvided() && request.isNameProvided() && !request.isSurnameProvided() && !request.isProfessionProvided()) {
+        if (request.isNameProvided() && !request.isSurnameProvided() && !request.isProfessionProvided()) {
             specialists = database.findSpecialistByName(request.getSpecialistName());
         }
-        if (!request.isIdProvided() && !request.isNameProvided() && request.isSurnameProvided() && !request.isProfessionProvided()) {
+        if (!request.isNameProvided() && request.isSurnameProvided() && !request.isProfessionProvided()) {
             specialists = database.findSpecialistBySurname(request.getSpecialistSurname());
         }
-        if (!request.isIdProvided() && !request.isNameProvided() && !request.isSurnameProvided() && request.isProfessionProvided()) {
+        if (!request.isNameProvided() && !request.isSurnameProvided() && request.isProfessionProvided()) {
             specialists = database.findSpecialistByProfession(request.getSpecialistProfession());
         }
-        if (request.isIdProvided() && request.isNameProvided() && request.isSurnameProvided() && request.isProfessionProvided()) {
-            specialists = database.findSpecialistByIdAndNameAndSurnameAndProfession(request.getSpecialistId(), request.getSpecialistName(), request.getSpecialistSurname(), request.getSpecialistProfession());
+        if (request.isNameProvided() && request.isSurnameProvided() && request.isProfessionProvided()) {
+            specialists = database.findSpecialistByNameAndSurnameAndProfession(request.getSpecialistName(), request.getSpecialistSurname(), request.getSpecialistProfession());
         }
 
         return specialists;
