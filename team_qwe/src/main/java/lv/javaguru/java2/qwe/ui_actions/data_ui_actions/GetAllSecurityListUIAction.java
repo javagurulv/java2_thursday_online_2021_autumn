@@ -7,16 +7,16 @@ import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 public class GetAllSecurityListUIAction implements UIAction {
 
-    private final GetAllSecurityListService showListService;
+    private final GetAllSecurityListService listService;
 
-    public GetAllSecurityListUIAction(GetAllSecurityListService showListService) {
-        this.showListService = showListService;
+    public GetAllSecurityListUIAction(GetAllSecurityListService listService) {
+        this.listService = listService;
     }
 
     @Override
     public void execute() {
         GetAllSecurityListRequest request = new GetAllSecurityListRequest();
-        GetAllSecurityListResponse response = showListService.execute(request);
+        GetAllSecurityListResponse response = listService.execute(request);
         System.out.println("LIST STARTS:");
         response.getList().forEach(System.out::println);
         System.out.println("LIST ENDS.");

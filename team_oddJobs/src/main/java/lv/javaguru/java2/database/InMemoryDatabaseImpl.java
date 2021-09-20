@@ -122,9 +122,8 @@ public class InMemoryDatabaseImpl implements Database {
     }
 
     @Override
-    public List<Specialist> findSpecialistByIdAndNameAndSurnameAndProfession(Long specialistId, String specialistName, String specialistSurname, String specialistProfession) {
+    public List<Specialist> findSpecialistByNameAndSurnameAndProfession(String specialistName, String specialistSurname, String specialistProfession) {
         return specialists.stream()
-                .filter(specialist -> specialistId.equals(specialist.getSpecialistId()))
                 .filter(specialist -> specialistName.equals(specialist.getSpecialistName()))
                 .filter(specialist -> specialistSurname.equals(specialist.getSpecialistSurname()))
                 .filter(specialist -> specialistProfession.equals(specialist.getSpecialistProfession()))

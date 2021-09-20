@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.Visitors;
+import lv.javaguru.java2.jg_entertainment.Visitors;
 
 import java.util.List;
 

@@ -9,11 +9,11 @@ import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
 public class GetUserInvestmentsByEachIndustryUIAction implements UIAction {
 
-    private final GetUserInvestmentsByEachIndustryService showUserInvestmentsByEachIndustryService;
+    private final GetUserInvestmentsByEachIndustryService getUserInvestmentsByEachIndustryService;
     private String userName;
 
-    public GetUserInvestmentsByEachIndustryUIAction(GetUserInvestmentsByEachIndustryService showUserInvestmentsByEachIndustryService) {
-        this.showUserInvestmentsByEachIndustryService = showUserInvestmentsByEachIndustryService;
+    public GetUserInvestmentsByEachIndustryUIAction(GetUserInvestmentsByEachIndustryService getUserInvestmentsByEachIndustryService) {
+        this.getUserInvestmentsByEachIndustryService = getUserInvestmentsByEachIndustryService;
     }
 
     @Override
@@ -22,11 +22,11 @@ public class GetUserInvestmentsByEachIndustryUIAction implements UIAction {
                 new GetUserInvestmentsByEachIndustryRequest(inputDialog(
                         "Choose user:",
                         "SHOW INVESTMENTS BY INDUSTRY",
-                        convertToStringArray(showUserInvestmentsByEachIndustryService.getUserData())
+                        convertToStringArray(getUserInvestmentsByEachIndustryService.getUserData())
                 ));
         userName = request.getUserName();
         GetUserInvestmentsByEachIndustryResponse response =
-                showUserInvestmentsByEachIndustryService.execute(request);
+                getUserInvestmentsByEachIndustryService.execute(request);
         printResponse(response);
     }
 

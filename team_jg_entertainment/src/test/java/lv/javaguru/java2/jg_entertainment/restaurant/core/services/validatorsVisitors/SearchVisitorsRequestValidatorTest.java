@@ -1,8 +1,10 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Ordering;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Paging;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.SearchVisitorsService;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -84,5 +86,45 @@ class SearchVisitorsRequestValidatorTest {
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderDirection");
         assertEquals(errors.get(0).getMessageError(), "might contain 'ASCENDING' or 'DESCENDING' only!");
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPageNumberContainNotValidValue(){
+        Paging paging = new Paging(0,1);
+        SearchVisitorsRequest request = new SearchVisitorsRequest("name", "surname", paging);
+        List<CoreError> errors = validator.validator(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "pageNumber");
+        assertEquals(errors.get(0).getMessageError(), "must be greater then 0!");
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPageSizeContainNotValidValue(){
+        Paging paging = new Paging(1,0);
+        SearchVisitorsRequest request = new SearchVisitorsRequest("name", "surname", paging);
+        List<CoreError> errors = validator.validator(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "pageSize");
+        assertEquals(errors.get(0).getMessageError(), "must be greater then 0!");
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPageNumberAreEmpty(){
+        Paging paging = new Paging(null,1);
+        SearchVisitorsRequest request = new SearchVisitorsRequest("name", "surname", paging);
+        List<CoreError> errors = validator.validator(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "pageNumber");
+        assertEquals(errors.get(0).getMessageError(), "must not be empty!");
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPageSizeAreEmpty(){
+        Paging paging = new Paging(1,null);
+        SearchVisitorsRequest request = new SearchVisitorsRequest("name", "surname", paging);
+        List<CoreError> errors = validator.validator(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "pageSize");
+        assertEquals(errors.get(0).getMessageError(), "must not be empty!");
     }
 }

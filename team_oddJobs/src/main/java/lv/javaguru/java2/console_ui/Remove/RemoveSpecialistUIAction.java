@@ -19,7 +19,7 @@ public class RemoveSpecialistUIAction implements UIAction {
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter specialist ID");
+        System.out.println("Enter ID");
         long specialistId = Long.parseLong(scanner.nextLine());
 
         System.out.println(("Enter specialist name (case sensitive)"));

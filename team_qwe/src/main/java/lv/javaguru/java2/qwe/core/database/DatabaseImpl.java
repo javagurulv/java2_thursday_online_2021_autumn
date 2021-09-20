@@ -62,7 +62,7 @@ public class DatabaseImpl implements Database {
     }
 
     @Override
-    public List<Security> showListOfSecurities() {
+    public List<Security> getAllSecurityList() {
         return getSecurityList();
     }
 

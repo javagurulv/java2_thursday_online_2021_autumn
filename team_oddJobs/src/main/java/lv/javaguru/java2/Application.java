@@ -16,66 +16,31 @@ import lv.javaguru.java2.core.validations.*;
 import lv.javaguru.java2.database.Database;
 import lv.javaguru.java2.database.InMemoryDatabaseImpl;
 import lv.javaguru.java2.services.Add.AddAdvertismentService;
-import lv.javaguru.java2.services.Add.AddClientService;
-import lv.javaguru.java2.services.Add.AddSpecialistService;
-import lv.javaguru.java2.services.Exit.ExitMenuService;
 import lv.javaguru.java2.services.Find.*;
-import lv.javaguru.java2.services.Get.GetAllClientsService;
-import lv.javaguru.java2.services.Get.GetAllSpecialistsService;
 import lv.javaguru.java2.services.Remove.RemoveAdvertismentService;
-import lv.javaguru.java2.services.Remove.RemoveClientService;
-import lv.javaguru.java2.services.Remove.RemoveSpecialistService;
+
 
 import java.util.Scanner;
-public class Application { private static final Database database = new InMemoryDatabaseImpl();
 
-    private static AddClientValidator addClientValidator = new AddClientValidator();
-    private static final AddClientService addClientService = new AddClientService(database,addClientValidator);
-    private static final UIAction addClient = new AddClientUIAction(addClientService);
+public class Application {
 
-   private static AddSpecialistValidator addSpecialistValidator = new AddSpecialistValidator();
-    private static final AddSpecialistService addSpecialistService = new AddSpecialistService(database,addSpecialistValidator);
-    private static final UIAction addSpecialist = new AddSpecialistUIAction(addSpecialistService);
+    private static ApplicationContext applicationContext = new ApplicationContext();
+    private static Database database = new InMemoryDatabaseImpl();
 
-    private static final AddAdvertismentService addAdvertisementService = new AddAdvertismentService(database);
-    private static final UIAction addAdvertisement = new AddAdvertismentUIAction(addAdvertisementService);
-
-    private static RemoveClientValidator removeClientValidator = new RemoveClientValidator();
-    private static final RemoveClientService deleteClientService = new RemoveClientService(database,removeClientValidator);
-    private static final UIAction deleteClient = new RemoveClientUIAction(deleteClientService);
-
-    private static RemoveSpecialistValidator removeSpecialistValidator = new RemoveSpecialistValidator();
-    private static final RemoveSpecialistService deleteSpecialistService = new RemoveSpecialistService(database,removeSpecialistValidator);
-    private static final UIAction deleteSpecialist = new RemoveSpecialistUIAction(deleteSpecialistService);
-
-    private static final FindClientsRequestValidator findClientsRequestValidator = new FindClientsRequestValidator();
-    private static final FindClientsService findClientBySearchCriteria = new FindClientsService(database,findClientsRequestValidator);
-    private static final UIAction findClientBySearch = new FindClientsUIAction(findClientBySearchCriteria);
+    private static AddAdvertismentService addAdvertisementService = new AddAdvertismentService(database);
+    private static UIAction addAdvertisement = new AddAdvertismentUIAction(addAdvertisementService);
 
     private static RemoveAdvertismentValidator removeAdvertismentValidator = new RemoveAdvertismentValidator();
-    private static final RemoveAdvertismentService deleteAdvertismentService = new RemoveAdvertismentService(database,removeAdvertismentValidator);
-    private static final UIAction deleteAdvertisment = new RemoveAdvertismentUIAction(deleteAdvertismentService);
+    private static RemoveAdvertismentService deleteAdvertismentService = new RemoveAdvertismentService(database, removeAdvertismentValidator);
+    private static UIAction deleteAdvertisment = new RemoveAdvertismentUIAction(deleteAdvertismentService);
 
-    private static final FindSpecialistValidator findSpecialistValidator = new FindSpecialistValidator();
-    private static final FindSpecialistService findSpecialistService = new FindSpecialistService(database,findSpecialistValidator);
-    private static final UIAction findSpecialist = new FindSpecialistUIAction(findSpecialistService);
+    private static FindAdvertisementByTitleValidator findAdvertisementByTitleValidator = new FindAdvertisementByTitleValidator();
+    private static FindAdvertisementByTitleService findAdvertisementByTitleService = new FindAdvertisementByTitleService(database, findAdvertisementByTitleValidator);
+    private static UIAction findAdvertisementByTitle = new FindAdvertisementByTitleUIAction(findAdvertisementByTitleService);
 
-    private static final FindAdvertisementByTitleValidator findAdvertisementByTitleValidator = new FindAdvertisementByTitleValidator();
-    private static final FindAdvertisementByTitleService findAdvertisementByTitleService = new FindAdvertisementByTitleService(database,findAdvertisementByTitleValidator);
-    private static final UIAction findAdvertisementByTitle = new FindAdvertisementByTitleUIAction(findAdvertisementByTitleService);
-
-    private static final FindAdvertisementByIdValidator findAdvertisementByIdValidator = new FindAdvertisementByIdValidator();
-    private static final FindAdvertisementByIdService findAdvertisementByIdService = new FindAdvertisementByIdService(database,findAdvertisementByIdValidator);
-    private static final UIAction findAdvertisementById = new FindAdvertisementByIdUIAction(findAdvertisementByIdService);
-
-    private static final GetAllSpecialistsService getAllSpecialistsService = new GetAllSpecialistsService(database);
-    private static final UIAction getAllSpecialists = new GetAllSpecialistUIAction(getAllSpecialistsService);
-
-    private static final GetAllClientsService getAllClientsService = new GetAllClientsService(database);
-    private static final UIAction getAllClients = new GetAllClientsUIAction(getAllClientsService);
-
-    private static final ExitMenuService exitMenuService = new ExitMenuService();
-    private static final UIAction menuExit = new ExitMenuUIAction(exitMenuService);
+    private static FindAdvertisementByIdValidator findAdvertisementByIdValidator = new FindAdvertisementByIdValidator();
+    private static FindAdvertisementByIdService findAdvertisementByIdService = new FindAdvertisementByIdService(database, findAdvertisementByIdValidator);
+    private static UIAction findAdvertisementById = new FindAdvertisementByIdUIAction(findAdvertisementByIdService);
 
 
     public static void main(String[] args) {
@@ -89,7 +54,7 @@ public class Application { private static final Database database = new InMemory
 
 
     private static int GetUserChoice() {
-        System.out.println("Enter a menu number to continued");
+        System.out.println("Enter a menu number to continue");
         Scanner scanner = new Scanner(System.in);
         return Integer.parseInt(scanner.nextLine());
     }
@@ -105,8 +70,8 @@ public class Application { private static final Database database = new InMemory
         System.out.println("7.  Find advertisement by ID");
         System.out.println("8.  Show all clients");
         System.out.println("9.  Show all specialists");
-        System.out.println("10.  Delete client account");
-        System.out.println("11.  Delete specialist account");
+        System.out.println("10. Delete client account");
+        System.out.println("11. Delete specialist account");
         System.out.println("12. Exit");
     }
 
@@ -114,63 +79,71 @@ public class Application { private static final Database database = new InMemory
     private static void RunSelectedMenuNumber(int selectedMenu) {
         switch (selectedMenu) {
             case 1: {
-                addClient.execute();
+                AddClientUIAction uiAction = applicationContext.getBean(AddClientUIAction.class);
+                uiAction.execute();
                 break;
 
             }
             case 2: {
-                addSpecialist.execute();
+                AddSpecialistUIAction uiAction = applicationContext.getBean(AddSpecialistUIAction.class);
+                uiAction.execute();
                 break;
             }
 
             case 3: {
                 addAdvertisement.execute();
+
                 break;
             }
 
             case 4: {
-                findSpecialist.execute();
+                FindSpecialistUIAction uiAction = applicationContext.getBean(FindSpecialistUIAction.class);
+                uiAction.execute();
                 break;
             }
 
             case 5: {
-                findClientBySearch.execute();
+                FindClientsUIAction uiAction = applicationContext.getBean(FindClientsUIAction.class);
+                uiAction.execute();
                 break;
             }
 
             case 6: {
                 findAdvertisementByTitle.execute();
+
                 break;
             }
 
             case 7: {
                 findAdvertisementById.execute();
+
                 break;
             }
 
             case 8: {
-                getAllClients.execute();
-
+                GetAllClientsUIAction uiAction = applicationContext.getBean(GetAllClientsUIAction.class);
+                uiAction.execute();
                 break;
             }
 
             case 9: {
-                getAllSpecialists.execute();
-
+                GetAllSpecialistUIAction uiAction = applicationContext.getBean(GetAllSpecialistUIAction.class);
+                uiAction.execute();
                 break;
             }
             case 10: {
-                deleteClient.execute();
-
+                RemoveClientUIAction uiAction = applicationContext.getBean(RemoveClientUIAction.class);
+                uiAction.execute();
                 break;
             }
             case 11: {
-                deleteSpecialist.execute();
-
+                RemoveSpecialistUIAction uiAction = applicationContext.getBean((RemoveSpecialistUIAction.class));
+                uiAction.execute();
                 break;
             }
             case 12: {
-                menuExit.execute();
+                ExitMenuUIAction uiAction = applicationContext.getBean(ExitMenuUIAction.class);
+                uiAction.execute();
 
 
             }

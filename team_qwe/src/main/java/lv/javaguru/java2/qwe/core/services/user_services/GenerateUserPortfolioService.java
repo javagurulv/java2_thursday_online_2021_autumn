@@ -100,7 +100,7 @@ public class GenerateUserPortfolioService {
     private void addCashResidual(User user, List<Position> userPortfolio, double portfolioTotalValue) {
         userPortfolio.add(new Position(
                 new Cash(),
-                roundToTwoDecimal(user.getInitialInvestment() - portfolioTotalValue),
+                round(user.getInitialInvestment() - portfolioTotalValue),
                 1
         ));
     }
