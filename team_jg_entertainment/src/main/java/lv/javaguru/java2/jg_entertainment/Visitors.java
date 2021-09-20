@@ -82,7 +82,7 @@ public class Visitors {
         return Objects.equals(clientName, that.clientName)
                 && Objects.equals(idClient, that.idClient)
                 && Objects.equals(surname, that.surname)
-                && Objects.equals(age, that.age)
+             //   && Objects.equals(age, that.age)
                 && Objects.equals(telephoneNumber, that.telephoneNumber);
         //   && Objects.equals(emailClient, that.emailClient);
     }
@@ -98,7 +98,7 @@ public class Visitors {
                 " client name ->'" + clientName + '\'' +
                 ", surname ->'" + surname + '\'' +
                 ", ID client ->" + idClient +
-                ", age client ->" + age +
+               // ", age client ->" + age +
                 ", telephone number ->" + telephoneNumber +
 //                ", email client ->" + emailClient +
                 '}';

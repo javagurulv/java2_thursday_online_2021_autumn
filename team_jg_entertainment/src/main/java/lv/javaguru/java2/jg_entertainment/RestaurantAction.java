@@ -2,67 +2,20 @@ package lv.javaguru.java2.jg_entertainment;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.AddTableUIAction;
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.ExitTableUIAction;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.GetAllTablesUIAction;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.RemoveTableUIAction;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors.*;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.*;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.AddMenuService;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.GetAllMenusService;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.RemoveMenuService;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables.AddTableService;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables.GetAllTablesService;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables.RemoveTableService;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.*;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.SearchVisitorsRequestValidator;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorAddVisitor;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorDeleteVisitor;
 
-public class Restaurant {
+public class RestaurantAction {
 
-    private static final DatabaseVisitors databaseRestaurant = new ImplDatabaseVisitors();
-
-    private static ValidatorAddVisitor validator = new ValidatorAddVisitor();
-    private static ValidatorDeleteVisitor validatorDelete = new ValidatorDeleteVisitor();
-    private static SearchVisitorsRequestValidator searchVisitorsRequestValidator = new SearchVisitorsRequestValidator();
-
-    private static ServiceAddAllVisitors addVisitorsService = new ServiceAddAllVisitors(databaseRestaurant, validator);
-    private static ServiceDeleteVisitors deleteVisitorsService = new ServiceDeleteVisitors(databaseRestaurant, validatorDelete);
-    private static ServiceShowListVisitors showAllVisitorsService = new ServiceShowListVisitors(databaseRestaurant);
-    private static SearchVisitorsService searchVisitorsService = new SearchVisitorsService(databaseRestaurant, searchVisitorsRequestValidator);
-
-    private static RestaurantUIAction uiAddVisitorAction = new UIActionAddVisitors(addVisitorsService);
-    private static RestaurantUIAction uiDeleteVisitorsAction = new UIActionDeleteVisitors(deleteVisitorsService);
-    private static RestaurantUIAction uiGetAllVisitorsAction = new UIActionShowListWithAllVisitors(showAllVisitorsService);
-    private static RestaurantUIAction searchUIAction = new SearchVisitorsUIAction(searchVisitorsService);
-
+    private static ApplicationContext applicationContext = new ApplicationContext();
     private static CheckMenuNumberFromConsole checkNumber = new CheckMenuNumberFromConsole();
-    private static RestaurantUIAction uiExitAction = new UIActionExit();
-
-    //menu
-    private static DatabaseMenu databaseMenu = new ImplDatabaseMenu();
-    private static AddMenuService addMenuService = new AddMenuService(databaseMenu);
-    private static RemoveMenuService removeMenuService = new RemoveMenuService(databaseMenu);
-    private static GetAllMenusService getAllMenusService = new GetAllMenusService(databaseMenu);
-    private static UIAction addMenuUIAction = new AddMenuUIAction(addMenuService);
-    private static UIAction removeMenuUIAction = new RemoveMenuUIAction(removeMenuService);
-    private static UIAction getAllMenusUIAction = new GetAllMenusUIAction(getAllMenusService);
-    private static UIAction exitUIAction = new ExitUIAction();
-
-    ///table
-    private static TableDatabase tableDatabase = new ImplDatabaseTable();
-    private static AddTableService addTableService = new AddTableService(tableDatabase);
-    private static RemoveTableService removeTableService = new RemoveTableService(tableDatabase);
-    private static GetAllTablesService getAllTablesService = new GetAllTablesService(tableDatabase);
-    private static lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.UIAction addTableUIAction = new AddTableUIAction(addTableService);
-    private static lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.UIAction removeTableUIAction = new RemoveTableUIAction(removeTableService);
-    private static lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.UIAction getAllTablesUIAction = new GetAllTablesUIAction(getAllTablesService);
-    private static UIAction exitUIActionTables = new ExitUIAction();//
 
     public static void main(String[] args) {
-        while (true) { //menuPrint();
+        while (true) {
             printProgramMenu();
             int numberOfMenu = checkNumberOfMenu();
-
             switch (numberOfMenu) {
                 case 1 -> visitorsMenu();
                 case 2 -> restaurantMenu();
@@ -100,21 +53,26 @@ public class Restaurant {
     private static void executeVisitorMenu(int numberOfMenu) {
         switch (numberOfMenu) {
             case 1: {
+                UIActionAddVisitors uiAddVisitorAction = applicationContext.getBean(UIActionAddVisitors.class);
                 uiAddVisitorAction.execute();
                 break;
             }
             case 2: {
+                UIActionDeleteVisitors uiDeleteVisitorsAction = applicationContext.getBean(UIActionDeleteVisitors.class);
                 uiDeleteVisitorsAction.execute();
                 break;
             }
             case 3: {
+                UIActionShowListWithAllVisitors uiGetAllVisitorsAction = applicationContext.getBean(UIActionShowListWithAllVisitors.class);
                 uiGetAllVisitorsAction.execute();
                 break;
             }
             case 4: {
+                SearchVisitorsUIAction searchUIAction = applicationContext.getBean(SearchVisitorsUIAction.class);
                 searchUIAction.execute();
             }
             case 5: {
+                UIActionExit uiExitAction = applicationContext.getBean(UIActionExit.class);
                 uiExitAction.execute();
                 break;
             }
@@ -136,19 +94,23 @@ public class Restaurant {
     private static void executeSelectedRestaurantMenu(int selectedMenu) {
         switch (selectedMenu) {
             case 1: {
+                AddMenuUIAction addMenuUIAction = applicationContext.getBean(AddMenuUIAction.class);
                 addMenuUIAction.execute();
                 break;
             }
             case 2: {
+                RemoveMenuUIAction removeMenuUIAction = applicationContext.getBean(RemoveMenuUIAction.class);
                 removeMenuUIAction.execute();
                 break;
             }
             case 3: {
+                GetAllMenusUIAction getAllMenusUIAction = applicationContext.getBean(GetAllMenusUIAction.class);
                 getAllMenusUIAction.execute();
                 break;
             }
             case 4: {
-                exitUIActionTables.execute();
+                ExitUIAction exitUIActionMenu = applicationContext.getBean(ExitUIAction.class);
+                exitUIActionMenu.execute();
                 break;
             }
         }
@@ -170,26 +132,30 @@ public class Restaurant {
     private static void executeSelectedTabledMenu(int selectedMenu) {
         switch (selectedMenu) {
             case 1: {
+                AddTableUIAction addTableUIAction = applicationContext.getBean(AddTableUIAction.class);
                 addTableUIAction.execute();
                 break;
             }
             case 2: {
+                RemoveTableUIAction removeTableUIAction = applicationContext.getBean(RemoveTableUIAction.class);
                 removeTableUIAction.execute();
                 break;
             }
             case 3: {
+                GetAllTablesUIAction getAllTablesUIAction = applicationContext.getBean(GetAllTablesUIAction.class);
                 getAllTablesUIAction.execute();
                 break;
             }
             case 4: {
-                exitUIAction.execute();
+                ExitTableUIAction exitTableUIAction = applicationContext.getBean(ExitTableUIAction.class);
+                exitTableUIAction.execute();
                 break;
             }
         }
     }
 
     private static int checkNumberOfMenu() {
-        System.out.println("Press enter number from menu !");
+        System.out.println("Start by choosing the program menu!");
         return checkNumber.getCorrectNumberMenu(1, 4);
 
     }
