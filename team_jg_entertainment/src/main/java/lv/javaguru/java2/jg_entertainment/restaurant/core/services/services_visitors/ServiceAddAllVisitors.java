@@ -5,7 +5,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Requ
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseAddVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.Visitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorAddVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorAddVisitor;
 
 import java.util.List;
 

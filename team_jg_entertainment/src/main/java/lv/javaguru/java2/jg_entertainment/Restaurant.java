@@ -13,10 +13,9 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tabl
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables.GetAllTablesService;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables.RemoveTableService;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.*;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.SearchVisitorsRequestValidator;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorAddVisitor;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorDeleteVisitor;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorFindVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.SearchVisitorsRequestValidator;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorAddVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorDeleteVisitor;
 
 public class Restaurant {
 
@@ -24,18 +23,15 @@ public class Restaurant {
 
     private static ValidatorAddVisitor validator = new ValidatorAddVisitor();
     private static ValidatorDeleteVisitor validatorDelete = new ValidatorDeleteVisitor();
-    private static ValidatorFindVisitor validatorFindVisitor = new ValidatorFindVisitor();
     private static SearchVisitorsRequestValidator searchVisitorsRequestValidator = new SearchVisitorsRequestValidator();
 
     private static ServiceAddAllVisitors addVisitorsService = new ServiceAddAllVisitors(databaseRestaurant, validator);
     private static ServiceDeleteVisitors deleteVisitorsService = new ServiceDeleteVisitors(databaseRestaurant, validatorDelete);
-    private static ServiceFindByIdVisitors findByIdVisitors = new ServiceFindByIdVisitors(databaseRestaurant, validatorFindVisitor);
     private static ServiceShowListVisitors showAllVisitorsService = new ServiceShowListVisitors(databaseRestaurant);
     private static SearchVisitorsService searchVisitorsService = new SearchVisitorsService(databaseRestaurant, searchVisitorsRequestValidator);
 
     private static RestaurantUIAction uiAddVisitorAction = new UIActionAddVisitors(addVisitorsService);
     private static RestaurantUIAction uiDeleteVisitorsAction = new UIActionDeleteVisitors(deleteVisitorsService);
-    private static RestaurantUIAction uiFindIdVisitors = new UIActionFindVisitors(findByIdVisitors);
     private static RestaurantUIAction uiGetAllVisitorsAction = new UIActionShowListWithAllVisitors(showAllVisitorsService);
     private static RestaurantUIAction searchUIAction = new SearchVisitorsUIAction(searchVisitorsService);
 
@@ -92,12 +88,11 @@ public class Restaurant {
         System.out.println("Visitors program menu, press number what do you want to do! ");
         System.out.println("1. Add information about visitor to list of restaurant-> ");
         System.out.println("2. Enter ID visitor that delete from list of restaurant-> ");
-        System.out.println("3. Find ID visitor's in catalogue-> ");
-        System.out.println("4. Show all visitor's in base of restaurant->");
-        System.out.println("5. Search visitor's->");
-        System.out.println("6. Exit! ");
+        System.out.println("3. Show all visitor's in base of restaurant->");
+        System.out.println("4. Search visitor's in catalogue->");
+        System.out.println("5. Exit! ");
         System.out.println();
-        int numberOfMenu = checkNumber.getCorrectNumberMenu(1, 6);
+        int numberOfMenu = checkNumber.getCorrectNumberMenu(1, 5);
         executeVisitorMenu(numberOfMenu);
         return numberOfMenu;
     }
@@ -113,17 +108,13 @@ public class Restaurant {
                 break;
             }
             case 3: {
-                uiFindIdVisitors.execute();
-                break;
-            }
-            case 4: {
                 uiGetAllVisitorsAction.execute();
                 break;
             }
-            case 5: {
+            case 4: {
                 searchUIAction.execute();
             }
-            case 6: {
+            case 5: {
                 uiExitAction.execute();
                 break;
             }

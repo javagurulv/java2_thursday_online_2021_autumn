@@ -22,7 +22,7 @@ public class ImplDatabaseVisitors implements DatabaseVisitors {
         clientInRestaurant.add(clientInfo);
     }
 
-    @Override /// +surname + v find
+    @Override
     public List<Visitors> findVisitorsByNameAndTelephoneNumber(String nameVisitors, Long telephoneNumber) {
         return clientInRestaurant.stream()
                 .filter(visitors -> visitors.getClientName().equals(nameVisitors))
