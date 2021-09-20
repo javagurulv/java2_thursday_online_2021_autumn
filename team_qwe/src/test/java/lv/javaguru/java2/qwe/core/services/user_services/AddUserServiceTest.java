@@ -2,7 +2,6 @@ package lv.javaguru.java2.qwe.core.services.user_services;
 
 import lv.javaguru.java2.qwe.Type;
 import lv.javaguru.java2.qwe.User;
-import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.requests.user_requests.AddUserRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
@@ -27,8 +26,6 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(MockitoJUnitRunner.class)
 public class AddUserServiceTest {
 
-    @Mock
-    private Database database;
     @Mock
     private UserData userData;
     @Mock

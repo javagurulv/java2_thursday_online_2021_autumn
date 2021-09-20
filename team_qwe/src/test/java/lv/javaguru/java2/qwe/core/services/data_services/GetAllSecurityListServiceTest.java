@@ -30,7 +30,7 @@ public class GetAllSecurityListServiceTest {
         List<Security> securityList = new ArrayList<>();
         securityList.add(new Stock("Alibaba", "Technology", "USD",
                 175.32, 0, 1.32));
-        Mockito.when(database.showListOfSecurities()).thenReturn(securityList);
+        Mockito.when(database.getAllSecurityList()).thenReturn(securityList);
 
         GetAllSecurityListRequest request = new GetAllSecurityListRequest();
         GetAllSecurityListResponse response = service.execute(request);

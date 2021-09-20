@@ -64,7 +64,7 @@ public class GetUserInvestmentsByEachIndustryServiceTest {
                 Map.entry("Health care", 75000.)
         );
         Mockito.when(userData.findUserByName("Alexander")).thenReturn(Optional.of(user));
-        Mockito.when(userData.showUserInvestmentsByEachIndustry(user)).thenReturn(map);
+        Mockito.when(userData.getUserInvestmentsByEachIndustry(user)).thenReturn(map);
 
         GetUserInvestmentsByEachIndustryResponse response = service.execute(request);
         assertFalse(response.hasErrors());

@@ -81,12 +81,12 @@ public class UtilityMethods {
     }
 
     public static double round(double amount) {
-        return Math.round(amount);
-    }
-
-    public static double roundToTwoDecimal(double amount) {
         return Math.round(amount * 100.) / 100.;
     }
+
+//    public static double roundToTwoDecimal(double amount) {
+//        return Math.round(amount * 100.) / 100.;
+//    }
 
     private static double generateNextPrice(double currentPrice) {
         return round(currentPrice * (1 + (-1 + (Math.random() * 2)) / 100));

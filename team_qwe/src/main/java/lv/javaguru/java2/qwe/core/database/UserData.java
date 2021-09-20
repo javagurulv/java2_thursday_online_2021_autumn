@@ -16,12 +16,12 @@ public interface UserData {
 
     boolean removeUser(String name);
 
-    List<User> showUserList();
+    List<User> getAllUserList();
 
     Optional<User> findUserByName(String userName);
 
-    Map<String, List<String>> showUserPortfolioGroupedByIndustry(User user);
+    Map<String, List<String>> getUserPortfolioGroupedByIndustry(User user);
 
-    Map<String, Double> showUserInvestmentsByEachIndustry(User user);
+    Map<String, Double> getUserInvestmentsByEachIndustry(User user);
 
 }

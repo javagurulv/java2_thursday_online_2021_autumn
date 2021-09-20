@@ -64,7 +64,7 @@ public class GetUserPortfolioGroupedByIndustryServiceTest {
                 Map.entry("Health care", List.of("Pfizer", "Johnson&Johnson"))
         );
         Mockito.when(userData.findUserByName("Alexander")).thenReturn(Optional.of(user));
-        Mockito.when(userData.showUserPortfolioGroupedByIndustry(user)).thenReturn(map);
+        Mockito.when(userData.getUserPortfolioGroupedByIndustry(user)).thenReturn(map);
 
         GetUserPortfolioGroupedByIndustryResponse response = service.execute(request);
         assertFalse(response.hasErrors());

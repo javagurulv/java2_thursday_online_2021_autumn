@@ -29,7 +29,7 @@ public class GetUserInvestmentsByEachIndustryService {
         Optional<User> user = userData.findUserByName(request.getUserName());
         if (errors.isEmpty() && user.isPresent()) {
             return new GetUserInvestmentsByEachIndustryResponse(
-                    userData.showUserInvestmentsByEachIndustry(user.get()));
+                    userData.getUserInvestmentsByEachIndustry(user.get()));
         }
         return new GetUserInvestmentsByEachIndustryResponse(errors);
     }

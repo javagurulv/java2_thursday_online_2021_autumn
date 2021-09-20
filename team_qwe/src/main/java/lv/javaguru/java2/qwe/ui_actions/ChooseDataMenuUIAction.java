@@ -1,19 +1,11 @@
 package lv.javaguru.java2.qwe.ui_actions;
 
-import lv.javaguru.java2.qwe.core.database.Database;
-import lv.javaguru.java2.qwe.core.services.data_services.*;
-import lv.javaguru.java2.qwe.core.services.validator.*;
 import lv.javaguru.java2.qwe.ui_actions.data_ui_actions.*;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
+import static lv.javaguru.java2.qwe.ApplicationDemo.getApplicationContext;
 
 public class ChooseDataMenuUIAction implements UIAction {
-
-    private final Database database;
-
-    public ChooseDataMenuUIAction(Database database) {
-        this.database = database;
-    }
 
     @Override
     public void execute() {
@@ -25,20 +17,41 @@ public class ChooseDataMenuUIAction implements UIAction {
         while (dataMenuOpen) {
             String type = inputDialog("Choose operation", "DATA MENU", dataMenu);
             switch (type) {
-                case "IMPORT DATA FROM FILE" -> new ImportDataFromFileUIAction(
-                        new ImportSecuritiesService(database, new AddStockValidator(database), new AddBondValidator(database))).execute();
-                case "ADD STOCK" -> new AddStockUIAction(
-                        new AddStockService(database, new AddStockValidator(database))).execute();
-                case "ADD BOND" -> new AddBondUIAction(
-                        new AddBondService(database, new AddBondValidator(database))).execute();
-                case "REMOVE SECURITY" -> new RemoveSecurityUIAction(
-                        new RemoveSecurityService(database)).execute();
-                case "SHOW LIST" -> new GetAllSecurityListUIAction(
-                        new GetAllSecurityListService(database)).execute();
-                case "FIND SECURITY BY NAME" -> new FindSecurityByNameUIAction(
-                        new FindSecurityByNameService(database, new FindSecurityByNameValidator())).execute();
-                case "FILTER SECURITIES(STOCKS) BY MULTIPLE PARAMETERS" -> new FilterStocksByMultipleParametersUIAction(
-                        new FilterStocksByMultipleParametersService(database, new FilterStocksByMultipleParametersValidator())).execute();
+                case "IMPORT DATA FROM FILE" -> {
+                    ImportDataFromFileUIAction uiAction =
+                            getApplicationContext().getBean(ImportDataFromFileUIAction.class);
+                    uiAction.execute();
+                }
+                case "ADD STOCK" -> {
+                    AddStockUIAction uiAction =
+                            getApplicationContext().getBean(AddStockUIAction.class);
+                    uiAction.execute();
+                }
+                case "ADD BOND" -> {
+                    AddBondUIAction uiAction =
+                            getApplicationContext().getBean(AddBondUIAction.class);
+                    uiAction.execute();
+                }
+                case "REMOVE SECURITY" -> {
+                    RemoveSecurityUIAction uiAction =
+                            getApplicationContext().getBean(RemoveSecurityUIAction.class);
+                    uiAction.execute();
+                }
+                case "SHOW LIST" -> {
+                    GetAllSecurityListUIAction uiAction =
+                            getApplicationContext().getBean(GetAllSecurityListUIAction.class);
+                    uiAction.execute();
+                }
+                case "FIND SECURITY BY NAME" -> {
+                    FindSecurityByNameUIAction uiAction =
+                            getApplicationContext().getBean(FindSecurityByNameUIAction.class);
+                    uiAction.execute();
+                }
+                case "FILTER SECURITIES(STOCKS) BY MULTIPLE PARAMETERS" -> {
+                    FilterStocksByMultipleParametersUIAction uiAction =
+                            getApplicationContext().getBean(FilterStocksByMultipleParametersUIAction.class);
+                    uiAction.execute();
+                }
                 default -> dataMenuOpen = false;
             }
         }

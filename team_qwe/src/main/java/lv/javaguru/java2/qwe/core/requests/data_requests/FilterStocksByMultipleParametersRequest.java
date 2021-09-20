@@ -15,7 +15,7 @@ import static java.util.Map.*;
 public class FilterStocksByMultipleParametersRequest {
 
     private final List<CoreRequest> requestList;
-    private final List<Predicate<Security>> list = new ArrayList<>();
+    private final List<Predicate<Security>> predicateList = new ArrayList<>();
     private String orderBy = "";
     private String orderDirection = "";
     private int pageNumber;
@@ -38,7 +38,7 @@ public class FilterStocksByMultipleParametersRequest {
     }
 
     public List<Predicate<Security>> getList() {
-        return list;
+        return predicateList;
     }
 
     public String getIndustryTarget() {
@@ -101,7 +101,7 @@ public class FilterStocksByMultipleParametersRequest {
                 .filter(i -> requestList.get(i).getClass().getSimpleName().equals("FilterStocksByAnyDoubleParameterRequest"))
                 .mapToObj(i -> (FilterStocksByAnyDoubleParameterRequest) requestList.get(i))
                 .filter(request -> request.getParameter() != null)
-                .forEach(request -> list.add(findPredicateForDouble(request)));
+                .forEach(request -> predicateList.add(findPredicateForDouble(request)));
     }
 
     private void setPredicateForIndustryParameter() {
@@ -109,7 +109,7 @@ public class FilterStocksByMultipleParametersRequest {
                 .filter(i -> requestList.get(i).getClass().getSimpleName().equals("FilterStocksByIndustryRequest"))
                 .mapToObj(i -> (FilterStocksByIndustryRequest) requestList.get(i))
                 .filter(request -> request.getIndustry() != null)
-                .forEach(request -> list.add(findPredicateForIndustry(request)));
+                .forEach(request -> predicateList.add(findPredicateForIndustry(request)));
     }
 
     private void setOrdering() {

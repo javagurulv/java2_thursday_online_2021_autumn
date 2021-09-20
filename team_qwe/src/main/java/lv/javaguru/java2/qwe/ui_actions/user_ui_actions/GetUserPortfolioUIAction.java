@@ -9,11 +9,11 @@ import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
 public class GetUserPortfolioUIAction implements UIAction {
 
-    private final GetUserPortfolioService showUserPortfolioService;
+    private final GetUserPortfolioService portfolioService;
     private String userName;
 
-    public GetUserPortfolioUIAction(GetUserPortfolioService showUserPortfolioService) {
-        this.showUserPortfolioService = showUserPortfolioService;
+    public GetUserPortfolioUIAction(GetUserPortfolioService portfolioService) {
+        this.portfolioService = portfolioService;
     }
 
     @Override
@@ -22,10 +22,10 @@ public class GetUserPortfolioUIAction implements UIAction {
                 new GetUserPortfolioRequest(inputDialog(
                         "Choose user:",
                         "SHOW PORTFOLIO",
-                        convertToStringArray(showUserPortfolioService.getUserData())
+                        convertToStringArray(portfolioService.getUserData())
                 ));
         userName = request.getUserName();
-        GetUserPortfolioResponse response = showUserPortfolioService.execute(request);
+        GetUserPortfolioResponse response = portfolioService.execute(request);
         printResponse(response);
     }
 

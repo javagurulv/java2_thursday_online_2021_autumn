@@ -9,11 +9,11 @@ import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
 public class GetUserPortfolioGroupedByIndustryUIAction implements UIAction {
 
-    private final GetUserPortfolioGroupedByIndustryService showUserPortfolioGroupedByIndustryService;
+    private final GetUserPortfolioGroupedByIndustryService getUserPortfolioGroupedByIndustryService;
     private String userName;
 
-    public GetUserPortfolioGroupedByIndustryUIAction(GetUserPortfolioGroupedByIndustryService showUserPortfolioGroupedByIndustryService) {
-        this.showUserPortfolioGroupedByIndustryService = showUserPortfolioGroupedByIndustryService;
+    public GetUserPortfolioGroupedByIndustryUIAction(GetUserPortfolioGroupedByIndustryService getUserPortfolioGroupedByIndustryService) {
+        this.getUserPortfolioGroupedByIndustryService = getUserPortfolioGroupedByIndustryService;
     }
 
     @Override
@@ -22,11 +22,11 @@ public class GetUserPortfolioGroupedByIndustryUIAction implements UIAction {
                 new GetUserPortfolioGroupedByIndustryRequest(inputDialog(
                         "Choose user:",
                         "SHOW PORTFOLIO BY INDUSTRIES",
-                        convertToStringArray(showUserPortfolioGroupedByIndustryService.getUserData())
+                        convertToStringArray(getUserPortfolioGroupedByIndustryService.getUserData())
                 ));
         userName = request.getUserName();
         GetUserPortfolioGroupedByIndustryResponse response =
-                showUserPortfolioGroupedByIndustryService.execute(request);
+                getUserPortfolioGroupedByIndustryService.execute(request);
         printResponse(response);
     }
 
