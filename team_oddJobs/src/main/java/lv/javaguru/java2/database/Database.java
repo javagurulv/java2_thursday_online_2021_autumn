@@ -34,7 +34,7 @@ public interface Database {
 
     List<Specialist> findSpecialistByProfession(String profession);
 
-    List<Specialist> findSpecialistByIdAndNameAndSurnameAndProfession(Long specialistId, String specialistName, String specialistSurname, String specialistProfession);
+    List<Specialist> findSpecialistByNameAndSurnameAndProfession(String specialistName, String specialistSurname, String specialistProfession);
 
     void addAdvertisement(Advertisement advBoard);
 

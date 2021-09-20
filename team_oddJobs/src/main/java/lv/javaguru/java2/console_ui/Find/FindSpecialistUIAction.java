@@ -25,14 +25,14 @@ public class FindSpecialistUIAction implements UIAction {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter specialistName");
+        System.out.println("Enter Name");
         String specialistName = scanner.nextLine();
-        System.out.println("Enter specialistSurname");
+        System.out.println("Enter Surname");
         String specialistSurname = scanner.nextLine();
-        System.out.println("Enter specialistProfession");
+        System.out.println("Enter Profession");
         String specialistProfession = scanner.nextLine();
 
-        System.out.println("Enter orderBy (specialistName || specialistSurname || specialistProfession): ");
+        System.out.println("Enter orderBy (Name || Surname || Profession): ");
         String orderBy = scanner.nextLine();
         System.out.println("Enter orderDirection (ASCENDING||DESCENDING): ");
         String orderDirection = scanner.nextLine();
