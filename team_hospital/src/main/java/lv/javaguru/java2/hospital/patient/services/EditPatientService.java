@@ -22,14 +22,15 @@ public class EditPatientService {
         if (!errors.isEmpty()) {
             return new EditPatientResponse(errors);
         } else {
-            database.editActions(
-                    Long.parseLong(request.getPatientID()),
-                    Integer.parseInt(request.getUserInput()),
-                    request.getChanges());
+
             return new EditPatientResponse(
                     request.getPatientID(),
                     request.getUserInput(),
-                    request.getChanges());
+                    request.getChanges(),
+                    database.editActions(
+                            Long.parseLong(request.getPatientID()),
+                            Integer.parseInt(request.getUserInput()),
+                            request.getChanges()));
         }
     }
 }
