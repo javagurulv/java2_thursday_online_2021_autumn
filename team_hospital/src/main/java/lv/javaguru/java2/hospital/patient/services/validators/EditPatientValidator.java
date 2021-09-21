@@ -2,7 +2,6 @@ package lv.javaguru.java2.hospital.patient.services.validators;
 
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.patient.requests.EditPatientRequest;
-import lv.javaguru.java2.hospital.patient.requests.FindPatientByIdRequest;
 import lv.javaguru.java2.hospital.patient.responses.CoreError;
 
 import java.util.ArrayList;
@@ -22,7 +21,6 @@ public class EditPatientValidator {
         validatePatientID(request).ifPresent(errors::add);
         validateUserChoice(request).ifPresent(errors::add);
         validateChanges(request).ifPresent(errors::add);
-        //validatePatientExists(request).ifPresent(errors::add);
         return errors;
     }
 

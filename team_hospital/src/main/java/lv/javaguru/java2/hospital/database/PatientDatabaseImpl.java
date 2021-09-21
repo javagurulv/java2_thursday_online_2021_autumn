@@ -44,7 +44,7 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public void editActions(Long patientID, int userInput, String input) {
+    public boolean editActions(Long patientID, int userInput, String input) {
         for (Patient patient : patientsList) {
             if (Objects.equals(patient.getId(), patientID)) {
                 switch (userInput) {
@@ -52,8 +52,10 @@ public class PatientDatabaseImpl implements PatientDatabase {
                     case 2 -> patient.setSurname(input);
                     case 3 -> patient.setPersonalCode(input);
                 }
+                return true;
             }
         }
+        return false;
     }
 
     @Override

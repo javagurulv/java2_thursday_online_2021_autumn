@@ -4,7 +4,8 @@ import lv.javaguru.java2.jg_entertainment.Menu;
 
 import java.util.List;
 
-public class GetAllMenusResponse {
+public class GetAllMenusResponse extends CoreResponse {
+
     private List<Menu> menus;
 
     public GetAllMenusResponse(List<Menu> menus) {

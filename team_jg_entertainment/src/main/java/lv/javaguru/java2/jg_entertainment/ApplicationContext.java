@@ -20,6 +20,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visi
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceAddAllVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceDeleteVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceShowListVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsMenus.AddMenuValidator;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.SearchVisitorsRequestValidator;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorAddVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorDeleteVisitor;
@@ -58,7 +59,8 @@ public class ApplicationContext {
         beans.put(SearchVisitorsUIAction.class, new SearchVisitorsUIAction(getBean(SearchVisitorsService.class)));
         beans.put(UIActionExit.class, new UIActionExit());
 //menu
-        beans.put(AddMenuService.class, new AddMenuService(getBean(DatabaseMenu.class)));
+        beans.put(AddMenuValidator.class, new AddMenuValidator());
+        beans.put(AddMenuService.class, new AddMenuService(getBean(DatabaseMenu.class), getBean(AddMenuValidator.class)));
         beans.put(RemoveMenuService.class, new RemoveMenuService(getBean(DatabaseMenu.class)));
         beans.put(GetAllMenusService.class, new GetAllMenusService(getBean(DatabaseMenu.class)));
 

@@ -3,6 +3,7 @@ package lv.javaguru.java2.hospital.patient.console_ui;
 import lv.javaguru.java2.hospital.patient.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.responses.EditPatientResponse;
 import lv.javaguru.java2.hospital.patient.services.EditPatientService;
+
 import java.util.Scanner;
 
 public class EditPatientUIAction implements PatientUIActions {
@@ -30,7 +31,11 @@ public class EditPatientUIAction implements PatientUIActions {
                     System.out.println("Error: " + coreError.getField() + " " + coreError.getDescription())
             );
         } else {
+            if (response.isTrueOrNot()) {
                 System.out.println("Changes are made!");
+            } else {
+                System.out.println("Patient not found!");
+            }
         }
     }
 }

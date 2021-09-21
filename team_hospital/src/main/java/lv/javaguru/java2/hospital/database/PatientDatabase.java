@@ -10,7 +10,7 @@ public interface PatientDatabase {
     Optional<Patient> findById(Long id);
     boolean deleteById(Long id);
     List<Patient> showAllPatients();
-    void editActions(Long id, int userInput, String input);
+    boolean editActions(Long id, int userInput, String input);
     boolean patientExists(Long id);
     List<Patient> findPatientsByName(String name);
     List<Patient> findPatientsBySurname(String surname);
