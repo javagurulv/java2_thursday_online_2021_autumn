@@ -21,10 +21,16 @@ public class RemoveMenuUIAction implements UIAction {
         Long number = Long.parseLong(scanner.nextLine());
         RemoveMenuRequest request = new RemoveMenuRequest(number);
         RemoveMenuResponse response = removeMenuService.execute(request);
-        if (response.isMenuRemoved()) {
-            System.out.println("That menu was removed from the order.");
+
+        if (response.hasErrors()) {
+            response.getErrors().forEach(coreError ->
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));
         } else {
-            System.out.println("That menu not removed from list.");
+            if (response.isMenuRemoved()) {
+                System.out.println("That menu was removed from the order.");
+            } else {
+                System.out.println("That menu not removed from list.");
+            }
         }
     }
 }
