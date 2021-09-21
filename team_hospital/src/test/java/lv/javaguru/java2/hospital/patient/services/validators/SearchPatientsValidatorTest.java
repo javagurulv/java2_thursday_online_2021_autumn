@@ -12,9 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SearchPatientsValidatorTest {
 
+    private SearchPatientsRequestFieldValidator fieldValidator = new SearchPatientsRequestFieldValidator();
     private OrderingValidator orderingValidator = new OrderingValidator();
     private PagingValidator pagingValidator = new PagingValidator();
-    private SearchPatientsValidator validator = new SearchPatientsValidator(orderingValidator, pagingValidator);
+    private SearchPatientsValidator validator = new SearchPatientsValidator(fieldValidator, orderingValidator, pagingValidator);
 
     @Test
     public void shouldNotReturnErrorWhenNameNotProvided(){
@@ -76,7 +77,7 @@ class SearchPatientsValidatorTest {
     public void shouldReturnErrorWhenOrderByContainNotValidValue() {
         Ordering ordering = new Ordering("notValidValue", "ASCENDING");
         SearchPatientsRequest request =
-                new SearchPatientsRequest("Name", "Surname","1212", ordering);
+                new SearchPatientsRequest("Name", "Surname", "1212", ordering);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderBy");
@@ -98,7 +99,7 @@ class SearchPatientsValidatorTest {
     public void shouldReturnErrorWhenPageNumberContainNotValidValue() {
         Paging paging = new Paging("0", "1");
         SearchPatientsRequest request =
-                new SearchPatientsRequest("Name", "Surname","1212", paging);
+                new SearchPatientsRequest("Name", "Surname", "1212", paging);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "pageNumber");
