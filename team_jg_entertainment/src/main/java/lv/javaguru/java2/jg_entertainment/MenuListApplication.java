@@ -1,5 +1,5 @@
 package lv.javaguru.java2.jg_entertainment;
-
+/*
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.ImplDatabaseMenu;
@@ -66,3 +66,4 @@ public class MenuListApplication {
     }
 }
 
+*/
