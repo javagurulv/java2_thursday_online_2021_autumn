@@ -25,7 +25,14 @@ public class AddMenuUIAction implements UIAction {
         double menuPrice = scanner.nextDouble();
         AddMenuRequest request = new AddMenuRequest(menuTitle, menuDescription, menuPrice);
         AddMenuResponse response = addMenuService.execute(request);
-        System.out.println("New book id was: " + response.getNewMenu().getNumber());
-        System.out.println("Your menu was added to the order.");
-    }
+
+        if (response.hasErrors()) {
+            response.getErrors().forEach(coreError ->
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage())
+            );
+        } else {
+            System.out.println("New book id was: " + response.getNewMenu().getNumber());
+            System.out.println("Your book was added to list.");
+        }
+     }
 }
