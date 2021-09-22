@@ -1,8 +1,8 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
-import lv.javaguru.java2.hospital.patient.requests.AddPatientRequest;
-import lv.javaguru.java2.hospital.patient.responses.AddPatientResponse;
-import lv.javaguru.java2.hospital.patient.services.AddPatientService;
+import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
+import lv.javaguru.java2.hospital.patient.core.responses.AddPatientResponse;
+import lv.javaguru.java2.hospital.patient.core.services.AddPatientService;
 import java.util.Scanner;
 
 public class AddPatientUIAction implements PatientUIActions {

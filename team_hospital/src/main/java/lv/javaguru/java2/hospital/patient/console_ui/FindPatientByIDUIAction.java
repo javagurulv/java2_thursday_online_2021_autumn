@@ -1,8 +1,8 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
-import lv.javaguru.java2.hospital.patient.requests.FindPatientByIdRequest;
-import lv.javaguru.java2.hospital.patient.responses.FindPatientByIDResponse;
-import lv.javaguru.java2.hospital.patient.services.FindPatientByIdService;
+import lv.javaguru.java2.hospital.patient.core.requests.FindPatientByIdRequest;
+import lv.javaguru.java2.hospital.patient.core.responses.FindPatientByIDResponse;
+import lv.javaguru.java2.hospital.patient.core.services.FindPatientByIdService;
 import java.util.Scanner;
 
 public class FindPatientByIDUIAction implements PatientUIActions {

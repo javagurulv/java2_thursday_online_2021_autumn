@@ -1,8 +1,8 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
-import lv.javaguru.java2.hospital.patient.requests.DeletePatientRequest;
-import lv.javaguru.java2.hospital.patient.responses.DeletePatientResponse;
-import lv.javaguru.java2.hospital.patient.services.DeletePatientService;
+import lv.javaguru.java2.hospital.patient.core.requests.DeletePatientRequest;
+import lv.javaguru.java2.hospital.patient.core.responses.DeletePatientResponse;
+import lv.javaguru.java2.hospital.patient.core.services.DeletePatientService;
 
 import java.util.Scanner;
 

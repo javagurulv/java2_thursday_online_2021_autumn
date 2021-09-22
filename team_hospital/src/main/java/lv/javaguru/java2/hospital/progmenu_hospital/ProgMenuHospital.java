@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.progmenu_hospital;
 
-import lv.javaguru.java2.hospital.ApplicationContext;
+import lv.javaguru.java2.hospital.PatientApplicationContext;
 import lv.javaguru.java2.hospital.InputNumChecker;
 import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import lv.javaguru.java2.hospital.database.PatientDatabase;
@@ -15,12 +15,12 @@ import lv.javaguru.java2.hospital.visits.services.validators.PatientVisitValidat
 
 public class ProgMenuHospital {
 
-    private static final ApplicationContext applicationContext = new ApplicationContext();
+    private static final PatientApplicationContext patientApplicationContext = new PatientApplicationContext();
     private static final DoctorDatabaseImpl doctorDatabase = new DoctorDatabaseImpl();
     private static final InputNumChecker inputNumChecker = new InputNumChecker();
     private static final PatientVisitUIAction patientVisit =
             new PatientVisitUIAction(new PatientsVisitService
-                    (applicationContext.getBean(PatientDatabase.class), doctorDatabase,
+                    (patientApplicationContext.getBean(PatientDatabase.class), doctorDatabase,
                             new VisitDatabaseImpl(), new PatientVisitValidator()));
 
     private static final DoctorUIActions[] doctorUIActions = {
@@ -109,27 +109,27 @@ public class ProgMenuHospital {
     private static void patientUserActions(int num) {
         switch (num) {
             case 1 -> {
-                AddPatientUIAction addPatientUIAction = applicationContext.getBean(AddPatientUIAction.class);
+                AddPatientUIAction addPatientUIAction = patientApplicationContext.getBean(AddPatientUIAction.class);
                 addPatientUIAction.execute();
             }
             case 2 -> {
-                ShowAllPatientsUIAction showAllPatientsUIAction = applicationContext.getBean(ShowAllPatientsUIAction.class);
+                ShowAllPatientsUIAction showAllPatientsUIAction = patientApplicationContext.getBean(ShowAllPatientsUIAction.class);
                 showAllPatientsUIAction.execute();
             }
             case 3 -> {
-                FindPatientByIDUIAction findPatientByIDUIAction = applicationContext.getBean(FindPatientByIDUIAction.class);
+                FindPatientByIDUIAction findPatientByIDUIAction = patientApplicationContext.getBean(FindPatientByIDUIAction.class);
                 findPatientByIDUIAction.execute();
             }
             case 4 -> {
-                DeletePatientUIAction deletePatientUIAction = applicationContext.getBean(DeletePatientUIAction.class);
+                DeletePatientUIAction deletePatientUIAction = patientApplicationContext.getBean(DeletePatientUIAction.class);
                 deletePatientUIAction.execute();
             }
             case 5 -> {
-                EditPatientUIAction editPatientUIAction = applicationContext.getBean(EditPatientUIAction.class);
+                EditPatientUIAction editPatientUIAction = patientApplicationContext.getBean(EditPatientUIAction.class);
                 editPatientUIAction.execute();
             }
             case 6 -> {
-                SearchPatientsUIAction searchPatientsUIAction = applicationContext.getBean(SearchPatientsUIAction.class);
+                SearchPatientsUIAction searchPatientsUIAction = patientApplicationContext.getBean(SearchPatientsUIAction.class);
                 searchPatientsUIAction.execute();
             }
         }
