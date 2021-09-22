@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AddVisitorValidatorTest {
+class ValidatorAddVisitorTest {
 
     ValidatorAddVisitor visitorValidator = new ValidatorAddVisitor();
 

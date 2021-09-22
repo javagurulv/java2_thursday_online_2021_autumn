@@ -19,12 +19,15 @@ import static org.mockito.ArgumentMatchers.any;
 
 class DeletePatientServiceTest {
 
-    @Mock private PatientDatabaseImpl patientDatabase;
-    @Mock private DeletePatientValidator validator;
-    @InjectMocks DeletePatientService service;
+    @Mock
+    private PatientDatabaseImpl patientDatabase;
+    @Mock
+    private DeletePatientValidator validator;
+    @InjectMocks
+    DeletePatientService service;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         patientDatabase = Mockito.mock(PatientDatabaseImpl.class);
         validator = Mockito.mock(DeletePatientValidator.class);
         service = new DeletePatientService(patientDatabase, validator);

@@ -4,7 +4,6 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Orde
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Paging;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.SearchVisitorsService;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SearchVisitorsRequestValidatorTest {
-
     private SearchVisitorsRequestValidator validator = new SearchVisitorsRequestValidator();
 
     @Test
@@ -127,4 +125,5 @@ class SearchVisitorsRequestValidatorTest {
         assertEquals(errors.get(0).getField(), "pageSize");
         assertEquals(errors.get(0).getMessageError(), "must not be empty!");
     }
+
 }

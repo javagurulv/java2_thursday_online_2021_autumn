@@ -7,26 +7,33 @@ import lv.javaguru.java2.hospital.patient.responses.EditPatientResponse;
 import lv.javaguru.java2.hospital.patient.services.validators.EditPatientValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EditPatientServiceTest {
 
+    @Mock
     private EditPatientValidator validator;
+    @Mock
     private PatientDatabaseImpl database;
+    @InjectMocks
     private EditPatientService service;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         validator = Mockito.mock(EditPatientValidator.class);
         database = Mockito.mock(PatientDatabaseImpl.class);
         service = new EditPatientService(database, validator);
     }
 
     @Test
-    public void shouldChangePatientName(){
+    public void shouldChangePatientName() {
         EditPatientRequest request = new EditPatientRequest("1", "1", "NewName");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
@@ -41,7 +48,7 @@ public class EditPatientServiceTest {
     }
 
     @Test
-    public void shouldChangePatientSurname(){
+    public void shouldChangePatientSurname() {
         EditPatientRequest request = new EditPatientRequest("1", "2", "NewSurname");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
@@ -56,7 +63,7 @@ public class EditPatientServiceTest {
     }
 
     @Test
-    public void shouldChangePatientPersonalCode(){
+    public void shouldChangePatientPersonalCode() {
         EditPatientRequest request = new EditPatientRequest("1", "3", "New1234");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
@@ -71,7 +78,7 @@ public class EditPatientServiceTest {
     }
 
     @Test
-    public void shouldReturnFalse(){
+    public void shouldReturnFalse() {
         EditPatientRequest request = new EditPatientRequest("1", "3", "New1234");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 

@@ -7,6 +7,8 @@ import lv.javaguru.java2.hospital.patient.responses.FindPatientByIDResponse;
 import lv.javaguru.java2.hospital.patient.services.validators.FindPatientByIDValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -18,19 +20,22 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class FindPatientByIdServiceTest {
 
+    @Mock
     private FindPatientByIDValidator validator;
+    @Mock
     private PatientDatabaseImpl database;
+    @InjectMocks
     private FindPatientByIdService service;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         validator = Mockito.mock(FindPatientByIDValidator.class);
         database = Mockito.mock(PatientDatabaseImpl.class);
         service = new FindPatientByIdService(database, validator);
     }
 
     @Test
-    public void shouldReturnPatient(){
+    public void shouldReturnPatient() {
         FindPatientByIdRequest request = new FindPatientByIdRequest("1");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
@@ -44,7 +49,7 @@ class FindPatientByIdServiceTest {
     }
 
     @Test
-    public void shouldReturnOptionalEmpty(){
+    public void shouldReturnOptionalEmpty() {
         FindPatientByIdRequest request = new FindPatientByIdRequest("2");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
