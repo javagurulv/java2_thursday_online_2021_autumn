@@ -18,11 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class ShowAllPatientsServiceTest {
 
-    @Mock private PatientDatabaseImpl database;
-    @InjectMocks private ShowAllPatientsService showAllPatientsService;
+    @Mock
+    private PatientDatabaseImpl database;
+    @InjectMocks
+    private ShowAllPatientsService showAllPatientsService;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         database = Mockito.mock(PatientDatabaseImpl.class);
         showAllPatientsService = new ShowAllPatientsService(database);
     }

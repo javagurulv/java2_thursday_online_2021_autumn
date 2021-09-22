@@ -11,17 +11,22 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 
 class AddPatientServiceTest {
 
-    @Mock private PatientDatabaseImpl patientDatabase;
-    @Mock private AddPatientValidator validator;
-    @InjectMocks private AddPatientService addPatientService;
+    @Mock
+    private PatientDatabaseImpl patientDatabase;
+    @Mock
+    private AddPatientValidator validator;
+    @InjectMocks
+    private AddPatientService addPatientService;
 
     @BeforeEach
     public void init() {

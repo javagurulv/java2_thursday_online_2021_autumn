@@ -10,6 +10,8 @@ import lv.javaguru.java2.hospital.patient.responses.SearchPatientsResponse;
 import lv.javaguru.java2.hospital.patient.services.validators.SearchPatientsValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -19,8 +21,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 class SearchPatientsServiceTest {
+
+    @Mock
     private PatientDatabaseImpl database;
+    @Mock
     private SearchPatientsValidator validator;
+    @InjectMocks
     private SearchPatientsService service;
 
     @BeforeEach
