@@ -54,7 +54,10 @@ public class Doctor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Doctor doctor = (Doctor) o;
-        return id == doctor.id && Objects.equals(name, doctor.name) && Objects.equals(surname, doctor.surname) && Objects.equals(speciality, doctor.speciality);
+        return id == doctor.id &&
+                Objects.equals(name, doctor.name) &&
+                Objects.equals(surname, doctor.surname) &&
+                Objects.equals(speciality, doctor.speciality);
     }
 
     @Override
