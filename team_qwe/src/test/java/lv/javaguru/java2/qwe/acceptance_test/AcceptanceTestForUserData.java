@@ -43,6 +43,7 @@ public class AcceptanceTestForUserData {
         getAddUserService().execute(request2);
         GetAllUserListRequest request3 = new GetAllUserListRequest();
         GetAllUserListResponse response = getAllUserListService().execute(request3);
+
         assertEquals(5, response.getList().size());
     }
 
@@ -52,6 +53,7 @@ public class AcceptanceTestForUserData {
         FindUserByNameResponse response1 = getFindUserByName().execute(request1);
         FindUserByNameRequest request2 = new FindUserByNameRequest("Alex");
         FindUserByNameResponse response2 = getFindUserByName().execute(request2);
+
         assertEquals(new User(
                 "Vladimir", 78, Type.LOWER_MIDDLE, 30000
         ), response1.getUser());
@@ -74,6 +76,7 @@ public class AcceptanceTestForUserData {
                 entry("Industrials", 74_859.84),
                 entry("Cash", 50_125.15)
         );
+
         assertEquals(map.get("Energy"), response1.getInvestmentMap().get("Energy"), 0.01);
         assertEquals(map.get("Materials"), response1.getInvestmentMap().get("Materials"), 0.01);
         assertEquals(map.get("Industrials"), response1.getInvestmentMap().get("Industrials"), 0.01);
@@ -91,13 +94,13 @@ public class AcceptanceTestForUserData {
                 new GetUserPortfolioGroupedByIndustryRequest("Michael");
         GetUserPortfolioGroupedByIndustryResponse response2 =
                 getUserPortfolioGroupedByIndustryService().execute(request2);
-
         Map<String, List<String>> map = ofEntries(
                 entry("Energy", List.of("APA Corp.", "Occidental Petroleum Corporation")),
                 entry("Materials", of("Freeport-McMoRan Inc.")),
                 entry("Industrials", of("Boeing Company")),
                 entry("Cash", of("Cash"))
         );
+
         assertEquals(map.get("Energy"), response1.getIndustryMap().get("Energy"));
         assertEquals(map.get("Materials"), response1.getIndustryMap().get("Materials"));
         assertEquals(map.get("Industrials"), response1.getIndustryMap().get("Industrials"));
@@ -115,7 +118,6 @@ public class AcceptanceTestForUserData {
                 new GetUserPortfolioRequest("Michael");
         GetUserPortfolioResponse response2 =
                 getUserPortfolioService().execute(request2);
-
         List<Position> list = of(
                 new Position(new Stock("APA Corp.", "Energy", "USD", 16.07, 0.62, 2), 3266, 16.07),
                 new Position(new Stock("Freeport-McMoRan Inc.", "Materials", "USD", 32.8, 0.91, 1.59), 1371, 32.8),
@@ -123,6 +125,7 @@ public class AcceptanceTestForUserData {
                 new Position(new Stock("Occidental Petroleum Corporation", "Energy", "USD", 21.95, 0.18, 1.69), 2391, 21.95),
                 new Position(new Cash(), 50125.15, 1)
         );
+
         assertEquals(list, response1.getPortfolio());
         assertTrue(response2.getPortfolio().isEmpty());
     }

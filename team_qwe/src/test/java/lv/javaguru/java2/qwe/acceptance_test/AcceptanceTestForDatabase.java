@@ -19,7 +19,7 @@ public class AcceptanceTestForDatabase {
     private final ApplicationContextForTest context = new ApplicationContextForTest();
 
     @Test
-    public void addSecuritiesToDatabase() {
+    public void addSecuritiesToDatabaseTest() {
         AddStockRequest request1 = new AddStockRequest(
                 "Alibaba", "Technology", "USD",
                 "160.13", "0", "1.32"
@@ -45,11 +45,10 @@ public class AcceptanceTestForDatabase {
         assertEquals(3, response.getList().size());
         assertEquals("Alibaba", response.getList().get(1).getName());
         assertEquals("Gazprom 4.75 30/12/2031", response.getList().get(2).getName());
-
     }
 
     @Test
-    public void removeSecuritiesFromDatabase() {
+    public void removeSecuritiesFromDatabaseTest() {
         AddStockRequest request1 = new AddStockRequest(
                 "Alibaba", "Technology", "USD",
                 "160.13", "0", "1.32"
@@ -64,7 +63,6 @@ public class AcceptanceTestForDatabase {
         getAddBondService().execute(request2);
         RemoveSecurityResponse response1 = getRemoveSecurityService().execute(request3);
         RemoveSecurityResponse response2 = getRemoveSecurityService().execute(request4);
-
         GetAllSecurityListResponse response3 = getAllSecurityListService().execute(new GetAllSecurityListRequest());
 
         assertTrue(response1.isRemoved());
@@ -74,7 +72,7 @@ public class AcceptanceTestForDatabase {
     }
 
     @Test
-    public void findSecurityByNameInDatabase() {
+    public void findSecurityByNameInDatabaseTest() {
         AddStockRequest request1 = new AddStockRequest(
                 "Alibaba", "Technology", "USD",
                 "160.13", "0", "1.32"
@@ -98,7 +96,7 @@ public class AcceptanceTestForDatabase {
     }
 
     @Test
-    public void filterStocksByMultipleParameters() {
+    public void filterStocksByMultipleParametersTest() {
         AddStockRequest request1 = new AddStockRequest(
                 "Alibaba", "Technology", "USD",
                 "160.13", "0", "1.32"
@@ -144,7 +142,6 @@ public class AcceptanceTestForDatabase {
         assertEquals(of(
                 new Stock("Intel", "Technology", "USD", 53.73, 2.05, 0.9)
         ), response2.getList());
-
     }
 
     private AddStockService getAddStockService() {

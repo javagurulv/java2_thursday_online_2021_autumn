@@ -8,6 +8,7 @@ import lv.javaguru.java2.qwe.ui_actions.UIAction;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
@@ -28,7 +29,8 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
     @Override
     public void execute() {
         try {
-            List<String> finalParameterList = setFilterParameters(parameters);
+            List<String> finalParameterList =
+                    setFilterParameters(Arrays.stream(parameters).collect(Collectors.toList()), new ArrayList<>());
             messageDialog("You have chosen parameters:\n - " + printList(finalParameterList) + ";");
             List<CoreRequest> requestList = createRequestList(finalParameterList, operators, industries);
             FilterStocksByMultipleParametersRequest multiFilterRequest = new FilterStocksByMultipleParametersRequest(requestList);
@@ -36,23 +38,18 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
             printResponse(response);
             System.out.println("\n");
         } catch (NumberFormatException e) {
-            System.out.println("Wrong format!");
+            messageDialog("Wrong format!");
         }
     }
 
-    private List<String> setFilterParameters(String[] parameters) {
-        List<String> finalParameterList = new ArrayList<>();
-        while (Arrays.asList(parameters).contains("none") && parameters.length != 1) {
-            String result = inputDialog("Choose parameter:", "FILTER", parameters);
-            if (result.equals("none") || result.isEmpty()) {
-                break;
-            }
-            finalParameterList.add(result);
-            parameters = Arrays.stream(parameters)
-                    .filter(parameter -> !parameter.equals(result))
-                    .toArray(String[]::new);
+    private List<String> setFilterParameters(List<String> parameters, List<String> finalParameters) {
+        String result = inputDialog("Choose parameter:", "FILTER", parameters.toArray(String[]::new));
+        if (result.equals("none") || result.isEmpty()) {
+            return finalParameters;
         }
-        return finalParameterList;
+        finalParameters.add(result);
+        parameters.remove(result);
+        return setFilterParameters(parameters, finalParameters);
     }
 
     private List<CoreRequest> createRequestList(List<String> finalParameterList, String[] operators, String[] industries) {
