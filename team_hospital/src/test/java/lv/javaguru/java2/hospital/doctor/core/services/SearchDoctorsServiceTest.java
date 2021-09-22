@@ -1,7 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
 import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.doctor.core.requests.Ordering;
 import lv.javaguru.java2.hospital.doctor.core.requests.Paging;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
@@ -9,8 +8,6 @@ import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.doctor.core.responses.SearchDoctorsResponse;
 import lv.javaguru.java2.hospital.doctor.core.services.validators.SearchDoctorsRequestValidator;
 import lv.javaguru.java2.hospital.domain.Doctor;
-import lv.javaguru.java2.hospital.patient.services.SearchPatientsService;
-import lv.javaguru.java2.hospital.patient.services.validators.SearchPatientsValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

@@ -1,8 +1,8 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
-import lv.javaguru.java2.hospital.patient.requests.ShowAllPatientsRequest;
-import lv.javaguru.java2.hospital.patient.responses.ShowAllPatientsResponse;
-import lv.javaguru.java2.hospital.patient.services.ShowAllPatientsService;
+import lv.javaguru.java2.hospital.patient.core.requests.ShowAllPatientsRequest;
+import lv.javaguru.java2.hospital.patient.core.responses.ShowAllPatientsResponse;
+import lv.javaguru.java2.hospital.patient.core.services.ShowAllPatientsService;
 
 public class ShowAllPatientsUIAction implements PatientUIActions {
     private final ShowAllPatientsService showAllPatients;

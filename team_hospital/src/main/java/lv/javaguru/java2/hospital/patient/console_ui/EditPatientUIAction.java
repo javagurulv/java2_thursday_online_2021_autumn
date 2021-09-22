@@ -1,8 +1,8 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
-import lv.javaguru.java2.hospital.patient.requests.EditPatientRequest;
-import lv.javaguru.java2.hospital.patient.responses.EditPatientResponse;
-import lv.javaguru.java2.hospital.patient.services.EditPatientService;
+import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
+import lv.javaguru.java2.hospital.patient.core.responses.EditPatientResponse;
+import lv.javaguru.java2.hospital.patient.core.services.EditPatientService;
 
 import java.util.Scanner;
 

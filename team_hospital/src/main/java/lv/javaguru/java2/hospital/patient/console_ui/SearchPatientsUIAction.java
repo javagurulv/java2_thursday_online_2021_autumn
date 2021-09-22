@@ -1,10 +1,10 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
-import lv.javaguru.java2.hospital.patient.requests.Ordering;
-import lv.javaguru.java2.hospital.patient.requests.Paging;
-import lv.javaguru.java2.hospital.patient.requests.SearchPatientsRequest;
-import lv.javaguru.java2.hospital.patient.responses.SearchPatientsResponse;
-import lv.javaguru.java2.hospital.patient.services.SearchPatientsService;
+import lv.javaguru.java2.hospital.patient.core.requests.Ordering;
+import lv.javaguru.java2.hospital.patient.core.requests.Paging;
+import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
+import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
+import lv.javaguru.java2.hospital.patient.core.services.SearchPatientsService;
 import java.util.Locale;
 import java.util.Scanner;
 
