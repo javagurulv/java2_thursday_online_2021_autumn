@@ -21,9 +21,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visi
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceDeleteVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceShowListVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsMenus.AddMenuValidator;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.SearchVisitorsRequestValidator;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorAddVisitor;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorDeleteVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +37,13 @@ public class ApplicationContext {
 //visitors
         beans.put(ValidatorAddVisitor.class, new ValidatorAddVisitor());
         beans.put(ValidatorDeleteVisitor.class, new ValidatorDeleteVisitor());
-        beans.put(SearchVisitorsRequestValidator.class, new SearchVisitorsRequestValidator());
+        beans.put(OrderingValidator.class, new OrderingValidator());
+        beans.put(PagingValidator.class, new PagingValidator());
+        beans.put(SearchVisitorsRequestFieldValidator.class, new SearchVisitorsRequestFieldValidator());
+        beans.put(SearchVisitorsRequestValidator.class, new SearchVisitorsRequestValidator(
+                getBean(SearchVisitorsRequestFieldValidator.class),
+                getBean(OrderingValidator.class),
+                getBean(PagingValidator.class)));
 
         beans.put(ServiceAddAllVisitors.class, new ServiceAddAllVisitors(
                 getBean(DatabaseVisitors.class),
