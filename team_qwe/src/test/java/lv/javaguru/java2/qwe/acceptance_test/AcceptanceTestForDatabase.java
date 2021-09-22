@@ -11,9 +11,8 @@ import lv.javaguru.java2.qwe.core.responses.data_responses.RemoveSecurityRespons
 import lv.javaguru.java2.qwe.core.services.data_services.*;
 import org.junit.Test;
 
-import java.util.List;
-
 import static org.junit.Assert.*;
+import static java.util.List.*;
 
 public class AcceptanceTestForDatabase {
 
@@ -64,7 +63,7 @@ public class AcceptanceTestForDatabase {
         getAddStockService().execute(request1);
         getAddBondService().execute(request2);
         RemoveSecurityResponse response1 = getRemoveSecurityService().execute(request3);
-        RemoveSecurityResponse response2 = getRemoveSecurityService().execute(request3);
+        RemoveSecurityResponse response2 = getRemoveSecurityService().execute(request4);
 
         GetAllSecurityListResponse response3 = getAllSecurityListService().execute(new GetAllSecurityListRequest());
 
@@ -117,13 +116,13 @@ public class AcceptanceTestForDatabase {
                 "359.23", "0", "0.87"
         );
         FilterStocksByMultipleParametersRequest request5 = new FilterStocksByMultipleParametersRequest(
-                List.of(
+                of(
                         new FilterStocksByIndustryRequest("Technology"),
                         new OrderingRequest("Name", "DESCENDING")
                 )
         );
         FilterStocksByMultipleParametersRequest request6 = new FilterStocksByMultipleParametersRequest(
-                List.of(
+                of(
                         new FilterStocksByAnyDoubleParameterRequest("Dividend", ">", "0"),
                         new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<", "1")
                 )
@@ -137,12 +136,12 @@ public class AcceptanceTestForDatabase {
         FilterStocksByMultipleParametersResponse response2 =
                 getFilterStocksByMultipleParametersService().execute(request6);
 
-        assertEquals(List.of(
+        assertEquals(of(
                 new Stock("Intel", "Technology", "USD", 53.73, 2.05, 0.9),
                 new Stock("Alibaba", "Technology", "USD", 160.13, 0, 1.32)
         ), response1.getList());
 
-        assertEquals(List.of(
+        assertEquals(of(
                 new Stock("Intel", "Technology", "USD", 53.73, 2.05, 0.9)
         ), response2.getList());
 
