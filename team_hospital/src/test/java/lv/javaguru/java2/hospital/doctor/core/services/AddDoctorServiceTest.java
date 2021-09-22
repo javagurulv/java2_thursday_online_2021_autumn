@@ -4,7 +4,7 @@ import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.AddDoctorResponse;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
-import lv.javaguru.java2.hospital.doctor.core.services.validators.AddDoctorValidator;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.AddDoctorRequestValidator;
 import lv.javaguru.java2.hospital.matchers.DoctorMatcher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,13 +22,13 @@ import static org.mockito.ArgumentMatchers.argThat;
 class AddDoctorServiceTest {
 
     @Mock private DoctorDatabaseImpl database;
-    @Mock private AddDoctorValidator validator;
+    @Mock private AddDoctorRequestValidator validator;
     @InjectMocks private AddDoctorService service;
 
     @BeforeEach
     public void init() {
         database = Mockito.mock(DoctorDatabaseImpl.class);
-        validator = Mockito.mock(AddDoctorValidator.class);
+        validator = Mockito.mock(AddDoctorRequestValidator.class);
         service = new AddDoctorService(database, validator);
     }
 

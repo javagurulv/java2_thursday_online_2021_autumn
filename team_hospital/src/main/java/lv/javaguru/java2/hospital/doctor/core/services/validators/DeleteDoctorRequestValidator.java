@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class DeleteDoctorValidator {
+public class DeleteDoctorRequestValidator {
 
     public List<CoreError> validate(DeleteDoctorRequest request) {
         List<CoreError> errors = new ArrayList<>();

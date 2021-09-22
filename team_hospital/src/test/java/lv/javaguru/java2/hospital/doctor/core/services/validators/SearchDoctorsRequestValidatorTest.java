@@ -15,74 +15,75 @@ import java.util.List;
 
 public class SearchDoctorsRequestValidatorTest {
 
-	private OrderingValidator orderingValidator;
-	private PagingValidator pagingValidator;
+    private SearchDoctorsRequestFieldValidator fieldValidator;
+    private OrderingValidator orderingValidator;
+    private PagingValidator pagingValidator;
+    private SearchDoctorsRequestValidator validator;
 
-	private SearchDoctorsRequestValidator validator;
+    @BeforeEach
+    public void init() {
+        fieldValidator = Mockito.mock(SearchDoctorsRequestFieldValidator.class);
+        orderingValidator = Mockito.mock(OrderingValidator.class);
+        pagingValidator = Mockito.mock(PagingValidator.class);
+        validator = new SearchDoctorsRequestValidator(fieldValidator, orderingValidator, pagingValidator);
+    }
 
-	@BeforeEach
-	public void init() {
-		orderingValidator = Mockito.mock(OrderingValidator.class);
-		pagingValidator = Mockito.mock(PagingValidator.class);
-		validator = new SearchDoctorsRequestValidator(orderingValidator, pagingValidator);
-	}
+    @Test
+    public void shouldReturnOrderingErrors() {
+        Ordering ordering = new Ordering("name", "ASC");
 
-	@Test
-	public void shouldReturnOrderingErrors() {
-		Ordering ordering = new Ordering("name", "ASC");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(
+                "id", "name", "surname", "speciality", ordering
+        );
 
-		SearchDoctorsRequest request = new SearchDoctorsRequest(
-			"id", "name", "surname", "speciality", ordering
-		);
+        CoreError error = new CoreError("orderBy", "bla bla bla");
 
-		CoreError error = new CoreError("orderBy", "bla bla bla");
+        Mockito.when(orderingValidator.validate(ordering))
+                .thenReturn(List.of(error));
 
-		Mockito.when(orderingValidator.validate(ordering))
-				.thenReturn(List.of(error));
+        List<CoreError> errors = validator.validate(request);
 
-		List<CoreError> errors = validator.validate(request);
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0), error);
 
-		assertEquals(errors.size(), 1);
-		assertEquals(errors.get(0), error);
+        Mockito.verify(orderingValidator).validate(ordering);
+    }
 
-		Mockito.verify(orderingValidator).validate(ordering);
-	}
+    @Test
+    public void shouldNotReturnOrderingErrors() {
+        Ordering ordering = new Ordering("name", "ASC");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(
+                "id",
+                "name",
+                "surname",
+                "speciality",
+                ordering
+        );
 
-	@Test
-	public void shouldNotReturnOrderingErrors() {
-		Ordering ordering = new Ordering("name", "ASC");
-		SearchDoctorsRequest request = new SearchDoctorsRequest(
-				"id",
-				"name",
-				"surname",
-				"speciality",
-				ordering
-		);
+        Mockito.when(orderingValidator.validate(ordering))
+                .thenReturn(new ArrayList<>());
 
-		Mockito.when(orderingValidator.validate(ordering))
-				.thenReturn(new ArrayList<>());
+        List<CoreError> errors = validator.validate(request);
 
-		List<CoreError> errors = validator.validate(request);
+        assertEquals(errors.size(), 0);
+    }
 
-		assertEquals(errors.size(), 0);
-	}
+    @Test
+    public void shouldNotCheckOrdering() {
+        Ordering ordering = null;
+        SearchDoctorsRequest request = new SearchDoctorsRequest(
+                "id",
+                "name",
+                "surname",
+                "speciality",
+                ordering
+        );
 
-	@Test
-	public void shouldNotCheckOrdering() {
-		Ordering ordering = null;
-		SearchDoctorsRequest request = new SearchDoctorsRequest(
-				"id",
-				"name",
-				"surname",
-				"speciality",
-				ordering
-		);
+        List<CoreError> errors = validator.validate(request);
 
-		List<CoreError> errors = validator.validate(request);
+        assertEquals(errors.size(), 0);
 
-		assertEquals(errors.size(), 0);
-
-		Mockito.verifyNoMoreInteractions(orderingValidator);
-	}
+        Mockito.verifyNoMoreInteractions(orderingValidator);
+    }
 
 }

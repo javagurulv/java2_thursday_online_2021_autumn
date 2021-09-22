@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class EditDoctorValidator {
+public class EditDoctorRequestValidator {
 
     public List<CoreError> validate(EditDoctorRequest request) {
         List<CoreError> errors = new ArrayList<>();

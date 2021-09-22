@@ -8,9 +8,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AddDoctorValidatorTest {
+class AddDoctorRequestValidatorTest {
 
-    private AddDoctorValidator validator = new AddDoctorValidator();
+    private AddDoctorRequestValidator validator = new AddDoctorRequestValidator();
 
     @Test
     public void shouldReturnEmptyList() {

@@ -9,9 +9,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class EditDoctorValidatorTest {
+class EditDoctorRequestValidatorTest {
 
-    private EditDoctorValidator validator = new EditDoctorValidator();
+    private EditDoctorRequestValidator validator = new EditDoctorRequestValidator();
 
     @Test
     public void shouldReturnEmptyList() {

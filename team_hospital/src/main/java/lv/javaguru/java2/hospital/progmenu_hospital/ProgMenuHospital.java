@@ -24,12 +24,12 @@ public class ProgMenuHospital {
                             new VisitDatabaseImpl(), new PatientVisitValidator()));
 
     private static final DoctorUIActions[] doctorUIActions = {
-            new AddDoctorUIAction(new AddDoctorService(doctorDatabase, new AddDoctorValidator())),
+            new AddDoctorUIAction(new AddDoctorService(doctorDatabase, new AddDoctorRequestValidator())),
             new ShowAllDoctorsUIAction(new ShowAllDoctorsService(doctorDatabase)),
-            new DeleteDoctorUIAction(new DeleteDoctorService(doctorDatabase, new DeleteDoctorValidator()), new DoctorExistsService(doctorDatabase)),
-            new EditDoctorUIAction(new EditDoctorService(doctorDatabase, new EditDoctorValidator()), new DoctorExistsService(doctorDatabase)),
+            new DeleteDoctorUIAction(new DeleteDoctorService(doctorDatabase, new DeleteDoctorRequestValidator()), new DoctorExistsService(doctorDatabase)),
+            new EditDoctorUIAction(new EditDoctorService(doctorDatabase, new EditDoctorRequestValidator()), new DoctorExistsService(doctorDatabase)),
             new SearchDoctorsUIAction(new SearchDoctorsService(doctorDatabase,
-                    new SearchDoctorsRequestValidator(new OrderingValidator(), new PagingValidator())))};
+                    new SearchDoctorsRequestValidator(new SearchDoctorsRequestFieldValidator(), new OrderingValidator(), new PagingValidator())))};
 
 
     //Menu

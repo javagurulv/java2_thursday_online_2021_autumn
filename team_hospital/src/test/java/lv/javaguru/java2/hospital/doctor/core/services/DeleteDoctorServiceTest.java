@@ -4,7 +4,7 @@ import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import lv.javaguru.java2.hospital.doctor.core.requests.DeleteDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.doctor.core.responses.DeleteDoctorResponse;
-import lv.javaguru.java2.hospital.doctor.core.services.validators.DeleteDoctorValidator;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.DeleteDoctorRequestValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -22,14 +22,14 @@ class DeleteDoctorServiceTest {
     @Mock
     private DoctorDatabaseImpl database;
     @Mock
-    private DeleteDoctorValidator validator;
+    private DeleteDoctorRequestValidator validator;
     @InjectMocks
     private DeleteDoctorService service;
 
     @BeforeEach
     public void init() {
         database = Mockito.mock(DoctorDatabaseImpl.class);
-        validator = Mockito.mock(DeleteDoctorValidator.class);
+        validator = Mockito.mock(DeleteDoctorRequestValidator.class);
         service = new DeleteDoctorService(database, validator);
     }
 
