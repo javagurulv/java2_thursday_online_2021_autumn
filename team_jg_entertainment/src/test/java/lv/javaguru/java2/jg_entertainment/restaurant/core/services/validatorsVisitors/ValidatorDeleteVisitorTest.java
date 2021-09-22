@@ -8,7 +8,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DeleteVisitorValidatorTest {
+class ValidatorDeleteVisitorTest {
+
     ValidatorDeleteVisitor visitorValidator = new ValidatorDeleteVisitor();
 
     @Test
@@ -46,4 +47,6 @@ class DeleteVisitorValidatorTest {
         assertEquals(coreErrorList.get(1).getField(), "name visitor");
         assertEquals(coreErrorList.get(1).getMessageError(), "Can't be empty");
     }
+
+
 }

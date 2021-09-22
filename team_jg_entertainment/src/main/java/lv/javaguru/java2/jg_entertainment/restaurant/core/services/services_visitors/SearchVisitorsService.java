@@ -35,6 +35,7 @@ public class SearchVisitorsService {
         List<Visitors> visitorsList = search(request);
         visitorsList = order(visitorsList, request.getOrdering());
         visitorsList = paging(visitorsList, request.getPaging());
+
         return new SearchVisitorsResponse(visitorsList, null);
     }
 
@@ -73,7 +74,6 @@ public class SearchVisitorsService {
         if (request.isNameProvided() && request.isTelephoneNumberProvided()) {
             visitors = database.findVisitorsByNameAndTelephoneNumber(request.getNameVisitors(), request.getTelephoneNumber());
         }
-
         return visitors;
     }
 

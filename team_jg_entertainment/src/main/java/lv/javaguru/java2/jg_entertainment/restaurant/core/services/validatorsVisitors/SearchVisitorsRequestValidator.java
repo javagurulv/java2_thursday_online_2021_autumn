@@ -29,7 +29,7 @@ public class SearchVisitorsRequestValidator {
         return errors;
     }
 
-    private List<CoreError> validatorSearchField(SearchVisitorsRequest request) {
+    private List<CoreError> validatorSearchField(SearchVisitorsRequest request) {//telephone
         List<CoreError> errors = new ArrayList<>();
         if (isEmpty(request.getNameVisitors()) && isEmpty(request.getSurnameVisitors())) {
             errors.add(new CoreError("name", "can not be empty!"));
@@ -70,8 +70,7 @@ public class SearchVisitorsRequestValidator {
                 : Optional.empty();
     }
 
-    /////
-    private Optional<CoreError> validatePageNumber(Paging paging) {
+    private Optional<CoreError> validatePageNumber(Paging paging) {//paging
         return (paging.getPageNumber() != null
                 && paging.getPageNumber() <= 0)
                 ? Optional.of(new CoreError("pageNumber", "must be greater then 0!"))

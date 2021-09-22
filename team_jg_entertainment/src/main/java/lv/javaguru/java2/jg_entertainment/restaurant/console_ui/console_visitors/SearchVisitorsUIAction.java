@@ -38,7 +38,7 @@ public class SearchVisitorsUIAction implements RestaurantUIAction {
 
         Paging paging = new Paging(pageNumber, pageSize);
 
-        SearchVisitorsRequest request = new SearchVisitorsRequest(name, surname, ordering, paging);
+        SearchVisitorsRequest request = new SearchVisitorsRequest(name, surname, ordering, paging);//+telephone or id
         SearchVisitorsResponse response = searchVisitorsService.execute(request);
 
         if (response.hasError()) {

@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class ApplicationContext {
 
-    private Map<Class, Object> beans = new HashMap<>();
+    private final Map<Class, Object> beans = new HashMap<>();
 
     public ApplicationContext() {
         beans.put(DatabaseVisitors.class, new ImplDatabaseVisitors());//visitors
