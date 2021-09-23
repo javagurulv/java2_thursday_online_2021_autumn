@@ -34,5 +34,4 @@ public class AddMenuValidator {
                 ? Optional.of(new CoreError("price", "Must not be empty!"))
                 : Optional.empty();
     }
-
-    }
+}

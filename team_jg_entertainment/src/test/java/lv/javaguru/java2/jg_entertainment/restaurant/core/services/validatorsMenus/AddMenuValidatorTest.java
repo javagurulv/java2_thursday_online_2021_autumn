@@ -2,7 +2,6 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsMe
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.AddMenuRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.CoreError;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
@@ -38,13 +37,23 @@ class AddMenuValidatorTest {
         assertEquals(errorList.get(0).getMessage(), "Must not be empty!");
     }
 
-   /* @Test
+   @Test
     public void shouldReturnPriceError() {
-        AddMenuRequest request = new AddMenuRequest("title", "description", null);
+        AddMenuRequest request = new AddMenuRequest("title", "description", 0.00);
         List<CoreError> errorList = menuValidator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "price");
         assertEquals(errorList.get(0).getMessage(), "Must not be empty!");
-    }*/
+    }
 
+    @Test
+    public void shouldReturnTitleAndAuthorErrors() {
+        AddMenuRequest request = new AddMenuRequest("", "", 1.00);
+        List<CoreError> errorList = menuValidator.validate(request);
+        assertEquals(errorList.size(), 2);
+        assertEquals(errorList.get(0).getField(), "title");
+        assertEquals(errorList.get(0).getMessage(), "Must not be empty!");
+        assertEquals(errorList.get(1).getField(), "description");
+        assertEquals(errorList.get(1).getMessage(), "Must not be empty!");
+    }
 }
