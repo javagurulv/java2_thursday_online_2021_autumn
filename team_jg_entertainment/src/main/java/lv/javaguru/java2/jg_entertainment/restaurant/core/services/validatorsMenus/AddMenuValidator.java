@@ -30,7 +30,7 @@ public class AddMenuValidator {
     }
 
         private Optional<CoreError> validatePrice(AddMenuRequest request) {
-        return (request.getPrice() == 0)
+        return (request.getPrice() == 0.00)
                 ? Optional.of(new CoreError("price", "Must not be empty!"))
                 : Optional.empty();
     }
