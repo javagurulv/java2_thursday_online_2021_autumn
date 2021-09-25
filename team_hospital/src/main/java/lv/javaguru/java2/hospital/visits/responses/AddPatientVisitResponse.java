@@ -4,10 +4,10 @@ import lv.javaguru.java2.hospital.domain.PatientVisit;
 
 import java.util.List;
 
-public class PatientVisitResponse extends CoreResponse {
+public class AddPatientVisitResponse extends CoreResponse {
     private PatientVisit patientVisit;
 
-    public PatientVisitResponse(List<CoreError> errors, PatientVisit patientVisit) {
+    public AddPatientVisitResponse(List<CoreError> errors, PatientVisit patientVisit) {
         super(errors);
         this.patientVisit = patientVisit;
     }
