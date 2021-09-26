@@ -26,11 +26,11 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVis
 import java.util.HashMap;
 import java.util.Map;
 
-public class ApplicationContext {
+public class ApplicationContextRestaurant {
 
     private final Map<Class, Object> beans = new HashMap<>();
 
-    public ApplicationContext() {
+    public ApplicationContextRestaurant() {
         beans.put(DatabaseVisitors.class, new ImplDatabaseVisitors());//visitors
         beans.put(DatabaseMenu.class, new ImplDatabaseMenu());//menu
         beans.put(TableDatabase.class, new ImplDatabaseTable());//table

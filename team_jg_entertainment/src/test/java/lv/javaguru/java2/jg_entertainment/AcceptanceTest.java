@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AcceptanceTest {
 
-    private ApplicationContext appContext = new ApplicationContext();
+    private ApplicationContextRestaurant appContext = new ApplicationContextRestaurant();
 
     @Test
     public void shouldReturnCorrectVisitorList() {
@@ -39,8 +39,6 @@ class AcceptanceTest {
         ResponseDeleteVisitors response = getDeleteVisitorService().execute(new RequestDeleteVisitor(2L, "nameX"));
         assertTrue(response.ifIdVisitorDelete());
     }
-
-
 
     private ServiceAddAllVisitors getAddVisitorService() {
         return appContext.getBean(ServiceAddAllVisitors.class);
