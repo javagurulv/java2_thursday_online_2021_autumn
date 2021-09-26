@@ -4,64 +4,67 @@ import lv.javaguru.java2.core.requests.Find.FindSpecialistRequest;
 import lv.javaguru.java2.core.requests.Find.Ordering;
 import lv.javaguru.java2.core.requests.Find.Paging;
 import lv.javaguru.java2.core.responce.CoreError;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
 public class FindSpecialistValidatorTest {
 
-    private FindSpecialistValidator validator = new FindSpecialistValidator();
+    private FindSpecialistsFieldValidator fieldValidator;
+    private FindSpecialistValidator validator;
+    private SpecialistOrderingValidator specialistOrderingValidator;
+    private SpecialistPagingValidator specialistPagingValidator;
+
+    @Before
+    public void init() {
+        fieldValidator = Mockito.mock(FindSpecialistsFieldValidator.class);
+        specialistOrderingValidator = Mockito.mock(SpecialistOrderingValidator.class);
+        specialistPagingValidator = Mockito.mock(SpecialistPagingValidator.class);
+
+        validator = new FindSpecialistValidator(fieldValidator, specialistOrderingValidator, specialistPagingValidator);
+    }
+
 
     @Test
-    public void shouldNotReturnErrorsWhenNameIsProvided() {
+    public void shouldNotReturnErrorsWhenFieldValidatorReturnNoErrors() {
         FindSpecialistRequest request = new FindSpecialistRequest("Name", null, null);
+        when(fieldValidator.validate(request)).thenReturn(List.of());
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
-    public void shouldNotReturnErrorsWhenSurnameIsProvided() {
-        FindSpecialistRequest request = new FindSpecialistRequest(null, "Surname", null);
+    public void shouldReturnErrorsWhenFieldValidatorReturnErrors() {
+        FindSpecialistRequest request = new FindSpecialistRequest(null, "Surname", "Profession");
+        CoreError error = new CoreError("Name", "Must not be empty!");
+        when(fieldValidator.validate(request)).thenReturn(List.of(error));
         List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 0);
-    }
-
-    @Test
-    public void shouldNotReturnErrorsWhenNameAndSurnameAndProfessionIsProvided() {
-        FindSpecialistRequest request = new FindSpecialistRequest("Name", "Surname", "Profession");
-        List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 0);
-    }
-
-    @Test
-    public void shouldReturnErrorWhenSearchFieldsAreEmpty() {
-        FindSpecialistRequest request = new FindSpecialistRequest(null, null, null);
-        List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 3);
+        assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Name");
         assertEquals(errors.get(0).getMessage(), "Must not be empty!");
-        assertEquals(errors.get(1).getField(), "Surname");
-        assertEquals(errors.get(1).getMessage(), "Must not be empty!");
-        assertEquals(errors.get(2).getField(), "Profession");
-        assertEquals(errors.get(2).getMessage(), "Must not be empty!");
     }
 
     @Test
-    public void shouldReturnErrorWhenOrderDirectionAreEmpty() {
-        Ordering ordering = new Ordering("Surname", null);
+    public void shouldNotReturnErrorsWhenOrderingValidatorReturnNoErrors() {
+        Ordering ordering = new Ordering("Name", "ASC");
         FindSpecialistRequest request = new FindSpecialistRequest("Name", "Surname", "Profession", ordering);
+        when(specialistOrderingValidator.validate(ordering)).thenReturn(List.of());
         List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "orderDirection");
-        assertEquals(errors.get(0).getMessage(), "Must not be empty!");
+        assertEquals(errors.size(), 0);
     }
 
     @Test
-    public void shouldReturnErrorWhenOrderByAreEmpty() {
+    public void shouldReturnErrorsWhenOrderingValidatorReturnErrors() {
         Ordering ordering = new Ordering(null, "ASCENDING");
         FindSpecialistRequest request = new FindSpecialistRequest("Name", "Surname", "Profession", ordering);
+        CoreError error = new CoreError("orderBy", "Must not be empty!");
+        when(specialistOrderingValidator.validate(ordering)).thenReturn(List.of(error));
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderBy");
@@ -69,49 +72,27 @@ public class FindSpecialistValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenOrderByContainNotValidValue() {
-        Ordering ordering = new Ordering("notValidValue", "ASCENDING");
-        FindSpecialistRequest request = new FindSpecialistRequest("Name", "Surname", "Profession", ordering);
-        List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "orderBy");
-        assertEquals(errors.get(0).getMessage(), "Must contain 'Name' or 'Surname' or 'Profession' only!");
+    public void shouldNotInvokeOrderingValidatorWhenNoOrderingObjectPresentInRequest() {
+        FindSpecialistRequest request = new FindSpecialistRequest("Name", "Surname", "Profession");
+        validator.validate(request);
+        verifyNoMoreInteractions(specialistOrderingValidator);
     }
 
     @Test
-    public void shouldReturnErrorWhenOrderDirectionContainNotValidValue() {
-        Ordering ordering = new Ordering("Surname", "notValidValue");
-        FindSpecialistRequest request = new FindSpecialistRequest("Name", "Surname", "Profession", ordering);
-        List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "orderDirection");
-        assertEquals(errors.get(0).getMessage(), "Must contain 'ASCENDING' or 'DESCENDING' only!");
-    }
-
-    @Test
-    public void shouldReturnErrorWhenPageNumberContainNotValidValue() {
-        Paging paging = new Paging(0, 1);
+    public void shouldNotReturnErrorsWhenPagingValidatorReturnNoErrors() {
+        Paging paging = new Paging(10, 10);
         FindSpecialistRequest request = new FindSpecialistRequest("Name", "Surname", "Profession", paging);
+        when(specialistPagingValidator.validate(paging)).thenReturn(List.of());
         List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "pageNumber");
-        assertEquals(errors.get(0).getMessage(), "Must be greater then 0!");
+        assertEquals(errors.size(), 0);
     }
 
     @Test
-    public void shouldReturnErrorWhenPageSizeContainNotValidValue() {
-        Paging paging = new Paging(1, 0);
+    public void shouldReturnErrorsWhenPagingValidatorReturnErrors() {
+        Paging paging = new Paging(null, 10);
         FindSpecialistRequest request = new FindSpecialistRequest("Name", "Surname", "Profession", paging);
-        List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "pageSize");
-        assertEquals(errors.get(0).getMessage(), "Must be greater then 0!");
-    }
-
-    @Test
-    public void shouldReturnErrorWhenPageNumberAreEmpty() {
-        Paging paging = new Paging(null, 1);
-        FindSpecialistRequest request = new FindSpecialistRequest("Name", "Surname", "Profession", paging);
+        CoreError error = new CoreError("pageNumber", "Must not be empty!");
+        when(specialistPagingValidator.validate(paging)).thenReturn(List.of(error));
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "pageNumber");
@@ -119,13 +100,10 @@ public class FindSpecialistValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenPageSizeAreEmpty() {
-        Paging paging = new Paging(1, null);
-        FindSpecialistRequest request = new FindSpecialistRequest("Name", "Surname", "Profession", paging);
-        List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "pageSize");
-        assertEquals(errors.get(0).getMessage(), "Must not be empty!");
+    public void shouldNotInvokePagingValidatorWhenNoPagingObjectPresentInRequest() {
+        FindSpecialistRequest request = new FindSpecialistRequest("Name", "Surname", "Profession");
+        validator.validate(request);
+        verifyNoMoreInteractions(specialistPagingValidator);
     }
 
 }
