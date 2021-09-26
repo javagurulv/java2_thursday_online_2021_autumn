@@ -14,7 +14,7 @@ public class AddPatientUIAction implements PatientUIActions {
 
     public void execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter patient's name, surname and personal code: ");
+        System.out.println("Please enter patient name, surname and personal code: ");
         String[] patientInfo = scanner.nextLine().split(" ");
         AddPatientRequest request = new AddPatientRequest(patientInfo[0], patientInfo[1], patientInfo[2]);
         AddPatientResponse response = addPatient.execute(request);

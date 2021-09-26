@@ -15,7 +15,7 @@ public class EditPatientUIAction implements PatientUIActions {
 
     public void execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Please enter patient's ID: ");
+        System.out.print("Please enter patient ID: ");
         String id = scanner.nextLine();
         System.out.println("What information would you like to edit? ");
         System.out.println("1. Name");

@@ -35,7 +35,9 @@ public class ApplicationContext {
         beans.put(RemoveClientValidator.class, new RemoveClientValidator());
         beans.put(RemoveSpecialistValidator.class, new RemoveSpecialistValidator());
         beans.put(FindClientsRequestValidator.class, new FindClientsRequestValidator());
-        beans.put(FindSpecialistValidator.class, new FindSpecialistValidator());
+        beans.put(FindSpecialistValidator.class, new FindSpecialistValidator(getBean(FindSpecialistsFieldValidator.class),
+                                                                             getBean(SpecialistOrderingValidator.class),
+                                                                             getBean(SpecialistPagingValidator.class)));
 
 
         beans.put(AddClientService.class, new AddClientService(getBean(Database.class), getBean(AddClientValidator.class)));

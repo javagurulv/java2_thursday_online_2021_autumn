@@ -18,11 +18,11 @@ public class SearchPatientsUIAction implements PatientUIActions {
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter patient`s name: ");
+        System.out.println("Enter patient name: ");
         String name = scanner.nextLine();
-        System.out.println("Enter patient`s surname: ");
+        System.out.println("Enter patient surname: ");
         String surname = scanner.nextLine();
-        System.out.println("Enter patient`s personal code: ");
+        System.out.println("Enter patient personal code: ");
         String personalCode = scanner.nextLine();
 
         Ordering ordering = getOrdering(scanner);

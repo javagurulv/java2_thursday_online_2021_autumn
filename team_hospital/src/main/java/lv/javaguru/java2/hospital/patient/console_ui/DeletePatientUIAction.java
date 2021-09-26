@@ -15,7 +15,7 @@ public class DeletePatientUIAction implements PatientUIActions {
 
     public void execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please, enter patient's ID: ");
+        System.out.println("Please, enter patient ID: ");
         DeletePatientRequest request = new DeletePatientRequest(scanner.nextLine());
         DeletePatientResponse response = deletePatient.execute(request);
         if (response.hasErrors()) {

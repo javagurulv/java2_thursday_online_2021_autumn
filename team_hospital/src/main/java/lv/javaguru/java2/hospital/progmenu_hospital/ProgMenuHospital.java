@@ -1,36 +1,37 @@
 package lv.javaguru.java2.hospital.progmenu_hospital;
 
-import lv.javaguru.java2.hospital.PatientApplicationContext;
+import lv.javaguru.java2.hospital.DoctorApplicationContext;
 import lv.javaguru.java2.hospital.InputNumChecker;
-import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
+import lv.javaguru.java2.hospital.PatientApplicationContext;
+import lv.javaguru.java2.hospital.database.DoctorDatabase;
 import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.database.VisitDatabaseImpl;
 import lv.javaguru.java2.hospital.doctor.console_ui.*;
-import lv.javaguru.java2.hospital.doctor.core.services.*;
-import lv.javaguru.java2.hospital.doctor.core.services.validators.*;
 import lv.javaguru.java2.hospital.patient.console_ui.*;
-import lv.javaguru.java2.hospital.visits.console_ui.PatientVisitUIAction;
-import lv.javaguru.java2.hospital.visits.services.PatientsVisitService;
-import lv.javaguru.java2.hospital.visits.services.validators.PatientVisitValidator;
+import lv.javaguru.java2.hospital.visits.console_ui.AddPatientVisitUIAction;
+import lv.javaguru.java2.hospital.visits.console_ui.DeletePatientVisitUIAction;
+import lv.javaguru.java2.hospital.visits.services.AddPatientsVisitService;
+import lv.javaguru.java2.hospital.visits.services.DeletePatientVisitService;
+import lv.javaguru.java2.hospital.visits.services.validators.AddPatientVisitValidator;
+import lv.javaguru.java2.hospital.visits.services.validators.DeletePatientVisitValidator;
 
 public class ProgMenuHospital {
 
     private static final PatientApplicationContext patientApplicationContext = new PatientApplicationContext();
-    private static final DoctorDatabaseImpl doctorDatabase = new DoctorDatabaseImpl();
+    private static final DoctorApplicationContext doctorApplicationContext = new DoctorApplicationContext();
+
     private static final InputNumChecker inputNumChecker = new InputNumChecker();
-    private static final PatientVisitUIAction patientVisit =
-            new PatientVisitUIAction(new PatientsVisitService
-                    (patientApplicationContext.getBean(PatientDatabase.class), doctorDatabase,
-                            new VisitDatabaseImpl(), new PatientVisitValidator()));
+    private static final AddPatientVisitUIAction addPatientVisit =
+            new AddPatientVisitUIAction(new AddPatientsVisitService
+                    (patientApplicationContext.getBean(PatientDatabase.class),
+                            doctorApplicationContext.getBean(DoctorDatabase.class),
+                            new VisitDatabaseImpl(),
+                            new AddPatientVisitValidator(patientApplicationContext.getBean(PatientDatabase.class),
+                                    doctorApplicationContext.getBean(DoctorDatabase.class))));
 
-    private static final DoctorUIActions[] doctorUIActions = {
-            new AddDoctorUIAction(new AddDoctorService(doctorDatabase, new AddDoctorRequestValidator())),
-            new ShowAllDoctorsUIAction(new ShowAllDoctorsService(doctorDatabase)),
-            new DeleteDoctorUIAction(new DeleteDoctorService(doctorDatabase, new DeleteDoctorRequestValidator()), new DoctorExistsService(doctorDatabase)),
-            new EditDoctorUIAction(new EditDoctorService(doctorDatabase, new EditDoctorRequestValidator()), new DoctorExistsService(doctorDatabase)),
-            new SearchDoctorsUIAction(new SearchDoctorsService(doctorDatabase,
-                    new SearchDoctorsRequestValidator(new SearchDoctorsRequestFieldValidator(), new OrderingValidator(), new PagingValidator())))};
-
+    private static final DeletePatientVisitUIAction deletePatientVisitUIAction =
+            new DeletePatientVisitUIAction(
+                    new DeletePatientVisitService(new VisitDatabaseImpl(), new DeletePatientVisitValidator()));
 
     //Menu
     public static void action() {
@@ -41,7 +42,7 @@ public class ProgMenuHospital {
             switch (userInput) {
                 case 1 -> patientMenu();
                 case 2 -> doctorMenu();
-                case 3 -> patientVisit.execute();
+                case 3 -> patientVisitMenu();
                 case 4 -> System.exit(0);
             }
             System.out.println();
@@ -57,7 +58,7 @@ public class ProgMenuHospital {
         System.out.println("Program menu: ");
         System.out.println("Press 1 to see patient actions.");
         System.out.println("Press 2 to see doctor actions.");
-        System.out.println("Press 3 to make a visit.");
+        System.out.println("Press 3 to see patient visit actions.");
         System.out.println("Press 4 for Exit.");
 
         System.out.println();
@@ -137,12 +138,55 @@ public class ProgMenuHospital {
 
     private static void doctorUserActions(int num) {
         switch (num) {
-            case 1 -> doctorUIActions[0].execute();
-            case 2 -> doctorUIActions[1].execute();
-            case 3 -> doctorUIActions[2].execute();
-            case 4 -> doctorUIActions[3].execute();
-            case 5 -> doctorUIActions[4].execute();
-            case 6 -> programMenu();
+            case 1 -> {
+                AddDoctorUIAction uiAction = doctorApplicationContext.getBean(AddDoctorUIAction.class);
+                uiAction.execute();
+            }
+            case 2 -> {
+                ShowAllDoctorsUIAction uiAction = doctorApplicationContext.getBean(ShowAllDoctorsUIAction.class);
+                uiAction.execute();
+            }
+            case 3 -> {
+                DeleteDoctorUIAction uiAction = doctorApplicationContext.getBean(DeleteDoctorUIAction.class);
+                uiAction.execute();
+            }
+            case 4 -> {
+                EditDoctorUIAction uiAction = doctorApplicationContext.getBean(EditDoctorUIAction.class);
+                uiAction.execute();
+            }
+            case 5 -> {
+                SearchDoctorsUIAction uiAction = doctorApplicationContext.getBean(SearchDoctorsUIAction.class);
+                uiAction.execute();
+            }
+            case 6 -> {
+                ExitUIAction uiAction = doctorApplicationContext.getBean(ExitUIAction.class);
+                uiAction.execute();
+            }
+        }
+    }
+
+    private static void patientVisitMenu() {
+        int userInput;
+        do {
+            userInput = menuPatientVisit();
+        } while (userInput != 3);
+    }
+
+    private static int menuPatientVisit() {
+        int userInput;
+        System.out.println("1. Add a patient visit.");
+        System.out.println("2. Delete patient visit.");
+        System.out.println("3. Exit.");
+        userInput = inputNumChecker.execute(1, 3);
+        patientVisitActions(userInput);
+        System.out.println();
+        return userInput;
+    }
+
+    private static void patientVisitActions(int num) {
+        switch (num) {
+            case 1 -> addPatientVisit.execute();
+            case 2 -> deletePatientVisitUIAction.execute();
         }
     }
 }
