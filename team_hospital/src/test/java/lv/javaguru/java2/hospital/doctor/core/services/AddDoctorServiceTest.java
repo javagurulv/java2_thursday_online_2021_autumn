@@ -5,7 +5,7 @@ import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.AddDoctorResponse;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.doctor.core.services.validators.AddDoctorRequestValidator;
-import lv.javaguru.java2.hospital.matchers.DoctorMatcher;
+import lv.javaguru.java2.hospital.doctor.matchers.DoctorMatcher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
