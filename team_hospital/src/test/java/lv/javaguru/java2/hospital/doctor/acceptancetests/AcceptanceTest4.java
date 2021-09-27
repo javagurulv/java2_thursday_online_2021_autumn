@@ -11,10 +11,10 @@ import lv.javaguru.java2.hospital.doctor.core.services.AddDoctorService;
 import lv.javaguru.java2.hospital.doctor.core.services.EditDoctorService;
 import lv.javaguru.java2.hospital.doctor.core.services.ShowAllDoctorsService;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AcceptanceTest4 {
 
@@ -30,7 +30,7 @@ public class AcceptanceTest4 {
         EditDoctorRequest request2 = new EditDoctorRequest(doctorId, 1, "Name1");
         EditDoctorResponse response2 = getEditDoctorService().execute(request2);
 
-        assertEquals(response2.isDoctorEdited(), true);
+        assertTrue(response2.isDoctorEdited());
 
         ShowAllDoctorsResponse response3 = getShowAllDoctorsService().execute(new ShowAllDoctorsRequest());
 
