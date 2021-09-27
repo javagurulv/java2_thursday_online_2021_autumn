@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AcceptanceTest3 {
 
-    private DoctorApplicationContext appContest = new DoctorApplicationContext();
+   /* private DoctorApplicationContext appContest = new DoctorApplicationContext();
 
     @Test
     public void shouldDeleteCorrectDoctor() {
@@ -47,5 +47,5 @@ public class AcceptanceTest3 {
 
     private DeleteDoctorService getDeleteDoctorService() {
         return appContest.getBean(DeleteDoctorService.class);
-    }
+    }*/
 }

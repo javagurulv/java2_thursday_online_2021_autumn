@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AcceptanceTest4 {
-
+/*
     private DoctorApplicationContext appContest = new DoctorApplicationContext();
 
     @Test
@@ -35,7 +35,7 @@ public class AcceptanceTest4 {
         assertEquals(response2.getDoctors().get(0).getSpeciality(), "Speciality1");
     }
 
-    @Test
+    /*@Test
     public void shouldEditDoctorSurname() {
         AddDoctorRequest request1 = new AddDoctorRequest("Name1", "Surname", "Speciality1");
         getAddDoctorService().execute(request1);
@@ -51,9 +51,9 @@ public class AcceptanceTest4 {
         assertEquals(response2.getDoctors().get(0).getName(), "Name1");
         assertEquals(response2.getDoctors().get(0).getSurname(), "Surname1");
         assertEquals(response2.getDoctors().get(0).getSpeciality(), "Speciality1");
-    }
+    }*/
 
-    @Test
+   /* @Test
     public void shouldEditDoctorSpeciality() {
         AddDoctorRequest request1 = new AddDoctorRequest("Name1", "Surname1", "Speciality");
         getAddDoctorService().execute(request1);
@@ -83,4 +83,5 @@ public class AcceptanceTest4 {
     private EditDoctorService getEditDoctorService() {
         return appContest.getBean(EditDoctorService.class);
     }
+    */
 }
