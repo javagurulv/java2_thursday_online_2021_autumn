@@ -1,11 +1,11 @@
-package lv.javaguru.java2.hospital.visits.services.validators;
+package lv.javaguru.java2.hospital.visits.core.services.validators;
 
 import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
-import lv.javaguru.java2.hospital.visits.request.AddPatientVisitRequest;
-import lv.javaguru.java2.hospital.visits.responses.CoreError;
+import lv.javaguru.java2.hospital.visits.core.request.AddPatientVisitRequest;
+import lv.javaguru.java2.hospital.visits.core.responses.CoreError;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.visits.responses;
+package lv.javaguru.java2.hospital.visits.core.responses;
 
 import java.util.List;
 

@@ -13,7 +13,7 @@ public class VisitDatabaseImpl implements VisitsDatabase {
         patientVisits.add(patientVisit);
     }
 
-    public List<PatientVisit> getPatientVisits() {
+    public List<PatientVisit> showAllPatientVisits() {
         return patientVisits;
     }
 

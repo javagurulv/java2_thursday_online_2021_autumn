@@ -10,10 +10,11 @@ import lv.javaguru.java2.hospital.doctor.core.services.ShowAllDoctorsService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AcceptanceTest3 {
-
-   /* private DoctorApplicationContext appContest = new DoctorApplicationContext();
+/*
+   private DoctorApplicationContext appContest = new DoctorApplicationContext();
 
     @Test
     public void shouldDeleteCorrectDoctor() {
@@ -26,7 +27,7 @@ public class AcceptanceTest3 {
         DeleteDoctorRequest request3 = new DeleteDoctorRequest("1");
         DeleteDoctorResponse response1 = getDeleteDoctorService().execute(request3);
 
-        assertEquals(response1.isDoctorDeleted(), true);
+        assertTrue(response1.isDoctorDeleted());
 
         ShowAllDoctorsResponse response2 = getShowAllDoctorsService().execute(new ShowAllDoctorsRequest());
 

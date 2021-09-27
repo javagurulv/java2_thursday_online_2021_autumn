@@ -1,9 +1,9 @@
-package lv.javaguru.java2.hospital.visits.responses;
+package lv.javaguru.java2.hospital.visits.core.responses;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CoreResponse {
+public abstract class CoreResponse {
     private List<CoreError> errors = new ArrayList<>();
 
     public CoreResponse() {

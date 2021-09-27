@@ -1,10 +1,10 @@
-package lv.javaguru.java2.hospital.visits.services;
+package lv.javaguru.java2.hospital.visits.core.services;
 
 import lv.javaguru.java2.hospital.database.VisitDatabaseImpl;
-import lv.javaguru.java2.hospital.visits.request.DeletePatientVisitRequest;
-import lv.javaguru.java2.hospital.visits.responses.CoreError;
-import lv.javaguru.java2.hospital.visits.responses.DeletePatientVisitResponse;
-import lv.javaguru.java2.hospital.visits.services.validators.DeletePatientVisitValidator;
+import lv.javaguru.java2.hospital.visits.core.request.DeletePatientVisitRequest;
+import lv.javaguru.java2.hospital.visits.core.responses.CoreError;
+import lv.javaguru.java2.hospital.visits.core.responses.DeletePatientVisitResponse;
+import lv.javaguru.java2.hospital.visits.core.services.validators.DeletePatientVisitValidator;
 
 import java.util.List;
 
