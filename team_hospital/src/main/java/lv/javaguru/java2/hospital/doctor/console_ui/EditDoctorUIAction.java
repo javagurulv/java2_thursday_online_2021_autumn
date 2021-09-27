@@ -29,14 +29,6 @@ public class EditDoctorUIAction implements DoctorUIActions {
             System.out.println("The doctor with id " + id + " was not edited.");
         }
 
-        /*if (doctorExists.execute(id)) {
-            printEditMenu();
-            int userInput = getUserInput.getUserNumericInput("Enter edit menu number: ");
-            editAction("", id, userInput);
-        } else {
-            System.out.println("Can't find doctor with such an Id.");
-        }*/
-
     }
 
     private void printEditMenu() {
