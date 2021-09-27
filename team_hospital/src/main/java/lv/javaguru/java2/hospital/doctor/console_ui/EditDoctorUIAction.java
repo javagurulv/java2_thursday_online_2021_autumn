@@ -17,7 +17,7 @@ public class EditDoctorUIAction implements DoctorUIActions {
     @Override
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
-        String id = getUserInput.getUserStringInput("Please, enter the doctor's id: ");
+        Long id = getUserInput.getUserLongInput("Please, enter the doctor's id: ");
         printEditMenu();
         int userInput = getUserInput.getUserNumericInput("Enter edit menu number: ");
         String changes = getUserInput.getUserStringInput("Enter info for change: ");

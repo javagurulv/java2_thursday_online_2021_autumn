@@ -25,7 +25,7 @@ public class AcceptanceTest4 {
         AddDoctorRequest request1 = new AddDoctorRequest("Name", "Surname1", "Speciality1");
 		AddDoctorResponse response1 = getAddDoctorService().execute(request1);
 
-		String doctorId = "" + response1.getNewDoctor().getId();
+		Long doctorId = response1.getNewDoctor().getId();
 
         EditDoctorRequest request2 = new EditDoctorRequest(doctorId, 1, "Name1");
         EditDoctorResponse response2 = getEditDoctorService().execute(request2);
@@ -45,12 +45,12 @@ public class AcceptanceTest4 {
         AddDoctorRequest request1 = new AddDoctorRequest("Name1", "Surname", "Speciality1");
         AddDoctorResponse response1 = getAddDoctorService().execute(request1);
 
-		String doctorId = "" + response1.getNewDoctor().getId();
+		Long doctorId = response1.getNewDoctor().getId();
 
 		EditDoctorRequest request2 = new EditDoctorRequest(doctorId, 2, "Surname1");
         EditDoctorResponse response2 = getEditDoctorService().execute(request2);
 
-        assertEquals(response2.isDoctorEdited(), true);
+        assertTrue(response2.isDoctorEdited());
 
         ShowAllDoctorsResponse response3 = getShowAllDoctorsService().execute(new ShowAllDoctorsRequest());
 
@@ -65,12 +65,12 @@ public class AcceptanceTest4 {
         AddDoctorRequest request1 = new AddDoctorRequest("Name1", "Surname1", "Speciality");
         AddDoctorResponse response1 = getAddDoctorService().execute(request1);
 
-	   String doctorId = "" + response1.getNewDoctor().getId();
+	   Long doctorId = response1.getNewDoctor().getId();
 
 	   EditDoctorRequest request2 = new EditDoctorRequest(doctorId, 3, "Speciality1");
         EditDoctorResponse response2 = getEditDoctorService().execute(request2);
 
-        assertEquals(response2.isDoctorEdited(), true);
+       assertTrue(response2.isDoctorEdited());
 
         ShowAllDoctorsResponse response3 = getShowAllDoctorsService().execute(new ShowAllDoctorsRequest());
 

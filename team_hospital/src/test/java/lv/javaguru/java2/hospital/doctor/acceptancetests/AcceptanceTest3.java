@@ -25,7 +25,7 @@ public class AcceptanceTest3 {
         AddDoctorRequest request2 = new AddDoctorRequest("Name2", "Surname2", "Speciality2");
         AddDoctorResponse response2 = getAddDoctorService().execute(request2);
 
-        String doctorId = "" + response1.getNewDoctor().getId();
+        Long doctorId = response1.getNewDoctor().getId();
 
         DeleteDoctorRequest request3 = new DeleteDoctorRequest(doctorId);
         DeleteDoctorResponse response3 = getDeleteDoctorService().execute(request3);

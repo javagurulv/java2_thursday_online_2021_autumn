@@ -60,7 +60,7 @@ public class SearchDoctorsService {
     private List<Doctor> search(SearchDoctorsRequest request) {
         List<Doctor> doctors = new ArrayList<>();
         if (request.isIdProvided()) {
-            doctors = database.findById(Long.parseLong(request.getId()));
+            doctors = database.findById(request.getId());
         } else if (request.isNameProvided() && request.isSurnameProvided() && request.isSpecialityProvided()) {
             doctors = database.findByNameAndSurnameAndSpeciality(request.getName(), request.getSurname(), request.getSpeciality());
         } else if (request.isNameProvided() && request.isSurnameProvided()) {

@@ -15,4 +15,10 @@ public class GetUserInput {
         System.out.println(s);
         return scanner.nextLine();
     }
+
+    public Long getUserLongInput(String s) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(s);
+        return scanner.nextLong();
+    }
 }
