@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.patient.core.services.patient_matcher;
+package lv.javaguru.java2.hospital.patient.matchers;
 
 import lv.javaguru.java2.hospital.domain.Patient;
 import org.mockito.ArgumentMatcher;

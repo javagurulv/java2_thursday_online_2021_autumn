@@ -59,8 +59,8 @@ public class SearchPatientsService {
 
     public List<Patient> returnPaging(List<Patient> patients, Paging paging) {
         if (paging != null) {
-            int pageNumber = Integer.parseInt(paging.getPageNumber());
-            int pageSize = Integer.parseInt(paging.getPageSize());
+            int pageNumber = paging.getPageNumber();
+            int pageSize = paging.getPageSize();
             int skip = (pageNumber - 1) * pageSize;
             return patients.stream()
                     .skip(skip)

@@ -23,7 +23,7 @@ public class FindPatientByIdService {
             return new FindPatientByIDResponse(errors);
         } else {
             return new FindPatientByIDResponse(request.getIdRequest(),
-                    patientDatabase.findById(Long.parseLong(request.getIdRequest())));
+                    patientDatabase.findById(request.getIdRequest()));
         }
     }
 }

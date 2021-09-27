@@ -17,14 +17,14 @@ class EditPatientValidatorTest {
     @Test
     public void shouldReturnEmptyList(){
         database.add(new Patient("name", "surname", "1234"));
-        EditPatientRequest request = new EditPatientRequest("1", "1", "Name");
+        EditPatientRequest request = new EditPatientRequest(1L, 1, "Name");
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnPatientIDError(){
-        EditPatientRequest request = new EditPatientRequest("", "1", "Name");
+        EditPatientRequest request = new EditPatientRequest(null, 1, "Name");
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "ID");
@@ -34,7 +34,7 @@ class EditPatientValidatorTest {
     @Test
     public void shouldReturnUserInputError(){
         database.add(new Patient("name", "surname", "1234"));
-        EditPatientRequest request = new EditPatientRequest("1", "","Name");
+        EditPatientRequest request = new EditPatientRequest(1L, null,"Name");
         List<CoreError> errorsList = validator.validate(request);
         assertEquals(errorsList.size(), 1);
         assertEquals(errorsList.get(0).getField(), "User choice");
@@ -44,7 +44,7 @@ class EditPatientValidatorTest {
     @Test
     public void shouldReturnChangesError(){
         database.add(new Patient("name", "surname", "1234"));
-        EditPatientRequest request = new EditPatientRequest("1", "1", "");
+        EditPatientRequest request = new EditPatientRequest(1L, 1, "");
         List<CoreError> errorsList = validator.validate(request);
         assertEquals(errorsList.size(), 1);
         assertEquals(errorsList.get(0).getField(), "Changes");
@@ -53,7 +53,7 @@ class EditPatientValidatorTest {
 
     @Test
     public void shouldReturn3Errors(){
-        EditPatientRequest request = new EditPatientRequest("","", "");
+        EditPatientRequest request = new EditPatientRequest(null,null, null);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 3);
         assertEquals(errorList.get(0).getField(), "ID");

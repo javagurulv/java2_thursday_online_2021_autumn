@@ -17,14 +17,14 @@ class FindPatientByIDValidatorTest {
     @Test
     public void shouldReturnEmptyList(){
         database.add(new Patient("name", "surname", "1234"));
-        FindPatientByIdRequest request = new FindPatientByIdRequest("1");
+        FindPatientByIdRequest request = new FindPatientByIdRequest(1L);
         List<CoreError> errorsList = validator.validate(request);
         assertTrue(errorsList.isEmpty());
     }
 
     @Test
     public void shouldReturnIDError(){
-        FindPatientByIdRequest request= new FindPatientByIdRequest("");
+        FindPatientByIdRequest request= new FindPatientByIdRequest(null);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "ID");

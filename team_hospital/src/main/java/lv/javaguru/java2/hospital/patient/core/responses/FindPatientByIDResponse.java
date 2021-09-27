@@ -6,19 +6,19 @@ import java.util.List;
 import java.util.Optional;
 
 public class FindPatientByIDResponse extends CoreResponse {
-    private String idResponse;
+    private Long idResponse;
     private Optional <Patient> patient;
 
     public FindPatientByIDResponse(List<CoreError> errors) {
         super(errors);
     }
 
-    public FindPatientByIDResponse(String idResponse, Optional<Patient> patient) {
+    public FindPatientByIDResponse(Long idResponse, Optional<Patient> patient) {
         this.idResponse = idResponse;
         this.patient = patient;
     }
 
-    public String getIdResponse() {
+    public Long getIdResponse() {
         return idResponse;
     }
 

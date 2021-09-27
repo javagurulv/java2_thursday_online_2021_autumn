@@ -1,19 +1,19 @@
 package lv.javaguru.java2.hospital.patient.core.requests;
 
 public class Paging {
-    private String pageNumber;
-    private String pageSize;
+    private Integer pageNumber;
+    private Integer pageSize;
 
-    public Paging(String pageNumber, String pageSize) {
+    public Paging(Integer pageNumber, Integer pageSize) {
         this.pageNumber = pageNumber;
         this.pageSize = pageSize;
     }
 
-    public String getPageNumber() {
+    public Integer getPageNumber() {
         return pageNumber;
     }
 
-    public String getPageSize() {
+    public Integer getPageSize() {
         return pageSize;
     }
 }

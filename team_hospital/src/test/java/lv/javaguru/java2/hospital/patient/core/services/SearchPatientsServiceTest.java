@@ -198,7 +198,7 @@ class SearchPatientsServiceTest {
 
     @Test
     public void shouldSearchByTitleWithPagingFirstPage() {
-        Paging paging = new Paging("1", "1");
+        Paging paging = new Paging(1, 1);
         SearchPatientsRequest request = new SearchPatientsRequest("name", null, null, paging);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
@@ -217,7 +217,7 @@ class SearchPatientsServiceTest {
 
     @Test
     public void shouldSearchByTitleWithPagingSecondPage() {
-        Paging paging = new Paging("2", "1");
+        Paging paging = new Paging(2, 1);
         SearchPatientsRequest request = new SearchPatientsRequest("name", null, null, paging);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 

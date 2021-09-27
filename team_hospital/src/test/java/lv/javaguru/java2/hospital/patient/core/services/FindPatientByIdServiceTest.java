@@ -36,7 +36,7 @@ class FindPatientByIdServiceTest {
 
     @Test
     public void shouldReturnPatient() {
-        FindPatientByIdRequest request = new FindPatientByIdRequest("1");
+        FindPatientByIdRequest request = new FindPatientByIdRequest(1L);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Patient> patients = new ArrayList<>();
@@ -50,7 +50,7 @@ class FindPatientByIdServiceTest {
 
     @Test
     public void shouldReturnOptionalEmpty() {
-        FindPatientByIdRequest request = new FindPatientByIdRequest("2");
+        FindPatientByIdRequest request = new FindPatientByIdRequest(2L);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Patient> patients = new ArrayList<>();

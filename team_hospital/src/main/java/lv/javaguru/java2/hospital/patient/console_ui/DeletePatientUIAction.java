@@ -4,8 +4,6 @@ import lv.javaguru.java2.hospital.patient.core.requests.DeletePatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.DeletePatientResponse;
 import lv.javaguru.java2.hospital.patient.core.services.DeletePatientService;
 
-import java.util.Scanner;
-
 public class DeletePatientUIAction implements PatientUIActions {
     private final DeletePatientService deletePatient;
 
@@ -14,9 +12,8 @@ public class DeletePatientUIAction implements PatientUIActions {
     }
 
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please, enter patient ID: ");
-        DeletePatientRequest request = new DeletePatientRequest(scanner.nextLine());
+        GetUserInput getUserInput = new GetUserInput();
+        DeletePatientRequest request = new DeletePatientRequest(getUserInput.getUserLongInput("Please, enter patient ID: "));
         DeletePatientResponse response = deletePatient.execute(request);
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError ->

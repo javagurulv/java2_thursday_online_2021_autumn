@@ -19,18 +19,11 @@ public class FindPatientByIDValidator {
     public List<CoreError> validate(FindPatientByIdRequest request) {
         List<CoreError> errors = new ArrayList<>();
         validateID(request).ifPresent(errors::add);
-        //validatePatientExists(request).ifPresent(errors::add);
         return errors;
     }
 
     private Optional<CoreError> validateID(FindPatientByIdRequest request) {
-        return (request.getIdRequest() == null || request.getIdRequest().isEmpty())
+        return (request.getIdRequest() == null)
                 ? Optional.of(new CoreError("ID", "Must not be empty!")) : Optional.empty();
-    }
-
-    private Optional<CoreError> validatePatientExists(FindPatientByIdRequest request) {
-        return (request.getIdRequest() == null || request.getIdRequest().isEmpty())
-                ? Optional.empty() : database.patientExists(Long.valueOf(request.getIdRequest()))
-                ? Optional.empty() : Optional.of(new CoreError("Patient", "does not exist."));
     }
 }

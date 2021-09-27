@@ -28,8 +28,8 @@ public class EditPatientService {
                     request.getUserInput(),
                     request.getChanges(),
                     database.editActions(
-                            Long.parseLong(request.getPatientID()),
-                            Integer.parseInt(request.getUserInput()),
+                            request.getPatientID(),
+                            request.getUserInput(),
                             request.getChanges()));
         }
     }
