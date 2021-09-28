@@ -11,5 +11,8 @@ public interface DatabaseMenu {
     boolean deleteByNr(Long number);
 
     List<Menu> getAllMenus();
+    List<Menu> findByTitle(String title);
+    List<Menu> findByDescription(String description);
+    List<Menu> findByTitleAndDescription(String title, String description);
 
 }
