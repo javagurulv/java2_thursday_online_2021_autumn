@@ -19,7 +19,6 @@ public class ImplDatabaseMenu implements DatabaseMenu {
         menus.add(menu);
     }
 
-
     @Override
     public boolean deleteByNr(Long number) {
         boolean isMenuDeleted = false;
@@ -32,7 +31,6 @@ public class ImplDatabaseMenu implements DatabaseMenu {
         }
         return isMenuDeleted;
     }
-
 
     @Override
     public List<Menu> getAllMenus() {
