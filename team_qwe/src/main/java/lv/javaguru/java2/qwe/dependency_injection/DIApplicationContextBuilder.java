@@ -9,9 +9,9 @@ public class DIApplicationContextBuilder {
     private DIComponentCreator componentsCreator = new DIComponentCreator();
     private DIDependencyResolver dependencyResolver = new DIDependencyResolver();
 
-    public ApplicationContext build() {
+    public ApplicationContext build(String packageName) {
         try {
-            List<Class<?>> allPackageClasses = classFinder.findClassesInsidePackage();
+            List<Class<?>> allPackageClasses = classFinder.findClassesInsidePackage(packageName);
             List<Class<?>> diComponents = componentFilter.filter(allPackageClasses);
 
             ApplicationContext applicationContext = new ApplicationContext();

@@ -24,7 +24,7 @@ import static lv.javaguru.java2.qwe.utils.UtilityMethods.importDataForTests;
 public class FilterStocksByMultipleParametersServiceTest {
 
     private final ApplicationContext appContext =
-            new DIApplicationContextBuilder().build();
+            new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
     @Mock
     private Database database = appContext.getBean(Database.class);
     private final FilterStocksByMultipleParametersService service =

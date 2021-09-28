@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AddBondValidatorTest {
 
     private final ApplicationContext appContext =
-            new DIApplicationContextBuilder().build();
+            new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
 
     private final Database database = appContext.getBean(Database.class);
     private final AddBondValidator validator = appContext.getBean(AddBondValidator.class);

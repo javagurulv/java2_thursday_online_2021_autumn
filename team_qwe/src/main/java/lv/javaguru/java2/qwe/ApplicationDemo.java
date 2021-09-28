@@ -15,7 +15,7 @@ import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 public class ApplicationDemo {
 
     private static final ApplicationContext applicationContext =
-            new DIApplicationContextBuilder().build();
+            new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
 
     public static ApplicationContext getApplicationContext() {
         return applicationContext;

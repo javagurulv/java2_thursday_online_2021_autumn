@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AddStockValidatorTest {
 
     private final ApplicationContext appContext =
-            new DIApplicationContextBuilder().build();
+            new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
 
     private final Database database = appContext.getBean(Database.class);
     private final AddStockValidator validator = appContext.getBean(AddStockValidator.class);

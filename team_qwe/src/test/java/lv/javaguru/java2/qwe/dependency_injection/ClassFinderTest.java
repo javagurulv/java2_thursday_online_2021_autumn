@@ -8,9 +8,9 @@ import java.util.List;
 public class ClassFinderTest {
 
     @Test
-    public void test() throws IOException {
+    public void test() throws IOException, ClassNotFoundException {
         ClassFinder classFinder = new ClassFinder();
-        List<Class<?>> classes = classFinder.findClassesInsidePackage();
+        List<Class<?>> classes = classFinder.findClassesInsidePackage("lv.javaguru.java2.qwe");
         classes.forEach(aClass -> System.out.println(aClass.getName()));
     }
 

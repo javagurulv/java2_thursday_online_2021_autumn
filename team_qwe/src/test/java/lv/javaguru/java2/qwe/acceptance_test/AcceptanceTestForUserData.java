@@ -32,7 +32,7 @@ public class AcceptanceTestForUserData {
     }
 
     private final ApplicationContext appContext =
-            new DIApplicationContextBuilder().build();
+            new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
 
     @Test
     public void addUserToUserDataTest() {

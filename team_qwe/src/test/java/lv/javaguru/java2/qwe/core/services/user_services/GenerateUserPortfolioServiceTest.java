@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class GenerateUserPortfolioServiceTest {
 
     private final ApplicationContext appContext =
-            new DIApplicationContextBuilder().build();
+            new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
     @Mock
     private Database database = appContext.getBean(Database.class);
     private final GenerateUserPortfolioService service =

@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AddUserValidatorTest {
 
     private final ApplicationContext appContext =
-            new DIApplicationContextBuilder().build();
+            new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
 
     private final AddUserValidator validator = appContext.getBean(AddUserValidator.class);
 
