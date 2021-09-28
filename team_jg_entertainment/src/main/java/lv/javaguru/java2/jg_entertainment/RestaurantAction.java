@@ -9,7 +9,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors
 
 public class RestaurantAction {
 
-    private static ApplicationContext applicationContext = new ApplicationContext();
+    private static ApplicationContextRestaurant applicationContext = new ApplicationContextRestaurant();
     private static CheckMenuNumberFromConsole checkNumber = new CheckMenuNumberFromConsole();
 
     public static void main(String[] args) {

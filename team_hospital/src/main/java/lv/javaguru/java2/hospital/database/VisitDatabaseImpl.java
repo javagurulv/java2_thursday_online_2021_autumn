@@ -5,7 +5,7 @@ import lv.javaguru.java2.hospital.domain.PatientVisit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VisitDatabaseImpl implements VisitsDatabase{
+public class VisitDatabaseImpl implements VisitsDatabase {
     private final List<PatientVisit> patientVisits = new ArrayList<>();
 
     @Override
@@ -13,7 +13,11 @@ public class VisitDatabaseImpl implements VisitsDatabase{
         patientVisits.add(patientVisit);
     }
 
-    public List<PatientVisit> getPatientVisits() {
+    public List<PatientVisit> showAllPatientVisits() {
         return patientVisits;
+    }
+
+    public boolean DeleteVisit(Long id) {
+        return patientVisits.removeIf(p -> p.getVisitID().equals(id));
     }
 }

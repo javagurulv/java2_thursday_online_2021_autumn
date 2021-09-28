@@ -4,6 +4,8 @@ import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddBondRequest;
 import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 
 import java.util.List;
 import java.util.Map;
@@ -14,13 +16,10 @@ import static java.util.Map.entry;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.isNotDouble;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.isNotInteger;
 
+@DIComponent
 public class AddBondValidator extends AddSecurityValidator {
 
-    private Database database;
-
-    public AddBondValidator(Database database) {
-        this.database = database;
-    }
+    @DIDependency private Database database;
 
     private final Map<Predicate<AddBondRequest>, CoreError> validator = Map.ofEntries(
             entry(request -> request.getName().length() < 3 || request.getName().length() > 100,

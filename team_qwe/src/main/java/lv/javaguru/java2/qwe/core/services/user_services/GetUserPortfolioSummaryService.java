@@ -7,6 +7,8 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.GetUserPortfolioSummary
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GetUserPortfolioSummaryResponse;
 import lv.javaguru.java2.qwe.core.services.validator.GetUserPortfolioSummaryValidator;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 
 import java.util.List;
 import java.util.Map;
@@ -16,15 +18,11 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.summingDouble;
 
+@DIComponent
 public class GetUserPortfolioSummaryService {
 
-    private final UserData userData;
-    private final GetUserPortfolioSummaryValidator validator;
-
-    public GetUserPortfolioSummaryService(UserData userData, GetUserPortfolioSummaryValidator validator) {
-        this.userData = userData;
-        this.validator = validator;
-    }
+    @DIDependency private UserData userData;
+    @DIDependency private GetUserPortfolioSummaryValidator validator;
 
     public UserData getUserData() {
         return userData;

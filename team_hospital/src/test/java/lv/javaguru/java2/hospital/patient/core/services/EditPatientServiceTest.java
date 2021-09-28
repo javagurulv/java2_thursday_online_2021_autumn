@@ -34,7 +34,7 @@ public class EditPatientServiceTest {
 
     @Test
     public void shouldChangePatientName() {
-        EditPatientRequest request = new EditPatientRequest("1", "1", "NewName");
+        EditPatientRequest request = new EditPatientRequest(1L, 1, "NewName");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Patient> patients = new ArrayList<>();
@@ -49,7 +49,7 @@ public class EditPatientServiceTest {
 
     @Test
     public void shouldChangePatientSurname() {
-        EditPatientRequest request = new EditPatientRequest("1", "2", "NewSurname");
+        EditPatientRequest request = new EditPatientRequest(1L, 2, "NewSurname");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Patient> patients = new ArrayList<>();
@@ -64,7 +64,7 @@ public class EditPatientServiceTest {
 
     @Test
     public void shouldChangePatientPersonalCode() {
-        EditPatientRequest request = new EditPatientRequest("1", "3", "New1234");
+        EditPatientRequest request = new EditPatientRequest(1L, 3, "New1234");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Patient> patients = new ArrayList<>();
@@ -79,7 +79,7 @@ public class EditPatientServiceTest {
 
     @Test
     public void shouldReturnFalse() {
-        EditPatientRequest request = new EditPatientRequest("1", "3", "New1234");
+        EditPatientRequest request = new EditPatientRequest(1L, 3, "New1234");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Patient> patients = new ArrayList<>();

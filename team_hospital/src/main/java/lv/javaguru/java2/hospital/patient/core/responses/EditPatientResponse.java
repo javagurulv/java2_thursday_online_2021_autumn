@@ -3,8 +3,8 @@ package lv.javaguru.java2.hospital.patient.core.responses;
 import java.util.List;
 
 public class EditPatientResponse extends CoreResponse {
-    private String patientID;
-    private String userInput;
+    private Long patientID;
+    private Integer userInput;
     private String changes;
     private boolean trueOrNot;
 
@@ -12,18 +12,18 @@ public class EditPatientResponse extends CoreResponse {
         super(errors);
     }
 
-    public EditPatientResponse(String patientID, String userInput, String changes, boolean trueOrNot) {
+    public EditPatientResponse(Long patientID, Integer userInput, String changes, boolean trueOrNot) {
         this.patientID = patientID;
         this.userInput = userInput;
         this.changes = changes;
         this.trueOrNot = trueOrNot;
     }
 
-    public String getPatientID() {
+    public Long getPatientID() {
         return patientID;
     }
 
-    public String getUserInput() {
+    public Integer getUserInput() {
         return userInput;
     }
 

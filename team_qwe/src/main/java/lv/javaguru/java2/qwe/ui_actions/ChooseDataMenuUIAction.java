@@ -1,10 +1,12 @@
 package lv.javaguru.java2.qwe.ui_actions;
 
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
 import lv.javaguru.java2.qwe.ui_actions.data_ui_actions.*;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
 import static lv.javaguru.java2.qwe.ApplicationDemo.getApplicationContext;
 
+@DIComponent
 public class ChooseDataMenuUIAction implements UIAction {
 
     @Override

@@ -18,7 +18,7 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
 
 
     @Override
-    public boolean deleteDoctorById(long id) {
+    public boolean deleteDoctorById(Long id) {
         boolean isDoctorDeleted = false;
         Optional<Doctor> doctorToDeleteOpt = doctorsList.stream()
                 .filter(doctor -> doctor.getId() == id)
@@ -36,7 +36,7 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
     }
 
     @Override
-    public boolean editDoctor(long doctorId, int userInput, String changes) {
+    public boolean editDoctor(Long doctorId, int userInput, String changes) {
         boolean isDoctorEdited = false;
         Optional<Doctor> doctorToEditOpt = doctorsList.stream()
                 .filter(doctor -> doctor.getId() == doctorId)
@@ -54,7 +54,7 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
     }
 
     @Override
-    public boolean doctorExists(long id) {
+    public boolean doctorExists(Long id) {
         for (Doctor doctor : doctorsList) {
             if (doctor.getId() == id) {
                 return true;
@@ -86,7 +86,7 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
     }
 
     @Override
-    public List<Doctor> findById(long id) {
+    public List<Doctor> findById(Long id) {
         return doctorsList.stream()
                 .filter(doctor -> doctor.getId() == id)
                 .collect(Collectors.toList());

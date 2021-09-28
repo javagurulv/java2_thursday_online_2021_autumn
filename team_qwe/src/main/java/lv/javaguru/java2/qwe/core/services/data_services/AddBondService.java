@@ -7,18 +7,16 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.AddBondResponse;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class AddBondService {
 
-    private final Database database;
-    private final AddBondValidator validator;
-
-    public AddBondService(Database database, AddBondValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @DIDependency private Database database;
+    @DIDependency private AddBondValidator validator;
 
     public AddBondResponse execute(CoreRequest request) {
         List<CoreError> errors = validator.validate(request);

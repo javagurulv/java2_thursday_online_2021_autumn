@@ -5,9 +5,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Pagi
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class SearchVisitorsRequestValidator {
 

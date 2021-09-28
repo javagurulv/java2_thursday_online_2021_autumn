@@ -25,12 +25,12 @@ public class EditPatientValidator {
     }
 
     private Optional<CoreError> validatePatientID(EditPatientRequest request) {
-        return (request.getPatientID() == null || request.getPatientID().isEmpty())
+        return (request.getPatientID() == null)
                 ? Optional.of(new CoreError("ID", "Must not be empty!")) : Optional.empty();
     }
 
     private Optional<CoreError> validateUserChoice(EditPatientRequest request) {
-        return (request.getUserInput() == null || request.getUserInput().isEmpty())
+        return (request.getUserInput() == null)
                 ? Optional.of(new CoreError("User choice", "Must not be empty!")) : Optional.empty();
     }
 
@@ -38,10 +38,4 @@ public class EditPatientValidator {
         return (request.getChanges() == null || request.getChanges().isEmpty())
                 ? Optional.of(new CoreError("Changes", "Must not be empty!")) : Optional.empty();
     }
-
-    private Optional<CoreError> validatePatientExists(EditPatientRequest request) {
-            return (request.getPatientID() == null || request.getPatientID().isEmpty())
-                    ? Optional.empty() : database.patientExists(Long.valueOf(request.getPatientID()))
-                    ? Optional.empty() : Optional.of(new CoreError("Patient", "does not exist."));
-        }
 }

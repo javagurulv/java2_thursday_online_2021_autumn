@@ -1,20 +1,22 @@
 package lv.javaguru.java2.qwe.core.database;
 
 import lv.javaguru.java2.qwe.*;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 
 import java.util.*;
 
 import static java.util.stream.Collectors.*;
 import static lv.javaguru.java2.qwe.Type.*;
 
+@DIComponent
 public class UserDataImpl implements UserData {
 
-    private final List<User> userList;
-    private final Database database;
+    private List<User> userList;
+    @DIDependency private Database database;
 
-    public UserDataImpl(Database database) {
+    public UserDataImpl() {
         this.userList = new ArrayList<>();
-        this.database = database;
         userList.add(new User("Alexander", 25, SUPER_RICH, 1_000_000));
         userList.add(new User("Tatyana", 32, UPPER_MIDDLE, 125_000));
         userList.add(new User("Vladimir", 78, LOWER_MIDDLE, 30_000));

@@ -1,6 +1,5 @@
 package lv.javaguru.java2.qwe.acceptance_test;
 
-import lv.javaguru.java2.qwe.ApplicationContextForTest;
 import lv.javaguru.java2.qwe.Bond;
 import lv.javaguru.java2.qwe.Stock;
 import lv.javaguru.java2.qwe.core.requests.data_requests.*;
@@ -9,6 +8,8 @@ import lv.javaguru.java2.qwe.core.responses.data_responses.FindSecurityByNameRes
 import lv.javaguru.java2.qwe.core.responses.data_responses.GetAllSecurityListResponse;
 import lv.javaguru.java2.qwe.core.responses.data_responses.RemoveSecurityResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.*;
+import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -16,7 +17,8 @@ import static java.util.List.*;
 
 public class AcceptanceTestForDatabase {
 
-    private final ApplicationContextForTest context = new ApplicationContextForTest();
+    private final ApplicationContext appContext =
+            new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
 
     @Test
     public void addSecuritiesToDatabaseTest() {
@@ -145,27 +147,27 @@ public class AcceptanceTestForDatabase {
     }
 
     private AddStockService getAddStockService() {
-        return context.getBean(AddStockService.class);
+        return appContext.getBean(AddStockService.class);
     }
 
     private AddBondService getAddBondService() {
-        return context.getBean(AddBondService.class);
+        return appContext.getBean(AddBondService.class);
     }
 
     private GetAllSecurityListService getAllSecurityListService() {
-        return context.getBean(GetAllSecurityListService.class);
+        return appContext.getBean(GetAllSecurityListService.class);
     }
 
     private RemoveSecurityService getRemoveSecurityService() {
-        return context.getBean(RemoveSecurityService.class);
+        return appContext.getBean(RemoveSecurityService.class);
     }
 
     private FindSecurityByNameService getFindSecurityByNameService() {
-        return context.getBean(FindSecurityByNameService.class);
+        return appContext.getBean(FindSecurityByNameService.class);
     }
 
     private FilterStocksByMultipleParametersService getFilterStocksByMultipleParametersService() {
-        return context.getBean(FilterStocksByMultipleParametersService.class);
+        return appContext.getBean(FilterStocksByMultipleParametersService.class);
     }
 
 }

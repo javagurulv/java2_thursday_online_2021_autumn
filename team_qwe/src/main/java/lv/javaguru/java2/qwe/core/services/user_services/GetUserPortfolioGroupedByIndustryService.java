@@ -6,18 +6,16 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.GetUserPortfolioGrouped
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GetUserPortfolioGroupedByIndustryResponse;
 import lv.javaguru.java2.qwe.core.services.validator.GetUserPortfolioGroupedByIndustryValidator;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 
 import java.util.*;
 
+@DIComponent
 public class GetUserPortfolioGroupedByIndustryService {
 
-    private final UserData userData;
-    private final GetUserPortfolioGroupedByIndustryValidator validator;
-
-    public GetUserPortfolioGroupedByIndustryService(UserData userData, GetUserPortfolioGroupedByIndustryValidator validator) {
-        this.userData = userData;
-        this.validator = validator;
-    }
+    @DIDependency private UserData userData;
+    @DIDependency private GetUserPortfolioGroupedByIndustryValidator validator;
 
     public UserData getUserData() {
         return userData;

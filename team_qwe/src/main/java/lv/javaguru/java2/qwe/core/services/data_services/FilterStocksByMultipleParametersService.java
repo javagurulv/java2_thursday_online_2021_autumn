@@ -6,19 +6,17 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.FilterStocksByMultipleP
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.data_responses.FilterStocksByMultipleParametersResponse;
 import lv.javaguru.java2.qwe.core.services.validator.FilterStocksByMultipleParametersValidator;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class FilterStocksByMultipleParametersService {
 
-    private final Database database;
-    private final FilterStocksByMultipleParametersValidator validator;
-
-    public FilterStocksByMultipleParametersService(Database database, FilterStocksByMultipleParametersValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @DIDependency private Database database;
+    @DIDependency private FilterStocksByMultipleParametersValidator validator;
 
     public Database getDatabase() {
         return database;

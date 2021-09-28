@@ -19,7 +19,6 @@ public class AddTableRequest {
 		return tableCapacity;
 	}
 
-	public double getPrice() {
-		return price;
+	public double getPrice() {return price;
 	}
 }

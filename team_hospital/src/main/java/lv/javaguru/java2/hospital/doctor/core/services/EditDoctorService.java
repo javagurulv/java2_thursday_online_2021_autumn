@@ -23,7 +23,7 @@ public class EditDoctorService {
             return new EditDoctorResponse(errors);
         }
 
-        boolean isDoctorEdited = database.editDoctor(Long.parseLong(request.getDoctorId()), request.getUserInput(), request.getChanges());
+        boolean isDoctorEdited = database.editDoctor(request.getDoctorId(), request.getUserInput(), request.getChanges());
         return new EditDoctorResponse(isDoctorEdited);
     }
 }

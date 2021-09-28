@@ -17,7 +17,7 @@ public class EditDoctorUIAction implements DoctorUIActions {
     @Override
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
-        String id = getUserInput.getUserStringInput("Please, enter the doctor's id: ");
+        Long id = getUserInput.getUserLongInput("Please, enter the doctor's id: ");
         printEditMenu();
         int userInput = getUserInput.getUserNumericInput("Enter edit menu number: ");
         String changes = getUserInput.getUserStringInput("Enter info for change: ");
@@ -28,14 +28,6 @@ public class EditDoctorUIAction implements DoctorUIActions {
         } else {
             System.out.println("The doctor with id " + id + " was not edited.");
         }
-
-        /*if (doctorExists.execute(id)) {
-            printEditMenu();
-            int userInput = getUserInput.getUserNumericInput("Enter edit menu number: ");
-            editAction("", id, userInput);
-        } else {
-            System.out.println("Can't find doctor with such an Id.");
-        }*/
 
     }
 

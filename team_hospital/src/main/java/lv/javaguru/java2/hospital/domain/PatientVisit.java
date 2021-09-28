@@ -29,6 +29,10 @@ public class PatientVisit {
 		return visitDate;
 	}
 
+	public Long getVisitID() {
+		return visitID;
+	}
+
 	@Override
 	public String toString() {
 		return "PatientVisit{" +

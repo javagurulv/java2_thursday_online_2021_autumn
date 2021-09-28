@@ -6,7 +6,6 @@ import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
 import lv.javaguru.java2.hospital.patient.core.services.SearchPatientsService;
 import java.util.Locale;
-import java.util.Scanner;
 
 public class SearchPatientsUIAction implements PatientUIActions {
     private final SearchPatientsService searchPatientsService;
@@ -17,16 +16,13 @@ public class SearchPatientsUIAction implements PatientUIActions {
 
     @Override
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter patient`s name: ");
-        String name = scanner.nextLine();
-        System.out.println("Enter patient`s surname: ");
-        String surname = scanner.nextLine();
-        System.out.println("Enter patient`s personal code: ");
-        String personalCode = scanner.nextLine();
+        GetUserInput getUserInput = new GetUserInput();
+        String name = getUserInput.getUserStringInput("Enter patient name: ");
+        String surname = getUserInput.getUserStringInput("Enter patient surname: ");
+        String personalCode = getUserInput.getUserStringInput("Enter patient personal code: ");
 
-        Ordering ordering = getOrdering(scanner);
-        Paging paging = getPaging(scanner);
+        Ordering ordering = getOrdering();
+        Paging paging = getPaging();
 
         SearchPatientsRequest request =
                 new SearchPatientsRequest(name, surname, personalCode, ordering, paging);
@@ -41,35 +37,31 @@ public class SearchPatientsUIAction implements PatientUIActions {
         }
     }
 
-    private Ordering getOrdering(Scanner scanner) {
-        System.out.println("Do you want to order list? "
-        + "Enter 'yes' or 'no': ");
-        String answer = scanner.nextLine().toLowerCase(Locale.ROOT);
+    private Ordering getOrdering() {
+        GetUserInput getUserInput = new GetUserInput();
+        String answer = getUserInput.getUserStringInput("Do you want to order list? "
+                + "Enter 'yes' or 'no': ").toLowerCase(Locale.ROOT);
 
         Ordering ordering = null;
 
         if (answer.equals("yes")) {
-            System.out.println("Enter orderBy (Name or Surname): ");
-            String orderBy = scanner.nextLine();
-            System.out.println("Enter orderDirection (Ascending||Descending): ");
-            String orderDirection = scanner.nextLine();
+            String orderBy = getUserInput.getUserStringInput("Enter orderBy (Name or Surname): ");
+            String orderDirection = getUserInput.getUserStringInput("Enter orderDirection (Ascending||Descending): ");
             ordering = new Ordering(orderBy, orderDirection);
         }
         return ordering;
     }
 
-    private Paging getPaging(Scanner scanner) {
-        System.out.println("Doy want to see list in pages? " +
-                "Enter 'yes' or 'no': ");
-        String answer = scanner.nextLine().toLowerCase(Locale.ROOT);
+    private Paging getPaging() {
+        GetUserInput getUserInput = new GetUserInput();
+        String answer = getUserInput.getUserStringInput("Do want to see list in pages? " +
+                "Enter 'yes' or 'no': ").toLowerCase(Locale.ROOT);
 
         Paging paging = null;
 
         if (answer.equals("yes")) {
-            System.out.println("Enter pageNumber: ");
-            String pageNumber = scanner.nextLine();
-            System.out.println("Enter pageSize: ");
-            String pageSize = scanner.nextLine();
+            int pageNumber = getUserInput.getUserNumericInput("Enter pageNumber: ");
+            int pageSize = getUserInput.getUserNumericInput("Enter pageSize: ");
             paging = new Paging(pageNumber, pageSize);
         }
         return paging;

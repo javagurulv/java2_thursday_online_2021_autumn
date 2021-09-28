@@ -1,11 +1,11 @@
 package lv.javaguru.java2.hospital.domain;
 
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Doctor {
-    private static final AtomicInteger count = new AtomicInteger(0);
-    private long id;
+    private static final AtomicLong count = new AtomicLong(0);
+    private Long id;
     private String name;
     private String surname;
     private String speciality;
@@ -17,11 +17,11 @@ public class Doctor {
         this.id = count.incrementAndGet();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

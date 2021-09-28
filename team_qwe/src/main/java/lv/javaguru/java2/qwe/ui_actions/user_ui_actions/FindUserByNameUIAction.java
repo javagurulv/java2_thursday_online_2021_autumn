@@ -3,17 +3,16 @@ package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 import lv.javaguru.java2.qwe.core.requests.user_requests.FindUserByNameRequest;
 import lv.javaguru.java2.qwe.core.responses.user_responses.FindUserByNameResponse;
 import lv.javaguru.java2.qwe.core.services.user_services.FindUserByNameService;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
+@DIComponent
 public class FindUserByNameUIAction implements UIAction {
 
-    private final FindUserByNameService findUserByNameService;
-
-    public FindUserByNameUIAction(FindUserByNameService findUserByNameService) {
-        this.findUserByNameService = findUserByNameService;
-    }
+    @DIDependency private FindUserByNameService findUserByNameService;
 
     @Override
     public void execute() {
