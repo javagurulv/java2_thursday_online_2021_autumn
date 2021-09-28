@@ -3,19 +3,18 @@ package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRequest;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GenerateUserPortfolioResponse;
 import lv.javaguru.java2.qwe.core.services.user_services.GenerateUserPortfolioService;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.printErrorList;
 
+@DIComponent
 public class GenerateUserPortfolioUIAction implements UIAction {
 
-    private final GenerateUserPortfolioService generatePortfolioService;
+    @DIDependency private GenerateUserPortfolioService generatePortfolioService;
     private String userName;
-
-    public GenerateUserPortfolioUIAction(GenerateUserPortfolioService generatePortfolioService) {
-        this.generatePortfolioService = generatePortfolioService;
-    }
 
     @Override
     public void execute() {

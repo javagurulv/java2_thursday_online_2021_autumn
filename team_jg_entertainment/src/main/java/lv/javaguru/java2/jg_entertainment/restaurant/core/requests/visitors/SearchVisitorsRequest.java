@@ -77,19 +77,23 @@ public class SearchVisitorsRequest {
     }
 
     public boolean isNameProvided() {
-        return this.nameVisitors != null && !this.nameVisitors.isEmpty();
+        return this.nameVisitors != null
+                && !this.nameVisitors.isEmpty();
     }
 
     public boolean isSurnameProvided() {
-        return this.surnameVisitors != null && !this.surnameVisitors.isEmpty();
+        return this.surnameVisitors != null
+                && !this.surnameVisitors.isEmpty();
     }
 
     public boolean isIDProvided() {
-        return this.idVisitors != null && this.idVisitors != 0;
+        return this.idVisitors != null
+                && this.idVisitors != 0;
     }
 
     public boolean isTelephoneNumberProvided() {
-        return this.telephoneNumber != null && this.telephoneNumber != 0;
+        return this.telephoneNumber != null
+                && this.telephoneNumber != 0;
     }
 
     public Ordering getOrdering() {

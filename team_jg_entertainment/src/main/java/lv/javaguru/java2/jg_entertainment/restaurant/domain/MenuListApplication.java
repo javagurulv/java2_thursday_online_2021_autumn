@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment;
+package lv.javaguru.java2.jg_entertainment.restaurant.domain;
 /*
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenu;

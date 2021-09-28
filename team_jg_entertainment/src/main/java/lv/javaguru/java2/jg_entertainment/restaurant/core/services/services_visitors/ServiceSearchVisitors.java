@@ -5,8 +5,8 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Orde
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Paging;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.SearchVisitorsResponse;
-import lv.javaguru.java2.jg_entertainment.Visitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseSearchVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.SearchVisitorsRequestValidator;
 
 import java.util.ArrayList;
@@ -14,29 +14,29 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SearchVisitorsService {
+public class ServiceSearchVisitors {
 
     private DatabaseVisitors database;
     private SearchVisitorsRequestValidator validator;
 
 
-    public SearchVisitorsService(DatabaseVisitors database,
+    public ServiceSearchVisitors(DatabaseVisitors database,
                                  SearchVisitorsRequestValidator validator) {
         this.database = database;
         this.validator = validator;
     }
 
-    public SearchVisitorsResponse execute(SearchVisitorsRequest request) {
+    public ResponseSearchVisitors execute(SearchVisitorsRequest request) {
 
         List<CoreError> errors = validator.validator(request);
         if (!errors.isEmpty()) {
-            return new SearchVisitorsResponse(null, errors);
+            return new ResponseSearchVisitors(null, errors);
         }
         List<Visitors> visitorsList = search(request);
         visitorsList = order(visitorsList, request.getOrdering());
         visitorsList = paging(visitorsList, request.getPaging());
 
-        return new SearchVisitorsResponse(visitorsList, null);
+        return new ResponseSearchVisitors(visitorsList, null);
     }
 
     private List<Visitors> order(List<Visitors> visitors, Ordering ordering) {

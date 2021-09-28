@@ -3,6 +3,8 @@ package lv.javaguru.java2.qwe.core.services.validator;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.requests.user_requests.AddUserRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 
 import java.util.List;
 import java.util.Map;
@@ -13,13 +15,10 @@ import static java.util.Map.entry;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.isNotDouble;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.isNotInteger;
 
+@DIComponent
 public class AddUserValidator {
 
-    private UserData userData;
-
-    public AddUserValidator(UserData userData) {
-        this.userData = userData;
-    }
+    @DIDependency private UserData userData;
 
     private final Map<Predicate<AddUserRequest>, CoreError> validator = Map.ofEntries(
             entry(request -> request.getName().length() < 3 || request.getName().length() > 100,

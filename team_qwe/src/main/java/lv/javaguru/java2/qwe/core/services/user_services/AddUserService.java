@@ -6,20 +6,18 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.AddUserRequest;
 import lv.javaguru.java2.qwe.core.responses.user_responses.AddUserResponse;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.services.validator.AddUserValidator;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 
 import java.util.List;
 
 import static lv.javaguru.java2.qwe.Type.*;
 
+@DIComponent
 public class AddUserService {
 
-    private final UserData userData;
-    private final AddUserValidator validator;
-
-    public AddUserService(UserData userData, AddUserValidator validator) {
-        this.userData = userData;
-        this.validator = validator;
-    }
+    @DIDependency private UserData userData;
+    @DIDependency private AddUserValidator validator;
 
     public UserData getUserData() {
         return userData;

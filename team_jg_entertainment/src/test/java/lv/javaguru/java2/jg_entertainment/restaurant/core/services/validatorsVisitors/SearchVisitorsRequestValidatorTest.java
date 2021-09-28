@@ -6,6 +6,8 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Sear
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.List;
@@ -16,9 +18,13 @@ import static org.mockito.Mockito.when;
 
 class SearchVisitorsRequestValidatorTest {
 
+    @Mock
     private SearchVisitorsRequestFieldValidator fieldValidator;
+    @Mock
     private OrderingValidator orderingValidator;
+    @Mock
     private PagingValidator pagingValidator;
+    @InjectMocks
     private SearchVisitorsRequestValidator validator;
 
     @BeforeEach

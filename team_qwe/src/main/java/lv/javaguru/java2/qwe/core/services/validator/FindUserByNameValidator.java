@@ -2,6 +2,7 @@ package lv.javaguru.java2.qwe.core.services.validator;
 
 import lv.javaguru.java2.qwe.core.requests.user_requests.FindUserByNameRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
 
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Map.*;
 
+@DIComponent
 public class FindUserByNameValidator {
 
     private final Map<Predicate<FindUserByNameRequest>, CoreError> validator = ofEntries(

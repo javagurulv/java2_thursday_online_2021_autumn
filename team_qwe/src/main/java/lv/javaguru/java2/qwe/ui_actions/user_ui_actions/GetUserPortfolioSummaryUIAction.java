@@ -3,19 +3,18 @@ package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GetUserPortfolioSummaryRequest;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GetUserPortfolioSummaryResponse;
 import lv.javaguru.java2.qwe.core.services.user_services.GetUserPortfolioSummaryService;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.printErrorList;
 
+@DIComponent
 public class GetUserPortfolioSummaryUIAction implements UIAction {
 
-    private final GetUserPortfolioSummaryService summaryService;
+    @DIDependency private GetUserPortfolioSummaryService summaryService;
     private String userName;
-
-    public GetUserPortfolioSummaryUIAction(GetUserPortfolioSummaryService summaryService) {
-        this.summaryService = summaryService;
-    }
 
     @Override
     public void execute() {

@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment;
+package lv.javaguru.java2.jg_entertainment.restaurant.domain;
 
 import java.util.Objects;
 

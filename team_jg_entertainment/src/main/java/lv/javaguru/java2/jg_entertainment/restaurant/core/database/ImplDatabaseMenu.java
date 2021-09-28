@@ -1,10 +1,11 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
 
-import lv.javaguru.java2.jg_entertainment.Menu;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ImplDatabaseMenu implements DatabaseMenu {
 
@@ -17,7 +18,6 @@ public class ImplDatabaseMenu implements DatabaseMenu {
         nextNr++;
         menus.add(menu);
     }
-
 
     @Override
     public boolean deleteByNr(Long number) {
@@ -32,9 +32,30 @@ public class ImplDatabaseMenu implements DatabaseMenu {
         return isMenuDeleted;
     }
 
-
     @Override
     public List<Menu> getAllMenus() {
         return menus;
+    }
+
+    @Override
+    public List<Menu> findByTitle(String title) {
+        return menus.stream()
+                .filter(menu -> menu.getTitle().equals(title))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Menu> findByDescription(String description) {
+        return menus.stream()
+                .filter(menu -> menu.getDescription().equals(description))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Menu> findByTitleAndDescription(String title, String description) {
+        return menus.stream()
+                .filter(menu -> menu.getTitle().equals(title))
+                .filter(menu -> menu.getDescription().equals(description))
+                .collect(Collectors.toList());
     }
 }

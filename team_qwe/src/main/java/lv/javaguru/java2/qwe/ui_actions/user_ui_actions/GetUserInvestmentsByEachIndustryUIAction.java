@@ -3,18 +3,17 @@ package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GetUserInvestmentsByEachIndustryRequest;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GetUserInvestmentsByEachIndustryResponse;
 import lv.javaguru.java2.qwe.core.services.user_services.GetUserInvestmentsByEachIndustryService;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
+@DIComponent
 public class GetUserInvestmentsByEachIndustryUIAction implements UIAction {
 
-    private final GetUserInvestmentsByEachIndustryService getUserInvestmentsByEachIndustryService;
+    @DIDependency private GetUserInvestmentsByEachIndustryService getUserInvestmentsByEachIndustryService;
     private String userName;
-
-    public GetUserInvestmentsByEachIndustryUIAction(GetUserInvestmentsByEachIndustryService getUserInvestmentsByEachIndustryService) {
-        this.getUserInvestmentsByEachIndustryService = getUserInvestmentsByEachIndustryService;
-    }
 
     @Override
     public void execute() {
