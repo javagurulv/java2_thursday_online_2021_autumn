@@ -18,6 +18,7 @@ public class SearchMenusRequest {
     public String getDescription() {
         return description;
     }
+
     public boolean isTitleProvided() {
         return this.title != null && !this.title.isEmpty();
     }
