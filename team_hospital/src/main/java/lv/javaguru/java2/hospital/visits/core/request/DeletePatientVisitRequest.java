@@ -1,13 +1,13 @@
 package lv.javaguru.java2.hospital.visits.core.request;
 
 public class DeletePatientVisitRequest {
-    private String id;
+    private Long id;
 
-    public DeletePatientVisitRequest(String id) {
+    public DeletePatientVisitRequest(Long id) {
         this.id = id;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 }

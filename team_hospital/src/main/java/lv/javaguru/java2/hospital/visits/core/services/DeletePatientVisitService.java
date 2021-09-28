@@ -23,6 +23,6 @@ public class DeletePatientVisitService {
             return new DeletePatientVisitResponse(errors);
         }
 
-        return new DeletePatientVisitResponse(visitDatabase.DeleteVisit(Long.valueOf(request.getId())));
+        return new DeletePatientVisitResponse(visitDatabase.DeleteVisit(request.getId()));
     }
 }

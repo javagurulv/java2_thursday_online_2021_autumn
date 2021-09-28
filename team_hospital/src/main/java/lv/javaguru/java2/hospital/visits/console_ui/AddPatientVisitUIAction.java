@@ -4,8 +4,6 @@ import lv.javaguru.java2.hospital.visits.core.request.AddPatientVisitRequest;
 import lv.javaguru.java2.hospital.visits.core.responses.AddPatientVisitResponse;
 import lv.javaguru.java2.hospital.visits.core.services.AddPatientsVisitService;
 
-import java.util.Scanner;
-
 public class AddPatientVisitUIAction {
     private final AddPatientsVisitService patientsVisitService;
 
@@ -14,16 +12,11 @@ public class AddPatientVisitUIAction {
     }
 
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Please enter patient personal code: ");
-        String patientsPersonalCode = scanner.nextLine();
-        System.out.println("Please enter doctor name: ");
-        String doctorName = scanner.nextLine();
-        System.out.println("Please enter doctor surname: ");
-        String doctorSurname = scanner.nextLine();
-        System.out.println("Please enter visit date in format dd/MM/yyyy HH:mm: ");
-        String visitDate = scanner.nextLine();
+        GetUserInput getUserInput = new GetUserInput();
+        String patientsPersonalCode = getUserInput.getUserStringInput("Please enter patient personal code: ");
+        String doctorName = getUserInput.getUserStringInput("Please enter doctor name: ");
+        String doctorSurname = getUserInput.getUserStringInput("Please enter doctor surname: ");
+        String visitDate = getUserInput.getUserStringInput("Please enter visit date in format dd/MM/yyyy HH:mm: ");
 
         AddPatientVisitRequest request =
                 new AddPatientVisitRequest(patientsPersonalCode, doctorName,
