@@ -9,7 +9,7 @@ public class DoctorExistsService {
         this.database = database;
     }
 
-    public boolean execute(long id) {
+    public boolean execute(Long id) {
         return database.doctorExists(id);
     }
 }

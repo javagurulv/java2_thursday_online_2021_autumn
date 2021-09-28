@@ -1,21 +1,21 @@
 package lv.javaguru.java2.hospital.patient.core.requests;
 
 public class EditPatientRequest {
-    private final String patientID;
-    private final String userInput;
+    private final Long patientID;
+    private final Integer userInput;
     private final String changes;
 
-    public EditPatientRequest(String patientID, String userInput, String changes) {
+    public EditPatientRequest(Long patientID, Integer userInput, String changes) {
         this.patientID = patientID;
         this.userInput = userInput;
         this.changes = changes;
     }
 
-    public String getPatientID() {
+    public Long getPatientID() {
         return patientID;
     }
 
-    public String getUserInput() {
+    public Integer getUserInput() {
         return userInput;
     }
 

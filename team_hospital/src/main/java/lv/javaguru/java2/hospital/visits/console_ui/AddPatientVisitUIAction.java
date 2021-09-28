@@ -1,8 +1,8 @@
 package lv.javaguru.java2.hospital.visits.console_ui;
 
-import lv.javaguru.java2.hospital.visits.request.AddPatientVisitRequest;
-import lv.javaguru.java2.hospital.visits.responses.AddPatientVisitResponse;
-import lv.javaguru.java2.hospital.visits.services.AddPatientsVisitService;
+import lv.javaguru.java2.hospital.visits.core.request.AddPatientVisitRequest;
+import lv.javaguru.java2.hospital.visits.core.responses.AddPatientVisitResponse;
+import lv.javaguru.java2.hospital.visits.core.services.AddPatientsVisitService;
 
 import java.util.Scanner;
 

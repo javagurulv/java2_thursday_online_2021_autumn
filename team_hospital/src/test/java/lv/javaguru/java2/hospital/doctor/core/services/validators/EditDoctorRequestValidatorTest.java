@@ -15,14 +15,14 @@ class EditDoctorRequestValidatorTest {
 
     @Test
     public void shouldReturnEmptyList() {
-        EditDoctorRequest request = new EditDoctorRequest("123", 1, "changes");
+        EditDoctorRequest request = new EditDoctorRequest(123L, 1, "changes");
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnIdError() {
-        EditDoctorRequest request = new EditDoctorRequest("", 1, "changes");
+        EditDoctorRequest request = new EditDoctorRequest(null, 1, "changes");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
@@ -32,7 +32,7 @@ class EditDoctorRequestValidatorTest {
 
     @Test
     public void shouldReturnChangesError() {
-        EditDoctorRequest request = new EditDoctorRequest("123", 1, "");
+        EditDoctorRequest request = new EditDoctorRequest(123L, 1, "");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
@@ -42,7 +42,7 @@ class EditDoctorRequestValidatorTest {
 
     @Test
     public void shouldReturnIdAndChangesErrors() {
-        EditDoctorRequest request = new EditDoctorRequest("", 1, "");
+        EditDoctorRequest request = new EditDoctorRequest(null, 1, "");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 2);

@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.visits.services;
+package lv.javaguru.java2.hospital.visits.core.services;
 
 import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
@@ -6,10 +6,10 @@ import lv.javaguru.java2.hospital.database.VisitDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.PatientVisit;
-import lv.javaguru.java2.hospital.visits.request.AddPatientVisitRequest;
-import lv.javaguru.java2.hospital.visits.responses.CoreError;
-import lv.javaguru.java2.hospital.visits.responses.AddPatientVisitResponse;
-import lv.javaguru.java2.hospital.visits.services.validators.AddPatientVisitValidator;
+import lv.javaguru.java2.hospital.visits.core.request.AddPatientVisitRequest;
+import lv.javaguru.java2.hospital.visits.core.responses.CoreError;
+import lv.javaguru.java2.hospital.visits.core.responses.AddPatientVisitResponse;
+import lv.javaguru.java2.hospital.visits.core.services.validators.AddPatientVisitValidator;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

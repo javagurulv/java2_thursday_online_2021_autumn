@@ -14,14 +14,14 @@ class DeleteDoctorRequestValidatorTest {
 
     @Test
     public void shouldReturnEmptyList() {
-        DeleteDoctorRequest request = new DeleteDoctorRequest("123");
+        DeleteDoctorRequest request = new DeleteDoctorRequest(123L);
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnIdError() {
-        DeleteDoctorRequest request = new DeleteDoctorRequest("");
+        DeleteDoctorRequest request = new DeleteDoctorRequest(null);
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);

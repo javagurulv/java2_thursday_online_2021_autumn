@@ -16,7 +16,7 @@ class PagingValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenPageNumberContainNotValidValue() {
-        Paging paging = new Paging("0", "1");
+        Paging paging = new Paging(0, 1);
         SearchPatientsRequest request =
                 new SearchPatientsRequest("Name", "Surname", "1212", paging);
         List<CoreError> errors = validator.validate(request.getPaging());
@@ -27,7 +27,7 @@ class PagingValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenPageSizeContainNotValidValue() {
-        Paging paging = new Paging("1", "0");
+        Paging paging = new Paging(1, 0);
         SearchPatientsRequest request =
                 new SearchPatientsRequest("Name", "Surname", "1212", paging);
         List<CoreError> errors = validator.validate(request.getPaging());
@@ -38,7 +38,7 @@ class PagingValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenPageNumberAreEmpty() {
-        Paging paging = new Paging(null, "1");
+        Paging paging = new Paging(null, 1);
         SearchPatientsRequest request =
                 new SearchPatientsRequest("Name", "Surname", "1212", paging);
         List<CoreError> errors = validator.validate(request.getPaging());
@@ -49,7 +49,7 @@ class PagingValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenPageSizeAreEmpty() {
-        Paging paging = new Paging("1", null);
+        Paging paging = new Paging(1, null);
         SearchPatientsRequest request =
                 new SearchPatientsRequest("Name", "Surname", "1212", paging);
         List<CoreError> errors = validator.validate(request.getPaging());

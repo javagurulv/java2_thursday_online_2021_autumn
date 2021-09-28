@@ -4,8 +4,6 @@ import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.EditPatientResponse;
 import lv.javaguru.java2.hospital.patient.core.services.EditPatientService;
 
-import java.util.Scanner;
-
 public class EditPatientUIAction implements PatientUIActions {
     private final EditPatientService editPatient;
 
@@ -14,16 +12,11 @@ public class EditPatientUIAction implements PatientUIActions {
     }
 
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Please enter patient ID: ");
-        String id = scanner.nextLine();
-        System.out.println("What information would you like to edit? ");
-        System.out.println("1. Name");
-        System.out.println("2. Surname");
-        System.out.println("3. Personal code");
-        String userInput = scanner.nextLine();
-        System.out.println("Please enter information for changes: ");
-        String changes = scanner.nextLine();
+        GetUserInput getUserInput = new GetUserInput();
+        Long id = getUserInput.getUserLongInput("Please enter patient ID: ");
+        menu();
+        Integer userInput = getUserInput.getUserNumericInput("Please enter edit menu number: ");
+        String changes = getUserInput.getUserStringInput("Please enter information for changes: ");
         EditPatientRequest request = new EditPatientRequest(id, userInput, changes);
         EditPatientResponse response = editPatient.execute(request);
         if (response.hasErrors()) {
@@ -37,5 +30,12 @@ public class EditPatientUIAction implements PatientUIActions {
                 System.out.println("Patient not found!");
             }
         }
+    }
+
+    private void menu() {
+        System.out.println("What information would you like to edit? ");
+        System.out.println("1. Name");
+        System.out.println("2. Surname");
+        System.out.println("3. Personal code");
     }
 }

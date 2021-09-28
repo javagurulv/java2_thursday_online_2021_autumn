@@ -17,7 +17,7 @@ public class SearchDoctorsUIAction implements DoctorUIActions {
     @Override
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
-        String id = getUserInput.getUserStringInput("Enter doctor id: ");
+        Long id = getUserInput.getUserLongInput("Enter doctor id: ");
         String name = getUserInput.getUserStringInput("Enter doctor name: ");
         String surname = getUserInput.getUserStringInput("Enter doctor surname: ");
         String speciality = getUserInput.getUserStringInput("Enter doctor speciality: ");

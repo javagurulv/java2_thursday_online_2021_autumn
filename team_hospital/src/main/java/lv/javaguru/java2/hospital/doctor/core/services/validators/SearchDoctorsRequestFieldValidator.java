@@ -10,7 +10,8 @@ public class SearchDoctorsRequestFieldValidator {
 
     public List<CoreError> validate(SearchDoctorsRequest request) {
         List<CoreError> errors = new ArrayList<>();
-        if (isEmpty(request.getId()) && isEmpty(request.getName()) && isEmpty(request.getSurname()) && isEmpty(request.getSpeciality())) {
+        if (isLongEmpty(request.getId()) && isStringEmpty(request.getName())
+                && isStringEmpty(request.getSurname()) && isStringEmpty(request.getSpeciality())) {
             errors.add(new CoreError("id", "Must not be empty!"));
             errors.add(new CoreError("name", "Must not be empty!"));
             errors.add(new CoreError("surname", "Must not be empty!"));
@@ -19,7 +20,11 @@ public class SearchDoctorsRequestFieldValidator {
         return errors;
     }
 
-    private boolean isEmpty(String str) {
+    private boolean isStringEmpty(String str) {
         return str == null || str.isEmpty();
+    }
+
+    private boolean isLongEmpty(Long num) {
+        return num == null;
     }
 }

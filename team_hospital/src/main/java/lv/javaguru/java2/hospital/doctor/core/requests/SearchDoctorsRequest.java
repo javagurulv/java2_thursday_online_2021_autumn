@@ -2,7 +2,7 @@ package lv.javaguru.java2.hospital.doctor.core.requests;
 
 public class SearchDoctorsRequest {
 
-    private String id;
+    private Long id;
     private String name;
     private String surname;
     private String speciality;
@@ -11,14 +11,14 @@ public class SearchDoctorsRequest {
     private Paging paging;
 
 
-    public SearchDoctorsRequest(String id, String name, String surname, String speciality) {
+    public SearchDoctorsRequest(Long id, String name, String surname, String speciality) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.speciality = speciality;
     }
 
-    public SearchDoctorsRequest(String id, String name, String surname, String speciality, Ordering ordering) {
+    public SearchDoctorsRequest(Long id, String name, String surname, String speciality, Ordering ordering) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -26,7 +26,7 @@ public class SearchDoctorsRequest {
         this.ordering = ordering;
     }
 
-    public SearchDoctorsRequest(String id, String name, String surname, String speciality, Paging paging) {
+    public SearchDoctorsRequest(Long id, String name, String surname, String speciality, Paging paging) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -34,7 +34,7 @@ public class SearchDoctorsRequest {
         this.paging = paging;
     }
 
-    public SearchDoctorsRequest(String id, String name, String surname, String speciality, Ordering ordering, Paging paging) {
+    public SearchDoctorsRequest(Long id, String name, String surname, String speciality, Ordering ordering, Paging paging) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -43,7 +43,7 @@ public class SearchDoctorsRequest {
         this.paging = paging;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
@@ -60,7 +60,7 @@ public class SearchDoctorsRequest {
     }
 
     public boolean isIdProvided() {
-        return this.id != null && !this.id.isEmpty() && Long.parseLong(this.id) != 0;
+        return this.id != null;
     }
 
     public boolean isNameProvided() {

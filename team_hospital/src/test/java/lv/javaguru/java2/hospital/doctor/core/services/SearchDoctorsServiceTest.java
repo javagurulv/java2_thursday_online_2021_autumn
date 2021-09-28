@@ -110,12 +110,12 @@ class SearchDoctorsServiceTest {
 
     @Test
     public void shouldSearchById() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest("1", null, null, null);
+        SearchDoctorsRequest request = new SearchDoctorsRequest(1L, null, null, null);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("Name", "Surname", "Speciality"));
-        Mockito.when(database.findById(1)).thenReturn(doctors);
+        Mockito.when(database.findById(1L)).thenReturn(doctors);
 
         SearchDoctorsResponse response = service.execute(request);
         assertFalse(response.hasErrors());

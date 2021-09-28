@@ -18,7 +18,7 @@ class DeletePatientValidatorTest {
     public void shouldReturnEmptyList(){
         database.add(new Patient("name", "surname", "1234"));
         DeletePatientRequest request =
-                new DeletePatientRequest("1");
+                new DeletePatientRequest(1L);
         List<CoreError> errors = validator.validate(request);
         assertTrue(errors.isEmpty());
     }
@@ -26,7 +26,7 @@ class DeletePatientValidatorTest {
     @Test
     public void shouldReturnIDError(){
         DeletePatientRequest request =
-                new DeletePatientRequest("");
+                new DeletePatientRequest(null);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "ID");

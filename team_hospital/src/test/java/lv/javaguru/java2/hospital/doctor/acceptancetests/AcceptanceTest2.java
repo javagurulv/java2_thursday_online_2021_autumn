@@ -14,7 +14,7 @@ public class AcceptanceTest2 {
     private DoctorApplicationContext appContest = new DoctorApplicationContext();
 
     @Test
-    public void shouldReturnCorrectBookList() {
+    public void shouldReturnCorrectDoctorList() {
         AddDoctorRequest request1 = new AddDoctorRequest("Name", "Surname1", "Speciality1");
         getAddDoctorService().execute(request1);
 

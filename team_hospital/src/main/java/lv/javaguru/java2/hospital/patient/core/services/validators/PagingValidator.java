@@ -21,14 +21,14 @@ public class PagingValidator {
 
     private Optional<CoreError> validatePageNumber(Paging paging) {
         return (paging.getPageNumber() != null
-                && Integer.parseInt(paging.getPageNumber()) <= 0)
+                && paging.getPageNumber() <= 0)
                 ? Optional.of(new CoreError("pageNumber", "must be greater then 0!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validatePageSize(Paging paging) {
         return (paging.getPageSize() != null
-                && Integer.parseInt(paging.getPageSize()) <= 0)
+                && paging.getPageSize() <= 0)
                 ? Optional.of(new CoreError("pageSize", "must be greater then 0!"))
                 : Optional.empty();
     }
