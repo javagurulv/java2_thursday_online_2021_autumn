@@ -28,14 +28,16 @@ public class SearchVisitorsRequestValidator {
         return errors;
     }
 
-    private void validateOrderingIfPresent(SearchVisitorsRequest request, List<CoreError> coreErrors) {
+    private void validateOrderingIfPresent(SearchVisitorsRequest request,
+                                           List<CoreError> coreErrors) {
         if (request.getOrdering() != null) {
             Ordering ordering = request.getOrdering();
             coreErrors.addAll(orderingValidator.validator(ordering));
         }
     }
 
-    private void validatePagingIfPresent(SearchVisitorsRequest request, List<CoreError> coreErrors) {
+    private void validatePagingIfPresent(SearchVisitorsRequest request,
+                                         List<CoreError> coreErrors) {
         if (request.getPaging() != null) {
             Paging paging = request.getPaging();
             coreErrors.addAll(pagingValidator.validatorPaging(paging));

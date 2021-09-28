@@ -19,6 +19,7 @@ public class SearchVisitorsRequestFieldValidator {
     }
 
     private boolean isEmpty(String str) {
-        return str == null || str.isEmpty();
+        return str == null
+                || str.isEmpty();
     }
 }

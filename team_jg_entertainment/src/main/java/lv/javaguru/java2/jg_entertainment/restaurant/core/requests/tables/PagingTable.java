@@ -1,12 +1,12 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables;
 
-public class Paging {
+public class PagingTable {
 
     private Integer pageNumber;
     private Integer pageSize;
 
-    public Paging(Integer pageNumber,
-                  Integer pageSize) {
+    public PagingTable(Integer pageNumber,
+                       Integer pageSize) {
         this.pageNumber = pageNumber;
         this.pageSize = pageSize;
     }

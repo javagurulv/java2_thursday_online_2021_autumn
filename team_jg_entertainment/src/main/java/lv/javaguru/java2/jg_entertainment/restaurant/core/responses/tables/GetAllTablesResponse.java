@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables;
 
-import lv.javaguru.java2.jg_entertainment.Table;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
 
 import java.util.List;
 
