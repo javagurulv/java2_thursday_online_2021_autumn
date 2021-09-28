@@ -4,10 +4,10 @@ import java.util.List;
 
 public class DIApplicationContextBuilder {
 
-    private ClassFinder classFinder = new ClassFinder();
-    private DIComponentFilter componentFilter = new DIComponentFilter();
-    private DIComponentCreator componentsCreator = new DIComponentCreator();
-    private DIDependencyResolver dependencyResolver = new DIDependencyResolver();
+    private final ClassFinder classFinder = new ClassFinder();
+    private final DIComponentFilter componentFilter = new DIComponentFilter();
+    private final DIComponentCreator componentsCreator = new DIComponentCreator();
+    private final DIDependencyResolver dependencyResolver = new DIDependencyResolver();
 
     public ApplicationContext build(String packageName) {
         try {

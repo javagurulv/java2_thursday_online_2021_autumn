@@ -8,11 +8,6 @@ import java.util.Optional;
 
 public class DIComponentCreator {
 
-/*    public void create(ApplicationContext applicationContext, List<Class<?>> diComponents) {
-        diComponents.forEach(aClass ->
-                applicationContext.addBean(aClass, applicationContext.getBean(aClass)));
-    }*/
-
     public void create(ApplicationContext applicationContext,
                        List<Class<?>> diComponents) {
         diComponents.forEach(diComponent -> {

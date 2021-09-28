@@ -7,23 +7,6 @@ import java.util.stream.Collectors;
 
 public class DIDependencyResolver {
 
-/*    public void resolve(ApplicationContext applicationContext, List<Class<?>> diComponents) {
-        diComponents.stream()
-                .map(Class::getDeclaredFields)
-                .map(fields -> Arrays.stream(fields)
-                        .filter(field -> field.isAnnotationPresent(DIDependency.class))
-                        .collect(Collectors.toList()))
-                .forEach(list -> list
-                        .forEach(field -> {
-                            try {
-                                field.setAccessible(true);
-                                field.set(field.getClass(), applicationContext.getBean(field.getClass()));
-                            } catch (IllegalAccessException e) {
-                                e.printStackTrace();
-                            }
-                        }));
-    }*/
-
     public void resolve(ApplicationContext applicationContext,
                         List<Class<?>> diComponents) {
         diComponents.forEach(diComponent -> {
@@ -54,7 +37,7 @@ public class DIDependencyResolver {
 
     private List<Field> findFieldsWithDIDependencyAnnotation(Class<?> diComponent) {
         return Arrays.stream(diComponent.getDeclaredFields())
-                .filter(filed -> filed.isAnnotationPresent(DIDependency.class))
+                .filter(field -> field.isAnnotationPresent(DIDependency.class))
                 .collect(Collectors.toList());
     }
 
