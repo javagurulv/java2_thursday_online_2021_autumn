@@ -1,13 +1,12 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu;
 
 import java.util.List;
-
-import lv.javaguru.java2.jg_entertainment.Menu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.SearchMenusRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.SearchMenusResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsMenus.SearchMenusRequestValidator;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
 
 public class SearchMenusService {
     private DatabaseMenu databaseMenu;

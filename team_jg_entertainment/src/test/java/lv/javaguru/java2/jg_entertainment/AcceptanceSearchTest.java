@@ -4,8 +4,8 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Orde
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Paging;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestAddVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.SearchVisitorsResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.SearchVisitorsService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseSearchVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceSearchVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceAddAllVisitors;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +27,7 @@ public class AcceptanceSearchTest {
         getAddVisitorService().execute(addVisitor2);
 
         SearchVisitorsRequest request = new SearchVisitorsRequest("name", null);
-        SearchVisitorsResponse response = getSearchVisitorService().execute(request);
+        ResponseSearchVisitors response = getSearchVisitorService().execute(request);
 
         assertEquals(response.getVisitors().size(), 3);
         assertEquals(response.getVisitors().get(0).getClientName(), "name");
@@ -48,7 +48,7 @@ public class AcceptanceSearchTest {
 
         Ordering ordering = new Ordering("name", "ASCENDING");
         SearchVisitorsRequest request = new SearchVisitorsRequest("name", null, ordering);
-        SearchVisitorsResponse response = getSearchVisitorService().execute(request);
+        ResponseSearchVisitors response = getSearchVisitorService().execute(request);
 
         assertEquals(response.getVisitors().size(), 2);
         assertEquals(response.getVisitors().get(0).getClientName(), "name");
@@ -69,7 +69,7 @@ public class AcceptanceSearchTest {
         Paging paging = new Paging(1, 1);
 
         SearchVisitorsRequest request = new SearchVisitorsRequest(null, "surname", ordering, paging);
-        SearchVisitorsResponse response = getSearchVisitorService().execute(request);
+        ResponseSearchVisitors response = getSearchVisitorService().execute(request);
 
         assertEquals(response.getVisitors().size(), 1);
         assertEquals(response.getVisitors().get(0).getClientName(), "name");
@@ -81,7 +81,7 @@ public class AcceptanceSearchTest {
         return appContest.getBean(ServiceAddAllVisitors.class);
     }
 
-    private SearchVisitorsService getSearchVisitorService() {
-        return appContest.getBean(SearchVisitorsService.class);
+    private ServiceSearchVisitors getSearchVisitorService() {
+        return appContest.getBean(ServiceSearchVisitors.class);
     }
 }

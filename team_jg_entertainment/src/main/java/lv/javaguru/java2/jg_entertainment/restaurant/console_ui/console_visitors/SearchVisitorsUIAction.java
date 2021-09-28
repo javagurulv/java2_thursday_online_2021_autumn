@@ -3,16 +3,16 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitor
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Ordering;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Paging;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.SearchVisitorsResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.SearchVisitorsService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseSearchVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceSearchVisitors;
 
 import java.util.Scanner;
 
 public class SearchVisitorsUIAction implements RestaurantUIAction {
 
-    private SearchVisitorsService searchVisitorsService;
+    private ServiceSearchVisitors searchVisitorsService;
 
-    public SearchVisitorsUIAction(SearchVisitorsService searchVisitorsService) {
+    public SearchVisitorsUIAction(ServiceSearchVisitors searchVisitorsService) {
         this.searchVisitorsService = searchVisitorsService;
     }
 
@@ -39,7 +39,7 @@ public class SearchVisitorsUIAction implements RestaurantUIAction {
         Paging paging = new Paging(pageNumber, pageSize);
 
         SearchVisitorsRequest request = new SearchVisitorsRequest(name, surname, ordering, paging);//+telephone or id
-        SearchVisitorsResponse response = searchVisitorsService.execute(request);
+        ResponseSearchVisitors response = searchVisitorsService.execute(request);
 
         if (response.hasError()) {
             response.getErrorsList().forEach(coreError -> System.out.println("Errors: " +

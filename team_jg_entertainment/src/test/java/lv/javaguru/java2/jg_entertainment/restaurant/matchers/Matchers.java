@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.matchers;
 
-import lv.javaguru.java2.jg_entertainment.Visitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 import org.mockito.ArgumentMatcher;
 
 public class Matchers implements ArgumentMatcher<Visitors> {

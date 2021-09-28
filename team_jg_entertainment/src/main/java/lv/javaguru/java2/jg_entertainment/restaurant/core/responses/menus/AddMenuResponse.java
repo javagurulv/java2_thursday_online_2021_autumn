@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus;
 
-import lv.javaguru.java2.jg_entertainment.Menu;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
 
 import java.util.List;
 

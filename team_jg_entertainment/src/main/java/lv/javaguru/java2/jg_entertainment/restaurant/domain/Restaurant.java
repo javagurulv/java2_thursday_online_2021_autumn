@@ -1,18 +1,16 @@
-package lv.javaguru.java2.jg_entertainment;
+package lv.javaguru.java2.jg_entertainment.restaurant.domain;
 
+import lv.javaguru.java2.jg_entertainment.ApplicationContextRestaurant;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.*;
-import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.AddTableUIAction;
-import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.ExitTableUIAction;
-import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.GetAllTablesUIAction;
-import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.RemoveTableUIAction;
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors.*;
 
-public class RestaurantAction {
+public class Restaurant {
 
     private static ApplicationContextRestaurant applicationContext = new ApplicationContextRestaurant();
     private static CheckMenuNumberFromConsole checkNumber = new CheckMenuNumberFromConsole();
 
-    public static void main(String[] args) {
+    public void mainAction() {
         while (true) {
             printProgramMenu();
             int numberOfMenu = checkNumberOfMenu();
@@ -121,10 +119,11 @@ public class RestaurantAction {
         System.out.println("Tables menu:");
         System.out.println("1. Add table to list");
         System.out.println("2. Delete table from list");
-        System.out.println("3. Show all tables in the list");
-        System.out.println("4. Exit");
+        System.out.println("3. Search table information from list");
+        System.out.println("4. Show all tables in the list");
+        System.out.println("5. Exit");
         System.out.println();
-        int numberOfMenu = checkNumber.getCorrectNumberMenu(1, 4);
+        int numberOfMenu = checkNumber.getCorrectNumberMenu(1, 5);
         executeSelectedTabledMenu(numberOfMenu);
         return numberOfMenu;
     }
@@ -142,11 +141,16 @@ public class RestaurantAction {
                 break;
             }
             case 3: {
+                SearchTableUIAction searchTableUIAction = applicationContext.getBean(SearchTableUIAction.class);
+                searchTableUIAction.execute();
+                break;
+            }
+            case 4: {
                 GetAllTablesUIAction getAllTablesUIAction = applicationContext.getBean(GetAllTablesUIAction.class);
                 getAllTablesUIAction.execute();
                 break;
             }
-            case 4: {
+            case 5: {
                 ExitTableUIAction exitTableUIAction = applicationContext.getBean(ExitTableUIAction.class);
                 exitTableUIAction.execute();
                 break;
@@ -156,7 +160,7 @@ public class RestaurantAction {
 
     private static int checkNumberOfMenu() {
         System.out.println("Start by choosing the program menu!");
-        return checkNumber.getCorrectNumberMenu(1, 4);
+        return checkNumber.getCorrectNumberMenu(1, 5);
 
     }
 }
