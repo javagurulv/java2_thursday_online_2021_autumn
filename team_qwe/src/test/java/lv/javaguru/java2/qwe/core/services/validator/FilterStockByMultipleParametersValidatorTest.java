@@ -2,6 +2,8 @@ package lv.javaguru.java2.qwe.core.services.validator;
 
 import lv.javaguru.java2.qwe.core.requests.data_requests.*;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
+import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import java.util.List;
@@ -10,7 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class FilterStockByMultipleParametersValidatorTest {
 
-    private final FilterStocksByMultipleParametersValidator validator = new FilterStocksByMultipleParametersValidator();
+    private final ApplicationContext appContext =
+            new DIApplicationContextBuilder().build();
+
+    private final FilterStocksByMultipleParametersValidator validator =
+            appContext.getBean(FilterStocksByMultipleParametersValidator.class);
 
     @Test
     public void shouldReturnEmptyList1() {

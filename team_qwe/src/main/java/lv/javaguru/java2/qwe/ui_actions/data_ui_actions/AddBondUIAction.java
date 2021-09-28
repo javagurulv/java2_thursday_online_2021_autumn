@@ -4,17 +4,16 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.AddBondRequest;
 import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.AddBondResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.AddBondService;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
+@DIComponent
 public class AddBondUIAction implements UIAction {
 
-    private final AddBondService addBondService;
-
-    public AddBondUIAction(AddBondService addBondService) {
-        this.addBondService = addBondService;
-    }
+    @DIDependency private AddBondService addBondService;
 
     @Override
     public void execute() {

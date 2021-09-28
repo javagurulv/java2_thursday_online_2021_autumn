@@ -1,6 +1,8 @@
 package lv.javaguru.java2.qwe;
 
 import lv.javaguru.java2.qwe.core.database.Database;
+import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import lv.javaguru.java2.qwe.ui_actions.ChooseDataMenuUIAction;
 import lv.javaguru.java2.qwe.ui_actions.ChooseUserMenuUIAction;
 
@@ -12,13 +14,17 @@ import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
 public class ApplicationDemo {
 
-    private static final ApplicationContext applicationContext = new ApplicationContext();
+    private static final ApplicationContext applicationContext =
+            new DIApplicationContextBuilder().build();
 
     public static ApplicationContext getApplicationContext() {
         return applicationContext;
     }
 
     public static void main(String[] args) {
+
+        //импортирует большой список ценных бумаг
+        importData();
 
         //Симуляция изменения рыночных цен!
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);

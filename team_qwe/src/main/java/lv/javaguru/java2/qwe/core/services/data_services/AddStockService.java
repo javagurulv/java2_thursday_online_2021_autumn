@@ -7,18 +7,16 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.AddStockResponse;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class AddStockService {
 
-    private final Database database;
-    private final AddStockValidator validator;
-
-    public AddStockService(Database database, AddStockValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @DIDependency private Database database;
+    @DIDependency private AddStockValidator validator;
 
     public AddStockResponse execute(CoreRequest request) {
         List<CoreError> errors = validator.validate(request);

@@ -7,6 +7,8 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
 import lv.javaguru.java2.qwe.core.services.validator.AddSecurityValidator;
 import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,17 +19,12 @@ import java.util.stream.IntStream;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
+@DIComponent
 public class ImportSecuritiesService {
 
-    private final Database database;
-    private final AddStockValidator stockValidator;
-    private final AddBondValidator bondValidator;
-
-    public ImportSecuritiesService(Database database, AddStockValidator stockValidator, AddBondValidator bondValidator) {
-        this.database = database;
-        this.stockValidator = stockValidator;
-        this.bondValidator = bondValidator;
-    }
+    @DIDependency private Database database;
+    @DIDependency private AddStockValidator stockValidator;
+    @DIDependency private AddBondValidator bondValidator;
 
     public void execute(String path) throws IOException {
         importSecurities(path);

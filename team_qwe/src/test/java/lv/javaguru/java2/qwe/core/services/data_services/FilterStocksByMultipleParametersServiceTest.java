@@ -3,11 +3,11 @@ package lv.javaguru.java2.qwe.core.services.data_services;
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.Stock;
 import lv.javaguru.java2.qwe.core.database.Database;
-import lv.javaguru.java2.qwe.core.database.DatabaseImpl;
 import lv.javaguru.java2.qwe.core.requests.data_requests.*;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.data_responses.FilterStocksByMultipleParametersResponse;
-import lv.javaguru.java2.qwe.core.services.validator.FilterStocksByMultipleParametersValidator;
+import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
@@ -18,16 +18,17 @@ import java.util.List;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.importDataForTests;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FilterStocksByMultipleParametersServiceTest {
 
+    private final ApplicationContext appContext =
+            new DIApplicationContextBuilder().build();
     @Mock
-    private Database database = new DatabaseImpl("");
-    @Mock
-    private FilterStocksByMultipleParametersValidator validator = new FilterStocksByMultipleParametersValidator();
-    @InjectMocks
-    private FilterStocksByMultipleParametersService service = new FilterStocksByMultipleParametersService(database, validator);
+    private Database database = appContext.getBean(Database.class);
+    private final FilterStocksByMultipleParametersService service =
+            appContext.getBean(FilterStocksByMultipleParametersService.class);
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
@@ -56,6 +57,7 @@ public class FilterStocksByMultipleParametersServiceTest {
     @Test
     public void shouldReturnFilteredSecurityList1() {
 
+        importDataForTests(appContext);
         List<CoreRequest> requestList = List.of(
                 new FilterStocksByAnyDoubleParameterRequest("Dividend", ">", "1"),
                 new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "0.9"),
@@ -79,6 +81,7 @@ public class FilterStocksByMultipleParametersServiceTest {
     @Test
     public void shouldReturnFilteredSecurityList2() {
 
+        importDataForTests(appContext);
         List<CoreRequest> requestList = List.of(
                 new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "20"),
                 new FilterStocksByAnyDoubleParameterRequest("Risk weight", ">", "1.2"),

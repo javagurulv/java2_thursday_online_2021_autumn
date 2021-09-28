@@ -4,16 +4,14 @@ import lv.javaguru.java2.qwe.Cash;
 import lv.javaguru.java2.qwe.Position;
 import lv.javaguru.java2.qwe.Stock;
 import lv.javaguru.java2.qwe.core.database.Database;
-import lv.javaguru.java2.qwe.core.database.DatabaseImpl;
-import lv.javaguru.java2.qwe.core.database.UserData;
-import lv.javaguru.java2.qwe.core.database.UserDataImpl;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GenerateUserPortfolioResponse;
-import lv.javaguru.java2.qwe.core.services.validator.GenerateUserPortfolioValidator;
+import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -27,15 +25,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @RunWith(MockitoJUnitRunner.class)
 public class GenerateUserPortfolioServiceTest {
 
+    private final ApplicationContext appContext =
+            new DIApplicationContextBuilder().build();
     @Mock
-    private Database database = new DatabaseImpl("");
-    @Mock
-    private UserData userData = new UserDataImpl(database);
-    @Mock
-    private GenerateUserPortfolioValidator validator = new GenerateUserPortfolioValidator();
-    @InjectMocks
-    private GenerateUserPortfolioService service =
-            new GenerateUserPortfolioService(userData, validator);
+    private Database database = appContext.getBean(Database.class);
+    private final GenerateUserPortfolioService service =
+            appContext.getBean(GenerateUserPortfolioService.class);
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails1() {
@@ -55,6 +50,7 @@ public class GenerateUserPortfolioServiceTest {
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails2() {
 
+        UtilityMethods.importDataForTests(appContext);
         List<Position> portfolio = List.of(
                 new Position(new Cash(), 100_000, 1),
                 new Position(service.getUserData().getDatabase().getSecurityList().get(123), 100, 100)
@@ -75,6 +71,7 @@ public class GenerateUserPortfolioServiceTest {
     @Test
     public void shouldReturnGeneratedUserPortfolio() {
 
+        UtilityMethods.importDataForTests(appContext);
         GenerateUserPortfolioRequest request = new GenerateUserPortfolioRequest("Alexander");
         GenerateUserPortfolioResponse response = service.execute(request);
 

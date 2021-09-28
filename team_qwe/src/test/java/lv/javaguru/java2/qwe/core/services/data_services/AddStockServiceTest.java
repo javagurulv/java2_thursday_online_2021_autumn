@@ -7,6 +7,7 @@ import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.data_responses.AddStockResponse;
 import lv.javaguru.java2.qwe.core.services.matchers.StockMatcher;
 import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,6 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 
 @RunWith(MockitoJUnitRunner.class)
+@DIComponent
 public class AddStockServiceTest {
 
     @Mock

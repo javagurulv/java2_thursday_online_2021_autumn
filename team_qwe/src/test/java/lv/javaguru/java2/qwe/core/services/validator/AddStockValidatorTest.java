@@ -2,9 +2,10 @@ package lv.javaguru.java2.qwe.core.services.validator;
 
 import lv.javaguru.java2.qwe.Stock;
 import lv.javaguru.java2.qwe.core.database.Database;
-import lv.javaguru.java2.qwe.core.database.DatabaseImpl;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
+import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import java.util.List;
@@ -13,8 +14,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AddStockValidatorTest {
 
-    private final Database database = new DatabaseImpl();
-    private final AddStockValidator validator = new AddStockValidator(database);
+    private final ApplicationContext appContext =
+            new DIApplicationContextBuilder().build();
+
+    private final Database database = appContext.getBean(Database.class);
+    private final AddStockValidator validator = appContext.getBean(AddStockValidator.class);
 
     @Test
     public void shouldReturnEmptyList() {

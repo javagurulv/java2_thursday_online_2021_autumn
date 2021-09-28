@@ -1,10 +1,9 @@
 package lv.javaguru.java2.qwe.core.services.validator;
 
-import lv.javaguru.java2.qwe.core.database.DatabaseImpl;
-import lv.javaguru.java2.qwe.core.database.UserData;
-import lv.javaguru.java2.qwe.core.database.UserDataImpl;
 import lv.javaguru.java2.qwe.core.requests.user_requests.AddUserRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
+import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import java.util.List;
@@ -13,8 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AddUserValidatorTest {
 
-    private final UserData userData = new UserDataImpl(new DatabaseImpl());
-    private final AddUserValidator validator = new AddUserValidator(userData);
+    private final ApplicationContext appContext =
+            new DIApplicationContextBuilder().build();
+
+    private final AddUserValidator validator = appContext.getBean(AddUserValidator.class);
 
     @Test
     public void shouldReturnEmptyList() {

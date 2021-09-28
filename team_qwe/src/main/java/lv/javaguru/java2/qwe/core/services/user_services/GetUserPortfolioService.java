@@ -7,20 +7,18 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.GetUserPortfolioRequest
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GetUserPortfolioResponse;
 import lv.javaguru.java2.qwe.core.services.validator.GetUserPortfolioValidator;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@DIComponent
 public class GetUserPortfolioService {
 
-    private final UserData userData;
-    private final GetUserPortfolioValidator validator;
-
-    public GetUserPortfolioService(UserData userData, GetUserPortfolioValidator validator) {
-        this.userData = userData;
-        this.validator = validator;
-    }
+    @DIDependency private UserData userData;
+    @DIDependency private GetUserPortfolioValidator validator;
 
     public UserData getUserData() {
         return userData;

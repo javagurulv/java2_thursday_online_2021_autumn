@@ -2,6 +2,8 @@ package lv.javaguru.java2.qwe.core.services.validator;
 
 import lv.javaguru.java2.qwe.core.requests.data_requests.FindSecurityByNameRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
+import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import java.util.List;
@@ -10,7 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class FindSecurityByNameValidatorTest {
 
-    private final FindSecurityByNameValidator validator = new FindSecurityByNameValidator();
+    private final ApplicationContext appContext =
+            new DIApplicationContextBuilder().build();
+
+    private final FindSecurityByNameValidator validator =
+            appContext.getBean(FindSecurityByNameValidator.class);
 
     @Test
     public void shouldReturnEmptyList1() {

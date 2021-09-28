@@ -4,17 +4,16 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
 import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.AddStockResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.AddStockService;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
+@DIComponent
 public class AddStockUIAction implements UIAction {
 
-    private final AddStockService addStockService;
-
-    public AddStockUIAction(AddStockService addSecurityService) {
-        this.addStockService = addSecurityService;
-    }
+    @DIDependency private AddStockService addStockService;
 
     @Override
     public void execute() {

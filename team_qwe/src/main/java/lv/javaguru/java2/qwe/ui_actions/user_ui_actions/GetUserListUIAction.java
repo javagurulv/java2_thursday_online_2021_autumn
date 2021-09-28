@@ -3,15 +3,14 @@ package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GetAllUserListRequest;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GetAllUserListResponse;
 import lv.javaguru.java2.qwe.core.services.user_services.GetAllUserListService;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
+@DIComponent
 public class GetUserListUIAction implements UIAction {
 
-    private final GetAllUserListService showUserListService;
-
-    public GetUserListUIAction(GetAllUserListService showUserListService) {
-        this.showUserListService = showUserListService;
-    }
+    @DIDependency private GetAllUserListService showUserListService;
 
     @Override
     public void execute() {

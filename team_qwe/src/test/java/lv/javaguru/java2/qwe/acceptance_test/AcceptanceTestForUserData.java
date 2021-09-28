@@ -4,6 +4,8 @@ import lv.javaguru.java2.qwe.*;
 import lv.javaguru.java2.qwe.core.requests.user_requests.*;
 import lv.javaguru.java2.qwe.core.responses.user_responses.*;
 import lv.javaguru.java2.qwe.core.services.user_services.*;
+import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,7 +31,8 @@ public class AcceptanceTestForUserData {
         );
     }
 
-    private final ApplicationContextForTest context = new ApplicationContextForTest();
+    private final ApplicationContext appContext =
+            new DIApplicationContextBuilder().build();
 
     @Test
     public void addUserToUserDataTest() {
@@ -131,27 +134,27 @@ public class AcceptanceTestForUserData {
     }
 
     private AddUserService getAddUserService() {
-        return context.getBean(AddUserService.class);
+        return appContext.getBean(AddUserService.class);
     }
 
     private GetAllUserListService getAllUserListService() {
-        return context.getBean(GetAllUserListService.class);
+        return appContext.getBean(GetAllUserListService.class);
     }
 
     private FindUserByNameService getFindUserByName() {
-        return context.getBean(FindUserByNameService.class);
+        return appContext.getBean(FindUserByNameService.class);
     }
 
     private GetUserInvestmentsByEachIndustryService getUserInvestmentsByEachIndustryService() {
-        return context.getBean(GetUserInvestmentsByEachIndustryService.class);
+        return appContext.getBean(GetUserInvestmentsByEachIndustryService.class);
     }
 
     private GetUserPortfolioGroupedByIndustryService getUserPortfolioGroupedByIndustryService() {
-        return context.getBean(GetUserPortfolioGroupedByIndustryService.class);
+        return appContext.getBean(GetUserPortfolioGroupedByIndustryService.class);
     }
 
     private GetUserPortfolioService getUserPortfolioService() {
-        return context.getBean(GetUserPortfolioService.class);
+        return appContext.getBean(GetUserPortfolioService.class);
     }
 
 }

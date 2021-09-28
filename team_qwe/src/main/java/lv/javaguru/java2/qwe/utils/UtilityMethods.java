@@ -1,11 +1,16 @@
 package lv.javaguru.java2.qwe.utils;
 
+import lv.javaguru.java2.qwe.ApplicationDemo;
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.User;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.responses.CoreResponse;
+import lv.javaguru.java2.qwe.core.services.data_services.ImportSecuritiesService;
+import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
 
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,7 +32,6 @@ public class UtilityMethods {
             IntStream.rangeClosed(0, list.size() - 1)
                     .filter(i -> !list.get(i).getClass().getSimpleName().equals("Cash"))
                     .forEach(i -> list.get(i).setMarketPrice(generateNextPrice(list.get(i).getMarketPrice())));
-//            System.out.println("Market prices updated!");
         }
     }
 
@@ -86,6 +90,29 @@ public class UtilityMethods {
 
     private static double generateNextPrice(double currentPrice) {
         return round(currentPrice * (1 + (-1 + (Math.random() * 2)) / 100));
+    }
+
+    public static void importData() {
+        File file = new File("./team_qwe/src/main/docs/stocks_list_import.txt");
+        ImportSecuritiesService service =
+                ApplicationDemo.getApplicationContext().getBean(ImportSecuritiesService.class);
+        try {
+            service.execute(file.getPath());
+            System.out.println("Data imported to database!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void importDataForTests(ApplicationContext context) {
+        File file = new File("./src/test/docs/stocks_list_import.txt");
+        ImportSecuritiesService service =
+                context.getBean(ImportSecuritiesService.class);
+        try {
+            service.execute(file.getPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

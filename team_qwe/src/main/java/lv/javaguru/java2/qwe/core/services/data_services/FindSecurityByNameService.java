@@ -6,19 +6,17 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.FindSecurityByNameReque
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.data_responses.FindSecurityByNameResponse;
 import lv.javaguru.java2.qwe.core.services.validator.FindSecurityByNameValidator;
+import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 
 import java.util.List;
 import java.util.Optional;
 
+@DIComponent
 public class FindSecurityByNameService {
 
-    private final Database database;
-    private final FindSecurityByNameValidator validator;
-
-    public FindSecurityByNameService(Database database, FindSecurityByNameValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @DIDependency private Database database;
+    @DIDependency private FindSecurityByNameValidator validator;
 
     public FindSecurityByNameResponse execute(FindSecurityByNameRequest request) {
         List<CoreError> errors = validator.validate(request);
