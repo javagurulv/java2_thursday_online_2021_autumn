@@ -76,7 +76,7 @@ public class SearchPatientsService {
             Comparator<Patient> comparator = ordering.getOrderBy().toUpperCase(Locale.ROOT).equals("NAME")
                     ? Comparator.comparing(Patient::getName)
                     : Comparator.comparing(Patient::getSurname);
-            if (ordering.getOrderDirection().equals("DESCENDING")) {
+            if (ordering.getOrderDirection().toUpperCase(Locale.ROOT).equals("DESCENDING")) {
                 comparator = comparator.reversed();
             }
             return patients.stream().sorted(comparator).collect(Collectors.toList());

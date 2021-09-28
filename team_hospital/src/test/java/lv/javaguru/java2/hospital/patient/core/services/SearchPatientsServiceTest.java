@@ -171,8 +171,8 @@ class SearchPatientsServiceTest {
         assertFalse(response.hasErrors());
         assertEquals(response.getPatientList().size(), 2);
         assertEquals(response.getPatientList().get(0).getSurname(), "surname1");
-        assertEquals(response.getPatientList().get(1).getSurname(), "surname2");
         assertEquals(response.getPatientList().get(0).getPersonalCode(), "1234");
+        assertEquals(response.getPatientList().get(1).getSurname(), "surname2");
         assertEquals(response.getPatientList().get(1).getPersonalCode(), "1235");
     }
 
@@ -191,8 +191,8 @@ class SearchPatientsServiceTest {
         assertFalse(response.hasErrors());
         assertEquals(response.getPatientList().size(), 2);
         assertEquals(response.getPatientList().get(0).getSurname(), "surname2");
-        assertEquals(response.getPatientList().get(1).getSurname(), "surname1");
         assertEquals(response.getPatientList().get(0).getPersonalCode(), "1235");
+        assertEquals(response.getPatientList().get(1).getSurname(), "surname1");
         assertEquals(response.getPatientList().get(1).getPersonalCode(), "1234");
     }
 
