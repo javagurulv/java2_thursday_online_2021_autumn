@@ -16,7 +16,7 @@ public class DeletePatientVisitValidator {
     }
 
     private Optional<CoreError> validateIDField(DeletePatientVisitRequest request){
-        return (request.getId() == null || request.getId().isEmpty())
+        return (request.getId() == null)
                 ? Optional.of(new CoreError("ID", " must not be empty!")) : Optional.empty();
     }
 }
