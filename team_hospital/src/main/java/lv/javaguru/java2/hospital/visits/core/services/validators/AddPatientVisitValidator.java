@@ -34,7 +34,7 @@ public class AddPatientVisitValidator {
 
     private Optional<CoreError> validatePatientsPersonalCode(AddPatientVisitRequest request) {
         return (request.getPatientsPersonalCode() == null || request.getPatientsPersonalCode().isEmpty())
-                ? Optional.of(new CoreError("Patient name", "must not be empty!")) : Optional.empty();
+                ? Optional.of(new CoreError("Patient personal code", "must not be empty!")) : Optional.empty();
     }
 
     private Optional<CoreError> validateDoctorsName(AddPatientVisitRequest request) {
