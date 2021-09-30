@@ -5,6 +5,7 @@ public class SearchMenusRequest {
     private String description;
 
     private OrderingMenu orderingMenu;
+    private PagingMenu pagingMenu;
 
     public SearchMenusRequest(String title, String description) {
         this.title = title;
@@ -15,6 +16,20 @@ public class SearchMenusRequest {
         this.title = title;
         this.description = description;
         this.orderingMenu = orderingMenu;
+
+    }
+
+    public SearchMenusRequest(String title, String description, PagingMenu pagingMenu) {
+        this.title = title;
+        this.description = description;
+        this.pagingMenu = pagingMenu;
+    }
+
+    public SearchMenusRequest(String title, String description, OrderingMenu orderingMenu, PagingMenu pagingMenu) {
+        this.title = title;
+        this.description = description;
+        this.orderingMenu = orderingMenu;
+        this.pagingMenu = pagingMenu;
     }
 
     public String getTitle() {
@@ -35,5 +50,9 @@ public class SearchMenusRequest {
 
     public OrderingMenu getOrderingMenu() {
         return orderingMenu;
+    }
+
+    public PagingMenu getPagingMenu() {
+        return pagingMenu;
     }
 }
