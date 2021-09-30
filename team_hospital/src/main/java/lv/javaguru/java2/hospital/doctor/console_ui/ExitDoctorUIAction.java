@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.console_ui;
 
-public class ExitUIAction implements DoctorUIActions{
+public class ExitDoctorUIAction implements DoctorUIActions{
 
     @Override
     public void execute() {

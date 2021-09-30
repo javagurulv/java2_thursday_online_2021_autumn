@@ -8,7 +8,9 @@ public interface VisitsDatabase {
 
     void recordVisit(PatientVisit patientVisit);
 
-    public boolean DeleteVisit(Long id);
+    boolean DeleteVisit(Long id);
 
-    public List<PatientVisit> showAllPatientVisits();
+    List<PatientVisit> showAllPatientVisits();
+
+    boolean editVisit(Long visitId, int userInput, String changes);
 }

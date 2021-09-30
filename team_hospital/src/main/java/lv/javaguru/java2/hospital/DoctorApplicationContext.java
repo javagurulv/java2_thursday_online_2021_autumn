@@ -52,7 +52,7 @@ public class DoctorApplicationContext {
                 getBean(EditDoctorService.class),
                 getBean(DoctorExistsService.class)));
         beans.put(SearchDoctorsUIAction.class, new SearchDoctorsUIAction(getBean(SearchDoctorsService.class)));
-        beans.put(ExitUIAction.class, new ExitUIAction());
+        beans.put(ExitDoctorUIAction.class, new ExitDoctorUIAction());
     }
 
     public <T extends Object> T getBean(Class c) {

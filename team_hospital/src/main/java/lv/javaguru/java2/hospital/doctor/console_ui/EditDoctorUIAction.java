@@ -28,7 +28,6 @@ public class EditDoctorUIAction implements DoctorUIActions {
         } else {
             System.out.println("The doctor with id " + id + " was not edited.");
         }
-
     }
 
     private void printEditMenu() {
