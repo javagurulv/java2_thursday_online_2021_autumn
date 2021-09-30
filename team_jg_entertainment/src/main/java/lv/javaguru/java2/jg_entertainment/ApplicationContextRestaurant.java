@@ -63,13 +63,10 @@ public class ApplicationContextRestaurant {
 //menu
         beans.put(AddMenuValidator.class, new AddMenuValidator());
         beans.put(SearchMenusRequestValidator.class, new SearchMenusRequestValidator());
+
         beans.put(AddMenuService.class, new AddMenuService(getBean(DatabaseMenu.class), getBean(AddMenuValidator.class)));
         beans.put(RemoveMenuService.class, new RemoveMenuService(getBean(DatabaseMenu.class)));
         beans.put(GetAllMenusService.class, new GetAllMenusService(getBean(DatabaseMenu.class)));
-
-        beans.put(AddMenuUIAction.class, new AddMenuUIAction(getBean(AddMenuService.class)));
-        beans.put(RemoveMenuUIAction.class, new RemoveMenuUIAction(getBean(RemoveMenuService.class)));
-        beans.put(GetAllMenusUIAction.class, new GetAllMenusUIAction(getBean(GetAllMenusService.class)));
         beans.put(SearchMenusService.class, new SearchMenusService(
                 getBean(DatabaseMenu.class),
                 getBean(SearchMenusRequestValidator.class)));

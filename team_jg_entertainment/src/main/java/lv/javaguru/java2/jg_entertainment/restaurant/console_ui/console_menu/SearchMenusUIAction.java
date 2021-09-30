@@ -1,5 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu;
 
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.OrderingMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.SearchMenusRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.SearchMenusResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.SearchMenusService;
@@ -22,6 +23,12 @@ public class SearchMenusUIAction implements UIAction {
         String title = scanner.nextLine();
         System.out.println("Enter menu description: ");
         String description = scanner.nextLine();
+
+        System.out.println("Enter orderBy (title||description): ");
+        String orderBy = scanner.nextLine();
+        System.out.println("Enter orderDirection (ASCENDING||DESCENDING): ");
+        String orderDirection = scanner.nextLine();
+        OrderingMenu orderingMenu = new OrderingMenu(orderBy, orderDirection);
 
         SearchMenusRequest request = new SearchMenusRequest(title, description);
         SearchMenusResponse response = searchMenusService.execute(request);

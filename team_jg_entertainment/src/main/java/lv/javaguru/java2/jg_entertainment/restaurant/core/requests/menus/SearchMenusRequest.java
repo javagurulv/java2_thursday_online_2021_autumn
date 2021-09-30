@@ -1,14 +1,20 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus;
 
-import java.util.Objects;
-
 public class SearchMenusRequest {
     private String title;
     private String description;
 
+    private OrderingMenu orderingMenu;
+
     public SearchMenusRequest(String title, String description) {
         this.title = title;
         this.description = description;
+    }
+
+    public SearchMenusRequest(String title, String description, OrderingMenu orderingMenu) {
+        this.title = title;
+        this.description = description;
+        this.orderingMenu = orderingMenu;
     }
 
     public String getTitle() {
@@ -27,4 +33,7 @@ public class SearchMenusRequest {
         return this.description != null && !this.description.isEmpty();
     }
 
+    public OrderingMenu getOrderingMenu() {
+        return orderingMenu;
+    }
 }

@@ -27,8 +27,6 @@ public class AddBookService {
 
 		Book book = new Book(request.getTitle(), request.getAuthor());
 		database.save(book);
-
 		return new AddBookResponse(book);
 	}
-
 }
