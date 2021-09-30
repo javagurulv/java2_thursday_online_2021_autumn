@@ -1,6 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.OrderingMenu;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.PagingMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.SearchMenusRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.SearchMenusResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.SearchMenusService;
@@ -29,6 +30,12 @@ public class SearchMenusUIAction implements UIAction {
         System.out.println("Enter orderDirection (ASCENDING||DESCENDING): ");
         String orderDirection = scanner.nextLine();
         OrderingMenu orderingMenu = new OrderingMenu(orderBy, orderDirection);
+
+        System.out.println("Enter pageNumber: ");
+        Integer pageNumber = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter pageSize: ");
+        Integer pageSize = Integer.parseInt(scanner.nextLine());
+        PagingMenu pagingMenu = new PagingMenu(pageNumber, pageSize);
 
         SearchMenusRequest request = new SearchMenusRequest(title, description);
         SearchMenusResponse response = searchMenusService.execute(request);

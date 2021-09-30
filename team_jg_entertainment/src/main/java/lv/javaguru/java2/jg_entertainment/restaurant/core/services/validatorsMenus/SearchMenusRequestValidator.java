@@ -1,6 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsMenus;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.OrderingMenu;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.PagingMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.SearchMenusRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.CoreError;
 
@@ -18,6 +19,12 @@ public class SearchMenusRequestValidator {
           validateMandatoryOrderBy(request.getOrderingMenu()).ifPresent(errors::add);
           validateMandatoryOrderDirection(request.getOrderingMenu()).ifPresent(errors::add);
         }
+        if(request.getPagingMenu() != null){
+            validatePageNumber(request.getPagingMenu()).ifPresent(errors::add);
+            validatePageSize(request.getPagingMenu()).ifPresent(errors::add);
+            validateMandatoryPageNumber(request.getPagingMenu()).ifPresent(errors::add);
+            validateMandatoryPageSize(request.getPagingMenu()).ifPresent(errors::add);
+        }
         return errors;
     }
 
@@ -33,10 +40,6 @@ public class SearchMenusRequestValidator {
     private boolean isEmpty(String str) {
         return str == null || str.isEmpty();
     }
-
-
-
-
 
     private Optional<CoreError> validateOrderBy(OrderingMenu orderingMenu) {
         return (orderingMenu.getOrderBy() != null
@@ -63,5 +66,32 @@ public class SearchMenusRequestValidator {
                 ? Optional.of(new CoreError("orderDirection", "Must not be empty!"))
                 : Optional.empty();
     }
+
+    private Optional<CoreError> validatePageNumber(PagingMenu pagingMenu) {
+        return (pagingMenu.getPageNumber() != null
+                && pagingMenu.getPageNumber() <= 0)
+                ? Optional.of(new CoreError("pageNumber", "Must be greater then 0!"))
+                : Optional.empty();
+    }
+
+    private Optional<CoreError> validatePageSize(PagingMenu pagingMenu) {
+        return (pagingMenu.getPageSize() != null
+                && pagingMenu.getPageSize() <= 0)
+                ? Optional.of(new CoreError("pageSize", "Must be greater then 0!"))
+                : Optional.empty();
+    }
+
+    private Optional<CoreError> validateMandatoryPageNumber(PagingMenu pagingMenu) {
+        return (pagingMenu.getPageNumber() == null && pagingMenu.getPageSize() != null)
+                ? Optional.of(new CoreError("pageNumber", "Must not be empty!"))
+                : Optional.empty();
+    }
+
+    private Optional<CoreError> validateMandatoryPageSize(PagingMenu pagingMenu) {
+        return (pagingMenu.getPageSize() == null && pagingMenu.getPageNumber() != null)
+                ? Optional.of(new CoreError("pageSize", "Must not be empty!"))
+                : Optional.empty();
+    }
+
 
 }

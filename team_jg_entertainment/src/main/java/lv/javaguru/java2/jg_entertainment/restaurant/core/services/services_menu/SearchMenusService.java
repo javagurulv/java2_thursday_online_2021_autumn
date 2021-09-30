@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.OrderingMenu;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.PagingMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.SearchMenusRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.SearchMenusResponse;
@@ -32,6 +33,7 @@ public class SearchMenusService {
 
         List<Menu> menus = search(request);
         menus = order(menus, request.getOrderingMenu());
+        menus = paging(menus, request.getPagingMenu());
 
         return new SearchMenusResponse(menus, null);
     }
@@ -64,5 +66,17 @@ public class SearchMenusService {
 
             return menus;
         }
+
+    private List<Menu> paging (List<Menu> menus, PagingMenu pagingMenu){
+        if (pagingMenu != null) {
+            int skip = (pagingMenu.getPageNumber() - 1) * pagingMenu.getPageSize();
+            return menus.stream()
+                    .skip(skip)
+                    .limit(pagingMenu.getPageSize())
+                    .collect(Collectors.toList());
+        } else {
+            return menus;
+        }
+    }
 
     }

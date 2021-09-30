@@ -8,6 +8,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.GetAll
 import java.util.List;
 
 public class GetAllMenusService {
+
     private DatabaseMenu databaseMenu;
 
     public GetAllMenusService(DatabaseMenu databaseMenu) {
@@ -18,4 +19,5 @@ public class GetAllMenusService {
         List<Menu> menus = databaseMenu.getAllMenus();
         return new GetAllMenusResponse(menus);
     }
+
 }
