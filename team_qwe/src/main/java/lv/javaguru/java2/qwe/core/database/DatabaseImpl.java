@@ -14,8 +14,12 @@ import static java.util.Map.ofEntries;
 public class DatabaseImpl implements Database {
 
     private ArrayList<Security> securityList;
+    private final String stringForTest;
+    private final int numberForTest;
 
-    public DatabaseImpl() {
+    public DatabaseImpl(String stringForTest, int numberForTest) {
+        this.stringForTest = stringForTest;
+        this.numberForTest = numberForTest;
         this.securityList = new ArrayList<>();
         securityList.add(new Cash());
     }
@@ -23,6 +27,16 @@ public class DatabaseImpl implements Database {
     @Override
     public ArrayList<Security> getSecurityList() {
         return securityList;
+    }
+
+    @Override
+    public String getStringForTest() {
+        return stringForTest;
+    }
+
+    @Override
+    public int getNumberForTest() {
+        return numberForTest;
     }
 
     @Override

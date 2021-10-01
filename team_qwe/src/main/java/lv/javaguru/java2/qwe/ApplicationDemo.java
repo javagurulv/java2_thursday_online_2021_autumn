@@ -24,7 +24,7 @@ public class ApplicationDemo {
 
     public static void main(String[] args) {
 
-        //импортирует большой список ценных бумаг
+        //импортирует в базу данных большой список ценных бумаг
         importData();
 
         //Симуляция изменения рыночных цен!

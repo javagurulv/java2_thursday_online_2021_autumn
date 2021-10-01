@@ -18,6 +18,9 @@ import static java.util.List.*;
 
 public class AcceptanceTestForUserData {
 
+    public AcceptanceTestForUserData() {
+    }
+
     @Before
     public void init() {
         getAllUserListService().getUserData().getUserList().get(0).setPortfolio(
