@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -104,6 +105,7 @@ public class GenerateUserPortfolioServiceTest {
         IntStream.rangeClosed(0, portfolio.size() - 1)
                 .forEach(i -> assertTrue(portfolio.contains(response.getPortfolio().get(i))));
         assertEquals(portfolio.get(22).getAmount(), response.getPortfolio().get(22).getAmount());
+        assertEquals(LocalDate.now(), response.getPortfolioGenerationDate());
 
     }
 

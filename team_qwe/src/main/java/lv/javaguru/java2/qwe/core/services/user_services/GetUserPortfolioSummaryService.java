@@ -38,8 +38,9 @@ public class GetUserPortfolioSummaryService {
             double avgWgtDividendYield = calculateAvgWgtDividendYield(user.get(), portfolioValue);
             double avgWgtRiskWeight = calculateAvgWgtRiskWeight(user.get(), portfolioValue);
             return new GetUserPortfolioSummaryResponse(user.get().getRiskTolerance(),
-                    user.get().getInitialInvestment(), portfolioValue, amountOfPositions,
-                    portfolioAllocation, avgWgtDividendYield, avgWgtRiskWeight);
+                    user.get().getInitialInvestment(), user.get().getPortfolioGenerationDate(),
+                    portfolioValue, amountOfPositions, portfolioAllocation,
+                    avgWgtDividendYield, avgWgtRiskWeight);
         }
         return new GetUserPortfolioSummaryResponse(errors);
     }

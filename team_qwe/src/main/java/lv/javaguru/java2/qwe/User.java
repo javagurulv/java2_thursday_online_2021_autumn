@@ -1,5 +1,6 @@
 package lv.javaguru.java2.qwe;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Predicate;
 
@@ -12,6 +13,7 @@ public class User {
     private final int age;
     private final Type type; // общий уровень благосостояния клиента
     private final double initialInvestment; //начальная сумма инвестиций
+    private LocalDate portfolioGenerationDate;
     private int riskTolerance;
     private List<Position> portfolio = new ArrayList<>();
     private final Map<String, Double[]> distribution = createDistributionMatrix();
@@ -57,12 +59,20 @@ public class User {
         this.portfolio = portfolio;
     }
 
+    public LocalDate getPortfolioGenerationDate() {
+        return portfolioGenerationDate;
+    }
+
+    public void setPortfolioGenerationDate(LocalDate portfolioGenerationDate) {
+        this.portfolioGenerationDate = portfolioGenerationDate;
+    }
+
     /*
-                Рассчитывает насколько большой риск клиент готов взять на себя.
-                Вычисляется исходя из возраста и благосостояния. Условно, молодой
-                и богатый может позволить себе самые рискованные вложения, а старый
-                и менее состоятельный - самые низкорискованные
-                 */
+                    Рассчитывает насколько большой риск клиент готов взять на себя.
+                    Вычисляется исходя из возраста и благосостояния. Условно, молодой
+                    и богатый может позволить себе самые рискованные вложения, а старый
+                    и менее состоятельный - самые низкорискованные
+                     */
     private void calculateRiskTolerance() {
         Map<Predicate<Integer>, Integer> mapAge = Map.ofEntries(
                 entry(age -> age >= 16 && age < 30, 5), // чем моложе, тем выше показатель толерантности к риску!

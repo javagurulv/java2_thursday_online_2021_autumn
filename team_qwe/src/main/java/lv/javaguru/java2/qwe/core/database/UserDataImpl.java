@@ -4,6 +4,7 @@ import lv.javaguru.java2.qwe.*;
 import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
 import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import static java.util.stream.Collectors.*;
@@ -14,6 +15,7 @@ public class UserDataImpl implements UserData {
 
     private List<User> userList;
     @DIDependency private Database database;
+    private LocalDate currentDate = LocalDate.now();
 
     public UserDataImpl() {
         this.userList = new ArrayList<>();
@@ -31,6 +33,14 @@ public class UserDataImpl implements UserData {
     @Override
     public Database getDatabase() {
         return database;
+    }
+
+    public LocalDate getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(LocalDate currentDate) {
+        this.currentDate = currentDate;
     }
 
     @Override

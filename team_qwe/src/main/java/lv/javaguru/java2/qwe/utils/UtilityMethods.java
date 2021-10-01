@@ -11,6 +11,7 @@ import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,7 +32,9 @@ public class UtilityMethods {
         if (list.size() > 1) {
             IntStream.rangeClosed(0, list.size() - 1)
                     .filter(i -> !list.get(i).getClass().getSimpleName().equals("Cash"))
-                    .forEach(i -> list.get(i).setMarketPrice(generateNextPrice(list.get(i).getMarketPrice())));
+                    .forEach(i -> list.get(i).setMarketPrice(generateNextPrice(
+                            list.get(i).getMarketPrice(), evenIsPositive(i)
+                    )));
         }
     }
 
@@ -88,8 +91,13 @@ public class UtilityMethods {
         return Math.round(amount * 100.) / 100.;
     }
 
-    private static double generateNextPrice(double currentPrice) {
-        return round(currentPrice * (1 + (-1 + (Math.random() * 2)) / 100));
+    private static double generateNextPrice(double currentPrice, boolean positive) {
+        return (positive) ? round(currentPrice * (1 + (Math.random()) / 100)) :
+                round(currentPrice * (1 - (Math.random()) / 100));
+    }
+
+    private static boolean evenIsPositive(int number) {
+        return number % 2 == 0;
     }
 
     public static void importData() {

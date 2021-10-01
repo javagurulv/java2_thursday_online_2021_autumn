@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,12 +26,9 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(MockitoJUnitRunner.class)
 public class GetUserPortfolioSummaryServiceTest {
 
-    @Mock
-    private UserData userData;
-    @Mock
-    private GetUserPortfolioSummaryValidator validator;
-    @InjectMocks
-    private GetUserPortfolioSummaryService service;
+    @Mock private UserData userData;
+    @Mock private GetUserPortfolioSummaryValidator validator;
+    @InjectMocks private GetUserPortfolioSummaryService service;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
@@ -63,9 +61,11 @@ public class GetUserPortfolioSummaryServiceTest {
                 new Position(new Cash(), 1055.34, 1)
         );
         user.setPortfolio(portfolio);
+        user.setPortfolioGenerationDate(LocalDate.now());
 
         int userRiskTolerance = 5;
         double userInitialInvestment = 1_000_000;
+        LocalDate portfolioGenerationDate = LocalDate.now();
         double portfolioValue = 241_938.84;
         int amountOfPositions = 4;
         double avgWgtDividendYield = 2.3102;
@@ -77,6 +77,7 @@ public class GetUserPortfolioSummaryServiceTest {
         assertFalse(response.hasErrors());
         Assert.assertEquals(userRiskTolerance, response.getUserRiskTolerance());
         Assert.assertEquals(userInitialInvestment, response.getUserInitialInvestment(), 0.01);
+        Assert.assertEquals(portfolioGenerationDate, response.getPortfolioGenerationDate());
         Assert.assertEquals(portfolioValue, response.getPortfolioValue(), 0.01);
         Assert.assertEquals(amountOfPositions, response.getAmountOfPositions());
         Assert.assertEquals(avgWgtDividendYield, response.getAvgWgtDividendYield(), 0.001);

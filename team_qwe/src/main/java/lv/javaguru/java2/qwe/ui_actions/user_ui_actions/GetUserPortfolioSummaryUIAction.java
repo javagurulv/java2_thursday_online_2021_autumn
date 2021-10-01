@@ -7,13 +7,17 @@ import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
 import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
+import java.time.LocalDate;
+import java.util.Optional;
+
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.printErrorList;
 
 @DIComponent
 public class GetUserPortfolioSummaryUIAction implements UIAction {
 
-    @DIDependency private GetUserPortfolioSummaryService summaryService;
+    @DIDependency
+    private GetUserPortfolioSummaryService summaryService;
     private String userName;
 
     @Override
@@ -33,10 +37,14 @@ public class GetUserPortfolioSummaryUIAction implements UIAction {
 
     public void printResponse(GetUserPortfolioSummaryResponse response) {
         if (!response.hasErrors()) {
-            System.out.println("===============PORTFOLIO SUMMARY======================");
+            System.out.println("===============PORTFOLIO SUMMARY AT "
+                    + summaryService.getUserData().getCurrentDate() + "====================");
             System.out.println("USER NAME: " + userName);
             System.out.println("USER RISK TOLERANCE LEVEL: " + response.getUserRiskTolerance());
             System.out.println("USER INITIAL INVESTMENT: " + response.getUserInitialInvestment());
+            Optional<LocalDate> portfolioGenerationDate = Optional.ofNullable(response.getPortfolioGenerationDate());
+            System.out.println("DATE OF PORTFOLIO INCEPTION: "
+                    + portfolioGenerationDate.orElse(summaryService.getUserData().getCurrentDate()));
             System.out.println("RETURN SINCE INCEPTION: " + round((
                     response.getPortfolioValue() / response.getUserInitialInvestment() - 1) * 100) + "%");
             System.out.println("PORTFOLIO VALUE: " + round(response.getPortfolioValue()));

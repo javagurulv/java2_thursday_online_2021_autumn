@@ -1,6 +1,7 @@
 package lv.javaguru.java2.qwe;
 
 import lv.javaguru.java2.qwe.core.database.Database;
+import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
 import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import lv.javaguru.java2.qwe.ui_actions.ChooseDataMenuUIAction;
@@ -30,7 +31,13 @@ public class ApplicationDemo {
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
         Database database = applicationContext.getBean(Database.class);
         Runnable simulator = () -> simulateMarketPrices(database.getSecurityList());
-        scheduledExecutorService.scheduleAtFixedRate(simulator, 5, 5, TimeUnit.SECONDS);
+        scheduledExecutorService.scheduleAtFixedRate(simulator, 1, 1, TimeUnit.SECONDS);
+
+        //Симуляция изменения текущей даты!
+        ScheduledExecutorService scheduledExecutorService1 = Executors.newScheduledThreadPool(1);
+        UserData userData = applicationContext.getBean(UserData.class);
+        Runnable simulator1 = () -> userData.setCurrentDate(userData.getCurrentDate().plusDays(1));
+        scheduledExecutorService1.scheduleAtFixedRate(simulator1, 1, 1, TimeUnit.SECONDS);
 
         String[] menu = {"DATA MENU", "USER MENU", "EXIT"};
 

@@ -34,7 +34,7 @@ public class GenerateUserPortfolioService {
         if (user.isPresent() && user.get().getPortfolio().size() > 1) {
             errors.add(new CoreError("", "portfolio has been already generated for this user!"));
             List<Position> positions = new ArrayList<>();
-            return new GenerateUserPortfolioResponse(errors, positions);
+            return new GenerateUserPortfolioResponse(errors, positions, userData.getCurrentDate());
         }
         if (user.isPresent() && user.get().getPortfolio().size() == 1) {
             User user1 = user.get();
@@ -45,10 +45,11 @@ public class GenerateUserPortfolioService {
             double portfolioTotalValue = calculatePortfolioTotalValue(userPortfolio);
             addCashResidual(user1, userPortfolio, portfolioTotalValue);
             user1.setPortfolio(userPortfolio);
-            return new GenerateUserPortfolioResponse(userPortfolio);
+            user1.setPortfolioGenerationDate(userData.getCurrentDate());
+            return new GenerateUserPortfolioResponse(userPortfolio, userData.getCurrentDate());
         } else {
             List<Position> positions = new ArrayList<>();
-            return new GenerateUserPortfolioResponse(errors, positions);
+            return new GenerateUserPortfolioResponse(errors, positions, userData.getCurrentDate());
         }
     }
 
