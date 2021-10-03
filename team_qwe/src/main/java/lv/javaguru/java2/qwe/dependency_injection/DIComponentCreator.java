@@ -1,28 +1,28 @@
 package lv.javaguru.java2.qwe.dependency_injection;
 
-import lv.javaguru.java2.qwe.core.database.Database;
+import lv.javaguru.java2.qwe.core.database.DatabaseImpl;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import static java.util.Map.*;
 
 public class DIComponentCreator {
 
-    private final List<Class<?>> list = List.of(
-            Database.class
+    private final Map<Class<?>, Object> list = ofEntries(
+            entry(DatabaseImpl.class, new DatabaseImpl("TEST!", 123))
     );
-
-    public DIComponentCreator() {
-    }
 
     public void create(ApplicationContext applicationContext,
                        List<Class<?>> diComponents) {
         diComponents.forEach(diComponent -> {
-            Optional<Constructor<?>> defaultConstructorOpt = getDefaultConstructor(diComponent);
-            if (defaultConstructorOpt.isPresent()) {
-                Object diComponentInstance = createInstanceUsingDefaultConstructor(defaultConstructorOpt.get());
+            Optional<Constructor<?>> constructorOpt = getConstructor(diComponent);
+            if (constructorOpt.isPresent()) {
+                Object diComponentInstance = createInstanceUsingConstructor(constructorOpt.get());
                 applicationContext.addBean(diComponent, diComponentInstance);
             } else {
                 throw new RuntimeException("Class do not have default constructor!");
@@ -30,24 +30,24 @@ public class DIComponentCreator {
         });
     }
 
-    private Optional<Constructor<?>> getDefaultConstructor(Class<?> diComponent) {
+    private Optional<Constructor<?>> getConstructor(Class<?> diComponent) {
         return Arrays.stream(diComponent.getConstructors())
                 .filter(constructor -> constructor.getParameterCount() == 0 ||
                         classHasParameterizedConstructor(constructor))
                 .findFirst();
     }
 
-    private Object createInstanceUsingDefaultConstructor(Constructor<?> defaultConstructor) {
+    private Object createInstanceUsingConstructor(Constructor<?> constructor) {
         try {
-            return (defaultConstructor.getParameterCount() == 0) ? defaultConstructor.newInstance() :
-                    defaultConstructor.newInstance("TEST!", 123);
+            return (constructor.getParameterCount() == 0) ? constructor.newInstance() :
+                    list.get(constructor.getDeclaringClass());
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
     }
 
     private boolean classHasParameterizedConstructor(Constructor<?> constructor) {
-        return list.contains(constructor.getDeclaringClass().getInterfaces()[0]);
+        return list.containsKey(constructor.getDeclaringClass());
     }
 
 }
