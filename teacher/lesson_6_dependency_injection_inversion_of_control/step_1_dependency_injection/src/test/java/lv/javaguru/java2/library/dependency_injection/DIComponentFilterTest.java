@@ -1,13 +1,10 @@
 package lv.javaguru.java2.library.dependency_injection;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 import java.util.List;
 
 import org.junit.Test;
 
-@DIComponent
 public class DIComponentFilterTest {
 
 	@Test
