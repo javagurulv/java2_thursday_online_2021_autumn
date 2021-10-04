@@ -5,32 +5,27 @@ import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.EditPatientResponse;
 import lv.javaguru.java2.hospital.patient.core.services.validators.EditPatientValidator;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 public class EditPatientServiceTest {
 
-    @Mock
-    private EditPatientValidator validator;
-    @Mock
-    private PatientDatabaseImpl database;
-    @InjectMocks
-    private EditPatientService service;
-
-    @BeforeEach
-    public void init() {
-        validator = Mockito.mock(EditPatientValidator.class);
-        database = Mockito.mock(PatientDatabaseImpl.class);
-        service = new EditPatientService();
-    }
+    @Mock private EditPatientValidator validator;
+    @Mock private PatientDatabaseImpl database;
+    @InjectMocks private EditPatientService service;
 
     @Test
     public void shouldChangePatientName() {
@@ -82,9 +77,7 @@ public class EditPatientServiceTest {
         EditPatientRequest request = new EditPatientRequest(1L, 3, "New1234");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
-        List<Patient> patients = new ArrayList<>();
-        patients.add(new Patient("name", "surname", "1234"));
-        Mockito.when(database.editActions(2L, 3, "New1234")).thenReturn(false);
+        Mockito.when(database.editActions(1L, 3, "New1234")).thenReturn(false);
 
         EditPatientResponse response = service.execute(request);
         assertFalse(response.hasErrors());

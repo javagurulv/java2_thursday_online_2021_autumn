@@ -8,11 +8,14 @@ import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
 import lv.javaguru.java2.hospital.patient.core.services.validators.SearchPatientsValidator;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,21 +23,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 class SearchPatientsServiceTest {
 
-    @Mock
-    private PatientDatabaseImpl database;
-    @Mock
-    private SearchPatientsValidator validator;
-    @InjectMocks
-    private SearchPatientsService service;
-
-    @BeforeEach
-    public void init() {
-        database = Mockito.mock(PatientDatabaseImpl.class);
-        validator = Mockito.mock(SearchPatientsValidator.class);
-        service = new SearchPatientsService();
-    }
+    @Mock private PatientDatabaseImpl database;
+    @Mock private SearchPatientsValidator validator;
+    @InjectMocks private SearchPatientsService service;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidatorFails() {

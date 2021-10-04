@@ -20,14 +20,14 @@ public class SearchPatientsValidator {
     }
 
     private void validatePagingIfNeeded(SearchPatientsRequest request, List<CoreError> errors) {
-        if (request != null) {
+        if (request.getPaging() != null) {
             List<CoreError> pagingErrors = pagingValidator.validate(request.getPaging());
             errors.addAll(pagingErrors);
         }
     }
 
     private void validateOrderingIfNeeded(SearchPatientsRequest request, List<CoreError> errors) {
-        if (request != null) {
+        if (request.getOrdering() != null) {
             List<CoreError> orderingErrors = orderingValidator.validate(request.getOrdering());
             errors.addAll(orderingErrors);
         }

@@ -4,11 +4,14 @@ import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.ShowAllPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.ShowAllPatientsResponse;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,18 +19,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 class ShowAllPatientsServiceTest {
 
-    @Mock
-    private PatientDatabaseImpl database;
-    @InjectMocks
-    private ShowAllPatientsService showAllPatientsService;
-
-    @BeforeEach
-    public void init() {
-        database = Mockito.mock(PatientDatabaseImpl.class);
-        showAllPatientsService = new ShowAllPatientsService();
-    }
+    @Mock private PatientDatabaseImpl database;
+    @InjectMocks private ShowAllPatientsService showAllPatientsService;
 
     @Test
     public void shouldGetPatientsFromDb() {
