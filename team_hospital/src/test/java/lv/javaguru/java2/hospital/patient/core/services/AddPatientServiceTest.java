@@ -32,7 +32,7 @@ class AddPatientServiceTest {
     public void init() {
         patientDatabase = Mockito.mock(PatientDatabaseImpl.class);
         validator = Mockito.mock(AddPatientValidator.class);
-        addPatientService = new AddPatientService(patientDatabase, validator);
+        addPatientService = new AddPatientService();
     }
 
     @Test

@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
 import lv.javaguru.java2.hospital.patient.core.requests.DeletePatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 
@@ -8,13 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@DIComponent
 public class DeletePatientValidator {
-
-    private final PatientDatabaseImpl database;
-
-    public DeletePatientValidator(PatientDatabaseImpl database) {
-        this.database = database;
-    }
 
     public List<CoreError> validate(DeletePatientRequest request) {
         List<CoreError> errors = new ArrayList<>();

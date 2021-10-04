@@ -31,7 +31,7 @@ class FindPatientByIdServiceTest {
     public void init() {
         validator = Mockito.mock(FindPatientByIDValidator.class);
         database = Mockito.mock(PatientDatabaseImpl.class);
-        service = new FindPatientByIdService(database, validator);
+        service = new FindPatientByIdService();
     }
 
     @Test

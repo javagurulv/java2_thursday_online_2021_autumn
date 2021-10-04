@@ -30,7 +30,7 @@ class SearchPatientsValidatorTest {
         fieldValidator = Mockito.mock(SearchPatientsRequestFieldValidator.class);
         orderingValidator = Mockito.mock(OrderingValidator.class);
         pagingValidator = Mockito.mock(PagingValidator.class);
-        validator = new SearchPatientsValidator(fieldValidator, orderingValidator, pagingValidator);
+        validator = new SearchPatientsValidator();
     }
 
     @Test

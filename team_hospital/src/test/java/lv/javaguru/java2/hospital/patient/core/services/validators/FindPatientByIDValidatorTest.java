@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class FindPatientByIDValidatorTest {
 
    private final PatientDatabaseImpl database = new PatientDatabaseImpl();
-   private final FindPatientByIDValidator validator = new FindPatientByIDValidator(database);
+   private final FindPatientByIDValidator validator = new FindPatientByIDValidator();
 
     @Test
     public void shouldReturnEmptyList(){

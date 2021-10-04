@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.patient.acceptance_tests;
 
-import lv.javaguru.java2.hospital.PatientApplicationContext;
+import lv.javaguru.java2.hospital.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.hospital.dependency_injection.DIApplicationContextBuilder;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.requests.Ordering;
 import lv.javaguru.java2.hospital.patient.core.requests.Paging;
@@ -14,7 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AcceptanceTest2 {
 
-    private final PatientApplicationContext applicationContext = new PatientApplicationContext();
+    private static final ApplicationContext applicationContext =
+            new DIApplicationContextBuilder().build("lv.javaguru.java2.hospital");
 
     @Test
     public void shouldReturnCorrectPatientsListWithSearch() {

@@ -1,15 +1,15 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
+import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.patient.core.requests.DeletePatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.DeletePatientResponse;
 import lv.javaguru.java2.hospital.patient.core.services.DeletePatientService;
 
+@DIComponent
 public class DeletePatientUIAction implements PatientUIActions {
-    private final DeletePatientService deletePatient;
 
-    public DeletePatientUIAction(DeletePatientService deletePatient) {
-        this.deletePatient = deletePatient;
-    }
+    @DIDependency private DeletePatientService deletePatient;
 
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();

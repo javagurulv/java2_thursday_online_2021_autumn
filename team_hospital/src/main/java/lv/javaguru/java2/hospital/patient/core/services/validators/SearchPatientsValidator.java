@@ -1,21 +1,16 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
+import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import java.util.List;
 
+@DIComponent
 public class SearchPatientsValidator {
 
-    private final SearchPatientsRequestFieldValidator fieldValidator;
-    private final OrderingValidator orderingValidator;
-    private final PagingValidator pagingValidator;
-
-    public SearchPatientsValidator(SearchPatientsRequestFieldValidator fieldValidator,
-                                   OrderingValidator orderingValidator,
-                                   PagingValidator pagingValidator) {
-        this.fieldValidator = fieldValidator;
-        this.orderingValidator = orderingValidator;
-        this.pagingValidator = pagingValidator;
-    }
+    @DIDependency private SearchPatientsRequestFieldValidator fieldValidator;
+    @DIDependency private OrderingValidator orderingValidator;
+    @DIDependency private PagingValidator pagingValidator;
 
     public List<CoreError> validate(SearchPatientsRequest request) {
         List<CoreError> errors = fieldValidator.validate(request);

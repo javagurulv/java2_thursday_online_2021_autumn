@@ -29,7 +29,7 @@ public class EditPatientServiceTest {
     public void init() {
         validator = Mockito.mock(EditPatientValidator.class);
         database = Mockito.mock(PatientDatabaseImpl.class);
-        service = new EditPatientService(database, validator);
+        service = new EditPatientService();
     }
 
     @Test

@@ -1,16 +1,16 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
+import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.patient.core.requests.FindPatientByIdRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.FindPatientByIDResponse;
 import lv.javaguru.java2.hospital.patient.core.services.FindPatientByIdService;
 import java.util.Scanner;
 
+@DIComponent
 public class FindPatientByIDUIAction implements PatientUIActions {
-    private final FindPatientByIdService findByIDService;
 
-    public FindPatientByIDUIAction(FindPatientByIdService findById) {
-        this.findByIDService = findById;
-    }
+   @DIDependency private FindPatientByIdService findByIDService;
 
     public void execute() {
         Scanner scanner = new Scanner(System.in);

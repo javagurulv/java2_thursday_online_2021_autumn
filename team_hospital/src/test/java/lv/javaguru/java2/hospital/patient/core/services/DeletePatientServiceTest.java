@@ -30,7 +30,7 @@ class DeletePatientServiceTest {
     public void init() {
         patientDatabase = Mockito.mock(PatientDatabaseImpl.class);
         validator = Mockito.mock(DeletePatientValidator.class);
-        service = new DeletePatientService(patientDatabase, validator);
+        service = new DeletePatientService();
     }
 
     @Test

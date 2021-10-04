@@ -1,15 +1,15 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
+import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.EditPatientResponse;
 import lv.javaguru.java2.hospital.patient.core.services.EditPatientService;
 
+@DIComponent
 public class EditPatientUIAction implements PatientUIActions {
-    private final EditPatientService editPatient;
 
-    public EditPatientUIAction(EditPatientService editPatient) {
-        this.editPatient = editPatient;
-    }
+    @DIDependency private EditPatientService editPatient;
 
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();

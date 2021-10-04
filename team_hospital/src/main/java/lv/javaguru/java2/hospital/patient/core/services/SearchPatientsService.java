@@ -1,6 +1,8 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
+import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.Ordering;
 import lv.javaguru.java2.hospital.patient.core.requests.Paging;
@@ -15,14 +17,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class SearchPatientsService {
-    private final PatientDatabaseImpl patientDatabase;
-    private final SearchPatientsValidator validator;
 
-    public SearchPatientsService(PatientDatabaseImpl patientDatabase, SearchPatientsValidator validator) {
-        this.patientDatabase = patientDatabase;
-        this.validator = validator;
-    }
+    @DIDependency private PatientDatabaseImpl patientDatabase;
+    @DIDependency private SearchPatientsValidator validator;
 
     public SearchPatientsResponse execute(SearchPatientsRequest request) {
         List<CoreError> errors = validator.validate(request);

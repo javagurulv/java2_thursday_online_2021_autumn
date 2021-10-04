@@ -26,7 +26,7 @@ class ShowAllPatientsServiceTest {
     @BeforeEach
     public void init() {
         database = Mockito.mock(PatientDatabaseImpl.class);
-        showAllPatientsService = new ShowAllPatientsService(database);
+        showAllPatientsService = new ShowAllPatientsService();
     }
 
     @Test

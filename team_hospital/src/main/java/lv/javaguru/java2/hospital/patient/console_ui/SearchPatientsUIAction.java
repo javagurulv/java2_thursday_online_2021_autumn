@@ -1,5 +1,7 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
+import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.patient.core.requests.Ordering;
 import lv.javaguru.java2.hospital.patient.core.requests.Paging;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
@@ -7,12 +9,10 @@ import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
 import lv.javaguru.java2.hospital.patient.core.services.SearchPatientsService;
 import java.util.Locale;
 
+@DIComponent
 public class SearchPatientsUIAction implements PatientUIActions {
-    private final SearchPatientsService searchPatientsService;
 
-    public SearchPatientsUIAction(SearchPatientsService searchPatientsService) {
-        this.searchPatientsService = searchPatientsService;
-    }
+    @DIDependency private SearchPatientsService searchPatientsService;
 
     @Override
     public void execute() {
