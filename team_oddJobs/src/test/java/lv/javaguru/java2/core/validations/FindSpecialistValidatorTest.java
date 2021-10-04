@@ -4,9 +4,11 @@ import lv.javaguru.java2.core.requests.Find.FindSpecialistRequest;
 import lv.javaguru.java2.core.requests.Find.Ordering;
 import lv.javaguru.java2.core.requests.Find.Paging;
 import lv.javaguru.java2.core.responce.CoreError;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
@@ -14,28 +16,24 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class FindSpecialistValidatorTest {
 
+    @Mock
     private FindSpecialistsFieldValidator fieldValidator;
+    @InjectMocks
     private FindSpecialistValidator validator;
+    @Mock
     private SpecialistOrderingValidator specialistOrderingValidator;
+    @Mock
     private SpecialistPagingValidator specialistPagingValidator;
-
-    @Before
-    public void init() {
-        fieldValidator = Mockito.mock(FindSpecialistsFieldValidator.class);
-        specialistOrderingValidator = Mockito.mock(SpecialistOrderingValidator.class);
-        specialistPagingValidator = Mockito.mock(SpecialistPagingValidator.class);
-
-        validator = new FindSpecialistValidator(fieldValidator, specialistOrderingValidator, specialistPagingValidator);
-    }
 
 
     @Test
     public void shouldNotReturnErrorsWhenFieldValidatorReturnNoErrors() {
         FindSpecialistRequest request = new FindSpecialistRequest("Name", null, null);
         when(fieldValidator.validate(request)).thenReturn(List.of());
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = fieldValidator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
@@ -44,7 +42,7 @@ public class FindSpecialistValidatorTest {
         FindSpecialistRequest request = new FindSpecialistRequest(null, "Surname", "Profession");
         CoreError error = new CoreError("Name", "Must not be empty!");
         when(fieldValidator.validate(request)).thenReturn(List.of(error));
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = fieldValidator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Name");
         assertEquals(errors.get(0).getMessage(), "Must not be empty!");
@@ -55,7 +53,7 @@ public class FindSpecialistValidatorTest {
         Ordering ordering = new Ordering("Name", "ASC");
         FindSpecialistRequest request = new FindSpecialistRequest("Name", "Surname", "Profession", ordering);
         when(specialistOrderingValidator.validate(ordering)).thenReturn(List.of());
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = specialistOrderingValidator.validate(ordering);
         assertEquals(errors.size(), 0);
     }
 
@@ -65,7 +63,7 @@ public class FindSpecialistValidatorTest {
         FindSpecialistRequest request = new FindSpecialistRequest("Name", "Surname", "Profession", ordering);
         CoreError error = new CoreError("orderBy", "Must not be empty!");
         when(specialistOrderingValidator.validate(ordering)).thenReturn(List.of(error));
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = specialistOrderingValidator.validate(ordering);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderBy");
         assertEquals(errors.get(0).getMessage(), "Must not be empty!");

@@ -7,17 +7,18 @@ import lv.javaguru.java2.core.responce.Add.AddSpecialistResponse;
 import lv.javaguru.java2.core.responce.CoreError;
 import lv.javaguru.java2.core.validations.AddSpecialistValidator;
 import lv.javaguru.java2.database.Database;
+import lv.javaguru.java2.dependency_injection.DIComponent;
+import lv.javaguru.java2.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class AddSpecialistService {
+    @DIDependency
     private Database database;
+    @DIDependency
     private AddSpecialistValidator validator;
 
-    public AddSpecialistService(Database database, AddSpecialistValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
 
     public AddSpecialistResponse execute(AddSpecialistRequest request) {
         List<CoreError> errors = validator.validate(request);

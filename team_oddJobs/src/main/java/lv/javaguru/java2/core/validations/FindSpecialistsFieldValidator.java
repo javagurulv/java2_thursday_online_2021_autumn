@@ -2,10 +2,11 @@ package lv.javaguru.java2.core.validations;
 
 import lv.javaguru.java2.core.requests.Find.FindSpecialistRequest;
 import lv.javaguru.java2.core.responce.CoreError;
+import lv.javaguru.java2.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@DIComponent
 public class FindSpecialistsFieldValidator {
 
     public List<CoreError> validate(FindSpecialistRequest request) {

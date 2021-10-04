@@ -8,39 +8,19 @@ import lv.javaguru.java2.console_ui.Exit.ExitMenuUIAction;
 import lv.javaguru.java2.console_ui.Find.*;
 import lv.javaguru.java2.console_ui.Get.GetAllClientsUIAction;
 import lv.javaguru.java2.console_ui.Get.GetAllSpecialistUIAction;
-import lv.javaguru.java2.console_ui.Remove.RemoveAdvertismentUIAction;
 import lv.javaguru.java2.console_ui.Remove.RemoveClientUIAction;
 import lv.javaguru.java2.console_ui.Remove.RemoveSpecialistUIAction;
-import lv.javaguru.java2.console_ui.UIAction;
-import lv.javaguru.java2.core.validations.*;
-import lv.javaguru.java2.database.Database;
-import lv.javaguru.java2.database.InMemoryDatabaseImpl;
-import lv.javaguru.java2.services.Add.AddAdvertismentService;
-import lv.javaguru.java2.services.Find.*;
-import lv.javaguru.java2.services.Remove.RemoveAdvertismentService;
+import lv.javaguru.java2.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.dependency_injection.DIApplicationContextBuilder;
+
 
 
 import java.util.Scanner;
 
 public class Application {
 
-    private static ApplicationContext applicationContext = new ApplicationContext();
-    private static Database database = new InMemoryDatabaseImpl();
-
-    private static AddAdvertismentService addAdvertisementService = new AddAdvertismentService(database);
-    private static UIAction addAdvertisement = new AddAdvertismentUIAction(addAdvertisementService);
-
-    private static RemoveAdvertismentValidator removeAdvertismentValidator = new RemoveAdvertismentValidator();
-    private static RemoveAdvertismentService deleteAdvertismentService = new RemoveAdvertismentService(database, removeAdvertismentValidator);
-    private static UIAction deleteAdvertisment = new RemoveAdvertismentUIAction(deleteAdvertismentService);
-
-    private static FindAdvertisementByTitleValidator findAdvertisementByTitleValidator = new FindAdvertisementByTitleValidator();
-    private static FindAdvertisementByTitleService findAdvertisementByTitleService = new FindAdvertisementByTitleService(database, findAdvertisementByTitleValidator);
-    private static UIAction findAdvertisementByTitle = new FindAdvertisementByTitleUIAction(findAdvertisementByTitleService);
-
-    private static FindAdvertisementByIdValidator findAdvertisementByIdValidator = new FindAdvertisementByIdValidator();
-    private static FindAdvertisementByIdService findAdvertisementByIdService = new FindAdvertisementByIdService(database, findAdvertisementByIdValidator);
-    private static UIAction findAdvertisementById = new FindAdvertisementByIdUIAction(findAdvertisementByIdService);
+    private static ApplicationContext applicationContext =
+            new DIApplicationContextBuilder().build("lv.javaguru.java2");
 
 
     public static void main(String[] args) {
@@ -91,8 +71,8 @@ public class Application {
             }
 
             case 3: {
-                addAdvertisement.execute();
-
+               AddAdvertismentUIAction uiAction = applicationContext.getBean(AddAdvertismentUIAction.class);
+                uiAction.execute();
                 break;
             }
 
@@ -109,14 +89,14 @@ public class Application {
             }
 
             case 6: {
-                findAdvertisementByTitle.execute();
-
+                FindAdvertisementByTitleUIAction uiAction = applicationContext.getBean(FindAdvertisementByTitleUIAction.class);
+                uiAction.execute();
                 break;
             }
 
             case 7: {
-                findAdvertisementById.execute();
-
+                FindAdvertisementByIdUIAction uiAction = applicationContext.getBean(FindAdvertisementByIdUIAction.class);
+                uiAction.execute();
                 break;
             }
 

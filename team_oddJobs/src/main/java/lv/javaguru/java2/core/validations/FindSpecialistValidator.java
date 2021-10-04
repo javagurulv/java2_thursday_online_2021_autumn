@@ -4,21 +4,18 @@ import lv.javaguru.java2.core.requests.Find.FindSpecialistRequest;
 import lv.javaguru.java2.core.requests.Find.Ordering;
 import lv.javaguru.java2.core.requests.Find.Paging;
 import lv.javaguru.java2.core.responce.CoreError;
+import lv.javaguru.java2.dependency_injection.DIComponent;
+import lv.javaguru.java2.dependency_injection.DIDependency;
 
 import java.util.List;
 
-
+@DIComponent
 public class FindSpecialistValidator {
 
-    private FindSpecialistsFieldValidator fieldValidator;
-    private SpecialistOrderingValidator specialistOrderingValidator;
-    private SpecialistPagingValidator specialistPagingValidator;
+    @DIDependency private FindSpecialistsFieldValidator fieldValidator;
+    @DIDependency private SpecialistOrderingValidator specialistOrderingValidator;
+    @DIDependency private SpecialistPagingValidator specialistPagingValidator;
 
-    public FindSpecialistValidator(FindSpecialistsFieldValidator fieldValidator, SpecialistOrderingValidator specialistOrderingValidator, SpecialistPagingValidator specialistPagingValidator) {
-        this.fieldValidator = fieldValidator;
-        this.specialistOrderingValidator = specialistOrderingValidator;
-        this.specialistPagingValidator = specialistPagingValidator;
-    }
 
     public List<CoreError> validate(FindSpecialistRequest request) {
         List<CoreError> errors = fieldValidator.validate(request);

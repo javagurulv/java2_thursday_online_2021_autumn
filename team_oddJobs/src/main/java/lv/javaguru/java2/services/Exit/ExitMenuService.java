@@ -1,5 +1,8 @@
 package lv.javaguru.java2.services.Exit;
 
+import lv.javaguru.java2.dependency_injection.DIComponent;
+
+@DIComponent
 public class ExitMenuService {
 
     public void execute() {

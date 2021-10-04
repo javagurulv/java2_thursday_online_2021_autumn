@@ -3,18 +3,17 @@ package lv.javaguru.java2.console_ui.Remove;
 import lv.javaguru.java2.console_ui.UIAction;
 import lv.javaguru.java2.core.requests.Remove.RemoveAdvertismentRequest;
 import lv.javaguru.java2.core.responce.Remove.RemoveAdvertismentResponse;
+import lv.javaguru.java2.dependency_injection.DIComponent;
+import lv.javaguru.java2.dependency_injection.DIDependency;
 import lv.javaguru.java2.services.Remove.RemoveAdvertismentService;
 
 import java.util.Scanner;
 
+@DIComponent
 public class RemoveAdvertismentUIAction implements UIAction {
 
+    @DIDependency
     private RemoveAdvertismentService deleteAdvertismentService;
-
-    public RemoveAdvertismentUIAction (RemoveAdvertismentService deleteAdvertismentService) {
-        this.deleteAdvertismentService = deleteAdvertismentService;
-
-    }
 
 
     @Override

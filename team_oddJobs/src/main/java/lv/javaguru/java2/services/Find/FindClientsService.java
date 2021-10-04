@@ -9,21 +9,22 @@ import lv.javaguru.java2.core.responce.CoreError;
 import lv.javaguru.java2.core.responce.Find.FindClientsResponse;
 import lv.javaguru.java2.core.validations.FindClientsRequestValidator;
 import lv.javaguru.java2.database.Database;
+import lv.javaguru.java2.dependency_injection.DIComponent;
+import lv.javaguru.java2.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class FindClientsService {
 
+    @DIDependency
     private Database database;
+    @DIDependency
     private FindClientsRequestValidator clientValidator;
 
-    public FindClientsService(Database database, FindClientsRequestValidator validator) {
-        this.database = database;
-        this.clientValidator = validator;
-    }
 
     public FindClientsResponse execute(FindClientsRequest request) {
 

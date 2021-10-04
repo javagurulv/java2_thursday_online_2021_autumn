@@ -1,21 +1,23 @@
-package acceptancetests;
+package lv.javaguru.java2.acceptanceTests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import lv.javaguru.java2.ApplicationContext;
+import lv.javaguru.java2.dependency_injection.ApplicationContext;
 import lv.javaguru.java2.core.requests.Add.AddSpecialistRequest;
 import lv.javaguru.java2.core.requests.Get.GetAllSpecialistRequest;
 import lv.javaguru.java2.core.requests.Remove.RemoveSpecialistRequest;
 import lv.javaguru.java2.core.responce.Get.GetAllSpecialistsResponse;
 import lv.javaguru.java2.core.responce.Remove.RemoveSpecialistResponse;
+import lv.javaguru.java2.dependency_injection.DIApplicationContextBuilder;
 import lv.javaguru.java2.services.Add.AddSpecialistService;
 import lv.javaguru.java2.services.Get.GetAllSpecialistsService;
 import lv.javaguru.java2.services.Remove.RemoveSpecialistService;
 import org.junit.Test;
 
 public class AcceptanceTest {
-    ApplicationContext applicationContext = new ApplicationContext();
+    private ApplicationContext appContext =
+            new DIApplicationContextBuilder().build("lv.javaguru.java2");
 
 
     @Test
@@ -46,15 +48,15 @@ public class AcceptanceTest {
 
 
     private AddSpecialistService getAddSpecialistService() {
-        return applicationContext.getBean(AddSpecialistService.class);
+        return appContext.getBean(AddSpecialistService.class);
     }
 
     private GetAllSpecialistsService getAllSpecialistsService() {
-        return applicationContext.getBean(GetAllSpecialistsService.class);
+        return appContext.getBean(GetAllSpecialistsService.class);
 
     }
 
     private RemoveSpecialistService gerRemoveSpecialistService() {
-        return applicationContext.getBean(RemoveSpecialistService.class);
+        return appContext.getBean(RemoveSpecialistService.class);
     }
 }

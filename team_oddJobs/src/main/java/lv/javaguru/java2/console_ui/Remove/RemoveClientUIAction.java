@@ -4,16 +4,16 @@ package lv.javaguru.java2.console_ui.Remove;
 import lv.javaguru.java2.console_ui.UIAction;
 import lv.javaguru.java2.core.requests.Remove.RemoveClientRequest;
 import lv.javaguru.java2.core.responce.Remove.RemoveClientResponse;
+import lv.javaguru.java2.dependency_injection.DIComponent;
+import lv.javaguru.java2.dependency_injection.DIDependency;
 import lv.javaguru.java2.services.Remove.RemoveClientService;
 
 import java.util.Scanner;
 
+@DIComponent
 public class RemoveClientUIAction implements UIAction {
+    @DIDependency
     private RemoveClientService deleteClientService;
-
-    public RemoveClientUIAction(RemoveClientService deleteClientService) {
-        this.deleteClientService = deleteClientService;
-    }
 
     @Override
     public void execute() {
@@ -29,7 +29,7 @@ public class RemoveClientUIAction implements UIAction {
 
 //        deleteClientService.execute(clientId);
 
-        RemoveClientRequest request = new RemoveClientRequest(clientName,clientSurname,clientId);
+        RemoveClientRequest request = new RemoveClientRequest(clientName, clientSurname, clientId);
         RemoveClientResponse removeClientResponse = deleteClientService.execute(request);
 
         if (removeClientResponse.hasErrors()) {
