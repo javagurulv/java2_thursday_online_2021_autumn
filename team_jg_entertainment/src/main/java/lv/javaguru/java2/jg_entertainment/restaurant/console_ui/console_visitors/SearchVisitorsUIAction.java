@@ -5,16 +5,15 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Pagi
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseSearchVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceSearchVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class SearchVisitorsUIAction implements RestaurantUIAction {
 
-    private ServiceSearchVisitors searchVisitorsService;
-
-    public SearchVisitorsUIAction(ServiceSearchVisitors searchVisitorsService) {
-        this.searchVisitorsService = searchVisitorsService;
-    }
+    @DIDependency private ServiceSearchVisitors searchVisitorsService;
 
     @Override
     public void execute() {

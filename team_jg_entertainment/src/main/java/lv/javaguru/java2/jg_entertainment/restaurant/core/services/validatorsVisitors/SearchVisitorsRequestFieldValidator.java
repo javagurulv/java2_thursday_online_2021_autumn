@@ -2,10 +2,12 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVi
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class SearchVisitorsRequestFieldValidator {
 
     public List<CoreError> validatorSearchField(SearchVisitorsRequest request) { //+search field telephone

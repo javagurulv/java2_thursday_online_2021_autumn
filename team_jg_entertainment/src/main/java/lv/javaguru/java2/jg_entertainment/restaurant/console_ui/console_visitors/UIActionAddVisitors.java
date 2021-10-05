@@ -3,16 +3,15 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitor
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestAddVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseAddVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceAddAllVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class UIActionAddVisitors implements RestaurantUIAction {
 
-    private ServiceAddAllVisitors serviceAddAllVisitors;
-
-    public UIActionAddVisitors(ServiceAddAllVisitors serviceAddAllVisitors) {
-        this.serviceAddAllVisitors = serviceAddAllVisitors;
-    }
+    @DIDependency private ServiceAddAllVisitors serviceAddAllVisitors;
 
     @Override
     public void execute() {

@@ -6,6 +6,8 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Pagi
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseSearchVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIDependency;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.SearchVisitorsRequestValidator;
 
@@ -14,17 +16,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class ServiceSearchVisitors {
 
-    private DatabaseVisitors database;
-    private SearchVisitorsRequestValidator validator;
-
-
-    public ServiceSearchVisitors(DatabaseVisitors database,
-                                 SearchVisitorsRequestValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @DIDependency private DatabaseVisitors database;
+    @DIDependency private SearchVisitorsRequestValidator validator;
 
     public ResponseSearchVisitors execute(SearchVisitorsRequest request) {
 

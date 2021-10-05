@@ -8,13 +8,16 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.Res
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceAddAllVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceDeleteVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceShowListVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIApplicationContextBuilder;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AcceptanceTest {
 
-    private ApplicationContextRestaurant appContext = new ApplicationContextRestaurant();
+    private ApplicationContext appContext =
+            new DIApplicationContextBuilder().build("lv.javaguru.java2.jg_entertainment.restaurant");
 
     @Test
     public void shouldReturnCorrectVisitorList() {

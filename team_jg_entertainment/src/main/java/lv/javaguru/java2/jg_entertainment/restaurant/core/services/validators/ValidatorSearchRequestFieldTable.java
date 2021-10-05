@@ -2,10 +2,12 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.SearchTableRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.CoreError;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class ValidatorSearchRequestFieldTable {
     
     public List<CoreError> validatorField(SearchTableRequest request){
