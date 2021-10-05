@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
 import lv.javaguru.java2.hospital.doctor.core.requests.Paging;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 
+@DIComponent
 public class PagingValidator {
 
 	public List<CoreError> validate(Paging paging) {

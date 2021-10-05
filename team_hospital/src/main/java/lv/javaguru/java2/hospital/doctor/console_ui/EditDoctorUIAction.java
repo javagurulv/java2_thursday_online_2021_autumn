@@ -1,18 +1,14 @@
 package lv.javaguru.java2.hospital.doctor.console_ui;
 
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
+import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.EditDoctorResponse;
-import lv.javaguru.java2.hospital.doctor.core.services.DoctorExistsService;
 import lv.javaguru.java2.hospital.doctor.core.services.EditDoctorService;
 
+@DIComponent
 public class EditDoctorUIAction implements DoctorUIActions {
-    private final EditDoctorService editDoctor;
-    private final DoctorExistsService doctorExists;
-
-    public EditDoctorUIAction(EditDoctorService editDoctor, DoctorExistsService doctorExists) {
-        this.editDoctor = editDoctor;
-        this.doctorExists = doctorExists;
-    }
+    @DIDependency private EditDoctorService editDoctor;
 
     @Override
     public void execute() {

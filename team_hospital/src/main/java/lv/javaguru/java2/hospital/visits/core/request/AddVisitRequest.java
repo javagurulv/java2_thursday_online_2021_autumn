@@ -1,13 +1,13 @@
 package lv.javaguru.java2.hospital.visits.core.request;
 
-public class AddPatientVisitRequest {
+public class AddVisitRequest {
     private String patientsPersonalCode;
     private String doctorsName;
     private String doctorsSurname;
     private String visitDate;
 
-    public AddPatientVisitRequest(String patientsPersonalCode, String doctorsName,
-                                  String doctorsSurname, String visitDate) {
+    public AddVisitRequest(String patientsPersonalCode, String doctorsName,
+                           String doctorsSurname, String visitDate) {
         this.patientsPersonalCode = patientsPersonalCode;
         this.doctorsName = doctorsName;
         this.doctorsSurname = doctorsSurname;

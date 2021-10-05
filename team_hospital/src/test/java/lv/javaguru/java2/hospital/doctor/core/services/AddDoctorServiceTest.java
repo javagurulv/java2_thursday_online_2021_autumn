@@ -47,7 +47,7 @@ class AddDoctorServiceTest {
     }
 
     @Test
-    public void shouldAddBookToDatabase() {
+    public void shouldAddDoctorToDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         AddDoctorRequest request = new AddDoctorRequest("name", "surname", "speciality");
         AddDoctorResponse response = service.execute(request);

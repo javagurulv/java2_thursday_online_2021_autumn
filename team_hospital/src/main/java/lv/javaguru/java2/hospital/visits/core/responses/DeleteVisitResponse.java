@@ -2,14 +2,14 @@ package lv.javaguru.java2.hospital.visits.core.responses;
 
 import java.util.List;
 
-public class DeletePatientVisitResponse extends CoreResponse {
+public class DeleteVisitResponse extends CoreResponse {
     private boolean isTrue;
 
-    public DeletePatientVisitResponse(List<CoreError> errors) {
+    public DeleteVisitResponse(List<CoreError> errors) {
         super(errors);
     }
 
-    public DeletePatientVisitResponse(boolean trueOrNot) {
+    public DeleteVisitResponse(boolean trueOrNot) {
         this.isTrue = trueOrNot;
     }
 

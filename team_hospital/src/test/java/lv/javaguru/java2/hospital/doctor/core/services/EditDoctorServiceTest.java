@@ -6,17 +6,22 @@ import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.doctor.core.responses.EditDoctorResponse;
 import lv.javaguru.java2.hospital.doctor.core.services.validators.EditDoctorRequestValidator;
 import lv.javaguru.java2.hospital.domain.Doctor;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 class EditDoctorServiceTest {
 
     @Mock
@@ -25,13 +30,6 @@ class EditDoctorServiceTest {
     private EditDoctorRequestValidator validator;
     @InjectMocks
     private EditDoctorService service;
-
-    @BeforeEach
-    public void init() {
-        database = Mockito.mock(DoctorDatabaseImpl.class);
-        validator = Mockito.mock(EditDoctorRequestValidator.class);
-        service = new EditDoctorService(database, validator);
-    }
 
     @Test
     public void shouldReturnErrorWhenDoctorIdNotProvided() {
@@ -45,21 +43,6 @@ class EditDoctorServiceTest {
         assertEquals(response.getErrors().size(), 1);
         assertEquals(response.getErrors().get(0).getField(), "id");
         assertEquals(response.getErrors().get(0).getMessage(), "Must not be empty!");
-    }
-
-
-    @Test
-    public void shouldReturnFalse() {
-        EditDoctorRequest request = new EditDoctorRequest(1L, 1, "NewName");
-        Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-
-        List<Doctor> doctors = new ArrayList<>();
-        doctors.add(new Doctor("Name", "Surname", "Speciality"));
-        Mockito.when(database.editDoctor(2L, 1, "NewName")).thenReturn(false);
-
-        EditDoctorResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertFalse(response.isDoctorEdited());
     }
 
     @Test

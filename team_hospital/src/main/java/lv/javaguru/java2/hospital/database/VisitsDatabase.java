@@ -1,16 +1,16 @@
 package lv.javaguru.java2.hospital.database;
 
-import lv.javaguru.java2.hospital.domain.PatientVisit;
+import lv.javaguru.java2.hospital.domain.Visit;
 
 import java.util.List;
 
 public interface VisitsDatabase {
 
-    void recordVisit(PatientVisit patientVisit);
+    void recordVisit(Visit visit);
 
-    boolean DeleteVisit(Long id);
+    boolean deleteVisit(Long id);
 
-    List<PatientVisit> showAllPatientVisits();
+    List<Visit> showAllVisits();
 
     boolean editVisit(Long visitId, int userInput, String changes);
 }

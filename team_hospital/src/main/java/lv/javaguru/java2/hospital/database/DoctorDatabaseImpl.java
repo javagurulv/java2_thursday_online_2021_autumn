@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.database;
 
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
 import lv.javaguru.java2.hospital.domain.Doctor;
 
 import java.util.ArrayList;
@@ -7,9 +8,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class DoctorDatabaseImpl implements DoctorDatabase {
 
-    private final List<Doctor> doctorsList = new ArrayList<>();
+    private List<Doctor> doctorsList = new ArrayList<>();
 
     @Override
     public void addDoctor(Doctor doctor) {
@@ -51,16 +53,6 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
             isDoctorEdited = true;
         }
         return isDoctorEdited;
-    }
-
-    @Override
-    public boolean doctorExists(Long id) {
-        for (Doctor doctor : doctorsList) {
-            if (doctor.getId() == id) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override

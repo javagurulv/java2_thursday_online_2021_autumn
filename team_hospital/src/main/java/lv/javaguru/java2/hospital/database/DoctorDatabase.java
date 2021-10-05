@@ -14,8 +14,6 @@ public interface DoctorDatabase {
 
     boolean editDoctor(Long doctorId, int userInput, String input);
 
-    boolean doctorExists(Long id);
-
     List<Doctor> findByName(String name);
 
     List<Doctor> findBySurname(String surname);

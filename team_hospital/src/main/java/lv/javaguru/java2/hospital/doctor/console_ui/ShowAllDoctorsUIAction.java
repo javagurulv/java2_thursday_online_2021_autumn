@@ -1,16 +1,15 @@
 package lv.javaguru.java2.hospital.doctor.console_ui;
 
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
+import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.doctor.core.requests.ShowAllDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.ShowAllDoctorsResponse;
 import lv.javaguru.java2.hospital.doctor.core.services.ShowAllDoctorsService;
 
+@DIComponent
 public class ShowAllDoctorsUIAction implements DoctorUIActions {
 
-    private final ShowAllDoctorsService showAllDoctors;
-
-    public ShowAllDoctorsUIAction(ShowAllDoctorsService showAllDoctors) {
-        this.showAllDoctors = showAllDoctors;
-    }
+    @DIDependency private ShowAllDoctorsService showAllDoctors;
 
     @Override
     public void execute() {

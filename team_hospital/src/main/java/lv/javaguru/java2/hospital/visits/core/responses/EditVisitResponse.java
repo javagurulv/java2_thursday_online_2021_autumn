@@ -2,15 +2,15 @@ package lv.javaguru.java2.hospital.visits.core.responses;
 
 import java.util.List;
 
-public class EditPatientVisitResponse extends CoreResponse {
+public class EditVisitResponse extends CoreResponse {
 
     private boolean visitEdited;
 
-    public EditPatientVisitResponse(List<CoreError> errors) {
+    public EditVisitResponse(List<CoreError> errors) {
         super(errors);
     }
 
-    public EditPatientVisitResponse(boolean visitEdited) {
+    public EditVisitResponse(boolean visitEdited) {
         this.visitEdited = visitEdited;
     }
 

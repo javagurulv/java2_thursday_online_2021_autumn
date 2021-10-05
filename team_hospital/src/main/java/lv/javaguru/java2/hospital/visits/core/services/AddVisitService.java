@@ -5,35 +5,35 @@ import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.database.VisitDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
-import lv.javaguru.java2.hospital.domain.PatientVisit;
-import lv.javaguru.java2.hospital.visits.core.request.AddPatientVisitRequest;
+import lv.javaguru.java2.hospital.domain.Visit;
+import lv.javaguru.java2.hospital.visits.core.request.AddVisitRequest;
 import lv.javaguru.java2.hospital.visits.core.responses.CoreError;
-import lv.javaguru.java2.hospital.visits.core.responses.AddPatientVisitResponse;
-import lv.javaguru.java2.hospital.visits.core.services.validators.AddPatientVisitValidator;
+import lv.javaguru.java2.hospital.visits.core.responses.AddVisitResponse;
+import lv.javaguru.java2.hospital.visits.core.services.validators.AddVisitValidator;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class AddPatientsVisitService {
+public class AddVisitService {
     private final PatientDatabaseImpl patientDatabase;
     private final DoctorDatabaseImpl doctorDatabase;
     private final VisitDatabaseImpl visitDatabase;
-    private final AddPatientVisitValidator validator;
+    private final AddVisitValidator validator;
 
-    public AddPatientsVisitService(PatientDatabaseImpl patientDatabase, DoctorDatabaseImpl doctorDatabase,
-                                   VisitDatabaseImpl visitDatabase, AddPatientVisitValidator validator) {
+    public AddVisitService(PatientDatabaseImpl patientDatabase, DoctorDatabaseImpl doctorDatabase,
+                           VisitDatabaseImpl visitDatabase, AddVisitValidator validator) {
         this.patientDatabase = patientDatabase;
         this.doctorDatabase = doctorDatabase;
         this.visitDatabase = visitDatabase;
         this.validator = validator;
     }
 
-    public AddPatientVisitResponse execute(AddPatientVisitRequest request) {
+    public AddVisitResponse execute(AddVisitRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (!errors.isEmpty()) {
-            return new AddPatientVisitResponse(errors, null);
+            return new AddVisitResponse(errors);
         }
 
         Patient patient = patientDatabase
@@ -49,10 +49,10 @@ public class AddPatientsVisitService {
             e.printStackTrace();
         }
 
-        PatientVisit patientVisit =
-                new PatientVisit(doctor, patient, date);
+        Visit visit =
+                new Visit(doctor, patient, date);
 
-        visitDatabase.recordVisit(patientVisit);
-        return new AddPatientVisitResponse(null, patientVisit);
+        visitDatabase.recordVisit(visit);
+        return new AddVisitResponse(visit);
     }
 }
