@@ -8,25 +8,25 @@ import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 public class SearchDoctorsRequestValidatorTest {
 
-    private SearchDoctorsRequestFieldValidator fieldValidator;
-    private OrderingValidator orderingValidator;
-    private PagingValidator pagingValidator;
-    private SearchDoctorsRequestValidator validator;
-
-    @BeforeEach
-    public void init() {
-        fieldValidator = Mockito.mock(SearchDoctorsRequestFieldValidator.class);
-        orderingValidator = Mockito.mock(OrderingValidator.class);
-        pagingValidator = Mockito.mock(PagingValidator.class);
-        validator = new SearchDoctorsRequestValidator(fieldValidator, orderingValidator, pagingValidator);
-    }
+    @Mock private SearchDoctorsRequestFieldValidator fieldValidator;
+    @Mock private OrderingValidator orderingValidator;
+    @Mock private PagingValidator pagingValidator;
+    @InjectMocks private SearchDoctorsRequestValidator validator;
 
     @Test
     public void shouldReturnOrderingErrors() {

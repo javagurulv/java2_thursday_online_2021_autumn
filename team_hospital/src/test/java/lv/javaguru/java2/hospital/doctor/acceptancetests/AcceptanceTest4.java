@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.acceptancetests;
 
-import lv.javaguru.java2.hospital.DoctorApplicationContext;
+import lv.javaguru.java2.hospital.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.hospital.dependency_injection.DIApplicationContextBuilder;
 import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.requests.ShowAllDoctorsRequest;
@@ -18,7 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AcceptanceTest4 {
 
-    private DoctorApplicationContext appContest = new DoctorApplicationContext();
+    private ApplicationContext appContest =
+            new DIApplicationContextBuilder().build("lv.javaguru.java2.hospital");
 
     @Test
     public void shouldEditDoctorName() {

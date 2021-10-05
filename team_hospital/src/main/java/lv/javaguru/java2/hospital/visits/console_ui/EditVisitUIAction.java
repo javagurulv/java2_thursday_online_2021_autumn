@@ -1,13 +1,13 @@
 package lv.javaguru.java2.hospital.visits.console_ui;
 
-import lv.javaguru.java2.hospital.visits.core.request.EditPatientVisitRequest;
-import lv.javaguru.java2.hospital.visits.core.responses.EditPatientVisitResponse;
-import lv.javaguru.java2.hospital.visits.core.services.EditPatientVisitService;
+import lv.javaguru.java2.hospital.visits.core.request.EditVisitRequest;
+import lv.javaguru.java2.hospital.visits.core.responses.EditVisitResponse;
+import lv.javaguru.java2.hospital.visits.core.services.EditVisitService;
 
-public class EditPatientVisitUIAction implements PatientVisitUIAction {
-    private EditPatientVisitService editPatientVisit;
+public class EditVisitUIAction implements VisitUIAction {
+    private EditVisitService editPatientVisit;
 
-    public EditPatientVisitUIAction(EditPatientVisitService editPatientVisit) {
+    public EditVisitUIAction(EditVisitService editPatientVisit) {
         this.editPatientVisit = editPatientVisit;
     }
 
@@ -23,8 +23,8 @@ public class EditPatientVisitUIAction implements PatientVisitUIAction {
             case 2 -> changes = getUserInput.getUserStringInput("Enter new patient id: ");
             case 3 -> changes = getUserInput.getUserStringInput("Enter new visit date and time in format dd/MM/yyyy HH:mm: ");
         }
-        EditPatientVisitRequest request = new EditPatientVisitRequest(id, userInput, changes);
-        EditPatientVisitResponse response = editPatientVisit.execute(request);
+        EditVisitRequest request = new EditVisitRequest(id, userInput, changes);
+        EditVisitResponse response = editPatientVisit.execute(request);
         if (response.isVisitEdited()) {
             System.out.println("The patient visit with id " + id + " was successfully edited.");
         } else {

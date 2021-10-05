@@ -1,13 +1,13 @@
 package lv.javaguru.java2.hospital.visits.console_ui;
 
-import lv.javaguru.java2.hospital.visits.core.request.AddPatientVisitRequest;
-import lv.javaguru.java2.hospital.visits.core.responses.AddPatientVisitResponse;
-import lv.javaguru.java2.hospital.visits.core.services.AddPatientsVisitService;
+import lv.javaguru.java2.hospital.visits.core.request.AddVisitRequest;
+import lv.javaguru.java2.hospital.visits.core.responses.AddVisitResponse;
+import lv.javaguru.java2.hospital.visits.core.services.AddVisitService;
 
-public class AddPatientVisitUIAction {
-    private final AddPatientsVisitService patientsVisitService;
+public class AddVisitUIAction {
+    private final AddVisitService patientsVisitService;
 
-    public AddPatientVisitUIAction(AddPatientsVisitService patientsVisitService) {
+    public AddVisitUIAction(AddVisitService patientsVisitService) {
         this.patientsVisitService = patientsVisitService;
     }
 
@@ -18,10 +18,10 @@ public class AddPatientVisitUIAction {
         String doctorSurname = getUserInput.getUserStringInput("Please enter doctor surname: ");
         String visitDate = getUserInput.getUserStringInput("Please enter visit date in format dd/MM/yyyy HH:mm: ");
 
-        AddPatientVisitRequest request =
-                new AddPatientVisitRequest(patientsPersonalCode, doctorName,
+        AddVisitRequest request =
+                new AddVisitRequest(patientsPersonalCode, doctorName,
                         doctorSurname, visitDate);
-        AddPatientVisitResponse response = patientsVisitService.execute(request);
+        AddVisitResponse response = patientsVisitService.execute(request);
 
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError

@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators;
 
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
 import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@DIComponent
 public class EditDoctorRequestValidator {
 
     public List<CoreError> validate(EditDoctorRequest request) {

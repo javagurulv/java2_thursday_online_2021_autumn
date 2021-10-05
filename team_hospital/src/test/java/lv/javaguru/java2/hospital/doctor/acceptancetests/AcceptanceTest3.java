@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.acceptancetests;
 
-import lv.javaguru.java2.hospital.DoctorApplicationContext;
+import lv.javaguru.java2.hospital.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.hospital.dependency_injection.DIApplicationContextBuilder;
 import lv.javaguru.java2.hospital.doctor.core.requests.*;
 import lv.javaguru.java2.hospital.doctor.core.responses.AddDoctorResponse;
 import lv.javaguru.java2.hospital.doctor.core.responses.DeleteDoctorResponse;
@@ -15,7 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AcceptanceTest3 {
 
-   private DoctorApplicationContext appContest = new DoctorApplicationContext();
+    private ApplicationContext appContest =
+            new DIApplicationContextBuilder().build("lv.javaguru.java2.hospital");
 
     @Test
     public void shouldDeleteCorrectDoctor() {

@@ -1,6 +1,8 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
 import lv.javaguru.java2.hospital.database.DoctorDatabase;
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
+import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.doctor.core.requests.Ordering;
 import lv.javaguru.java2.hospital.doctor.core.requests.Paging;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
@@ -14,15 +16,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class SearchDoctorsService {
 
-    private DoctorDatabase database;
-    private SearchDoctorsRequestValidator validator;
-
-    public SearchDoctorsService(DoctorDatabase database, SearchDoctorsRequestValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @DIDependency private DoctorDatabase database;
+    @DIDependency private SearchDoctorsRequestValidator validator;
 
     public SearchDoctorsResponse execute(SearchDoctorsRequest request) {
         List<CoreError> errors = validator.validate(request);
