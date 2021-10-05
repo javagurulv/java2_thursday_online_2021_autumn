@@ -1,9 +1,11 @@
-package lv.javaguru.java2.jg_entertainment;
+package lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.*;
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_reservation.UIActionAddReservation;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.*;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.service_reservation.ServiceAddReservation;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.AddMenuService;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.GetAllMenusService;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.RemoveMenuService;
@@ -16,6 +18,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visi
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceAddAllVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceDeleteVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceShowListVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validator_reservation.ValidatorAddReservation;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsMenus.AddMenuValidator;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsMenus.SearchMenusRequestValidator;
@@ -24,42 +27,43 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVis
 import java.util.HashMap;
 import java.util.Map;
 
-public class ApplicationContextRestaurant {
+public class ApplicationContextMenuAndTable {
 
     private final Map<Class, Object> beans = new HashMap<>();
 
-    public ApplicationContextRestaurant() {
+    public ApplicationContextMenuAndTable() {
         beans.put(DatabaseVisitors.class, new ImplDatabaseVisitors());//visitors
         beans.put(DatabaseMenu.class, new ImplDatabaseMenu());//menu
         beans.put(TableDatabase.class, new ImplDatabaseTable());//table
+        beans.put(DatabaseReservation.class, new ImplDatabaseReservation());//reservation
 //visitors
-        beans.put(ValidatorAddVisitor.class, new ValidatorAddVisitor());
-        beans.put(ValidatorDeleteVisitor.class, new ValidatorDeleteVisitor());
-        beans.put(OrderingValidator.class, new OrderingValidator());
-        beans.put(PagingValidator.class, new PagingValidator());
-        beans.put(SearchVisitorsRequestFieldValidator.class, new SearchVisitorsRequestFieldValidator());
-        beans.put(SearchVisitorsRequestValidator.class, new SearchVisitorsRequestValidator(
-                getBean(SearchVisitorsRequestFieldValidator.class),
-                getBean(OrderingValidator.class),
-                getBean(PagingValidator.class)));
-
-        beans.put(ServiceAddAllVisitors.class, new ServiceAddAllVisitors(
-                getBean(DatabaseVisitors.class),
-                getBean(ValidatorAddVisitor.class)));
-        beans.put(ServiceDeleteVisitors.class, new ServiceDeleteVisitors(
-                getBean(DatabaseVisitors.class),
-                getBean(ValidatorDeleteVisitor.class)));
-        beans.put(ServiceShowListVisitors.class, new ServiceShowListVisitors(
-                getBean(DatabaseVisitors.class)));
-        beans.put(ServiceSearchVisitors.class, new ServiceSearchVisitors(
-                getBean(DatabaseVisitors.class),
-                getBean(SearchVisitorsRequestValidator.class)));
-
-        beans.put(UIActionAddVisitors.class, new UIActionAddVisitors(getBean(ServiceAddAllVisitors.class)));
-        beans.put(UIActionDeleteVisitors.class, new UIActionDeleteVisitors(getBean(ServiceDeleteVisitors.class)));
-        beans.put(UIActionShowListWithAllVisitors.class, new UIActionShowListWithAllVisitors(getBean(ServiceShowListVisitors.class)));
-        beans.put(SearchVisitorsUIAction.class, new SearchVisitorsUIAction(getBean(ServiceSearchVisitors.class)));
-        beans.put(UIActionExit.class, new UIActionExit());
+//        beans.put(ValidatorAddVisitor.class, new ValidatorAddVisitor());
+//        beans.put(ValidatorDeleteVisitor.class, new ValidatorDeleteVisitor());
+//        beans.put(OrderingValidator.class, new OrderingValidator());
+//        beans.put(PagingValidator.class, new PagingValidator());
+//        beans.put(SearchVisitorsRequestFieldValidator.class, new SearchVisitorsRequestFieldValidator());
+//        beans.put(SearchVisitorsRequestValidator.class, new SearchVisitorsRequestValidator(
+//                getBean(SearchVisitorsRequestFieldValidator.class),
+//                getBean(OrderingValidator.class),
+//                getBean(PagingValidator.class)));
+//
+//        beans.put(ServiceAddAllVisitors.class, new ServiceAddAllVisitors(
+//                getBean(DatabaseVisitors.class),
+//                getBean(ValidatorAddVisitor.class)));
+//        beans.put(ServiceDeleteVisitors.class, new ServiceDeleteVisitors(
+//                getBean(DatabaseVisitors.class),
+//                getBean(ValidatorDeleteVisitor.class)));
+//        beans.put(ServiceShowListVisitors.class, new ServiceShowListVisitors(
+//                getBean(DatabaseVisitors.class)));
+//        beans.put(ServiceSearchVisitors.class, new ServiceSearchVisitors(
+//                getBean(DatabaseVisitors.class),
+//                getBean(SearchVisitorsRequestValidator.class)));
+//
+//        beans.put(UIActionAddVisitors.class, new UIActionAddVisitors(getBean(ServiceAddAllVisitors.class)));
+//        beans.put(UIActionDeleteVisitors.class, new UIActionDeleteVisitors(getBean(ServiceDeleteVisitors.class)));
+//        beans.put(UIActionShowListWithAllVisitors.class, new UIActionShowListWithAllVisitors(getBean(ServiceShowListVisitors.class)));
+//        beans.put(SearchVisitorsUIAction.class, new SearchVisitorsUIAction(getBean(ServiceSearchVisitors.class)));
+//        beans.put(UIActionExit.class, new UIActionExit());
 //menu
         beans.put(AddMenuValidator.class, new AddMenuValidator());
         beans.put(SearchMenusRequestValidator.class, new SearchMenusRequestValidator());
@@ -109,6 +113,20 @@ public class ApplicationContextRestaurant {
         beans.put(GetAllTablesUIAction.class, new GetAllTablesUIAction(
                 getBean(GetAllTablesService.class)));
         beans.put(ExitTableUIAction.class, new ExitTableUIAction());
+//reservation
+        beans.put(ValidatorAddReservation.class, new ValidatorAddReservation(
+                getBean(ImplDatabaseVisitors.class),
+                getBean(ImplDatabaseTable.class),
+                getBean(ImplDatabaseMenu.class)));
+        beans.put(ServiceAddReservation.class, new ServiceAddReservation(
+                getBean(ImplDatabaseVisitors.class),
+                getBean(ImplDatabaseTable.class),
+                getBean(ImplDatabaseMenu.class),
+                getBean(ImplDatabaseReservation.class),
+                getBean(ValidatorAddReservation.class)));
+
+        beans.put(UIActionAddReservation.class, new UIActionAddReservation(
+                getBean(ServiceAddReservation.class)));
     }
 
     public <T extends Object> T getBean(Class c) {
