@@ -5,17 +5,17 @@ import lv.javaguru.java2.core.responce.CoreError;
 import lv.javaguru.java2.core.responce.Remove.RemoveAdvertismentResponse;
 import lv.javaguru.java2.core.validations.RemoveAdvertismentValidator;
 import lv.javaguru.java2.database.Database;
+import lv.javaguru.java2.dependency_injection.DIComponent;
+import lv.javaguru.java2.dependency_injection.DIDependency;
 
 import java.util.List;
-
+@DIComponent
 public class RemoveAdvertismentService {
+    @DIDependency
     private Database database;
-    private RemoveAdvertismentValidator validator;
+    @DIDependency private RemoveAdvertismentValidator validator;
 
-    public RemoveAdvertismentService(Database database, RemoveAdvertismentValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+
     public RemoveAdvertismentResponse execute (RemoveAdvertismentRequest request){
         List<CoreError> errors =validator.validate(request);
         if ((!errors.isEmpty())) {

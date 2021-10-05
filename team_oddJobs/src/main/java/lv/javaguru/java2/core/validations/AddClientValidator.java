@@ -1,11 +1,12 @@
 package lv.javaguru.java2.core.validations;
 import lv.javaguru.java2.core.requests.Add.AddClientRequest;
 import lv.javaguru.java2.core.responce.CoreError;
+import lv.javaguru.java2.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@DIComponent
 public class AddClientValidator {
     public List<CoreError> validate(AddClientRequest request){
         List<CoreError> errors = new ArrayList<>();

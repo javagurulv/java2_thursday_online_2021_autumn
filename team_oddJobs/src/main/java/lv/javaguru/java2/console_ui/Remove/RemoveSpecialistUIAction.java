@@ -4,17 +4,18 @@ package lv.javaguru.java2.console_ui.Remove;
 import lv.javaguru.java2.console_ui.UIAction;
 import lv.javaguru.java2.core.requests.Remove.RemoveSpecialistRequest;
 import lv.javaguru.java2.core.responce.Remove.RemoveSpecialistResponse;
+import lv.javaguru.java2.dependency_injection.DIComponent;
+import lv.javaguru.java2.dependency_injection.DIDependency;
 import lv.javaguru.java2.services.Remove.RemoveSpecialistService;
 
 import java.util.Scanner;
 
+@DIComponent
 public class RemoveSpecialistUIAction implements UIAction {
 
+    @DIDependency
     private RemoveSpecialistService deleteSpecialistService;
 
-    public RemoveSpecialistUIAction(RemoveSpecialistService deleteSpecialistService) {
-        this.deleteSpecialistService = deleteSpecialistService;
-    }
 
     @Override
     public void execute() {

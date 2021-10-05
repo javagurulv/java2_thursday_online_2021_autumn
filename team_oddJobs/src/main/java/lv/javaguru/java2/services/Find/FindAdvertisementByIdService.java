@@ -14,18 +14,18 @@ import lv.javaguru.java2.core.requests.Find.FindAdvertisementByIdRequest;
 import lv.javaguru.java2.core.responce.CoreError;
 import lv.javaguru.java2.core.validations.FindAdvertisementByIdValidator;
 import lv.javaguru.java2.database.Database;
+import lv.javaguru.java2.dependency_injection.DIComponent;
+import lv.javaguru.java2.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class FindAdvertisementByIdService {
 
+    @DIDependency
     private Database database;
+    @DIDependency
     private FindAdvertisementByIdValidator validator;
-
-    public FindAdvertisementByIdService(Database database, FindAdvertisementByIdValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
 
 
     public FindAdvertisementByIdResponse execute(FindAdvertisementByIdRequest request) {

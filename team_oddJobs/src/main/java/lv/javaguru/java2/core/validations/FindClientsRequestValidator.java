@@ -4,11 +4,12 @@ import lv.javaguru.java2.core.requests.Find.FindClientsRequest;
 import lv.javaguru.java2.core.requests.Find.Ordering;
 import lv.javaguru.java2.core.requests.Find.Paging;
 import lv.javaguru.java2.core.responce.CoreError;
+import lv.javaguru.java2.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@DIComponent
 public class FindClientsRequestValidator {
 
     public List<CoreError> validate(FindClientsRequest request) {

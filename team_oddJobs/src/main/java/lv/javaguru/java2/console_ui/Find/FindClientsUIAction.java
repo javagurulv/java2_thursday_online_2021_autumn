@@ -6,19 +6,21 @@ import lv.javaguru.java2.core.requests.Find.FindClientsRequest;
 import lv.javaguru.java2.core.requests.Find.Ordering;
 import lv.javaguru.java2.core.requests.Find.Paging;
 import lv.javaguru.java2.core.responce.Find.FindClientsResponse;
+import lv.javaguru.java2.dependency_injection.DIComponent;
+import lv.javaguru.java2.dependency_injection.DIDependency;
 import lv.javaguru.java2.services.Find.FindClientsService;
 
 import java.util.Scanner;
 
+@DIComponent
 public class FindClientsUIAction implements UIAction {
 
 
+    @DIDependency
     private FindClientsService findClientsService;
+    @DIDependency
     private ExitMenuUIAction exitUIAction;
 
-    public FindClientsUIAction(FindClientsService findClientsService) {
-        this.findClientsService = findClientsService;
-    }
 
     @Override
     public void execute() {
