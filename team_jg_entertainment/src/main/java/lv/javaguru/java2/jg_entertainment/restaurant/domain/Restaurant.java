@@ -2,7 +2,6 @@ package lv.javaguru.java2.jg_entertainment.restaurant.domain;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.ApplicationContext;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.*;
-import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_reservation.UIActionAddReservation;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIApplicationContextBuilder;
@@ -22,8 +21,8 @@ public class Restaurant {
                 case 1 -> visitorsMenu();
                 case 2 -> restaurantMenu();
                 case 3 -> tablesMenu();
-                case 4 -> reservationMenu();
-                case 5 -> System.exit(0);
+                //case 4 -> reservationMenu();
+                case 4 -> System.exit(0);
             }
         }
     }
@@ -34,8 +33,8 @@ public class Restaurant {
         System.out.println("1--> choose action with VISITORS: ");
         System.out.println("2--> choose action with restaurant MENU: ");
         System.out.println("3--> choose action with TABLES: ");
-        System.out.println("4--> choose action with RESERVATION: ");
-        System.out.println("5--> EXIT!");
+       // System.out.println("4--> choose action with RESERVATION: ");
+        System.out.println("4--> EXIT!");
         System.out.println();
     }
 
@@ -164,37 +163,37 @@ public class Restaurant {
         }
     }
 
-    private static int reservationMenu() {
-        System.out.println();
-        System.out.println("Hello !");
-        System.out.println("Reservation: ");
-        System.out.println("1. Add reservation -> ");
-
-        System.out.println("5. Exit! ");
-        System.out.println();
-        int numberOfMenu = checkNumber.getCorrectNumberMenu(1, 5);
-        executeReservation(numberOfMenu);
-        return numberOfMenu;
-    }
-
-
-    private static void executeReservation(int selectedMenu) {
-        switch (selectedMenu) {
-            case 1: {
-                UIActionAddReservation addReservation = applicationContext.getBean(UIActionAddReservation.class);
-                addReservation.execute();
-                break;
-            }
-            case 5: {
-                ExitTableUIAction exitTableUIAction = applicationContext.getBean(ExitTableUIAction.class);
-                exitTableUIAction.execute();
-                break;
-            }
-        }
-    }
+//    private static int reservationMenu() {
+//        System.out.println();
+//        System.out.println("Hello !");
+//        System.out.println("Reservation: ");
+//        System.out.println("1. Add reservation -> ");
+//
+//        System.out.println("5. Exit! ");
+//        System.out.println();
+//        int numberOfMenu = checkNumber.getCorrectNumberMenu(1, 5);
+//        executeReservation(numberOfMenu);
+//        return numberOfMenu;
+//    }
+//
+//
+//    private static void executeReservation(int selectedMenu) {
+//        switch (selectedMenu) {
+//            case 1: {
+//                UIActionAddReservation addReservation = applicationContext.getBean(UIActionAddReservation.class);
+//                addReservation.execute();
+//                break;
+//            }
+//            case 5: {
+//                ExitTableUIAction exitTableUIAction = applicationContext.getBean(ExitTableUIAction.class);
+//                exitTableUIAction.execute();
+//                break;
+//            }
+//        }
+//    }
 
     private static int checkNumberOfMenu() {
         System.out.println("Start by choosing the program menu!");
-        return checkNumber.getCorrectNumberMenu(1, 5);
+        return checkNumber.getCorrectNumberMenu(1, 4);
     }
 }
