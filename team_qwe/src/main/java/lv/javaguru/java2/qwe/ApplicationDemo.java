@@ -31,13 +31,13 @@ public class ApplicationDemo {
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
         Database database = applicationContext.getBean(Database.class);
         Runnable simulator = () -> simulateMarketPrices(database.getSecurityList());
-        scheduledExecutorService.scheduleAtFixedRate(simulator, 1, 1, TimeUnit.SECONDS);
+        scheduledExecutorService.scheduleAtFixedRate(simulator, 3, 3, TimeUnit.SECONDS);
 
         //Симуляция изменения текущей даты!
         ScheduledExecutorService scheduledExecutorService1 = Executors.newScheduledThreadPool(1);
         UserData userData = applicationContext.getBean(UserData.class);
         Runnable simulator1 = () -> userData.setCurrentDate(userData.getCurrentDate().plusDays(1));
-        scheduledExecutorService1.scheduleAtFixedRate(simulator1, 1, 1, TimeUnit.SECONDS);
+        scheduledExecutorService1.scheduleAtFixedRate(simulator1, 3, 3, TimeUnit.SECONDS);
 
         String[] menu = {"DATA MENU", "USER MENU", "EXIT"};
 

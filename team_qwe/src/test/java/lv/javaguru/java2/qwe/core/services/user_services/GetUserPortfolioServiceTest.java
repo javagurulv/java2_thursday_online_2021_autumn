@@ -28,12 +28,9 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(MockitoJUnitRunner.class)
 public class GetUserPortfolioServiceTest {
 
-    @Mock
-    private UserData userData;
-    @Mock
-    private GetUserPortfolioValidator validator;
-    @InjectMocks
-    private GetUserPortfolioService service;
+    @Mock private UserData userData;
+    @Mock private GetUserPortfolioValidator validator;
+    @InjectMocks private GetUserPortfolioService service;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {

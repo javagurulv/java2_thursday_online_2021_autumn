@@ -20,10 +20,8 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class GetAllSecurityListServiceTest {
 
-    @Mock
-    private Database database;
-    @InjectMocks
-    private GetAllSecurityListService service;
+    @Mock private Database database;
+    @InjectMocks private GetAllSecurityListService service;
 
     @Test
     public void shouldGetAllSecuritiesFromDatabase() {

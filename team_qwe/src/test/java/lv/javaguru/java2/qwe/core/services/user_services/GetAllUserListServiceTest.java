@@ -20,10 +20,8 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class GetAllUserListServiceTest {
 
-    @Mock
-    private UserData userData;
-    @InjectMocks
-    private GetAllUserListService service;
+    @Mock private UserData userData;
+    @InjectMocks private GetAllUserListService service;
 
     @Test
     public void shouldGetAllUsersFromUserData() {

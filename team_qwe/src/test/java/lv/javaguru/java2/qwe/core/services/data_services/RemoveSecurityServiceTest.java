@@ -15,10 +15,8 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class RemoveSecurityServiceTest {
 
-    @Mock
-    private Database database;
-    @InjectMocks
-    private RemoveSecurityService service;
+    @Mock private Database database;
+    @InjectMocks private RemoveSecurityService service;
 
     @Test
     public void shouldRemoveSecurityByName() {

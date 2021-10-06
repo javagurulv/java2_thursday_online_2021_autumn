@@ -27,12 +27,9 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(MockitoJUnitRunner.class)
 public class GetUserInvestmentsByEachIndustryServiceTest {
 
-    @Mock
-    private UserData userData;
-    @Mock
-    private GetUserInvestmentsByEachIndustryValidator validator;
-    @InjectMocks
-    private GetUserInvestmentsByEachIndustryService service;
+    @Mock private UserData userData;
+    @Mock private GetUserInvestmentsByEachIndustryValidator validator;
+    @InjectMocks private GetUserInvestmentsByEachIndustryService service;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {

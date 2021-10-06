@@ -25,12 +25,9 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(MockitoJUnitRunner.class)
 public class AddBondServiceTest {
 
-    @Mock
-    private Database database;
-    @Mock
-    private AddBondValidator validator;
-    @InjectMocks
-    private AddBondService service;
+    @Mock private Database database;
+    @Mock private AddBondValidator validator;
+    @InjectMocks private AddBondService service;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {

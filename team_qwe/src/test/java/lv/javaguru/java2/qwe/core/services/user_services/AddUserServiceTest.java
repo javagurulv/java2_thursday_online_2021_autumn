@@ -26,12 +26,9 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(MockitoJUnitRunner.class)
 public class AddUserServiceTest {
 
-    @Mock
-    private UserData userData;
-    @Mock
-    private AddUserValidator validator;
-    @InjectMocks
-    private AddUserService service;
+    @Mock private UserData userData;
+    @Mock private AddUserValidator validator;
+    @InjectMocks private AddUserService service;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {

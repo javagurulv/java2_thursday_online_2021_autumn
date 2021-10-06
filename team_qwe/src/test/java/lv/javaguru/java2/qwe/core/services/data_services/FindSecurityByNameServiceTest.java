@@ -26,12 +26,9 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(MockitoJUnitRunner.class)
 public class FindSecurityByNameServiceTest {
 
-    @Mock
-    private Database database;
-    @Mock
-    private FindSecurityByNameValidator validator;
-    @InjectMocks
-    private FindSecurityByNameService service;
+    @Mock private Database database;
+    @Mock private FindSecurityByNameValidator validator;
+    @InjectMocks private FindSecurityByNameService service;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {

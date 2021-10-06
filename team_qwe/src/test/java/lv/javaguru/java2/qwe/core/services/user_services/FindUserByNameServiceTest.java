@@ -26,12 +26,9 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(MockitoJUnitRunner.class)
 public class FindUserByNameServiceTest {
 
-    @Mock
-    private UserData userData;
-    @Mock
-    private FindUserByNameValidator validator;
-    @InjectMocks
-    private FindUserByNameService service;
+    @Mock private UserData userData;
+    @Mock private FindUserByNameValidator validator;
+    @InjectMocks private FindUserByNameService service;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {

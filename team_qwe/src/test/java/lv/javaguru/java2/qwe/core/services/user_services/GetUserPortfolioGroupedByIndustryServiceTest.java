@@ -27,12 +27,9 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(MockitoJUnitRunner.class)
 public class GetUserPortfolioGroupedByIndustryServiceTest {
 
-    @Mock
-    private UserData userData;
-    @Mock
-    private GetUserPortfolioGroupedByIndustryValidator validator;
-    @InjectMocks
-    private GetUserPortfolioGroupedByIndustryService service;
+    @Mock private UserData userData;
+    @Mock private GetUserPortfolioGroupedByIndustryValidator validator;
+    @InjectMocks private GetUserPortfolioGroupedByIndustryService service;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
