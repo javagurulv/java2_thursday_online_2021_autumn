@@ -5,7 +5,6 @@ import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.AddPatientResponse;
 import lv.javaguru.java2.hospital.patient.core.services.AddPatientService;
-
 import java.util.Scanner;
 
 @DIComponent
