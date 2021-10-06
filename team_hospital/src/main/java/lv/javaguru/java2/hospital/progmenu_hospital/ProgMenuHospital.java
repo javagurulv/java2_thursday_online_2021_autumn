@@ -8,14 +8,14 @@ import lv.javaguru.java2.hospital.dependency_injection.ApplicationContext;
 import lv.javaguru.java2.hospital.dependency_injection.DIApplicationContextBuilder;
 import lv.javaguru.java2.hospital.doctor.console_ui.*;
 import lv.javaguru.java2.hospital.patient.console_ui.*;
-import lv.javaguru.java2.hospital.visits.console_ui.*;
-import lv.javaguru.java2.hospital.visits.core.services.AddVisitService;
-import lv.javaguru.java2.hospital.visits.core.services.DeleteVisitService;
-import lv.javaguru.java2.hospital.visits.core.services.EditVisitService;
-import lv.javaguru.java2.hospital.visits.core.services.ShowAllVisitService;
-import lv.javaguru.java2.hospital.visits.core.services.validators.AddVisitValidator;
-import lv.javaguru.java2.hospital.visits.core.services.validators.DeleteVisitValidator;
-import lv.javaguru.java2.hospital.visits.core.services.validators.EditVisitValidator;
+import lv.javaguru.java2.hospital.visit.console_ui.*;
+import lv.javaguru.java2.hospital.visit.core.services.AddVisitService;
+import lv.javaguru.java2.hospital.visit.core.services.DeleteVisitService;
+import lv.javaguru.java2.hospital.visit.core.services.EditVisitService;
+import lv.javaguru.java2.hospital.visit.core.services.ShowAllVisitService;
+import lv.javaguru.java2.hospital.visit.core.services.validators.AddVisitValidator;
+import lv.javaguru.java2.hospital.visit.core.services.validators.DeleteVisitValidator;
+import lv.javaguru.java2.hospital.visit.core.services.validators.EditVisitValidator;
 
 
 public class ProgMenuHospital {

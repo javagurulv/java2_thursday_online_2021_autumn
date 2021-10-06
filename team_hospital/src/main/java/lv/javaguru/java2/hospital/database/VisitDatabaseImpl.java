@@ -8,8 +8,10 @@ import lv.javaguru.java2.hospital.domain.Visit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @DIComponent
 public class VisitDatabaseImpl implements VisitsDatabase {
@@ -58,6 +60,67 @@ public class VisitDatabaseImpl implements VisitsDatabase {
             }
         }
         return isVisitEdited;
+    }
+
+    @Override
+    public List<Visit> findByVisitId(Long id) {
+        return visits.stream()
+                .filter(visit -> visit.getVisitID() == id)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visit> findByDoctorId(Long id) {
+        return visits.stream()
+                .filter(visit -> visit.getDoctor().getId() == id)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visit> findByPatientId(Long id) {
+        return visits.stream()
+                .filter(visit -> visit.getPatient().getId() == id)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visit> findByDate(Date date) {
+        return visits.stream()
+                .filter(visit -> visit.getVisitDate().equals(date))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visit> findByDoctorIdAndPatientId(Long doctorId, Long patientId) {
+        return visits.stream()
+                .filter(visit -> visit.getDoctor().getId() == doctorId)
+                .filter(visit -> visit.getPatient().getId() == patientId)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visit> findByDoctorIdAndDate(Long doctorId, Date date) {
+        return visits.stream()
+                .filter(visit -> visit.getDoctor().getId() == doctorId)
+                .filter(visit -> visit.getVisitDate().equals(date))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visit> findByPatientIdAndDate(Long patientId, Date date) {
+        return visits.stream()
+                .filter(visit -> visit.getPatient().getId() == patientId)
+                .filter(visit -> visit.getVisitDate().equals(date))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visit> findByDoctorIdAndPatientIdAndDate(Long doctorId, Long patientId, Date date) {
+        return visits.stream()
+                .filter(visit -> visit.getDoctor().getId() == doctorId)
+                .filter(visit -> visit.getPatient().getId() == patientId)
+                .filter(visit -> visit.getVisitDate().equals(date))
+                .collect(Collectors.toList());
     }
 
     private List<Doctor> findDoctorById(Long id) {
