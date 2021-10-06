@@ -23,7 +23,7 @@ public class ImportDataFromFileUIAction implements UIAction {
             String path = fileChooser.getSelectedFile().getPath();
             try {
                 importSecuritiesService.execute(path);
-            } catch (IOException e) {
+            } catch (IOException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("ERROR!");
                 e.printStackTrace();
             }
