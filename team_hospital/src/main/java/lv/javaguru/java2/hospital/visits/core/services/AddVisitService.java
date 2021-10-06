@@ -22,8 +22,10 @@ public class AddVisitService {
     private final VisitDatabaseImpl visitDatabase;
     private final AddVisitValidator validator;
 
-    public AddVisitService(PatientDatabaseImpl patientDatabase, DoctorDatabaseImpl doctorDatabase,
-                           VisitDatabaseImpl visitDatabase, AddVisitValidator validator) {
+    public AddVisitService(PatientDatabaseImpl patientDatabase,
+						   DoctorDatabaseImpl doctorDatabase,
+                           VisitDatabaseImpl visitDatabase,
+						   AddVisitValidator validator) {
         this.patientDatabase = patientDatabase;
         this.doctorDatabase = doctorDatabase;
         this.visitDatabase = visitDatabase;
