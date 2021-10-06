@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.domain;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Visit {
@@ -53,5 +54,21 @@ public class Visit {
 
     public void setVisitDate(Date visitDate) {
         this.visitDate = visitDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Visit visit = (Visit) o;
+        return Objects.equals(doctor, visit.doctor)
+                && Objects.equals(patient, visit.patient)
+                && Objects.equals(visitDate, visit.visitDate)
+                && Objects.equals(visitID, visit.visitID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(doctor, patient, visitDate, visitID);
     }
 }

@@ -7,6 +7,7 @@ import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
+import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.responses.AddVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.validators.AddVisitValidator;
@@ -38,23 +39,36 @@ public class AddVisitService {
             return new AddVisitResponse(errors);
         }
 
-        Patient patient = patientDatabase
-                .findPatientsByPersonalCode(request.getPatientsPersonalCode()).get(0);
-        Doctor doctor = doctorDatabase
-                .findByNameAndSurname(request.getDoctorsName(), request.getDoctorsSurname()).get(0);
+        Patient patient = getPatient(request);
+        Doctor doctor = getDoctor(request);
+        Date date = getVisitDate(request);
 
-        String data = request.getVisitDate();
-        Date date = null;
-        try {
-            date = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(data);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        Visit visit =
-                new Visit(doctor, patient, date);
+        Visit visit = new Visit(doctor, patient, date);
 
         visitDatabase.recordVisit(visit);
         return new AddVisitResponse(visit);
+    }
+
+    private Doctor getDoctor(AddVisitRequest request) {
+        Doctor doctor = doctorDatabase
+                .findByNameAndSurname(request.getDoctorsName(), request.getDoctorsSurname()).get(0);
+        return doctor;
+    }
+
+    private Patient getPatient(AddVisitRequest request) {
+        Patient patient = patientDatabase
+                .findPatientsByPersonalCode(request.getPatientsPersonalCode()).get(0);
+        return patient;
+    }
+
+
+    private Date getVisitDate(AddVisitRequest request) {
+        Date visitDate = null;
+        try {
+            visitDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(request.getVisitDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return visitDate;
     }
 }

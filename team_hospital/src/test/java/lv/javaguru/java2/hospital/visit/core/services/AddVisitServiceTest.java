@@ -3,10 +3,13 @@ package lv.javaguru.java2.hospital.visit.core.services;
 import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.database.VisitDatabaseImpl;
+import lv.javaguru.java2.hospital.domain.Doctor;
+import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.AddVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.services.validators.AddVisitValidator;
+import lv.javaguru.java2.hospital.visit.matchers.VisitMatcher;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -17,10 +20,12 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
@@ -47,21 +52,28 @@ class AddVisitServiceTest {
 
         Mockito.verifyNoMoreInteractions(visitDatabase);
     }
-/*
+
     @Test
     public void shouldAddVisitToDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        AddDoctorRequest request1 = new AddDoctorRequest("DoctorsName", "DoctorsSurname", "Speciality");
-        AddDoctorResponse response1 = new AddDoctorService().execute(request1);
-        AddPatientRequest request2 = new AddPatientRequest("PatientsName", "PatientsSurname", "120254-12636");
-        AddPatientResponse response2 = new AddPatientService().execute(request2);
-        String patientsPersonalCode = response2.getPatient().getPersonalCode();
-        String doctorsName = response1.getNewDoctor().getName();
-        String doctorsSurname = response1.getNewDoctor().getSurname();
-        AddVisitRequest request = new AddVisitRequest(patientsPersonalCode, doctorsName, doctorsSurname, "21/12/2021 15:00");
+        Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
+        Patient patient = new Patient("PatientsName", "PatientsSurname", "120254-12636");
+        List<Patient> patients = new ArrayList<>();
+        patients.add(patient);
+        List<Doctor> doctors = new ArrayList<>();
+        doctors.add(doctor);
+        Mockito.when(patientDatabase.findPatientsByPersonalCode(patient.getPersonalCode()))
+                .thenReturn((patients));
+        Mockito.when(doctorDatabase.findByNameAndSurname(doctor.getName(), doctor.getSurname()))
+                .thenReturn((doctors));
+
+        AddVisitRequest request = new AddVisitRequest(patient.getPersonalCode(), doctor.getName(), doctor.getSurname(),
+                "21/12/2021 15:00");
         AddVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        Mockito.verify(visitDatabase).recordVisit(argThat(new VisitMatcher(response1.getNewDoctor(), response2.getPatient(), new Date(2021, 12, 21, 15, 00))));
+        Mockito.verify(visitDatabase).recordVisit(argThat(
+                new VisitMatcher(response.getPatientVisit().getDoctor(),
+                        response.getPatientVisit().getPatient(),
+                        response.getPatientVisit().getVisitDate())));
     }
-*/
 }
