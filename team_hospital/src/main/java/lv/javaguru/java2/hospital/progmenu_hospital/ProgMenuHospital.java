@@ -8,14 +8,9 @@ import lv.javaguru.java2.hospital.dependency_injection.ApplicationContext;
 import lv.javaguru.java2.hospital.dependency_injection.DIApplicationContextBuilder;
 import lv.javaguru.java2.hospital.doctor.console_ui.*;
 import lv.javaguru.java2.hospital.patient.console_ui.*;
-import lv.javaguru.java2.hospital.visits.console_ui.*;
-import lv.javaguru.java2.hospital.visits.core.services.AddVisitService;
-import lv.javaguru.java2.hospital.visits.core.services.DeleteVisitService;
-import lv.javaguru.java2.hospital.visits.core.services.EditVisitService;
-import lv.javaguru.java2.hospital.visits.core.services.ShowAllVisitService;
-import lv.javaguru.java2.hospital.visits.core.services.validators.AddVisitValidator;
-import lv.javaguru.java2.hospital.visits.core.services.validators.DeleteVisitValidator;
-import lv.javaguru.java2.hospital.visits.core.services.validators.EditVisitValidator;
+import lv.javaguru.java2.hospital.visit.console_ui.*;
+import lv.javaguru.java2.hospital.visit.core.services.*;
+import lv.javaguru.java2.hospital.visit.core.services.validators.*;
 
 
 public class ProgMenuHospital {
@@ -23,33 +18,38 @@ public class ProgMenuHospital {
     private static ApplicationContext applicationContext =
             new DIApplicationContextBuilder().build("lv.javaguru.java2.hospital");
 
-    /*private static final PatientApplicationContext patientApplicationContext = new PatientApplicationContext();*/
-    /*private static final DoctorApplicationContext doctorApplicationContext = new DoctorApplicationContext();*/
-
     private static final InputNumChecker inputNumChecker = new InputNumChecker();
+
+    private static final VisitDatabaseImpl visitDatabase = new VisitDatabaseImpl();
 
     private static final AddVisitUIAction addPatientVisit =
             new AddVisitUIAction(new AddVisitService
                     (applicationContext.getBean(PatientDatabase.class),
                             applicationContext.getBean(DoctorDatabase.class),
-                            new VisitDatabaseImpl(),
+                            visitDatabase,
                             new AddVisitValidator(applicationContext.getBean(PatientDatabase.class),
                                     applicationContext.getBean(DoctorDatabase.class))));
-
-    private static final DeleteVisitUIAction DELETE_VISIT_UI_ACTION =
+    private static final DeleteVisitUIAction deleteVisitUIAction =
             new DeleteVisitUIAction(
-                    new DeleteVisitService(new VisitDatabaseImpl(), new DeleteVisitValidator()));
-
-    private static final VisitDatabaseImpl visitDatabase = new VisitDatabaseImpl();
-    private static final ShowAllVisitService SHOW_ALL_VISIT_SERVICE =
+                    new DeleteVisitService(visitDatabase, new DeleteVisitValidator()));
+    private static final ShowAllVisitService showAllVisitService =
             new ShowAllVisitService(visitDatabase);
     private static final ShowAllVisitUIAction showAllPatientVisitUIAction =
-            new ShowAllVisitUIAction(SHOW_ALL_VISIT_SERVICE);
-    private static final EditVisitValidator EDIT_VISIT_VALIDATOR = new EditVisitValidator();
-    private static final EditVisitService EDIT_VISIT_SERVICE =
-            new EditVisitService(visitDatabase, EDIT_VISIT_VALIDATOR);
-    private static final EditVisitUIAction EDIT_VISIT_UI_ACTION =
-            new EditVisitUIAction(EDIT_VISIT_SERVICE);
+            new ShowAllVisitUIAction(showAllVisitService);
+    private static final EditVisitValidator editVisitValidator = new EditVisitValidator();
+    private static final EditVisitService editVisitService =
+            new EditVisitService(visitDatabase, editVisitValidator);
+    private static final EditVisitUIAction editVisitUIAction =
+            new EditVisitUIAction(editVisitService);
+
+    private static final OrderingValidator orderingValidator = new OrderingValidator();
+    private static final PagingValidator pagingValidator = new PagingValidator();
+    private static final SearchVisitFieldValidator searchVisitFieldValidator = new SearchVisitFieldValidator();
+    private static final SearchVisitValidator searchVisitValidator = new
+            SearchVisitValidator(searchVisitFieldValidator, orderingValidator, pagingValidator);
+    private static final SearchVisitService searchVisitService =
+            new SearchVisitService(visitDatabase, searchVisitValidator);
+    private static final SearchVisitUIAction searchVisitUIAction = new SearchVisitUIAction(searchVisitService);
     private static final ExitVisitUIAction exitVisit = new ExitVisitUIAction();
 
     //Menu
@@ -120,7 +120,7 @@ public class ProgMenuHospital {
         System.out.println("4. Edit the doctor's information");
         System.out.println("5. Search doctors");
         System.out.println("6. Exit");
-        userInput = inputNumChecker.execute(1, 7);
+        userInput = inputNumChecker.execute(1, 6);
         doctorUserActions(userInput);
         System.out.println();
         return userInput;
@@ -197,8 +197,9 @@ public class ProgMenuHospital {
         System.out.println("2. Delete patient visit.");
         System.out.println("3. Show all patient visits.");
         System.out.println("4. Edit patient visits.");
-        System.out.println("5. Exit.");
-        userInput = inputNumChecker.execute(1, 5);
+        System.out.println("5. Search patient visits.");
+        System.out.println("6. Exit.");
+        userInput = inputNumChecker.execute(1, 6);
         patientVisitActions(userInput);
         System.out.println();
         return userInput;
@@ -206,11 +207,12 @@ public class ProgMenuHospital {
 
     private static void patientVisitActions(int num) {
         switch (num) {
-            /*case 1 -> addPatientVisit.execute();*/
-            case 2 -> DELETE_VISIT_UI_ACTION.execute();
+            case 1 -> addPatientVisit.execute();
+            case 2 -> deleteVisitUIAction.execute();
             case 3 -> showAllPatientVisitUIAction.execute();
-            case 4 -> EDIT_VISIT_UI_ACTION.execute();
-            case 5 -> exitVisit.execute();
+            case 4 -> editVisitUIAction.execute();
+            case 5 -> searchVisitUIAction.execute();
+            case 6 -> exitVisit.execute();
         }
     }
 }
