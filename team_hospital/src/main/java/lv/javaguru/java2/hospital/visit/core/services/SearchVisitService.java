@@ -9,8 +9,11 @@ import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.responses.SearchVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.validators.SearchVisitValidator;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,22 +42,23 @@ public class SearchVisitService {
 
     private List<Visit> search(SearchVisitRequest request) {
         List<Visit> visits = new ArrayList<>();
+        Date visitDate = getVisitDate(request);
         if (request.isVisitIdProvided()) {
             visits = visitDatabase.findByVisitId(request.getVisitId());
         } else if (request.isDoctorIdProvided() && request.isPatientIdProvided() && request.isDateProvided()) {
-            visits = visitDatabase.findByDoctorIdAndPatientIdAndDate(request.getDoctorId(), request.getPatientId(), request.getVisitDate());
+            visits = visitDatabase.findByDoctorIdAndPatientIdAndDate(request.getDoctorId(), request.getPatientId(), visitDate);
         } else if (request.isDoctorIdProvided() && request.isPatientIdProvided()) {
             visits = visitDatabase.findByDoctorIdAndPatientId(request.getDoctorId(), request.getPatientId());
         } else if (request.isDoctorIdProvided() && request.isDateProvided()) {
-            visits = visitDatabase.findByDoctorIdAndDate(request.getDoctorId(), request.getVisitDate());
+            visits = visitDatabase.findByDoctorIdAndDate(request.getDoctorId(), visitDate);
         } else if (request.isPatientIdProvided() && request.isDateProvided()) {
-            visits = visitDatabase.findByPatientIdAndDate(request.getPatientId(), request.getVisitDate());
+            visits = visitDatabase.findByPatientIdAndDate(request.getPatientId(), visitDate);
         } else if (request.isDoctorIdProvided()) {
             visits = visitDatabase.findByDoctorId(request.getDoctorId());
         } else if (request.isPatientIdProvided()) {
             visits = visitDatabase.findByPatientId(request.getPatientId());
         } else if (request.isDateProvided()) {
-            visits = visitDatabase.findByDate(request.getVisitDate());
+            visits = visitDatabase.findByDate(visitDate);
         }
         return visits;
     }
@@ -84,6 +88,16 @@ public class SearchVisitService {
         } else {
             return visits;
         }
+    }
+
+    private Date getVisitDate(SearchVisitRequest request) {
+        Date visitDate = null;
+        try {
+            visitDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(request.getVisitDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return visitDate;
     }
 
 }

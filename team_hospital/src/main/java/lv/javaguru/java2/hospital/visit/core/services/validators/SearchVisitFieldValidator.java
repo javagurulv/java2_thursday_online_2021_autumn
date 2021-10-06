@@ -12,7 +12,7 @@ public class SearchVisitFieldValidator {
     public List<CoreError> validate(SearchVisitRequest request) {
         List<CoreError> errors = new ArrayList<>();
         if (isLongEmpty(request.getVisitId()) && isLongEmpty(request.getDoctorId())
-                && isLongEmpty(request.getPatientId()) && isDateEmpty(request.getVisitDate())) {
+                && isLongEmpty(request.getPatientId()) && isStringEmpty(request.getVisitDate())) {
             errors.add(new CoreError("visitId", "Must not be empty!"));
             errors.add(new CoreError("doctorId", "Must not be empty!"));
             errors.add(new CoreError("patientId", "Must not be empty!"));
@@ -21,8 +21,8 @@ public class SearchVisitFieldValidator {
         return errors;
     }
 
-    private boolean isDateEmpty(Date date) {
-        return date == null;
+    private boolean isStringEmpty(String date) {
+        return date == null && date.isEmpty();
     }
 
     private boolean isLongEmpty(Long num) {

@@ -10,19 +10,19 @@ public class SearchVisitRequest {
     private Long visitId;
     private Long doctorId;
     private Long patientId;
-    private Date visitDate;
+    private String visitDate;
 
     private Ordering ordering;
     private Paging paging;
 
-    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, Date visitDate) {
+    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, String visitDate) {
         this.visitId = visitId;
         this.doctorId = doctorId;
         this.patientId = patientId;
         this.visitDate = visitDate;
     }
 
-    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, Date visitDate, Ordering ordering) {
+    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, String visitDate, Ordering ordering) {
         this.visitId = visitId;
         this.doctorId = doctorId;
         this.patientId = patientId;
@@ -30,7 +30,7 @@ public class SearchVisitRequest {
         this.ordering = ordering;
     }
 
-    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, Date visitDate, Paging paging) {
+    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, String visitDate, Paging paging) {
         this.visitId = visitId;
         this.doctorId = doctorId;
         this.patientId = patientId;
@@ -38,7 +38,7 @@ public class SearchVisitRequest {
         this.paging = paging;
     }
 
-    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, Date visitDate, Ordering ordering, Paging paging) {
+    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, String visitDate, Ordering ordering, Paging paging) {
         this.visitId = visitId;
         this.doctorId = doctorId;
         this.patientId = patientId;
@@ -75,7 +75,7 @@ public class SearchVisitRequest {
         return patientId;
     }
 
-    public Date getVisitDate() {
+    public String getVisitDate() {
         return visitDate;
     }
 

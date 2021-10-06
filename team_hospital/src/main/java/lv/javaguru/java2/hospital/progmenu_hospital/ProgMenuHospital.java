@@ -23,24 +23,20 @@ public class ProgMenuHospital {
     private static ApplicationContext applicationContext =
             new DIApplicationContextBuilder().build("lv.javaguru.java2.hospital");
 
-    /*private static final PatientApplicationContext patientApplicationContext = new PatientApplicationContext();*/
-    /*private static final DoctorApplicationContext doctorApplicationContext = new DoctorApplicationContext();*/
-
     private static final InputNumChecker inputNumChecker = new InputNumChecker();
+
+    private static final VisitDatabaseImpl visitDatabase = new VisitDatabaseImpl();
 
     private static final AddVisitUIAction addPatientVisit =
             new AddVisitUIAction(new AddVisitService
                     (applicationContext.getBean(PatientDatabase.class),
                             applicationContext.getBean(DoctorDatabase.class),
-                            new VisitDatabaseImpl(),
+                            visitDatabase,
                             new AddVisitValidator(applicationContext.getBean(PatientDatabase.class),
                                     applicationContext.getBean(DoctorDatabase.class))));
-
     private static final DeleteVisitUIAction DELETE_VISIT_UI_ACTION =
             new DeleteVisitUIAction(
-                    new DeleteVisitService(new VisitDatabaseImpl(), new DeleteVisitValidator()));
-
-    private static final VisitDatabaseImpl visitDatabase = new VisitDatabaseImpl();
+                    new DeleteVisitService(visitDatabase, new DeleteVisitValidator()));
     private static final ShowAllVisitService SHOW_ALL_VISIT_SERVICE =
             new ShowAllVisitService(visitDatabase);
     private static final ShowAllVisitUIAction showAllPatientVisitUIAction =
