@@ -6,7 +6,6 @@ import lv.javaguru.java2.hospital.doctor.core.requests.Ordering;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

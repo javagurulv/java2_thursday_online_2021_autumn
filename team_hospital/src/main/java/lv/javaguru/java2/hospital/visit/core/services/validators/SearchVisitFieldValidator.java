@@ -22,7 +22,7 @@ public class SearchVisitFieldValidator {
     }
 
     private boolean isStringEmpty(String date) {
-        return date == null && date.isEmpty();
+        return date == null;
     }
 
     private boolean isLongEmpty(Long num) {

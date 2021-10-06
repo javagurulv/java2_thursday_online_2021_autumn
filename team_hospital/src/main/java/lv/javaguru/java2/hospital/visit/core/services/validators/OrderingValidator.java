@@ -20,8 +20,8 @@ public class OrderingValidator {
 
 	private Optional<CoreError> validateOrderBy(Ordering ordering) {
 		return (ordering.getOrderBy() != null)
-				&& !(ordering.getOrderBy().equals("name") || ordering.getOrderBy().equals("surname") || ordering.getOrderBy().equals("speciality"))
-				? Optional.of(new CoreError("orderBy", "Must contain 'name', 'surname' or 'speciality' only!"))
+				&& !(ordering.getOrderBy().equals("date"))
+				? Optional.of(new CoreError("orderBy", "Must contain 'date' only!"))
 				: Optional.empty();
 	}
 
