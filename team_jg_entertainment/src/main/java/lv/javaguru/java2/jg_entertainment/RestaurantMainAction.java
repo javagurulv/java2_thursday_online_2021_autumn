@@ -8,4 +8,5 @@ public class RestaurantMainAction {
         Restaurant restaurant = new Restaurant();
         restaurant.mainAction();
     }
+
 }
