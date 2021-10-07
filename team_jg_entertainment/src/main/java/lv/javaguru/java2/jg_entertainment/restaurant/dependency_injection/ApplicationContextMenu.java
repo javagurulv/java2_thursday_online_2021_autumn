@@ -7,6 +7,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.RemoveMenuService;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.SearchMenusService;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsMenus.AddMenuValidator;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsMenus.RemoveMenuRequestValidator;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsMenus.SearchMenusRequestValidator;
 
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class ApplicationContextMenu {
         beans.put(SearchMenusRequestValidator.class, new SearchMenusRequestValidator());
 
         beans.put(AddMenuService.class, new AddMenuService(getBean(DatabaseMenu.class), getBean(AddMenuValidator.class)));
-        beans.put(RemoveMenuService.class, new RemoveMenuService(getBean(DatabaseMenu.class)));
+        beans.put(RemoveMenuService.class, new RemoveMenuService(getBean(DatabaseMenu.class), getBean(RemoveMenuRequestValidator.class)));
         beans.put(GetAllMenusService.class, new GetAllMenusService(getBean(DatabaseMenu.class)));
         beans.put(SearchMenusService.class, new SearchMenusService(
                 getBean(DatabaseMenu.class),
