@@ -1,6 +1,8 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
+import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import lv.javaguru.java2.hospital.patient.core.responses.EditPatientResponse;
@@ -8,14 +10,11 @@ import lv.javaguru.java2.hospital.patient.core.services.validators.EditPatientVa
 
 import java.util.List;
 
+@DIComponent
 public class EditPatientService {
-    private final PatientDatabaseImpl database;
-    private final EditPatientValidator validator;
 
-    public EditPatientService(PatientDatabaseImpl database, EditPatientValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @DIDependency private PatientDatabaseImpl database;
+    @DIDependency private EditPatientValidator validator;
 
     public EditPatientResponse execute(EditPatientRequest request) {
         List<CoreError> errors = validator.validate(request);

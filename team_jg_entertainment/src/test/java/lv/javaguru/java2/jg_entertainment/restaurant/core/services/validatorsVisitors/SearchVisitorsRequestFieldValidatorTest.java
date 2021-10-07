@@ -10,7 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SearchVisitorsRequestFieldValidatorTest {
 
-    private final SearchVisitorsRequestFieldValidator validator = new SearchVisitorsRequestFieldValidator();
+    private final SearchVisitorsRequestFieldValidator validator =
+            new SearchVisitorsRequestFieldValidator();
 
     @Test
     public void shouldNotReturnErrorsListWhenAllFieldsAreProvided() {

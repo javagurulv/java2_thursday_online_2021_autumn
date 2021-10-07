@@ -6,25 +6,26 @@ import lv.javaguru.java2.core.responce.CoreError;
 import lv.javaguru.java2.core.responce.Find.FindAdvertisementByTitleResponse;
 import lv.javaguru.java2.core.validations.FindAdvertisementByTitleValidator;
 import lv.javaguru.java2.database.Database;
+import lv.javaguru.java2.dependency_injection.DIComponent;
+import lv.javaguru.java2.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class FindAdvertisementByTitleService {
 
+    @DIDependency
     private Database database;
+    @DIDependency
     private FindAdvertisementByTitleValidator validator;
 
-    public FindAdvertisementByTitleService(Database database, FindAdvertisementByTitleValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
 
     public FindAdvertisementByTitleResponse execute(FindAdvertisementByTitleRequest request) {
         //FindAdvertisementByTitleRequest request = new FindAdvertisementByTitleRequest(req);
         List<CoreError> errors = validator.validate(request);
 
-        if(!errors.isEmpty()) {
+        if (!errors.isEmpty()) {
             new FindAdvertisementByTitleResponse(null, errors);
         }
 

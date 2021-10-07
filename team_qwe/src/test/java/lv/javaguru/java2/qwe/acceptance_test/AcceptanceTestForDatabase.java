@@ -20,6 +20,10 @@ public class AcceptanceTestForDatabase {
     private final ApplicationContext appContext =
             new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
 
+    public ApplicationContext getAppContext() {
+        return appContext;
+    }
+
     @Test
     public void addSecuritiesToDatabaseTest() {
         AddStockRequest request1 = new AddStockRequest(

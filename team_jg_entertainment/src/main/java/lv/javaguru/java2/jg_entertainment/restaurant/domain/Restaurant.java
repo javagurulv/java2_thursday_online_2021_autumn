@@ -1,13 +1,16 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.domain;
 
-import lv.javaguru.java2.jg_entertainment.ApplicationContextRestaurant;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.ApplicationContext;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors.*;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIApplicationContextBuilder;
 
 public class Restaurant {
 
-    private static ApplicationContextRestaurant applicationContext = new ApplicationContextRestaurant();
+    private static ApplicationContext applicationContext =
+            new DIApplicationContextBuilder().build("lv.javaguru.java2.jg_entertainment.restaurant");
+
     private static CheckMenuNumberFromConsole checkNumber = new CheckMenuNumberFromConsole();
 
     public void mainAction() {
@@ -18,6 +21,7 @@ public class Restaurant {
                 case 1 -> visitorsMenu();
                 case 2 -> restaurantMenu();
                 case 3 -> tablesMenu();
+                //case 4 -> reservationMenu();
                 case 4 -> System.exit(0);
             }
         }
@@ -26,10 +30,11 @@ public class Restaurant {
     private static void printProgramMenu() {
         System.out.println();
         System.out.println("Hello ! MENU: ");
-        System.out.println("1--> choose action with visitors !");
-        System.out.println("2--> choose action with restaurant menu !");
-        System.out.println("3--> choose action with tables !");
-        System.out.println("4--> EXIT !");
+        System.out.println("1--> choose action with VISITORS: ");
+        System.out.println("2--> choose action with restaurant MENU: ");
+        System.out.println("3--> choose action with TABLES: ");
+       // System.out.println("4--> choose action with RESERVATION: ");
+        System.out.println("4--> EXIT!");
         System.out.println();
     }
 
@@ -38,7 +43,7 @@ public class Restaurant {
         System.out.println("Hello !");
         System.out.println("Visitors program menu, press number what do you want to do! ");
         System.out.println("1. Add information about visitor to list of restaurant-> ");
-        System.out.println("2. Enter ID visitor that delete from list of restaurant-> ");
+        System.out.println("2. Delete visitor - Enter ID that delete from list of restaurant-> ");
         System.out.println("3. Show all visitor's in base of restaurant->");
         System.out.println("4. Search visitor's in catalogue->");
         System.out.println("5. Exit! ");
@@ -78,11 +83,11 @@ public class Restaurant {
     }
 
     private static int restaurantMenu() {
-        System.out.println("Restaurant menu:");
-        System.out.println("1. Add menu to list");
-        System.out.println("2. Delete menu from list");
-        System.out.println("3. Show all menus in the list");
-        System.out.println("4. Exit");
+        System.out.println("Restaurant menu: ");
+        System.out.println("1. Add menu to list: ");
+        System.out.println("2. Delete menu from list: ");
+        System.out.println("3. Show all menus in the list: ");
+        System.out.println("4. Exit!");
         System.out.println("");
         int numberOfMenu = checkNumber.getCorrectNumberMenu(1, 4);
         executeSelectedRestaurantMenu(numberOfMenu);
@@ -116,12 +121,12 @@ public class Restaurant {
 
     private static int tablesMenu() {
         System.out.println();
-        System.out.println("Tables menu:");
-        System.out.println("1. Add table to list");
-        System.out.println("2. Delete table from list");
-        System.out.println("3. Search table information from list");
-        System.out.println("4. Show all tables in the list");
-        System.out.println("5. Exit");
+        System.out.println("Tables menu: ");
+        System.out.println("1. Add table to list: ");
+        System.out.println("2. Delete table from list: ");
+        System.out.println("3. Search table information from list: ");
+        System.out.println("4. Show all tables in the list: ");
+        System.out.println("5. Exit! ");
         System.out.println();
         int numberOfMenu = checkNumber.getCorrectNumberMenu(1, 5);
         executeSelectedTabledMenu(numberOfMenu);
@@ -158,9 +163,37 @@ public class Restaurant {
         }
     }
 
+//    private static int reservationMenu() {
+//        System.out.println();
+//        System.out.println("Hello !");
+//        System.out.println("Reservation: ");
+//        System.out.println("1. Add reservation -> ");
+//
+//        System.out.println("5. Exit! ");
+//        System.out.println();
+//        int numberOfMenu = checkNumber.getCorrectNumberMenu(1, 5);
+//        executeReservation(numberOfMenu);
+//        return numberOfMenu;
+//    }
+//
+//
+//    private static void executeReservation(int selectedMenu) {
+//        switch (selectedMenu) {
+//            case 1: {
+//                UIActionAddReservation addReservation = applicationContext.getBean(UIActionAddReservation.class);
+//                addReservation.execute();
+//                break;
+//            }
+//            case 5: {
+//                ExitTableUIAction exitTableUIAction = applicationContext.getBean(ExitTableUIAction.class);
+//                exitTableUIAction.execute();
+//                break;
+//            }
+//        }
+//    }
+
     private static int checkNumberOfMenu() {
         System.out.println("Start by choosing the program menu!");
-        return checkNumber.getCorrectNumberMenu(1, 5);
-
+        return checkNumber.getCorrectNumberMenu(1, 4);
     }
 }

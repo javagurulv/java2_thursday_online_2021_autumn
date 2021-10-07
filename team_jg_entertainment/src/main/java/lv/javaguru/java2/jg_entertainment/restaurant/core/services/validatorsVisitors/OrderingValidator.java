@@ -2,11 +2,13 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVi
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Ordering;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@DIComponent
 public class OrderingValidator {
 
     public List<CoreError> validator(Ordering ordering) {

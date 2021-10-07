@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class EditPatientValidatorTest {
 
     private final PatientDatabaseImpl database = new PatientDatabaseImpl();
-    private final EditPatientValidator validator = new EditPatientValidator(database);
+    private final EditPatientValidator validator = new EditPatientValidator();
 
     @Test
     public void shouldReturnEmptyList(){

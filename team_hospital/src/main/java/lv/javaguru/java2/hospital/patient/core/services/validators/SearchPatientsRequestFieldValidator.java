@@ -1,11 +1,13 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@DIComponent
 public class SearchPatientsRequestFieldValidator {
     public List<CoreError> validate(SearchPatientsRequest request) {
         List<CoreError> errors = new ArrayList<>();

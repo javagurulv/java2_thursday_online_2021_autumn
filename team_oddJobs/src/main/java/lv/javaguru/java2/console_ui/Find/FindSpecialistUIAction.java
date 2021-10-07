@@ -7,18 +7,19 @@ import lv.javaguru.java2.core.requests.Find.FindSpecialistRequest;
 import lv.javaguru.java2.core.requests.Find.Ordering;
 import lv.javaguru.java2.core.requests.Find.Paging;
 import lv.javaguru.java2.core.responce.Find.FindSpecialistResponse;
+import lv.javaguru.java2.dependency_injection.DIComponent;
+import lv.javaguru.java2.dependency_injection.DIDependency;
 import lv.javaguru.java2.services.Find.FindSpecialistService;
 
 import java.util.Scanner;
 
+@DIComponent
 public class FindSpecialistUIAction implements UIAction {
 
+    @DIDependency
     private FindSpecialistService findSpecialistService;
+    @DIDependency
     private ExitMenuUIAction exitMenuUIAction;
-
-    public FindSpecialistUIAction(FindSpecialistService findSpecialistService) {
-        this.findSpecialistService = findSpecialistService;
-    }
 
     @Override
     public void execute() {

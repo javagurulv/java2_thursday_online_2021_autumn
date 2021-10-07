@@ -8,22 +8,21 @@ import lv.javaguru.java2.core.responce.CoreError;
 import lv.javaguru.java2.core.responce.Find.FindSpecialistResponse;
 import lv.javaguru.java2.core.validations.FindSpecialistValidator;
 import lv.javaguru.java2.database.Database;
+import lv.javaguru.java2.dependency_injection.DIComponent;
+import lv.javaguru.java2.dependency_injection.DIDependency;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class FindSpecialistService {
 
+    @DIDependency
     private Database database;
+    @DIDependency
     private FindSpecialistValidator specialistValidator;
-
-
-    public FindSpecialistService(Database database, FindSpecialistValidator specialistValidator) {
-        this.database = database;
-        this.specialistValidator = specialistValidator;
-    }
 
     public FindSpecialistResponse execute(FindSpecialistRequest request) {
 
@@ -43,8 +42,8 @@ public class FindSpecialistService {
     private List<Specialist> ordering(List<Specialist> specialists, Ordering ordering) {
         if (ordering != null) {
             Comparator<Specialist> comparator = ordering.getOrderBy().equals("Name")
-            ?Comparator.comparing(Specialist::getSpecialistName)
-            :Comparator.comparing(Specialist::getSpecialistSurname);
+                    ? Comparator.comparing(Specialist::getSpecialistName)
+                    : Comparator.comparing(Specialist::getSpecialistSurname);
             if (ordering.getOrderDirection().equals("DESCENDING")) {
                 comparator = comparator.reversed();
             }

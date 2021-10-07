@@ -29,13 +29,11 @@ public class ImplDatabaseReservation implements DatabaseReservation {
             deleteReservationInformation = reservationList.remove(reservation);
         }
         return deleteReservationInformation;
-    }//reservationList.removeIf(reservation ->reservation.getReservationID().equals(idReservation))
+    }
+    //reservationList.removeIf(reservation ->reservation.getReservationID().equals(idReservation))
 
     @Override
     public List<Reservation> showReservationList() {
-        return reservationList.stream()
-                .sorted(Comparator.comparing(Reservation::getReservationDate)
-                        .thenComparing(Reservation::getReservationID))
-                .collect(Collectors.toList());
+        return reservationList;
     }
 }

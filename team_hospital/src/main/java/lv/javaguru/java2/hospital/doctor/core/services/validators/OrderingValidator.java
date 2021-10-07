@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
 import lv.javaguru.java2.hospital.doctor.core.requests.Ordering;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 
+@DIComponent
 public class OrderingValidator {
 
 	public List<CoreError> validate(Ordering ordering) {

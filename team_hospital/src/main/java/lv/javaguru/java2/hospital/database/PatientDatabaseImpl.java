@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.database;
 
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
 import lv.javaguru.java2.hospital.domain.Patient;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class PatientDatabaseImpl implements PatientDatabase {
 
     private final List<Patient> patientsList = new ArrayList<>();

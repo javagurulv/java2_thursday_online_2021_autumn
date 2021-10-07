@@ -1,17 +1,16 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
+import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.AddPatientResponse;
 import lv.javaguru.java2.hospital.patient.core.services.AddPatientService;
-
 import java.util.Scanner;
 
+@DIComponent
 public class AddPatientUIAction implements PatientUIActions {
-    private final AddPatientService addPatient;
 
-    public AddPatientUIAction(AddPatientService addPatient) {
-        this.addPatient = addPatient;
-    }
+    @DIDependency private AddPatientService addPatient;
 
     public void execute() {
         String[] patientInfo = getUserInput();

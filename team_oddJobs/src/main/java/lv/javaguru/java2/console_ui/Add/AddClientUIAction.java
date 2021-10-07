@@ -3,18 +3,17 @@ package lv.javaguru.java2.console_ui.Add;
 import lv.javaguru.java2.console_ui.UIAction;
 import lv.javaguru.java2.core.requests.Add.AddClientRequest;
 import lv.javaguru.java2.core.responce.Add.AddClientResponse;
+import lv.javaguru.java2.dependency_injection.DIComponent;
+import lv.javaguru.java2.dependency_injection.DIDependency;
 import lv.javaguru.java2.services.Add.AddClientService;
 
 import java.util.Scanner;
 
+@DIComponent
 public class AddClientUIAction implements UIAction {
 
+    @DIDependency
     private AddClientService addClientService;
-
-
-    public AddClientUIAction(AddClientService addClientService) {
-        this.addClientService = addClientService;
-    }
 
 
     @Override

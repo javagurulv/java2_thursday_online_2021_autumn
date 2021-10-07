@@ -6,11 +6,14 @@ import lv.javaguru.java2.hospital.doctor.core.responses.AddDoctorResponse;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.doctor.core.services.validators.AddDoctorRequestValidator;
 import lv.javaguru.java2.hospital.doctor.matchers.DoctorMatcher;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +22,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 class AddDoctorServiceTest {
 
     @Mock private DoctorDatabaseImpl database;
     @Mock private AddDoctorRequestValidator validator;
     @InjectMocks private AddDoctorService service;
-
-    @BeforeEach
-    public void init() {
-        database = Mockito.mock(DoctorDatabaseImpl.class);
-        validator = Mockito.mock(AddDoctorRequestValidator.class);
-        service = new AddDoctorService(database, validator);
-    }
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
@@ -45,11 +43,11 @@ class AddDoctorServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "name");
         assertEquals(response.getErrors().get(0).getMessage(), "Must not be empty!");
 
-        Mockito.verifyNoInteractions(database);
+        Mockito.verifyNoMoreInteractions(database);
     }
 
     @Test
-    public void shouldAddBookToDatabase() {
+    public void shouldAddDoctorToDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         AddDoctorRequest request = new AddDoctorRequest("name", "surname", "speciality");
         AddDoctorResponse response = service.execute(request);

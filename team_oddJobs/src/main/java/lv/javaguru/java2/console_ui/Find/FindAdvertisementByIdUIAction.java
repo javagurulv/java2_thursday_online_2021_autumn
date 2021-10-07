@@ -6,17 +6,18 @@ import lv.javaguru.java2.console_ui.UIAction;
 import lv.javaguru.java2.core.requests.Find.FindAdvertisementByIdRequest;
 import lv.javaguru.java2.core.responce.Find.FindAdvertisementByIdResponse;
 import lv.javaguru.java2.console_ui.UIAction;
+import lv.javaguru.java2.dependency_injection.DIComponent;
+import lv.javaguru.java2.dependency_injection.DIDependency;
 import lv.javaguru.java2.services.Find.FindAdvertisementByIdService;
 
 import java.util.Scanner;
 
+@DIComponent
 public class FindAdvertisementByIdUIAction implements UIAction {
 
+    @DIDependency
     private FindAdvertisementByIdService findAdvertisementByIdService;
 
-    public FindAdvertisementByIdUIAction(FindAdvertisementByIdService findAdvertisementByIdService) {
-        this.findAdvertisementByIdService = findAdvertisementByIdService;
-    }
 
     @Override
     public void execute() {

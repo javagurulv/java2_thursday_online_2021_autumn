@@ -6,24 +6,24 @@ import lv.javaguru.java2.core.responce.Add.AddClientResponse;
 import lv.javaguru.java2.core.responce.CoreError;
 import lv.javaguru.java2.core.validations.AddClientValidator;
 import lv.javaguru.java2.database.Database;
+import lv.javaguru.java2.dependency_injection.DIComponent;
+import lv.javaguru.java2.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class AddClientService {
+    @DIDependency
     private Database database;
+    @DIDependency
     private AddClientValidator validator;
-
-    public AddClientService(Database database, AddClientValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
 
     public AddClientResponse execute(AddClientRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (!errors.isEmpty()) {
             return new AddClientResponse(errors);
         }
-        Client client = new Client(request.getName(),request.getSurname());
+        Client client = new Client(request.getName(), request.getSurname());
         database.addClient(client);
         return new AddClientResponse(client);
 

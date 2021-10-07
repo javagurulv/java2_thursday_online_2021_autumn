@@ -3,16 +3,15 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.AddTableRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.AddTableResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables.AddTableService;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class AddTableUIAction implements UIAction {
 
-	private AddTableService addTableService;
-
-	public AddTableUIAction(AddTableService addTableService) {
-		this.addTableService = addTableService;
-	}
+	@DIDependency private AddTableService addTableService;
 
 	@Override
 	public void execute() {

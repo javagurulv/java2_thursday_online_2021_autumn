@@ -5,16 +5,15 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.Paging
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.SearchTableRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.SearchTableResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables.SearchTableService;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIDependency;
 
 import java.util.Scanner;
 
+@DIComponent
 public class SearchTableUIAction implements UIAction {
 
-    private SearchTableService searchTableService;
-
-    public SearchTableUIAction(SearchTableService searchTableService) {
-        this.searchTableService = searchTableService;
-    }
+    @DIDependency private SearchTableService searchTableService;
 
     @Override
     public void execute() {

@@ -26,11 +26,11 @@ public class ImportSecuritiesService {
     @DIDependency private AddStockValidator stockValidator;
     @DIDependency private AddBondValidator bondValidator;
 
-    public void execute(String path) throws IOException {
+    public void execute(String path) throws IOException, ArrayIndexOutOfBoundsException {
         importSecurities(path);
     }
 
-    private void importSecurities(String path) throws IOException {
+    private void importSecurities(String path) throws IOException, ArrayIndexOutOfBoundsException {
         List<String> lines = Files.readAllLines(Paths.get(path)).stream()
                 .skip(1)
                 .collect(Collectors.toList());

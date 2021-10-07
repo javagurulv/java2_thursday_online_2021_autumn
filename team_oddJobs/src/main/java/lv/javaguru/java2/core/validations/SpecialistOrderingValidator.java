@@ -2,11 +2,12 @@ package lv.javaguru.java2.core.validations;
 
 import lv.javaguru.java2.core.requests.Find.Ordering;
 import lv.javaguru.java2.core.responce.CoreError;
+import lv.javaguru.java2.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@DIComponent
 public class SpecialistOrderingValidator {
 
     public List<CoreError> validate(Ordering ordering) {

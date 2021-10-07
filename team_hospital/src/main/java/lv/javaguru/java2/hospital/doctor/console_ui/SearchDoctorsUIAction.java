@@ -1,18 +1,17 @@
 package lv.javaguru.java2.hospital.doctor.console_ui;
 
+import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
+import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.doctor.core.requests.Ordering;
 import lv.javaguru.java2.hospital.doctor.core.requests.Paging;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.SearchDoctorsResponse;
 import lv.javaguru.java2.hospital.doctor.core.services.SearchDoctorsService;
 
+@DIComponent
 public class SearchDoctorsUIAction implements DoctorUIActions {
 
-    private SearchDoctorsService searchDoctorsService;
-
-    public SearchDoctorsUIAction(SearchDoctorsService searchDoctorsService) {
-        this.searchDoctorsService = searchDoctorsService;
-    }
+    @DIDependency private SearchDoctorsService searchDoctorsService;
 
     @Override
     public void execute() {

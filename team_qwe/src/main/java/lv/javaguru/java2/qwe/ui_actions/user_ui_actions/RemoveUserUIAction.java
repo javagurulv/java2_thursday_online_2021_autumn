@@ -7,8 +7,7 @@ import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
 import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
+import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
 @DIComponent
 public class RemoveUserUIAction implements UIAction {
@@ -20,9 +19,16 @@ public class RemoveUserUIAction implements UIAction {
         RemoveUserRequest request = new RemoveUserRequest(inputDialog("Enter name"));
         RemoveUserResponse response =
                 removeUserService.execute(request);
-        String info = response.isRemoved() ? "User " + request.getName() + " has been removed!" :
-                "No user with such name!";
-        messageDialog(info);
+        printResponse(request, response);
+    }
+
+    private void printResponse(RemoveUserRequest request, RemoveUserResponse response) {
+        if (response.hasErrors()) {
+            messageDialog("FAILED TO REMOVE USER!\n" +
+                    printErrorList(response));
+        } else {
+            messageDialog("User " + request.getName() + " has been removed!");
+        }
     }
 
 }

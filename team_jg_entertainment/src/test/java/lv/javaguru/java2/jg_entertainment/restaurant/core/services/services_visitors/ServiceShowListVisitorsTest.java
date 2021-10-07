@@ -1,46 +1,39 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.ImplDatabaseVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestShowAllVisitorsInListRestaurant;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseShowAllVisitors;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-class ServiceShowListVisitorsTest {
+@RunWith(MockitoJUnitRunner.class)
+public class ServiceShowListVisitorsTest {
 
     @Mock
-    private ImplDatabaseVisitors database;
+    private DatabaseVisitors databaseVisitors;
     @InjectMocks
-    private ServiceShowListVisitors showAllVisitors;
-
-
-    @BeforeEach
-    public void setUp() {
-        database = Mockito.mock(ImplDatabaseVisitors.class);
-        showAllVisitors = new ServiceShowListVisitors(database);
-    }
+    private ServiceShowListVisitors service;
 
     @Test
-    public void shouldAllVisitors() {
+    public void shouldGetVisitorsFromDb() {
         List<Visitors> visitors = new ArrayList<>();
-        visitors.add(new Visitors("name", "surname", 3659874L));
-        Mockito.when(database.showAllClientsInList()).thenReturn(visitors);
-
+        visitors.add(new Visitors("name", "surname"));
+        Mockito.when(databaseVisitors.showAllClientsInList()).thenReturn(visitors);
         RequestShowAllVisitorsInListRestaurant request = new RequestShowAllVisitorsInListRestaurant();
-        ResponseShowAllVisitors response = showAllVisitors.execute(request);
+        ResponseShowAllVisitors response = service.execute(request);
         assertFalse(response.hasError());
         assertEquals(response.getNewVisitor().size(), 1);
         assertEquals(response.getNewVisitor().get(0).getClientName(), "name");
         assertEquals(response.getNewVisitor().get(0).getSurname(), "surname");
-        assertEquals(response.getNewVisitor().get(0).getTelephoneNumber(), 3659874L);
     }
 }

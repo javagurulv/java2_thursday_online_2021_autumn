@@ -13,6 +13,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 class SearchDoctorsServiceTest {
 
     @Mock
@@ -28,13 +34,6 @@ class SearchDoctorsServiceTest {
     private SearchDoctorsRequestValidator validator;
     @InjectMocks
     private SearchDoctorsService service;
-
-    @BeforeEach
-    public void init() {
-        database = Mockito.mock(DoctorDatabaseImpl.class);
-        validator = Mockito.mock(SearchDoctorsRequestValidator.class);
-        service = new SearchDoctorsService(database, validator);
-    }
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidatorFails() {

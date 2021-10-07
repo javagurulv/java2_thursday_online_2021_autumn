@@ -4,12 +4,14 @@ package lv.javaguru.java2.database;
 import lv.javaguru.java2.Advertisement;
 import lv.javaguru.java2.Client;
 import lv.javaguru.java2.Specialist;
+import lv.javaguru.java2.dependency_injection.DIComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@DIComponent
 public class InMemoryDatabaseImpl implements Database {
 
     private Long nextId = 1L;
@@ -60,7 +62,6 @@ public class InMemoryDatabaseImpl implements Database {
         }
         return isClientRemoved;
     }
-
 
 
     @Override

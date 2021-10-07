@@ -4,22 +4,17 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.Orderi
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.PagingTable;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.SearchTableRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.CoreError;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
+import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIDependency;
 
 import java.util.List;
 
+@DIComponent
 public class ValidatorSearchRequestTable {
 
-    private ValidatorSearchRequestFieldTable fieldTable;
-    private ValidatorOrdering validatorOrdering;
-    private ValidatorPaging validatorPaging;
-
-    public ValidatorSearchRequestTable(ValidatorSearchRequestFieldTable fieldTable,
-                                       ValidatorOrdering validatorOrdering,
-                                       ValidatorPaging validatorPaging) {
-        this.fieldTable = fieldTable;
-        this.validatorOrdering = validatorOrdering;
-        this.validatorPaging = validatorPaging;
-    }
+    @DIDependency private ValidatorSearchRequestFieldTable fieldTable;
+    @DIDependency private ValidatorOrdering validatorOrdering;
+    @DIDependency private ValidatorPaging validatorPaging;
 
     public List<CoreError> validator(SearchTableRequest request) {
         List<CoreError> coreErrors = fieldTable.validatorField(request);

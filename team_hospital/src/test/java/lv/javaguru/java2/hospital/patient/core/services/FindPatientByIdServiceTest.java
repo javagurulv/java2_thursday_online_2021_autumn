@@ -5,11 +5,14 @@ import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.FindPatientByIdRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.FindPatientByIDResponse;
 import lv.javaguru.java2.hospital.patient.core.services.validators.FindPatientByIDValidator;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,21 +21,13 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 class FindPatientByIdServiceTest {
 
-    @Mock
-    private FindPatientByIDValidator validator;
-    @Mock
-    private PatientDatabaseImpl database;
-    @InjectMocks
-    private FindPatientByIdService service;
-
-    @BeforeEach
-    public void init() {
-        validator = Mockito.mock(FindPatientByIDValidator.class);
-        database = Mockito.mock(PatientDatabaseImpl.class);
-        service = new FindPatientByIdService(database, validator);
-    }
+    @Mock private FindPatientByIDValidator validator;
+    @Mock private PatientDatabaseImpl database;
+    @InjectMocks private FindPatientByIdService service;
 
     @Test
     public void shouldReturnPatient() {

@@ -1,21 +1,17 @@
 package lv.javaguru.java2.qwe.core.services.validator;
 
+import lv.javaguru.java2.qwe.acceptance_test.AcceptanceTestForDatabase;
 import lv.javaguru.java2.qwe.core.requests.user_requests.AddUserRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
-import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
-import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AddUserValidatorTest {
+public class AddUserValidatorTest extends AcceptanceTestForDatabase {
 
-    private final ApplicationContext appContext =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
-
-    private final AddUserValidator validator = appContext.getBean(AddUserValidator.class);
+    private final AddUserValidator validator = super.getAppContext().getBean(AddUserValidator.class);
 
     @Test
     public void shouldReturnEmptyList() {

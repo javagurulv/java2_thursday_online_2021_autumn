@@ -5,11 +5,14 @@ import lv.javaguru.java2.hospital.patient.core.requests.DeletePatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import lv.javaguru.java2.hospital.patient.core.responses.DeletePatientResponse;
 import lv.javaguru.java2.hospital.patient.core.services.validators.DeletePatientValidator;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,21 +20,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 class DeletePatientServiceTest {
 
-    @Mock
-    private PatientDatabaseImpl patientDatabase;
-    @Mock
-    private DeletePatientValidator validator;
-    @InjectMocks
-    DeletePatientService service;
-
-    @BeforeEach
-    public void init() {
-        patientDatabase = Mockito.mock(PatientDatabaseImpl.class);
-        validator = Mockito.mock(DeletePatientValidator.class);
-        service = new DeletePatientService(patientDatabase, validator);
-    }
+    @Mock private PatientDatabaseImpl patientDatabase;
+    @Mock private DeletePatientValidator validator;
+    @InjectMocks DeletePatientService service;
 
     @Test
     public void shouldReturnErrorWhenPatientIdNotProvided() {

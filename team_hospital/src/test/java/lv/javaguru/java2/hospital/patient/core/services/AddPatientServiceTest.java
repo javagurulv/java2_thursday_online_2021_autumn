@@ -6,11 +6,14 @@ import lv.javaguru.java2.hospital.patient.core.responses.AddPatientResponse;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import lv.javaguru.java2.hospital.patient.core.services.validators.AddPatientValidator;
 import lv.javaguru.java2.hospital.patient.matchers.PatientMatcher;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,21 +22,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 class AddPatientServiceTest {
 
-    @Mock
-    private PatientDatabaseImpl patientDatabase;
-    @Mock
-    private AddPatientValidator validator;
-    @InjectMocks
-    private AddPatientService addPatientService;
-
-    @BeforeEach
-    public void init() {
-        patientDatabase = Mockito.mock(PatientDatabaseImpl.class);
-        validator = Mockito.mock(AddPatientValidator.class);
-        addPatientService = new AddPatientService(patientDatabase, validator);
-    }
+    @Mock private PatientDatabaseImpl patientDatabase;
+    @Mock private AddPatientValidator validator;
+    @InjectMocks private AddPatientService addPatientService;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
