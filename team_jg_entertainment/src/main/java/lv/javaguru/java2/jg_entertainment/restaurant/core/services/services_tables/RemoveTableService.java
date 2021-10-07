@@ -11,10 +11,6 @@ public class RemoveTableService {
 
 	@DIDependency private TableDatabase tableDatabase;
 
-//	public RemoveTableService(TableDatabase tableDatabase) {
-//		this.tableDatabase = tableDatabase;
-//	}
-
 	public RemoveTableResponse execute(RemoveTableRequest request) {
 		boolean isTableRemoved = tableDatabase.deleteById(request.getTableIdToRemove());
 		return new RemoveTableResponse(isTableRemoved);

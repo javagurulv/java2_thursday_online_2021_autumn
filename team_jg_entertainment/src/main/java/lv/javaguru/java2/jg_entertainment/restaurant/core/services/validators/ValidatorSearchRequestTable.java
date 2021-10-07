@@ -16,14 +16,6 @@ public class ValidatorSearchRequestTable {
     @DIDependency private ValidatorOrdering validatorOrdering;
     @DIDependency private ValidatorPaging validatorPaging;
 
-//    public ValidatorSearchRequestTable(ValidatorSearchRequestFieldTable fieldTable,
-//                                       ValidatorOrdering validatorOrdering,
-//                                       ValidatorPaging validatorPaging) {
-//        this.fieldTable = fieldTable;
-//        this.validatorOrdering = validatorOrdering;
-//        this.validatorPaging = validatorPaging;
-//    }
-
     public List<CoreError> validator(SearchTableRequest request) {
         List<CoreError> coreErrors = fieldTable.validatorField(request);
         validateOrderingIfPresent(request, coreErrors);

@@ -22,12 +22,6 @@ public class SearchTableService {
     @DIDependency private TableDatabase database;
     @DIDependency private ValidatorSearchRequestTable validator;
 
-//    public SearchTableService(TableDatabase database,
-//                              ValidatorSearchRequestTable validator) {
-//        this.database = database;
-//        this.validator = validator;
-//    }
-
     public SearchTableResponse execute(SearchTableRequest request) {
 
         List<CoreError> coreErrors = validator.validator(request);

@@ -15,10 +15,6 @@ public class SearchTableUIAction implements UIAction {
 
     @DIDependency private SearchTableService searchTableService;
 
-//    public SearchTableUIAction(SearchTableService searchTableService) {
-//        this.searchTableService = searchTableService;
-//    }
-
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);

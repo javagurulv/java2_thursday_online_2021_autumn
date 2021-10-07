@@ -11,10 +11,6 @@ public class GetAllTablesUIAction implements UIAction {
 
 	@DIDependency private GetAllTablesService getAllTablesService;
 
-//	public GetAllTablesUIAction(GetAllTablesService getAllTablesService) {
-//		this.getAllTablesService = getAllTablesService;
-//	}
-
 	@Override
 	public void execute() {
 		System.out.println("Table list: ");

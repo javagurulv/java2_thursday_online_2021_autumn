@@ -13,10 +13,6 @@ public class AddTableUIAction implements UIAction {
 
 	@DIDependency private AddTableService addTableService;
 
-//	public AddTableUIAction(AddTableService addTableService) {
-//		this.addTableService = addTableService;
-//	}
-
 	@Override
 	public void execute() {
 		Scanner scanner = new Scanner(System.in);

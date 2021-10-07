@@ -13,10 +13,6 @@ public class RemoveTableUIAction implements UIAction {
 
 	@DIDependency private RemoveTableService removeTableService;
 
-//	public RemoveTableUIAction(RemoveTableService removeTableService) {
-//		this.removeTableService = removeTableService;
-//	}
-
 	@Override
 	public void execute() {
 		Scanner scanner = new Scanner(System.in);

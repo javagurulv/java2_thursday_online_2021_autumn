@@ -14,10 +14,6 @@ public class GetAllTablesService {
 
 	@DIDependency private TableDatabase tableDatabase;
 
-//	public GetAllTablesService(TableDatabase tableDatabase) {
-//		this.tableDatabase = tableDatabase;
-//	}
-
 	public GetAllTablesResponse execute(GetAllTablesRequest request) {
 		List<Table> tables = tableDatabase.getAllTables();
 		return new GetAllTablesResponse(tables);
