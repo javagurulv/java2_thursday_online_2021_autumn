@@ -68,20 +68,20 @@ public class Reservation {
                 '}';
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Reservation that = (Reservation) o;
-//        return Objects.equals(visitor, that.visitor)
-//                && Objects.equals(table, that.table)
-//                && Objects.equals(menu, that.menu)
-//                && Objects.equals(reservationID, that.reservationID)
-//                && Objects.equals(reservationDate, that.reservationDate);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(visitor, table, menu, reservationID, reservationDate);
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reservation that = (Reservation) o;
+        return Objects.equals(visitor, that.visitor)
+                && Objects.equals(table, that.table)
+                && Objects.equals(menu, that.menu)
+                && Objects.equals(reservationID, that.reservationID)
+                && Objects.equals(reservationDate, that.reservationDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(visitor, table, menu, reservationID, reservationDate);
+    }
 }
