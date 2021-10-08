@@ -34,7 +34,7 @@ public class ValidatorAddTable {
 
     private Optional<CoreError> tablePriceValidator(AddTableRequest addTableRequest) {
         return (addTableRequest.getPrice() < 0)
-                ? Optional.of(new CoreError("table price", "Shouldn't be empty or negative"))
+                ? Optional.of(new CoreError("table price", "Shouldn't be empty or negative (less than 0)"))
                 : Optional.empty();
     }
 }

@@ -29,7 +29,7 @@ public class ServiceDeleteVisitorsTest {
     private ServiceDeleteVisitors service;
 
     @Test
-    public void shouldReturnErrorWhenBookIdNotProvided() {
+    public void shouldReturnErrorWhenVisitorIdNotProvided() {
         RequestDeleteVisitor request = new RequestDeleteVisitor(null, "name");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("id visitor", "Can't be null"));
@@ -42,7 +42,7 @@ public class ServiceDeleteVisitorsTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenBookNameNotProvided() {
+    public void shouldReturnErrorWhenVisitorNameNotProvided() {
         RequestDeleteVisitor request = new RequestDeleteVisitor(1L, "");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("name visitor", "Can't be empty"));
@@ -55,7 +55,7 @@ public class ServiceDeleteVisitorsTest {
     }
 
     @Test
-    public void shouldDeleteBookWithIdFromDatabase() {
+    public void shouldDeleteVisitorWithIdFromDatabase() {
         Mockito.when(validator.coreErrors(any())).thenReturn(new ArrayList<>());
         Mockito.when(database.deleteClientWithIDAndName(1L, "name")).thenReturn(true);
         RequestDeleteVisitor request = new RequestDeleteVisitor(1L, "name");

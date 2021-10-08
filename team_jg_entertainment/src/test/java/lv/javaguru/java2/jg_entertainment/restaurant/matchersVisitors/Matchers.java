@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.matchers;
+package lv.javaguru.java2.jg_entertainment.restaurant.matchersVisitors;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 import org.mockito.ArgumentMatcher;

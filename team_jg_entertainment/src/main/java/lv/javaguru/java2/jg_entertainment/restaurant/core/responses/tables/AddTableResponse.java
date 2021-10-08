@@ -2,15 +2,21 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
 
-public class AddTableResponse {
+import java.util.List;
 
-	private Table newTable;
+public class AddTableResponse extends CoreResponse {
 
-	public AddTableResponse(Table newTable) {
-		this.newTable = newTable;
-	}
+    private Table newTable;
 
-	public Table getNewTable() {
-		return newTable;
-	}
+    public AddTableResponse(List<CoreError> errorsList) {
+        super(errorsList);
+    }
+
+    public AddTableResponse(Table newTable) {
+        this.newTable = newTable;
+    }
+
+    public Table getNewTable() {
+        return newTable;
+    }
 }

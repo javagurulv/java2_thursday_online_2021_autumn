@@ -38,7 +38,7 @@ class ValidatorDeleteVisitorTest {
     }
 
     @Test
-    public void coreErrorsHaveNNotCorrectInformationInAllField() {
+    public void coreErrorsHaveNotCorrectInformationInAllField() {
         RequestDeleteVisitor request = new RequestDeleteVisitor(null, "");
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertEquals(coreErrorList.size(), 2);

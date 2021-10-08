@@ -5,7 +5,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Requ
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseAddVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorAddVisitor;
-import lv.javaguru.java2.jg_entertainment.restaurant.matchers.Matchers;
+import lv.javaguru.java2.jg_entertainment.restaurant.matchersVisitors.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -54,7 +54,7 @@ public class ServiceAddAllVisitorsTest {
     }
 
     @Test
-    public void shouldAddBookToDatabaseWhenRequestIsValid() {
+    public void shouldAddVisitorToDatabaseWhenRequestIsValid() {
         RequestAddVisitor validRequest = new RequestAddVisitor("name", "surname", 252525L);
         when(validator.coreErrors(validRequest)).thenReturn(List.of());
         service.execute(validRequest);
@@ -70,7 +70,7 @@ public class ServiceAddAllVisitorsTest {
     }
 
     @Test
-    public void shouldReturnResponseWithBookWhenRequestIsValid() {
+    public void shouldReturnResponseWithVisitorWhenRequestIsValid() {
         RequestAddVisitor validRequest = new RequestAddVisitor("name", "surname", 252525L);
         when(validator.coreErrors(validRequest)).thenReturn(List.of());
         ResponseAddVisitor response = service.execute(validRequest);

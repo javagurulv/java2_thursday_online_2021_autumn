@@ -16,7 +16,8 @@ public class ServiceAddAllVisitors {
 
     @Autowired
     private DatabaseVisitors database;
-    @Autowired private ValidatorAddVisitor validator;
+    @Autowired
+    private ValidatorAddVisitor validator;
 
     public ResponseAddVisitor execute(RequestAddVisitor request) {
         List<CoreError> coreErrors = validator.coreErrors(request);
