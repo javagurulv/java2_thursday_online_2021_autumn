@@ -1,11 +1,12 @@
 package lv.javaguru.java2.qwe;
 
+import lv.javaguru.java2.qwe.config.AppConfiguration;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.database.UserData;
-import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
-import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import lv.javaguru.java2.qwe.ui_actions.ChooseDataMenuUIAction;
 import lv.javaguru.java2.qwe.ui_actions.ChooseUserMenuUIAction;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -16,7 +17,7 @@ import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 public class ApplicationDemo {
 
     private static final ApplicationContext applicationContext =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
+            new AnnotationConfigApplicationContext(AppConfiguration.class);
 
     public static ApplicationContext getApplicationContext() {
         return applicationContext;

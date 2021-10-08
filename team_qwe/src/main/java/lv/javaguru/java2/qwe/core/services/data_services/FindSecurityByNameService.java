@@ -6,17 +6,17 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.FindSecurityByNameReque
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.data_responses.FindSecurityByNameResponse;
 import lv.javaguru.java2.qwe.core.services.validator.FindSecurityByNameValidator;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class FindSecurityByNameService {
 
-    @DIDependency private Database database;
-    @DIDependency private FindSecurityByNameValidator validator;
+    @Autowired private Database database;
+    @Autowired private FindSecurityByNameValidator validator;
 
     public FindSecurityByNameResponse execute(FindSecurityByNameRequest request) {
         List<CoreError> errors = validator.validate(request);

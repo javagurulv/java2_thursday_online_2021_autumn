@@ -1,8 +1,8 @@
 package lv.javaguru.java2.qwe.core.database;
 
 import lv.javaguru.java2.qwe.*;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -10,11 +10,12 @@ import java.util.*;
 import static java.util.stream.Collectors.*;
 import static lv.javaguru.java2.qwe.Type.*;
 
-@DIComponent
+@Component
 public class UserDataImpl implements UserData {
 
     private List<User> userList;
-    @DIDependency private Database database;
+    @Autowired
+    private Database database;
     private LocalDate currentDate = LocalDate.now();
 
     public UserDataImpl() {

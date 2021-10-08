@@ -6,18 +6,18 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.AddUserRequest;
 import lv.javaguru.java2.qwe.core.responses.user_responses.AddUserResponse;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.services.validator.AddUserValidator;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 import static lv.javaguru.java2.qwe.Type.*;
 
-@DIComponent
+@Component
 public class AddUserService {
 
-    @DIDependency private UserData userData;
-    @DIDependency private AddUserValidator validator;
+    @Autowired private UserData userData;
+    @Autowired private AddUserValidator validator;
 
     public UserData getUserData() {
         return userData;

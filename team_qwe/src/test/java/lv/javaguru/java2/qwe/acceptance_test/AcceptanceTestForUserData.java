@@ -4,8 +4,6 @@ import lv.javaguru.java2.qwe.*;
 import lv.javaguru.java2.qwe.core.requests.user_requests.*;
 import lv.javaguru.java2.qwe.core.responses.user_responses.*;
 import lv.javaguru.java2.qwe.core.services.user_services.*;
-import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
-import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Before;
 import org.junit.Test;
 

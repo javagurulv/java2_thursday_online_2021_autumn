@@ -6,7 +6,7 @@ import lv.javaguru.java2.qwe.User;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.responses.CoreResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.ImportSecuritiesService;
-import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
+import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import java.io.File;

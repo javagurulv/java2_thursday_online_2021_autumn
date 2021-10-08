@@ -1,12 +1,9 @@
 package lv.javaguru.java2.qwe.dependency_injection;
 
-import lv.javaguru.java2.qwe.core.database.Database;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class DIComponentCreatorTest {
 
@@ -20,15 +17,6 @@ public class DIComponentCreatorTest {
         List<Class<?>> diComponentClasses = diComponentFilter.filter(allClasses);
         diComponentCreator.create(context, diComponentClasses);
         context.getBeans().forEach((key, value) -> System.out.println(key.getName()));
-    }
-
-    @Test
-    public void testParameterizedConstructorDI() {
-        ApplicationContext context =
-                new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
-        Database database = context.getBean(Database.class);
-        assertEquals("TEST!", database.getStringForTest());
-        assertEquals(123, database.getNumberForTest());
     }
 
 }

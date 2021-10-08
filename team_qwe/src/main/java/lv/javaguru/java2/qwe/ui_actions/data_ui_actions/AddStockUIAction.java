@@ -4,16 +4,16 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
 import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.AddStockResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.AddStockService;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
-@DIComponent
+@Component
 public class AddStockUIAction implements UIAction {
 
-    @DIDependency private AddStockService addStockService;
+    @Autowired private AddStockService addStockService;
 
     @Override
     public void execute() {

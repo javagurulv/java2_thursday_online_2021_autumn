@@ -13,10 +13,6 @@ public interface Database {
 
     ArrayList<Security> getSecurityList();
 
-    String getStringForTest();
-
-    int getNumberForTest();
-
     void addStock(Stock stock);
 
     void addBond(Bond bond);

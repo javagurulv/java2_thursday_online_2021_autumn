@@ -7,16 +7,16 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.AddStockResponse;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class AddStockService {
 
-    @DIDependency private Database database;
-    @DIDependency private AddStockValidator validator;
+    @Autowired private Database database;
+    @Autowired private AddStockValidator validator;
 
     public AddStockResponse execute(CoreRequest request) {
         List<CoreError> errors = validator.validate(request);

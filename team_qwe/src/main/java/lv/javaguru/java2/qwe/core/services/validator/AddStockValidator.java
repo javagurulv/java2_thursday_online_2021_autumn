@@ -4,8 +4,8 @@ import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
 import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.isNotDouble;
 
@@ -16,10 +16,10 @@ import java.util.stream.Collectors;
 
 import static java.util.Map.entry;
 
-@DIComponent
+@Component
 public class AddStockValidator extends AddSecurityValidator {
 
-    @DIDependency private Database database;
+    @Autowired private Database database;
 
     private final Map<Predicate<AddStockRequest>, CoreError> validator = Map.ofEntries(
             entry(request -> request.getName().length() < 3 || request.getName().length() > 100,

@@ -7,16 +7,16 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.AddBondResponse;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class AddBondService {
 
-    @DIDependency private Database database;
-    @DIDependency private AddBondValidator validator;
+    @Autowired private Database database;
+    @Autowired private AddBondValidator validator;
 
     public AddBondResponse execute(CoreRequest request) {
         List<CoreError> errors = validator.validate(request);

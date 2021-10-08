@@ -2,11 +2,10 @@ package lv.javaguru.java2.qwe.core.services.validator;
 
 import lv.javaguru.java2.qwe.User;
 import lv.javaguru.java2.qwe.core.database.UserData;
-import lv.javaguru.java2.qwe.core.requests.user_requests.GetUserPortfolioRequest;
 import lv.javaguru.java2.qwe.core.requests.user_requests.RemoveUserRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -17,10 +16,10 @@ import java.util.stream.Collectors;
 import static java.util.Map.entry;
 import static java.util.Map.ofEntries;
 
-@DIComponent
+@Component
 public class RemoveUserValidator {
 
-    @DIDependency private UserData userData;
+    @Autowired private UserData userData;
 
     private final Map<Predicate<RemoveUserRequest>, CoreError> validator = ofEntries(
             entry(this::checkUserPortfolioIsPresent,

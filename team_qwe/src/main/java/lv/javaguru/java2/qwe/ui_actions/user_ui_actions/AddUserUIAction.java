@@ -3,19 +3,19 @@ package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 import lv.javaguru.java2.qwe.core.requests.user_requests.AddUserRequest;
 import lv.javaguru.java2.qwe.core.responses.user_responses.AddUserResponse;
 import lv.javaguru.java2.qwe.core.services.user_services.AddUserService;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import static lv.javaguru.java2.qwe.Type.*;
 import static lv.javaguru.java2.qwe.Type.SUPER_RICH;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
-@DIComponent
+@Component
 public class AddUserUIAction implements UIAction {
 
-    @DIDependency private AddUserService addUserService;
+    @Autowired private AddUserService addUserService;
 
     @Override
     public void execute() {

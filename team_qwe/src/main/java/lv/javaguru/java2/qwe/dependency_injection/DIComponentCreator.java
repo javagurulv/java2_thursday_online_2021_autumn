@@ -14,7 +14,7 @@ import static java.util.Map.*;
 public class DIComponentCreator {
 
     private final Map<Class<?>, Object> list = ofEntries(
-            entry(DatabaseImpl.class, new DatabaseImpl("TEST!", 123))
+            entry(DatabaseImpl.class, new DatabaseImpl())
     );
 
     public void create(ApplicationContext applicationContext,

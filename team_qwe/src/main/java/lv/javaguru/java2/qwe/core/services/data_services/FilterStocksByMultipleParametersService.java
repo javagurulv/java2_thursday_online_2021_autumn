@@ -6,17 +6,17 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.FilterStocksByMultipleP
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.data_responses.FilterStocksByMultipleParametersResponse;
 import lv.javaguru.java2.qwe.core.services.validator.FilterStocksByMultipleParametersValidator;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class FilterStocksByMultipleParametersService {
 
-    @DIDependency private Database database;
-    @DIDependency private FilterStocksByMultipleParametersValidator validator;
+    @Autowired private Database database;
+    @Autowired private FilterStocksByMultipleParametersValidator validator;
 
     public Database getDatabase() {
         return database;

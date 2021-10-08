@@ -4,16 +4,16 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.AddBondRequest;
 import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.AddBondResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.AddBondService;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
-@DIComponent
+@Component
 public class AddBondUIAction implements UIAction {
 
-    @DIDependency private AddBondService addBondService;
+    @Autowired private AddBondService addBondService;
 
     @Override
     public void execute() {

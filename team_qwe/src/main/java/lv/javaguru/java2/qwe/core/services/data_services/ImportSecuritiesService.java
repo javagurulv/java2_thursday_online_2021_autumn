@@ -7,8 +7,8 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
 import lv.javaguru.java2.qwe.core.services.validator.AddSecurityValidator;
 import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,12 +19,12 @@ import java.util.stream.IntStream;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
 
-@DIComponent
+@Component
 public class ImportSecuritiesService {
 
-    @DIDependency private Database database;
-    @DIDependency private AddStockValidator stockValidator;
-    @DIDependency private AddBondValidator bondValidator;
+    @Autowired private Database database;
+    @Autowired private AddStockValidator stockValidator;
+    @Autowired private AddBondValidator bondValidator;
 
     public void execute(String path) throws IOException, ArrayIndexOutOfBoundsException {
         importSecurities(path);

@@ -3,16 +3,16 @@ package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 import lv.javaguru.java2.qwe.core.requests.user_requests.FindUserByNameRequest;
 import lv.javaguru.java2.qwe.core.responses.user_responses.FindUserByNameResponse;
 import lv.javaguru.java2.qwe.core.services.user_services.FindUserByNameService;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
-@DIComponent
+@Component
 public class FindUserByNameUIAction implements UIAction {
 
-    @DIDependency private FindUserByNameService findUserByNameService;
+    @Autowired private FindUserByNameService findUserByNameService;
 
     @Override
     public void execute() {

@@ -7,18 +7,18 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.GetUserPortfolioRequest
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GetUserPortfolioResponse;
 import lv.javaguru.java2.qwe.core.services.validator.GetUserPortfolioValidator;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class GetUserPortfolioService {
 
-    @DIDependency private UserData userData;
-    @DIDependency private GetUserPortfolioValidator validator;
+    @Autowired private UserData userData;
+    @Autowired private GetUserPortfolioValidator validator;
 
     public UserData getUserData() {
         return userData;

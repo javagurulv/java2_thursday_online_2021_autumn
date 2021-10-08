@@ -7,8 +7,8 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.GetUserPortfolioSummary
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GetUserPortfolioSummaryResponse;
 import lv.javaguru.java2.qwe.core.services.validator.GetUserPortfolioSummaryValidator;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -18,11 +18,11 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.summingDouble;
 
-@DIComponent
+@Component
 public class GetUserPortfolioSummaryService {
 
-    @DIDependency private UserData userData;
-    @DIDependency private GetUserPortfolioSummaryValidator validator;
+    @Autowired private UserData userData;
+    @Autowired private GetUserPortfolioSummaryValidator validator;
 
     public UserData getUserData() {
         return userData;

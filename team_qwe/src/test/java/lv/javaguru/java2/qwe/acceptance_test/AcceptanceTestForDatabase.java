@@ -1,6 +1,7 @@
 package lv.javaguru.java2.qwe.acceptance_test;
 
 import lv.javaguru.java2.qwe.Bond;
+import lv.javaguru.java2.qwe.config.AppConfiguration;
 import lv.javaguru.java2.qwe.Stock;
 import lv.javaguru.java2.qwe.core.requests.data_requests.*;
 import lv.javaguru.java2.qwe.core.responses.data_responses.FilterStocksByMultipleParametersResponse;
@@ -8,8 +9,9 @@ import lv.javaguru.java2.qwe.core.responses.data_responses.FindSecurityByNameRes
 import lv.javaguru.java2.qwe.core.responses.data_responses.GetAllSecurityListResponse;
 import lv.javaguru.java2.qwe.core.responses.data_responses.RemoveSecurityResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.*;
-import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
-import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -18,7 +20,7 @@ import static java.util.List.*;
 public class AcceptanceTestForDatabase {
 
     private final ApplicationContext appContext =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
+            new AnnotationConfigApplicationContext(AppConfiguration.class);
 
     public ApplicationContext getAppContext() {
         return appContext;

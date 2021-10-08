@@ -5,16 +5,16 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.RemoveUserRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.RemoveUserResponse;
 import lv.javaguru.java2.qwe.core.services.validator.RemoveUserValidator;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class RemoveUserService {
 
-    @DIDependency private UserData userData;
-    @DIDependency private RemoveUserValidator validator;
+    @Autowired private UserData userData;
+    @Autowired private RemoveUserValidator validator;
 
     public UserData getUserData() {
         return userData;

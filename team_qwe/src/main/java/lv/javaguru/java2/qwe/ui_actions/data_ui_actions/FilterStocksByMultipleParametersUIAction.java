@@ -3,9 +3,9 @@ package lv.javaguru.java2.qwe.ui_actions.data_ui_actions;
 import lv.javaguru.java2.qwe.core.requests.data_requests.*;
 import lv.javaguru.java2.qwe.core.responses.data_responses.FilterStocksByMultipleParametersResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.FilterStocksByMultipleParametersService;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,10 +15,10 @@ import java.util.stream.IntStream;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
-@DIComponent
+@Component
 public class FilterStocksByMultipleParametersUIAction implements UIAction {
 
-    @DIDependency private FilterStocksByMultipleParametersService multipleParametersService;
+    @Autowired private FilterStocksByMultipleParametersService multipleParametersService;
     private final String[] parameters = {"Industry", "Market price", "Dividend", "Risk weight", "none"};
     private final String[] operators = {">", ">=", "<", "<=", "="};
     private final String[] industries = new String[]{"Consumer Staples", "Utilities", "Communications",

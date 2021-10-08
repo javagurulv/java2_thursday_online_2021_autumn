@@ -6,8 +6,8 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRe
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GenerateUserPortfolioResponse;
 import lv.javaguru.java2.qwe.core.services.validator.GenerateUserPortfolioValidator;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.stream.IntStream;
@@ -18,11 +18,11 @@ import static java.util.Comparator.*;
 import static java.util.Map.*;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
-@DIComponent
+@Component
 public class GenerateUserPortfolioService {
 
-    @DIDependency private UserData userData;
-    @DIDependency private GenerateUserPortfolioValidator validator;
+    @Autowired private UserData userData;
+    @Autowired private GenerateUserPortfolioValidator validator;
 
     public UserData getUserData() {
         return userData;
