@@ -11,7 +11,6 @@ import lv.javaguru.java2.qwe.core.responses.data_responses.RemoveSecurityRespons
 import lv.javaguru.java2.qwe.core.services.data_services.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -5,6 +5,7 @@ import lv.javaguru.java2.qwe.core.responses.data_responses.FilterStocksByMultipl
 import lv.javaguru.java2.qwe.core.services.data_services.FilterStocksByMultipleParametersService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -17,6 +18,12 @@ import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
 @Component
 public class FilterStocksByMultipleParametersUIAction implements UIAction {
+
+    @Value("${filter.ordering.enabled}")
+    private boolean orderingEnabled;
+
+    @Value("${filter.paging.enabled}")
+    private boolean pagingEnabled;
 
     @Autowired private FilterStocksByMultipleParametersService multipleParametersService;
     private final String[] parameters = {"Industry", "Market price", "Dividend", "Risk weight", "none"};
@@ -55,8 +62,12 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
         List<CoreRequest> requestList = new ArrayList<>();
         addDoubleParametersRequests(requestList, finalParameterList, operators);
         addIndustryParameterRequest(requestList, finalParameterList, industries);
-        addOrderingRequest(requestList);
-        addPagingRequest(requestList);
+        if (orderingEnabled) {
+            addOrderingRequest(requestList);
+        }
+        if (pagingEnabled) {
+            addPagingRequest(requestList);
+        }
         return requestList;
     }
 
