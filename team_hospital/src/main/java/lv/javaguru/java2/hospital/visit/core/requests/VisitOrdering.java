@@ -1,11 +1,11 @@
 package lv.javaguru.java2.hospital.visit.core.requests;
 
-public class Ordering {
+public class VisitOrdering {
 
     private String orderBy;
     private String orderDirection;
 
-    public Ordering(String orderBy, String orderDirection) {
+    public VisitOrdering(String orderBy, String orderDirection) {
         this.orderBy = orderBy;
         this.orderDirection = orderDirection;
     }

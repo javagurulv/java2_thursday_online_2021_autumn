@@ -1,17 +1,17 @@
 package lv.javaguru.java2.hospital.doctor.console_ui;
 
-import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
-import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
-import lv.javaguru.java2.hospital.doctor.core.requests.Ordering;
-import lv.javaguru.java2.hospital.doctor.core.requests.Paging;
+import lv.javaguru.java2.hospital.doctor.core.requests.DoctorOrdering;
+import lv.javaguru.java2.hospital.doctor.core.requests.DoctorPaging;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.SearchDoctorsResponse;
 import lv.javaguru.java2.hospital.doctor.core.services.SearchDoctorsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class SearchDoctorsUIAction implements DoctorUIActions {
 
-    @DIDependency private SearchDoctorsService searchDoctorsService;
+    @Autowired private SearchDoctorsService searchDoctorsService;
 
     @Override
     public void execute() {
@@ -23,13 +23,13 @@ public class SearchDoctorsUIAction implements DoctorUIActions {
 
         String orderBy = getUserInput.getUserStringInput("Enter orderBy (name||surname||speciality): ");
         String orderDirection = getUserInput.getUserStringInput("Enter orderDirection (ASCENDING||DESCENDING): ");
-        Ordering ordering = new Ordering(orderBy, orderDirection);
+        DoctorOrdering doctorOrdering = new DoctorOrdering(orderBy, orderDirection);
 
         Integer pageNumber = getUserInput.getUserNumericInput("Enter pageNumber: ");
         Integer pageSize = getUserInput.getUserNumericInput("Enter pageSize: ");
-        Paging paging = new Paging(pageNumber, pageSize);
+        DoctorPaging doctorPaging = new DoctorPaging(pageNumber, pageSize);
 
-        SearchDoctorsRequest request = new SearchDoctorsRequest(id, name, surname, speciality, ordering, paging);
+        SearchDoctorsRequest request = new SearchDoctorsRequest(id, name, surname, speciality, doctorOrdering, doctorPaging);
         SearchDoctorsResponse response = searchDoctorsService.execute(request);
 
         if (response.hasErrors()) {

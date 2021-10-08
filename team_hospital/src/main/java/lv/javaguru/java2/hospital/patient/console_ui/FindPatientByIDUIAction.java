@@ -1,16 +1,17 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
-import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
-import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.patient.core.requests.FindPatientByIdRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.FindPatientByIDResponse;
 import lv.javaguru.java2.hospital.patient.core.services.FindPatientByIdService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class FindPatientByIDUIAction implements PatientUIActions {
 
-   @DIDependency private FindPatientByIdService findByIDService;
+   @Autowired private FindPatientByIdService findByIDService;
 
     public void execute() {
         Scanner scanner = new Scanner(System.in);

@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.visit.console_ui;
 
-import lv.javaguru.java2.hospital.visit.core.requests.Ordering;
-import lv.javaguru.java2.hospital.visit.core.requests.Paging;
+import lv.javaguru.java2.hospital.visit.core.requests.VisitOrdering;
+import lv.javaguru.java2.hospital.visit.core.requests.VisitPaging;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.SearchVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.SearchVisitService;
@@ -24,13 +24,13 @@ public class SearchVisitUIAction implements VisitUIAction {
 
         String orderBy = getUserInput.getUserStringInput("Enter orderBy (name||surname||speciality): ");
         String orderDirection = getUserInput.getUserStringInput("Enter orderDirection (ASCENDING||DESCENDING): ");
-        Ordering ordering = new Ordering(orderBy, orderDirection);
+        VisitOrdering visitOrdering = new VisitOrdering(orderBy, orderDirection);
 
         Integer pageNumber = getUserInput.getUserNumericInput("Enter pageNumber: ");
         Integer pageSize = getUserInput.getUserNumericInput("Enter pageSize: ");
-        Paging paging = new Paging(pageNumber, pageSize);
+        VisitPaging visitPaging = new VisitPaging(pageNumber, pageSize);
 
-        SearchVisitRequest request = new SearchVisitRequest(visitId, doctorId, patientId, dateInput, ordering, paging);
+        SearchVisitRequest request = new SearchVisitRequest(visitId, doctorId, patientId, dateInput, visitOrdering, visitPaging);
         SearchVisitResponse response = searchVisitService.execute(request);
 
         if (response.hasErrors()) {

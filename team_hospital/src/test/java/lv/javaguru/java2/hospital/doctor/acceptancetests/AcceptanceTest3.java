@@ -1,7 +1,8 @@
 package lv.javaguru.java2.hospital.doctor.acceptancetests;
 
-import lv.javaguru.java2.hospital.dependency_injection.ApplicationContext;
-import lv.javaguru.java2.hospital.dependency_injection.DIApplicationContextBuilder;
+import lv.javaguru.java2.hospital.config.HospitalConfiguration;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.context.ApplicationContext;
 import lv.javaguru.java2.hospital.doctor.core.requests.*;
 import lv.javaguru.java2.hospital.doctor.core.responses.AddDoctorResponse;
 import lv.javaguru.java2.hospital.doctor.core.responses.DeleteDoctorResponse;
@@ -10,14 +11,19 @@ import lv.javaguru.java2.hospital.doctor.core.services.AddDoctorService;
 import lv.javaguru.java2.hospital.doctor.core.services.DeleteDoctorService;
 import lv.javaguru.java2.hospital.doctor.core.services.ShowAllDoctorsService;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AcceptanceTest3 {
 
-    private ApplicationContext appContest =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.hospital");
+    private ApplicationContext appContext;
+
+    @BeforeEach
+    public void setup() {
+        appContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
+    }
 
     @Test
     public void shouldDeleteCorrectDoctor() {
@@ -44,14 +50,15 @@ public class AcceptanceTest3 {
 
 
     private AddDoctorService getAddDoctorService() {
-        return appContest.getBean(AddDoctorService.class);
+        return appContext.getBean(AddDoctorService.class);
     }
 
     private ShowAllDoctorsService getShowAllDoctorsService() {
-        return appContest.getBean(ShowAllDoctorsService.class);
+        return appContext.getBean(ShowAllDoctorsService.class);
     }
 
     private DeleteDoctorService getDeleteDoctorService() {
-        return appContest.getBean(DeleteDoctorService.class);
+        return appContext.getBean(DeleteDoctorService.class);
     }
+
 }

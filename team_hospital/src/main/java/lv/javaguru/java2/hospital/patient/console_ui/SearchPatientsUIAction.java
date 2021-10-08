@@ -1,18 +1,19 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
-import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
-import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
-import lv.javaguru.java2.hospital.patient.core.requests.Ordering;
-import lv.javaguru.java2.hospital.patient.core.requests.Paging;
+import lv.javaguru.java2.hospital.patient.core.requests.PatientOrdering;
+import lv.javaguru.java2.hospital.patient.core.requests.PatientPaging;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
 import lv.javaguru.java2.hospital.patient.core.services.SearchPatientsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.Locale;
 
-@DIComponent
+@Component
 public class SearchPatientsUIAction implements PatientUIActions {
 
-    @DIDependency private SearchPatientsService searchPatientsService;
+    @Autowired private SearchPatientsService searchPatientsService;
 
     @Override
     public void execute() {
@@ -21,11 +22,11 @@ public class SearchPatientsUIAction implements PatientUIActions {
         String surname = getUserInput.getUserStringInput("Enter patient surname: ");
         String personalCode = getUserInput.getUserStringInput("Enter patient personal code: ");
 
-        Ordering ordering = getOrdering();
-        Paging paging = getPaging();
+        PatientOrdering patientOrdering = getOrdering();
+        PatientPaging patientPaging = getPaging();
 
         SearchPatientsRequest request =
-                new SearchPatientsRequest(name, surname, personalCode, ordering, paging);
+                new SearchPatientsRequest(name, surname, personalCode, patientOrdering, patientPaging);
 
         SearchPatientsResponse response = searchPatientsService.execute(request);
 
@@ -37,33 +38,33 @@ public class SearchPatientsUIAction implements PatientUIActions {
         }
     }
 
-    private Ordering getOrdering() {
+    private PatientOrdering getOrdering() {
         GetUserInput getUserInput = new GetUserInput();
         String answer = getUserInput.getUserStringInput("Do you want to order list? "
                 + "Enter 'yes' or 'no': ").toLowerCase(Locale.ROOT);
 
-        Ordering ordering = null;
+        PatientOrdering patientOrdering = null;
 
         if (answer.equals("yes")) {
             String orderBy = getUserInput.getUserStringInput("Enter orderBy (Name or Surname): ");
             String orderDirection = getUserInput.getUserStringInput("Enter orderDirection (Ascending||Descending): ");
-            ordering = new Ordering(orderBy, orderDirection);
+            patientOrdering = new PatientOrdering(orderBy, orderDirection);
         }
-        return ordering;
+        return patientOrdering;
     }
 
-    private Paging getPaging() {
+    private PatientPaging getPaging() {
         GetUserInput getUserInput = new GetUserInput();
         String answer = getUserInput.getUserStringInput("Do want to see list in pages? " +
                 "Enter 'yes' or 'no': ").toLowerCase(Locale.ROOT);
 
-        Paging paging = null;
+        PatientPaging patientPaging = null;
 
         if (answer.equals("yes")) {
             int pageNumber = getUserInput.getUserNumericInput("Enter pageNumber: ");
             int pageSize = getUserInput.getUserNumericInput("Enter pageSize: ");
-            paging = new Paging(pageNumber, pageSize);
+            patientPaging = new PatientPaging(pageNumber, pageSize);
         }
-        return paging;
+        return patientPaging;
     }
 }

@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
-import lv.javaguru.java2.hospital.visit.core.requests.Ordering;
+import lv.javaguru.java2.hospital.visit.core.requests.VisitOrdering;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import org.junit.jupiter.api.Test;
 
@@ -8,14 +8,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class OrderingValidatorTest {
+class VisitOrderingValidatorTest {
 
-    private OrderingValidator validator = new OrderingValidator();
+    private VisitOrderingValidator validator = new VisitOrderingValidator();
 
     @Test
     public void shouldReturnErrorWhenOrderDirectionAreEmpty() {
-        Ordering ordering = new Ordering("date", null);
-        List<CoreError> errors = validator.validate(ordering);
+        VisitOrdering visitOrdering = new VisitOrdering("date", null);
+        List<CoreError> errors = validator.validate(visitOrdering);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderDirection");
         assertEquals(errors.get(0).getDescription(), "Must not be empty!");
@@ -23,8 +23,8 @@ class OrderingValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenOrderByAreEmpty() {
-        Ordering ordering = new Ordering(null, "ASCENDING");
-        List<CoreError> errors = validator.validate(ordering);
+        VisitOrdering visitOrdering = new VisitOrdering(null, "ASCENDING");
+        List<CoreError> errors = validator.validate(visitOrdering);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderBy");
         assertEquals(errors.get(0).getDescription(), "Must not be empty!");
@@ -32,8 +32,8 @@ class OrderingValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenOrderByContainNotValidValue() {
-        Ordering ordering = new Ordering("notValidValue", "ASCENDING");
-        List<CoreError> errors = validator.validate(ordering);
+        VisitOrdering visitOrdering = new VisitOrdering("notValidValue", "ASCENDING");
+        List<CoreError> errors = validator.validate(visitOrdering);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderBy");
         assertEquals(errors.get(0).getDescription(), "Must contain 'date' only!");
@@ -41,8 +41,8 @@ class OrderingValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenOrderDirectionContainNotValidValue() {
-        Ordering ordering = new Ordering("date", "notValidValue");
-        List<CoreError> errors = validator.validate(ordering);
+        VisitOrdering visitOrdering = new VisitOrdering("date", "notValidValue");
+        List<CoreError> errors = validator.validate(visitOrdering);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderDirection");
         assertEquals(errors.get(0).getDescription(), "Must contain 'ASCENDING' or 'DESCENDING' only!");

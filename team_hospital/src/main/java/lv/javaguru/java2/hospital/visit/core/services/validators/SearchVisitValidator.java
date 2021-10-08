@@ -8,13 +8,13 @@ import java.util.List;
 public class SearchVisitValidator {
 
     private SearchVisitFieldValidator fieldValidator;
-    private OrderingValidator orderingValidator;
-    private PagingValidator pagingValidator;
+    private VisitOrderingValidator visitOrderingValidator;
+    private VisitPagingValidator visitPagingValidator;
 
-    public SearchVisitValidator(SearchVisitFieldValidator fieldValidator, OrderingValidator orderingValidator, PagingValidator pagingValidator) {
+    public SearchVisitValidator(SearchVisitFieldValidator fieldValidator, VisitOrderingValidator visitOrderingValidator, VisitPagingValidator visitPagingValidator) {
         this.fieldValidator = fieldValidator;
-        this.orderingValidator = orderingValidator;
-        this.pagingValidator = pagingValidator;
+        this.visitOrderingValidator = visitOrderingValidator;
+        this.visitPagingValidator = visitPagingValidator;
     }
 
     public List<CoreError> validate(SearchVisitRequest request) {
@@ -26,14 +26,14 @@ public class SearchVisitValidator {
 
     private void validatePagingIfPresent(SearchVisitRequest request, List<CoreError> errors) {
         if (request.getPaging() != null) {
-            List<CoreError> pagingErrors = pagingValidator.validate(request.getPaging());
+            List<CoreError> pagingErrors = visitPagingValidator.validate(request.getPaging());
             errors.addAll(pagingErrors);
         }
     }
 
     private void validateOrderingIfPresent(SearchVisitRequest request, List<CoreError> errors) {
         if (request.getOrdering() != null) {
-            List<CoreError> orderingErrors = orderingValidator.validate(request.getOrdering());
+            List<CoreError> orderingErrors = visitOrderingValidator.validate(request.getOrdering());
             errors.addAll(orderingErrors);
         }
     }

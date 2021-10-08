@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.database;
 
-import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
 import lv.javaguru.java2.hospital.domain.Patient;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@DIComponent
+@Component
 public class PatientDatabaseImpl implements PatientDatabase {
 
     private final List<Patient> patientsList = new ArrayList<>();

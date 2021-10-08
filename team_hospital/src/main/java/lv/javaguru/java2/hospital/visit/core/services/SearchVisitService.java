@@ -2,12 +2,13 @@ package lv.javaguru.java2.hospital.visit.core.services;
 
 import lv.javaguru.java2.hospital.database.VisitsDatabase;
 import lv.javaguru.java2.hospital.domain.Visit;
-import lv.javaguru.java2.hospital.visit.core.requests.Ordering;
-import lv.javaguru.java2.hospital.visit.core.requests.Paging;
+import lv.javaguru.java2.hospital.visit.core.requests.VisitOrdering;
+import lv.javaguru.java2.hospital.visit.core.requests.VisitPaging;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.responses.SearchVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.validators.SearchVisitValidator;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +19,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SearchVisitService {
+
+    @Value("${search.ordering.enabled}")
+    private boolean orderingEnabled;
+
+    @Value("${search.paging.enabled}")
+    private boolean pagingEnabled;
 
     private VisitsDatabase visitDatabase;
     private SearchVisitValidator validator;
@@ -63,13 +70,13 @@ public class SearchVisitService {
         return visits;
     }
 
-    private List<Visit> order(List<Visit> visits, Ordering ordering) {
-        if (ordering != null) {
+    private List<Visit> order(List<Visit> visits, VisitOrdering visitOrdering) {
+        if (orderingEnabled && visitOrdering != null) {
             Comparator<Visit> comparator = null;
-            if (ordering.getOrderBy().equals("date")) {
+            if (visitOrdering.getOrderBy().equals("date")) {
                 comparator = Comparator.comparing(Visit::getVisitDate);
             }
-            if (ordering.getOrderDirection().equals("DESCENDING")) {
+            if (visitOrdering.getOrderDirection().equals("DESCENDING")) {
                 comparator = comparator.reversed();
             }
             return visits.stream().sorted(comparator).collect(Collectors.toList());
@@ -78,12 +85,12 @@ public class SearchVisitService {
         }
     }
 
-    private List<Visit> paging(List<Visit> visits, Paging paging) {
-        if (paging != null) {
-            int skip = (paging.getPageNumber() - 1) * paging.getPageSize();
+    private List<Visit> paging(List<Visit> visits, VisitPaging visitPaging) {
+        if (pagingEnabled && visitPaging != null) {
+            int skip = (visitPaging.getPageNumber() - 1) * visitPaging.getPageSize();
             return visits.stream()
                     .skip(skip)
-                    .limit(paging.getPageSize())
+                    .limit(visitPaging.getPageSize())
                     .collect(Collectors.toList());
         } else {
             return visits;

@@ -1,11 +1,11 @@
 package lv.javaguru.java2.hospital.visit.core.requests;
 
-public class Paging {
+public class VisitPaging {
 
     private Integer pageNumber;
     private Integer pageSize;
 
-    public Paging(Integer pageNumber, Integer pageSize) {
+    public VisitPaging(Integer pageNumber, Integer pageSize) {
         this.pageNumber = pageNumber;
         this.pageSize = pageSize;
     }

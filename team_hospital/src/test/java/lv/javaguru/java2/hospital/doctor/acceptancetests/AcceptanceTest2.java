@@ -1,19 +1,25 @@
 package lv.javaguru.java2.hospital.doctor.acceptancetests;
 
-import lv.javaguru.java2.hospital.dependency_injection.ApplicationContext;
-import lv.javaguru.java2.hospital.dependency_injection.DIApplicationContextBuilder;
+import lv.javaguru.java2.hospital.config.HospitalConfiguration;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.context.ApplicationContext;
 import lv.javaguru.java2.hospital.doctor.core.requests.*;
 import lv.javaguru.java2.hospital.doctor.core.responses.SearchDoctorsResponse;
 import lv.javaguru.java2.hospital.doctor.core.services.AddDoctorService;
 import lv.javaguru.java2.hospital.doctor.core.services.SearchDoctorsService;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AcceptanceTest2 {
 
-    private ApplicationContext appContest =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.hospital");
+    private ApplicationContext appContext;
+
+    @BeforeEach
+    public void setup() {
+        appContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
+    }
 
     @Test
     public void shouldReturnCorrectDoctorList() {
@@ -43,8 +49,8 @@ public class AcceptanceTest2 {
         AddDoctorRequest request2 = new AddDoctorRequest("Name", "Surname2", "Speciality2");
         getAddDoctorService().execute(request2);
 
-        Ordering ordering = new Ordering("surname", "DESCENDING");
-        SearchDoctorsRequest request3 = new SearchDoctorsRequest(null, "Name", null, null, ordering);
+        DoctorOrdering doctorOrdering = new DoctorOrdering("surname", "DESCENDING");
+        SearchDoctorsRequest request3 = new SearchDoctorsRequest(null, "Name", null, null, doctorOrdering);
         SearchDoctorsResponse response = getSearchDoctorsService().execute(request3);
 
         assertEquals(response.getDoctors().size(), 2);
@@ -64,8 +70,8 @@ public class AcceptanceTest2 {
         AddDoctorRequest request2 = new AddDoctorRequest("Name", "Surname2", "Speciality2");
         getAddDoctorService().execute(request2);
 
-        Ordering ordering = new Ordering("surname", "ASCENDING");
-        SearchDoctorsRequest request3 = new SearchDoctorsRequest(null, "Name", null, null, ordering);
+        DoctorOrdering doctorOrdering = new DoctorOrdering("surname", "ASCENDING");
+        SearchDoctorsRequest request3 = new SearchDoctorsRequest(null, "Name", null, null, doctorOrdering);
         SearchDoctorsResponse response = getSearchDoctorsService().execute(request3);
 
         assertEquals(response.getDoctors().size(), 2);
@@ -85,9 +91,9 @@ public class AcceptanceTest2 {
         AddDoctorRequest request2 = new AddDoctorRequest("Name", "Surname2", "Speciality2");
         getAddDoctorService().execute(request2);
 
-        Ordering ordering = new Ordering("surname", "ASCENDING");
-        Paging paging = new Paging(1, 1);
-        SearchDoctorsRequest request3 = new SearchDoctorsRequest(null, "Name", null, null, ordering, paging);
+        DoctorOrdering doctorOrdering = new DoctorOrdering("surname", "ASCENDING");
+        DoctorPaging doctorPaging = new DoctorPaging(1, 1);
+        SearchDoctorsRequest request3 = new SearchDoctorsRequest(null, "Name", null, null, doctorOrdering, doctorPaging);
         SearchDoctorsResponse response = getSearchDoctorsService().execute(request3);
 
         assertEquals(response.getDoctors().size(), 1);
@@ -97,10 +103,10 @@ public class AcceptanceTest2 {
     }
 
     private AddDoctorService getAddDoctorService() {
-        return appContest.getBean(AddDoctorService.class);
+        return appContext.getBean(AddDoctorService.class);
     }
 
     private SearchDoctorsService getSearchDoctorsService() {
-        return appContest.getBean(SearchDoctorsService.class);
+        return appContext.getBean(SearchDoctorsService.class);
     }
 }

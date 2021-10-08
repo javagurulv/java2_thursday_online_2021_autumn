@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
-import lv.javaguru.java2.hospital.patient.core.requests.Ordering;
-import lv.javaguru.java2.hospital.patient.core.requests.Paging;
+import lv.javaguru.java2.hospital.patient.core.requests.PatientOrdering;
+import lv.javaguru.java2.hospital.patient.core.requests.PatientPaging;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import org.junit.jupiter.api.Test;
@@ -23,23 +23,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SearchPatientsValidatorTest {
 
     @Mock private SearchPatientsRequestFieldValidator fieldValidator;
-    @Mock private OrderingValidator orderingValidator;
-    @Mock private PagingValidator pagingValidator;
+    @Mock private PatientOrderingValidator patientOrderingValidator;
+    @Mock private PatientPagingValidator patientPagingValidator;
     @InjectMocks private SearchPatientsValidator validator;
 
     @Test
     public void shouldReturnOrderingErrors() {
-        Ordering ordering = new Ordering("name", "ASC");
+        PatientOrdering patientOrdering = new PatientOrdering("name", "ASC");
 
         SearchPatientsRequest request = new SearchPatientsRequest(
                 "name",
                 "surname",
                 "1234",
-                ordering);
+                patientOrdering);
 
         CoreError error = new CoreError("orderBy", "bla bla bla");
 
-        Mockito.when(orderingValidator.validate(ordering))
+        Mockito.when(patientOrderingValidator.validate(patientOrdering))
                 .thenReturn(List.of(error));
 
         List<CoreError> errors = validator.validate(request);
@@ -47,20 +47,20 @@ class SearchPatientsValidatorTest {
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0), error);
 
-        Mockito.verify(orderingValidator).validate(ordering);
+        Mockito.verify(patientOrderingValidator).validate(patientOrdering);
     }
 
     @Test
     public void shouldNotReturnOrderingErrors() {
-        Ordering ordering = new Ordering("name", "ASC");
+        PatientOrdering patientOrdering = new PatientOrdering("name", "ASC");
         SearchPatientsRequest request = new SearchPatientsRequest(
                 "name",
                 "surname",
                 "1234",
-                ordering
+                patientOrdering
         );
 
-        Mockito.when(orderingValidator.validate(ordering))
+        Mockito.when(patientOrderingValidator.validate(patientOrdering))
                 .thenReturn(new ArrayList<>());
 
         List<CoreError> errors = validator.validate(request);
@@ -70,34 +70,34 @@ class SearchPatientsValidatorTest {
 
     @Test
     public void shouldNotCheckOrdering() {
-        Ordering ordering = null;
+        PatientOrdering patientOrdering = null;
         SearchPatientsRequest request = new SearchPatientsRequest(
                 "name",
                 "surname",
                 "1234",
-                ordering
+                patientOrdering
         );
 
         List<CoreError> errors = validator.validate(request);
 
         assertEquals(errors.size(), 0);
 
-        Mockito.verifyNoMoreInteractions(orderingValidator);
+        Mockito.verifyNoMoreInteractions(patientOrderingValidator);
     }
 
     @Test
     public void shouldReturnPagingErrors() {
-        Paging paging = new Paging(0, 0);
+        PatientPaging patientPaging = new PatientPaging(0, 0);
 
         SearchPatientsRequest request = new SearchPatientsRequest(
                 "name",
                 "surname",
                 "1234",
-                paging);
+                patientPaging);
 
         CoreError error = new CoreError("orderBy", "bla bla bla");
 
-        Mockito.when(pagingValidator.validate(paging))
+        Mockito.when(patientPagingValidator.validate(patientPaging))
                 .thenReturn(List.of(error));
 
         List<CoreError> errors = validator.validate(request);
@@ -105,20 +105,20 @@ class SearchPatientsValidatorTest {
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0), error);
 
-        Mockito.verify(pagingValidator).validate(paging);
+        Mockito.verify(patientPagingValidator).validate(patientPaging);
     }
 
     @Test
     public void shouldNotReturnPagingErrors() {
-        Paging paging = new Paging(1, 1);
+        PatientPaging patientPaging = new PatientPaging(1, 1);
         SearchPatientsRequest request = new SearchPatientsRequest(
                 "name",
                 "surname",
                 "1234",
-                paging
+                patientPaging
         );
 
-        Mockito.when(pagingValidator.validate(paging))
+        Mockito.when(patientPagingValidator.validate(patientPaging))
                 .thenReturn(new ArrayList<>());
 
         List<CoreError> errors = validator.validate(request);
@@ -128,18 +128,18 @@ class SearchPatientsValidatorTest {
 
     @Test
     public void shouldNotCheckPaging() {
-        Paging paging = null;
+        PatientPaging patientPaging = null;
         SearchPatientsRequest request = new SearchPatientsRequest(
                 "name",
                 "surname",
                 "1234",
-                paging
+                patientPaging
         );
 
         List<CoreError> errors = validator.validate(request);
 
         assertEquals(errors.size(), 0);
 
-        Mockito.verifyNoMoreInteractions(pagingValidator);
+        Mockito.verifyNoMoreInteractions(patientPagingValidator);
     }
 }
