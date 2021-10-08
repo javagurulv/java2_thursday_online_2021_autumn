@@ -3,10 +3,8 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class ImplDatabaseReservation implements DatabaseReservation {
 

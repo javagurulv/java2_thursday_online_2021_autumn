@@ -2,12 +2,12 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.SearchTableRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.CoreError;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@DIComponent
+@Component
 public class ValidatorSearchRequestFieldTable {
     
     public List<CoreError> validatorField(SearchTableRequest request){
@@ -15,7 +15,7 @@ public class ValidatorSearchRequestFieldTable {
         if(isEmpty(request.getTitleTable())
                 && (request.getIdTable() == null)){///
             coreErrors.add(new CoreError("titleTable", "can not be empty"));
-            coreErrors.add(new CoreError("idTable", "must not be null"));//
+            coreErrors.add(new CoreError("idTable", "must not be null"));
         }
         return coreErrors;
     }

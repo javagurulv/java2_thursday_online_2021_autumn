@@ -7,8 +7,8 @@ public class SearchDoctorsRequest {
     private String surname;
     private String speciality;
 
-    private Ordering ordering;
-    private Paging paging;
+    private DoctorOrdering doctorOrdering;
+    private DoctorPaging doctorPaging;
 
 
     public SearchDoctorsRequest(Long id, String name, String surname, String speciality) {
@@ -18,29 +18,29 @@ public class SearchDoctorsRequest {
         this.speciality = speciality;
     }
 
-    public SearchDoctorsRequest(Long id, String name, String surname, String speciality, Ordering ordering) {
+    public SearchDoctorsRequest(Long id, String name, String surname, String speciality, DoctorOrdering doctorOrdering) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.speciality = speciality;
-        this.ordering = ordering;
+        this.doctorOrdering = doctorOrdering;
     }
 
-    public SearchDoctorsRequest(Long id, String name, String surname, String speciality, Paging paging) {
+    public SearchDoctorsRequest(Long id, String name, String surname, String speciality, DoctorPaging doctorPaging) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.speciality = speciality;
-        this.paging = paging;
+        this.doctorPaging = doctorPaging;
     }
 
-    public SearchDoctorsRequest(Long id, String name, String surname, String speciality, Ordering ordering, Paging paging) {
+    public SearchDoctorsRequest(Long id, String name, String surname, String speciality, DoctorOrdering doctorOrdering, DoctorPaging doctorPaging) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.speciality = speciality;
-        this.ordering = ordering;
-        this.paging = paging;
+        this.doctorOrdering = doctorOrdering;
+        this.doctorPaging = doctorPaging;
     }
 
     public Long getId() {
@@ -75,11 +75,11 @@ public class SearchDoctorsRequest {
         return this.speciality != null && !this.speciality.isEmpty();
     }
 
-    public Ordering getOrdering() {
-        return ordering;
+    public DoctorOrdering getOrdering() {
+        return doctorOrdering;
     }
 
-    public Paging getPaging() {
-        return paging;
+    public DoctorPaging getPaging() {
+        return doctorPaging;
     }
 }

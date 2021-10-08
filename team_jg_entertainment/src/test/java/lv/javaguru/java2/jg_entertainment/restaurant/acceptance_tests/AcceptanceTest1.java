@@ -1,19 +1,21 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.acceptance_tests;
 
+import lv.javaguru.java2.jg_entertainment.restaurant.configuration.RestaurantListConfiguration;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestAddVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestShowAllVisitorsInListRestaurant;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseShowAllVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceAddAllVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceShowListVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.ApplicationContext;
 import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIApplicationContextBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class AcceptanceTest1 {
 
     private ApplicationContext appContext =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.jg_entertainment.restaurant");
+            new AnnotationConfigApplicationContext(RestaurantListConfiguration.class);
 
     @Test
     public void shouldReturnCorrectListVisitor() {

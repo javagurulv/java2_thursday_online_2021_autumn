@@ -2,11 +2,11 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVi
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestAddVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-@DIComponent
+@Component
 public class ValidatorAddVisitor {
 
     public List<CoreError> coreErrors(RequestAddVisitor request) {

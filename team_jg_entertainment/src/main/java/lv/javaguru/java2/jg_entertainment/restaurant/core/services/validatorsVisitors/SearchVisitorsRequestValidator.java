@@ -4,17 +4,18 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Orde
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Paging;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class SearchVisitorsRequestValidator {
 
-    @DIDependency private SearchVisitorsRequestFieldValidator fieldValidator;
-    @DIDependency private OrderingValidator orderingValidator;
-    @DIDependency private PagingValidator pagingValidator;
+    @Autowired
+    private SearchVisitorsRequestFieldValidator fieldValidator;
+    @Autowired private OrderingValidator orderingValidator;
+    @Autowired private PagingValidator pagingValidator;
 
     public List<CoreError> validator(SearchVisitorsRequest request) {
         List<CoreError> errors = fieldValidator.validatorSearchField(request);

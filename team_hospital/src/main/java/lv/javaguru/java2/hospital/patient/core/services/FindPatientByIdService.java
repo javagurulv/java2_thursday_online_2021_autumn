@@ -1,20 +1,20 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
-import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
-import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.patient.core.requests.FindPatientByIdRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import lv.javaguru.java2.hospital.patient.core.responses.FindPatientByIDResponse;
 import lv.javaguru.java2.hospital.patient.core.services.validators.FindPatientByIDValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@DIComponent
+@Component
 public class FindPatientByIdService {
 
-    @DIDependency private PatientDatabaseImpl patientDatabase;
-    @DIDependency private FindPatientByIDValidator validator;
+    @Autowired private PatientDatabaseImpl patientDatabase;
+    @Autowired private FindPatientByIDValidator validator;
 
     public FindPatientByIDResponse execute(FindPatientByIdRequest request){
         List<CoreError> errors = validator.validate(request);

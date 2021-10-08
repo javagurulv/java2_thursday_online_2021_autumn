@@ -1,15 +1,16 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.domain;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.ApplicationContext;
+import lv.javaguru.java2.jg_entertainment.restaurant.configuration.RestaurantListConfiguration;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors.*;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIApplicationContextBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Restaurant {
 
-    private static ApplicationContext applicationContext =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.jg_entertainment.restaurant");
+    private static final ApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(RestaurantListConfiguration.class);
 
     private static CheckMenuNumberFromConsole checkNumber = new CheckMenuNumberFromConsole();
 

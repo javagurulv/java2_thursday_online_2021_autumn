@@ -1,10 +1,5 @@
 package lv.javaguru.java2.hospital.visit.core.requests;
 
-import lv.javaguru.java2.hospital.visit.core.requests.Ordering;
-import lv.javaguru.java2.hospital.visit.core.requests.Paging;
-
-import java.util.Date;
-
 public class SearchVisitRequest {
 
     private Long visitId;
@@ -12,8 +7,8 @@ public class SearchVisitRequest {
     private Long patientId;
     private String visitDate;
 
-    private Ordering ordering;
-    private Paging paging;
+    private VisitOrdering visitOrdering;
+    private VisitPaging visitPaging;
 
     public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, String visitDate) {
         this.visitId = visitId;
@@ -22,29 +17,29 @@ public class SearchVisitRequest {
         this.visitDate = visitDate;
     }
 
-    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, String visitDate, Ordering ordering) {
+    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, String visitDate, VisitOrdering visitOrdering) {
         this.visitId = visitId;
         this.doctorId = doctorId;
         this.patientId = patientId;
         this.visitDate = visitDate;
-        this.ordering = ordering;
+        this.visitOrdering = visitOrdering;
     }
 
-    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, String visitDate, Paging paging) {
+    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, String visitDate, VisitPaging visitPaging) {
         this.visitId = visitId;
         this.doctorId = doctorId;
         this.patientId = patientId;
         this.visitDate = visitDate;
-        this.paging = paging;
+        this.visitPaging = visitPaging;
     }
 
-    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, String visitDate, Ordering ordering, Paging paging) {
+    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, String visitDate, VisitOrdering visitOrdering, VisitPaging visitPaging) {
         this.visitId = visitId;
         this.doctorId = doctorId;
         this.patientId = patientId;
         this.visitDate = visitDate;
-        this.ordering = ordering;
-        this.paging = paging;
+        this.visitOrdering = visitOrdering;
+        this.visitPaging = visitPaging;
     }
 
     public boolean isVisitIdProvided() {
@@ -79,11 +74,11 @@ public class SearchVisitRequest {
         return visitDate;
     }
 
-    public Ordering getOrdering() {
-        return ordering;
+    public VisitOrdering getOrdering() {
+        return visitOrdering;
     }
 
-    public Paging getPaging() {
-        return paging;
+    public VisitPaging getPaging() {
+        return visitPaging;
     }
 }

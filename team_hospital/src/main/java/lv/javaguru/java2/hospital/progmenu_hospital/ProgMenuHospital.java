@@ -1,34 +1,36 @@
 package lv.javaguru.java2.hospital.progmenu_hospital;
 
 import lv.javaguru.java2.hospital.InputNumChecker;
-import lv.javaguru.java2.hospital.database.DoctorDatabase;
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.config.HospitalConfiguration;
 import lv.javaguru.java2.hospital.database.VisitDatabaseImpl;
-import lv.javaguru.java2.hospital.dependency_injection.ApplicationContext;
-import lv.javaguru.java2.hospital.dependency_injection.DIApplicationContextBuilder;
 import lv.javaguru.java2.hospital.doctor.console_ui.*;
 import lv.javaguru.java2.hospital.patient.console_ui.*;
 import lv.javaguru.java2.hospital.visit.console_ui.*;
 import lv.javaguru.java2.hospital.visit.core.services.*;
 import lv.javaguru.java2.hospital.visit.core.services.validators.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 
 public class ProgMenuHospital {
 
     private static ApplicationContext applicationContext =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.hospital");
+            new AnnotationConfigApplicationContext(HospitalConfiguration.class);
+
+   /*private static ApplicationContext applicationContext =
+            new DIApplicationContextBuilder().build("lv.javaguru.java2.hospital");*/
 
     private static final InputNumChecker inputNumChecker = new InputNumChecker();
 
     private static final VisitDatabaseImpl visitDatabase = new VisitDatabaseImpl();
 
-    private static final AddVisitUIAction addPatientVisit =
+    /*private static final AddVisitUIAction addPatientVisit =
             new AddVisitUIAction(new AddVisitService
                     (applicationContext.getBean(PatientDatabase.class),
                             applicationContext.getBean(DoctorDatabase.class),
                             visitDatabase,
                             new AddVisitValidator(applicationContext.getBean(PatientDatabase.class),
-                                    applicationContext.getBean(DoctorDatabase.class))));
+                                    applicationContext.getBean(DoctorDatabase.class))));*/
     private static final DeleteVisitUIAction deleteVisitUIAction =
             new DeleteVisitUIAction(
                     new DeleteVisitService(visitDatabase, new DeleteVisitValidator()));
@@ -42,11 +44,11 @@ public class ProgMenuHospital {
     private static final EditVisitUIAction editVisitUIAction =
             new EditVisitUIAction(editVisitService);
 
-    private static final OrderingValidator orderingValidator = new OrderingValidator();
-    private static final PagingValidator pagingValidator = new PagingValidator();
+    private static final VisitOrderingValidator visitOrderingValidator = new VisitOrderingValidator();
+    private static final VisitPagingValidator visitPagingValidator = new VisitPagingValidator();
     private static final SearchVisitFieldValidator searchVisitFieldValidator = new SearchVisitFieldValidator();
     private static final SearchVisitValidator searchVisitValidator = new
-            SearchVisitValidator(searchVisitFieldValidator, orderingValidator, pagingValidator);
+            SearchVisitValidator(searchVisitFieldValidator, visitOrderingValidator, visitPagingValidator);
     private static final SearchVisitService searchVisitService =
             new SearchVisitService(visitDatabase, searchVisitValidator);
     private static final SearchVisitUIAction searchVisitUIAction = new SearchVisitUIAction(searchVisitService);
@@ -207,7 +209,7 @@ public class ProgMenuHospital {
 
     private static void patientVisitActions(int num) {
         switch (num) {
-            case 1 -> addPatientVisit.execute();
+           /* case 1 -> addPatientVisit.execute();*/
             case 2 -> deleteVisitUIAction.execute();
             case 3 -> showAllPatientVisitUIAction.execute();
             case 4 -> editVisitUIAction.execute();

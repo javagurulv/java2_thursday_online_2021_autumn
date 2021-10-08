@@ -1,14 +1,14 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators;
 
-import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
 import lv.javaguru.java2.hospital.doctor.core.requests.DeleteDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class DeleteDoctorRequestValidator {
 
     public List<CoreError> validate(DeleteDoctorRequest request) {

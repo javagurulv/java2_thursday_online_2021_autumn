@@ -1,14 +1,15 @@
 package lv.javaguru.java2.hospital.doctor.console_ui;
 
-import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
-import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.doctor.core.requests.DeleteDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.DeleteDoctorResponse;
 import lv.javaguru.java2.hospital.doctor.core.services.DeleteDoctorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class DeleteDoctorUIAction implements DoctorUIActions {
-    @DIDependency private DeleteDoctorService deleteDoctor;
+
+    @Autowired private DeleteDoctorService deleteDoctor;
 
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();

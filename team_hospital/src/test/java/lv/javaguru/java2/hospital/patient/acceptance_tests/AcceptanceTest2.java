@@ -1,22 +1,28 @@
 package lv.javaguru.java2.hospital.patient.acceptance_tests;
 
-import lv.javaguru.java2.hospital.dependency_injection.ApplicationContext;
-import lv.javaguru.java2.hospital.dependency_injection.DIApplicationContextBuilder;
+import lv.javaguru.java2.hospital.config.HospitalConfiguration;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.context.ApplicationContext;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
-import lv.javaguru.java2.hospital.patient.core.requests.Ordering;
-import lv.javaguru.java2.hospital.patient.core.requests.Paging;
+import lv.javaguru.java2.hospital.patient.core.requests.PatientOrdering;
+import lv.javaguru.java2.hospital.patient.core.requests.PatientPaging;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
 import lv.javaguru.java2.hospital.patient.core.services.AddPatientService;
 import lv.javaguru.java2.hospital.patient.core.services.SearchPatientsService;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AcceptanceTest2 {
 
-    private static final ApplicationContext applicationContext =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.hospital");
+    private ApplicationContext applicationContext;
+
+    @BeforeEach
+    public void setup() {
+        applicationContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
+    }
 
     @Test
     public void shouldReturnCorrectPatientsListWithSearch() {
@@ -49,10 +55,10 @@ public class AcceptanceTest2 {
         AddPatientRequest addPatientRequest3 = new AddPatientRequest("name4", "surname3", "9876");
         getAddPatienceService().execute(addPatientRequest3);
 
-        Ordering ordering = new Ordering("surname", "descending");
+        PatientOrdering patientOrdering = new PatientOrdering("surname", "descending");
 
         SearchPatientsRequest searchPatientsRequest =
-                new SearchPatientsRequest("name4", "", "", ordering);
+                new SearchPatientsRequest("name4", "", "", patientOrdering);
         SearchPatientsResponse searchPatientsResponse = getSearchPatientsService().execute(searchPatientsRequest);
 
         assertEquals(searchPatientsResponse.getPatientList().size(), 3);
@@ -78,10 +84,10 @@ public class AcceptanceTest2 {
         AddPatientRequest addPatientRequest3 = new AddPatientRequest("name5", "surname3", "4446");
         getAddPatienceService().execute(addPatientRequest3);
 
-        Ordering ordering = new Ordering("surname", "ascending");
+        PatientOrdering patientOrdering = new PatientOrdering("surname", "ascending");
 
         SearchPatientsRequest searchPatientsRequest =
-                new SearchPatientsRequest("name5", "", "", ordering);
+                new SearchPatientsRequest("name5", "", "", patientOrdering);
         SearchPatientsResponse searchPatientsResponse = getSearchPatientsService().execute(searchPatientsRequest);
 
         assertEquals(searchPatientsResponse.getPatientList().size(), 3);
@@ -107,11 +113,11 @@ public class AcceptanceTest2 {
         AddPatientRequest addPatientRequest3 = new AddPatientRequest("name6", "surname3", "5556");
         getAddPatienceService().execute(addPatientRequest3);
 
-        Ordering ordering = new Ordering("surname", "ascending");
-        Paging paging = new Paging(1, 1);
+        PatientOrdering patientOrdering = new PatientOrdering("surname", "ascending");
+        PatientPaging patientPaging = new PatientPaging(1, 1);
 
         SearchPatientsRequest searchPatientsRequest =
-                new SearchPatientsRequest("name6", "", "", ordering, paging);
+                new SearchPatientsRequest("name6", "", "", patientOrdering, patientPaging);
         SearchPatientsResponse searchPatientsResponse = getSearchPatientsService().execute(searchPatientsRequest);
 
         assertEquals(searchPatientsResponse.getPatientList().size(), 1);
@@ -131,11 +137,11 @@ public class AcceptanceTest2 {
         AddPatientRequest addPatientRequest3 = new AddPatientRequest("name7", "surname3", "7776");
         getAddPatienceService().execute(addPatientRequest3);
 
-        Ordering ordering = new Ordering("surname", "ascending");
-        Paging paging = new Paging(3, 1);
+        PatientOrdering patientOrdering = new PatientOrdering("surname", "ascending");
+        PatientPaging patientPaging = new PatientPaging(3, 1);
 
         SearchPatientsRequest searchPatientsRequest =
-                new SearchPatientsRequest("name7", "", "", ordering, paging);
+                new SearchPatientsRequest("name7", "", "", patientOrdering, patientPaging);
         SearchPatientsResponse searchPatientsResponse = getSearchPatientsService().execute(searchPatientsRequest);
 
         assertEquals(searchPatientsResponse.getPatientList().size(), 1);
@@ -151,4 +157,5 @@ public class AcceptanceTest2 {
     private SearchPatientsService getSearchPatientsService() {
         return applicationContext.getBean(SearchPatientsService.class);
     }
+
 }

@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
-import lv.javaguru.java2.hospital.visit.core.requests.Ordering;
+import lv.javaguru.java2.hospital.visit.core.requests.VisitOrdering;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import org.junit.jupiter.api.Test;
@@ -24,34 +24,34 @@ class SearchVisitValidatorTest {
     @Mock
     private SearchVisitFieldValidator fieldValidator;
     @Mock
-    private OrderingValidator orderingValidator;
+    private VisitOrderingValidator visitOrderingValidator;
     @Mock
-    private PagingValidator pagingValidator;
+    private VisitPagingValidator visitPagingValidator;
     @InjectMocks
     private SearchVisitValidator validator;
 
     @Test
     public void shouldReturnOrderingErrors() {
-        Ordering ordering = new Ordering("date", "ASC");
+        VisitOrdering visitOrdering = new VisitOrdering("date", "ASC");
         SearchVisitRequest request = new SearchVisitRequest
-                (1L, 1L, 1L, "12/12/21 12:00", ordering);
+                (1L, 1L, 1L, "12/12/21 12:00", visitOrdering);
         CoreError error = new CoreError("orderBy", "bla bla bla");
 
-        Mockito.when(orderingValidator.validate(ordering)).thenReturn(List.of(error));
+        Mockito.when(visitOrderingValidator.validate(visitOrdering)).thenReturn(List.of(error));
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0), error);
 
-        Mockito.verify(orderingValidator).validate(ordering);
+        Mockito.verify(visitOrderingValidator).validate(visitOrdering);
     }
 
     @Test
     public void shouldNotReturnOrderingErrors() {
-        Ordering ordering = new Ordering("date", "ASC");
+        VisitOrdering visitOrdering = new VisitOrdering("date", "ASC");
         SearchVisitRequest request = new SearchVisitRequest
-                (1L, 1L, 1L, "12/12/21 12:00", ordering);
+                (1L, 1L, 1L, "12/12/21 12:00", visitOrdering);
 
-        Mockito.when(orderingValidator.validate(ordering))
+        Mockito.when(visitOrderingValidator.validate(visitOrdering))
                 .thenReturn(new ArrayList<>());
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
@@ -59,13 +59,13 @@ class SearchVisitValidatorTest {
 
     @Test
     public void shouldNotCheckOrdering() {
-        Ordering ordering = null;
+        VisitOrdering visitOrdering = null;
         SearchVisitRequest request = new SearchVisitRequest
-                (1L, 1L, 1L, "12/12/21 12:00", ordering);
+                (1L, 1L, 1L, "12/12/21 12:00", visitOrdering);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
 
-        Mockito.verifyNoMoreInteractions(orderingValidator);
+        Mockito.verifyNoMoreInteractions(visitOrderingValidator);
     }
 
 }

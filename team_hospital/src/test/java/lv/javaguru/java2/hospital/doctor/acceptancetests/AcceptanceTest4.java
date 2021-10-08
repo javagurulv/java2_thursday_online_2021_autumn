@@ -1,7 +1,8 @@
 package lv.javaguru.java2.hospital.doctor.acceptancetests;
 
-import lv.javaguru.java2.hospital.dependency_injection.ApplicationContext;
-import lv.javaguru.java2.hospital.dependency_injection.DIApplicationContextBuilder;
+import lv.javaguru.java2.hospital.config.HospitalConfiguration;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.context.ApplicationContext;
 import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.requests.ShowAllDoctorsRequest;
@@ -13,14 +14,19 @@ import lv.javaguru.java2.hospital.doctor.core.services.EditDoctorService;
 import lv.javaguru.java2.hospital.doctor.core.services.ShowAllDoctorsService;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AcceptanceTest4 {
 
-    private ApplicationContext appContest =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.hospital");
+    private ApplicationContext appContext;
+
+    @BeforeEach
+    public void setup() {
+        appContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
+    }
 
     @Test
     public void shouldEditDoctorName() {
@@ -84,15 +90,15 @@ public class AcceptanceTest4 {
 
 
     private AddDoctorService getAddDoctorService() {
-        return appContest.getBean(AddDoctorService.class);
+        return appContext.getBean(AddDoctorService.class);
     }
 
     private ShowAllDoctorsService getShowAllDoctorsService() {
-        return appContest.getBean(ShowAllDoctorsService.class);
+        return appContext.getBean(ShowAllDoctorsService.class);
     }
 
     private EditDoctorService getEditDoctorService() {
-        return appContest.getBean(EditDoctorService.class);
+        return appContext.getBean(EditDoctorService.class);
     }
 
 }

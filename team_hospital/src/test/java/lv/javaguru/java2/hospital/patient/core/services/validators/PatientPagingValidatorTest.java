@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
 
-import lv.javaguru.java2.hospital.patient.core.requests.Paging;
+import lv.javaguru.java2.hospital.patient.core.requests.PatientPaging;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import org.junit.jupiter.api.Test;
@@ -10,15 +10,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PagingValidatorTest {
+class PatientPagingValidatorTest {
 
-    private PagingValidator validator = new PagingValidator();
+    private PatientPagingValidator validator = new PatientPagingValidator();
 
     @Test
     public void shouldReturnErrorWhenPageNumberContainNotValidValue() {
-        Paging paging = new Paging(0, 1);
+        PatientPaging patientPaging = new PatientPaging(0, 1);
         SearchPatientsRequest request =
-                new SearchPatientsRequest("Name", "Surname", "1212", paging);
+                new SearchPatientsRequest("Name", "Surname", "1212", patientPaging);
         List<CoreError> errors = validator.validate(request.getPaging());
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "pageNumber");
@@ -27,9 +27,9 @@ class PagingValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenPageSizeContainNotValidValue() {
-        Paging paging = new Paging(1, 0);
+        PatientPaging patientPaging = new PatientPaging(1, 0);
         SearchPatientsRequest request =
-                new SearchPatientsRequest("Name", "Surname", "1212", paging);
+                new SearchPatientsRequest("Name", "Surname", "1212", patientPaging);
         List<CoreError> errors = validator.validate(request.getPaging());
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "pageSize");
@@ -38,9 +38,9 @@ class PagingValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenPageNumberAreEmpty() {
-        Paging paging = new Paging(null, 1);
+        PatientPaging patientPaging = new PatientPaging(null, 1);
         SearchPatientsRequest request =
-                new SearchPatientsRequest("Name", "Surname", "1212", paging);
+                new SearchPatientsRequest("Name", "Surname", "1212", patientPaging);
         List<CoreError> errors = validator.validate(request.getPaging());
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "pageNumber");
@@ -49,9 +49,9 @@ class PagingValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenPageSizeAreEmpty() {
-        Paging paging = new Paging(1, null);
+        PatientPaging patientPaging = new PatientPaging(1, null);
         SearchPatientsRequest request =
-                new SearchPatientsRequest("Name", "Surname", "1212", paging);
+                new SearchPatientsRequest("Name", "Surname", "1212", patientPaging);
         List<CoreError> errors = validator.validate(request.getPaging());
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "pageSize");

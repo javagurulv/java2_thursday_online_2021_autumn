@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
-import lv.javaguru.java2.hospital.patient.core.requests.Ordering;
+import lv.javaguru.java2.hospital.patient.core.requests.PatientOrdering;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import org.junit.jupiter.api.Test;
@@ -9,15 +9,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class OrderingValidatorTest {
+class PatientOrderingValidatorTest {
 
-    private OrderingValidator validator = new OrderingValidator();
+    private PatientOrderingValidator validator = new PatientOrderingValidator();
 
     @Test
     public void shouldReturnErrorWhenOrderDirectionISEmpty() {
-        Ordering ordering = new Ordering("Name", null);
+        PatientOrdering patientOrdering = new PatientOrdering("Name", null);
         SearchPatientsRequest request = new SearchPatientsRequest("name", "surname",
-                "1212", ordering);
+                "1212", patientOrdering);
         List<CoreError> errors = validator.validate(request.getOrdering());
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderDirection");
@@ -26,9 +26,9 @@ class OrderingValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenOrderByISEmpty() {
-        Ordering ordering = new Ordering(null, "Ascending");
+        PatientOrdering patientOrdering = new PatientOrdering(null, "Ascending");
         SearchPatientsRequest request = new SearchPatientsRequest("name", "surname",
-                "1212", ordering);
+                "1212", patientOrdering);
         List<CoreError> errors = validator.validate(request.getOrdering());
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderBy");
@@ -37,9 +37,9 @@ class OrderingValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenOrderByContainNotValidValue() {
-        Ordering ordering = new Ordering("notValidValue", "ASCENDING");
+        PatientOrdering patientOrdering = new PatientOrdering("notValidValue", "ASCENDING");
         SearchPatientsRequest request =
-                new SearchPatientsRequest("Name", "Surname", "1212", ordering);
+                new SearchPatientsRequest("Name", "Surname", "1212", patientOrdering);
         List<CoreError> errors = validator.validate(request.getOrdering());
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "orderBy");
@@ -48,9 +48,9 @@ class OrderingValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenOrderDirectionContainNotValidValue() {
-        Ordering ordering = new Ordering("name", "notValidValue");
+        PatientOrdering patientOrdering = new PatientOrdering("name", "notValidValue");
         SearchPatientsRequest request =
-                new SearchPatientsRequest("Name", "Surname", "1212", ordering);
+                new SearchPatientsRequest("Name", "Surname", "1212", patientOrdering);
         List<CoreError> errors = validator.validate(request.getOrdering());
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Order Direction");
