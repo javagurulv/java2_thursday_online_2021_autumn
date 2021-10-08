@@ -13,16 +13,19 @@ import java.util.List;
 @Component
 public class ServiceDeleteVisitors {
 
-   @Autowired
-   private DatabaseVisitors database;
-   @Autowired private ValidatorDeleteVisitor validator;
+    @Autowired
+    private DatabaseVisitors database;
+    @Autowired
+    private ValidatorDeleteVisitor validator;
 
     public ResponseDeleteVisitors execute(RequestDeleteVisitor request) {
         List<CoreError> coreErrors = validator.coreErrors(request);
         if (!coreErrors.isEmpty()) {
             return new ResponseDeleteVisitors(coreErrors);
         }
-        boolean deleteId = database.deleteClientWithIDAndName(request.getIdVisitor(), request.getNameVisitors());
+        boolean deleteId =
+                database.deleteClientWithIDAndName(request.getIdVisitor(), request.getNameVisitors());
+
         return new ResponseDeleteVisitors(deleteId);
     }
 }

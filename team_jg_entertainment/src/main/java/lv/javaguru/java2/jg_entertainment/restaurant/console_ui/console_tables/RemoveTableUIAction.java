@@ -11,20 +11,28 @@ import java.util.Scanner;
 @Component
 public class RemoveTableUIAction implements UIAction {
 
-	@Autowired
-	private RemoveTableService removeTableService;
+    @Autowired
+    private RemoveTableService removeTableService;
 
-	@Override
-	public void execute() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Enter table id to remove: ");
-		Long tableId = Long.parseLong(scanner.nextLine());
-		RemoveTableRequest request = new RemoveTableRequest(tableId);
-		RemoveTableResponse response = removeTableService.execute(request);
-		if (response.isTableRemoved()) {
-			System.out.println("Your table was removed from list.");
-		} else {
-			System.out.println("Your table not removed from list.");
-		}
-	}
+    @Override
+    public void execute() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter table ID to remove: ");
+        Long tableId = Long.parseLong(scanner.nextLine());
+        RemoveTableRequest request = new RemoveTableRequest(tableId);
+        RemoveTableResponse response = removeTableService.execute(request);
+
+        if (response.hasError()) {
+            response.getErrorsList().forEach(coreError ->
+                    System.out.println("Error: " + coreError.getField() + " "
+                            + coreError.getMessageError()));
+        } else {
+            if (response.isTableRemoved()) {
+                System.out.println("Your table: " + tableId + "find and was removed from list!");
+            } else {
+                System.out.println("Your table NOT removed from list!");
+            }
+        }
+    }
 }

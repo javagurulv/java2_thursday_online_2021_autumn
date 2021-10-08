@@ -1,6 +1,5 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
 import org.springframework.stereotype.Component;
 
