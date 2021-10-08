@@ -2,13 +2,13 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVi
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Paging;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class PagingValidator {
 
     public List<CoreError> validatorPaging(Paging paging) {

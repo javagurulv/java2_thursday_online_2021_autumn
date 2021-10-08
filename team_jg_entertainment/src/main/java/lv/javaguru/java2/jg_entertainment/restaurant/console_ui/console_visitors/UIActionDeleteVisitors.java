@@ -3,15 +3,16 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitor
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestDeleteVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseDeleteVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceDeleteVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class UIActionDeleteVisitors implements RestaurantUIAction {
 
-    @DIDependency private ServiceDeleteVisitors deleteVisitors;
+    @Autowired
+    private ServiceDeleteVisitors deleteVisitors;
 
     @Override
     public void execute() {

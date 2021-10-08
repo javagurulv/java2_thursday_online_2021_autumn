@@ -3,13 +3,14 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.GetAllTablesRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.GetAllTablesResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables.GetAllTablesService;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class GetAllTablesUIAction implements UIAction {
 
-	@DIDependency private GetAllTablesService getAllTablesService;
+	@Autowired
+	private GetAllTablesService getAllTablesService;
 
 	@Override
 	public void execute() {

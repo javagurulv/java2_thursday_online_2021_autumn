@@ -1,7 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-@DIComponent
+@Component
 public class ImplDatabaseVisitors implements DatabaseVisitors {
 
     List<Visitors> clientInRestaurant = new ArrayList<>();

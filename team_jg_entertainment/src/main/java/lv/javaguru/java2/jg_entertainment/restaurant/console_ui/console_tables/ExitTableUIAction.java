@@ -1,8 +1,8 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class ExitTableUIAction implements UIAction {
 
 	@Override

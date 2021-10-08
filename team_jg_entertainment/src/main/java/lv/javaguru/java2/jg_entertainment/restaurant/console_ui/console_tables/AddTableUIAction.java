@@ -3,15 +3,16 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.AddTableRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.AddTableResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables.AddTableService;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class AddTableUIAction implements UIAction {
 
-	@DIDependency private AddTableService addTableService;
+	@Autowired
+	private AddTableService addTableService;
 
 	@Override
 	public void execute() {

@@ -5,15 +5,16 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.Paging
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.SearchTableRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.SearchTableResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables.SearchTableService;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIComponent;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class SearchTableUIAction implements UIAction {
 
-    @DIDependency private SearchTableService searchTableService;
+    @Autowired
+    private SearchTableService searchTableService;
 
     @Override
     public void execute() {
