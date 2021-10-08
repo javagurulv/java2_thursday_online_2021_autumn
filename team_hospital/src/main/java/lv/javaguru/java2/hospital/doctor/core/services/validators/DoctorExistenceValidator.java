@@ -27,14 +27,23 @@ public class DoctorExistenceValidator {
 
     public List<CoreError> validate(String name, String surname, String speciality) {
         List<CoreError> errors = new ArrayList<>();
-        if (isNameProvided(name)) {
+        if(isNameProvided(name) && isSurnameProvided(surname)
+                && isSpecialityProvided(speciality)) {
+            validateExistenceByNameAndSurnameAndSpeciality(name, surname, speciality)
+                    .ifPresent(errors::add);
+        } else if(isNameProvided(name) && isSurnameProvided(surname)) {
+            validateExistenceByNameAndSurname(name, surname).ifPresent(errors::add);
+        } else if (isNameProvided(name) && isSpecialityProvided(speciality)) {
+            validateExistenceByNameAndSpeciality(name, speciality).ifPresent(errors::add);
+        } else if (isSurnameProvided(surname) && isSpecialityProvided(speciality)) {
+            validateExistenceBySurnameAndSpeciality(surname, speciality).ifPresent(errors::add);
+        } else if (isNameProvided(name)) {
             validateExistenceByName(name).ifPresent(errors::add);
         } else if (isSurnameProvided(surname)) {
             validateExistenceBySurname(surname).ifPresent(errors::add);
         } else if (isSpecialityProvided(speciality)) {
             validateExistenceBySpeciality(speciality).ifPresent(errors::add);
         }
-
         return errors;
     }
 
@@ -44,7 +53,7 @@ public class DoctorExistenceValidator {
                 Optional.empty();
             }
         }
-        return Optional.of(new CoreError("DoctorId", "Does not exist!"));
+        return Optional.of(new CoreError("Doctor", "Does not exist!"));
     }
 
     private Optional<CoreError> validateExistenceByName(String name) {
@@ -53,7 +62,7 @@ public class DoctorExistenceValidator {
                 Optional.empty();
             }
         }
-        return Optional.of(new CoreError("DoctorName", "Does not exist!"));
+        return Optional.of(new CoreError("Doctor", "Does not exist!"));
     }
 
     private Optional<CoreError> validateExistenceBySurname(String surname) {
@@ -62,7 +71,7 @@ public class DoctorExistenceValidator {
                 Optional.empty();
             }
         }
-        return Optional.of(new CoreError("DoctorSurname", "Does not exist!"));
+        return Optional.of(new CoreError("Doctor", "Does not exist!"));
     }
 
     private Optional<CoreError> validateExistenceBySpeciality(String speciality) {
@@ -71,7 +80,48 @@ public class DoctorExistenceValidator {
                 Optional.empty();
             }
         }
-        return Optional.of(new CoreError("DoctorSurname", "Does not exist!"));
+        return Optional.of(new CoreError("Doctor", "Does not exist!"));
+    }
+
+    private Optional<CoreError> validateExistenceByNameAndSurnameAndSpeciality(String name, String surname, String speciality) {
+        for (Doctor doctor : database.getDoctorsList()) {
+            if (Objects.equals(doctor.getName(), name)
+                    && Objects.equals(doctor.getSurname(), surname)
+                    && Objects.equals(doctor.getSpeciality(), speciality)) {
+                Optional.empty();
+            }
+        }
+        return Optional.of(new CoreError("Doctor", "Does not exist!"));
+    }
+
+    private Optional<CoreError> validateExistenceByNameAndSurname(String name, String surname) {
+        for (Doctor doctor : database.getDoctorsList()) {
+            if (Objects.equals(doctor.getName(), name)
+                    && Objects.equals(doctor.getSurname(), surname)) {
+                Optional.empty();
+            }
+        }
+        return Optional.of(new CoreError("Doctor", "Does not exist!"));
+    }
+
+    private Optional<CoreError> validateExistenceByNameAndSpeciality(String name, String speciality) {
+        for (Doctor doctor : database.getDoctorsList()) {
+            if (Objects.equals(doctor.getName(), name)
+                    && Objects.equals(doctor.getSpeciality(), speciality)) {
+                Optional.empty();
+            }
+        }
+        return Optional.of(new CoreError("Doctor", "Does not exist!"));
+    }
+
+    private Optional<CoreError> validateExistenceBySurnameAndSpeciality(String surname, String speciality) {
+        for (Doctor doctor : database.getDoctorsList()) {
+            if (Objects.equals(doctor.getSurname(), surname)
+                    && Objects.equals(doctor.getSpeciality(), speciality)) {
+                Optional.empty();
+            }
+        }
+        return Optional.of(new CoreError("Doctor", "Does not exist!"));
     }
 
     private boolean isIdProvided(Long id) {
