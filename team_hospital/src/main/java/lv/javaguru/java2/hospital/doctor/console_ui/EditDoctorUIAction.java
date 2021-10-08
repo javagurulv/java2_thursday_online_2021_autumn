@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EditDoctorUIAction implements DoctorUIActions {
+public class EditDoctorUIAction implements DoctorUIAction {
 
     @Autowired private EditDoctorService editDoctor;
 
