@@ -3,6 +3,7 @@ package lv.javaguru.java2.qwe.utils;
 import lv.javaguru.java2.qwe.ApplicationDemo;
 import lv.javaguru.java2.qwe.Security;
 import lv.javaguru.java2.qwe.User;
+import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.responses.CoreResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.ImportSecuritiesService;
@@ -15,6 +16,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -25,10 +29,46 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class UtilityMethods {
 
     private static boolean importDataEnabled;
+    private static boolean marketPriceSimulatorEnabled;
+    private static int marketPriceSimulatorInitDelay;
+    private static int marketPriceSimulatorPeriod;
+    private static boolean dateSimulatorEnabled;
+    private static int dateSimulatorInitDelay;
+    private static int dateSimulatorPeriod;
 
     @Value("${importData.enabled}")
     public void setImportDataEnabled(boolean importDataEnabled) {
         UtilityMethods.importDataEnabled = importDataEnabled;
+    }
+
+    @Value("${simulator.marketPrice.enabled}")
+    public void setMarketPriceSimulatorEnabled(boolean marketPriceSimulatorEnabled) {
+        UtilityMethods.marketPriceSimulatorEnabled = marketPriceSimulatorEnabled;
+    }
+
+    @Value("${simulator.marketPrice.initDelay}")
+    public void setMarketPriceSimulatorInitDelay(int marketPriceSimulatorInitDelay) {
+        UtilityMethods.marketPriceSimulatorInitDelay = marketPriceSimulatorInitDelay;
+    }
+
+    @Value("${simulator.marketPrice.period}")
+    public void setMarketPriceSimulatorPeriod(int marketPriceSimulatorPeriod) {
+        UtilityMethods.marketPriceSimulatorPeriod = marketPriceSimulatorPeriod;
+    }
+
+    @Value("${simulator.date.enabled}")
+    public void setDateSimulatorEnabled(boolean dateSimulatorEnabled) {
+        UtilityMethods.dateSimulatorEnabled = dateSimulatorEnabled;
+    }
+
+    @Value("${simulator.date.initDelay}")
+    public void setDateSimulatorInitDelay(int dateSimulatorInitDelay) {
+        UtilityMethods.dateSimulatorInitDelay = dateSimulatorInitDelay;
+    }
+
+    @Value("${simulator.date.period}")
+    public void setDateSimulatorPeriod(int dateSimulatorPeriod) {
+        UtilityMethods.dateSimulatorPeriod = dateSimulatorPeriod;
     }
 
     public static String[] convertToStringArray(UserData userData) {
@@ -37,7 +77,28 @@ public class UtilityMethods {
                 .toArray(String[]::new);
     }
 
-    public static void simulateMarketPrices(List<Security> list) {
+    public static void setMarketPriceSimulator(ApplicationContext context) {
+        if (marketPriceSimulatorEnabled && marketPriceSimulatorPeriod > 0) {
+            ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+            Database database = context.getBean(Database.class);
+            Runnable simulator = () -> simulateMarketPrices(database.getSecurityList());
+            scheduledExecutorService.scheduleAtFixedRate(
+                    simulator, marketPriceSimulatorInitDelay, marketPriceSimulatorPeriod, TimeUnit.SECONDS
+            );
+        }
+    }
+
+    public static void setDateSimulator(ApplicationContext context) {
+        if (dateSimulatorEnabled && dateSimulatorPeriod > 0) {
+            ScheduledExecutorService scheduledExecutorService1 = Executors.newScheduledThreadPool(1);
+            UserData userData = context.getBean(UserData.class);
+            Runnable simulator1 = () -> userData.setCurrentDate(userData.getCurrentDate().plusDays(1));
+            scheduledExecutorService1.scheduleAtFixedRate(
+                    simulator1, dateSimulatorInitDelay, dateSimulatorPeriod, TimeUnit.SECONDS);
+        }
+    }
+
+    private static void simulateMarketPrices(List<Security> list) {
         if (list.size() > 1) {
             IntStream.rangeClosed(0, list.size() - 1)
                     .filter(i -> !list.get(i).getClass().getSimpleName().equals("Cash"))
