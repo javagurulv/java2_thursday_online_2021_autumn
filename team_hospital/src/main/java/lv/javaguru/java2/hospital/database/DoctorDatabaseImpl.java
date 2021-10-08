@@ -116,4 +116,7 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
                 .collect(Collectors.toList());
     }
 
+    public List<Doctor> getDoctorsList() {
+        return doctorsList;
+    }
 }
