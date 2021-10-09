@@ -108,24 +108,12 @@ public class ProgMenuHospital {
     }
 
     private static void doctorMenu() {
-        int userInput;
-        do {
-            userInput = menuDoctor();
-        } while (userInput != 6);
-    }
-
-    private static int menuDoctor() {
-        int userInput;
-        System.out.println("1. Add a new doctor");
-        System.out.println("2. Show all doctors");
-        System.out.println("3. Delete the doctor by ID");
-        System.out.println("4. Edit the doctor's information");
-        System.out.println("5. Search doctors");
-        System.out.println("6. Exit");
-        userInput = inputNumChecker.execute(1, 6);
-        doctorUserActions(userInput);
-        System.out.println();
-        return userInput;
+        DoctorProgramMenu doctorProgramMenu = applicationContext.getBean(DoctorProgramMenu.class);
+        while (true) {
+            doctorProgramMenu.printDoctorMenu();
+            int doctorMenuNumber = doctorProgramMenu.getDoctorMenuNumberFromUser();
+            doctorProgramMenu.executeSelectedMenuItem(doctorMenuNumber);
+        }
     }
 
     private static void patientUserActions(int num) {
@@ -153,35 +141,6 @@ public class ProgMenuHospital {
             case 6 -> {
                 SearchPatientsUIAction searchPatientsUIAction = applicationContext.getBean(SearchPatientsUIAction.class);
                 searchPatientsUIAction.execute();
-            }
-        }
-    }
-
-    private static void doctorUserActions(int num) {
-        switch (num) {
-            case 1 -> {
-                AddDoctorUIAction uiAction = applicationContext.getBean(AddDoctorUIAction.class);
-                uiAction.execute();
-            }
-            case 2 -> {
-                ShowAllDoctorsUIAction uiAction = applicationContext.getBean(ShowAllDoctorsUIAction.class);
-                uiAction.execute();
-            }
-            case 3 -> {
-                DeleteDoctorUIAction uiAction = applicationContext.getBean(DeleteDoctorUIAction.class);
-                uiAction.execute();
-            }
-            case 4 -> {
-                EditDoctorUIAction uiAction = applicationContext.getBean(EditDoctorUIAction.class);
-                uiAction.execute();
-            }
-            case 5 -> {
-                SearchDoctorsUIAction uiAction = applicationContext.getBean(SearchDoctorsUIAction.class);
-                uiAction.execute();
-            }
-            case 6 -> {
-                ExitDoctorUIAction uiAction = applicationContext.getBean(ExitDoctorUIAction.class);
-                uiAction.execute();
             }
         }
     }

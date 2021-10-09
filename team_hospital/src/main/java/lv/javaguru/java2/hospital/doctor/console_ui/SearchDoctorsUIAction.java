@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SearchDoctorsUIAction implements DoctorUIActions {
+public class SearchDoctorsUIAction implements DoctorUIAction {
 
     @Autowired private SearchDoctorsService searchDoctorsService;
 
