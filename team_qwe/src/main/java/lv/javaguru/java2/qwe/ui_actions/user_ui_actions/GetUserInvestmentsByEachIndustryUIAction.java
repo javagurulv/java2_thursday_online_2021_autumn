@@ -4,25 +4,24 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.GetUserInvestmentsByEac
 import lv.javaguru.java2.qwe.core.responses.user_responses.GetUserInvestmentsByEachIndustryResponse;
 import lv.javaguru.java2.qwe.core.services.user_services.GetUserInvestmentsByEachIndustryService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
 @Component
 public class GetUserInvestmentsByEachIndustryUIAction implements UIAction {
 
-    @Autowired
-    private GetUserInvestmentsByEachIndustryService getUserInvestmentsByEachIndustryService;
+    @Autowired private GetUserInvestmentsByEachIndustryService getUserInvestmentsByEachIndustryService;
+    @Autowired private UtilityMethods utils;
     private String userName;
 
     @Override
     public void execute() {
         GetUserInvestmentsByEachIndustryRequest request =
-                new GetUserInvestmentsByEachIndustryRequest(inputDialog(
+                new GetUserInvestmentsByEachIndustryRequest(utils.inputDialog(
                         "Choose user:",
                         "SHOW INVESTMENTS BY INDUSTRY",
-                        convertToStringArray(getUserInvestmentsByEachIndustryService.getUserData())
+                        utils.convertToStringArray(getUserInvestmentsByEachIndustryService.getUserData())
                 ));
         userName = request.getUserName();
         GetUserInvestmentsByEachIndustryResponse response =
@@ -36,8 +35,8 @@ public class GetUserInvestmentsByEachIndustryUIAction implements UIAction {
             response.getInvestmentMap().forEach((key, value) -> System.out.println(key + ": " + value));
             System.out.println("\n");
         } else {
-            messageDialog("WRONG INPUT!\n" +
-                    printErrorList(response));
+            utils.messageDialog("WRONG INPUT!\n" +
+                    utils.printErrorList(response));
         }
     }
 

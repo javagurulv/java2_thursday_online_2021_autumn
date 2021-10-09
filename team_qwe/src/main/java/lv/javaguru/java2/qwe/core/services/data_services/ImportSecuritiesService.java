@@ -7,6 +7,7 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
 import lv.javaguru.java2.qwe.core.services.validator.AddSecurityValidator;
 import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,14 +18,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
-
 @Component
 public class ImportSecuritiesService {
 
     @Autowired private Database database;
     @Autowired private AddStockValidator stockValidator;
     @Autowired private AddBondValidator bondValidator;
+    @Autowired private UtilityMethods utils;
 
     public void execute(String path) throws IOException, ArrayIndexOutOfBoundsException {
         importSecurities(path);
@@ -58,7 +58,7 @@ public class ImportSecuritiesService {
         if (errorRequestList.isEmpty()) {
             importSt(list);
         } else {
-            messageDialog("FAILED to add this list!\n" +
+            utils.messageDialog("FAILED to add this list!\n" +
                     "Validation FAILED!");
             errorRequestList.stream()
                     .map(request -> (AddStockRequest) request)

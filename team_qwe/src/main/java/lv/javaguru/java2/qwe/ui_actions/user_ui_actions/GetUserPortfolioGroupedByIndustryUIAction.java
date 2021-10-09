@@ -4,24 +4,24 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.GetUserPortfolioGrouped
 import lv.javaguru.java2.qwe.core.responses.user_responses.GetUserPortfolioGroupedByIndustryResponse;
 import lv.javaguru.java2.qwe.core.services.user_services.GetUserPortfolioGroupedByIndustryService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
 @Component
 public class GetUserPortfolioGroupedByIndustryUIAction implements UIAction {
 
     @Autowired private GetUserPortfolioGroupedByIndustryService getUserPortfolioGroupedByIndustryService;
+    @Autowired private UtilityMethods utils;
     private String userName;
 
     @Override
     public void execute() {
         GetUserPortfolioGroupedByIndustryRequest request =
-                new GetUserPortfolioGroupedByIndustryRequest(inputDialog(
+                new GetUserPortfolioGroupedByIndustryRequest(utils.inputDialog(
                         "Choose user:",
                         "SHOW PORTFOLIO BY INDUSTRIES",
-                        convertToStringArray(getUserPortfolioGroupedByIndustryService.getUserData())
+                        utils.convertToStringArray(getUserPortfolioGroupedByIndustryService.getUserData())
                 ));
         userName = request.getUserName();
         GetUserPortfolioGroupedByIndustryResponse response =
@@ -35,8 +35,8 @@ public class GetUserPortfolioGroupedByIndustryUIAction implements UIAction {
             response.getIndustryMap().forEach((key, value) -> System.out.println(key + ": " + value));
             System.out.println("\n");
         } else {
-            messageDialog("WRONG INPUT!\n" +
-                    printErrorList(response));
+            utils.messageDialog("WRONG INPUT!\n" +
+                    utils.printErrorList(response));
         }
     }
 

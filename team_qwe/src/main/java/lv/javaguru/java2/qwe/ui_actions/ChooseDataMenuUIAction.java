@@ -1,16 +1,18 @@
 package lv.javaguru.java2.qwe.ui_actions;
 
 import lv.javaguru.java2.qwe.ui_actions.data_ui_actions.*;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.Map;
 
 import static java.util.Map.*;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
 import static lv.javaguru.java2.qwe.ApplicationDemo.getApplicationContext;
 
 @Component
 public class ChooseDataMenuUIAction implements UIAction {
+
+    @Autowired private UtilityMethods utils;
 
     @Override
     public void execute() {
@@ -38,7 +40,7 @@ public class ChooseDataMenuUIAction implements UIAction {
 
         boolean dataMenuOpen = true;
         while (dataMenuOpen) {
-            String type = inputDialog("Choose operation", "DATA MENU", dataMenu);
+            String type = utils.inputDialog("Choose operation", "DATA MENU", dataMenu);
             if (!dataMenuMap.containsKey(type)) {
                 dataMenuOpen = false;
             } else {

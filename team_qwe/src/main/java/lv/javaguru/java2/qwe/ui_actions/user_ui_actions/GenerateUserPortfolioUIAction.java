@@ -4,25 +4,24 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRe
 import lv.javaguru.java2.qwe.core.responses.user_responses.GenerateUserPortfolioResponse;
 import lv.javaguru.java2.qwe.core.services.user_services.GenerateUserPortfolioService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.printErrorList;
 
 @Component
 public class GenerateUserPortfolioUIAction implements UIAction {
 
     @Autowired private GenerateUserPortfolioService generatePortfolioService;
+    @Autowired private UtilityMethods utils;
     private String userName;
 
     @Override
     public void execute() {
         GenerateUserPortfolioRequest request =
-                new GenerateUserPortfolioRequest(inputDialog(
+                new GenerateUserPortfolioRequest(utils.inputDialog(
                         "Choose user:",
                         "GENERATE PORTFOLIO",
-                        convertToStringArray(generatePortfolioService.getUserData())
+                        utils.convertToStringArray(generatePortfolioService.getUserData())
                 ));
         userName = request.getUserName();
         GenerateUserPortfolioResponse response =
@@ -32,13 +31,13 @@ public class GenerateUserPortfolioUIAction implements UIAction {
 
     public void printResponse(GenerateUserPortfolioResponse response) {
         if (!response.hasErrors()) {
-            messageDialog("Portfolio has been generated for " + userName);
+            utils.messageDialog("Portfolio has been generated for " + userName);
             System.out.println("==============" + userName + "===============");
             response.getPortfolio().forEach(System.out::println);
             System.out.println("\n");
         } else {
-            messageDialog("WRONG INPUT!\n" +
-                    printErrorList(response));
+            utils.messageDialog("WRONG INPUT!\n" +
+                    utils.printErrorList(response));
         }
     }
 

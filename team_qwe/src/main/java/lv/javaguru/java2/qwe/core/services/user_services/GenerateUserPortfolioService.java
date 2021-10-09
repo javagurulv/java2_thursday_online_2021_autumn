@@ -6,6 +6,7 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRe
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GenerateUserPortfolioResponse;
 import lv.javaguru.java2.qwe.core.services.validator.GenerateUserPortfolioValidator;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,7 @@ public class GenerateUserPortfolioService {
 
     @Autowired private UserData userData;
     @Autowired private GenerateUserPortfolioValidator validator;
+    @Autowired private UtilityMethods utils;
 
     public UserData getUserData() {
         return userData;
@@ -81,7 +83,7 @@ public class GenerateUserPortfolioService {
                 .map(entry -> IntStream.rangeClosed(0, entry.getValue().size() - 1)
                         .mapToObj(i -> new Position(
                                 entry.getValue().get(i),
-                                convertToInt(round((investmentPerIndustry.get(entry.getKey()) / entry.getValue().size()) /
+                                utils.convertToInt(utils.round((investmentPerIndustry.get(entry.getKey()) / entry.getValue().size()) /
                                         entry.getValue().get(i).getMarketPrice())),
                                 entry.getValue().get(i).getMarketPrice()
                         ))
@@ -99,7 +101,7 @@ public class GenerateUserPortfolioService {
     private void addCashResidual(User user, List<Position> userPortfolio, double portfolioTotalValue) {
         userPortfolio.add(new Position(
                 new Cash(),
-                round(user.getInitialInvestment() - portfolioTotalValue),
+                utils.round(user.getInitialInvestment() - portfolioTotalValue),
                 1
         ));
     }

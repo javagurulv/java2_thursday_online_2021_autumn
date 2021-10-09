@@ -28,56 +28,34 @@ import static javax.swing.JOptionPane.showMessageDialog;
 @Component
 public class UtilityMethods {
 
-    private static boolean importDataEnabled;
-    private static boolean marketPriceSimulatorEnabled;
-    private static int marketPriceSimulatorInitDelay;
-    private static int marketPriceSimulatorPeriod;
-    private static boolean dateSimulatorEnabled;
-    private static int dateSimulatorInitDelay;
-    private static int dateSimulatorPeriod;
-
     @Value("${importData.enabled}")
-    public void setImportDataEnabled(boolean importDataEnabled) {
-        UtilityMethods.importDataEnabled = importDataEnabled;
-    }
+    private boolean importDataEnabled;
 
     @Value("${simulator.marketPrice.enabled}")
-    public void setMarketPriceSimulatorEnabled(boolean marketPriceSimulatorEnabled) {
-        UtilityMethods.marketPriceSimulatorEnabled = marketPriceSimulatorEnabled;
-    }
+    private boolean marketPriceSimulatorEnabled;
 
     @Value("${simulator.marketPrice.initDelay}")
-    public void setMarketPriceSimulatorInitDelay(int marketPriceSimulatorInitDelay) {
-        UtilityMethods.marketPriceSimulatorInitDelay = marketPriceSimulatorInitDelay;
-    }
+    private int marketPriceSimulatorInitDelay;
 
     @Value("${simulator.marketPrice.period}")
-    public void setMarketPriceSimulatorPeriod(int marketPriceSimulatorPeriod) {
-        UtilityMethods.marketPriceSimulatorPeriod = marketPriceSimulatorPeriod;
-    }
+    private int marketPriceSimulatorPeriod;
 
     @Value("${simulator.date.enabled}")
-    public void setDateSimulatorEnabled(boolean dateSimulatorEnabled) {
-        UtilityMethods.dateSimulatorEnabled = dateSimulatorEnabled;
-    }
+    private boolean dateSimulatorEnabled;
 
     @Value("${simulator.date.initDelay}")
-    public void setDateSimulatorInitDelay(int dateSimulatorInitDelay) {
-        UtilityMethods.dateSimulatorInitDelay = dateSimulatorInitDelay;
-    }
+    private int dateSimulatorInitDelay;
 
     @Value("${simulator.date.period}")
-    public void setDateSimulatorPeriod(int dateSimulatorPeriod) {
-        UtilityMethods.dateSimulatorPeriod = dateSimulatorPeriod;
-    }
+    private int dateSimulatorPeriod;
 
-    public static String[] convertToStringArray(UserData userData) {
+    public String[] convertToStringArray(UserData userData) {
         return userData.getUserList().stream()
                 .map(User::getName)
                 .toArray(String[]::new);
     }
 
-    public static void setMarketPriceSimulator(ApplicationContext context) {
+    public void setMarketPriceSimulator(ApplicationContext context) {
         if (marketPriceSimulatorEnabled && marketPriceSimulatorPeriod > 0) {
             ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
             Database database = context.getBean(Database.class);
@@ -88,7 +66,7 @@ public class UtilityMethods {
         }
     }
 
-    public static void setDateSimulator(ApplicationContext context) {
+    public void setDateSimulator(ApplicationContext context) {
         if (dateSimulatorEnabled && dateSimulatorPeriod > 0) {
             ScheduledExecutorService scheduledExecutorService1 = Executors.newScheduledThreadPool(1);
             UserData userData = context.getBean(UserData.class);
@@ -98,7 +76,7 @@ public class UtilityMethods {
         }
     }
 
-    private static void simulateMarketPrices(List<Security> list) {
+    private void simulateMarketPrices(List<Security> list) {
         if (list.size() > 1) {
             IntStream.rangeClosed(0, list.size() - 1)
                     .filter(i -> !list.get(i).getClass().getSimpleName().equals("Cash"))
@@ -108,30 +86,30 @@ public class UtilityMethods {
         }
     }
 
-    public static String inputDialog(String text) {
+    public String inputDialog(String text) {
         return Optional.ofNullable(showInputDialog(null, text)).orElse("");
     }
 
-    public static String inputDialog(String request, String title, String[] arr) {
+    public String inputDialog(String request, String title, String[] arr) {
         return Optional.ofNullable((String) showInputDialog(
                 null, request,
                 title, JOptionPane.QUESTION_MESSAGE, null,
                 arr, arr[0])).orElse("");
     }
 
-    public static String[] generateIndustriesArray() {
+    public String[] generateIndustriesArray() {
         return new String[]{"Consumer Staples", "Utilities", "Communications", "Health Care",
                 "Technology", "Materials", "Energy", "Financials", "Real Estate",
                 "Industrials", "Consumer Discretionary"};
     }
 
-    public static String printErrorList(CoreResponse response) {
+    public String printErrorList(CoreResponse response) {
         return response.getErrors().stream()
                 .map(error -> error.getField() + ": " + error.getMessage())
                 .collect(Collectors.joining("\n"));
     }
 
-    public static boolean isNotDouble(String text) {
+    public boolean isNotDouble(String text) {
         try {
             Double.parseDouble(text);
             return false;
@@ -140,7 +118,7 @@ public class UtilityMethods {
         }
     }
 
-    public static boolean isNotInteger(String text) {
+    public boolean isNotInteger(String text) {
         try {
             Integer.parseInt(text);
             return false;
@@ -149,28 +127,28 @@ public class UtilityMethods {
         }
     }
 
-    public static void messageDialog(String text) {
+    public void messageDialog(String text) {
         showMessageDialog(null, text);
     }
 
-    public static int convertToInt(double amount) {
+    public int convertToInt(double amount) {
         return (int) amount;
     }
 
-    public static double round(double amount) {
+    public double round(double amount) {
         return Math.round(amount * 100.) / 100.;
     }
 
-    private static double generateNextPrice(double currentPrice, boolean positive) {
+    private double generateNextPrice(double currentPrice, boolean positive) {
         return (positive) ? round(currentPrice * (1 + (Math.random()) / 100)) :
                 round(currentPrice * (1 - (Math.random()) / 100));
     }
 
-    private static boolean evenIsPositive(int number) {
+    private boolean evenIsPositive(int number) {
         return number % 2 == 0;
     }
 
-    public static void importData() {
+    public void importData() {
         if (importDataEnabled) {
             File file = new File("./team_qwe/src/main/docs/stocks_list_import.txt");
             ImportSecuritiesService service =

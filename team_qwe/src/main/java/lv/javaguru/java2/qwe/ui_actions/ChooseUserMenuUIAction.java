@@ -1,16 +1,19 @@
 package lv.javaguru.java2.qwe.ui_actions;
 
 import lv.javaguru.java2.qwe.ui_actions.user_ui_actions.*;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 import static java.util.Map.*;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
 import static lv.javaguru.java2.qwe.ApplicationDemo.getApplicationContext;
 
 @Component
 public class ChooseUserMenuUIAction implements UIAction {
+
+    @Autowired private UtilityMethods utils;
 
     @Override
     public void execute() {
@@ -41,7 +44,7 @@ public class ChooseUserMenuUIAction implements UIAction {
 
         boolean userMenuOpen = true;
         while (userMenuOpen) {
-            String type = inputDialog("Choose operation", "USER MENU", userMenu);
+            String type = utils.inputDialog("Choose operation", "USER MENU", userMenu);
             if (!userMenuMap.containsKey(type)) {
                 userMenuOpen = false;
             } else {

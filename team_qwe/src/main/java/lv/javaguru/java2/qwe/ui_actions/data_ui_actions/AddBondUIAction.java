@@ -5,26 +5,26 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.AddBondResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.AddBondService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
 @Component
 public class AddBondUIAction implements UIAction {
 
     @Autowired private AddBondService addBondService;
+    @Autowired private UtilityMethods utils;
 
     @Override
     public void execute() {
-        String name = inputDialog("Security name");
-        String industry = inputDialog("Industry", "CHOOSE INDUSTRY", generateIndustriesArray());
-        String currency = inputDialog("Currency", "CHOOSE CURRENCY", new String[]{"USD"});
-        String marketPrice = inputDialog("Market price");
-        String coupon = inputDialog("Coupon");
-        String rating = inputDialog("Rating");
-        String nominal = inputDialog("Nominal");
-        String maturity = inputDialog("Maturity");
+        String name = utils.inputDialog("Security name");
+        String industry = utils.inputDialog("Industry", "CHOOSE INDUSTRY", utils.generateIndustriesArray());
+        String currency = utils.inputDialog("Currency", "CHOOSE CURRENCY", new String[]{"USD"});
+        String marketPrice = utils.inputDialog("Market price");
+        String coupon = utils.inputDialog("Coupon");
+        String rating = utils.inputDialog("Rating");
+        String nominal = utils.inputDialog("Nominal");
+        String maturity = utils.inputDialog("Maturity");
         CoreRequest bondRequest = new AddBondRequest(name, industry, currency,
                 marketPrice, coupon, rating, nominal, maturity);
         AddBondResponse bondResponse = addBondService.execute(bondRequest);
@@ -33,10 +33,10 @@ public class AddBondUIAction implements UIAction {
 
     private void printResponse(AddBondResponse response) {
         if (response.hasErrors()) {
-            messageDialog("FAILED TO ADD BOND!\n" +
-                    printErrorList(response));
+            utils.messageDialog("FAILED TO ADD BOND!\n" +
+                    utils.printErrorList(response));
         } else {
-            messageDialog("Bond " + response.getNewBond().getName() + " has been added!");
+            utils.messageDialog("Bond " + response.getNewBond().getName() + " has been added!");
         }
     }
 

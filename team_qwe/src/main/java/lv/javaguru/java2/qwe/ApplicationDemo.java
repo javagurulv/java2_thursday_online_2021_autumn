@@ -2,10 +2,9 @@ package lv.javaguru.java2.qwe;
 
 import lv.javaguru.java2.qwe.config.AppConfiguration;
 import lv.javaguru.java2.qwe.ui_actions.AppMenu;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
 public class ApplicationDemo {
 
@@ -19,21 +18,25 @@ public class ApplicationDemo {
     public static void main(String[] args) {
 
         //импортирует в базу данных большой список ценных бумаг
-        importData();
+        getUtilityMethods().importData();
         //Симуляция изменения рыночных цен!
-        setMarketPriceSimulator(applicationContext);
+        getUtilityMethods().setMarketPriceSimulator(applicationContext);
         //Симуляция изменения текущей даты!
-        setDateSimulator(applicationContext);
+        getUtilityMethods().setDateSimulator(applicationContext);
 
         AppMenu appMenu = new AppMenu(applicationContext);
 
         String[] menu = {"DATA MENU", "USER MENU", "EXIT"};
 
         while (true) {
-            String type = inputDialog("Choose operation:", "MAIN MENU", menu);
+            String type = getUtilityMethods().inputDialog("Choose operation:", "MAIN MENU", menu);
             appMenu.executeSelectedMainMenuOption(type);
         }
 
+    }
+
+    private static UtilityMethods getUtilityMethods() {
+        return applicationContext.getBean(UtilityMethods.class);
     }
 
 }
