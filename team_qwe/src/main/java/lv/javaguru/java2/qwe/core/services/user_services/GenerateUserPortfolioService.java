@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.core.services.user_services;
 
-import lv.javaguru.java2.qwe.*;
 import lv.javaguru.java2.qwe.core.database.UserData;
+import lv.javaguru.java2.qwe.core.domain.*;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GenerateUserPortfolioResponse;
@@ -17,7 +17,6 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 import static java.util.Comparator.*;
 import static java.util.Map.*;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
 @Component
 public class GenerateUserPortfolioService {

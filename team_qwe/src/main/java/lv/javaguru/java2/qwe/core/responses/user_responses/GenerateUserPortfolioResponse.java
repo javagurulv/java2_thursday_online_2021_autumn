@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.responses.user_responses;
 
-import lv.javaguru.java2.qwe.Position;
+import lv.javaguru.java2.qwe.core.domain.Position;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.CoreResponse;
 

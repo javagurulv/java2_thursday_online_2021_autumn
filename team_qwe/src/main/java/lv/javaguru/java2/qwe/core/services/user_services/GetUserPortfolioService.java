@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.core.services.user_services;
 
-import lv.javaguru.java2.qwe.Position;
-import lv.javaguru.java2.qwe.User;
+import lv.javaguru.java2.qwe.core.domain.Position;
+import lv.javaguru.java2.qwe.core.domain.User;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GetUserPortfolioRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;

@@ -1,11 +1,11 @@
-package lv.javaguru.java2.qwe;
+package lv.javaguru.java2.qwe.core.domain;
 
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Predicate;
 
 import static java.util.Map.entry;
-import static lv.javaguru.java2.qwe.Type.*;
+import static lv.javaguru.java2.qwe.core.domain.Type.*;
 
 public class User {
 

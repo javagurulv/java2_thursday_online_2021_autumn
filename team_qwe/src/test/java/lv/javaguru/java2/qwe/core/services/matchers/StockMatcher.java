@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.services.matchers;
 
-import lv.javaguru.java2.qwe.Stock;
+import lv.javaguru.java2.qwe.core.domain.Stock;
 import org.mockito.ArgumentMatcher;
 
 public class StockMatcher implements ArgumentMatcher<Stock> {

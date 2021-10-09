@@ -1,6 +1,9 @@
 package lv.javaguru.java2.qwe.core.database;
 
-import lv.javaguru.java2.qwe.*;
+import lv.javaguru.java2.qwe.core.domain.Bond;
+import lv.javaguru.java2.qwe.core.domain.Cash;
+import lv.javaguru.java2.qwe.core.domain.Security;
+import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.requests.data_requests.FilterStocksByMultipleParametersRequest;
 import org.springframework.stereotype.Component;
 

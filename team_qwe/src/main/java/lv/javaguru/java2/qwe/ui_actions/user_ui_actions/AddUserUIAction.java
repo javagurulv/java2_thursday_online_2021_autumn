@@ -8,8 +8,8 @@ import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static lv.javaguru.java2.qwe.Type.*;
-import static lv.javaguru.java2.qwe.Type.SUPER_RICH;
+import static lv.javaguru.java2.qwe.core.domain.Type.*;
+import static lv.javaguru.java2.qwe.core.domain.Type.SUPER_RICH;
 
 @Component
 public class AddUserUIAction implements UIAction {

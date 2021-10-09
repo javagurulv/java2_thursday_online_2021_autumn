@@ -1,4 +1,4 @@
-package lv.javaguru.java2.qwe;
+package lv.javaguru.java2.qwe.core.domain;
 
 import java.util.Objects;
 

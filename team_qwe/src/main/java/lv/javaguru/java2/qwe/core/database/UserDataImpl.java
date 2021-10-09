@@ -1,6 +1,8 @@
 package lv.javaguru.java2.qwe.core.database;
 
-import lv.javaguru.java2.qwe.*;
+import lv.javaguru.java2.qwe.core.domain.Position;
+import lv.javaguru.java2.qwe.core.domain.Security;
+import lv.javaguru.java2.qwe.core.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +10,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 import static java.util.stream.Collectors.*;
-import static lv.javaguru.java2.qwe.Type.*;
+import static lv.javaguru.java2.qwe.core.domain.Type.*;
 
 @Component
 public class UserDataImpl implements UserData {

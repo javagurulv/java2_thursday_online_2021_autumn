@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.responses.data_responses;
 
-import lv.javaguru.java2.qwe.Stock;
+import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.CoreResponse;
 

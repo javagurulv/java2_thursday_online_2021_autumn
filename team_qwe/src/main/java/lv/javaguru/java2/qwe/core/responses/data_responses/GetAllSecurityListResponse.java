@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.responses.data_responses;
 
-import lv.javaguru.java2.qwe.Security;
+import lv.javaguru.java2.qwe.core.domain.Security;
 import lv.javaguru.java2.qwe.core.responses.CoreResponse;
 
 import java.util.List;

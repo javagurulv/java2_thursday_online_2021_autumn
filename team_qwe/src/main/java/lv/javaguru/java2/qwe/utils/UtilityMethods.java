@@ -1,8 +1,8 @@
 package lv.javaguru.java2.qwe.utils;
 
 import lv.javaguru.java2.qwe.ApplicationDemo;
-import lv.javaguru.java2.qwe.Security;
-import lv.javaguru.java2.qwe.User;
+import lv.javaguru.java2.qwe.core.domain.Security;
+import lv.javaguru.java2.qwe.core.domain.User;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.responses.CoreResponse;

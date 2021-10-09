@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.services.data_services;
 
-import lv.javaguru.java2.qwe.Stock;
+import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
 import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
@@ -21,14 +21,14 @@ public class AddStockService {
     public AddStockResponse execute(CoreRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (errors.isEmpty()) {
-            Stock stock = addStock((AddStockRequest) request);
+            Stock stock = createStock((AddStockRequest) request);
             database.addStock(stock);
             return new AddStockResponse(stock);
         }
         return new AddStockResponse(errors);
     }
 
-    private Stock addStock(AddStockRequest request) {
+    private Stock createStock(AddStockRequest request) {
         return new Stock(
                 request.getName(),
                 request.getIndustry(),
