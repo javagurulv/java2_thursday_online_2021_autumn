@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.database;
 
 import lv.javaguru.java2.hospital.domain.Visit;
+import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
 
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,7 @@ public interface VisitsDatabase {
 
     List<Visit> showAllVisits();
 
-    boolean editVisit(Long visitId, int userInput, String changes);
+    boolean editVisit(Long visitId, EditVisitEnum userInput, String changes);
 
     List<Visit> findByVisitId(Long id);
 

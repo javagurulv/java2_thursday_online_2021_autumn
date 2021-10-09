@@ -21,7 +21,7 @@ public class EditVisitService {
         if (!errors.isEmpty()) {
             return new EditVisitResponse(errors);
         }
-        boolean isVisitEdited = database.editVisit(request.getVisitID(), request.getUserInput(), request.getChanges());
+        boolean isVisitEdited = database.editVisit(request.getVisitID(), request.getEditEnums(), request.getChanges());
         return new EditVisitResponse(isVisitEdited);
     }
 }

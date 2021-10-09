@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
+import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import org.junit.jupiter.api.Test;
 import java.util.List;
@@ -13,14 +14,14 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnEmptyList() {
-        EditVisitRequest request = new EditVisitRequest(1L, 1, "changes");
+        EditVisitRequest request = new EditVisitRequest(1L, EditVisitEnum.CHANGE_DOCTOR, "changes");
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnIdError() {
-        EditVisitRequest request = new EditVisitRequest(null, 1, "changes");
+        EditVisitRequest request = new EditVisitRequest(null, EditVisitEnum.CHANGE_DOCTOR, "changes");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
@@ -30,7 +31,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnChangesError() {
-        EditVisitRequest request = new EditVisitRequest(1L, 1, "");
+        EditVisitRequest request = new EditVisitRequest(1L, EditVisitEnum.CHANGE_DOCTOR, "");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
@@ -40,7 +41,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnIdAndChangesErrors() {
-        EditVisitRequest request = new EditVisitRequest(null, 1, "");
+        EditVisitRequest request = new EditVisitRequest(null, EditVisitEnum.CHANGE_DOCTOR, "");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 2);

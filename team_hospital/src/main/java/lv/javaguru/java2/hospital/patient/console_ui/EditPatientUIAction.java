@@ -2,7 +2,7 @@ package lv.javaguru.java2.hospital.patient.console_ui;
 
 import lv.javaguru.java2.hospital.InputNumChecker;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
-import lv.javaguru.java2.hospital.patient.core.requests.SearchEnums;
+import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 import lv.javaguru.java2.hospital.patient.core.responses.EditPatientResponse;
 import lv.javaguru.java2.hospital.patient.core.services.EditPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +20,13 @@ public class EditPatientUIAction implements PatientUIActions {
         Long id = getUserInput.getUserLongInput("Please enter patient ID: ");
         menu();
         int userInput = numChecker.execute(1,3);
-        SearchEnums enums;
+        EditPatientEnum enums;
         if (userInput == 1) {
-            enums = SearchEnums.CHANGE_NAME;
+            enums = EditPatientEnum.CHANGE_NAME;
         } else if (userInput == 2) {
-            enums = SearchEnums.CHANGE_SURNAME;
+            enums = EditPatientEnum.CHANGE_SURNAME;
         } else {
-            enums = SearchEnums.CHANGE_PERSONALCODE;
+            enums = EditPatientEnum.CHANGE_PERSONALCODE;
         }
         String changes = getUserInput.getUserStringInput("Please enter information for changes: ");
         EditPatientRequest request = new EditPatientRequest(id, enums, changes);

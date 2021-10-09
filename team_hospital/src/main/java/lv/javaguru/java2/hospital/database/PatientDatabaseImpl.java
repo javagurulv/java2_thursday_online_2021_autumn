@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.database;
 
 import lv.javaguru.java2.hospital.domain.Patient;
-import lv.javaguru.java2.hospital.patient.core.requests.SearchEnums;
+import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -48,13 +48,13 @@ public class PatientDatabaseImpl implements PatientDatabase {
     public boolean editActions(Long patientID, Enum userInput, String input) {
         for (Patient patient : patientsList) {
             if (Objects.equals(patient.getId(), patientID)) {
-                if (SearchEnums.CHANGE_NAME.equals(userInput)) {
+                if (EditPatientEnum.CHANGE_NAME.equals(userInput)) {
                     patient.setName(input);
                     return true;
-                } else if (SearchEnums.CHANGE_SURNAME.equals(userInput)) {
+                } else if (EditPatientEnum.CHANGE_SURNAME.equals(userInput)) {
                     patient.setSurname(input);
                     return true;
-                } else if (SearchEnums.CHANGE_PERSONALCODE.equals(userInput)) {
+                } else if (EditPatientEnum.CHANGE_PERSONALCODE.equals(userInput)) {
                     patient.setPersonalCode(input);
                     return true;
                 }
