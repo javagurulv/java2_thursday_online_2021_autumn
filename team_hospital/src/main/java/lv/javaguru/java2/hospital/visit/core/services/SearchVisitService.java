@@ -8,7 +8,9 @@ import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.responses.SearchVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.validators.SearchVisitValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,16 +20,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class SearchVisitService {
 
     @Value("${search.ordering.enabled}")
-    private boolean orderingEnabled;
+    @Autowired private boolean orderingEnabled;
 
     @Value("${search.paging.enabled}")
-    private boolean pagingEnabled;
+    @Autowired private boolean pagingEnabled;
 
-    private VisitsDatabase visitDatabase;
-    private SearchVisitValidator validator;
+    @Autowired private VisitsDatabase visitDatabase;
+    @Autowired private SearchVisitValidator validator;
 
     public SearchVisitService(VisitsDatabase database, SearchVisitValidator validator) {
         this.visitDatabase = database;
@@ -100,7 +103,7 @@ public class SearchVisitService {
     private Date getVisitDate(SearchVisitRequest request) {
         Date visitDate = null;
         try {
-            visitDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(request.getVisitDate());
+                visitDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(request.getVisitDate());
         } catch (ParseException e) {
             e.printStackTrace();
         }

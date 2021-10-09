@@ -3,13 +3,14 @@ package lv.javaguru.java2.hospital.visit.console_ui;
 import lv.javaguru.java2.hospital.visit.core.requests.DeleteVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.DeleteVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.DeleteVisitService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DeleteVisitUIAction {
-    private final DeleteVisitService visitService;
 
-    public DeleteVisitUIAction(DeleteVisitService visitService) {
-        this.visitService = visitService;
-    }
+    @Autowired
+    private DeleteVisitService visitService;
 
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();

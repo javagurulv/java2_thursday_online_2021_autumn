@@ -1,12 +1,13 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
-import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
+import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+@Component
 public class SearchVisitFieldValidator {
 
     public List<CoreError> validate(SearchVisitRequest request) {

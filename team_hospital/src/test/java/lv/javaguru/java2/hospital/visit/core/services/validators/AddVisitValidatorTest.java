@@ -2,22 +2,28 @@ package lv.javaguru.java2.hospital.visit.core.services.validators;
 
 import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
-import lv.javaguru.java2.hospital.domain.Doctor;
-import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 class AddVisitValidatorTest {
 
-    PatientDatabaseImpl patientDatabase = new PatientDatabaseImpl();
-    DoctorDatabaseImpl doctorDatabase = new DoctorDatabaseImpl();
-    AddVisitValidator addVisitValidator = new AddVisitValidator(patientDatabase, doctorDatabase);
+    @Mock PatientDatabaseImpl patientDatabase;
+    @Mock DoctorDatabaseImpl doctorDatabase;
+    @InjectMocks AddVisitValidator addVisitValidator;
 
     @Test
     public void shouldReturnPersonalCodeError(){
@@ -72,10 +78,9 @@ class AddVisitValidatorTest {
     }
 
     @Test
-    public void shouldReturnPatientDoesNotExistError(){
-        doctorDatabase.addDoctor(new Doctor("name", "surname", "speciality"));
+    public void shouldReturnPatientAndDoctorDoesNotExistError(){
         AddVisitRequest addVisitRequest = new AddVisitRequest(
-                "1234",
+                "0000",
                 "name",
                 "surname",
                 "12/12/2021 12:00");
@@ -83,19 +88,7 @@ class AddVisitValidatorTest {
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.get(0).getField(), "Patient");
         assertEquals(errorList.get(0).getDescription(), "does not exist!");
-    }
-
-    @Test
-    public void shouldReturnDoctorDoesNotExistError(){
-        patientDatabase.add(new Patient("name", "surname", "1234"));
-        AddVisitRequest addVisitRequest = new AddVisitRequest(
-                "1234",
-                "name",
-                "surname",
-                "12/12/2021 12:00");
-        List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
-        assertFalse(errorList.isEmpty());
-        assertEquals(errorList.get(0).getField(), "Doctor");
-        assertEquals(errorList.get(0).getDescription(), "does not exist!");
+        assertEquals(errorList.get(1).getField(), "Doctor");
+        assertEquals(errorList.get(1).getDescription(), "does not exist!");
     }
 }

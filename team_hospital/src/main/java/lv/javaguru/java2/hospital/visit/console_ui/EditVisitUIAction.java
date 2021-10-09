@@ -3,13 +3,13 @@ package lv.javaguru.java2.hospital.visit.console_ui;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.EditVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.EditVisitService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EditVisitUIAction implements VisitUIAction {
-    private EditVisitService editPatientVisit;
 
-    public EditVisitUIAction(EditVisitService editPatientVisit) {
-        this.editPatientVisit = editPatientVisit;
-    }
+    @Autowired private EditVisitService editPatientVisit;
 
     @Override
     public void execute() {

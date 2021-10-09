@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.patient.core.search_criteria;
+package lv.javaguru.java2.hospital.patient.core.services.search_criteria;
 
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -6,10 +6,10 @@ import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 
 import java.util.List;
 
-public class NameSearchCriteria implements PatientsSearchCriteria {
+public class NameAndPersonalCodeSearchCriteria implements PatientsSearchCriteria {
     private final PatientDatabaseImpl patientDatabase;
 
-    public NameSearchCriteria(PatientDatabaseImpl patientDatabase) {
+    public NameAndPersonalCodeSearchCriteria(PatientDatabaseImpl patientDatabase) {
         this.patientDatabase = patientDatabase;
     }
 
@@ -17,11 +17,13 @@ public class NameSearchCriteria implements PatientsSearchCriteria {
     public boolean canProcess(SearchPatientsRequest request) {
         return request.isNameProvided()
                 && !request.isSurnameProvided()
-                && !request.isPersonalCodeProvided();
+                && request.isPersonalCodeProvided();
     }
 
     @Override
     public List<Patient> process(SearchPatientsRequest request) {
-        return patientDatabase.findPatientsByName(request.getName());
+        return patientDatabase
+                .findPatientsByNameAndPersonalCode
+                        (request.getName(), request.getPersonalCode());
     }
 }

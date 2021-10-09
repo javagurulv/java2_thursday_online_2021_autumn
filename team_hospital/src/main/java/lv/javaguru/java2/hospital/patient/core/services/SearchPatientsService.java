@@ -7,7 +7,7 @@ import lv.javaguru.java2.hospital.patient.core.requests.PatientPaging;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
-import lv.javaguru.java2.hospital.patient.core.search_criteria.*;
+import lv.javaguru.java2.hospital.patient.core.services.search_criteria.*;
 import lv.javaguru.java2.hospital.patient.core.services.validators.SearchPatientsValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -63,7 +63,21 @@ public class SearchPatientsService {
         return patients;
     }
 
-    public List<Patient> returnPaging(List<Patient> patients, PatientPaging patientPaging) {
+    private List<Patient> returnOrdering(List<Patient> patients, PatientOrdering patientOrdering) {
+        if (orderingEnabled && patientOrdering != null) {
+            Comparator<Patient> comparator = patientOrdering.getOrderBy().toUpperCase(Locale.ROOT).equals("NAME")
+                    ? Comparator.comparing(Patient::getName)
+                    : Comparator.comparing(Patient::getSurname);
+            if (patientOrdering.getOrderDirection().toUpperCase(Locale.ROOT).equals("DESCENDING")) {
+                comparator = comparator.reversed();
+            }
+            return patients.stream().sorted(comparator).collect(Collectors.toList());
+        } else {
+            return patients;
+        }
+    }
+
+    private List<Patient> returnPaging(List<Patient> patients, PatientPaging patientPaging) {
         if (pagingEnabled && patientPaging != null) {
             int pageNumber = patientPaging.getPageNumber();
             int pageSize = patientPaging.getPageSize();
@@ -77,18 +91,6 @@ public class SearchPatientsService {
         }
     }
 
-    public List<Patient> returnOrdering(List<Patient> patients, PatientOrdering patientOrdering) {
-        if (orderingEnabled && patientOrdering != null) {
-            Comparator<Patient> comparator = patientOrdering.getOrderBy().toUpperCase(Locale.ROOT).equals("NAME")
-                    ? Comparator.comparing(Patient::getName)
-                    : Comparator.comparing(Patient::getSurname);
-            if (patientOrdering.getOrderDirection().toUpperCase(Locale.ROOT).equals("DESCENDING")) {
-                comparator = comparator.reversed();
-            }
-            return patients.stream().sorted(comparator).collect(Collectors.toList());
-        } else {
-            return patients;
-        }
-    }
+
 }
 

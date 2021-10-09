@@ -2,11 +2,13 @@ package lv.javaguru.java2.hospital.visit.core.services.validators;
 
 import lv.javaguru.java2.hospital.visit.core.requests.VisitOrdering;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class VisitOrderingValidator {
 
 	public List<CoreError> validate(VisitOrdering visitOrdering) {

@@ -2,20 +2,17 @@ package lv.javaguru.java2.hospital.visit.core.services.validators;
 
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class SearchVisitValidator {
 
-    private SearchVisitFieldValidator fieldValidator;
-    private VisitOrderingValidator visitOrderingValidator;
-    private VisitPagingValidator visitPagingValidator;
-
-    public SearchVisitValidator(SearchVisitFieldValidator fieldValidator, VisitOrderingValidator visitOrderingValidator, VisitPagingValidator visitPagingValidator) {
-        this.fieldValidator = fieldValidator;
-        this.visitOrderingValidator = visitOrderingValidator;
-        this.visitPagingValidator = visitPagingValidator;
-    }
+    @Autowired private SearchVisitFieldValidator fieldValidator;
+    @Autowired private VisitOrderingValidator visitOrderingValidator;
+    @Autowired private VisitPagingValidator visitPagingValidator;
 
     public List<CoreError> validate(SearchVisitRequest request) {
         List<CoreError> errors = fieldValidator.validate(request);

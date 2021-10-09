@@ -5,10 +5,13 @@ import lv.javaguru.java2.hospital.visit.core.requests.VisitPaging;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.SearchVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.SearchVisitService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SearchVisitUIAction implements VisitUIAction {
 
-    private SearchVisitService searchVisitService;
+    @Autowired private SearchVisitService searchVisitService;
 
     public SearchVisitUIAction(SearchVisitService searchVisitService) {
         this.searchVisitService = searchVisitService;

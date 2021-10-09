@@ -7,31 +7,24 @@ import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
-import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
-import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.responses.AddVisitResponse;
+import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.services.validators.AddVisitValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class AddVisitService {
-    private final PatientDatabaseImpl patientDatabase;
-    private final DoctorDatabaseImpl doctorDatabase;
-    private final VisitDatabaseImpl visitDatabase;
-    private final AddVisitValidator validator;
 
-    public AddVisitService(PatientDatabaseImpl patientDatabase,
-						   DoctorDatabaseImpl doctorDatabase,
-                           VisitDatabaseImpl visitDatabase,
-						   AddVisitValidator validator) {
-        this.patientDatabase = patientDatabase;
-        this.doctorDatabase = doctorDatabase;
-        this.visitDatabase = visitDatabase;
-        this.validator = validator;
-    }
+    @Autowired private PatientDatabaseImpl patientDatabase;
+    @Autowired private DoctorDatabaseImpl doctorDatabase;
+    @Autowired private VisitDatabaseImpl visitDatabase;
+    @Autowired private AddVisitValidator validator;
 
     public AddVisitResponse execute(AddVisitRequest request) {
         List<CoreError> errors = validator.validate(request);

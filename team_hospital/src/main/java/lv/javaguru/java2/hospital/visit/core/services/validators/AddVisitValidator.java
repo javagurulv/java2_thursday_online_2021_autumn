@@ -6,20 +6,18 @@ import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class AddVisitValidator {
 
-    private final PatientDatabaseImpl patientDatabase;
-    private final DoctorDatabaseImpl doctorDatabase;
-
-    public AddVisitValidator(PatientDatabaseImpl patientDatabase, DoctorDatabaseImpl doctorDatabase) {
-        this.patientDatabase = patientDatabase;
-        this.doctorDatabase = doctorDatabase;
-    }
+    @Autowired private PatientDatabaseImpl patientDatabase;
+    @Autowired private DoctorDatabaseImpl doctorDatabase;
 
     public List<CoreError> validate(AddVisitRequest patientVisitRequest) {
         List<CoreError> errors = new ArrayList<>();

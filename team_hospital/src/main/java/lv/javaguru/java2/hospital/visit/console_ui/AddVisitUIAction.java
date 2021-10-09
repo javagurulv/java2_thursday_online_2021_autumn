@@ -3,13 +3,13 @@ package lv.javaguru.java2.hospital.visit.console_ui;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.AddVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.AddVisitService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AddVisitUIAction {
-    private final AddVisitService patientsVisitService;
 
-    public AddVisitUIAction(AddVisitService patientsVisitService) {
-        this.patientsVisitService = patientsVisitService;
-    }
+    @Autowired private AddVisitService patientsVisitService;
 
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();

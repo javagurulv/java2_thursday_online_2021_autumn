@@ -10,7 +10,6 @@ import lv.javaguru.java2.hospital.patient.core.services.AddPatientService;
 import lv.javaguru.java2.hospital.patient.core.services.ShowAllPatientsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AcceptanceTest1 {
@@ -41,5 +40,4 @@ public class AcceptanceTest1 {
     private ShowAllPatientsService getShowAllPatientsService() {
         return applicationContext.getBean(ShowAllPatientsService.class);
     }
-
 }

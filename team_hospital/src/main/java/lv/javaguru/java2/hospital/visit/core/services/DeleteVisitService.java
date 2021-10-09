@@ -5,17 +5,16 @@ import lv.javaguru.java2.hospital.visit.core.requests.DeleteVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.responses.DeleteVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.validators.DeleteVisitValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class DeleteVisitService {
-    private final VisitDatabaseImpl visitDatabase;
-    private final DeleteVisitValidator validator;
 
-    public DeleteVisitService(VisitDatabaseImpl visitDatabase, DeleteVisitValidator validator) {
-        this.visitDatabase = visitDatabase;
-        this.validator = validator;
-    }
+    @Autowired private VisitDatabaseImpl visitDatabase;
+    @Autowired private DeleteVisitValidator validator;
 
     public DeleteVisitResponse execute(DeleteVisitRequest request) {
         List<CoreError> errors = validator.validate(request);
