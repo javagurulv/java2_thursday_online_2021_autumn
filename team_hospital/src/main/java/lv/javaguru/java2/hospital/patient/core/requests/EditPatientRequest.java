@@ -2,12 +2,12 @@ package lv.javaguru.java2.hospital.patient.core.requests;
 
 public class EditPatientRequest {
     private final Long patientID;
-    private final Integer userInput;
+    private final SearchEnums enums;
     private final String changes;
 
-    public EditPatientRequest(Long patientID, Integer userInput, String changes) {
+    public EditPatientRequest(Long patientID, SearchEnums enums, String changes) {
         this.patientID = patientID;
-        this.userInput = userInput;
+        this.enums = enums;
         this.changes = changes;
     }
 
@@ -15,8 +15,8 @@ public class EditPatientRequest {
         return patientID;
     }
 
-    public Integer getUserInput() {
-        return userInput;
+    public SearchEnums getEnums() {
+        return enums;
     }
 
     public String getChanges() {

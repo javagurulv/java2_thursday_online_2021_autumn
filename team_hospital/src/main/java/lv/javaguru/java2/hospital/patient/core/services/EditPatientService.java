@@ -24,11 +24,11 @@ public class EditPatientService {
 
             return new EditPatientResponse(
                     request.getPatientID(),
-                    request.getUserInput(),
+                    request.getEnums(),
                     request.getChanges(),
                     database.editActions(
                             request.getPatientID(),
-                            request.getUserInput(),
+                            request.getEnums(),
                             request.getChanges()));
         }
     }

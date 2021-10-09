@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.patient.acceptance_tests;
 
 import lv.javaguru.java2.hospital.config.HospitalConfiguration;
+import lv.javaguru.java2.hospital.patient.core.requests.SearchEnums;
 import org.springframework.context.ApplicationContext;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
@@ -33,7 +34,7 @@ public class AcceptanceTest3 {
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
-                1, "NewName");
+                SearchEnums.CHANGE_NAME, "NewName");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
 		assertTrue(editPatientResponse.isTrueOrNot());
 
@@ -51,7 +52,7 @@ public class AcceptanceTest3 {
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
-                2, "NewSurname");
+                SearchEnums.CHANGE_SURNAME, "NewSurname");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
 		assertTrue(editPatientResponse.isTrueOrNot());
 
@@ -69,7 +70,7 @@ public class AcceptanceTest3 {
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
-                3, "New22222");
+                SearchEnums.CHANGE_PERSONALCODE, "New22222");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
 		assertTrue(editPatientResponse.isTrueOrNot());
 

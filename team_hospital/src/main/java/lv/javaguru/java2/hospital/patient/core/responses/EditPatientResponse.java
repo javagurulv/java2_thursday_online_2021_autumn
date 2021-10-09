@@ -4,7 +4,7 @@ import java.util.List;
 
 public class EditPatientResponse extends CoreResponse {
     private Long patientID;
-    private Integer userInput;
+    private Enum userInput;
     private String changes;
     private boolean trueOrNot;
 
@@ -12,7 +12,7 @@ public class EditPatientResponse extends CoreResponse {
         super(errors);
     }
 
-    public EditPatientResponse(Long patientID, Integer userInput, String changes, boolean trueOrNot) {
+    public EditPatientResponse(Long patientID, Enum userInput, String changes, boolean trueOrNot) {
         this.patientID = patientID;
         this.userInput = userInput;
         this.changes = changes;
@@ -23,7 +23,7 @@ public class EditPatientResponse extends CoreResponse {
         return patientID;
     }
 
-    public Integer getUserInput() {
+    public Enum getUserInput() {
         return userInput;
     }
 

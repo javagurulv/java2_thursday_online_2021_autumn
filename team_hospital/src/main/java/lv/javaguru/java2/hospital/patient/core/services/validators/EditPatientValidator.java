@@ -25,7 +25,7 @@ public class EditPatientValidator {
     }
 
     private Optional<CoreError> validateUserChoice(EditPatientRequest request) {
-        return (request.getUserInput() == null)
+        return (request.getEnums() == null)
                 ? Optional.of(new CoreError("User choice", "Must not be empty!")) : Optional.empty();
     }
 
