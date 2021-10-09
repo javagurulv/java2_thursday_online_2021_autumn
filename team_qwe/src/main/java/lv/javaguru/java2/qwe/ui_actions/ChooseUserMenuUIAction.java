@@ -3,6 +3,9 @@ package lv.javaguru.java2.qwe.ui_actions;
 import lv.javaguru.java2.qwe.ui_actions.user_ui_actions.*;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
+import static java.util.Map.*;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.inputDialog;
 import static lv.javaguru.java2.qwe.ApplicationDemo.getApplicationContext;
 
@@ -15,56 +18,34 @@ public class ChooseUserMenuUIAction implements UIAction {
                 "GENERATE PORTFOLIO FOR USER", "SHOW USER PORTFOLIO", "SHOW USER PORTFOLIO GROUPED BY INDUSTRY",
                 "SHOW USER INVESTMENTS BY EACH INDUSTRY", "SHOW PORTFOLIO SUMMARY", "RETURN TO MAIN MENU"};
 
+        Map<String, UIAction> userMenuMap = ofEntries(
+                entry("ADD NEW USER",
+                        getApplicationContext().getBean(AddUserUIAction.class)),
+                entry("REMOVE USER",
+                        getApplicationContext().getBean(RemoveUserUIAction.class)),
+                entry("SHOW USER LIST",
+                        getApplicationContext().getBean(GetUserListUIAction.class)),
+                entry("FIND USER BY NAME",
+                        getApplicationContext().getBean(FindUserByNameUIAction.class)),
+                entry("GENERATE PORTFOLIO FOR USER",
+                        getApplicationContext().getBean(GenerateUserPortfolioUIAction.class)),
+                entry("SHOW USER PORTFOLIO",
+                        getApplicationContext().getBean(GetUserPortfolioUIAction.class)),
+                entry("SHOW USER PORTFOLIO GROUPED BY INDUSTRY",
+                        getApplicationContext().getBean(GetUserPortfolioGroupedByIndustryUIAction.class)),
+                entry("SHOW USER INVESTMENTS BY EACH INDUSTRY",
+                        getApplicationContext().getBean(GetUserInvestmentsByEachIndustryUIAction.class)),
+                entry("SHOW PORTFOLIO SUMMARY",
+                        getApplicationContext().getBean(GetUserPortfolioSummaryUIAction.class))
+        );
+
         boolean userMenuOpen = true;
         while (userMenuOpen) {
             String type = inputDialog("Choose operation", "USER MENU", userMenu);
-            switch (type) {
-                case "ADD NEW USER" -> {
-                    AddUserUIAction uiAction =
-                            getApplicationContext().getBean(AddUserUIAction.class);
-                    uiAction.execute();
-                }
-                case "REMOVE USER" -> {
-                    RemoveUserUIAction uiAction =
-                            getApplicationContext().getBean(RemoveUserUIAction.class);
-                    uiAction.execute();
-                }
-                case "SHOW USER LIST" -> {
-                    GetUserListUIAction uiAction =
-                            getApplicationContext().getBean(GetUserListUIAction.class);
-                    uiAction.execute();
-                }
-                case "FIND USER BY NAME" -> {
-                    FindUserByNameUIAction uiAction =
-                            getApplicationContext().getBean(FindUserByNameUIAction.class);
-                    uiAction.execute();
-                }
-                case "GENERATE PORTFOLIO FOR USER" -> {
-                    GenerateUserPortfolioUIAction uiAction =
-                            getApplicationContext().getBean(GenerateUserPortfolioUIAction.class);
-                    uiAction.execute();
-                }
-                case "SHOW USER PORTFOLIO" -> {
-                    GetUserPortfolioUIAction uiAction =
-                            getApplicationContext().getBean(GetUserPortfolioUIAction.class);
-                    uiAction.execute();
-                }
-                case "SHOW USER PORTFOLIO GROUPED BY INDUSTRY" -> {
-                    GetUserPortfolioGroupedByIndustryUIAction uiAction =
-                            getApplicationContext().getBean(GetUserPortfolioGroupedByIndustryUIAction.class);
-                    uiAction.execute();
-                }
-                case "SHOW USER INVESTMENTS BY EACH INDUSTRY" -> {
-                    GetUserInvestmentsByEachIndustryUIAction uiAction =
-                            getApplicationContext().getBean(GetUserInvestmentsByEachIndustryUIAction.class);
-                    uiAction.execute();
-                }
-                case "SHOW PORTFOLIO SUMMARY" -> {
-                    GetUserPortfolioSummaryUIAction uiAction =
-                            getApplicationContext().getBean(GetUserPortfolioSummaryUIAction.class);
-                    uiAction.execute();
-                }
-                default -> userMenuOpen = false;
+            if (!userMenuMap.containsKey(type)) {
+                userMenuOpen = false;
+            } else {
+                userMenuMap.get(type).execute();
             }
         }
     }
