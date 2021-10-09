@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DeleteVisitUIAction {
+public class DeleteVisitUIAction implements VisitUIAction{
 
     @Autowired
     private DeleteVisitService visitService;

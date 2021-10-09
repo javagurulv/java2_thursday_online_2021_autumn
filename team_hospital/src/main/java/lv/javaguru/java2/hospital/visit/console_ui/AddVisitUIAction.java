@@ -1,5 +1,4 @@
 package lv.javaguru.java2.hospital.visit.console_ui;
-
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.AddVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.AddVisitService;
@@ -7,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AddVisitUIAction {
+public class AddVisitUIAction implements VisitUIAction{
 
     @Autowired private AddVisitService patientsVisitService;
 
