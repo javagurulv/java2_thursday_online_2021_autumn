@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.TableDatabase;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseTable;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.AddTableRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.AddTableResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.CoreError;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 public class AddTableServiceTest {
 
     @Mock
-    private TableDatabase database;
+    private DatabaseTable database;
     @Mock
     private ValidatorAddTable validator;
     @InjectMocks

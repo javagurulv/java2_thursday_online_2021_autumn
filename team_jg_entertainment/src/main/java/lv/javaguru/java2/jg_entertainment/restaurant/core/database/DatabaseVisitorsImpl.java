@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 
 @Component
-public class ImplDatabaseVisitors implements DatabaseVisitors {
+public class DatabaseVisitorsImpl implements DatabaseVisitors {
 
     List<Visitors> clientInRestaurant = new ArrayList<>();
     private Long idClient = 1L;

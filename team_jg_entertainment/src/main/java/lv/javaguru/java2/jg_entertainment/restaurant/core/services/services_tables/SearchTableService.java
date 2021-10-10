@@ -1,7 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.TableDatabase;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseTable;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.OrderingTable;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.PagingTable;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.SearchTableRequest;
@@ -27,7 +27,7 @@ public class SearchTableService {
     private boolean pagingEnabled;
 
     @Autowired
-    private TableDatabase database;
+    private DatabaseTable database;
     @Autowired private ValidatorSearchRequestTable validator;
 
     public SearchTableResponse execute(SearchTableRequest request) {

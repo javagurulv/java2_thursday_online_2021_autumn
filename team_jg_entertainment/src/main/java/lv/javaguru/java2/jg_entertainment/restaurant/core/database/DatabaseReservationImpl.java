@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ImplDatabaseReservation implements DatabaseReservation {
+public class DatabaseReservationImpl implements DatabaseReservation {
 
     List<Reservation> reservationList = new ArrayList<>();
 
