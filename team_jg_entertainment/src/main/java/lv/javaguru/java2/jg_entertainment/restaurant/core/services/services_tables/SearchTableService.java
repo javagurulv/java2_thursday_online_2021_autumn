@@ -7,7 +7,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.Paging
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.SearchTableRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.SearchTableResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorSearchRequestTable;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.SearchRequestTableValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -28,7 +28,7 @@ public class SearchTableService {
 
     @Autowired
     private DatabaseTable database;
-    @Autowired private ValidatorSearchRequestTable validator;
+    @Autowired private SearchRequestTableValidator validator;
 
     public SearchTableResponse execute(SearchTableRequest request) {
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ValidatorSearchRequestTable {
+public class SearchRequestTableValidator {
 
     @Autowired
     private SearchRequestFieldTableValidator fieldTable;
