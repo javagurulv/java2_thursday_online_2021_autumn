@@ -1,7 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestDeleteVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.DeleteVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseDeleteVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorDeleteVisitor;
@@ -18,7 +18,7 @@ public class ServiceDeleteVisitors {
     @Autowired
     private ValidatorDeleteVisitor validator;
 
-    public ResponseDeleteVisitors execute(RequestDeleteVisitor request) {
+    public ResponseDeleteVisitors execute(DeleteVisitorRequest request) {
         List<CoreError> coreErrors = validator.coreErrors(request);
         if (!coreErrors.isEmpty()) {
             return new ResponseDeleteVisitors(coreErrors);

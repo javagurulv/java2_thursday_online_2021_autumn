@@ -1,7 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestAddVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseAddVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
@@ -19,7 +19,7 @@ public class ServiceAddAllVisitors {
     @Autowired
     private ValidatorAddVisitor validator;
 
-    public ResponseAddVisitor execute(RequestAddVisitor request) {
+    public ResponseAddVisitor execute(AddVisitorRequest request) {
         List<CoreError> coreErrors = validator.coreErrors(request);
         if (!coreErrors.isEmpty()) {
             return new ResponseAddVisitor(coreErrors);

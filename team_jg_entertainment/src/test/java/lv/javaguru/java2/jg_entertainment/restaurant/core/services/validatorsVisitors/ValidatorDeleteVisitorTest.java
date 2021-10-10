@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestDeleteVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.DeleteVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import org.junit.jupiter.api.Test;
 
@@ -14,14 +14,14 @@ class ValidatorDeleteVisitorTest {
 
     @Test
     public void coreErrorsNotEmpty() {
-        RequestDeleteVisitor request = new RequestDeleteVisitor(32L, "Nika");
+        DeleteVisitorRequest request = new DeleteVisitorRequest(32L, "Nika");
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertTrue(coreErrorList.isEmpty());
     }
 
     @Test
     public void coreErrorsHaveNullId() {
-        RequestDeleteVisitor request = new RequestDeleteVisitor(null, "Nika");
+        DeleteVisitorRequest request = new DeleteVisitorRequest(null, "Nika");
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertEquals(coreErrorList.size(), 1);
         assertEquals(coreErrorList.get(0).getField(), "id visitor");
@@ -30,7 +30,7 @@ class ValidatorDeleteVisitorTest {
 
     @Test
     public void coreErrorsHaveEmptyNameVisitor() {
-        RequestDeleteVisitor request = new RequestDeleteVisitor(3289L, "");
+        DeleteVisitorRequest request = new DeleteVisitorRequest(3289L, "");
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertEquals(coreErrorList.size(), 1);
         assertEquals(coreErrorList.get(0).getField(), "name visitor");
@@ -39,7 +39,7 @@ class ValidatorDeleteVisitorTest {
 
     @Test
     public void coreErrorsHaveNotCorrectInformationInAllField() {
-        RequestDeleteVisitor request = new RequestDeleteVisitor(null, "");
+        DeleteVisitorRequest request = new DeleteVisitorRequest(null, "");
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertEquals(coreErrorList.size(), 2);
         assertEquals(coreErrorList.get(0).getField(), "id visitor");

@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestAddVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import org.junit.jupiter.api.Test;
 
@@ -14,14 +14,14 @@ class ValidatorAddVisitorTest {
 
     @Test
     public void coreErrorsNotEmpty() {
-        RequestAddVisitor request = new RequestAddVisitor("Nika", "Plotnikova", 3256489742L);
+        AddVisitorRequest request = new AddVisitorRequest("Nika", "Plotnikova", 3256489742L);
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertTrue(coreErrorList.isEmpty());
     }
 
     @Test
     public void coreErrorsEmptyName() {
-        RequestAddVisitor request = new RequestAddVisitor("", "Plotnikova", 3256489742L);
+        AddVisitorRequest request = new AddVisitorRequest("", "Plotnikova", 3256489742L);
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertEquals(coreErrorList.size(), 1);
         assertEquals(coreErrorList.get(0).getField(), "name visitors");
@@ -30,7 +30,7 @@ class ValidatorAddVisitorTest {
 
     @Test
     public void coreErrorsEmptySurname() {
-        RequestAddVisitor request = new RequestAddVisitor("Nika", "", 3256489742L);
+        AddVisitorRequest request = new AddVisitorRequest("Nika", "", 3256489742L);
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertEquals(coreErrorList.size(), 1);
         assertEquals(coreErrorList.get(0).getField(), "surname");
@@ -39,7 +39,7 @@ class ValidatorAddVisitorTest {
 
     @Test
     public void coreErrorsNotCorrectTelephoneNumber() {
-        RequestAddVisitor request = new RequestAddVisitor("Nika", "Plotnikova", null);
+        AddVisitorRequest request = new AddVisitorRequest("Nika", "Plotnikova", null);
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertEquals(coreErrorList.size(), 1);
         assertEquals(coreErrorList.get(0).getField(), "telephone");
@@ -48,7 +48,7 @@ class ValidatorAddVisitorTest {
 
     @Test
     public void coreErrorsAllFieldNotCorrect() {
-        RequestAddVisitor request = new RequestAddVisitor("", "", null);
+        AddVisitorRequest request = new AddVisitorRequest("", "", null);
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertEquals(coreErrorList.size(), 3);
         assertEquals(coreErrorList.get(0).getField(), "name visitors");

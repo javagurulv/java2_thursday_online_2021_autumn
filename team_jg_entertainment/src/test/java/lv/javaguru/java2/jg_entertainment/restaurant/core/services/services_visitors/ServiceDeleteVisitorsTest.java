@@ -1,7 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestDeleteVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.DeleteVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseDeleteVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorDeleteVisitor;
@@ -30,7 +30,7 @@ public class ServiceDeleteVisitorsTest {
 
     @Test
     public void shouldReturnErrorWhenVisitorIdNotProvided() {
-        RequestDeleteVisitor request = new RequestDeleteVisitor(null, "name");
+        DeleteVisitorRequest request = new DeleteVisitorRequest(null, "name");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("id visitor", "Can't be null"));
         Mockito.when(validator.coreErrors(request)).thenReturn(errors);
@@ -43,7 +43,7 @@ public class ServiceDeleteVisitorsTest {
 
     @Test
     public void shouldReturnErrorWhenVisitorNameNotProvided() {
-        RequestDeleteVisitor request = new RequestDeleteVisitor(1L, "");
+        DeleteVisitorRequest request = new DeleteVisitorRequest(1L, "");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("name visitor", "Can't be empty"));
         Mockito.when(validator.coreErrors(request)).thenReturn(errors);
@@ -58,7 +58,7 @@ public class ServiceDeleteVisitorsTest {
     public void shouldDeleteVisitorWithIdFromDatabase() {
         Mockito.when(validator.coreErrors(any())).thenReturn(new ArrayList<>());
         Mockito.when(database.deleteClientWithIDAndName(1L, "name")).thenReturn(true);
-        RequestDeleteVisitor request = new RequestDeleteVisitor(1L, "name");
+        DeleteVisitorRequest request = new DeleteVisitorRequest(1L, "name");
         ResponseDeleteVisitors response = service.execute(request);
         assertFalse(response.hasError());
         assertTrue(response.ifIdVisitorDelete());

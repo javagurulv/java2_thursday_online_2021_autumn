@@ -1,5 +1,5 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors;
 
-public class RequestShowAllVisitorsInListRestaurant {
+public class ShowAllVisitorsRequest {
 
 }
