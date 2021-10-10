@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class ValidatorPaging {
+public class Paging {
 
     public List<CoreError> validatorPaging(PagingTable paging) {
         List<CoreError> coreErrors = new ArrayList<>();

@@ -15,7 +15,7 @@ public class SearchRequestTableValidator {
     @Autowired
     private SearchRequestFieldTableValidator fieldTable;
     @Autowired private Ordering ordering;
-    @Autowired private ValidatorPaging validatorPaging;
+    @Autowired private Paging paging;
 
     public List<CoreError> validator(SearchTableRequest request) {
         List<CoreError> coreErrors = fieldTable.validatorField(request);
@@ -36,7 +36,7 @@ public class SearchRequestTableValidator {
                                          List<CoreError> errorList) {
         if (request.getPaging() != null) {
             PagingTable pagingTable = request.getPaging();
-            errorList.addAll(validatorPaging.validatorPaging(pagingTable));
+            errorList.addAll(paging.validatorPaging(pagingTable));
         }
     }
 }
