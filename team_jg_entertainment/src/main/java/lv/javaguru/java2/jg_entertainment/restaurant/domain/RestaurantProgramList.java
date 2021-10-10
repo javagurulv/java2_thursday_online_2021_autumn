@@ -8,7 +8,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class Restaurant {
+public class RestaurantProgramList {
 
     private static final ApplicationContext applicationContext =
             new AnnotationConfigApplicationContext(RestaurantListConfiguration.class);
