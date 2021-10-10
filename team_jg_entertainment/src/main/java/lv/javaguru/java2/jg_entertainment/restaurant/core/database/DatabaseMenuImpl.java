@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
-public class ImplDatabaseMenu implements DatabaseMenu {
+public class DatabaseMenuImpl implements DatabaseMenu {
 
     private Long nextNr = 1L;
     private List<Menu> menus = new ArrayList<>();
