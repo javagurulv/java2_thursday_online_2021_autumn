@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ServiceAddAllVisitors {
+public class AddAllVisitorsService {
 
     @Autowired
     private DatabaseVisitors database;

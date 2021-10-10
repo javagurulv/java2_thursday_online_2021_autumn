@@ -22,14 +22,14 @@ import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ServiceSearchVisitorsTest {
+public class SearchVisitorsServiceTest {
 
     @Mock
     private DatabaseVisitors database;
     @Mock
     private SearchVisitorsRequestValidator validator;
     @InjectMocks
-    private ServiceSearchVisitors serviceSearch;
+    private SearchVisitorsService serviceSearch;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidatorFails() {

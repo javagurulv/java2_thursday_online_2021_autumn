@@ -19,14 +19,14 @@ import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ServiceDeleteVisitorsTest {
+public class DeleteVisitorsServiceTest {
 
     @Mock
     private DatabaseVisitors database;
     @Mock
     private ValidatorDeleteVisitor validator;
     @InjectMocks
-    private ServiceDeleteVisitors service;
+    private DeleteVisitorsService service;
 
     @Test
     public void shouldReturnErrorWhenVisitorIdNotProvided() {

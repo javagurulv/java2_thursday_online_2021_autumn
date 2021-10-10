@@ -6,8 +6,8 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Pagi
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.SearchVisitorsResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceAddAllVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceSearchVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.AddAllVisitorsService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.SearchVisitorsService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
@@ -89,11 +89,11 @@ public class AcceptanceTest2 {
         Assertions.assertEquals(searchVisitorsResponse.getVisitors().get(0).getSurname(), "surname1");
     }
 
-    private ServiceAddAllVisitors getAddVisitorService() {
-        return appContext.getBean(ServiceAddAllVisitors.class);
+    private AddAllVisitorsService getAddVisitorService() {
+        return appContext.getBean(AddAllVisitorsService.class);
     }
 
-    private ServiceSearchVisitors getSearchVisitorService() {
-        return appContext.getBean(ServiceSearchVisitors.class);
+    private SearchVisitorsService getSearchVisitorService() {
+        return appContext.getBean(SearchVisitorsService.class);
     }
 }

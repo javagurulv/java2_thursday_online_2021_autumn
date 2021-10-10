@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class ServiceSearchVisitors {
+public class SearchVisitorsService {
 
     @Value("${search.ordering.enabled}")
     private boolean orderingEnabled;

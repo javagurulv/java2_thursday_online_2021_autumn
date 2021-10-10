@@ -18,14 +18,14 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ServiceAddAllVisitorsTest {
+public class AddAllVisitorsServiceTest {
 
     @Mock
     private DatabaseVisitors databaseVisitors;
     @Mock
     private ValidatorAddVisitor validator;
     @InjectMocks
-    private ServiceAddAllVisitors service;
+    private AddAllVisitorsService service;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {

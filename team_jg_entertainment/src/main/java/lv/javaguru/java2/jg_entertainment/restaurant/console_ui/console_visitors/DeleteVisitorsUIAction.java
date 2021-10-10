@@ -2,7 +2,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitor
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.DeleteVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.DeleteVisitorsResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceDeleteVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.DeleteVisitorsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class DeleteVisitorsUIAction implements RestaurantUIAction {
 
     @Autowired
-    private ServiceDeleteVisitors deleteVisitors;
+    private DeleteVisitorsService deleteVisitors;
 
     @Override
     public void execute() {

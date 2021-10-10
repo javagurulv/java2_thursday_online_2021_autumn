@@ -2,7 +2,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitor
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.AddVisitorResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceAddAllVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.AddAllVisitorsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class AddVisitorsUIAction implements RestaurantUIAction {
 
     @Autowired
-    private ServiceAddAllVisitors serviceAddAllVisitors;
+    private AddAllVisitorsService addAllVisitorsService;
 
     @Override
     public void execute() {
@@ -28,7 +28,7 @@ public class AddVisitorsUIAction implements RestaurantUIAction {
         Long telephoneNumber = scanner.nextLong();
 
         AddVisitorRequest request = new AddVisitorRequest(visitorsName, visitorsSurname, telephoneNumber);
-        AddVisitorResponse response = serviceAddAllVisitors.execute(request);
+        AddVisitorResponse response = addAllVisitorsService.execute(request);
 
         if (response.hasError()) {
             response.getErrorsList().forEach(coreError ->

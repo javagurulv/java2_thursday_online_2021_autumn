@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ServiceDeleteVisitors {
+public class DeleteVisitorsService {
 
     @Autowired
     private DatabaseVisitors database;

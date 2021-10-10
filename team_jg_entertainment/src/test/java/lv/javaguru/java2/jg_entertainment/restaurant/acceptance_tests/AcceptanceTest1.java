@@ -4,8 +4,8 @@ import lv.javaguru.java2.jg_entertainment.restaurant.configuration.RestaurantLis
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.ShowAllVisitorsRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ShowAllVisitorsResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceAddAllVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceShowListVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.AddAllVisitorsService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ShowListVisitorsService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
@@ -28,11 +28,11 @@ public class AcceptanceTest1 {
         Assertions.assertEquals(response.getNewVisitor().size(), 2);
     }
 
-    private ServiceAddAllVisitors getAddVisitorService() {
-        return appContext.getBean(ServiceAddAllVisitors.class);
+    private AddAllVisitorsService getAddVisitorService() {
+        return appContext.getBean(AddAllVisitorsService.class);
     }
 
-    private ServiceShowListVisitors getAllVisitorsService() {
-        return appContext.getBean(ServiceShowListVisitors.class);
+    private ShowListVisitorsService getAllVisitorsService() {
+        return appContext.getBean(ShowListVisitorsService.class);
     }
 }

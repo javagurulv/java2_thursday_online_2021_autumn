@@ -17,12 +17,12 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ServiceShowListVisitorsTest {
+public class ShowListVisitorsServiceTest {
 
     @Mock
     private DatabaseVisitors databaseVisitors;
     @InjectMocks
-    private ServiceShowListVisitors service;
+    private ShowListVisitorsService service;
 
     @Test
     public void shouldGetVisitorsFromDb() {
