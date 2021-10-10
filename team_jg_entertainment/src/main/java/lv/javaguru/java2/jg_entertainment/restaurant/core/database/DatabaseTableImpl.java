@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
-public class DatabaseImplTable implements DatabaseTable {
+public class DatabaseTableImpl implements DatabaseTable {
 
     private Long nextId = 1L;
     private List<Table> tables = new ArrayList<>();
