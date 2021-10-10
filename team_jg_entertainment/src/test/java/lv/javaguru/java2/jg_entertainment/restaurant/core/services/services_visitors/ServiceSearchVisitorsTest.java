@@ -5,7 +5,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Orde
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Paging;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseSearchVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.SearchVisitorsResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.SearchVisitorsRequestValidator;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 import org.junit.Test;
@@ -38,9 +38,9 @@ public class ServiceSearchVisitorsTest {
         errorList.add(new CoreError("name", "can not be empty!"));
         errorList.add(new CoreError("surname", "can not be empty!"));
         Mockito.when(validator.validator(request)).thenReturn(errorList);
-        ResponseSearchVisitors responseSearchVisitors = serviceSearch.execute(request);
-        assertTrue(responseSearchVisitors.hasError());
-        assertEquals(responseSearchVisitors.getErrorsList().size(), 2);
+        SearchVisitorsResponse searchVisitorsResponse = serviceSearch.execute(request);
+        assertTrue(searchVisitorsResponse.hasError());
+        assertEquals(searchVisitorsResponse.getErrorsList().size(), 2);
         Mockito.verify(validator).validator(request);
         Mockito.verify(validator).validator(any());
         Mockito.verifyNoInteractions(database);
@@ -54,11 +54,11 @@ public class ServiceSearchVisitorsTest {
         visitors.add(new Visitors("name", "surname"));
         Mockito.when(database.findByNameVisitor("name")).thenReturn(visitors);
 
-        ResponseSearchVisitors responseSearchVisitors = serviceSearch.execute(request);
-        assertFalse(responseSearchVisitors.hasError());
-        assertEquals(responseSearchVisitors.getVisitors().size(), 1);
-        assertEquals(responseSearchVisitors.getVisitors().get(0).getClientName(), "name");
-        assertEquals(responseSearchVisitors.getVisitors().get(0).getSurname(), "surname");
+        SearchVisitorsResponse searchVisitorsResponse = serviceSearch.execute(request);
+        assertFalse(searchVisitorsResponse.hasError());
+        assertEquals(searchVisitorsResponse.getVisitors().size(), 1);
+        assertEquals(searchVisitorsResponse.getVisitors().get(0).getClientName(), "name");
+        assertEquals(searchVisitorsResponse.getVisitors().get(0).getSurname(), "surname");
     }
 
     @Test
@@ -68,11 +68,11 @@ public class ServiceSearchVisitorsTest {
         List<Visitors> visitors = new ArrayList<>();
         visitors.add(new Visitors("name", "surname"));
         Mockito.when(database.findBySurnameVisitor("surname")).thenReturn(visitors);
-        ResponseSearchVisitors responseSearchVisitors = serviceSearch.execute(request);
-        assertFalse(responseSearchVisitors.hasError());
-        assertEquals(responseSearchVisitors.getVisitors().size(), 1);
-        assertEquals(responseSearchVisitors.getVisitors().get(0).getClientName(), "name");
-        assertEquals(responseSearchVisitors.getVisitors().get(0).getSurname(), "surname");
+        SearchVisitorsResponse searchVisitorsResponse = serviceSearch.execute(request);
+        assertFalse(searchVisitorsResponse.hasError());
+        assertEquals(searchVisitorsResponse.getVisitors().size(), 1);
+        assertEquals(searchVisitorsResponse.getVisitors().get(0).getClientName(), "name");
+        assertEquals(searchVisitorsResponse.getVisitors().get(0).getSurname(), "surname");
     }
 
     @Test
@@ -82,11 +82,11 @@ public class ServiceSearchVisitorsTest {
         List<Visitors> visitors = new ArrayList<>();
         visitors.add(new Visitors("name", "surname"));
         Mockito.when(database.findByNameAndSurname("name", "surname")).thenReturn(visitors);
-        ResponseSearchVisitors responseSearchVisitors = serviceSearch.execute(request);
-        assertFalse(responseSearchVisitors.hasError());
-        assertEquals(responseSearchVisitors.getVisitors().size(), 1);
-        assertEquals(responseSearchVisitors.getVisitors().get(0).getClientName(), "name");
-        assertEquals(responseSearchVisitors.getVisitors().get(0).getSurname(), "surname");
+        SearchVisitorsResponse searchVisitorsResponse = serviceSearch.execute(request);
+        assertFalse(searchVisitorsResponse.hasError());
+        assertEquals(searchVisitorsResponse.getVisitors().size(), 1);
+        assertEquals(searchVisitorsResponse.getVisitors().get(0).getClientName(), "name");
+        assertEquals(searchVisitorsResponse.getVisitors().get(0).getSurname(), "surname");
     }
 
     @Test
@@ -99,11 +99,11 @@ public class ServiceSearchVisitorsTest {
         visitors.add(new Visitors("name", "surname2"));
         Mockito.when(database.findByNameVisitor("name")).thenReturn(visitors);
 
-        ResponseSearchVisitors responseSearchVisitors = serviceSearch.execute(request);
-        assertFalse(responseSearchVisitors.hasError());
-        assertEquals(responseSearchVisitors.getVisitors().size(), 2);
-        assertEquals(responseSearchVisitors.getVisitors().get(0).getSurname(), "surname1");
-        assertEquals(responseSearchVisitors.getVisitors().get(1).getSurname(), "surname2");
+        SearchVisitorsResponse searchVisitorsResponse = serviceSearch.execute(request);
+        assertFalse(searchVisitorsResponse.hasError());
+        assertEquals(searchVisitorsResponse.getVisitors().size(), 2);
+        assertEquals(searchVisitorsResponse.getVisitors().get(0).getSurname(), "surname1");
+        assertEquals(searchVisitorsResponse.getVisitors().get(1).getSurname(), "surname2");
     }
 
     @Test
@@ -116,11 +116,11 @@ public class ServiceSearchVisitorsTest {
         visitors.add(new Visitors("name", "surname2"));
         Mockito.when(database.findByNameVisitor("name")).thenReturn(visitors);
 
-        ResponseSearchVisitors responseSearchVisitors = serviceSearch.execute(request);
-        assertFalse(responseSearchVisitors.hasError());
-        assertEquals(responseSearchVisitors.getVisitors().size(), 2);
-        assertEquals(responseSearchVisitors.getVisitors().get(0).getSurname(), "surname2");
-        assertEquals(responseSearchVisitors.getVisitors().get(1).getSurname(), "surname1");
+        SearchVisitorsResponse searchVisitorsResponse = serviceSearch.execute(request);
+        assertFalse(searchVisitorsResponse.hasError());
+        assertEquals(searchVisitorsResponse.getVisitors().size(), 2);
+        assertEquals(searchVisitorsResponse.getVisitors().get(0).getSurname(), "surname2");
+        assertEquals(searchVisitorsResponse.getVisitors().get(1).getSurname(), "surname1");
     }
 
     @Test
@@ -133,11 +133,11 @@ public class ServiceSearchVisitorsTest {
         visitors.add(new Visitors("name", "surname2"));
         Mockito.when(database.findByNameVisitor("name")).thenReturn(visitors);
 
-        ResponseSearchVisitors responseSearchVisitors = serviceSearch.execute(request);
-        assertFalse(responseSearchVisitors.hasError());
-        assertEquals(responseSearchVisitors.getVisitors().size(), 1);
-        assertEquals(responseSearchVisitors.getVisitors().get(0).getClientName(), "name");
-        assertEquals(responseSearchVisitors.getVisitors().get(0).getSurname(), "surname1");
+        SearchVisitorsResponse searchVisitorsResponse = serviceSearch.execute(request);
+        assertFalse(searchVisitorsResponse.hasError());
+        assertEquals(searchVisitorsResponse.getVisitors().size(), 1);
+        assertEquals(searchVisitorsResponse.getVisitors().get(0).getClientName(), "name");
+        assertEquals(searchVisitorsResponse.getVisitors().get(0).getSurname(), "surname1");
     }
 
     @Test
@@ -150,10 +150,10 @@ public class ServiceSearchVisitorsTest {
         visitors.add(new Visitors("name", "surname2"));
         Mockito.when(database.findByNameVisitor("name")).thenReturn(visitors);
 
-        ResponseSearchVisitors responseSearchVisitors = serviceSearch.execute(request);
-        assertFalse(responseSearchVisitors.hasError());
-        assertEquals(responseSearchVisitors.getVisitors().size(), 1);
-        assertEquals(responseSearchVisitors.getVisitors().get(0).getClientName(), "name");
-        assertEquals(responseSearchVisitors.getVisitors().get(0).getSurname(), "surname2");
+        SearchVisitorsResponse searchVisitorsResponse = serviceSearch.execute(request);
+        assertFalse(searchVisitorsResponse.hasError());
+        assertEquals(searchVisitorsResponse.getVisitors().size(), 1);
+        assertEquals(searchVisitorsResponse.getVisitors().get(0).getClientName(), "name");
+        assertEquals(searchVisitorsResponse.getVisitors().get(0).getSurname(), "surname2");
     }
 }

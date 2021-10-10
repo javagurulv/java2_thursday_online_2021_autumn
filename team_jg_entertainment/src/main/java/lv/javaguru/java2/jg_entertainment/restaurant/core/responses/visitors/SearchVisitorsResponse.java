@@ -4,11 +4,11 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 
 import java.util.List;
 
-public class ResponseFindVisitors extends CoreResponse{
+public class SearchVisitorsResponse extends CoreResponse{
 
     private List<Visitors> visitors;
 
-    public ResponseFindVisitors(List<CoreError> errorsList, List<Visitors> visitors) {
+    public SearchVisitorsResponse(List<Visitors> visitors, List<CoreError> errorsList) {
         super(errorsList);
         this.visitors = visitors;
     }

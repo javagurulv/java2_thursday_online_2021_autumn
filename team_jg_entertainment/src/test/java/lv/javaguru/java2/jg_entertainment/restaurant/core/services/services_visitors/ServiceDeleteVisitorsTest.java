@@ -3,7 +3,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_vis
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.DeleteVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseDeleteVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.DeleteVisitorsResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorDeleteVisitor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +34,7 @@ public class ServiceDeleteVisitorsTest {
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("id visitor", "Can't be null"));
         Mockito.when(validator.coreErrors(request)).thenReturn(errors);
-        ResponseDeleteVisitors response = service.execute(request);
+        DeleteVisitorsResponse response = service.execute(request);
         assertTrue(response.hasError());
         assertEquals(response.getErrorsList().size(), 1);
         assertEquals(response.getErrorsList().get(0).getField(), "id visitor");
@@ -47,7 +47,7 @@ public class ServiceDeleteVisitorsTest {
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("name visitor", "Can't be empty"));
         Mockito.when(validator.coreErrors(request)).thenReturn(errors);
-        ResponseDeleteVisitors response = service.execute(request);
+        DeleteVisitorsResponse response = service.execute(request);
         assertTrue(response.hasError());
         assertEquals(response.getErrorsList().size(), 1);
         assertEquals(response.getErrorsList().get(0).getField(), "name visitor");
@@ -59,7 +59,7 @@ public class ServiceDeleteVisitorsTest {
         Mockito.when(validator.coreErrors(any())).thenReturn(new ArrayList<>());
         Mockito.when(database.deleteClientWithIDAndName(1L, "name")).thenReturn(true);
         DeleteVisitorRequest request = new DeleteVisitorRequest(1L, "name");
-        ResponseDeleteVisitors response = service.execute(request);
+        DeleteVisitorsResponse response = service.execute(request);
         assertFalse(response.hasError());
         assertTrue(response.ifIdVisitorDelete());
     }

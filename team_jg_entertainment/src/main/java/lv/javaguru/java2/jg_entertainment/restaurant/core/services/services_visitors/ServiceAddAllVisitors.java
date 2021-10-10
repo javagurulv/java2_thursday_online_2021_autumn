@@ -3,7 +3,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_vis
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseAddVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.AddVisitorResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorAddVisitor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +19,13 @@ public class ServiceAddAllVisitors {
     @Autowired
     private ValidatorAddVisitor validator;
 
-    public ResponseAddVisitor execute(AddVisitorRequest request) {
+    public AddVisitorResponse execute(AddVisitorRequest request) {
         List<CoreError> coreErrors = validator.coreErrors(request);
         if (!coreErrors.isEmpty()) {
-            return new ResponseAddVisitor(coreErrors);
+            return new AddVisitorResponse(coreErrors);
         }
         Visitors visitor = new Visitors(request.getName(), request.getSurname(), request.getTelephone());
         database.saveClientToRestaurantList(visitor);
-        return new ResponseAddVisitor(visitor);
+        return new AddVisitorResponse(visitor);
     }
 }

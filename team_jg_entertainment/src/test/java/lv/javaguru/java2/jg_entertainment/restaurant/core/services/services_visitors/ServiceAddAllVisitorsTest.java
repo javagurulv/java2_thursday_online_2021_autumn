@@ -3,7 +3,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_vis
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseAddVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.AddVisitorResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorAddVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.matchers_visitors.Matchers;
 import org.junit.Test;
@@ -31,7 +31,7 @@ public class ServiceAddAllVisitorsTest {
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
         AddVisitorRequest notValidRequest = new AddVisitorRequest(null, "surname", 252525L);
         when(validator.coreErrors(notValidRequest)).thenReturn(List.of(new CoreError("name", "Shouldn't be empty")));
-        ResponseAddVisitor response = service.execute(notValidRequest);
+        AddVisitorResponse response = service.execute(notValidRequest);
         assertTrue(response.hasError());
     }
 
@@ -39,10 +39,10 @@ public class ServiceAddAllVisitorsTest {
     public void shouldReturnResponseWithErrorsReceivedFromValidator() {
         AddVisitorRequest notValidRequest = new AddVisitorRequest(null, "surname", 252525L);
         when(validator.coreErrors(notValidRequest)).thenReturn(List.of(new CoreError("name", "Shouldn't be empty")));
-        ResponseAddVisitor responseAddVisitor = service.execute(notValidRequest);
-        assertEquals(responseAddVisitor.getErrorsList().size(), 1);
-        assertEquals(responseAddVisitor.getErrorsList().get(0).getField(), "name");
-        assertEquals(responseAddVisitor.getErrorsList().get(0).getMessageError(), "Shouldn't be empty");
+        AddVisitorResponse addVisitorResponse = service.execute(notValidRequest);
+        assertEquals(addVisitorResponse.getErrorsList().size(), 1);
+        assertEquals(addVisitorResponse.getErrorsList().get(0).getField(), "name");
+        assertEquals(addVisitorResponse.getErrorsList().get(0).getMessageError(), "Shouldn't be empty");
     }
 
     @Test
@@ -65,7 +65,7 @@ public class ServiceAddAllVisitorsTest {
     public void shouldReturnResponseWithoutErrorsWhenRequestIsValid() {
         AddVisitorRequest validRequest = new AddVisitorRequest("name", "surname", 252525L);
         when((validator.coreErrors(validRequest))).thenReturn(List.of());
-        ResponseAddVisitor response = service.execute(validRequest);
+        AddVisitorResponse response = service.execute(validRequest);
         assertFalse(response.hasError());
     }
 
@@ -73,7 +73,7 @@ public class ServiceAddAllVisitorsTest {
     public void shouldReturnResponseWithVisitorWhenRequestIsValid() {
         AddVisitorRequest validRequest = new AddVisitorRequest("name", "surname", 252525L);
         when(validator.coreErrors(validRequest)).thenReturn(List.of());
-        ResponseAddVisitor response = service.execute(validRequest);
+        AddVisitorResponse response = service.execute(validRequest);
         assertNotNull(response.getNewVisitor());
         assertEquals(response.getNewVisitor().getClientName(), validRequest.getName());
         assertEquals(response.getNewVisitor().getSurname(), validRequest.getSurname());

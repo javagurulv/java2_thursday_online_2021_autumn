@@ -5,7 +5,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Orde
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Paging;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseSearchVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.SearchVisitorsResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.SearchVisitorsRequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +30,17 @@ public class ServiceSearchVisitors {
     private DatabaseVisitors database;
     @Autowired private SearchVisitorsRequestValidator validator;
 
-    public ResponseSearchVisitors execute(SearchVisitorsRequest request) {
+    public SearchVisitorsResponse execute(SearchVisitorsRequest request) {
 
         List<CoreError> errors = validator.validator(request);
         if (!errors.isEmpty()) {
-            return new ResponseSearchVisitors(null, errors);
+            return new SearchVisitorsResponse(null, errors);
         }
         List<Visitors> visitorsList = search(request);
         visitorsList = order(visitorsList, request.getOrdering());
         visitorsList = paging(visitorsList, request.getPaging());
 
-        return new ResponseSearchVisitors(visitorsList, null);
+        return new SearchVisitorsResponse(visitorsList, null);
     }
 
     private List<Visitors> order(List<Visitors> visitors, Ordering ordering) {

@@ -1,7 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.DeleteVisitorRequest;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseDeleteVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.DeleteVisitorsResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceDeleteVisitors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,13 +24,13 @@ public class DeleteVisitorsUIAction implements RestaurantUIAction {
         String nameVisitor = scanner.nextLine();
 
         DeleteVisitorRequest request = new DeleteVisitorRequest(idVisitors, nameVisitor);
-        ResponseDeleteVisitors responseDeleteVisitorsByID = deleteVisitors.execute(request);
+        DeleteVisitorsResponse deleteVisitorsResponseByID = deleteVisitors.execute(request);
 
-        if (responseDeleteVisitorsByID.hasError()) {
-            responseDeleteVisitorsByID.getErrorsList().forEach((coreError ->
+        if (deleteVisitorsResponseByID.hasError()) {
+            deleteVisitorsResponseByID.getErrorsList().forEach((coreError ->
                     System.out.println("Error" + coreError.getField() + " " + coreError.getMessageError())));
         } else {
-            if (responseDeleteVisitorsByID.ifIdVisitorDelete()) {
+            if (deleteVisitorsResponseByID.ifIdVisitorDelete()) {
                 System.out.println("The visitor with ID number " + idVisitors + ", name " + nameVisitor + "-> was deleted from list !");
             } else {
                 System.out.println("Sorry, visitor's with this ID and name wasn't deleted! Check your information, and try again! ");

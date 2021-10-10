@@ -5,7 +5,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Orde
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Paging;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseSearchVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.SearchVisitorsResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceAddAllVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceSearchVisitors;
 import org.junit.jupiter.api.Assertions;
@@ -28,7 +28,7 @@ public class AcceptanceTest2 {
         getAddVisitorService().execute(request2);
 
         SearchVisitorsRequest request3 = new SearchVisitorsRequest("name", null);
-        ResponseSearchVisitors response = getSearchVisitorService().execute(request3);
+        SearchVisitorsResponse response = getSearchVisitorService().execute(request3);
 
         Assertions.assertEquals(response.getVisitors().size(), 2);
         Assertions.assertEquals(response.getVisitors().get(0).getClientName(), "name");
@@ -46,7 +46,7 @@ public class AcceptanceTest2 {
 
         Ordering ordering = new Ordering("surname", "DESCENDING");
         SearchVisitorsRequest request = new SearchVisitorsRequest("name", null, ordering);
-        ResponseSearchVisitors response = getSearchVisitorService().execute(request);
+        SearchVisitorsResponse response = getSearchVisitorService().execute(request);
 
         Assertions.assertEquals(response.getVisitors().size(), 2);
         Assertions.assertEquals(response.getVisitors().get(0).getClientName(), "name");
@@ -64,13 +64,13 @@ public class AcceptanceTest2 {
 
         Ordering ordering = new Ordering("surname", "ASCENDING");
         SearchVisitorsRequest request = new SearchVisitorsRequest("name", null, ordering);
-        ResponseSearchVisitors responseSearchVisitors = getSearchVisitorService().execute(request);
+        SearchVisitorsResponse searchVisitorsResponse = getSearchVisitorService().execute(request);
 
-        Assertions.assertEquals(responseSearchVisitors.getVisitors().size(), 2);
-        Assertions.assertEquals(responseSearchVisitors.getVisitors().get(0).getClientName(), "name");
-        Assertions.assertEquals(responseSearchVisitors.getVisitors().get(0).getSurname(), "surname1");
-        Assertions.assertEquals(responseSearchVisitors.getVisitors().get(1).getClientName(), "name");
-        Assertions.assertEquals(responseSearchVisitors.getVisitors().get(1).getSurname(), "surname2");
+        Assertions.assertEquals(searchVisitorsResponse.getVisitors().size(), 2);
+        Assertions.assertEquals(searchVisitorsResponse.getVisitors().get(0).getClientName(), "name");
+        Assertions.assertEquals(searchVisitorsResponse.getVisitors().get(0).getSurname(), "surname1");
+        Assertions.assertEquals(searchVisitorsResponse.getVisitors().get(1).getClientName(), "name");
+        Assertions.assertEquals(searchVisitorsResponse.getVisitors().get(1).getSurname(), "surname2");
     }
 
     @Test
@@ -82,11 +82,11 @@ public class AcceptanceTest2 {
         Ordering ordering = new Ordering("surname", "ASCENDING");
         Paging paging = new Paging(1, 1);
         SearchVisitorsRequest request = new SearchVisitorsRequest("name", null, ordering, paging);
-        ResponseSearchVisitors responseSearchVisitors = getSearchVisitorService().execute(request);
+        SearchVisitorsResponse searchVisitorsResponse = getSearchVisitorService().execute(request);
 
-        Assertions.assertEquals(responseSearchVisitors.getVisitors().size(), 1);
-        Assertions.assertEquals(responseSearchVisitors.getVisitors().get(0).getClientName(), "name");
-        Assertions.assertEquals(responseSearchVisitors.getVisitors().get(0).getSurname(), "surname1");
+        Assertions.assertEquals(searchVisitorsResponse.getVisitors().size(), 1);
+        Assertions.assertEquals(searchVisitorsResponse.getVisitors().get(0).getClientName(), "name");
+        Assertions.assertEquals(searchVisitorsResponse.getVisitors().get(0).getSurname(), "surname1");
     }
 
     private ServiceAddAllVisitors getAddVisitorService() {

@@ -1,7 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseAddVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.AddVisitorResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceAddAllVisitors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,7 +28,7 @@ public class AddVisitorsUIAction implements RestaurantUIAction {
         Long telephoneNumber = scanner.nextLong();
 
         AddVisitorRequest request = new AddVisitorRequest(visitorsName, visitorsSurname, telephoneNumber);
-        ResponseAddVisitor response = serviceAddAllVisitors.execute(request);
+        AddVisitorResponse response = serviceAddAllVisitors.execute(request);
 
         if (response.hasError()) {
             response.getErrorsList().forEach(coreError ->
