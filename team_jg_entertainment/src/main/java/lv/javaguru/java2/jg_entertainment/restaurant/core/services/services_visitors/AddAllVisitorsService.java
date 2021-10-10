@@ -5,7 +5,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddV
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.AddVisitorResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.AddVisitorValidator;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_visitors.AddVisitorValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -4,7 +4,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisit
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.DeleteVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.DeleteVisitorsResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.DeleteVisitorValidator;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_visitors.DeleteVisitorValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

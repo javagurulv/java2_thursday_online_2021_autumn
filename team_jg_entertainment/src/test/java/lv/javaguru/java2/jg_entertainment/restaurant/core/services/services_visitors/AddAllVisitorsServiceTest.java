@@ -4,7 +4,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisit
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.AddVisitorResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.AddVisitorValidator;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_visitors.AddVisitorValidator;
 import lv.javaguru.java2.jg_entertainment.restaurant.matchers_visitors.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
