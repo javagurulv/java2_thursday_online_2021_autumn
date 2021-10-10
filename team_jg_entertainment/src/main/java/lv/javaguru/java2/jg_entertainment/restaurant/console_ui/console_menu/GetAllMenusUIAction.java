@@ -3,14 +3,17 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.GetAllMenusRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.GetAllMenusResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.GetAllMenusService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class GetAllMenusUIAction implements UIAction {
 
-    private GetAllMenusService getAllMenusService;
+    @Autowired private GetAllMenusService getAllMenusService;
 
-    public GetAllMenusUIAction(GetAllMenusService getAllMenusService) {
-        this.getAllMenusService = getAllMenusService;
-    }
+//    public GetAllMenusUIAction(GetAllMenusService getAllMenusService) {
+//        this.getAllMenusService = getAllMenusService;
+//    }
 
     @Override
     public void execute() {

@@ -1,12 +1,14 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Component
 public class ImplDatabaseMenu implements DatabaseMenu {
 
     private Long nextNr = 1L;

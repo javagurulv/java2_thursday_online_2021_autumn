@@ -75,6 +75,7 @@ public class Restaurant {
             case 4: {
                 SearchVisitorsUIAction searchUIAction = applicationContext.getBean(SearchVisitorsUIAction.class);
                 searchUIAction.execute();
+                break;
             }
             case 5: {
                 ExitUIAction uiExitAction = applicationContext.getBean(ExitUIAction.class);
@@ -114,7 +115,7 @@ public class Restaurant {
                 break;
             }
             case 4: {
-                lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.ExitUIAction exitUIActionMenu = applicationContext.getBean(lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.ExitUIAction.class);
+                ExitMenuUIAction exitUIActionMenu = applicationContext.getBean(ExitMenuUIAction.class);
                 exitUIActionMenu.execute();
                 break;
             }

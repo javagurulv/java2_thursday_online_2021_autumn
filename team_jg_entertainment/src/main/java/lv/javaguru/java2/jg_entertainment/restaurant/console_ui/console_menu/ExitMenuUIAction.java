@@ -1,6 +1,10 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu;
 
-public class ExitUIAction implements UIAction {
+import org.springframework.stereotype.Component;
+
+@Component
+public class ExitMenuUIAction implements UIAction {
+
     @Override
     public void execute() {
         System.out.println("Good by!");

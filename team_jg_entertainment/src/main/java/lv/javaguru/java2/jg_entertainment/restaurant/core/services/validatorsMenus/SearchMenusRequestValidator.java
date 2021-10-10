@@ -4,11 +4,13 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.Orderin
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.PagingMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.SearchMenusRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.CoreError;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class SearchMenusRequestValidator {
 
     public List<CoreError> validate(SearchMenusRequest request) {
