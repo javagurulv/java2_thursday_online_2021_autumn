@@ -4,16 +4,16 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 
 import java.util.List;
 
-public class ResponseShowAllVisitors extends CoreResponse{
+public class ShowAllVisitorsResponse extends CoreResponse{
     private List<Visitors> newVisitor;
 
 
-    public ResponseShowAllVisitors(List<CoreError> errorsList, List<Visitors> newVisitor) {
+    public ShowAllVisitorsResponse(List<CoreError> errorsList, List<Visitors> newVisitor) {
         super(errorsList);
         this.newVisitor = newVisitor;
     }
 
-    public ResponseShowAllVisitors(List<Visitors> newVisitor) {
+    public ShowAllVisitorsResponse(List<Visitors> newVisitor) {
         this.newVisitor = newVisitor;
     }
 

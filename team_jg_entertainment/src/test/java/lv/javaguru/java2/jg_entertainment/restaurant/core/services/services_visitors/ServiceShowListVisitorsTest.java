@@ -2,7 +2,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_vis
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.ShowAllVisitorsRequest;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseShowAllVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ShowAllVisitorsResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +30,7 @@ public class ServiceShowListVisitorsTest {
         visitors.add(new Visitors("name", "surname"));
         Mockito.when(databaseVisitors.showAllClientsInList()).thenReturn(visitors);
         ShowAllVisitorsRequest request = new ShowAllVisitorsRequest();
-        ResponseShowAllVisitors response = service.execute(request);
+        ShowAllVisitorsResponse response = service.execute(request);
         assertFalse(response.hasError());
         assertEquals(response.getNewVisitor().size(), 1);
         assertEquals(response.getNewVisitor().get(0).getClientName(), "name");
