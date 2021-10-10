@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators;
 
 import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorRequest;
+import lv.javaguru.java2.hospital.doctor.core.requests.EditOption;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import org.junit.jupiter.api.Test;
 
@@ -15,14 +16,14 @@ class EditDoctorRequestValidatorTest {
 
     @Test
     public void shouldReturnEmptyList() {
-        EditDoctorRequest request = new EditDoctorRequest(123L, 1, "changes");
+        EditDoctorRequest request = new EditDoctorRequest(123L, EditOption.valueOf("NAME"), "changes");
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnIdError() {
-        EditDoctorRequest request = new EditDoctorRequest(null, 1, "changes");
+        EditDoctorRequest request = new EditDoctorRequest(null, EditOption.valueOf("NAME"), "changes");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
@@ -32,7 +33,7 @@ class EditDoctorRequestValidatorTest {
 
     @Test
     public void shouldReturnChangesError() {
-        EditDoctorRequest request = new EditDoctorRequest(123L, 1, "");
+        EditDoctorRequest request = new EditDoctorRequest(123L, EditOption.valueOf("NAME"), "");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
@@ -42,7 +43,7 @@ class EditDoctorRequestValidatorTest {
 
     @Test
     public void shouldReturnIdAndChangesErrors() {
-        EditDoctorRequest request = new EditDoctorRequest(null, 1, "");
+        EditDoctorRequest request = new EditDoctorRequest(null, EditOption.valueOf("NAME"), "");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 2);
@@ -51,6 +52,5 @@ class EditDoctorRequestValidatorTest {
         assertEquals(errorList.get(1).getField(), "changes");
         assertEquals(errorList.get(1).getMessage(), "Must not be empty!");
     }
-
 
 }

@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.acceptancetests;
 
 import lv.javaguru.java2.hospital.config.HospitalConfiguration;
+import lv.javaguru.java2.hospital.doctor.core.requests.EditOption;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.context.ApplicationContext;
 import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
@@ -35,7 +36,7 @@ public class AcceptanceTest4 {
 
 		Long doctorId = response1.getNewDoctor().getId();
 
-        EditDoctorRequest request2 = new EditDoctorRequest(doctorId, 1, "Name1");
+        EditDoctorRequest request2 = new EditDoctorRequest(doctorId, EditOption.NAME, "Name1");
         EditDoctorResponse response2 = getEditDoctorService().execute(request2);
 
         assertTrue(response2.isDoctorEdited());
@@ -55,7 +56,7 @@ public class AcceptanceTest4 {
 
 		Long doctorId = response1.getNewDoctor().getId();
 
-		EditDoctorRequest request2 = new EditDoctorRequest(doctorId, 2, "Surname1");
+		EditDoctorRequest request2 = new EditDoctorRequest(doctorId, EditOption.SURNAME, "Surname1");
         EditDoctorResponse response2 = getEditDoctorService().execute(request2);
 
         assertTrue(response2.isDoctorEdited());
@@ -75,7 +76,7 @@ public class AcceptanceTest4 {
 
 	   Long doctorId = response1.getNewDoctor().getId();
 
-	   EditDoctorRequest request2 = new EditDoctorRequest(doctorId, 3, "Speciality1");
+	   EditDoctorRequest request2 = new EditDoctorRequest(doctorId, EditOption.SPECIALITY, "Speciality1");
         EditDoctorResponse response2 = getEditDoctorService().execute(request2);
 
        assertTrue(response2.isDoctorEdited());
