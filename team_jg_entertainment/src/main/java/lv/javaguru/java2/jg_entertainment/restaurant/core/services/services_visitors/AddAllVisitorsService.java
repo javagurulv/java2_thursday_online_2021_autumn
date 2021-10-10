@@ -5,7 +5,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddV
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.AddVisitorResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorAddVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.AddVisitorValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ public class AddAllVisitorsService {
     @Autowired
     private DatabaseVisitors database;
     @Autowired
-    private ValidatorAddVisitor validator;
+    private AddVisitorValidator validator;
 
     public AddVisitorResponse execute(AddVisitorRequest request) {
         List<CoreError> coreErrors = validator.coreErrors(request);

@@ -4,7 +4,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisit
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.DeleteVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.DeleteVisitorsResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorDeleteVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.DeleteVisitorValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ public class DeleteVisitorsService {
     @Autowired
     private DatabaseVisitors database;
     @Autowired
-    private ValidatorDeleteVisitor validator;
+    private DeleteVisitorValidator validator;
 
     public DeleteVisitorsResponse execute(DeleteVisitorRequest request) {
         List<CoreError> coreErrors = validator.coreErrors(request);

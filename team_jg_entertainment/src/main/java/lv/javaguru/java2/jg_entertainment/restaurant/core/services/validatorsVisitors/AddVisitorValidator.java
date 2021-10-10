@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-public class ValidatorAddVisitor {
+public class AddVisitorValidator {
 
     public List<CoreError> coreErrors(AddVisitorRequest request) {
         List<CoreError> coreErrors = new ArrayList<>();

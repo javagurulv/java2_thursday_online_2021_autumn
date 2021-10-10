@@ -4,7 +4,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisit
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.AddVisitorResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorAddVisitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.AddVisitorValidator;
 import lv.javaguru.java2.jg_entertainment.restaurant.matchers_visitors.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +23,7 @@ public class AddAllVisitorsServiceTest {
     @Mock
     private DatabaseVisitors databaseVisitors;
     @Mock
-    private ValidatorAddVisitor validator;
+    private AddVisitorValidator validator;
     @InjectMocks
     private AddAllVisitorsService service;
 

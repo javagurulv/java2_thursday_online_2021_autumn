@@ -8,9 +8,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ValidatorDeleteVisitorTest {
+class DeleteVisitorValidatorTest {
 
-    ValidatorDeleteVisitor visitorValidator = new ValidatorDeleteVisitor();
+    DeleteVisitorValidator visitorValidator = new DeleteVisitorValidator();
 
     @Test
     public void coreErrorsNotEmpty() {

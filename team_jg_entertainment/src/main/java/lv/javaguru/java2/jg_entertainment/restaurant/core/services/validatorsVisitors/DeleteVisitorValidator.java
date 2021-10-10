@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class ValidatorDeleteVisitor {
+public class DeleteVisitorValidator {
 
     public List<CoreError> coreErrors(DeleteVisitorRequest request) {
         List<CoreError> errorList = new ArrayList<>();
