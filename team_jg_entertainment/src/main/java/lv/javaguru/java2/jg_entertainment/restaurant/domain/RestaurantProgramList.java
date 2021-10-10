@@ -4,7 +4,6 @@ import lv.javaguru.java2.jg_entertainment.restaurant.configuration.RestaurantLis
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors.*;
-import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors.ExitUIAction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -35,165 +34,37 @@ public class RestaurantProgramList {
         System.out.println("1--> choose action with VISITORS: ");
         System.out.println("2--> choose action with restaurant MENU: ");
         System.out.println("3--> choose action with TABLES: ");
-       // System.out.println("4--> choose action with RESERVATION: ");
+        // System.out.println("4--> choose action with RESERVATION: ");
         System.out.println("4--> EXIT!");
         System.out.println();
     }
 
-    private static int visitorsMenu() {
-        System.out.println();
-        System.out.println("Hello !");
-        System.out.println("Visitors program menu, press number what do you want to do! ");
-        System.out.println("1. Add information about visitor to list of restaurant-> ");
-        System.out.println("2. Delete visitor - Enter ID that delete from list of restaurant-> ");
-        System.out.println("3. Show all visitor's in base of restaurant->");
-        System.out.println("4. Search visitor's in catalogue->");
-        System.out.println("5. Exit! ");
-        System.out.println();
-        int numberOfMenu = checkNumber.getCorrectNumberMenu(1, 5);
-        executeVisitorMenu(numberOfMenu);
-        return numberOfMenu;
-    }
-
-    private static void executeVisitorMenu(int numberOfMenu) {
-        switch (numberOfMenu) {
-            case 1: {
-                AddVisitorsUIAction uiAddVisitorAction = applicationContext.getBean(AddVisitorsUIAction.class);
-                uiAddVisitorAction.execute();
-                break;
-            }
-            case 2: {
-                DeleteVisitorsUIAction uiDeleteVisitorsAction = applicationContext.getBean(DeleteVisitorsUIAction.class);
-                uiDeleteVisitorsAction.execute();
-                break;
-            }
-            case 3: {
-                ShowListWithAllVisitorsUIAction uiGetAllVisitorsAction = applicationContext.getBean(ShowListWithAllVisitorsUIAction.class);
-                uiGetAllVisitorsAction.execute();
-                break;
-            }
-            case 4: {
-                SearchVisitorsUIAction searchUIAction = applicationContext.getBean(SearchVisitorsUIAction.class);
-                searchUIAction.execute();
-                break;
-            }
-            case 5: {
-                ExitUIAction uiExitAction = applicationContext.getBean(ExitUIAction.class);
-                uiExitAction.execute();
-                break;
-            }
+    private static void visitorsMenu() {
+        ProgramMenuVisitor visitorProgram = applicationContext.getBean(ProgramMenuVisitor.class);
+        while (true) {
+            visitorProgram.print();
+            int visitorNumberMenuInConsole = visitorProgram.getMenuNumberFromUser();
+            visitorProgram.executeSelectMenuItem(visitorNumberMenuInConsole);
         }
     }
 
-    private static int restaurantMenu() {
-        System.out.println("Restaurant menu: ");
-        System.out.println("1. Add menu to list: ");
-        System.out.println("2. Delete menu from list: ");
-        System.out.println("3. Show all menus in the list: ");
-        System.out.println("4. Exit!");
-        System.out.println("");
-        int numberOfMenu = checkNumber.getCorrectNumberMenu(1, 4);
-        executeSelectedRestaurantMenu(numberOfMenu);
-        return numberOfMenu;
-    }
-
-    private static void executeSelectedRestaurantMenu(int selectedMenu) {
-        switch (selectedMenu) {
-            case 1: {
-                AddMenuUIAction addMenuUIAction = applicationContext.getBean(AddMenuUIAction.class);
-                addMenuUIAction.execute();
-                break;
-            }
-            case 2: {
-                RemoveMenuUIAction removeMenuUIAction = applicationContext.getBean(RemoveMenuUIAction.class);
-                removeMenuUIAction.execute();
-                break;
-            }
-            case 3: {
-                GetAllMenusUIAction getAllMenusUIAction = applicationContext.getBean(GetAllMenusUIAction.class);
-                getAllMenusUIAction.execute();
-                break;
-            }
-            case 4: {
-                ExitMenuUIAction exitUIActionMenu = applicationContext.getBean(ExitMenuUIAction.class);
-                exitUIActionMenu.execute();
-                break;
-            }
+    private static void restaurantMenu() {
+        ProgramMenuRestaurant programMenuRestaurant = applicationContext.getBean(ProgramMenuRestaurant.class);
+        while (true) {
+            programMenuRestaurant.printMenuInRestaurant();
+            int menuNumberInConsole = programMenuRestaurant.getMenuNumberFromUser();
+            programMenuRestaurant.executeSelectMenuItem(menuNumberInConsole);
         }
     }
 
-    private static int tablesMenu() {
-        System.out.println();
-        System.out.println("Tables menu: ");
-        System.out.println("1. Add table to list: ");
-        System.out.println("2. Delete table from list: ");
-        System.out.println("3. Search table information from list: ");
-        System.out.println("4. Show all tables in the list: ");
-        System.out.println("5. Exit! ");
-        System.out.println();
-        int numberOfMenu = checkNumber.getCorrectNumberMenu(1, 5);
-        executeSelectedTabledMenu(numberOfMenu);
-        return numberOfMenu;
-    }
-
-    private static void executeSelectedTabledMenu(int selectedMenu) {
-        switch (selectedMenu) {
-            case 1: {
-                AddTableUIAction addTableUIAction = applicationContext.getBean(AddTableUIAction.class);
-                addTableUIAction.execute();
-                break;
-            }
-            case 2: {
-                RemoveTableUIAction removeTableUIAction = applicationContext.getBean(RemoveTableUIAction.class);
-                removeTableUIAction.execute();
-                break;
-            }
-            case 3: {
-                SearchTableUIAction searchTableUIAction = applicationContext.getBean(SearchTableUIAction.class);
-                searchTableUIAction.execute();
-                break;
-            }
-            case 4: {
-                GetAllTablesUIAction getAllTablesUIAction = applicationContext.getBean(GetAllTablesUIAction.class);
-                getAllTablesUIAction.execute();
-                break;
-            }
-            case 5: {
-                ExitTableUIAction exitTableUIAction = applicationContext.getBean(ExitTableUIAction.class);
-                exitTableUIAction.execute();
-                break;
-            }
+    private static void tablesMenu() {
+        ProgramMenuTable tableProgramMenu = applicationContext.getBean(ProgramMenuTable.class);
+        while (true) {
+            tableProgramMenu.printTableMenu();
+            int tableNumberInConsole = tableProgramMenu.getMenuNumberFromUser();
+            tableProgramMenu.executeSelectMenuItem(tableNumberInConsole);
         }
     }
-
-//    private static int reservationMenu() {
-//        System.out.println();
-//        System.out.println("Hello !");
-//        System.out.println("Reservation: ");
-//        System.out.println("1. Add reservation -> ");
-//
-//        System.out.println("5. Exit! ");
-//        System.out.println();
-//        int numberOfMenu = checkNumber.getCorrectNumberMenu(1, 5);
-//        executeReservation(numberOfMenu);
-//        return numberOfMenu;
-//    }
-//
-//
-//    private static void executeReservation(int selectedMenu) {
-//        switch (selectedMenu) {
-//            case 1: {
-//                UIActionAddReservation addReservation = applicationContext.getBean(UIActionAddReservation.class);
-//                addReservation.execute();
-//                break;
-//            }
-//            case 5: {
-//                ExitTableUIAction exitTableUIAction = applicationContext.getBean(ExitTableUIAction.class);
-//                exitTableUIAction.execute();
-//                break;
-//            }
-//        }
-//    }
 
     private static int checkNumberOfMenu() {
         System.out.println("Start by choosing the program menu!");
