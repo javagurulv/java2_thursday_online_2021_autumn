@@ -4,6 +4,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.configuration.RestaurantLis
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors.*;
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors.ExitUIAction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -57,17 +58,17 @@ public class Restaurant {
     private static void executeVisitorMenu(int numberOfMenu) {
         switch (numberOfMenu) {
             case 1: {
-                UIActionAddVisitors uiAddVisitorAction = applicationContext.getBean(UIActionAddVisitors.class);
+                AddVisitorsUIAction uiAddVisitorAction = applicationContext.getBean(AddVisitorsUIAction.class);
                 uiAddVisitorAction.execute();
                 break;
             }
             case 2: {
-                UIActionDeleteVisitors uiDeleteVisitorsAction = applicationContext.getBean(UIActionDeleteVisitors.class);
+                DeleteVisitorsUIAction uiDeleteVisitorsAction = applicationContext.getBean(DeleteVisitorsUIAction.class);
                 uiDeleteVisitorsAction.execute();
                 break;
             }
             case 3: {
-                UIActionShowListWithAllVisitors uiGetAllVisitorsAction = applicationContext.getBean(UIActionShowListWithAllVisitors.class);
+                ShowListWithAllVisitorsUIAction uiGetAllVisitorsAction = applicationContext.getBean(ShowListWithAllVisitorsUIAction.class);
                 uiGetAllVisitorsAction.execute();
                 break;
             }
@@ -76,7 +77,7 @@ public class Restaurant {
                 searchUIAction.execute();
             }
             case 5: {
-                UIActionExit uiExitAction = applicationContext.getBean(UIActionExit.class);
+                ExitUIAction uiExitAction = applicationContext.getBean(ExitUIAction.class);
                 uiExitAction.execute();
                 break;
             }
@@ -113,7 +114,7 @@ public class Restaurant {
                 break;
             }
             case 4: {
-                ExitUIAction exitUIActionMenu = applicationContext.getBean(ExitUIAction.class);
+                lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.ExitUIAction exitUIActionMenu = applicationContext.getBean(lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.ExitUIAction.class);
                 exitUIActionMenu.execute();
                 break;
             }

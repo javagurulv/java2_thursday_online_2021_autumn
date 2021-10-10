@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Scanner;
 
 @Component
-public class UIActionDeleteVisitors implements RestaurantUIAction {
+public class DeleteVisitorsUIAction implements RestaurantUIAction {
 
     @Autowired
     private ServiceDeleteVisitors deleteVisitors;

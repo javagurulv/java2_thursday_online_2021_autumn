@@ -3,7 +3,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitor
 import org.springframework.stereotype.Component;
 
 @Component
-public class UIActionExit implements RestaurantUIAction {
+public class ExitUIAction implements RestaurantUIAction {
 
     @Override
     public void execute() {
