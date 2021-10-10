@@ -5,7 +5,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.AddTab
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.AddTableResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorAddTable;
-import lv.javaguru.java2.jg_entertainment.restaurant.matchersTables.Matchers;
+import lv.javaguru.java2.jg_entertainment.restaurant.matchers_tables.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.matchersTables;
+package lv.javaguru.java2.jg_entertainment.restaurant.matchers_tables;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
 import org.mockito.ArgumentMatcher;
