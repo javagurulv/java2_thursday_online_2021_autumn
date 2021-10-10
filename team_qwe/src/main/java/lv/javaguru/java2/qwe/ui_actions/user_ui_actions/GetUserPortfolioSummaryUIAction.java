@@ -3,30 +3,28 @@ package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GetUserPortfolioSummaryRequest;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GetUserPortfolioSummaryResponse;
 import lv.javaguru.java2.qwe.core.services.user_services.GetUserPortfolioSummaryService;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.printErrorList;
-
-@DIComponent
+@Component
 public class GetUserPortfolioSummaryUIAction implements UIAction {
 
-    @DIDependency
-    private GetUserPortfolioSummaryService summaryService;
+    @Autowired private GetUserPortfolioSummaryService summaryService;
+    @Autowired private UtilityMethods utils;
     private String userName;
 
     @Override
     public void execute() {
         GetUserPortfolioSummaryRequest request =
-                new GetUserPortfolioSummaryRequest(inputDialog(
+                new GetUserPortfolioSummaryRequest(utils.inputDialog(
                         "Choose user:",
                         "SHOW PORTFOLIO SUMMARY",
-                        convertToStringArray(summaryService.getUserData())
+                        utils.convertToStringArray(summaryService.getUserData())
                 ));
         userName = request.getUserName();
         GetUserPortfolioSummaryResponse response =
@@ -45,19 +43,19 @@ public class GetUserPortfolioSummaryUIAction implements UIAction {
             Optional<LocalDate> portfolioGenerationDate = Optional.ofNullable(response.getPortfolioGenerationDate());
             System.out.println("DATE OF PORTFOLIO INCEPTION: "
                     + portfolioGenerationDate.orElse(summaryService.getUserData().getCurrentDate()));
-            System.out.println("RETURN SINCE INCEPTION: " + round((
+            System.out.println("RETURN SINCE INCEPTION: " + utils.round((
                     response.getPortfolioValue() / response.getUserInitialInvestment() - 1) * 100) + "%");
-            System.out.println("PORTFOLIO VALUE: " + round(response.getPortfolioValue()));
+            System.out.println("PORTFOLIO VALUE: " + utils.round(response.getPortfolioValue()));
             System.out.println("AMOUNT OF POSITIONS: " + response.getAmountOfPositions());
             System.out.println("PORTFOLIO ALLOCATION:");
             response.getPortfolioAllocation().forEach(
-                    (key, value) -> System.out.println(key + ": " + round(value * 100) + "%"));
-            System.out.println("AVERAGE WEIGHTED DIVIDEND YIELD: " + round(response.getAvgWgtDividendYield()) + "%");
-            System.out.println("AVERAGE WEIGHTED RISK WEIGHT: " + round(response.getAvgWgtRiskWeight()));
+                    (key, value) -> System.out.println(key + ": " + utils.round(value * 100) + "%"));
+            System.out.println("AVERAGE WEIGHTED DIVIDEND YIELD: " + utils.round(response.getAvgWgtDividendYield()) + "%");
+            System.out.println("AVERAGE WEIGHTED RISK WEIGHT: " + utils.round(response.getAvgWgtRiskWeight()));
             System.out.println("======================================================");
         } else {
-            messageDialog("WRONG INPUT!\n" +
-                    printErrorList(response));
+            utils.messageDialog("WRONG INPUT!\n" +
+                    utils.printErrorList(response));
         }
     }
 

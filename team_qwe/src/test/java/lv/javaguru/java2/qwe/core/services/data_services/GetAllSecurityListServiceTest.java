@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.core.services.data_services;
 
-import lv.javaguru.java2.qwe.Security;
-import lv.javaguru.java2.qwe.Stock;
+import lv.javaguru.java2.qwe.core.domain.Security;
+import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.GetAllSecurityListRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.GetAllSecurityListResponse;
@@ -20,10 +20,8 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class GetAllSecurityListServiceTest {
 
-    @Mock
-    private Database database;
-    @InjectMocks
-    private GetAllSecurityListService service;
+    @Mock private Database database;
+    @InjectMocks private GetAllSecurityListService service;
 
     @Test
     public void shouldGetAllSecuritiesFromDatabase() {

@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.patient.acceptance_tests;
 
-import lv.javaguru.java2.hospital.dependency_injection.ApplicationContext;
-import lv.javaguru.java2.hospital.dependency_injection.DIApplicationContextBuilder;
+import lv.javaguru.java2.hospital.config.HospitalConfiguration;
+import org.springframework.context.ApplicationContext;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.requests.DeletePatientRequest;
 import lv.javaguru.java2.hospital.patient.core.requests.ShowAllPatientsRequest;
@@ -11,15 +11,21 @@ import lv.javaguru.java2.hospital.patient.core.responses.ShowAllPatientsResponse
 import lv.javaguru.java2.hospital.patient.core.services.AddPatientService;
 import lv.javaguru.java2.hospital.patient.core.services.DeletePatientService;
 import lv.javaguru.java2.hospital.patient.core.services.ShowAllPatientsService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AcceptanceTest4 {
 
-    private static final ApplicationContext applicationContext =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.hospital");
+    private ApplicationContext applicationContext;
+
+    @BeforeEach
+    public void setup() {
+        applicationContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
+    }
 
     @Test
     public void shouldReturnCorrectPatientsListAfterDelete() {
@@ -52,4 +58,5 @@ class AcceptanceTest4 {
     private ShowAllPatientsService getShowAllPatientsService() {
         return applicationContext.getBean(ShowAllPatientsService.class);
     }
+
 }

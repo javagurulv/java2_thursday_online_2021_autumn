@@ -20,7 +20,7 @@ class ValidatorAddTableTest {
     }
 
     @Test
-    void coreErrorEmptyTitle() {
+    void coreErrorEmptyTitleTable() {
         AddTableRequest addTableRequest = new AddTableRequest("",4,25);
         List<CoreError> coreErrorList = tableValidator.validate(addTableRequest);
         assertEquals(coreErrorList.size(),1);

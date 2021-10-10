@@ -8,23 +8,27 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.Cor
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseSearchVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.SearchVisitorsRequestValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class ServiceSearchVisitors {
 
+    @Value("${search.ordering.enabled}")
+    private boolean orderingEnabled;
+
+    @Value("${search.paging.enabled}")
+    private boolean pagingEnabled;
+
+    @Autowired
     private DatabaseVisitors database;
-    private SearchVisitorsRequestValidator validator;
-
-
-    public ServiceSearchVisitors(DatabaseVisitors database,
-                                 SearchVisitorsRequestValidator validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @Autowired private SearchVisitorsRequestValidator validator;
 
     public ResponseSearchVisitors execute(SearchVisitorsRequest request) {
 

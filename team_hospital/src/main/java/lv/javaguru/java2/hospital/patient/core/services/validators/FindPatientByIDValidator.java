@@ -1,14 +1,14 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
-import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
 import lv.javaguru.java2.hospital.patient.core.requests.FindPatientByIdRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class FindPatientByIDValidator {
 
     public List<CoreError> validate(FindPatientByIdRequest request) {

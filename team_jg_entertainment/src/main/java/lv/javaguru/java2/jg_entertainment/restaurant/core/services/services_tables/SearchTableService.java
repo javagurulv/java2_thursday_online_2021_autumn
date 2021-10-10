@@ -8,22 +8,27 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.Search
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.SearchTableResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorSearchRequestTable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class SearchTableService {
 
-    private TableDatabase database;
-    private ValidatorSearchRequestTable validator;
+    @Value("${search.ordering.enabled}")
+    private boolean orderingEnabled;
 
-    public SearchTableService(TableDatabase database,
-                              ValidatorSearchRequestTable validator) {
-        this.database = database;
-        this.validator = validator;
-    }
+    @Value("${search.paging.enabled}")
+    private boolean pagingEnabled;
+
+    @Autowired
+    private TableDatabase database;
+    @Autowired private ValidatorSearchRequestTable validator;
 
     public SearchTableResponse execute(SearchTableRequest request) {
 

@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.services.data_services;
 
-import lv.javaguru.java2.qwe.Bond;
+import lv.javaguru.java2.qwe.core.domain.Bond;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddBondRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
@@ -25,12 +25,9 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(MockitoJUnitRunner.class)
 public class AddBondServiceTest {
 
-    @Mock
-    private Database database;
-    @Mock
-    private AddBondValidator validator;
-    @InjectMocks
-    private AddBondService service;
+    @Mock private Database database;
+    @Mock private AddBondValidator validator;
+    @InjectMocks private AddBondService service;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {

@@ -1,8 +1,8 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
 import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
-import lv.javaguru.java2.hospital.doctor.core.requests.Ordering;
-import lv.javaguru.java2.hospital.doctor.core.requests.Paging;
+import lv.javaguru.java2.hospital.doctor.core.requests.DoctorOrdering;
+import lv.javaguru.java2.hospital.doctor.core.requests.DoctorPaging;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.doctor.core.responses.SearchDoctorsResponse;
@@ -17,6 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,12 @@ class SearchDoctorsServiceTest {
     private SearchDoctorsRequestValidator validator;
     @InjectMocks
     private SearchDoctorsService service;
+
+    @BeforeEach
+    public void setup() {
+        ReflectionTestUtils.setField(service, "orderingEnabled", true);
+        ReflectionTestUtils.setField(service, "pagingEnabled", true);
+    }
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidatorFails() {
@@ -196,8 +203,8 @@ class SearchDoctorsServiceTest {
 
     @Test
     public void shouldSearchByNameWithOrderingAscending() {
-        Ordering ordering = new Ordering("surname", "ASCENDING");
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, null, ordering);
+        DoctorOrdering doctorOrdering = new DoctorOrdering("surname", "ASCENDING");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, null, doctorOrdering);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
@@ -214,8 +221,8 @@ class SearchDoctorsServiceTest {
 
     @Test
     public void shouldSearchByNameWithOrderingDescending() {
-        Ordering ordering = new Ordering("surname", "DESCENDING");
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, null, ordering);
+        DoctorOrdering doctorOrdering = new DoctorOrdering("surname", "DESCENDING");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, null, doctorOrdering);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
@@ -232,8 +239,8 @@ class SearchDoctorsServiceTest {
 
     @Test
     public void shouldSearchByTitleWithPagingFirstPage() {
-        Paging paging = new Paging(1, 1);
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, null, paging);
+        DoctorPaging doctorPaging = new DoctorPaging(1, 1);
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, null, doctorPaging);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
@@ -251,8 +258,8 @@ class SearchDoctorsServiceTest {
 
     @Test
     public void shouldSearchByTitleWithPagingSecondPage() {
-        Paging paging = new Paging(2, 1);
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, null, paging);
+        DoctorPaging doctorPaging = new DoctorPaging(2, 1);
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, null, doctorPaging);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();

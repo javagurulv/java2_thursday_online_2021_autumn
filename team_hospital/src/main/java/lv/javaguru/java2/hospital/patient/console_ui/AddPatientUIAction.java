@@ -1,17 +1,17 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
-import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
-import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.AddPatientResponse;
 import lv.javaguru.java2.hospital.patient.core.services.AddPatientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@DIComponent
+@Component
 public class AddPatientUIAction implements PatientUIActions {
 
-    @DIDependency private AddPatientService addPatient;
+    @Autowired private AddPatientService addPatient;
 
     public void execute() {
         String[] patientInfo = getUserInput();

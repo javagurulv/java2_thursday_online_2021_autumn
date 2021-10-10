@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.core.services.user_services;
 
-import lv.javaguru.java2.qwe.Type;
-import lv.javaguru.java2.qwe.User;
+import lv.javaguru.java2.qwe.core.domain.Type;
+import lv.javaguru.java2.qwe.core.domain.User;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GetAllUserListRequest;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GetAllUserListResponse;
@@ -20,10 +20,8 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class GetAllUserListServiceTest {
 
-    @Mock
-    private UserData userData;
-    @InjectMocks
-    private GetAllUserListService service;
+    @Mock private UserData userData;
+    @InjectMocks private GetAllUserListService service;
 
     @Test
     public void shouldGetAllUsersFromUserData() {

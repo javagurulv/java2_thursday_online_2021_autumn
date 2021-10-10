@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.core.services.user_services;
 
-import lv.javaguru.java2.qwe.*;
 import lv.javaguru.java2.qwe.core.database.UserData;
+import lv.javaguru.java2.qwe.core.domain.*;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GetUserPortfolioSummaryRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GetUserPortfolioSummaryResponse;

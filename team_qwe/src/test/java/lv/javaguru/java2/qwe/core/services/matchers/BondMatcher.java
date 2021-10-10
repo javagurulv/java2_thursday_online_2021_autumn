@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.services.matchers;
 
-import lv.javaguru.java2.qwe.Bond;
+import lv.javaguru.java2.qwe.core.domain.Bond;
 import org.mockito.ArgumentMatcher;
 
 public class BondMatcher implements ArgumentMatcher<Bond> {

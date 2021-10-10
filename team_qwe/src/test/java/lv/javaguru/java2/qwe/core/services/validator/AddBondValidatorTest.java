@@ -1,24 +1,20 @@
 package lv.javaguru.java2.qwe.core.services.validator;
 
-import lv.javaguru.java2.qwe.Bond;
+import lv.javaguru.java2.qwe.core.domain.Bond;
+import lv.javaguru.java2.qwe.acceptance_test.AcceptanceTestForDatabase;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddBondRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
-import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
-import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AddBondValidatorTest {
+public class AddBondValidatorTest extends AcceptanceTestForDatabase {
 
-    private final ApplicationContext appContext =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
-
-    private final Database database = appContext.getBean(Database.class);
-    private final AddBondValidator validator = appContext.getBean(AddBondValidator.class);
+    private final Database database = super.getAppContext().getBean(Database.class);
+    private final AddBondValidator validator = super.getAppContext().getBean(AddBondValidator.class);
 
     @Test
     public void shouldReturnEmptyList() {

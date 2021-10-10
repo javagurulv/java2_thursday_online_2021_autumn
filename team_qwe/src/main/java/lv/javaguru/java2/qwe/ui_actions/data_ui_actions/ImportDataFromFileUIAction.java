@@ -1,17 +1,17 @@
 package lv.javaguru.java2.qwe.ui_actions.data_ui_actions;
 
 import lv.javaguru.java2.qwe.core.services.data_services.ImportSecuritiesService;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.io.IOException;
 
-@DIComponent
+@Component
 public class ImportDataFromFileUIAction implements UIAction {
 
-    @DIDependency private ImportSecuritiesService importSecuritiesService;
+    @Autowired private ImportSecuritiesService importSecuritiesService;
 
     @Override
     public void execute() {
@@ -23,7 +23,7 @@ public class ImportDataFromFileUIAction implements UIAction {
             String path = fileChooser.getSelectedFile().getPath();
             try {
                 importSecuritiesService.execute(path);
-            } catch (IOException e) {
+            } catch (IOException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("ERROR!");
                 e.printStackTrace();
             }

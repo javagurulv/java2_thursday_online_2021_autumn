@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.core.requests.data_requests;
 
-import lv.javaguru.java2.qwe.Security;
-import lv.javaguru.java2.qwe.Stock;
+import lv.javaguru.java2.qwe.core.domain.Security;
+import lv.javaguru.java2.qwe.core.domain.Stock;
 
 import java.util.ArrayList;
 import java.util.List;

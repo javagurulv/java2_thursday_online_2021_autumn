@@ -1,7 +1,8 @@
 package lv.javaguru.java2.hospital.database;
 
-import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
 import lv.javaguru.java2.hospital.domain.Patient;
+import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@DIComponent
+@Component
 public class PatientDatabaseImpl implements PatientDatabase {
 
     private final List<Patient> patientsList = new ArrayList<>();
@@ -44,15 +45,19 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public boolean editActions(Long patientID, int userInput, String input) {
+    public boolean editActions(Long patientID, Enum userInput, String input) {
         for (Patient patient : patientsList) {
             if (Objects.equals(patient.getId(), patientID)) {
-                switch (userInput) {
-                    case 1 -> patient.setName(input);
-                    case 2 -> patient.setSurname(input);
-                    case 3 -> patient.setPersonalCode(input);
+                if (EditPatientEnum.CHANGE_NAME.equals(userInput)) {
+                    patient.setName(input);
+                    return true;
+                } else if (EditPatientEnum.CHANGE_SURNAME.equals(userInput)) {
+                    patient.setSurname(input);
+                    return true;
+                } else if (EditPatientEnum.CHANGE_PERSONALCODE.equals(userInput)) {
+                    patient.setPersonalCode(input);
+                    return true;
                 }
-                return true;
             }
         }
         return false;

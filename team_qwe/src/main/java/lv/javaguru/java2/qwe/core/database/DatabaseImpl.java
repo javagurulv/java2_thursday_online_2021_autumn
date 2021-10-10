@@ -1,8 +1,11 @@
 package lv.javaguru.java2.qwe.core.database;
 
-import lv.javaguru.java2.qwe.*;
+import lv.javaguru.java2.qwe.core.domain.Bond;
+import lv.javaguru.java2.qwe.core.domain.Cash;
+import lv.javaguru.java2.qwe.core.domain.Security;
+import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.requests.data_requests.FilterStocksByMultipleParametersRequest;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -10,16 +13,12 @@ import java.util.stream.Collectors;
 import static java.util.Map.entry;
 import static java.util.Map.ofEntries;
 
-@DIComponent
+@Component
 public class DatabaseImpl implements Database {
 
     private ArrayList<Security> securityList;
-    private final String stringForTest;
-    private final int numberForTest;
 
-    public DatabaseImpl(String stringForTest, int numberForTest) {
-        this.stringForTest = stringForTest;
-        this.numberForTest = numberForTest;
+    public DatabaseImpl() {
         this.securityList = new ArrayList<>();
         securityList.add(new Cash());
     }
@@ -27,16 +26,6 @@ public class DatabaseImpl implements Database {
     @Override
     public ArrayList<Security> getSecurityList() {
         return securityList;
-    }
-
-    @Override
-    public String getStringForTest() {
-        return stringForTest;
-    }
-
-    @Override
-    public int getNumberForTest() {
-        return numberForTest;
     }
 
     @Override

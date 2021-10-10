@@ -1,14 +1,14 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
-import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@DIComponent
+@Component
 public class EditPatientValidator {
 
     public List<CoreError> validate(EditPatientRequest request) {
@@ -25,7 +25,7 @@ public class EditPatientValidator {
     }
 
     private Optional<CoreError> validateUserChoice(EditPatientRequest request) {
-        return (request.getUserInput() == null)
+        return (request.getEnums() == null)
                 ? Optional.of(new CoreError("User choice", "Must not be empty!")) : Optional.empty();
     }
 

@@ -6,19 +6,18 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.Cor
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseAddVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsVisitors.ValidatorAddVisitor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ServiceAddAllVisitors {
 
+    @Autowired
     private DatabaseVisitors database;
+    @Autowired
     private ValidatorAddVisitor validator;
-
-    public ServiceAddAllVisitors(DatabaseVisitors database,
-                                 ValidatorAddVisitor validator) {
-        this.database = database;
-        this.validator = validator;
-    }
 
     public ResponseAddVisitor execute(RequestAddVisitor request) {
         List<CoreError> coreErrors = validator.coreErrors(request);

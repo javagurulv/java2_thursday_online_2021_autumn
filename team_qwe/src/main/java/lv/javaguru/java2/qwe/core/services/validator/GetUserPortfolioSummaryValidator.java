@@ -2,7 +2,7 @@ package lv.javaguru.java2.qwe.core.services.validator;
 
 import lv.javaguru.java2.qwe.core.requests.user_requests.GetUserPortfolioSummaryRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import static java.util.Map.entry;
 import static java.util.Map.ofEntries;
 
-@DIComponent
+@Component
 public class GetUserPortfolioSummaryValidator {
 
     private final Map<Predicate<GetUserPortfolioSummaryRequest>, CoreError> validator = ofEntries(

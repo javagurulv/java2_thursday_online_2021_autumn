@@ -3,15 +3,16 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitor
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestDeleteVisitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseDeleteVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceDeleteVisitors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class UIActionDeleteVisitors implements RestaurantUIAction {
-    private ServiceDeleteVisitors deleteVisitors;
 
-    public UIActionDeleteVisitors(ServiceDeleteVisitors deleteVisitors) {
-        this.deleteVisitors = deleteVisitors;
-    }
+    @Autowired
+    private ServiceDeleteVisitors deleteVisitors;
 
     @Override
     public void execute() {

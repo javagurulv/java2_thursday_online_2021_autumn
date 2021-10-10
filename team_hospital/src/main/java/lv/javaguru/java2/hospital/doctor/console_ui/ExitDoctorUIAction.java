@@ -1,9 +1,9 @@
 package lv.javaguru.java2.hospital.doctor.console_ui;
 
-import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
+import org.springframework.stereotype.Component;
 
-@DIComponent
-public class ExitDoctorUIAction implements DoctorUIActions{
+@Component
+public class ExitDoctorUIAction implements DoctorUIAction {
 
     @Override
     public void execute() {

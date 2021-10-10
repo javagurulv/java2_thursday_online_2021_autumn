@@ -1,6 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
+@Component
 public class ImplDatabaseVisitors implements DatabaseVisitors {
 
     List<Visitors> clientInRestaurant = new ArrayList<>();
@@ -87,12 +89,4 @@ public class ImplDatabaseVisitors implements DatabaseVisitors {
 //                .filter(customer -> customer.getIdClient().equals(id))
 //                .findFirst()
 //                .ifPresent(customer -> clientInRestaurant.remove(customer));
-//    }
-//@Override
-//public boolean findClientById(Long id)
-///        for (Visitors visitor : clientInRestaurant) {
-//            if (visitor.getIdClient().equals(id)) {
-//                return true;
-//            }
-//        }
-//        return false;
+//}

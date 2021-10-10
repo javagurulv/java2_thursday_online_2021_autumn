@@ -2,11 +2,13 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.OrderingTable;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.CoreError;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class ValidatorOrdering {
 
     public List<CoreError> validator(OrderingTable ordering) {

@@ -1,14 +1,14 @@
 package lv.javaguru.java2.hospital.database;
 
-import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
 import lv.javaguru.java2.hospital.domain.Doctor;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@DIComponent
+@Component
 public class DoctorDatabaseImpl implements DoctorDatabase {
 
     private List<Doctor> doctorsList = new ArrayList<>();
@@ -116,4 +116,7 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
                 .collect(Collectors.toList());
     }
 
+    public List<Doctor> getDoctorsList() {
+        return doctorsList;
+    }
 }

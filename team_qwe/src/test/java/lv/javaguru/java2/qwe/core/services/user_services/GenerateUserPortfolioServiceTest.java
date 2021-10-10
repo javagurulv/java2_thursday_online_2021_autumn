@@ -1,14 +1,13 @@
 package lv.javaguru.java2.qwe.core.services.user_services;
 
-import lv.javaguru.java2.qwe.Cash;
-import lv.javaguru.java2.qwe.Position;
-import lv.javaguru.java2.qwe.Stock;
+import lv.javaguru.java2.qwe.core.domain.Cash;
+import lv.javaguru.java2.qwe.core.domain.Position;
+import lv.javaguru.java2.qwe.core.domain.Stock;
+import lv.javaguru.java2.qwe.acceptance_test.AcceptanceTestForDatabase;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GenerateUserPortfolioResponse;
-import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
-import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,14 +23,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GenerateUserPortfolioServiceTest {
+public class GenerateUserPortfolioServiceTest extends AcceptanceTestForDatabase {
 
-    private final ApplicationContext appContext =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
-    @Mock
-    private Database database = appContext.getBean(Database.class);
+    @Mock private Database database = super.getAppContext().getBean(Database.class);
     private final GenerateUserPortfolioService service =
-            appContext.getBean(GenerateUserPortfolioService.class);
+            super.getAppContext().getBean(GenerateUserPortfolioService.class);
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails1() {
@@ -51,7 +47,7 @@ public class GenerateUserPortfolioServiceTest {
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails2() {
 
-        UtilityMethods.importDataForTests(appContext);
+        UtilityMethods.importDataForTests(super.getAppContext());
         List<Position> portfolio = List.of(
                 new Position(new Cash(), 100_000, 1),
                 new Position(service.getUserData().getDatabase().getSecurityList().get(123), 100, 100)
@@ -72,7 +68,7 @@ public class GenerateUserPortfolioServiceTest {
     @Test
     public void shouldReturnGeneratedUserPortfolio() {
 
-        UtilityMethods.importDataForTests(appContext);
+        UtilityMethods.importDataForTests(super.getAppContext());
         GenerateUserPortfolioRequest request = new GenerateUserPortfolioRequest("Alexander");
         GenerateUserPortfolioResponse response = service.execute(request);
 

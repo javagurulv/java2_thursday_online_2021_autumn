@@ -1,75 +1,85 @@
 package lv.javaguru.java2.hospital.patient.acceptance_tests;
 
-import lv.javaguru.java2.hospital.dependency_injection.ApplicationContext;
-import lv.javaguru.java2.hospital.dependency_injection.DIApplicationContextBuilder;
+import lv.javaguru.java2.hospital.config.HospitalConfiguration;
+import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
+import org.springframework.context.ApplicationContext;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
-import lv.javaguru.java2.hospital.patient.core.requests.ShowAllPatientsRequest;
+import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.AddPatientResponse;
 import lv.javaguru.java2.hospital.patient.core.responses.EditPatientResponse;
-import lv.javaguru.java2.hospital.patient.core.responses.ShowAllPatientsResponse;
+import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
 import lv.javaguru.java2.hospital.patient.core.services.AddPatientService;
 import lv.javaguru.java2.hospital.patient.core.services.EditPatientService;
-import lv.javaguru.java2.hospital.patient.core.services.ShowAllPatientsService;
+import lv.javaguru.java2.hospital.patient.core.services.SearchPatientsService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AcceptanceTest3 {
 
-    private static final ApplicationContext applicationContext =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.hospital");
+    private ApplicationContext applicationContext;
+
+    @BeforeEach
+    public void setup() {
+        applicationContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
+    }
 
     @Test
     public void shouldReturnCorrectNameAfterEditing() {
-        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name", "surname", "1234");
+        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name9", "surname", "9999");
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
-                1, "NewName");
+                EditPatientEnum.CHANGE_NAME, "NewName");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
+		assertTrue(editPatientResponse.isTrueOrNot());
 
-        ShowAllPatientsResponse showAllPatientsResponse = getShowAllPatientsService().execute(new ShowAllPatientsRequest());
+		SearchPatientsRequest searchPatientsRequest = new SearchPatientsRequest("NewName", "surname", "");
+		SearchPatientsResponse searchPatientsResponse = getSearchPatientsService().execute(searchPatientsRequest);
 
-        assertTrue(editPatientResponse.isTrueOrNot());
-        assertEquals(editPatientResponse.getChanges(), showAllPatientsResponse.getPatients().get(0).getName());
-        assertEquals(showAllPatientsResponse.getPatients().get(0).getSurname(), "surname");
-        assertEquals(showAllPatientsResponse.getPatients().get(0).getPersonalCode(), "1234");
+		assertEquals(searchPatientsResponse.getPatientList().get(0).getName(), "NewName");
+		assertEquals(searchPatientsResponse.getPatientList().get(0).getSurname(), "surname");
+		assertEquals(searchPatientsResponse.getPatientList().get(0).getPersonalCode(), "9999");
     }
 
     @Test
     public void shouldReturnCorrectSurnameAfterEditing() {
-        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name", "surname", "1234");
+        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name10", "surname", "12345");
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
-                2, "NewSurname");
+                EditPatientEnum.CHANGE_SURNAME, "NewSurname");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
+		assertTrue(editPatientResponse.isTrueOrNot());
 
-        ShowAllPatientsResponse showAllPatientsResponse = getShowAllPatientsService().execute(new ShowAllPatientsRequest());
+		SearchPatientsRequest searchPatientsRequest = new SearchPatientsRequest("name10", "NewSurname", "");
+		SearchPatientsResponse searchPatientsResponse = getSearchPatientsService().execute(searchPatientsRequest);
 
-        assertTrue(editPatientResponse.isTrueOrNot());
-        assertEquals(editPatientResponse.getChanges(), showAllPatientsResponse.getPatients().get(0).getSurname());
-        assertEquals(showAllPatientsResponse.getPatients().get(0).getName(), "name");
-        assertEquals(showAllPatientsResponse.getPatients().get(0).getPersonalCode(), "1234");
+		assertEquals(searchPatientsResponse.getPatientList().get(0).getName(), "name10");
+		assertEquals(searchPatientsResponse.getPatientList().get(0).getSurname(), "NewSurname");
+		assertEquals(searchPatientsResponse.getPatientList().get(0).getPersonalCode(), "12345");
     }
 
     @Test
     public void shouldReturnCorrectPersonalCodeAfterEditing() {
-        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name", "surname", "1234");
+        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name11", "surname", "22222");
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
-                3, "New1234");
+                EditPatientEnum.CHANGE_PERSONALCODE, "New22222");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
+		assertTrue(editPatientResponse.isTrueOrNot());
 
-        ShowAllPatientsResponse showAllPatientsResponse = getShowAllPatientsService().execute(new ShowAllPatientsRequest());
+		SearchPatientsRequest searchPatientsRequest = new SearchPatientsRequest("name11", "surname", "");
+		SearchPatientsResponse searchPatientsResponse = getSearchPatientsService().execute(searchPatientsRequest);
 
-        assertTrue(editPatientResponse.isTrueOrNot());
-        assertEquals(editPatientResponse.getChanges(), showAllPatientsResponse.getPatients().get(0).getPersonalCode());
-        assertEquals(showAllPatientsResponse.getPatients().get(0).getName(), "name");
-        assertEquals(showAllPatientsResponse.getPatients().get(0).getSurname(), "surname");
+		assertEquals(searchPatientsResponse.getPatientList().get(0).getName(), "name11");
+		assertEquals(searchPatientsResponse.getPatientList().get(0).getSurname(), "surname");
+		assertEquals(searchPatientsResponse.getPatientList().get(0).getPersonalCode(), "New22222");
     }
 
     private AddPatientService getAddPatienceService() {
@@ -80,7 +90,8 @@ public class AcceptanceTest3 {
         return applicationContext.getBean(EditPatientService.class);
     }
 
-    private ShowAllPatientsService getShowAllPatientsService() {
-        return applicationContext.getBean(ShowAllPatientsService.class);
-    }
+	private SearchPatientsService getSearchPatientsService() {
+		return applicationContext.getBean(SearchPatientsService.class);
+	}
+
 }

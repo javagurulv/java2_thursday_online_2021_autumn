@@ -4,25 +4,25 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
 import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.AddStockResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.AddStockService;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
-
-@DIComponent
+@Component
 public class AddStockUIAction implements UIAction {
 
-    @DIDependency private AddStockService addStockService;
+    @Autowired private AddStockService addStockService;
+    @Autowired private UtilityMethods utils;
 
     @Override
     public void execute() {
-        String name = inputDialog("Security name");
-        String industry = inputDialog("Industry", "CHOOSE INDUSTRY", generateIndustriesArray());
-        String currency = inputDialog("Currency", "CHOOSE CURRENCY", new String[]{"USD"});
-        String marketPrice = inputDialog("Market price");
-        String dividend = inputDialog("Dividend");
-        String riskWeight = inputDialog("Risk weight");
+        String name = utils.inputDialog("Security name");
+        String industry = utils.inputDialog("Industry", "CHOOSE INDUSTRY", utils.generateIndustriesArray());
+        String currency = utils.inputDialog("Currency", "CHOOSE CURRENCY", new String[]{"USD"});
+        String marketPrice = utils.inputDialog("Market price");
+        String dividend = utils.inputDialog("Dividend");
+        String riskWeight = utils.inputDialog("Risk weight");
         CoreRequest stockRequest = new AddStockRequest(name, industry, currency,
                 marketPrice, dividend, riskWeight);
         AddStockResponse stockResponse = addStockService.execute(stockRequest);
@@ -31,10 +31,10 @@ public class AddStockUIAction implements UIAction {
 
     private void printResponse(AddStockResponse response) {
         if (response.hasErrors()) {
-            messageDialog("FAILED TO ADD STOCK!\n" +
-                    printErrorList(response));
+            utils.messageDialog("FAILED TO ADD STOCK!\n" +
+                    utils.printErrorList(response));
         } else {
-            messageDialog("Stock " + response.getNewStock().getName() + " has been added!");
+            utils.messageDialog("Stock " + response.getNewStock().getName() + " has been added!");
         }
     }
 

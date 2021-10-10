@@ -3,21 +3,23 @@ package lv.javaguru.java2.qwe.ui_actions.data_ui_actions;
 import lv.javaguru.java2.qwe.core.requests.data_requests.FindSecurityByNameRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.FindSecurityByNameResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.FindSecurityByNameService;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
-@DIComponent
+@Component
 public class FindSecurityByNameUIAction implements UIAction {
 
-    @DIDependency private FindSecurityByNameService findSecurityByNameService;
+    @Autowired private FindSecurityByNameService findSecurityByNameService;
+    @Autowired private UtilityMethods utils;
 
     @Override
     public void execute() {
         FindSecurityByNameRequest request =
-                new FindSecurityByNameRequest(inputDialog("Enter name:"));
+                new FindSecurityByNameRequest(utils.inputDialog("Enter name:"));
         FindSecurityByNameResponse response =
                 findSecurityByNameService.execute(request);
         printResponse(response);
@@ -25,14 +27,14 @@ public class FindSecurityByNameUIAction implements UIAction {
 
     private void printResponse(FindSecurityByNameResponse response) {
         if (response.getSecurity() == null && !response.hasErrors()) {
-            messageDialog("There is no security with such name!");
+            utils.messageDialog("There is no security with such name!");
         }
         else if (response.hasErrors()) {
-            messageDialog("WRONG INPUT!\n" +
-                    printErrorList(response));
+            utils.messageDialog("WRONG INPUT!\n" +
+                    utils.printErrorList(response));
         }
         else {
-            messageDialog(response.getSecurity().toString());
+            utils.messageDialog(response.getSecurity().toString());
             System.out.println(response.getSecurity() + "\n");
         }
     }

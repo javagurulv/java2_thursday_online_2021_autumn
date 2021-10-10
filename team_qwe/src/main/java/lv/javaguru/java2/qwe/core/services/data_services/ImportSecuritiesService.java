@@ -1,14 +1,15 @@
 package lv.javaguru.java2.qwe.core.services.data_services;
 
-import lv.javaguru.java2.qwe.Stock;
+import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
 import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
 import lv.javaguru.java2.qwe.core.services.validator.AddSecurityValidator;
 import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,20 +18,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.messageDialog;
-
-@DIComponent
+@Component
 public class ImportSecuritiesService {
 
-    @DIDependency private Database database;
-    @DIDependency private AddStockValidator stockValidator;
-    @DIDependency private AddBondValidator bondValidator;
+    @Autowired private Database database;
+    @Autowired private AddStockValidator stockValidator;
+    @Autowired private AddBondValidator bondValidator;
+    @Autowired private UtilityMethods utils;
 
-    public void execute(String path) throws IOException {
+    public void execute(String path) throws IOException, ArrayIndexOutOfBoundsException {
         importSecurities(path);
     }
 
-    private void importSecurities(String path) throws IOException {
+    private void importSecurities(String path) throws IOException, ArrayIndexOutOfBoundsException {
         List<String> lines = Files.readAllLines(Paths.get(path)).stream()
                 .skip(1)
                 .collect(Collectors.toList());
@@ -58,7 +58,7 @@ public class ImportSecuritiesService {
         if (errorRequestList.isEmpty()) {
             importSt(list);
         } else {
-            messageDialog("FAILED to add this list!\n" +
+            utils.messageDialog("FAILED to add this list!\n" +
                     "Validation FAILED!");
             errorRequestList.stream()
                     .map(request -> (AddStockRequest) request)

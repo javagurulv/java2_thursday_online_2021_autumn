@@ -1,11 +1,9 @@
 package lv.javaguru.java2.qwe.acceptance_test;
 
-import lv.javaguru.java2.qwe.*;
+import lv.javaguru.java2.qwe.core.domain.*;
 import lv.javaguru.java2.qwe.core.requests.user_requests.*;
 import lv.javaguru.java2.qwe.core.responses.user_responses.*;
 import lv.javaguru.java2.qwe.core.services.user_services.*;
-import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
-import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +14,7 @@ import static org.junit.Assert.*;
 import static java.util.Map.*;
 import static java.util.List.*;
 
-public class AcceptanceTestForUserData {
+public class AcceptanceTestForUserData extends AcceptanceTestForDatabase {
 
     public AcceptanceTestForUserData() {
     }
@@ -33,9 +31,6 @@ public class AcceptanceTestForUserData {
                 )
         );
     }
-
-    private final ApplicationContext appContext =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
 
     @Test
     public void addUserToUserDataTest() {
@@ -137,27 +132,27 @@ public class AcceptanceTestForUserData {
     }
 
     private AddUserService getAddUserService() {
-        return appContext.getBean(AddUserService.class);
+        return super.getAppContext().getBean(AddUserService.class);
     }
 
     private GetAllUserListService getAllUserListService() {
-        return appContext.getBean(GetAllUserListService.class);
+        return super.getAppContext().getBean(GetAllUserListService.class);
     }
 
     private FindUserByNameService getFindUserByName() {
-        return appContext.getBean(FindUserByNameService.class);
+        return super.getAppContext().getBean(FindUserByNameService.class);
     }
 
     private GetUserInvestmentsByEachIndustryService getUserInvestmentsByEachIndustryService() {
-        return appContext.getBean(GetUserInvestmentsByEachIndustryService.class);
+        return super.getAppContext().getBean(GetUserInvestmentsByEachIndustryService.class);
     }
 
     private GetUserPortfolioGroupedByIndustryService getUserPortfolioGroupedByIndustryService() {
-        return appContext.getBean(GetUserPortfolioGroupedByIndustryService.class);
+        return super.getAppContext().getBean(GetUserPortfolioGroupedByIndustryService.class);
     }
 
     private GetUserPortfolioService getUserPortfolioService() {
-        return appContext.getBean(GetUserPortfolioService.class);
+        return super.getAppContext().getBean(GetUserPortfolioService.class);
     }
 
 }

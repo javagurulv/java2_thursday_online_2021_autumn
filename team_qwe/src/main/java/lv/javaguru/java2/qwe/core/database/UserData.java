@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.database;
 
-import lv.javaguru.java2.qwe.User;
+import lv.javaguru.java2.qwe.core.domain.User;
 
 import java.time.LocalDate;
 import java.util.List;

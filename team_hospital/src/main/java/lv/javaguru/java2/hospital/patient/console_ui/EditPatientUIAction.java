@@ -1,23 +1,35 @@
 package lv.javaguru.java2.hospital.patient.console_ui;
 
-import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
-import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
+import lv.javaguru.java2.hospital.InputNumChecker;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
+import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 import lv.javaguru.java2.hospital.patient.core.responses.EditPatientResponse;
 import lv.javaguru.java2.hospital.patient.core.services.EditPatientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class EditPatientUIAction implements PatientUIActions {
 
-    @DIDependency private EditPatientService editPatient;
+    @Autowired
+    private EditPatientService editPatient;
 
     public void execute() {
+        InputNumChecker numChecker = new InputNumChecker();
         GetUserInput getUserInput = new GetUserInput();
         Long id = getUserInput.getUserLongInput("Please enter patient ID: ");
         menu();
-        Integer userInput = getUserInput.getUserNumericInput("Please enter edit menu number: ");
+        int userInput = numChecker.execute(1,3);
+        EditPatientEnum enums;
+        if (userInput == 1) {
+            enums = EditPatientEnum.CHANGE_NAME;
+        } else if (userInput == 2) {
+            enums = EditPatientEnum.CHANGE_SURNAME;
+        } else {
+            enums = EditPatientEnum.CHANGE_PERSONALCODE;
+        }
         String changes = getUserInput.getUserStringInput("Please enter information for changes: ");
-        EditPatientRequest request = new EditPatientRequest(id, userInput, changes);
+        EditPatientRequest request = new EditPatientRequest(id, enums, changes);
         EditPatientResponse response = editPatient.execute(request);
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError ->
@@ -37,5 +49,6 @@ public class EditPatientUIAction implements PatientUIActions {
         System.out.println("1. Name");
         System.out.println("2. Surname");
         System.out.println("3. Personal code");
+        System.out.println("Choose number from 1 to 3:");
     }
 }

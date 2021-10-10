@@ -14,7 +14,8 @@ public class AddMenuService {
     private DatabaseMenu databaseMenu;
     private AddMenuValidator validator;
 
-    public AddMenuService(DatabaseMenu databaseMenu, AddMenuValidator validator) {
+    public AddMenuService(DatabaseMenu databaseMenu,
+                          AddMenuValidator validator) {
         this.databaseMenu = databaseMenu;
         this.validator = validator;
     }
@@ -27,6 +28,8 @@ public class AddMenuService {
 
         Menu menu = new Menu(request.getTitle(), request.getDescription(), request.getPrice());
         databaseMenu.save(menu);
+
         return new AddMenuResponse(menu);
     }
+
 }

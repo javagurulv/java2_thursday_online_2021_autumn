@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.core.services.data_services;
 
-import lv.javaguru.java2.qwe.Security;
-import lv.javaguru.java2.qwe.Stock;
+import lv.javaguru.java2.qwe.core.domain.Security;
+import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.FindSecurityByNameRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
@@ -26,12 +26,9 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(MockitoJUnitRunner.class)
 public class FindSecurityByNameServiceTest {
 
-    @Mock
-    private Database database;
-    @Mock
-    private FindSecurityByNameValidator validator;
-    @InjectMocks
-    private FindSecurityByNameService service;
+    @Mock private Database database;
+    @Mock private FindSecurityByNameValidator validator;
+    @InjectMocks private FindSecurityByNameService service;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {

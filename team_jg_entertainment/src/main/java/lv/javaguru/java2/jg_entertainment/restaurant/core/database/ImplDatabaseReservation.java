@@ -3,10 +3,8 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class ImplDatabaseReservation implements DatabaseReservation {
 
@@ -29,13 +27,11 @@ public class ImplDatabaseReservation implements DatabaseReservation {
             deleteReservationInformation = reservationList.remove(reservation);
         }
         return deleteReservationInformation;
-    }//reservationList.removeIf(reservation ->reservation.getReservationID().equals(idReservation))
+    }
+    //reservationList.removeIf(reservation ->reservation.getReservationID().equals(idReservation))
 
     @Override
     public List<Reservation> showReservationList() {
-        return reservationList.stream()
-                .sorted(Comparator.comparing(Reservation::getReservationDate)
-                        .thenComparing(Reservation::getReservationID))
-                .collect(Collectors.toList());
+        return reservationList;
     }
 }

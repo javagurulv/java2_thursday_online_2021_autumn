@@ -1,14 +1,15 @@
 package lv.javaguru.java2.hospital.doctor.console_ui;
 
-import lv.javaguru.java2.hospital.dependency_injection.DIComponent;
-import lv.javaguru.java2.hospital.dependency_injection.DIDependency;
 import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.EditDoctorResponse;
 import lv.javaguru.java2.hospital.doctor.core.services.EditDoctorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
-public class EditDoctorUIAction implements DoctorUIActions {
-    @DIDependency private EditDoctorService editDoctor;
+@Component
+public class EditDoctorUIAction implements DoctorUIAction {
+
+    @Autowired private EditDoctorService editDoctor;
 
     @Override
     public void execute() {

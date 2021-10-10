@@ -1,13 +1,14 @@
 package lv.javaguru.java2.qwe.core.services.user_services;
 
-import lv.javaguru.java2.qwe.*;
 import lv.javaguru.java2.qwe.core.database.UserData;
+import lv.javaguru.java2.qwe.core.domain.*;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GenerateUserPortfolioResponse;
 import lv.javaguru.java2.qwe.core.services.validator.GenerateUserPortfolioValidator;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.stream.IntStream;
@@ -16,13 +17,13 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 import static java.util.Comparator.*;
 import static java.util.Map.*;
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
 
-@DIComponent
+@Component
 public class GenerateUserPortfolioService {
 
-    @DIDependency private UserData userData;
-    @DIDependency private GenerateUserPortfolioValidator validator;
+    @Autowired private UserData userData;
+    @Autowired private GenerateUserPortfolioValidator validator;
+    @Autowired private UtilityMethods utils;
 
     public UserData getUserData() {
         return userData;
@@ -81,7 +82,7 @@ public class GenerateUserPortfolioService {
                 .map(entry -> IntStream.rangeClosed(0, entry.getValue().size() - 1)
                         .mapToObj(i -> new Position(
                                 entry.getValue().get(i),
-                                convertToInt(round((investmentPerIndustry.get(entry.getKey()) / entry.getValue().size()) /
+                                utils.convertToInt(utils.round((investmentPerIndustry.get(entry.getKey()) / entry.getValue().size()) /
                                         entry.getValue().get(i).getMarketPrice())),
                                 entry.getValue().get(i).getMarketPrice()
                         ))
@@ -99,7 +100,7 @@ public class GenerateUserPortfolioService {
     private void addCashResidual(User user, List<Position> userPortfolio, double portfolioTotalValue) {
         userPortfolio.add(new Position(
                 new Cash(),
-                round(user.getInitialInvestment() - portfolioTotalValue),
+                utils.round(user.getInitialInvestment() - portfolioTotalValue),
                 1
         ));
     }

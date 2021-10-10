@@ -1,13 +1,12 @@
 package lv.javaguru.java2.qwe.core.services.data_services;
 
-import lv.javaguru.java2.qwe.Stock;
+import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.data_responses.AddStockResponse;
 import lv.javaguru.java2.qwe.core.services.matchers.StockMatcher;
 import lv.javaguru.java2.qwe.core.services.validator.AddStockValidator;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,12 +25,9 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(MockitoJUnitRunner.class)
 public class AddStockServiceTest {
 
-    @Mock
-    private Database database;
-    @Mock
-    private AddStockValidator validator;
-    @InjectMocks
-    private AddStockService service;
+    @Mock private Database database;
+    @Mock private AddStockValidator validator;
+    @InjectMocks private AddStockService service;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {

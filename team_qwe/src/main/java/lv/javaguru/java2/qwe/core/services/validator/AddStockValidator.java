@@ -4,10 +4,9 @@ import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
 import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
-
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.isNotDouble;
+import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -16,10 +15,11 @@ import java.util.stream.Collectors;
 
 import static java.util.Map.entry;
 
-@DIComponent
+@Component
 public class AddStockValidator extends AddSecurityValidator {
 
-    @DIDependency private Database database;
+    @Autowired private Database database;
+    @Autowired private UtilityMethods utils;
 
     private final Map<Predicate<AddStockRequest>, CoreError> validator = Map.ofEntries(
             entry(request -> request.getName().length() < 3 || request.getName().length() > 100,
@@ -30,17 +30,17 @@ public class AddStockValidator extends AddSecurityValidator {
                     new CoreError("Industry", "is empty!")),
             entry(request -> request.getCurrency().isEmpty(),
                     new CoreError("Currency", "is empty!")),
-            entry(request -> isNotDouble(request.getMarketPrice()),
+            entry(request -> utils.isNotDouble(request.getMarketPrice()),
                     new CoreError("Market price", "wrong format! Must be double!")),
-            entry(request -> !isNotDouble(request.getMarketPrice()) && Double.parseDouble(request.getMarketPrice()) < 0,
+            entry(request -> !utils.isNotDouble(request.getMarketPrice()) && Double.parseDouble(request.getMarketPrice()) < 0,
                     new CoreError("Market price", "cannot be negative!")),
-            entry(request -> isNotDouble(request.getDividends()),
+            entry(request -> utils.isNotDouble(request.getDividends()),
                     new CoreError("Dividend", "wrong format! Must be double!")),
-            entry(request -> !isNotDouble(request.getDividends()) && Double.parseDouble(request.getDividends()) < 0,
+            entry(request -> !utils.isNotDouble(request.getDividends()) && Double.parseDouble(request.getDividends()) < 0,
                     new CoreError("Dividend", "cannot be negative!")),
-            entry(request -> isNotDouble(request.getRiskWeight()),
+            entry(request -> utils.isNotDouble(request.getRiskWeight()),
                     new CoreError("Risk weight", "wrong format! Must be double!")),
-            entry(request -> !isNotDouble(request.getRiskWeight()) && Double.parseDouble(request.getRiskWeight()) < 0,
+            entry(request -> !utils.isNotDouble(request.getRiskWeight()) && Double.parseDouble(request.getRiskWeight()) < 0,
                     new CoreError("Risk weight", "cannot be negative!"))
     );
 

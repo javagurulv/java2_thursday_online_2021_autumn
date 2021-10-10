@@ -42,24 +42,6 @@ public class SearchVisitorsRequest {
         this.paging = paging;
     }
 
-    public SearchVisitorsRequest(String nameVisitors,
-                                 Long telephoneNumber,
-                                 Ordering ordering,
-                                 Paging paging) {
-        this.nameVisitors = nameVisitors;
-        this.telephoneNumber = telephoneNumber;
-        this.ordering = ordering;
-        this.paging = paging;
-    }
-
-    public SearchVisitorsRequest(Long idVisitors,
-                                 Ordering ordering,
-                                 Paging paging) {
-        this.idVisitors = idVisitors;
-        this.ordering = ordering;
-        this.paging = paging;
-    }
-
     public String getNameVisitors() {
         return nameVisitors;
     }

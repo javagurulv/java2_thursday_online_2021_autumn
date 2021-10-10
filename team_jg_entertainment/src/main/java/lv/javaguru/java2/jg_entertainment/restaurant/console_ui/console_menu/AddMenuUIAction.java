@@ -35,5 +35,4 @@ public class AddMenuUIAction implements UIAction {
             System.out.println("Your book was added to list.");
         }
      }
-
 }

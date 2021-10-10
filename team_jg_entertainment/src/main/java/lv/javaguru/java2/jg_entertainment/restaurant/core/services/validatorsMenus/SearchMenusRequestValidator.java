@@ -10,9 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class SearchMenusRequestValidator {
+
     public List<CoreError> validate(SearchMenusRequest request) {
         List<CoreError> errors = new ArrayList<>();
-      errors.addAll(validateSearchFields(request));;
+      errors.addAll(validateSearchFields(request));
       if(request.getOrderingMenu() != null){
           validateOrderBy(request.getOrderingMenu()).ifPresent(errors::add);
           validateOrderDirection(request.getOrderingMenu()).ifPresent(errors::add);
@@ -25,6 +26,7 @@ public class SearchMenusRequestValidator {
             validateMandatoryPageNumber(request.getPagingMenu()).ifPresent(errors::add);
             validateMandatoryPageSize(request.getPagingMenu()).ifPresent(errors::add);
         }
+
         return errors;
     }
 
@@ -92,6 +94,5 @@ public class SearchMenusRequestValidator {
                 ? Optional.of(new CoreError("pageSize", "Must not be empty!"))
                 : Optional.empty();
     }
-
 
 }

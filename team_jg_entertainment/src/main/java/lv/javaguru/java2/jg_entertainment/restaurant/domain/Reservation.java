@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Reservation {
 
-    private Visitors visitor;
+    private final Visitors visitor;
     private Table table;
     private Menu menu;
     private Long reservationID;
@@ -33,6 +33,10 @@ public class Reservation {
         this.reservationDate = reservationDate;
     }
 
+    public Reservation(Visitors visitor) {
+        this.visitor = visitor;
+    }
+
     public Visitors getVisitor() {
         return visitor;
     }
@@ -54,6 +58,17 @@ public class Reservation {
     }
 
     @Override
+    public String toString() {
+        return "Reservation{" +
+                "visitor=" + visitor +
+                ", table=" + table +
+                ", menu=" + menu +
+                ", reservationID=" + reservationID +
+                ", reservationDate=" + reservationDate +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -68,16 +83,5 @@ public class Reservation {
     @Override
     public int hashCode() {
         return Objects.hash(visitor, table, menu, reservationID, reservationDate);
-    }
-
-    @Override
-    public String toString() {
-        return "Reservation{" +
-                "visitor=" + visitor +
-                ", table=" + table +
-                ", menu=" + menu +
-                ", reservationID=" + reservationID +
-                ", reservationDate=" + reservationDate +
-                '}';
     }
 }

@@ -5,8 +5,8 @@ public class SearchPatientsRequest {
     private String surname;
     private String personalCode;
 
-    private Ordering ordering;
-    private Paging paging;
+    private PatientOrdering patientOrdering;
+    private PatientPaging patientPaging;
 
 
     public SearchPatientsRequest(String name, String surname, String personalCode) {
@@ -15,26 +15,26 @@ public class SearchPatientsRequest {
         this.personalCode = personalCode;
     }
 
-    public SearchPatientsRequest(String name, String surname, String personalCode, Ordering ordering) {
+    public SearchPatientsRequest(String name, String surname, String personalCode, PatientOrdering patientOrdering) {
         this.name = name;
         this.surname = surname;
         this.personalCode = personalCode;
-        this.ordering = ordering;
+        this.patientOrdering = patientOrdering;
     }
 
-    public SearchPatientsRequest(String name, String surname, String personalCode, Paging paging) {
+    public SearchPatientsRequest(String name, String surname, String personalCode, PatientPaging patientPaging) {
         this.name = name;
         this.surname = surname;
         this.personalCode = personalCode;
-        this.paging = paging;
+        this.patientPaging = patientPaging;
     }
 
-    public SearchPatientsRequest(String name, String surname, String personalCode, Ordering ordering, Paging paging) {
+    public SearchPatientsRequest(String name, String surname, String personalCode, PatientOrdering patientOrdering, PatientPaging patientPaging) {
         this.name = name;
         this.surname = surname;
         this.personalCode = personalCode;
-        this.ordering = ordering;
-        this.paging = paging;
+        this.patientOrdering = patientOrdering;
+        this.patientPaging = patientPaging;
     }
 
     public String getName() {
@@ -61,11 +61,11 @@ public class SearchPatientsRequest {
         return this.personalCode != null && !this.personalCode.isEmpty();
     }
 
-    public Ordering getOrdering() {
-        return ordering;
+    public PatientOrdering getOrdering() {
+        return patientOrdering;
     }
 
-    public Paging getPaging() {
-        return paging;
+    public PatientPaging getPaging() {
+        return patientPaging;
     }
 }

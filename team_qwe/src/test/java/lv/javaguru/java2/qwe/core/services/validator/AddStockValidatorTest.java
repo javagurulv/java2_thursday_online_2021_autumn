@@ -1,24 +1,20 @@
 package lv.javaguru.java2.qwe.core.services.validator;
 
-import lv.javaguru.java2.qwe.Stock;
+import lv.javaguru.java2.qwe.core.domain.Stock;
+import lv.javaguru.java2.qwe.acceptance_test.AcceptanceTestForDatabase;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
-import lv.javaguru.java2.qwe.dependency_injection.ApplicationContext;
-import lv.javaguru.java2.qwe.dependency_injection.DIApplicationContextBuilder;
 import org.junit.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AddStockValidatorTest {
+public class AddStockValidatorTest extends AcceptanceTestForDatabase {
 
-    private final ApplicationContext appContext =
-            new DIApplicationContextBuilder().build("lv.javaguru.java2.qwe");
-
-    private final Database database = appContext.getBean(Database.class);
-    private final AddStockValidator validator = appContext.getBean(AddStockValidator.class);
+    private final Database database = super.getAppContext().getBean(Database.class);
+    private final AddStockValidator validator = super.getAppContext().getBean(AddStockValidator.class);
 
     @Test
     public void shouldReturnEmptyList() {
@@ -240,7 +236,6 @@ public class AddStockValidatorTest {
                 ""
         );
         List<CoreError> errorList = validator.validate(request);
-        errorList.forEach(System.out::println);
         assertEquals(errorList.size(), 6);
         assertTrue(errorList.contains(new CoreError("Name", "3 to 100 symbols required!")));
         assertTrue(errorList.contains(new CoreError("Industry", "is empty!")));

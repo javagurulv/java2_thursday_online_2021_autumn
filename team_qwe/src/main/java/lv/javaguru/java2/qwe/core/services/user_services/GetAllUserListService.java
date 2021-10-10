@@ -3,13 +3,13 @@ package lv.javaguru.java2.qwe.core.services.user_services;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GetAllUserListRequest;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GetAllUserListResponse;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@DIComponent
+@Component
 public class GetAllUserListService {
 
-    @DIDependency private UserData userData;
+    @Autowired private UserData userData;
 
     public UserData getUserData() {
         return userData;

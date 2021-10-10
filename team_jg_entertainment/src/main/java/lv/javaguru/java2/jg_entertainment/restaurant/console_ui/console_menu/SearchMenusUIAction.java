@@ -46,4 +46,5 @@ public class SearchMenusUIAction implements UIAction {
             response.getMenus().forEach(Menu::toString);
         }
     }
+
 }

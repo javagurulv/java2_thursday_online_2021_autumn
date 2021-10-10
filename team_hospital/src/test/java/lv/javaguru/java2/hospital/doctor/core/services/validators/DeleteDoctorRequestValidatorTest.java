@@ -3,18 +3,32 @@ package lv.javaguru.java2.hospital.doctor.core.services.validators;
 import lv.javaguru.java2.hospital.doctor.core.requests.DeleteDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 class DeleteDoctorRequestValidatorTest {
 
-    private DeleteDoctorRequestValidator validator = new DeleteDoctorRequestValidator();
+    @Mock private DoctorExistenceValidator doctorExistenceValidator;
+    @InjectMocks private DeleteDoctorRequestValidator validator;
 
     @Test
     public void shouldReturnEmptyList() {
         DeleteDoctorRequest request = new DeleteDoctorRequest(123L);
+        Mockito.when(doctorExistenceValidator.validate(request.getDoctorIdToDelete()))
+                .thenReturn(new ArrayList<>());
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }

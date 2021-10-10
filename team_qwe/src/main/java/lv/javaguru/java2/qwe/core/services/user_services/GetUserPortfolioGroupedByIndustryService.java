@@ -1,21 +1,21 @@
 package lv.javaguru.java2.qwe.core.services.user_services;
 
-import lv.javaguru.java2.qwe.User;
+import lv.javaguru.java2.qwe.core.domain.User;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GetUserPortfolioGroupedByIndustryRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GetUserPortfolioGroupedByIndustryResponse;
 import lv.javaguru.java2.qwe.core.services.validator.GetUserPortfolioGroupedByIndustryValidator;
-import lv.javaguru.java2.qwe.dependency_injection.DIComponent;
-import lv.javaguru.java2.qwe.dependency_injection.DIDependency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-@DIComponent
+@Component
 public class GetUserPortfolioGroupedByIndustryService {
 
-    @DIDependency private UserData userData;
-    @DIDependency private GetUserPortfolioGroupedByIndustryValidator validator;
+    @Autowired private UserData userData;
+    @Autowired private GetUserPortfolioGroupedByIndustryValidator validator;
 
     public UserData getUserData() {
         return userData;
