@@ -8,9 +8,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ValidatorAddTableTest {
+class AddTableValidatorTest {
 
-    ValidatorAddTable tableValidator = new ValidatorAddTable();
+    AddTableValidator tableValidator = new AddTableValidator();
 
     @Test
     void coreErrorsNotEmpty() {

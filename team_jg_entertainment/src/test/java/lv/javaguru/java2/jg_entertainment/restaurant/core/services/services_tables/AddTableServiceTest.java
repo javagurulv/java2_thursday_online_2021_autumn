@@ -4,7 +4,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseTable
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.AddTableRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.AddTableResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.CoreError;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorAddTable;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.AddTableValidator;
 import lv.javaguru.java2.jg_entertainment.restaurant.matchers_tables.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +23,7 @@ public class AddTableServiceTest {
     @Mock
     private DatabaseTable database;
     @Mock
-    private ValidatorAddTable validator;
+    private AddTableValidator validator;
     @InjectMocks
     private AddTableService service;
 

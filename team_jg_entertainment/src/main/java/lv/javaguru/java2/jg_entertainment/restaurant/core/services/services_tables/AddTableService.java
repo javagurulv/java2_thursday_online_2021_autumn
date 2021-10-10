@@ -1,7 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.CoreError;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorAddTable;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.AddTableValidator;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseTable;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.AddTableRequest;
@@ -17,7 +17,7 @@ public class AddTableService {
     @Autowired
     private DatabaseTable databaseTable;
     @Autowired
-    private ValidatorAddTable validator;
+    private AddTableValidator validator;
 
     public AddTableResponse execute(AddTableRequest request) {
         List<CoreError> coreErrors = validator.validate(request);

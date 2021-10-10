@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class ValidatorAddTable {
+public class AddTableValidator {
 
     public List<CoreError> validate(AddTableRequest addTableRequest) {
         List<CoreError> coreErrors = new ArrayList<>();
