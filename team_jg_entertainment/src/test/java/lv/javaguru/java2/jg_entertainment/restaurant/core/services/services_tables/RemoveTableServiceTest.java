@@ -1,10 +1,10 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.TableDatabase;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseTable;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.RemoveTableRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.RemoveTableResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorRemoveTable;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.RemoveTableValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,9 +23,9 @@ import static org.mockito.Mockito.when;
 public class RemoveTableServiceTest {
 
     @Mock
-    private TableDatabase database;
+    private DatabaseTable database;
     @Mock
-    private ValidatorRemoveTable validator;
+    private RemoveTableValidator validator;
     @InjectMocks
     private RemoveTableService service;
 

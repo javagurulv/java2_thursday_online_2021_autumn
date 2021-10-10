@@ -3,18 +3,18 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitor
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Ordering;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Paging;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseSearchVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceSearchVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.SearchVisitorsResponse;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.SearchVisitorsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
 @Component
-public class SearchVisitorsUIAction implements RestaurantUIAction {
+public class SearchVisitorsUIAction implements VisitorUIAction {
 
     @Autowired
-    private ServiceSearchVisitors searchVisitorsService;
+    private SearchVisitorsService searchVisitorsService;
 
     @Override
     public void execute() {
@@ -39,7 +39,7 @@ public class SearchVisitorsUIAction implements RestaurantUIAction {
         Paging paging = new Paging(pageNumber, pageSize);
 
         SearchVisitorsRequest request = new SearchVisitorsRequest(name, surname, ordering, paging);//+telephone or id
-        ResponseSearchVisitors response = searchVisitorsService.execute(request);
+        SearchVisitorsResponse response = searchVisitorsService.execute(request);
 
         if (response.hasError()) {
             response.getErrorsList().forEach(coreError -> System.out.println("Errors: " +

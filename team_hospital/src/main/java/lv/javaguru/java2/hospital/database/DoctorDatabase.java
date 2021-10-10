@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.database;
 
+import lv.javaguru.java2.hospital.doctor.core.requests.EditOption;
 import lv.javaguru.java2.hospital.domain.Doctor;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface DoctorDatabase {
 
     List<Doctor> showAllDoctors();
 
-    boolean editDoctor(Long doctorId, int userInput, String input);
+    boolean editDoctor(Long doctorId, EditOption infoToEdit, String input);
 
     List<Doctor> findByName(String name);
 

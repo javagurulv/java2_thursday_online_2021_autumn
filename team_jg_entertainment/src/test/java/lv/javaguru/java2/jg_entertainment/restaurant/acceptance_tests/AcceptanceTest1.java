@@ -1,12 +1,11 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.acceptance_tests;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.configuration.RestaurantListConfiguration;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestAddVisitor;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.RequestShowAllVisitorsInListRestaurant;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ResponseShowAllVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceAddAllVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ServiceShowListVisitors;
-import lv.javaguru.java2.jg_entertainment.restaurant.dependency_injection.DIApplicationContextBuilder;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.ShowAllVisitorsRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ShowAllVisitorsResponse;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.AddAllVisitorsService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ShowListVisitorsService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
@@ -19,21 +18,21 @@ public class AcceptanceTest1 {
 
     @Test
     public void shouldReturnCorrectListVisitor() {
-        RequestAddVisitor addVisitor = new RequestAddVisitor("name", "surname", 252525L);
+        AddVisitorRequest addVisitor = new AddVisitorRequest("name", "surname", 252525L);
         getAddVisitorService().execute(addVisitor);
 
-        RequestAddVisitor addVisitor1 = new RequestAddVisitor("name", "surname", 252525L);
+        AddVisitorRequest addVisitor1 = new AddVisitorRequest("name", "surname", 252525L);
         getAddVisitorService().execute(addVisitor1);
 
-        ResponseShowAllVisitors response = getAllVisitorsService().execute(new RequestShowAllVisitorsInListRestaurant());
+        ShowAllVisitorsResponse response = getAllVisitorsService().execute(new ShowAllVisitorsRequest());
         Assertions.assertEquals(response.getNewVisitor().size(), 2);
     }
 
-    private ServiceAddAllVisitors getAddVisitorService() {
-        return appContext.getBean(ServiceAddAllVisitors.class);
+    private AddAllVisitorsService getAddVisitorService() {
+        return appContext.getBean(AddAllVisitorsService.class);
     }
 
-    private ServiceShowListVisitors getAllVisitorsService() {
-        return appContext.getBean(ServiceShowListVisitors.class);
+    private ShowListVisitorsService getAllVisitorsService() {
+        return appContext.getBean(ShowListVisitorsService.class);
     }
 }

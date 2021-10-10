@@ -1,6 +1,5 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators;
 
-
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.PagingTable;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.CoreError;
 import org.junit.jupiter.api.Test;
@@ -11,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ValidatorPagingTest {
 
-    private ValidatorPaging validator = new ValidatorPaging();
+    private Paging validator = new Paging();
 
     @Test
     public void shouldReturnErrorWhenPageNumberNotValidValue() {

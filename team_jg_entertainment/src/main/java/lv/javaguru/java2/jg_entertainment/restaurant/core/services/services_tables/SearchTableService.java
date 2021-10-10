@@ -1,13 +1,13 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.TableDatabase;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseTable;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.OrderingTable;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.PagingTable;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.SearchTableRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.SearchTableResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.ValidatorSearchRequestTable;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.SearchRequestTableValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -27,8 +27,8 @@ public class SearchTableService {
     private boolean pagingEnabled;
 
     @Autowired
-    private TableDatabase database;
-    @Autowired private ValidatorSearchRequestTable validator;
+    private DatabaseTable database;
+    @Autowired private SearchRequestTableValidator validator;
 
     public SearchTableResponse execute(SearchTableRequest request) {
 

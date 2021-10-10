@@ -3,16 +3,19 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.RemoveMenuRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.RemoveMenuResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.RemoveMenuService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class RemoveMenuUIAction implements UIAction {
 
-    private RemoveMenuService removeMenuService;
+    @Autowired private RemoveMenuService removeMenuService;
 
-    public RemoveMenuUIAction(RemoveMenuService removeMenuService) {
-        this.removeMenuService = removeMenuService;
-    }
+//    public RemoveMenuUIAction(RemoveMenuService removeMenuService) {
+//        this.removeMenuService = removeMenuService;
+//    }
 
     @Override
     public void execute() {

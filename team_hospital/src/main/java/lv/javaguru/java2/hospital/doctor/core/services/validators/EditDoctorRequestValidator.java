@@ -14,6 +14,7 @@ public class EditDoctorRequestValidator {
     public List<CoreError> validate(EditDoctorRequest request) {
         List<CoreError> errors = new ArrayList<>();
         validateId(request).ifPresent(errors::add);
+        validateEditOption(request).ifPresent(errors::add);
         validateChanges(request).ifPresent(errors::add);
         return errors;
     }
@@ -23,6 +24,16 @@ public class EditDoctorRequestValidator {
                 ? Optional.of(new CoreError("id", "Must not be empty!"))
                 : Optional.empty();
     }
+
+    private Optional<CoreError> validateEditOption(EditDoctorRequest request) {
+        return (request.getEditOption() == null
+                && !request.getEditOption().equals("NAME")
+                || request.getEditOption().equals("SURNAME")
+                || request.getEditOption().equals("SPECIALITY"))
+                ? Optional.of(new CoreError("edit option", "Must not be empty!"))
+                : Optional.empty();
+    }
+
 
     private Optional<CoreError> validateChanges(EditDoctorRequest request) {
         return (request.getChanges() == null || request.getChanges().isEmpty())

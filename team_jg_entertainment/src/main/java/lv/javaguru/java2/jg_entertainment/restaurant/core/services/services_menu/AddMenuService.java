@@ -6,19 +6,22 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.AddMenu
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.AddMenuResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsMenus.AddMenuValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class AddMenuService {
 
-    private DatabaseMenu databaseMenu;
-    private AddMenuValidator validator;
+    @Autowired private DatabaseMenu databaseMenu;
+    @Autowired private AddMenuValidator validator;
 
-    public AddMenuService(DatabaseMenu databaseMenu,
-                          AddMenuValidator validator) {
-        this.databaseMenu = databaseMenu;
-        this.validator = validator;
-    }
+//    public AddMenuService(DatabaseMenu databaseMenu,
+//                          AddMenuValidator validator) {
+//        this.databaseMenu = databaseMenu;
+//        this.validator = validator;
+//    }
 
     public AddMenuResponse execute(AddMenuRequest request) {
         List<CoreError> errors = validator.validate(request);

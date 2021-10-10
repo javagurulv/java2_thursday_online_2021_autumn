@@ -5,14 +5,17 @@ import java.util.Scanner;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.AddMenuService;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.AddMenuResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.AddMenuRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AddMenuUIAction implements UIAction {
 
-    private AddMenuService addMenuService;
+    @Autowired private AddMenuService addMenuService;
 
-    public AddMenuUIAction(AddMenuService addMenuService) {
-        this.addMenuService = addMenuService;
-    }
+//    public AddMenuUIAction(AddMenuService addMenuService) {
+//        this.addMenuService = addMenuService;
+//    }
 
     @Override
     public void execute() {

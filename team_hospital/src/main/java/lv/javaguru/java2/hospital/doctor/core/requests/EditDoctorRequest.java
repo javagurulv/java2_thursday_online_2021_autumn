@@ -3,12 +3,12 @@ package lv.javaguru.java2.hospital.doctor.core.requests;
 public class EditDoctorRequest {
 
     private Long doctorId;
-    private int userInput;
+    private EditOption editOption;
     private String changes;
 
-    public EditDoctorRequest(Long doctorId, int userInput, String changes) {
+    public EditDoctorRequest(Long doctorId, EditOption editOption, String changes) {
         this.doctorId = doctorId;
-        this.userInput = userInput;
+        this.editOption = editOption;
         this.changes = changes;
     }
 
@@ -16,8 +16,8 @@ public class EditDoctorRequest {
         return doctorId;
     }
 
-    public int getUserInput() {
-        return userInput;
+    public EditOption getEditOption() {
+        return editOption;
     }
 
     public String getChanges() {
