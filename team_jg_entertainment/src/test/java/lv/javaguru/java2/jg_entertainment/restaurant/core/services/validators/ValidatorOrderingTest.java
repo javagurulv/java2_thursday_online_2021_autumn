@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ValidatorOrderingTest {
 
-    private ValidatorOrdering validator = new ValidatorOrdering();
+    private Ordering validator = new Ordering();
 
     @Test
     public void shouldReturnErrorWhenOrderDirectionNull() {
@@ -40,10 +40,10 @@ class ValidatorOrderingTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenNotValidValueInOrderDirection(){
+    public void shouldReturnErrorWhenNotValidValueInOrderDirection() {
         OrderingTable ordering = new OrderingTable("title", "notValidValue");
-        List<CoreError>errorList = validator.validator(ordering);
-        assertEquals(errorList.size(),1);
+        List<CoreError> errorList = validator.validator(ordering);
+        assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "orderDirection");
         assertEquals(errorList.get(0).getMessageError(), "might contain 'ASCENDING' or 'DESCENDING' only!");
     }

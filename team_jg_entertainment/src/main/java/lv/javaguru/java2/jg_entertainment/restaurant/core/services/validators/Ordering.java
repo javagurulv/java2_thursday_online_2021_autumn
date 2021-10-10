@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class ValidatorOrdering {
+public class Ordering {
 
     public List<CoreError> validator(OrderingTable ordering) {
         List<CoreError> coreErrors = new ArrayList<>();
