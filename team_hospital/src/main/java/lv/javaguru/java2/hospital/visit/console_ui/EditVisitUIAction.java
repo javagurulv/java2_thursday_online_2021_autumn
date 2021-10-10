@@ -21,13 +21,13 @@ public class EditVisitUIAction implements VisitUIAction {
         Long id = getUserInput.getUserLongInput("Please, enter the patient visit's id: ");
         printEditMenu();
         int userInput = numChecker.execute(1, 3);
-        EditVisitEnum editEnums;
+        EditVisitEnum editEnum;
         if (userInput == 1) {
-            editEnums = EditVisitEnum.CHANGE_DOCTOR;
+            editEnum = EditVisitEnum.CHANGE_DOCTOR;
         } else if (userInput == 2) {
-            editEnums = EditVisitEnum.CHANGE_PATIENT;
+            editEnum = EditVisitEnum.CHANGE_PATIENT;
         } else {
-            editEnums = EditVisitEnum.CHANGE_DATE;
+            editEnum = EditVisitEnum.CHANGE_DATE;
         }
         String changes = "";
         switch (userInput) {
@@ -35,7 +35,7 @@ public class EditVisitUIAction implements VisitUIAction {
             case 2 -> changes = getUserInput.getUserStringInput("Enter new patient id: ");
             case 3 -> changes = getUserInput.getUserStringInput("Enter new visit date and time in format dd/MM/yyyy HH:mm: ");
         }
-        EditVisitRequest request = new EditVisitRequest(id, editEnums, changes);
+        EditVisitRequest request = new EditVisitRequest(id, editEnum, changes);
         EditVisitResponse response = editPatientVisit.execute(request);
         if (response.isVisitEdited()) {
             System.out.println("The patient visit with id " + id + " was successfully edited.");

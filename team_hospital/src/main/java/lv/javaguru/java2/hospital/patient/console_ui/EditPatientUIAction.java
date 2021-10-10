@@ -20,16 +20,16 @@ public class EditPatientUIAction implements PatientUIActions {
         Long id = getUserInput.getUserLongInput("Please enter patient ID: ");
         menu();
         int userInput = numChecker.execute(1,3);
-        EditPatientEnum enums;
+        EditPatientEnum editEnum;
         if (userInput == 1) {
-            enums = EditPatientEnum.CHANGE_NAME;
+            editEnum = EditPatientEnum.CHANGE_NAME;
         } else if (userInput == 2) {
-            enums = EditPatientEnum.CHANGE_SURNAME;
+            editEnum = EditPatientEnum.CHANGE_SURNAME;
         } else {
-            enums = EditPatientEnum.CHANGE_PERSONALCODE;
+            editEnum = EditPatientEnum.CHANGE_PERSONALCODE;
         }
         String changes = getUserInput.getUserStringInput("Please enter information for changes: ");
-        EditPatientRequest request = new EditPatientRequest(id, enums, changes);
+        EditPatientRequest request = new EditPatientRequest(id, editEnum, changes);
         EditPatientResponse response = editPatient.execute(request);
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError ->
