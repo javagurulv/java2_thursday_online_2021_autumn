@@ -13,7 +13,7 @@ import java.util.List;
 public class ValidatorSearchRequestTable {
 
     @Autowired
-    private ValidatorSearchRequestFieldTable fieldTable;
+    private SearchRequestFieldTableValidator fieldTable;
     @Autowired private ValidatorOrdering validatorOrdering;
     @Autowired private ValidatorPaging validatorPaging;
 

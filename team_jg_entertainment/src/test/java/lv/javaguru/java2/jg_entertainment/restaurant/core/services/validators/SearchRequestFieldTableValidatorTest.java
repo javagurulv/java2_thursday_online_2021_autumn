@@ -8,9 +8,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ValidatorSearchRequestFieldTableTest {
+class SearchRequestFieldTableValidatorTest {
 
-    private final ValidatorSearchRequestFieldTable validatorField = new ValidatorSearchRequestFieldTable();
+    private final SearchRequestFieldTableValidator validatorField = new SearchRequestFieldTableValidator();
 
     @Test
     public void shouldNotReturnErrorListWhenAllInformationProvided() {

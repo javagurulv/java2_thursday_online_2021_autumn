@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ValidatorSearchRequestFieldTable {
+public class SearchRequestFieldTableValidator {
     
     public List<CoreError> validatorField(SearchTableRequest request){
         List<CoreError> coreErrors = new ArrayList<>();
