@@ -2,6 +2,7 @@ package lv.javaguru.java2.hospital.doctor.core.services.validators;
 
 import lv.javaguru.java2.hospital.doctor.core.requests.DeleteDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.existence.DoctorExistenceByIdValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ import java.util.Optional;
 @Component
 public class DeleteDoctorRequestValidator {
 
-    @Autowired private DoctorExistenceValidator validator;
+    @Autowired private DoctorExistenceByIdValidator validator;
 
     public List<CoreError> validate(DeleteDoctorRequest request) {
         List<CoreError> errors = new ArrayList<>();

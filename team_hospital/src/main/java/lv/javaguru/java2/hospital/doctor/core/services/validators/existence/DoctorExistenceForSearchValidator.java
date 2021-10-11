@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.doctor.core.services.validators;
+package lv.javaguru.java2.hospital.doctor.core.services.validators.existence;
 
 import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
@@ -12,26 +12,25 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Component
-public class DoctorExistenceValidator {
+public class DoctorExistenceForSearchValidator {
 
     @Autowired
     private DoctorDatabaseImpl database;
 
-    public List<CoreError> validate(Long id) {
-        List<CoreError> errors = new ArrayList<>();
-        if (isIdProvided(id)) {
-            validateExistenceById(id).ifPresent(errors::add);
-        }
+    public List<CoreError> validate(Long id, String name, String surname, String speciality) {
+        List<CoreError> errors = validateEachField(id, name, surname, speciality);
         return errors;
     }
 
-    public List<CoreError> validate(String name, String surname, String speciality) {
+    public List<CoreError> validateEachField(Long id, String name, String surname, String speciality) {
         List<CoreError> errors = new ArrayList<>();
-        if(isNameProvided(name) && isSurnameProvided(surname)
+        if (isIdProvided(id)) {
+            validateExistenceById(id).ifPresent(errors::add);
+        } else if (isNameProvided(name) && isSurnameProvided(surname)
                 && isSpecialityProvided(speciality)) {
             validateExistenceByNameAndSurnameAndSpeciality(name, surname, speciality)
                     .ifPresent(errors::add);
-        } else if(isNameProvided(name) && isSurnameProvided(surname)) {
+        } else if (isNameProvided(name) && isSurnameProvided(surname)) {
             validateExistenceByNameAndSurname(name, surname).ifPresent(errors::add);
         } else if (isNameProvided(name) && isSpecialityProvided(speciality)) {
             validateExistenceByNameAndSpeciality(name, speciality).ifPresent(errors::add);
@@ -50,7 +49,7 @@ public class DoctorExistenceValidator {
     private Optional<CoreError> validateExistenceById(Long id) {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getId(), id)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
@@ -59,7 +58,7 @@ public class DoctorExistenceValidator {
     private Optional<CoreError> validateExistenceByName(String name) {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getName(), name)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
@@ -68,7 +67,7 @@ public class DoctorExistenceValidator {
     private Optional<CoreError> validateExistenceBySurname(String surname) {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getSurname(), surname)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
@@ -77,7 +76,7 @@ public class DoctorExistenceValidator {
     private Optional<CoreError> validateExistenceBySpeciality(String speciality) {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getSpeciality(), speciality)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
@@ -88,7 +87,7 @@ public class DoctorExistenceValidator {
             if (Objects.equals(doctor.getName(), name)
                     && Objects.equals(doctor.getSurname(), surname)
                     && Objects.equals(doctor.getSpeciality(), speciality)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
@@ -98,7 +97,7 @@ public class DoctorExistenceValidator {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getName(), name)
                     && Objects.equals(doctor.getSurname(), surname)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
@@ -108,7 +107,7 @@ public class DoctorExistenceValidator {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getName(), name)
                     && Objects.equals(doctor.getSpeciality(), speciality)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
@@ -118,7 +117,7 @@ public class DoctorExistenceValidator {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getSurname(), surname)
                     && Objects.equals(doctor.getSpeciality(), speciality)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
