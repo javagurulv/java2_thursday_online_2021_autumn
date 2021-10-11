@@ -20,7 +20,8 @@ public class ProgramMenuVisitor {
         menuNumberToUIActionMap.put(2, findUIAction(uiActions, DeleteVisitorsUIAction.class));
         menuNumberToUIActionMap.put(3, findUIAction(uiActions, ShowListWithAllVisitorsUIAction.class));
         menuNumberToUIActionMap.put(4, findUIAction(uiActions, SearchVisitorsUIAction.class));
-        menuNumberToUIActionMap.put(5,findUIAction(uiActions, ExitUIAction.class));
+        menuNumberToUIActionMap.put(5, findUIAction(uiActions, ExitProgramListVisitorUIAction.class));//return in main(RestaurantProgramList ->mainAction)
+        menuNumberToUIActionMap.put(6, findUIAction(uiActions, ExitUIAction.class));
     }
 
     private VisitorUIAction findUIAction(List<VisitorUIAction> uiActions, Class uiActionClass) {
@@ -38,12 +39,13 @@ public class ProgramMenuVisitor {
         System.out.println("2. Delete visitor - Enter ID that delete from list of restaurant-> ");
         System.out.println("3. Show all visitor's in base of restaurant->");
         System.out.println("4. Search visitor's in catalogue->");
-        System.out.println("5. Exit! ");
+        System.out.println("5. Choose that return in MAIN MENU:");//return in main menu(RestaurantProgramList -> mainAction)
+        System.out.println("6. Exit! ");
         System.out.println();
     }
 
     public int getMenuNumberFromUser() {
-        return checkNumberFromConsole.getCorrectNumberMenu(1, 5);
+        return checkNumberFromConsole.getCorrectNumberMenu(1, 6);
     }
 
     public void executeSelectMenuItem(int selectMenu) {

@@ -6,14 +6,14 @@ import java.util.Objects;
 public class Reservation {
 
     private final Visitors visitor;
-    private Table table;
+    private Long telephoneNumber;
     private Menu menu;
-    private Long reservationID;
+    private Table table;
     private Date reservationDate;
 
     public Reservation(Visitors visitor,
-                       Table table,
                        Menu menu,
+                       Table table,
                        Date reservationDate) {
         this.visitor = visitor;
         this.table = table;
@@ -22,14 +22,14 @@ public class Reservation {
     }
 
     public Reservation(Visitors visitor,
-                       Table table,
+                       Long telephoneNumber,
                        Menu menu,
-                       Long reservationID,
+                       Table table,
                        Date reservationDate) {
         this.visitor = visitor;
         this.table = table;
         this.menu = menu;
-        this.reservationID = reservationID;
+        this.telephoneNumber = telephoneNumber;
         this.reservationDate = reservationDate;
     }
 
@@ -53,8 +53,8 @@ public class Reservation {
         return reservationDate;
     }
 
-    public Long getReservationID() {
-        return reservationID;
+    public Long getTelephoneNumber() {
+        return telephoneNumber;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class Reservation {
                 "visitor=" + visitor +
                 ", table=" + table +
                 ", menu=" + menu +
-                ", reservationID=" + reservationID +
+                ", reservationID=" + telephoneNumber +
                 ", reservationDate=" + reservationDate +
                 '}';
     }
@@ -76,12 +76,12 @@ public class Reservation {
         return Objects.equals(visitor, that.visitor)
                 && Objects.equals(table, that.table)
                 && Objects.equals(menu, that.menu)
-                && Objects.equals(reservationID, that.reservationID)
+                && Objects.equals(telephoneNumber, that.telephoneNumber)
                 && Objects.equals(reservationDate, that.reservationDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(visitor, table, menu, reservationID, reservationDate);
+        return Objects.hash(visitor, table, menu, telephoneNumber, reservationDate);
     }
 }

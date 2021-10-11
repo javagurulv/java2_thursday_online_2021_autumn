@@ -2,6 +2,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.domain;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.configuration.RestaurantListConfiguration;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.*;
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_reservation.ProgramReservation;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors.*;
 import org.springframework.context.ApplicationContext;
@@ -22,8 +23,8 @@ public class RestaurantProgramList {
                 case 1 -> visitorsMenu();
                 case 2 -> restaurantMenu();
                 case 3 -> tablesMenu();
-                //case 4 -> reservationMenu();
-                case 4 -> System.exit(0);
+                case 4 -> reservationMenu();
+                case 5 -> System.exit(0);
             }
         }
     }
@@ -34,8 +35,8 @@ public class RestaurantProgramList {
         System.out.println("1--> choose action with VISITORS: ");
         System.out.println("2--> choose action with restaurant MENU: ");
         System.out.println("3--> choose action with TABLES: ");
-        // System.out.println("4--> choose action with RESERVATION: ");
-        System.out.println("4--> EXIT!");
+        System.out.println("4--> choose action with RESERVATION: ");
+        System.out.println("5--> EXIT!");
         System.out.println();
     }
 
@@ -66,8 +67,17 @@ public class RestaurantProgramList {
         }
     }
 
+    private static void reservationMenu() {
+        ProgramReservation reservation = applicationContext.getBean(ProgramReservation.class);
+        while (true) {
+            reservation.printReservationMenu();
+            int reservationNumberInConsole = reservation.getReservationMenuNumberFromUser();
+            reservation.executeSelectMenuItem(reservationNumberInConsole);
+        }
+    }
+
     private static int checkNumberOfMenu() {
         System.out.println("Start by choosing the program menu!");
-        return checkNumber.getCorrectNumberMenu(1, 4);
+        return checkNumber.getCorrectNumberMenu(1, 5);
     }
 }
