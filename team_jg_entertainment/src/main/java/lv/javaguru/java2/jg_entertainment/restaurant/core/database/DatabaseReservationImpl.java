@@ -1,11 +1,13 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class DatabaseReservationImpl implements DatabaseReservation {
 
     List<Reservation> reservationList = new ArrayList<>();
@@ -20,7 +22,7 @@ public class DatabaseReservationImpl implements DatabaseReservation {
         boolean deleteReservationInformation = false;
 
         Optional<Reservation> optionalReservation = reservationList.stream()
-                .filter(reservation -> reservation.getReservationID().equals(idReservation))
+                .filter(reservation -> reservation.getTelephoneNumber().equals(idReservation))
                 .findFirst();
         if (optionalReservation.isPresent()) {
             Reservation reservation = optionalReservation.get();
