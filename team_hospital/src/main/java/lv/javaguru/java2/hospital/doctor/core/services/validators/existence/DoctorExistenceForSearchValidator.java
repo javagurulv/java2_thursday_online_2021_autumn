@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.doctor.core.services.validators;
+package lv.javaguru.java2.hospital.doctor.core.services.validators.existence;
 
 import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
@@ -49,7 +49,7 @@ public class DoctorExistenceForSearchValidator {
     private Optional<CoreError> validateExistenceById(Long id) {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getId(), id)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
@@ -58,7 +58,7 @@ public class DoctorExistenceForSearchValidator {
     private Optional<CoreError> validateExistenceByName(String name) {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getName(), name)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
@@ -67,7 +67,7 @@ public class DoctorExistenceForSearchValidator {
     private Optional<CoreError> validateExistenceBySurname(String surname) {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getSurname(), surname)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
@@ -76,7 +76,7 @@ public class DoctorExistenceForSearchValidator {
     private Optional<CoreError> validateExistenceBySpeciality(String speciality) {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getSpeciality(), speciality)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
@@ -87,7 +87,7 @@ public class DoctorExistenceForSearchValidator {
             if (Objects.equals(doctor.getName(), name)
                     && Objects.equals(doctor.getSurname(), surname)
                     && Objects.equals(doctor.getSpeciality(), speciality)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
@@ -97,7 +97,7 @@ public class DoctorExistenceForSearchValidator {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getName(), name)
                     && Objects.equals(doctor.getSurname(), surname)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
@@ -107,7 +107,7 @@ public class DoctorExistenceForSearchValidator {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getName(), name)
                     && Objects.equals(doctor.getSpeciality(), speciality)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
@@ -117,7 +117,7 @@ public class DoctorExistenceForSearchValidator {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getSurname(), surname)
                     && Objects.equals(doctor.getSpeciality(), speciality)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));

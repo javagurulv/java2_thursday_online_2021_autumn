@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.doctor.core.services.validators;
+package lv.javaguru.java2.hospital.doctor.core.services.validators.existence;
 
 import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
@@ -32,7 +32,7 @@ public class DoctorExistenceByIdValidator {
     private Optional<CoreError> validateExistenceById(Long id) {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getId(), id)) {
-                Optional.empty();
+                return Optional.empty();
             }
         }
         return Optional.of(new CoreError("Doctor", "Does not exist!"));
