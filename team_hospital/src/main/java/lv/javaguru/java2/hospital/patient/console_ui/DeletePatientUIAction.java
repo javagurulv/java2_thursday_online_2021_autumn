@@ -20,12 +20,7 @@ public class DeletePatientUIAction implements PatientUIActions {
                     System.out.println("Error: " + coreError.getField() + " " + coreError.getDescription())
             );
         } else {
-            if (response.isPatientDeleted()) {
                 System.out.println("Patient with ID " + request.getIdRequest() + " was successfully deleted.");
-            } else {
-                System.out.println("User with ID:" + response.getIdResponse() + " not found!");
-            }
-
         }
     }
 }

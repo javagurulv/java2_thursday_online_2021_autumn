@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface PatientDatabase {
     void add(Patient patient);
     Optional<Patient> findById(Long id);
-    boolean deleteById(Long id);
+    void deleteById(Long id);
     List<Patient> showAllPatients();
     boolean editActions(Long patientID, Enum userInput, String input);
     boolean patientExists(Long id);

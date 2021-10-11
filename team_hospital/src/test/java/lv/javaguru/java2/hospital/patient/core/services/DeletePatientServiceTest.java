@@ -42,12 +42,10 @@ class DeletePatientServiceTest {
     }
 
     @Test
-    public void shouldDeleteBookWithIdFromDatabase() {
+    public void shouldDeletePatientWithIdFromDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        Mockito.when(patientDatabase.deleteById(1L)).thenReturn(true);
         DeletePatientRequest request = new DeletePatientRequest(1L);
         DeletePatientResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        assertTrue(response.isPatientDeleted());
     }
 }

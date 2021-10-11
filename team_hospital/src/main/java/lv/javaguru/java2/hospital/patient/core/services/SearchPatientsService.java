@@ -37,8 +37,13 @@ public class SearchPatientsService {
         }
 
         List<Patient> patients = search(request);
-        patients = returnOrdering(patients, request.getOrdering());
-        patients = returnPaging(patients, request.getPaging());
+
+        if(orderingEnabled){
+            patients = returnOrdering(patients, request.getOrdering());
+        }
+        if (pagingEnabled){
+            patients = returnPaging(patients, request.getPaging());
+        }
 
         return new SearchPatientsResponse(null, patients);
     }

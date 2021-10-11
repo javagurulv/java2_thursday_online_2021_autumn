@@ -1,7 +1,6 @@
 package lv.javaguru.java2.hospital.patient.acceptance_tests;
 
 import lv.javaguru.java2.hospital.config.HospitalConfiguration;
-import org.springframework.context.ApplicationContext;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.requests.DeletePatientRequest;
 import lv.javaguru.java2.hospital.patient.core.requests.ShowAllPatientsRequest;
@@ -13,10 +12,10 @@ import lv.javaguru.java2.hospital.patient.core.services.DeletePatientService;
 import lv.javaguru.java2.hospital.patient.core.services.ShowAllPatientsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AcceptanceTest4 {
 
@@ -39,7 +38,6 @@ class AcceptanceTest4 {
         DeletePatientResponse deletePatientResponse = getDeletePatientService().execute(deletePatientRequest);
 
         ShowAllPatientsResponse response = getShowAllPatientsService().execute(new ShowAllPatientsRequest());
-        assertTrue(deletePatientResponse.isPatientDeleted());
         assertEquals(response.getPatients().size(), 1);
         assertEquals(response.getPatients().get(0).getName(), "name2");
         assertEquals(response.getPatients().get(0).getSurname(), "surname2");

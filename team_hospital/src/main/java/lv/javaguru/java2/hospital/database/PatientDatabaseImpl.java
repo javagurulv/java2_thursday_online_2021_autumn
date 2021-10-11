@@ -31,12 +31,8 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public boolean deleteById(Long id) {
-        if (patientExists(id)) {
-            patientsList.removeIf(patient -> Objects.equals(patient.getId(), id));
-            return true;
-        }
-        return false;
+    public void deleteById(Long id) {
+        patientsList.removeIf(patient -> Objects.equals(patient.getId(), id));
     }
 
     @Override
@@ -130,5 +126,9 @@ public class PatientDatabaseImpl implements PatientDatabase {
             }
         }
         return list;
+    }
+
+    public List<Patient> getPatientsList() {
+        return patientsList;
     }
 }

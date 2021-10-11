@@ -21,7 +21,7 @@ public class DeletePatientService {
         if (!errors.isEmpty()) {
             return new DeletePatientResponse(errors);
         }
-        boolean removedOrNot = database.deleteById(request.getIdRequest());
-        return new DeletePatientResponse(request.getIdRequest(), removedOrNot);
+        database.deleteById(request.getIdRequest());
+        return new DeletePatientResponse(request.getIdRequest());
     }
 }

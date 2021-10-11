@@ -1,33 +1,42 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
-import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.DeletePatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
+import lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.PatientExistenceByIDValidator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 class DeletePatientValidatorTest {
 
-    private final PatientDatabaseImpl database = new PatientDatabaseImpl();
-    private final DeletePatientValidator validator = new DeletePatientValidator();
+    @Mock private PatientExistenceByIDValidator existenceValidator;
+    @InjectMocks private DeletePatientValidator validator;
 
     @Test
     public void shouldReturnEmptyList(){
-        database.add(new Patient("name", "surname", "1234"));
         DeletePatientRequest request =
-                new DeletePatientRequest(1L);
+                new DeletePatientRequest(123L);
+        Mockito.when(existenceValidator.existenceByID(request.getIdRequest())).thenReturn(Optional.empty());
         List<CoreError> errors = validator.validate(request);
         assertTrue(errors.isEmpty());
     }
 
     @Test
     public void shouldReturnIDError(){
-        DeletePatientRequest request =
-                new DeletePatientRequest(null);
+        DeletePatientRequest request = new DeletePatientRequest(null);
         List<CoreError> errors = validator.validate(request);
+        assertFalse(errors.isEmpty());
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "ID");
         assertEquals(errors.get(0).getDescription(), "Must not be empty!");
