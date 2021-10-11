@@ -18,7 +18,7 @@ public class DeleteDoctorRequestValidator {
     public List<CoreError> validate(DeleteDoctorRequest request) {
         List<CoreError> errors = new ArrayList<>();
         validateId(request).ifPresent(errors::add);
-        validator.validate(request.getDoctorIdToDelete());
+        validateDoctorExistence(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -27,4 +27,12 @@ public class DeleteDoctorRequestValidator {
                 ? Optional.of(new CoreError("id", "Must not be empty!"))
                 : Optional.empty();
     }
+
+    private Optional<CoreError> validateDoctorExistence(DeleteDoctorRequest request) {
+        if (request.getDoctorIdToDelete() == null) {
+            return Optional.empty();
+        }
+        return validator.validateExistenceById(request.getDoctorIdToDelete());
+    }
+
 }

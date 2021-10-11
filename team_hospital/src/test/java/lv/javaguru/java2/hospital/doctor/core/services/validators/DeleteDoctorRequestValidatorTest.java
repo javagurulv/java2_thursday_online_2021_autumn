@@ -14,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,8 +28,8 @@ class DeleteDoctorRequestValidatorTest {
     @Test
     public void shouldReturnEmptyList() {
         DeleteDoctorRequest request = new DeleteDoctorRequest(123L);
-        Mockito.when(existence.validate(request.getDoctorIdToDelete()))
-                .thenReturn(new ArrayList<>());
+        Mockito.when(existence.validateExistenceById(request.getDoctorIdToDelete()))
+                .thenReturn(Optional.empty());
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }

@@ -17,19 +17,7 @@ public class DoctorExistenceByIdValidator {
     @Autowired
     private DoctorDatabaseImpl database;
 
-    public List<CoreError> validate(Long id) {
-        List<CoreError> errors = new ArrayList<>();
-        if (isIdProvided(id)) {
-            validateExistenceById(id).ifPresent(errors::add);
-        }
-        return errors;
-    }
-
-    private boolean isIdProvided(Long id) {
-        return id != null;
-    }
-
-    private Optional<CoreError> validateExistenceById(Long id) {
+    public Optional<CoreError> validateExistenceById(Long id) {
         for (Doctor doctor : database.getDoctorsList()) {
             if (Objects.equals(doctor.getId(), id)) {
                 return Optional.empty();

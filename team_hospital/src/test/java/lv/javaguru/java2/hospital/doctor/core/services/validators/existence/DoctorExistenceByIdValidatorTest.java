@@ -16,6 +16,7 @@ import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -30,10 +31,9 @@ class DoctorExistenceByIdValidatorTest {
     private DoctorExistenceByIdValidator validator;
 
     @Test public void shouldReturnDoctorsErrorWhenDoctorDoesNotExist() {
-        List<CoreError> errors = validator.validate(1231L);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "Doctor");
-        assertEquals(errors.get(0).getMessage(), "Does not exist!");
+        Optional<CoreError> errors = validator.validateExistenceById(1231L);
+        assertEquals(errors.get().getField(), "Doctor");
+        assertEquals(errors.get().getMessage(), "Does not exist!");
     }
 
     @Test
@@ -43,7 +43,7 @@ class DoctorExistenceByIdValidatorTest {
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
         Mockito.when(database.getDoctorsList()).thenReturn(doctors);
-        List<CoreError> errors = validator.validate(doctorId);
+        Optional<CoreError> errors = validator.validateExistenceById(doctorId);
         assertTrue(errors.isEmpty());
     }
 }
