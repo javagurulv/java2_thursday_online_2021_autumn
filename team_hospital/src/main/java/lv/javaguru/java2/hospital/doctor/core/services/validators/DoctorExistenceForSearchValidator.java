@@ -12,26 +12,25 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Component
-public class DoctorExistenceValidator {
+public class DoctorExistenceForSearchValidator {
 
     @Autowired
     private DoctorDatabaseImpl database;
 
-    public List<CoreError> validate(Long id) {
-        List<CoreError> errors = new ArrayList<>();
-        if (isIdProvided(id)) {
-            validateExistenceById(id).ifPresent(errors::add);
-        }
+    public List<CoreError> validate(Long id, String name, String surname, String speciality) {
+        List<CoreError> errors = validateEachField(id, name, surname, speciality);
         return errors;
     }
 
-    public List<CoreError> validate(String name, String surname, String speciality) {
+    public List<CoreError> validateEachField(Long id, String name, String surname, String speciality) {
         List<CoreError> errors = new ArrayList<>();
-        if(isNameProvided(name) && isSurnameProvided(surname)
+        if (isIdProvided(id)) {
+            validateExistenceById(id).ifPresent(errors::add);
+        } else if (isNameProvided(name) && isSurnameProvided(surname)
                 && isSpecialityProvided(speciality)) {
             validateExistenceByNameAndSurnameAndSpeciality(name, surname, speciality)
                     .ifPresent(errors::add);
-        } else if(isNameProvided(name) && isSurnameProvided(surname)) {
+        } else if (isNameProvided(name) && isSurnameProvided(surname)) {
             validateExistenceByNameAndSurname(name, surname).ifPresent(errors::add);
         } else if (isNameProvided(name) && isSpecialityProvided(speciality)) {
             validateExistenceByNameAndSpeciality(name, speciality).ifPresent(errors::add);

@@ -12,7 +12,7 @@ import java.util.Optional;
 @Component
 public class DeleteDoctorRequestValidator {
 
-    @Autowired private DoctorExistenceValidator validator;
+    @Autowired private DoctorExistenceByIdValidator validator;
 
     public List<CoreError> validate(DeleteDoctorRequest request) {
         List<CoreError> errors = new ArrayList<>();
