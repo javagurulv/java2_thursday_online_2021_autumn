@@ -8,6 +8,9 @@ import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
 import lv.javaguru.java2.hospital.patient.core.services.search_criteria.*;
+import lv.javaguru.java2.hospital.patient.core.services.search_criteria.NameAndSurnameSearchCriteria;
+import lv.javaguru.java2.hospital.patient.core.services.search_criteria.NameSearchCriteria;
+import lv.javaguru.java2.hospital.patient.core.services.search_criteria.SurnameSearchCriteria;
 import lv.javaguru.java2.hospital.patient.core.services.validators.SearchPatientsValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,8 +30,10 @@ public class SearchPatientsService {
     @Value("${search.paging.enabled}")
     private boolean pagingEnabled;
 
-    @Autowired private PatientDatabaseImpl patientDatabase;
-    @Autowired private SearchPatientsValidator validator;
+    @Autowired
+    private PatientDatabaseImpl patientDatabase;
+    @Autowired
+    private SearchPatientsValidator validator;
 
     public SearchPatientsResponse execute(SearchPatientsRequest request) {
         List<CoreError> errors = validator.validate(request);
@@ -38,10 +43,10 @@ public class SearchPatientsService {
 
         List<Patient> patients = search(request);
 
-        if(orderingEnabled){
+        if (orderingEnabled) {
             patients = returnOrdering(patients, request.getOrdering());
         }
-        if (pagingEnabled){
+        if (pagingEnabled) {
             patients = returnPaging(patients, request.getPaging());
         }
 
@@ -49,13 +54,7 @@ public class SearchPatientsService {
     }
 
     private List<Patient> search(SearchPatientsRequest request) {
-        PatientsSearchCriteria[] patientsSearchCriteria = {
-                new NameSearchCriteria(patientDatabase),
-                new SurnameSearchCriteria(patientDatabase),
-                new PersonalCodeSearchCriteria(patientDatabase),
-                new NameAndSurnameSearchCriteria(patientDatabase),
-                new NameAndPersonalCodeSearchCriteria(patientDatabase),
-                new SurnameAndPersonalCodeSearchCriteria(patientDatabase)};
+        PatientsSearchCriteria[] patientsSearchCriteria = getPatientsSearchCriteria();
 
         List<Patient> patients = null;
 
@@ -66,6 +65,17 @@ public class SearchPatientsService {
             }
         }
         return patients;
+    }
+
+    private PatientsSearchCriteria[] getPatientsSearchCriteria() {
+        PatientsSearchCriteria[] patientsSearchCriteria = {
+                new NameSearchCriteria(patientDatabase),
+                new SurnameSearchCriteria(patientDatabase),
+                new PersonalCodeSearchCriteria(patientDatabase),
+                new NameAndSurnameSearchCriteria(patientDatabase),
+                new NameAndPersonalCodeSearchCriteria(patientDatabase),
+                new SurnameAndPersonalCodeSearchCriteria(patientDatabase)};
+        return patientsSearchCriteria;
     }
 
     private List<Patient> returnOrdering(List<Patient> patients, PatientOrdering patientOrdering) {
