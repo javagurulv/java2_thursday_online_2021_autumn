@@ -2,6 +2,8 @@ package lv.javaguru.java2.hospital.doctor.core.services.validators;
 
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.existence.DoctorExistenceForSearchValidator;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.existence.search_criteria.DoctorExistenceBySearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,11 +15,13 @@ public class SearchDoctorsRequestValidator {
 	@Autowired private SearchDoctorsRequestFieldValidator fieldValidator;
 	@Autowired private DoctorOrderingValidator doctorOrderingValidator;
 	@Autowired private DoctorPagingValidator doctorPagingValidator;
+	@Autowired private DoctorExistenceForSearchValidator doctorExistenceForSearchValidator;
 
 	public List<CoreError> validate(SearchDoctorsRequest request) {
         List<CoreError> errors = fieldValidator.validate(request);
 		validateOrderingIfPresent(request, errors);
 		validatePagingIfPresent(request, errors);
+		validateDoctorExistence(request, errors);
 		return errors;
     }
 
@@ -33,6 +37,11 @@ public class SearchDoctorsRequestValidator {
 			List<CoreError> orderingErrors = doctorOrderingValidator.validate(request.getOrdering());
 			errors.addAll(orderingErrors);
 		}
+	}
+
+	private void validateDoctorExistence(SearchDoctorsRequest request, List<CoreError> errors) {
+		List<CoreError> existenceErrors = doctorExistenceForSearchValidator.validate(request);
+		errors.addAll(existenceErrors);
 	}
 
 }

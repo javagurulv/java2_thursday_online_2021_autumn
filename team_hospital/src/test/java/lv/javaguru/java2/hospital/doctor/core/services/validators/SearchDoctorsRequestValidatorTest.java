@@ -6,6 +6,7 @@ import lv.javaguru.java2.hospital.doctor.core.requests.DoctorOrdering;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 
+import lv.javaguru.java2.hospital.doctor.core.services.validators.existence.DoctorExistenceForSearchValidator;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -25,6 +26,7 @@ public class SearchDoctorsRequestValidatorTest {
     @Mock private SearchDoctorsRequestFieldValidator fieldValidator;
     @Mock private DoctorOrderingValidator doctorOrderingValidator;
     @Mock private DoctorPagingValidator doctorPagingValidator;
+    @Mock private DoctorExistenceForSearchValidator doctorExistenceForSearchValidator;
     @InjectMocks private SearchDoctorsRequestValidator validator;
 
     @Test
