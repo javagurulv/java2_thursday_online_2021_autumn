@@ -47,7 +47,7 @@ public class AcceptanceTest3 {
 
         EditVisitRequest editVisitRequest = new EditVisitRequest(
                 addVisitResponse.getPatientVisit().getVisitID(),
-                EditVisitEnum.CHANGE_DOCTOR,
+                EditVisitEnum.DOCTOR,
                 addDoctorResponse2.getNewDoctor().getId().toString());
         EditVisitResponse editVisitResponse = getEditVisitService().execute(editVisitRequest);
         assertTrue(editVisitResponse.isVisitEdited());

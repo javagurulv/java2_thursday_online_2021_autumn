@@ -30,12 +30,12 @@ public class EditPatientServiceTest {
 
     @Test
     public void shouldChangePatientName() {
-        EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.CHANGE_NAME, "NewName");
+        EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.NAME, "NewName");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
-        Mockito.when(database.editActions(1L, EditPatientEnum.CHANGE_NAME, "NewName")).thenReturn(true);
+        Mockito.when(database.editActions(1L, EditPatientEnum.NAME, "NewName")).thenReturn(true);
 
         EditPatientResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -45,12 +45,12 @@ public class EditPatientServiceTest {
 
     @Test
     public void shouldChangePatientSurname() {
-        EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.CHANGE_SURNAME, "NewSurname");
+        EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.SURNAME, "NewSurname");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
-        Mockito.when(database.editActions(1L, EditPatientEnum.CHANGE_SURNAME, "NewSurname")).thenReturn(true);
+        Mockito.when(database.editActions(1L, EditPatientEnum.SURNAME, "NewSurname")).thenReturn(true);
 
         EditPatientResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -60,12 +60,12 @@ public class EditPatientServiceTest {
 
     @Test
     public void shouldChangePatientPersonalCode() {
-        EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.CHANGE_PERSONALCODE, "New1234");
+        EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.PERSONALCODE, "New1234");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
-        Mockito.when(database.editActions(1L, EditPatientEnum.CHANGE_PERSONALCODE, "New1234")).thenReturn(true);
+        Mockito.when(database.editActions(1L, EditPatientEnum.PERSONALCODE, "New1234")).thenReturn(true);
 
         EditPatientResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -75,10 +75,10 @@ public class EditPatientServiceTest {
 
     @Test
     public void shouldReturnFalse() {
-        EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.CHANGE_PERSONALCODE, "New1234");
+        EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.PERSONALCODE, "New1234");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
-        Mockito.when(database.editActions(1L, EditPatientEnum.CHANGE_PERSONALCODE, "New1234")).thenReturn(false);
+        Mockito.when(database.editActions(1L, EditPatientEnum.PERSONALCODE, "New1234")).thenReturn(false);
 
         EditPatientResponse response = service.execute(request);
         assertFalse(response.hasErrors());

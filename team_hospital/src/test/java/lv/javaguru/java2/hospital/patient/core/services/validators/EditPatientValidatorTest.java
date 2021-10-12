@@ -18,14 +18,14 @@ class EditPatientValidatorTest {
     @Test
     public void shouldReturnEmptyList(){
         database.add(new Patient("name", "surname", "1234"));
-        EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.CHANGE_NAME, "Name");
+        EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.NAME, "Name");
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnPatientIDError(){
-        EditPatientRequest request = new EditPatientRequest(null, EditPatientEnum.CHANGE_NAME, "Name");
+        EditPatientRequest request = new EditPatientRequest(null, EditPatientEnum.NAME, "Name");
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "ID");
@@ -45,7 +45,7 @@ class EditPatientValidatorTest {
     @Test
     public void shouldReturnChangesError(){
         database.add(new Patient("name", "surname", "1234"));
-        EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.CHANGE_NAME, "");
+        EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.NAME, "");
         List<CoreError> errorsList = validator.validate(request);
         assertEquals(errorsList.size(), 1);
         assertEquals(errorsList.get(0).getField(), "Changes");

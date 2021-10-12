@@ -14,14 +14,14 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnEmptyList() {
-        EditVisitRequest request = new EditVisitRequest(1L, EditVisitEnum.CHANGE_DOCTOR, "changes");
+        EditVisitRequest request = new EditVisitRequest(1L, EditVisitEnum.DOCTOR, "changes");
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnIdError() {
-        EditVisitRequest request = new EditVisitRequest(null, EditVisitEnum.CHANGE_DOCTOR, "changes");
+        EditVisitRequest request = new EditVisitRequest(null, EditVisitEnum.DOCTOR, "changes");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
@@ -31,7 +31,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnChangesError() {
-        EditVisitRequest request = new EditVisitRequest(1L, EditVisitEnum.CHANGE_DOCTOR, "");
+        EditVisitRequest request = new EditVisitRequest(1L, EditVisitEnum.DOCTOR, "");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
@@ -41,7 +41,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnIdAndChangesErrors() {
-        EditVisitRequest request = new EditVisitRequest(null, EditVisitEnum.CHANGE_DOCTOR, "");
+        EditVisitRequest request = new EditVisitRequest(null, EditVisitEnum.DOCTOR, "");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 2);

@@ -34,7 +34,7 @@ public class AcceptanceTest3 {
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
-                EditPatientEnum.CHANGE_NAME, "NewName");
+                EditPatientEnum.NAME, "NewName");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
 		assertTrue(editPatientResponse.isTrueOrNot());
 
@@ -52,7 +52,7 @@ public class AcceptanceTest3 {
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
-                EditPatientEnum.CHANGE_SURNAME, "NewSurname");
+                EditPatientEnum.SURNAME, "NewSurname");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
 		assertTrue(editPatientResponse.isTrueOrNot());
 
@@ -70,7 +70,7 @@ public class AcceptanceTest3 {
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
-                EditPatientEnum.CHANGE_PERSONALCODE, "New22222");
+                EditPatientEnum.PERSONALCODE, "New22222");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
 		assertTrue(editPatientResponse.isTrueOrNot());
 

@@ -41,10 +41,10 @@ public class VisitDatabaseImpl implements VisitsDatabase {
                 .findFirst();
         if (visitToEditOpt.isPresent()) {
             Visit visitToEdit = visitToEditOpt.get();
-            if (userInput.equals(EditVisitEnum.CHANGE_DOCTOR)) {
+            if (userInput.equals(EditVisitEnum.DOCTOR)) {
                 visitToEdit.setDoctor(doctorDatabase.findById(Long.parseLong(changes)).get(0));
                 isVisitEdited = true;
-            } else if (userInput.equals(EditVisitEnum.CHANGE_PATIENT)) {
+            } else if (userInput.equals(EditVisitEnum.PATIENT)) {
                 visitToEdit.setPatient(patientDatabase.findById(Long.parseLong(changes)).get());
                 isVisitEdited = true;
             } else {

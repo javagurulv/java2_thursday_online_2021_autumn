@@ -44,13 +44,13 @@ public class PatientDatabaseImpl implements PatientDatabase {
     public boolean editActions(Long patientID, Enum userInput, String input) {
         for (Patient patient : patientsList) {
             if (Objects.equals(patient.getId(), patientID)) {
-                if (EditPatientEnum.CHANGE_NAME.equals(userInput)) {
+                if (EditPatientEnum.NAME.equals(userInput)) {
                     patient.setName(input);
                     return true;
-                } else if (EditPatientEnum.CHANGE_SURNAME.equals(userInput)) {
+                } else if (EditPatientEnum.SURNAME.equals(userInput)) {
                     patient.setSurname(input);
                     return true;
-                } else if (EditPatientEnum.CHANGE_PERSONALCODE.equals(userInput)) {
+                } else if (EditPatientEnum.PERSONALCODE.equals(userInput)) {
                     patient.setPersonalCode(input);
                     return true;
                 }
