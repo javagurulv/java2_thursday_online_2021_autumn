@@ -21,8 +21,8 @@ public class FindPatientByIdService {
         if(!errors.isEmpty()){
             return new FindPatientByIDResponse(errors);
         } else {
-            return new FindPatientByIDResponse(request.getIdRequest(),
-                    patientDatabase.findById(request.getIdRequest()));
+            return new FindPatientByIDResponse(request.getIDRequest(),
+                    patientDatabase.findById(request.getIDRequest()));
         }
     }
 }
