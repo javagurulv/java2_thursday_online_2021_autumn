@@ -7,6 +7,8 @@ import lv.javaguru.java2.hospital.doctor.core.services.EditDoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Locale;
+
 @Component
 public class EditDoctorUIAction implements DoctorUIAction {
 
@@ -16,7 +18,9 @@ public class EditDoctorUIAction implements DoctorUIAction {
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
         Long id = getUserInput.getUserLongInput("Please, enter the doctor's id: ");
-        EditOption editOption = EditOption.valueOf(getUserInput.getUserStringInput("What you would like to change (NAME||SURNAME||SPECIALITY)? "));
+        EditOption editOption = EditOption.valueOf
+                (getUserInput.getUserStringInput("What you would like to change (NAME||SURNAME||SPECIALITY)? ")
+                        .toUpperCase(Locale.ROOT));
         String changes = getUserInput.getUserStringInput("Enter info for change: ");
         EditDoctorRequest request = new EditDoctorRequest(id, editOption, changes);
         EditDoctorResponse response = editDoctor.execute(request);
