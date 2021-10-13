@@ -1,7 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators.existence;
 
-
-import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
+import lv.javaguru.java2.hospital.database.DoctorDatabase;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @RunWith(JUnitPlatform.class)
 class DoctorExistenceByIdValidatorTest {
 
-    @Mock private DoctorDatabaseImpl database;
+    @Mock private DoctorDatabase database;
     @InjectMocks
     private DoctorExistenceByIdValidator validator;
 

@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators.existence.search_criteria;
 
+import lv.javaguru.java2.hospital.database.DoctorDatabase;
 import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
@@ -10,7 +11,7 @@ import java.util.Optional;
 
 public class ExistenceByNameAndSpeciality implements DoctorExistenceBySearchCriteria{
 
-    private DoctorDatabaseImpl database = new DoctorDatabaseImpl();
+    private DoctorDatabase database = new DoctorDatabaseImpl();
 
     public ExistenceByNameAndSpeciality(DoctorDatabaseImpl database) {
         this.database = database;

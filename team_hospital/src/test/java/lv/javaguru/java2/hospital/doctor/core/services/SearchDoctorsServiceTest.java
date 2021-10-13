@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
+import lv.javaguru.java2.hospital.database.DoctorDatabase;
 import lv.javaguru.java2.hospital.doctor.core.requests.DoctorOrdering;
 import lv.javaguru.java2.hospital.doctor.core.requests.DoctorPaging;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
@@ -30,7 +30,7 @@ import static org.mockito.ArgumentMatchers.any;
 class SearchDoctorsServiceTest {
 
     @Mock
-    private DoctorDatabaseImpl database;
+    private DoctorDatabase database;
     @Mock
     private SearchDoctorsRequestValidator validator;
     @InjectMocks

@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 public class VisitDatabaseImpl implements VisitsDatabase {
     private final List<Visit> visits = new ArrayList<>();
     @Autowired
-    PatientDatabaseImpl patientDatabase;
+    PatientDatabase patientDatabase;
     @Autowired
-    DoctorDatabaseImpl doctorDatabase;
+    DoctorDatabase doctorDatabase;
 
     @Override
     public void recordVisit(Visit visit) {

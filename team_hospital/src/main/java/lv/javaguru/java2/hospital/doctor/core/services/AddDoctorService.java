@@ -1,11 +1,11 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
+import lv.javaguru.java2.hospital.database.DoctorDatabase;
 import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.AddDoctorResponse;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.doctor.core.services.validators.AddDoctorRequestValidator;
 import lv.javaguru.java2.hospital.domain.Doctor;
-import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 public class AddDoctorService {
 
-    @Autowired private DoctorDatabaseImpl database;
+    @Autowired private DoctorDatabase database;
     @Autowired private AddDoctorRequestValidator validator;
 
     public AddDoctorResponse execute(AddDoctorRequest request) {

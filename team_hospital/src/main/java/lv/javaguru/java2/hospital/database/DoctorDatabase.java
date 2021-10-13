@@ -31,4 +31,6 @@ public interface DoctorDatabase {
 
     List<Doctor> findByNameAndSurnameAndSpeciality(String name, String surname, String speciality);
 
+    List<Doctor> getDoctorsList();
+
 }

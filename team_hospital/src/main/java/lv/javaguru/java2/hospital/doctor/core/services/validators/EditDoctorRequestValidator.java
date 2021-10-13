@@ -30,7 +30,7 @@ public class EditDoctorRequestValidator {
                 && !request.getEditOption().equals("NAME")
                 || request.getEditOption().equals("SURNAME")
                 || request.getEditOption().equals("SPECIALITY"))
-                ? Optional.of(new CoreError("edit option", "Must not be empty!"))
+                ? Optional.of(new CoreError("edit option", "Must contain 'NAME', 'SURNAME' or 'SPECIALITY' only!"))
                 : Optional.empty();
     }
 

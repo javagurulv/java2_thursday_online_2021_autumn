@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
+import lv.javaguru.java2.hospital.database.DoctorDatabase;
 import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.requests.EditOption;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EditDoctorServiceTest {
 
     @Mock
-    private DoctorDatabaseImpl database;
+    private DoctorDatabase database;
     @Mock
     private EditDoctorRequestValidator validator;
     @InjectMocks
