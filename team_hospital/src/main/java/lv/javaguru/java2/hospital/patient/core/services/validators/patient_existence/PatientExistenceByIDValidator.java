@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence;
 
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
@@ -11,7 +12,7 @@ import java.util.Optional;
 @Component
 public class PatientExistenceByIDValidator {
 
-    @Autowired private PatientDatabaseImpl patientDatabase;
+    @Autowired private PatientDatabase patientDatabase;
 
     public Optional<CoreError> existenceByID(Long id) {
         for (Patient p : patientDatabase.getPatientsList()) {

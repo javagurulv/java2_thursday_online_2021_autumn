@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.search_criteria;
 
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
@@ -7,7 +8,7 @@ import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import java.util.List;
 
 public class NameAndSurnameSearchCriteria implements PatientsSearchCriteria {
-    private final PatientDatabaseImpl patientDatabase;
+    private final PatientDatabase patientDatabase;
 
     public NameAndSurnameSearchCriteria(PatientDatabaseImpl patientDatabase) {
         this.patientDatabase = patientDatabase;

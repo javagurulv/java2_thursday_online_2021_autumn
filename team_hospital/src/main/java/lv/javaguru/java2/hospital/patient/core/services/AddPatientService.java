@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.domain.Patient;
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.AddPatientResponse;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 public class AddPatientService {
 
-    @Autowired private PatientDatabaseImpl database;
+    @Autowired private PatientDatabase database;
     @Autowired private AddPatientValidator validator;
 
     public AddPatientResponse execute(AddPatientRequest request) {

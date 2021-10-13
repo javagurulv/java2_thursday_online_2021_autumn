@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.ShowAllPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.ShowAllPatientsResponse;
@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @RunWith(JUnitPlatform.class)
 class ShowAllPatientsServiceTest {
 
-    @Mock private PatientDatabaseImpl database;
+    @Mock private PatientDatabase database;
     @InjectMocks private ShowAllPatientsService showAllPatientsService;
 
     @Test

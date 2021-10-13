@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EditPatientValidatorTest {
 
-    private final PatientDatabaseImpl database = new PatientDatabaseImpl();
+    private final PatientDatabase database = new PatientDatabaseImpl();
     private final EditPatientValidator validator = new EditPatientValidator();
 
     @Test

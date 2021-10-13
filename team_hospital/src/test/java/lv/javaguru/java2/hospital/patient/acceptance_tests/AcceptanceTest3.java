@@ -70,7 +70,7 @@ public class AcceptanceTest3 {
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
-                EditPatientEnum.PERSONALCODE, "New22222");
+                EditPatientEnum.PERSONAL_CODE, "New22222");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
 		assertTrue(editPatientResponse.isTrueOrNot());
 

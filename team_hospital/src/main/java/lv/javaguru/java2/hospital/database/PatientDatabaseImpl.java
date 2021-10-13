@@ -50,7 +50,7 @@ public class PatientDatabaseImpl implements PatientDatabase {
                 } else if (EditPatientEnum.SURNAME.equals(userInput)) {
                     patient.setSurname(input);
                     return true;
-                } else if (EditPatientEnum.PERSONALCODE.equals(userInput)) {
+                } else if (EditPatientEnum.PERSONAL_CODE.equals(userInput)) {
                     patient.setPersonalCode(input);
                     return true;
                 }
@@ -128,6 +128,7 @@ public class PatientDatabaseImpl implements PatientDatabase {
         return list;
     }
 
+    @Override
     public List<Patient> getPatientsList() {
         return patientsList;
     }

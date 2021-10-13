@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface SearchValidator {
     boolean canProcess(SearchPatientsRequest request);
+
     Optional<CoreError> process(SearchPatientsRequest request);
 }

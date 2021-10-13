@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.validators_for_search_criteria;
 
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
@@ -11,7 +12,7 @@ import java.util.Optional;
 @Component
 public class NameAndSurnameSearchValidator implements SearchValidator {
 
-    private PatientDatabaseImpl database;
+    private PatientDatabase database;
 
     public NameAndSurnameSearchValidator(PatientDatabaseImpl database) {
         this.database = database;
