@@ -5,8 +5,7 @@ import java.util.Locale;
 
 public class PatientEnumChecker {
 
-    public EditPatientEnum validateEnum(String output, String input) {
-        System.out.println(output);
+    public EditPatientEnum validateEnum(String input) {
         EditPatientEnum editPatientEnum = null;
         try {
            editPatientEnum = EditPatientEnum.valueOf(input.toUpperCase(Locale.ROOT));

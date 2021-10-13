@@ -10,6 +10,6 @@ public class PatientEnumCheckerTest {
 
     @Test
     public void enumShouldNotBeNull(){
-        assertNotNull(checker.validateEnum("", "name"));
+        assertNotNull(checker.validateEnum("name"));
     }
 }
