@@ -1,9 +1,8 @@
 package lv.javaguru.java2.hospital.patient.acceptance_tests;
 
 import lv.javaguru.java2.hospital.config.HospitalConfiguration;
-import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
-import org.springframework.context.ApplicationContext;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
+import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.AddPatientResponse;
@@ -14,10 +13,10 @@ import lv.javaguru.java2.hospital.patient.core.services.EditPatientService;
 import lv.javaguru.java2.hospital.patient.core.services.SearchPatientsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AcceptanceTest3 {
 
@@ -36,7 +35,6 @@ public class AcceptanceTest3 {
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
                 EditPatientEnum.NAME, "NewName");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
-		assertTrue(editPatientResponse.isTrueOrNot());
 
 		SearchPatientsRequest searchPatientsRequest = new SearchPatientsRequest("NewName", "surname", "");
 		SearchPatientsResponse searchPatientsResponse = getSearchPatientsService().execute(searchPatientsRequest);
@@ -54,7 +52,6 @@ public class AcceptanceTest3 {
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
                 EditPatientEnum.SURNAME, "NewSurname");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
-		assertTrue(editPatientResponse.isTrueOrNot());
 
 		SearchPatientsRequest searchPatientsRequest = new SearchPatientsRequest("name10", "NewSurname", "");
 		SearchPatientsResponse searchPatientsResponse = getSearchPatientsService().execute(searchPatientsRequest);
@@ -72,7 +69,6 @@ public class AcceptanceTest3 {
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
                 EditPatientEnum.PERSONAL_CODE, "New22222");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
-		assertTrue(editPatientResponse.isTrueOrNot());
 
 		SearchPatientsRequest searchPatientsRequest = new SearchPatientsRequest("name11", "surname", "");
 		SearchPatientsResponse searchPatientsResponse = getSearchPatientsService().execute(searchPatientsRequest);

@@ -21,15 +21,15 @@ public class EditPatientService {
         if (!errors.isEmpty()) {
             return new EditPatientResponse(errors);
         } else {
-
+            database.editActions(
+                    request.getPatientID(),
+                    request.getEnums(),
+                    request.getChanges());
             return new EditPatientResponse(
                     request.getPatientID(),
                     request.getEnums(),
-                    request.getChanges(),
-                    database.editActions(
-                            request.getPatientID(),
-                            request.getEnums(),
-                            request.getChanges()));
+                    request.getChanges()
+                    );
         }
     }
 }

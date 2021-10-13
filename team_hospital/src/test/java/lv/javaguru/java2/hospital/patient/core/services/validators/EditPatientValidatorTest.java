@@ -1,24 +1,28 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
-
-import lv.javaguru.java2.hospital.database.PatientDatabase;
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
-import lv.javaguru.java2.hospital.domain.Patient;
-import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
+import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
+import lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.PatientExistenceByIDValidator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 class EditPatientValidatorTest {
 
-    private final PatientDatabase database = new PatientDatabaseImpl();
-    private final EditPatientValidator validator = new EditPatientValidator();
+    @Mock private PatientExistenceByIDValidator idValidator;
+    @InjectMocks private EditPatientValidator validator;
 
     @Test
     public void shouldReturnEmptyList(){
-        database.add(new Patient("name", "surname", "1234"));
         EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.NAME, "Name");
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
@@ -35,7 +39,6 @@ class EditPatientValidatorTest {
 
     @Test
     public void shouldReturnUserInputError(){
-        database.add(new Patient("name", "surname", "1234"));
         EditPatientRequest request = new EditPatientRequest(1L, null,"Name");
         List<CoreError> errorsList = validator.validate(request);
         assertEquals(errorsList.size(), 1);
@@ -45,7 +48,6 @@ class EditPatientValidatorTest {
 
     @Test
     public void shouldReturnChangesError(){
-        database.add(new Patient("name", "surname", "1234"));
         EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.NAME, "");
         List<CoreError> errorsList = validator.validate(request);
         assertEquals(errorsList.size(), 1);

@@ -39,7 +39,6 @@ public class EditPatientServiceTest {
 
         EditPatientResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        assertTrue(response.isTrueOrNot());
         assertEquals(response.getChanges(), "NewName");
     }
 
@@ -54,7 +53,6 @@ public class EditPatientServiceTest {
 
         EditPatientResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        assertTrue(response.isTrueOrNot());
         assertEquals(response.getChanges(), "NewSurname");
     }
 
@@ -69,7 +67,6 @@ public class EditPatientServiceTest {
 
         EditPatientResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        assertTrue(response.isTrueOrNot());
         assertEquals(response.getChanges(), "New1234");
     }
 
@@ -82,6 +79,5 @@ public class EditPatientServiceTest {
 
         EditPatientResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        assertFalse(response.isTrueOrNot());
     }
 }

@@ -2,6 +2,8 @@ package lv.javaguru.java2.hospital.patient.core.services.validators;
 
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
+import lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.PatientExistenceByIDValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,11 +13,14 @@ import java.util.Optional;
 @Component
 public class EditPatientValidator {
 
+    @Autowired PatientExistenceByIDValidator validator;
+
     public List<CoreError> validate(EditPatientRequest request) {
         List<CoreError> errors = new ArrayList<>();
         validatePatientID(request).ifPresent(errors::add);
         validateUserChoice(request).ifPresent(errors::add);
         validateChanges(request).ifPresent(errors::add);
+        validatePatientExistence(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -32,5 +37,12 @@ public class EditPatientValidator {
     private Optional<CoreError> validateChanges(EditPatientRequest request) {
         return (request.getChanges() == null || request.getChanges().isEmpty())
                 ? Optional.of(new CoreError("Changes", "Must not be empty!")) : Optional.empty();
+    }
+
+    private Optional<CoreError> validatePatientExistence(EditPatientRequest request) {
+        if (request.getPatientID() == null) {
+            return Optional.empty();
+        }
+        return validator.existenceByID(request.getPatientID());
     }
 }
