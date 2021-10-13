@@ -4,7 +4,7 @@ import lv.javaguru.java2.hospital.patient.core.requests.PatientOrdering;
 import lv.javaguru.java2.hospital.patient.core.requests.PatientPaging;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
-import lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.PatientExistenceForSearch;
+import lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.PatientExistenceForSearchValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @RunWith(JUnitPlatform.class)
 class SearchPatientsValidatorTest {
 
-    @Mock private PatientExistenceForSearch existenceSearchValidator;
+    @Mock private PatientExistenceForSearchValidator existenceSearchValidator;
     @Mock private SearchPatientsRequestFieldValidator fieldValidator;
     @Mock private PatientOrderingValidator patientOrderingValidator;
     @Mock private PatientPagingValidator patientPagingValidator;

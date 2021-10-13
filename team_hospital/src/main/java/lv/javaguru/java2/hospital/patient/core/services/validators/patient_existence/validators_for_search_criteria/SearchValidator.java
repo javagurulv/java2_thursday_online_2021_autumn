@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.search_criteria_validators;
+package lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.validators_for_search_criteria;
 
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;

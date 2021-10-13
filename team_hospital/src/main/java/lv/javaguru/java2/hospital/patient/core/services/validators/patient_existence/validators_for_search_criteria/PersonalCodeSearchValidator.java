@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.search_criteria_validators;
+package lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.validators_for_search_criteria;
 
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -19,7 +19,8 @@ public class PersonalCodeSearchValidator implements SearchValidator {
 
     @Override
     public boolean canProcess(SearchPatientsRequest request) {
-        return !(request.isNameProvided() && request.isSurnameProvided())
+        return !request.isNameProvided()
+                && !request.isSurnameProvided()
                 && request.isPersonalCodeProvided();
     }
 
@@ -30,6 +31,6 @@ public class PersonalCodeSearchValidator implements SearchValidator {
                 return Optional.empty();
             }
         }
-        return Optional.of(new CoreError("Patient", "does not exist"));
+        return Optional.of(new CoreError("Patient", "does not exist!"));
     }
 }
