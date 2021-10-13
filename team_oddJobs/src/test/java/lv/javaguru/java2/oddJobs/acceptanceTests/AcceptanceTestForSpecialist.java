@@ -17,7 +17,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class AcceptanceTest {
+public class AcceptanceTestForSpecialist {
     private ApplicationContext appContext;
 
     @Before
