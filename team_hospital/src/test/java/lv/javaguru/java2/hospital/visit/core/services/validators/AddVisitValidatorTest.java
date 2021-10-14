@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+import lv.javaguru.java2.hospital.database.DoctorDatabase;
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import org.junit.jupiter.api.Test;
@@ -21,8 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @RunWith(JUnitPlatform.class)
 class AddVisitValidatorTest {
 
-    @Mock PatientDatabaseImpl patientDatabase;
-    @Mock DoctorDatabaseImpl doctorDatabase;
+    @Mock PatientDatabase patientDatabase;
+    @Mock DoctorDatabase doctorDatabase;
     @InjectMocks AddVisitValidator addVisitValidator;
 
     @Test

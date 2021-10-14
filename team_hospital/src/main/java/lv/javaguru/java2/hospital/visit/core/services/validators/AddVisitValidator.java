@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+import lv.javaguru.java2.hospital.database.DoctorDatabase;
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
@@ -16,8 +16,8 @@ import java.util.Optional;
 @Component
 public class AddVisitValidator {
 
-    @Autowired private PatientDatabaseImpl patientDatabase;
-    @Autowired private DoctorDatabaseImpl doctorDatabase;
+    @Autowired private PatientDatabase patientDatabase;
+    @Autowired private DoctorDatabase doctorDatabase;
 
     public List<CoreError> validate(AddVisitRequest patientVisitRequest) {
         List<CoreError> errors = new ArrayList<>();

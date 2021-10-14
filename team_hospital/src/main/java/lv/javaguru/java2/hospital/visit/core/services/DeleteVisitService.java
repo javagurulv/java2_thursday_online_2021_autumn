@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
-import lv.javaguru.java2.hospital.database.VisitDatabaseImpl;
+import lv.javaguru.java2.hospital.database.VisitDatabase;
 import lv.javaguru.java2.hospital.visit.core.requests.DeleteVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.responses.DeleteVisitResponse;
@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class DeleteVisitService {
 
-    @Autowired private VisitDatabaseImpl visitDatabase;
+    @Autowired private VisitDatabase visitDatabase;
     @Autowired private DeleteVisitValidator validator;
 
     public DeleteVisitResponse execute(DeleteVisitRequest request) {

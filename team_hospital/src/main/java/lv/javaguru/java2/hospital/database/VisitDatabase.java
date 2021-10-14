@@ -6,7 +6,7 @@ import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
 import java.util.Date;
 import java.util.List;
 
-public interface VisitsDatabase {
+public interface VisitDatabase {
 
     void recordVisit(Visit visit);
 

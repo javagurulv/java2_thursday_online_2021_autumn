@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
-public class VisitDatabaseImpl implements VisitsDatabase {
+public class VisitDatabaseImpl implements VisitDatabase {
     private final List<Visit> visits = new ArrayList<>();
     @Autowired
     PatientDatabase patientDatabase;

@@ -11,10 +11,6 @@ public class ShowAllVisitUIAction implements VisitUIAction {
 
     @Autowired private ShowAllVisitService showAllPatientVisit;
 
-    public ShowAllVisitUIAction(ShowAllVisitService showAllPatientVisit) {
-        this.showAllPatientVisit = showAllPatientVisit;
-    }
-
     @Override
     public void execute() {
         System.out.println("Patient visits list: ");

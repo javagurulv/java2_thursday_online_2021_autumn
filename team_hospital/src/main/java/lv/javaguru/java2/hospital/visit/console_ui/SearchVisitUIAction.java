@@ -13,10 +13,6 @@ public class SearchVisitUIAction implements VisitUIAction {
 
     @Autowired private SearchVisitService searchVisitService;
 
-    public SearchVisitUIAction(SearchVisitService searchVisitService) {
-        this.searchVisitService = searchVisitService;
-    }
-
     @Override
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();

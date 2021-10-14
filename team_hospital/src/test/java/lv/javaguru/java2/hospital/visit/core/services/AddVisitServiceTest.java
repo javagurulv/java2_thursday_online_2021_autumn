@@ -1,8 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
-import lv.javaguru.java2.hospital.database.VisitDatabaseImpl;
+import lv.javaguru.java2.hospital.database.*;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
@@ -31,10 +29,10 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(JUnitPlatform.class)
 class AddVisitServiceTest {
 
-    @Mock private PatientDatabaseImpl patientDatabase;
-    @Mock private DoctorDatabaseImpl doctorDatabase;
+    @Mock private PatientDatabase patientDatabase;
+    @Mock private DoctorDatabase doctorDatabase;
     @Mock private AddVisitValidator validator;
-    @Mock private VisitDatabaseImpl visitDatabase;
+    @Mock private VisitDatabase visitDatabase;
     @InjectMocks private AddVisitService service;
 
     @Test

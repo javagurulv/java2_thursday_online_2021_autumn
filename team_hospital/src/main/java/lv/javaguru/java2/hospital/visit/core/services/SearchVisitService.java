@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
-import lv.javaguru.java2.hospital.database.VisitsDatabase;
+import lv.javaguru.java2.hospital.database.VisitDatabase;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.VisitOrdering;
 import lv.javaguru.java2.hospital.visit.core.requests.VisitPaging;
@@ -29,10 +29,10 @@ public class SearchVisitService {
     @Value("${search.paging.enabled}")
     @Autowired private boolean pagingEnabled;
 
-    @Autowired private VisitsDatabase visitDatabase;
+    @Autowired private VisitDatabase visitDatabase;
     @Autowired private SearchVisitValidator validator;
 
-    public SearchVisitService(VisitsDatabase database, SearchVisitValidator validator) {
+    public SearchVisitService(VisitDatabase database, SearchVisitValidator validator) {
         this.visitDatabase = database;
         this.validator = validator;
     }

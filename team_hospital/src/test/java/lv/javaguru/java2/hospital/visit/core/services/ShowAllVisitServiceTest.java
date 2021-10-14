@@ -1,7 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
-
-import lv.javaguru.java2.hospital.database.VisitDatabaseImpl;
+import lv.javaguru.java2.hospital.database.VisitDatabase;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Visit;
@@ -28,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class ShowAllVisitServiceTest {
 
     @Mock
-    VisitDatabaseImpl database;
+    VisitDatabase database;
     @InjectMocks
     ShowAllVisitService service;
 

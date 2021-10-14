@@ -1,8 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
-import lv.javaguru.java2.hospital.database.VisitDatabaseImpl;
+import lv.javaguru.java2.hospital.database.*;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Visit;
@@ -21,9 +19,9 @@ import java.util.List;
 @Component
 public class AddVisitService {
 
-    @Autowired private PatientDatabaseImpl patientDatabase;
-    @Autowired private DoctorDatabaseImpl doctorDatabase;
-    @Autowired private VisitDatabaseImpl visitDatabase;
+    @Autowired private PatientDatabase patientDatabase;
+    @Autowired private DoctorDatabase doctorDatabase;
+    @Autowired private VisitDatabase visitDatabase;
     @Autowired private AddVisitValidator validator;
 
     public AddVisitResponse execute(AddVisitRequest request) {
