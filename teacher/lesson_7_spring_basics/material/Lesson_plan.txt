@@ -1,5 +1,10 @@
 Lesson 7 plan:
 
+0. Stand up
+0. Git commits and automated build results checking
+0. Acceptance tests refactoring
+0. Student problems if any and solutions
+
 1. @Configuration
 2. Component Scan
 3. @Component
