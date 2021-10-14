@@ -22,7 +22,7 @@ public class EditPatientUIAction implements PatientUIActions {
         PatientEnumChecker checker = new PatientEnumChecker();
         Long id = getUserInput.getUserLongInput("Please enter patient ID: ");
         String str =
-                getUserInput.getUserStringInput("What information would you like to edit? (NAME||SURNAME||PERSONALCODE)?");
+                getUserInput.getUserStringInput("What information would you like to edit? (NAME||SURNAME||PERSONAL_CODE)?");
         EditPatientEnum editEnum = checker.validateEnum(str);
         if(editEnum == null){
             return;

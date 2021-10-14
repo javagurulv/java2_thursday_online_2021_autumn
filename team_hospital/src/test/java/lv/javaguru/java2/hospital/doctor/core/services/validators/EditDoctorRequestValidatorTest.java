@@ -53,4 +53,15 @@ class EditDoctorRequestValidatorTest {
         assertEquals(errorList.get(1).getMessage(), "Must not be empty!");
     }
 
+    /*
+    @Test
+    public void shouldReturnEditOptionError() {
+        EditDoctorRequest request = new EditDoctorRequest(123L, EditOption.valueOf("namee"), "NewName");
+        List<CoreError> errorList = validator.validate(request);
+        assertFalse(errorList.isEmpty());
+        assertEquals(errorList.size(), 1);
+        assertEquals(errorList.get(0).getField(), "edit option");
+        assertEquals(errorList.get(0).getMessage(), "Must contain 'NAME', 'SURNAME' or 'SPECIALITY' only!");
+    }*/
+
 }
