@@ -3,6 +3,7 @@ package lv.javaguru.java2.library.acceptancetests;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -17,6 +18,7 @@ import lv.javaguru.java2.library.core.responses.SearchBooksResponse;
 import lv.javaguru.java2.library.core.services.AddBookService;
 import lv.javaguru.java2.library.core.services.SearchBooksService;
 
+@Ignore
 public class AcceptanceTest2 {
 
 	private ApplicationContext appContext;
