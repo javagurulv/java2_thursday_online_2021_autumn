@@ -1,12 +1,15 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
 import lv.javaguru.java2.hospital.database.VisitDatabase;
+import lv.javaguru.java2.hospital.doctor.core.services.search_criteria.*;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.VisitOrdering;
 import lv.javaguru.java2.hospital.visit.core.requests.VisitPaging;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.responses.SearchVisitResponse;
+import lv.javaguru.java2.hospital.visit.core.services.search_criteria.*;
+import lv.javaguru.java2.hospital.visit.core.services.search_criteria.IdSearchCriteria;
 import lv.javaguru.java2.hospital.visit.core.services.validators.SearchVisitValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,13 +27,17 @@ import java.util.stream.Collectors;
 public class SearchVisitService {
 
     @Value("${search.ordering.enabled}")
-    @Autowired private boolean orderingEnabled;
+    @Autowired
+    private boolean orderingEnabled;
 
     @Value("${search.paging.enabled}")
-    @Autowired private boolean pagingEnabled;
+    @Autowired
+    private boolean pagingEnabled;
 
-    @Autowired private VisitDatabase visitDatabase;
-    @Autowired private SearchVisitValidator validator;
+    @Autowired
+    private VisitDatabase visitDatabase;
+    @Autowired
+    private SearchVisitValidator validator;
 
     public SearchVisitService(VisitDatabase database, SearchVisitValidator validator) {
         this.visitDatabase = database;
@@ -52,26 +59,32 @@ public class SearchVisitService {
 
     private List<Visit> search(SearchVisitRequest request) {
         List<Visit> visits = new ArrayList<>();
-        Date visitDate = getVisitDate(request);
-        if (request.isVisitIdProvided()) {
-            visits = visitDatabase.findByVisitId(request.getVisitId());
-        } else if (request.isDoctorIdProvided() && request.isPatientIdProvided() && request.isDateProvided()) {
-            visits = visitDatabase.findByDoctorIdAndPatientIdAndDate(request.getDoctorId(), request.getPatientId(), visitDate);
-        } else if (request.isDoctorIdProvided() && request.isPatientIdProvided()) {
-            visits = visitDatabase.findByDoctorIdAndPatientId(request.getDoctorId(), request.getPatientId());
-        } else if (request.isDoctorIdProvided() && request.isDateProvided()) {
-            visits = visitDatabase.findByDoctorIdAndDate(request.getDoctorId(), visitDate);
-        } else if (request.isPatientIdProvided() && request.isDateProvided()) {
-            visits = visitDatabase.findByPatientIdAndDate(request.getPatientId(), visitDate);
-        } else if (request.isDoctorIdProvided()) {
-            visits = visitDatabase.findByDoctorId(request.getDoctorId());
-        } else if (request.isPatientIdProvided()) {
-            visits = visitDatabase.findByPatientId(request.getPatientId());
-        } else if (request.isDateProvided()) {
-            visits = visitDatabase.findByDate(visitDate);
+
+        VisitsSearchCriteria[] visitsSearchCriteria = getVisitsSearchCriteria();
+
+        for (VisitsSearchCriteria processor : visitsSearchCriteria) {
+            if (processor.canProcess(request)) {
+                visits = processor.process(request);
+                break;
+            }
         }
+
         return visits;
     }
+
+    private VisitsSearchCriteria[] getVisitsSearchCriteria() {
+        VisitsSearchCriteria[] visitsSearchCriteria = {
+                new IdSearchCriteria(visitDatabase),
+                new DoctorIdAndPatientIdAndDateSearchCriteria(visitDatabase),
+                new DoctorIdAndPatientIdSearchCriteria(visitDatabase),
+                new DoctorIdAndDateSearchCriteria(visitDatabase),
+                new PatientIdAndDateSearchCriteria(visitDatabase),
+                new DoctorIdAndDateSearchCriteria(visitDatabase),
+                new PatientIdAndDateSearchCriteria(visitDatabase),
+                new DateSearchCriteria(visitDatabase)};
+        return visitsSearchCriteria;
+    }
+
 
     private List<Visit> order(List<Visit> visits, VisitOrdering visitOrdering) {
         if (orderingEnabled && visitOrdering != null) {
@@ -103,7 +116,7 @@ public class SearchVisitService {
     private Date getVisitDate(SearchVisitRequest request) {
         Date visitDate = null;
         try {
-                visitDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(request.getVisitDate());
+            visitDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(request.getVisitDate());
         } catch (ParseException e) {
             e.printStackTrace();
         }
