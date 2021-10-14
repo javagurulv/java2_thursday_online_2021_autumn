@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.patient.core.services.search_criteria;
+package lv.javaguru.java2.hospital.patient.core.services.search_patient.search_criteria;
 
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Patient;

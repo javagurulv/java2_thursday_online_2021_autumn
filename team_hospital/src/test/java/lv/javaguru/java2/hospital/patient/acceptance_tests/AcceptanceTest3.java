@@ -10,7 +10,7 @@ import lv.javaguru.java2.hospital.patient.core.responses.EditPatientResponse;
 import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
 import lv.javaguru.java2.hospital.patient.core.services.AddPatientService;
 import lv.javaguru.java2.hospital.patient.core.services.EditPatientService;
-import lv.javaguru.java2.hospital.patient.core.services.SearchPatientsService;
+import lv.javaguru.java2.hospital.patient.core.services.search_patient.SearchPatientsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
