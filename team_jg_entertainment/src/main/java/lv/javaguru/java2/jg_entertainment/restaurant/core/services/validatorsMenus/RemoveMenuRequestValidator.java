@@ -21,4 +21,5 @@ public class RemoveMenuRequestValidator {
                 ? Optional.of(new CoreError("number", "Must not be empty!"))
                 : Optional.empty();
     }
+
 }
