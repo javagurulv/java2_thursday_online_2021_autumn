@@ -23,8 +23,6 @@ public class AddDoctorService {
             return new AddDoctorResponse(errors);
         }
 
-
-
         Doctor doctor = new Doctor(request.getName(), request.getSurname(), request.getSpeciality());
         database.addDoctor(doctor);
         return new AddDoctorResponse(doctor);

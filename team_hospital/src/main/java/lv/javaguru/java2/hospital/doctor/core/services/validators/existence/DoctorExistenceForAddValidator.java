@@ -18,11 +18,11 @@ public class DoctorExistenceForAddValidator {
     public Optional<CoreError> validateDoctorExistence(AddDoctorRequest request) {
         for (Doctor doctor : database.getDoctorsList()) {
             if (doctor.getName().equals(request.getName())
-            && doctor.getSurname().equals(request.getSurname())
-            && doctor.getSpeciality().equals(request.getSpeciality())) {
-                return Optional.empty();
+                    && doctor.getSurname().equals(request.getSurname())
+                    && doctor.getSpeciality().equals(request.getSpeciality())) {
+                return Optional.of(new CoreError("Doctor", "Already exists!"));
             }
         }
-        return Optional.of(new CoreError("Doctor", "Already exists!"));
+        return Optional.empty();
     }
 }
