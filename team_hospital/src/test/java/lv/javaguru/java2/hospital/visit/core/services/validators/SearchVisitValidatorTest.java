@@ -3,6 +3,7 @@ package lv.javaguru.java2.hospital.visit.core.services.validators;
 import lv.javaguru.java2.hospital.visit.core.requests.VisitOrdering;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
+import lv.javaguru.java2.hospital.visit.core.services.validators.existence.VisitExistenceForSearchValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -27,6 +28,8 @@ class SearchVisitValidatorTest {
     private VisitOrderingValidator visitOrderingValidator;
     @Mock
     private VisitPagingValidator visitPagingValidator;
+    @Mock
+    private VisitExistenceForSearchValidator visitExistenceForSearchValidator;
     @InjectMocks
     private SearchVisitValidator validator;
 

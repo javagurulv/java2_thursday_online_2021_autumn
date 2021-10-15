@@ -78,8 +78,8 @@ public class SearchVisitService {
                 new DoctorIdAndPatientIdSearchCriteria(visitDatabase),
                 new DoctorIdAndDateSearchCriteria(visitDatabase),
                 new PatientIdAndDateSearchCriteria(visitDatabase),
-                new DoctorIdAndDateSearchCriteria(visitDatabase),
-                new PatientIdAndDateSearchCriteria(visitDatabase),
+                new DoctorIdSearchCriteria(visitDatabase),
+                new PatientIdSearchCriteria(visitDatabase),
                 new DateSearchCriteria(visitDatabase)};
         return visitsSearchCriteria;
     }
