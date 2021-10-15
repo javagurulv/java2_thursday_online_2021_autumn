@@ -2,6 +2,8 @@ package lv.javaguru.java2.hospital.visit.core.services.validators;
 
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
+import lv.javaguru.java2.hospital.visit.core.services.validators.existence.VisitExistenceByIdValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,9 +13,13 @@ import java.util.Optional;
 @Component
 public class EditVisitValidator {
 
+    @Autowired
+    private VisitExistenceByIdValidator validator;
+
     public List<CoreError> validate(EditVisitRequest request) {
         List<CoreError> errors = new ArrayList<>();
         validateId(request).ifPresent(errors::add);
+        validateVisitExistence(request.getVisitID()).ifPresent(errors::add);
         validateChanges(request).ifPresent(errors::add);
         return errors;
     }
@@ -22,6 +28,13 @@ public class EditVisitValidator {
         return (request.getVisitID() == null)
                 ? Optional.of(new CoreError("id", "Must not be empty!"))
                 : Optional.empty();
+    }
+
+    private Optional<CoreError> validateVisitExistence(Long id)  {
+        if(id == null) {
+            return Optional.empty();
+        }
+        return validator.validateExistenceById(id);
     }
 
     private Optional<CoreError> validateChanges(EditVisitRequest request) {

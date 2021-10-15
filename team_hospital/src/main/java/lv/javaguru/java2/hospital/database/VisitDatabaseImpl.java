@@ -119,4 +119,9 @@ public class VisitDatabaseImpl implements VisitDatabase {
                 .filter(visit -> visit.getVisitDate().equals(date))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Visit> getVisits() {
+        return visits;
+    }
 }
