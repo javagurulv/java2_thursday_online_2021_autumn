@@ -1,7 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
 import lv.javaguru.java2.hospital.database.VisitDatabase;
-import lv.javaguru.java2.hospital.doctor.core.services.search_criteria.*;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.VisitOrdering;
 import lv.javaguru.java2.hospital.visit.core.requests.VisitPaging;
@@ -9,7 +8,7 @@ import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.responses.SearchVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.search_criteria.*;
-import lv.javaguru.java2.hospital.visit.core.services.search_criteria.IdSearchCriteria;
+import lv.javaguru.java2.hospital.visit.core.services.search_criteria.VisitIdSearchCriteria;
 import lv.javaguru.java2.hospital.visit.core.services.validators.SearchVisitValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -74,7 +73,7 @@ public class SearchVisitService {
 
     private VisitsSearchCriteria[] getVisitsSearchCriteria() {
         VisitsSearchCriteria[] visitsSearchCriteria = {
-                new IdSearchCriteria(visitDatabase),
+                new VisitIdSearchCriteria(visitDatabase),
                 new DoctorIdAndPatientIdAndDateSearchCriteria(visitDatabase),
                 new DoctorIdAndPatientIdSearchCriteria(visitDatabase),
                 new DoctorIdAndDateSearchCriteria(visitDatabase),

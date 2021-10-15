@@ -51,11 +51,11 @@ public class SearchVisitRequest {
     }
 
     public boolean isPatientIdProvided() {
-        return this.visitId != null;
+        return this.patientId != null;
     }
 
     public boolean isDateProvided() {
-        return this.visitDate != null;
+        return this.visitDate != null && !this.visitDate.isEmpty();
     }
 
     public Long getVisitId() {
