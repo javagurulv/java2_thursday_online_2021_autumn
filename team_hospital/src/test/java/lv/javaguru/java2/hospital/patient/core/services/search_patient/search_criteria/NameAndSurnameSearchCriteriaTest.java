@@ -3,14 +3,28 @@ package lv.javaguru.java2.hospital.patient.core.services.search_patient.search_c
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 public class NameAndSurnameSearchCriteriaTest {
 
-    private final PatientDatabaseImpl patientDatabase = new PatientDatabaseImpl();
-    private final NameAndSurnameSearchCriteria searchCriteria = new NameAndSurnameSearchCriteria(patientDatabase);
+    @Mock private PatientDatabaseImpl database;
+    @InjectMocks private NameAndSurnameSearchCriteria searchCriteria;
 
     @Test
     public void shouldReturnTrue(){
@@ -26,11 +40,19 @@ public class NameAndSurnameSearchCriteriaTest {
 
     @Test
     public void shouldReturnCorrectPatient(){
-        patientDatabase.add(new Patient("name2", "surname2", "4321"));
         SearchPatientsRequest request = new SearchPatientsRequest("name2", "surname2", "");
-        Patient patient = searchCriteria.process(request).get(0);
-        assertEquals(patient.getName(), "name2");
-        assertEquals(patient.getSurname(), "surname2");
-        assertEquals(patient.getPersonalCode(), "4321");
+        List<Patient> patients = new ArrayList<>();
+        patients.add(new Patient("name2", "surname2", "4321"));
+
+        Mockito.when(database.findPatientsByNameAndSurname
+                        (request.getName(), request.getSurname()))
+                .thenReturn(patients);
+        List<Patient> patients2 = database.findPatientsByNameAndSurname
+                (request.getName(), request.getSurname());
+
+        assertTrue(searchCriteria.canProcess(request));
+        Assertions.assertEquals(patients2.get(0).getName(), "name2");
+        Assertions.assertEquals(patients2.get(0).getSurname(), "surname2");
+        Assertions.assertEquals(patients2.get(0).getPersonalCode(), "4321");
     }
 }

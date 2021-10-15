@@ -4,14 +4,25 @@ import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 class SurnameSearchCriteriaTest {
 
-    private PatientDatabaseImpl patientDatabase = new PatientDatabaseImpl();
-    private SurnameSearchCriteria searchCriteria = new SurnameSearchCriteria(patientDatabase);
+    @Mock private PatientDatabaseImpl database;
+    @InjectMocks private SurnameSearchCriteria searchCriteria;
 
     @Test
     public void shouldReturnTrue(){
@@ -27,12 +38,19 @@ class SurnameSearchCriteriaTest {
 
     @Test
     public void shouldReturnCorrectPatient(){
-        patientDatabase.add(new Patient("Name8745", "Surname1268", "985-65691"));
         SearchPatientsRequest request = new SearchPatientsRequest("", "Surname1268", "");
-        Patient patient = searchCriteria.process(request).get(0);
-        assertEquals(patient.getName(), "Name8745");
-        assertEquals(patient.getSurname(), "Surname1268");
-        assertEquals(patient.getPersonalCode(), "985-65691");
+        List<Patient> patients = new ArrayList<>();
+        patients.add(new Patient("Name8745", "Surname1268", "985-65691"));
+
+        Mockito.when(database.findPatientsBySurname(request.getSurname()))
+                .thenReturn(patients);
+        List<Patient> patients2 = database
+                .findPatientsBySurname(request.getSurname());
+        assertTrue(searchCriteria.canProcess(request));
+
+        assertEquals(patients2.get(0).getName(), "Name8745");
+        assertEquals(patients2.get(0).getSurname(), "Surname1268");
+        assertEquals(patients2.get(0).getPersonalCode(), "985-65691");
     }
 
 }

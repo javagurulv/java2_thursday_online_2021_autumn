@@ -35,7 +35,8 @@ public class PatientSearch {
                 new PersonalCodeSearchCriteria(database),
                 new NameAndSurnameSearchCriteria(database),
                 new NameAndPersonalCodeSearchCriteria(database),
-                new SurnameAndPersonalCodeSearchCriteria(database)};
+                new SurnameAndPersonalCodeSearchCriteria(database),
+                new NameSurnamePersonalCodeSearchCriteria(database)};
     }
 }
 

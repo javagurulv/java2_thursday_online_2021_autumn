@@ -1,9 +1,9 @@
 package lv.javaguru.java2.hospital.patient.core.services.search_patient.search_criteria;
 
+
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -16,43 +16,42 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-public class NameAndPersonalCodeSearchCriteriaTest {
+public class NameSurnamePersonalCodeSearchCriteriaTest {
 
     @Mock private PatientDatabaseImpl database;
-    @InjectMocks private NameAndPersonalCodeSearchCriteria searchCriteria;
+    @InjectMocks private NameSurnamePersonalCodeSearchCriteria searchCriteria;
 
     @Test
     public void shouldReturnTrue(){
-        SearchPatientsRequest request = new SearchPatientsRequest("name3", "", "1111");
+        SearchPatientsRequest request = new SearchPatientsRequest("name", "surname", "1234");
         assertTrue(searchCriteria.canProcess(request));
     }
 
     @Test
     public void shouldReturnFalse(){
-        SearchPatientsRequest request = new SearchPatientsRequest("", "surname3", "1111");
+        SearchPatientsRequest request = new SearchPatientsRequest("name", "surname", "");
         assertFalse(searchCriteria.canProcess(request));
     }
 
     @Test
     public void shouldReturnCorrectPatient(){
-        SearchPatientsRequest request = new SearchPatientsRequest("name3", "", "1111");
+        SearchPatientsRequest request = new SearchPatientsRequest("name", "surname", "1234");
         List<Patient> patients = new ArrayList<>();
-        patients.add(new Patient("name3", "surname3", "1111"));
+        patients.add(new Patient("name", "surname", "1234"));
 
-        Mockito.when(database.findPatientsByNameAndPersonalCode
-                        (request.getName(), request.getPersonalCode()))
+        Mockito.when(database.findPatientByNameSurnamePersonalCode
+                (request.getName(), request.getSurname(), request.getPersonalCode()))
                 .thenReturn(patients);
-        List<Patient> patients2 = database.findPatientsByNameAndPersonalCode
-                (request.getName(), request.getPersonalCode());
+        List<Patient> patients2 = database
+                .findPatientByNameSurnamePersonalCode(request.getName(), request.getSurname(), request.getPersonalCode());
 
         assertTrue(searchCriteria.canProcess(request));
-        Assertions.assertEquals(patients2.get(0).getName(), "name3");
-        Assertions.assertEquals(patients2.get(0).getSurname(), "surname3");
-        Assertions.assertEquals(patients2.get(0).getPersonalCode(), "1111");
+        assertEquals(patients2.get(0).getName(), "name");
+        assertEquals(patients2.get(0).getSurname(), "surname");
+        assertEquals(patients2.get(0).getPersonalCode(), "1234");
     }
 }
