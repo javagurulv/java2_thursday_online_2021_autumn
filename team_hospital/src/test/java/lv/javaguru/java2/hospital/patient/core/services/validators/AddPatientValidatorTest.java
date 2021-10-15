@@ -25,11 +25,15 @@ class AddPatientValidatorTest {
 
     @Test
     public void shouldReturnEmptyList(){
-        AddPatientRequest request =
-                new AddPatientRequest("Name", "Surname", "1234");
-        List<CoreError> errors = validator.validate(request);
-        assertTrue(errors.isEmpty());
-    }
+            AddPatientRequest request =
+                    new AddPatientRequest("Name", "Surname", "1234");
+            Mockito.when(database.findPatientByNameSurnamePersonalCode(
+                    request.getName(),
+                    request.getSurname(),
+                    request.getPersonalCode())).thenReturn(new ArrayList<>());
+            List<CoreError> errors = validator.validate(request);
+            assertTrue(errors.isEmpty());
+        }
 
     @Test
     public void shouldReturnNameError(){
@@ -76,7 +80,7 @@ class AddPatientValidatorTest {
     }
 
     @Test
-    public void shouldReturnError(){
+    public void shouldReturnError() {
         AddPatientRequest request =
                 new AddPatientRequest("Name", "Surname", "1234");
         List<Patient> patients = new ArrayList<>();
@@ -90,17 +94,5 @@ class AddPatientValidatorTest {
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Patient");
         assertEquals(errors.get(0).getDescription(), "already exist!");
-    }
-
-    @Test
-    public void shouldNotReturnError(){
-        AddPatientRequest request =
-                new AddPatientRequest("Name", "Surname", "1234");
-        Mockito.when(database.findPatientByNameSurnamePersonalCode(
-                request.getName(),
-                request.getSurname(),
-                request.getPersonalCode())).thenReturn(new ArrayList<>());
-        List<CoreError> errors = validator.validate(request);
-        assertTrue(errors.isEmpty());
     }
 }
