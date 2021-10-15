@@ -13,8 +13,7 @@ import java.util.Optional;
 @Component
 public class FindPatientByIDValidator {
 
-    @Autowired
-    private PatientExistenceByIDValidator idValidator;
+    @Autowired private PatientExistenceByIDValidator idValidator;
 
     public List<CoreError> validate(FindPatientByIdRequest request) {
         List<CoreError> errors = new ArrayList<>();

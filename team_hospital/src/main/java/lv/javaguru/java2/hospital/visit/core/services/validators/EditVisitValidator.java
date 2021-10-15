@@ -13,8 +13,7 @@ import java.util.Optional;
 @Component
 public class EditVisitValidator {
 
-    @Autowired
-    private VisitExistenceByIdValidator validator;
+    @Autowired private VisitExistenceByIdValidator validator;
 
     public List<CoreError> validate(EditVisitRequest request) {
         List<CoreError> errors = new ArrayList<>();
