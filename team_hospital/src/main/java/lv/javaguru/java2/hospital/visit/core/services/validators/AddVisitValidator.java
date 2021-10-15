@@ -9,6 +9,8 @@ import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,8 +18,10 @@ import java.util.Optional;
 @Component
 public class AddVisitValidator {
 
-    @Autowired private PatientDatabase patientDatabase;
-    @Autowired private DoctorDatabase doctorDatabase;
+    @Autowired
+    private PatientDatabase patientDatabase;
+    @Autowired
+    private DoctorDatabase doctorDatabase;
 
     public List<CoreError> validate(AddVisitRequest patientVisitRequest) {
         List<CoreError> errors = new ArrayList<>();
@@ -27,6 +31,7 @@ public class AddVisitValidator {
         validateVisitDate(patientVisitRequest).ifPresent(errors::add);
         validatePatientExistence(patientVisitRequest).ifPresent(errors::add);
         validateDoctorExistence(patientVisitRequest).ifPresent(errors::add);
+        validateDate(patientVisitRequest).ifPresent(errors::add);
         return errors;
     }
 
@@ -60,5 +65,14 @@ public class AddVisitValidator {
         List<Doctor> doctor = doctorDatabase.findByNameAndSurname(request.getDoctorsName(), request.getDoctorsSurname());
         return doctor.isEmpty() ?
                 Optional.of(new CoreError("Doctor", "does not exist!")) : Optional.empty();
+    }
+
+    private Optional<CoreError> validateDate(AddVisitRequest request) {
+        try {
+            new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(request.getVisitDate());
+            return Optional.empty();
+        } catch (ParseException e) {
+            return Optional.of(new CoreError("Date", "input is incorrect!"));
+        }
     }
 }

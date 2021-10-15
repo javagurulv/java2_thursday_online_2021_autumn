@@ -41,17 +41,14 @@ public class AddVisitService {
     }
 
     private Doctor getDoctor(AddVisitRequest request) {
-        Doctor doctor = doctorDatabase
+        return doctorDatabase
                 .findByNameAndSurname(request.getDoctorsName(), request.getDoctorsSurname()).get(0);
-        return doctor;
     }
 
     private Patient getPatient(AddVisitRequest request) {
-        Patient patient = patientDatabase
+        return patientDatabase
                 .findPatientsByPersonalCode(request.getPatientsPersonalCode()).get(0);
-        return patient;
     }
-
 
     private Date getVisitDate(AddVisitRequest request) {
         Date visitDate = null;
