@@ -7,7 +7,7 @@ import lv.javaguru.java2.hospital.patient.core.requests.PatientPaging;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
-import lv.javaguru.java2.hospital.patient.core.services.search_patient.SearchPatientsService;
+import lv.javaguru.java2.hospital.patient.core.services.search_patient_service.SearchPatientsService;
 import lv.javaguru.java2.hospital.patient.core.services.validators.SearchPatientsValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

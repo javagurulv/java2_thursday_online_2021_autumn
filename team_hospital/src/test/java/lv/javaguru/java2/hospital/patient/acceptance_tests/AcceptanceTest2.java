@@ -9,7 +9,7 @@ import lv.javaguru.java2.hospital.patient.core.requests.PatientPaging;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
 import lv.javaguru.java2.hospital.patient.core.services.AddPatientService;
-import lv.javaguru.java2.hospital.patient.core.services.search_patient.SearchPatientsService;
+import lv.javaguru.java2.hospital.patient.core.services.search_patient_service.SearchPatientsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

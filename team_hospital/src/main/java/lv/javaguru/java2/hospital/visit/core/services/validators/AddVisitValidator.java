@@ -2,8 +2,6 @@ package lv.javaguru.java2.hospital.visit.core.services.validators;
 
 import lv.javaguru.java2.hospital.database.DoctorDatabase;
 import lv.javaguru.java2.hospital.database.PatientDatabase;
-import lv.javaguru.java2.hospital.domain.Doctor;
-import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,15 +54,15 @@ public class AddVisitValidator {
     }
 
     private Optional<CoreError> validatePatientExistence(AddVisitRequest request) {
-        List<Patient> patient = patientDatabase.findPatientsByPersonalCode(request.getPatientsPersonalCode());
-        return patient.isEmpty() ?
-                Optional.of(new CoreError("Patient", "does not exist!")) : Optional.empty();
+        return request == null ? Optional.empty() :
+                patientDatabase.findPatientsByPersonalCode(request.getPatientsPersonalCode()).isEmpty() ?
+                        Optional.of(new CoreError("Patient", "does not exist!")) : Optional.empty();
     }
 
     private Optional<CoreError> validateDoctorExistence(AddVisitRequest request) {
-        List<Doctor> doctor = doctorDatabase.findByNameAndSurname(request.getDoctorsName(), request.getDoctorsSurname());
-        return doctor.isEmpty() ?
-                Optional.of(new CoreError("Doctor", "does not exist!")) : Optional.empty();
+        return request == null ? Optional.empty() :
+                doctorDatabase.findByNameAndSurname(request.getDoctorsName(), request.getDoctorsSurname()).isEmpty() ?
+                        Optional.of(new CoreError("Doctor", "does not exist!")) : Optional.empty();
     }
 
     private Optional<CoreError> validateDate(AddVisitRequest request) {
