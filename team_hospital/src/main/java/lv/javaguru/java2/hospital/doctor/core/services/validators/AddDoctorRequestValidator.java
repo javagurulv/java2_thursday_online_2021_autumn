@@ -2,6 +2,8 @@ package lv.javaguru.java2.hospital.doctor.core.services.validators;
 
 import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.existence.DoctorExistenceForAddValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,11 +13,15 @@ import java.util.Optional;
 @Component
 public class AddDoctorRequestValidator {
 
+    @Autowired
+    private DoctorExistenceForAddValidator doctorExistenceForAddValidator;
+
     public List<CoreError> validate(AddDoctorRequest request) {
         List<CoreError> errors = new ArrayList<>();
         validateName(request).ifPresent(errors::add);
         validateSurname(request).ifPresent(errors::add);
         validateSpeciality(request).ifPresent(errors::add);
+        //validateExistence(request, errors);
         return errors;
     }
 
@@ -36,5 +42,10 @@ public class AddDoctorRequestValidator {
                 ? Optional.of(new CoreError("speciality", "Must not be empty!"))
                 : Optional.empty();
     }
-
+/*
+    private void validateExistence(AddDoctorRequest request, List<CoreError> errors) {
+        Optional<CoreError> error = doctorExistenceForAddValidator.validateDoctorExistence(request);
+        error.ifPresent(errors::add);
+    }
+ */
 }

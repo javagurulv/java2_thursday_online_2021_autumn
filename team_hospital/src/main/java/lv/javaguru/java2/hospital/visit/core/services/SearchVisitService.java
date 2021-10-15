@@ -112,14 +112,4 @@ public class SearchVisitService {
         }
     }
 
-    private Date getVisitDate(SearchVisitRequest request) {
-        Date visitDate = null;
-        try {
-            visitDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(request.getVisitDate());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return visitDate;
-    }
-
 }
