@@ -34,6 +34,7 @@ class AddVisitValidatorTest {
                 "name",
                 "surname",
                 "12/12/21 12:00");
+
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.get(0).getField(), "Patient personal code");
@@ -47,6 +48,7 @@ class AddVisitValidatorTest {
                 "",
                 "surname",
                 "12/12/21 12:00");
+
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.get(0).getField(), "Doctor name");
@@ -60,6 +62,7 @@ class AddVisitValidatorTest {
                 "name",
                 "",
                 "12/12/21 12:00");
+
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.get(0).getField(), "Doctor surname");
@@ -73,10 +76,6 @@ class AddVisitValidatorTest {
                 "name",
                 "surname",
                 "");
-        List<CoreError> errors = new ArrayList<>();
-        errors.add(new CoreError("Visit date", "must not be empty!"));
-        Mockito.when(addVisitValidator.validate(addVisitRequest)).thenReturn(errors);
-
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
@@ -92,12 +91,9 @@ class AddVisitValidatorTest {
                 "surname",
                 "12/12/2021 12:00");
 
-        List<CoreError> errors = new ArrayList<>();
-        errors.add(new CoreError("Patient", "does not exist!"));
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("name", "surname", "speciality"));
 
-        Mockito.when(addVisitValidator.validate(addVisitRequest)).thenReturn(errors);
         Mockito.when(patientDatabase.findPatientsByPersonalCode(addVisitRequest.getPatientsPersonalCode()))
                 .thenReturn(new ArrayList<>());
         Mockito.when(doctorDatabase.findByNameAndSurname(addVisitRequest.getDoctorsName(), addVisitRequest.getDoctorsSurname()))
@@ -117,12 +113,9 @@ class AddVisitValidatorTest {
                 "surname",
                 "12/12/2021 12:00");
 
-        List<CoreError> errors = new ArrayList<>();
-        errors.add(new CoreError("Doctor", "does not exist!"));
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
 
-        Mockito.when(addVisitValidator.validate(addVisitRequest)).thenReturn(errors);
         Mockito.when(patientDatabase.findPatientsByPersonalCode(addVisitRequest.getPatientsPersonalCode()))
                 .thenReturn(patients);
         Mockito.when(doctorDatabase.findByNameAndSurname(addVisitRequest.getDoctorsName(), addVisitRequest.getDoctorsSurname()))
@@ -142,8 +135,6 @@ class AddVisitValidatorTest {
                 "surname",
                 "121220211200");
 
-        List<CoreError> errors = new ArrayList<>();
-        errors.add(new CoreError("Date", "input is incorrect!"));
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
         List<Doctor> doctors = new ArrayList<>();
@@ -153,7 +144,6 @@ class AddVisitValidatorTest {
                 .thenReturn(patients);
         Mockito.when(doctorDatabase.findByNameAndSurname(addVisitRequest.getDoctorsName(), addVisitRequest.getDoctorsSurname()))
                 .thenReturn(doctors);
-        Mockito.when(addVisitValidator.validate(addVisitRequest)).thenReturn(errors);
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
