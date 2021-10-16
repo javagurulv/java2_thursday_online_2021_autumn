@@ -21,7 +21,7 @@ public class AddDoctorRequestValidator {
         validateName(request).ifPresent(errors::add);
         validateSurname(request).ifPresent(errors::add);
         validateSpeciality(request).ifPresent(errors::add);
-        //validateExistence(request, errors);
+        validateExistence(request, errors);
         return errors;
     }
 
@@ -42,10 +42,10 @@ public class AddDoctorRequestValidator {
                 ? Optional.of(new CoreError("speciality", "Must not be empty!"))
                 : Optional.empty();
     }
-/*
+
     private void validateExistence(AddDoctorRequest request, List<CoreError> errors) {
         Optional<CoreError> error = doctorExistenceForAddValidator.validateDoctorExistence(request);
         error.ifPresent(errors::add);
     }
- */
+
 }
