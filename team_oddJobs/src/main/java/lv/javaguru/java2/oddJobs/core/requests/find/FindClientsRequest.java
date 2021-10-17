@@ -52,6 +52,15 @@ public class FindClientsRequest {
         this.paging = paging;
     }
 
+    public FindClientsRequest(String clientName, String clientSurname) {
+        this.clientName = clientName;
+        this.clientSurname = clientSurname;
+    }
+
+    public FindClientsRequest(String clientName) {
+        this.clientName = clientName;
+    }
+
     public Long getClientId() {
         return clientId;
     }
@@ -81,6 +90,6 @@ public class FindClientsRequest {
     }
 
     public boolean isSurnameProvide() {
-        return this.clientSurname != null && !this.clientName.isEmpty();
+        return this.clientSurname != null && !this.clientSurname.isEmpty();
     }
 }

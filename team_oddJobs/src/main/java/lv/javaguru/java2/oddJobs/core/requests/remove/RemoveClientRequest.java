@@ -12,6 +12,11 @@ public class RemoveClientRequest {
         this.clientId = clientId;
     }
 
+    public RemoveClientRequest(String clientName, String clientSurname) {
+        this.clientName = clientName;
+        this.clientSurname = clientSurname;
+    }
+
     public Long getClientId() {
         return clientId;
     }

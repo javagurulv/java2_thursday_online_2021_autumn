@@ -5,10 +5,11 @@ import lv.javaguru.java2.oddJobs.core.requests.find.Ordering;
 import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.find.FindClientsResponse;
-import lv.javaguru.java2.oddJobs.core.validations.FindClientsRequestValidator;
+import lv.javaguru.java2.oddJobs.core.validations.FindClientsValidator;
 import lv.javaguru.java2.oddJobs.database.Database;
 import lv.javaguru.java2.oddJobs.domain.Client;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,10 +19,14 @@ import java.util.stream.Collectors;
 @Component
 public class FindClientsService {
 
-    @Autowired
-    private Database database;
-    @Autowired
-    private FindClientsRequestValidator clientValidator;
+    @Value("${search.ordering.enabled}")
+    private boolean orderingEnabled;
+
+    @Value("${search.paging.enabled}")
+    private boolean pagingEnabled;
+
+    @Autowired private Database database;
+    @Autowired private FindClientsValidator clientValidator;
 
 
     public FindClientsResponse execute(FindClientsRequest request) {
