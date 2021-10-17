@@ -27,7 +27,7 @@ public class ExistenceByNameAndSpeciality implements DoctorExistenceBySearchCrit
 
     @Override
     public Optional<CoreError> validateExistence(SearchDoctorsRequest request) {
-        for (Doctor doctor : database.getDoctorsList()) {
+        for (Doctor doctor : database.showAllDoctors()) {
             if (Objects.equals(doctor.getName(), request.getName())
                     && Objects.equals(doctor.getSpeciality(), request.getSpeciality())) {
                 return Optional.empty();

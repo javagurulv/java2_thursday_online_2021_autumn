@@ -141,9 +141,4 @@ public class PatientDatabaseImpl implements PatientDatabase {
         }
         return list;
     }
-
-    @Override
-    public List<Patient> getPatientsList() {
-        return patientsList;
-    }
 }

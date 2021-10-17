@@ -27,7 +27,7 @@ public class ExistenceByName implements DoctorExistenceBySearchCriteria{
 
     @Override
     public Optional<CoreError> validateExistence(SearchDoctorsRequest request) {
-        for (Doctor doctor : database.getDoctorsList()) {
+        for (Doctor doctor : database.showAllDoctors()) {
             if (Objects.equals(doctor.getName(), request.getName())) {
                 return Optional.empty();
             }

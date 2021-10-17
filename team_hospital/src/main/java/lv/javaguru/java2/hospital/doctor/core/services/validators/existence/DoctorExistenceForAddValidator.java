@@ -16,7 +16,7 @@ public class DoctorExistenceForAddValidator {
     private DoctorDatabase database;
 
     public Optional<CoreError> validateDoctorExistence(AddDoctorRequest request) {
-        for (Doctor doctor : database.getDoctorsList()) {
+        for (Doctor doctor : database.showAllDoctors()) {
             if (doctor.getName().equals(request.getName())
                     && doctor.getSurname().equals(request.getSurname())
                     && doctor.getSpeciality().equals(request.getSpeciality())) {

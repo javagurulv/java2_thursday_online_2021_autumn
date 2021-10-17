@@ -59,7 +59,7 @@ class ExistenceByIdTest {
         SearchDoctorsRequest request = new SearchDoctorsRequest(doctorsId, "", "", "");
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
-        Mockito.when(database.getDoctorsList()).thenReturn(doctors);
+        Mockito.when(database.showAllDoctors()).thenReturn(doctors);
 
         Optional<CoreError> errorList = existence.validateExistence(request);
         assertTrue(errorList.isEmpty());

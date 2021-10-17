@@ -64,7 +64,7 @@ class ExistenceByDoctorIdAndPatientIdAndDateTest {
         visits.add(new Visit(doctor, patient, date));
 
         SearchVisitRequest request = new SearchVisitRequest(null, doctorId, patientId, "27/12/2021 16:00");
-        Mockito.when(database.getVisits()).thenReturn(visits);
+        Mockito.when(database.showAllVisits()).thenReturn(visits);
         Optional<CoreError> error = existence.validateExistence(request);
         assertTrue(error.isEmpty());
     }

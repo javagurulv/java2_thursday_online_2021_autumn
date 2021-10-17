@@ -116,9 +116,4 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
                 .filter(doctor -> doctor.getSpeciality().equals(speciality))
                 .collect(Collectors.toList());
     }
-
-    @Override
-    public List<Doctor> getDoctorsList() {
-        return doctorsList;
-    }
 }

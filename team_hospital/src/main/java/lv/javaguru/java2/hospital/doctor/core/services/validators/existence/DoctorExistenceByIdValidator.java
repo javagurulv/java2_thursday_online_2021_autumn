@@ -19,7 +19,7 @@ public class DoctorExistenceByIdValidator {
     private DoctorDatabase database;
 
     public Optional<CoreError> validateExistenceById(Long id) {
-        for (Doctor doctor : database.getDoctorsList()) {
+        for (Doctor doctor : database.showAllDoctors()) {
             if (Objects.equals(doctor.getId(), id)) {
                 return Optional.empty();
             }

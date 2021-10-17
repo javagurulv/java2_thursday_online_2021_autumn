@@ -27,7 +27,7 @@ public class NameSearchValidator implements SearchValidator {
 
     @Override
     public Optional<CoreError> process(SearchPatientsRequest request) {
-        for (Patient p : database.getPatientsList()) {
+        for (Patient p : database.showAllPatients()) {
             if (p.getName().equals(request.getName())) {
                 return Optional.empty();
             }

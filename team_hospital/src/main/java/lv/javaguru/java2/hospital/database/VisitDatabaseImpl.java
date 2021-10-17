@@ -120,8 +120,4 @@ public class VisitDatabaseImpl implements VisitDatabase {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<Visit> getVisits() {
-        return visits;
-    }
 }

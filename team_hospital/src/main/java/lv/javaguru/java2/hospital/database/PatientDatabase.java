@@ -32,5 +32,4 @@ public interface PatientDatabase {
 
     List<Patient> findPatientByNameSurnamePersonalCode(String name, String surname, String personalCode);
 
-    List<Patient> getPatientsList();
 }
