@@ -1,6 +1,5 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.existence;
 
-import lv.javaguru.java2.hospital.database.VisitDatabaseImpl;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria.*;
@@ -13,8 +12,14 @@ import java.util.List;
 @Component
 public class VisitExistenceForSearchValidator {
 
-    @Autowired
-    VisitDatabaseImpl database;
+    @Autowired ExistenceByVisitId existenceByVisitId;
+    @Autowired ExistenceByDoctorIdAndPatientIdAndDate existenceByDoctorIdAndPatientIdAndDate;
+    @Autowired ExistenceByDoctorIdAndPatientId existenceByDoctorIdAndPatientId;
+    @Autowired ExistenceByDoctorIdAndDate existenceByDoctorIdAndDate;
+    @Autowired ExistenceByPatientIdAndDate existenceByPatientIdAndDate;
+    @Autowired ExistenceByDoctorId existenceByDoctorId;
+    @Autowired ExistenceByPatientId existenceByPatientId;
+    @Autowired ExistenceByDate existenceByDate;
 
     public List<CoreError> validate(SearchVisitRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -30,14 +35,14 @@ public class VisitExistenceForSearchValidator {
 
     private VisitExistenceBySearchCriteria[] getVisitExistenceBySearchCriteria() {
         VisitExistenceBySearchCriteria[] visitExistenceBySearchCriteria = {
-                new ExistenceByVisitId(database),
-                new ExistenceByDoctorIdAndPatientIdAndDate(database),
-                new ExistenceByDoctorIdAndPatientId(database),
-                new ExistenceByDoctorIdAndDate(database),
-                new ExistenceByPatientIdAndDate(database),
-                new ExistenceByDoctorId(database),
-                new ExistenceByPatientId(database),
-                new ExistenceByDate(database)};
+                existenceByVisitId,
+                existenceByDoctorIdAndPatientIdAndDate,
+                existenceByDoctorIdAndPatientId,
+                existenceByDoctorIdAndDate,
+                existenceByPatientIdAndDate,
+                existenceByDoctorId,
+                existenceByPatientId,
+                existenceByDate};
         return visitExistenceBySearchCriteria;
     }
 }
