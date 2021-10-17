@@ -1,6 +1,5 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators.existence;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.doctor.core.services.validators.existence.search_criteria.*;
@@ -13,8 +12,14 @@ import java.util.List;
 @Component
 public class DoctorExistenceForSearchValidator {
 
-    @Autowired
-    private DoctorDatabaseImpl database;
+    @Autowired private ExistenceById existenceById;
+    @Autowired private ExistenceByNameAndSurnameAndSpeciality existenceByNameAndSurnameAndSpeciality;
+    @Autowired private ExistenceByNameAndSurname existenceByNameAndSurname;
+    @Autowired private ExistenceByNameAndSpeciality existenceByNameAndSpeciality;
+    @Autowired private ExistenceBySurnameAndSpeciality existenceBySurnameAndSpeciality;
+    @Autowired private ExistenceByName existenceByName;
+    @Autowired private ExistenceBySurname existenceBySurname;
+    @Autowired private ExistenceBySpeciality existenceBySpeciality;
 
     public List<CoreError> validate(SearchDoctorsRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -31,17 +36,16 @@ public class DoctorExistenceForSearchValidator {
         return errors;
     }
 
-
     private DoctorExistenceBySearchCriteria[] getDoctorsExistenceBySearchCriteria() {
         DoctorExistenceBySearchCriteria[] doctorExistenceBySearchCriteria = {
-                new ExistenceById(database),
-                new ExistenceByNameAndSurnameAndSpeciality(database),
-                new ExistenceByNameAndSurname(database),
-                new ExistenceByNameAndSpeciality(database),
-                new ExistenceBySurnameAndSpeciality(database),
-                new ExistenceByName(database),
-                new ExistenceBySurname(database),
-                new ExistenceBySpeciality(database)};
+                existenceById,
+                existenceByNameAndSurnameAndSpeciality,
+                existenceByNameAndSurname,
+                existenceByNameAndSpeciality,
+                existenceBySurnameAndSpeciality,
+                existenceByName,
+                existenceBySurname,
+                existenceBySpeciality};
         return doctorExistenceBySearchCriteria;
     }
 }

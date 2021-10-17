@@ -2,9 +2,11 @@ package lv.javaguru.java2.hospital.database;
 
 import lv.javaguru.java2.hospital.doctor.core.requests.EditOption;
 import lv.javaguru.java2.hospital.domain.Doctor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public interface DoctorDatabase {
 
     void addDoctor(Doctor doctor);

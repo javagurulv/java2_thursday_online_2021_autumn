@@ -1,7 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators.existence.search_criteria;
 
-
-import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
+import lv.javaguru.java2.hospital.database.DoctorDatabase;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.domain.Doctor;
@@ -26,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ExistenceBySurnameTest {
 
     @Mock
-    private DoctorDatabaseImpl database;
+    private DoctorDatabase database;
     @InjectMocks
     private ExistenceBySurname existence;
 
