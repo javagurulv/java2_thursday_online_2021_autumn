@@ -59,6 +59,7 @@ public class PatientDatabaseImpl implements PatientDatabase {
         return false;
     }
 
+
     @Override
     public boolean patientExists(Long id) {
         for (Patient patient : patientsList) {
@@ -129,7 +130,15 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public List<Patient> getPatientsList() {
-        return patientsList;
+    public List<Patient> findPatientByNameSurnamePersonalCode(String name, String surname, String personalCode) {
+        List<Patient> list = new ArrayList<>();
+        for (Patient p : patientsList) {
+            if (p.getName().equals(name)
+                    && p.getSurname().equals(surname)
+                    && p.getPersonalCode().equals(personalCode)) {
+                list.add(p);
+            }
+        }
+        return list;
     }
 }

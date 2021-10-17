@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators.existence.search_criteria;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
+import lv.javaguru.java2.hospital.database.DoctorDatabase;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.domain.Doctor;
@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ExistenceBySpecialityTest {
 
     @Mock
-    private DoctorDatabaseImpl database;
+    private DoctorDatabase database;
     @InjectMocks
     private ExistenceBySpeciality existence;
 
@@ -57,7 +57,7 @@ class ExistenceBySpecialityTest {
         SearchDoctorsRequest request = new SearchDoctorsRequest(null, "", "", "Speciality894");
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
-        Mockito.when(database.getDoctorsList()).thenReturn(doctors);
+        Mockito.when(database.showAllDoctors()).thenReturn(doctors);
 
         Optional<CoreError> errorList = existence.validateExistence(request);
         assertTrue(errorList.isEmpty());

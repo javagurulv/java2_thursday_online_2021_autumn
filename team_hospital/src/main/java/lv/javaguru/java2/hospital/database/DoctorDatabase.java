@@ -2,6 +2,7 @@ package lv.javaguru.java2.hospital.database;
 
 import lv.javaguru.java2.hospital.doctor.core.requests.EditOption;
 import lv.javaguru.java2.hospital.domain.Doctor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -30,7 +31,5 @@ public interface DoctorDatabase {
     List<Doctor> findBySurnameAndSpeciality(String surname, String speciality);
 
     List<Doctor> findByNameAndSurnameAndSpeciality(String name, String surname, String speciality);
-
-    List<Doctor> getDoctorsList();
 
 }

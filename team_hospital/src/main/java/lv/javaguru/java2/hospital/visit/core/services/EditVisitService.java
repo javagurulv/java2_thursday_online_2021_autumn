@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
-import lv.javaguru.java2.hospital.database.VisitDatabaseImpl;
+import lv.javaguru.java2.hospital.database.VisitDatabase;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.responses.EditVisitResponse;
@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class EditVisitService {
 
-    @Autowired private VisitDatabaseImpl database;
+    @Autowired private VisitDatabase database;
     @Autowired private EditVisitValidator validator;
 
     public EditVisitResponse execute(EditVisitRequest request) {

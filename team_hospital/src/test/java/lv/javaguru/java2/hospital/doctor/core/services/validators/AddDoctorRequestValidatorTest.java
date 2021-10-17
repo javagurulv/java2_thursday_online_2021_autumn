@@ -2,15 +2,27 @@ package lv.javaguru.java2.hospital.doctor.core.services.validators;
 
 import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
+import lv.javaguru.java2.hospital.doctor.core.services.validators.existence.DoctorExistenceForAddValidator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 class AddDoctorRequestValidatorTest {
 
-    private AddDoctorRequestValidator validator = new AddDoctorRequestValidator();
+    @Mock
+    private DoctorExistenceForAddValidator doctorExistenceForAddValidator;
+    @InjectMocks
+    private AddDoctorRequestValidator validator;
 
     @Test
     public void shouldReturnEmptyList() {
@@ -62,5 +74,4 @@ class AddDoctorRequestValidatorTest {
         assertEquals(errorList.get(2).getField(), "speciality");
         assertEquals(errorList.get(2).getMessage(), "Must not be empty!");
     }
-
 }

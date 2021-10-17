@@ -8,8 +8,7 @@ import lv.javaguru.java2.hospital.patient.core.services.EditPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Scanner;
-
+import java.util.Locale;
 @Component
 public class EditPatientUIAction implements PatientUIActions {
 
@@ -17,13 +16,13 @@ public class EditPatientUIAction implements PatientUIActions {
     private EditPatientService editPatient;
 
     public void execute() {
-        Scanner scanner = new Scanner(System.in);
         GetUserInput getUserInput = new GetUserInput();
         PatientEnumChecker checker = new PatientEnumChecker();
         Long id = getUserInput.getUserLongInput("Please enter patient ID: ");
-        String str =
-                getUserInput.getUserStringInput("What information would you like to edit? (NAME||SURNAME||PERSONAL_CODE)?");
-        EditPatientEnum editEnum = checker.validateEnum(str);
+        String userInputString = getUserInput
+                        .getUserStringInput("What information would you like to edit? (NAME||SURNAME||PERSONAL_CODE)?")
+                        .toUpperCase(Locale.ROOT);
+        EditPatientEnum editEnum = checker.validateEnum(userInputString);
         if(editEnum == null){
             return;
         }

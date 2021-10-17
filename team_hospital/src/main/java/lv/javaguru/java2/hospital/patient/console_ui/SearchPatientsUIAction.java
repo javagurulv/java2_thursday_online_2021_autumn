@@ -4,7 +4,7 @@ import lv.javaguru.java2.hospital.patient.core.requests.PatientOrdering;
 import lv.javaguru.java2.hospital.patient.core.requests.PatientPaging;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
-import lv.javaguru.java2.hospital.patient.core.services.SearchPatientsService;
+import lv.javaguru.java2.hospital.patient.core.services.search_patient_service.SearchPatientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -27,7 +27,7 @@ public class AcceptanceTest1 {
         AddDoctorRequest addDoctorRequest1 = new AddDoctorRequest("NameA", "SurnameA", "SpecialityA");
         getAddDoctorService().execute(addDoctorRequest1);
 
-        AddDoctorRequest addDoctorRequest2 = new AddDoctorRequest("NameA", "SurnameA", "SpecialityA");
+        AddDoctorRequest addDoctorRequest2 = new AddDoctorRequest("NameAB", "SurnameAB", "SpecialityAB");
         getAddDoctorService().execute(addDoctorRequest2);
 
         ShowAllDoctorsResponse response = getShowAllDoctorsService().execute(new ShowAllDoctorsRequest());

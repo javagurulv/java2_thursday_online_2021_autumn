@@ -27,7 +27,7 @@ public class PersonalCodeSearchValidator implements SearchValidator {
 
     @Override
     public Optional<CoreError> process(SearchPatientsRequest request) {
-        for (Patient p : database.getPatientsList()) {
+        for (Patient p : database.showAllPatients()) {
             if (p.getPersonalCode().equals(request.getPersonalCode())) {
                 return Optional.empty();
             }

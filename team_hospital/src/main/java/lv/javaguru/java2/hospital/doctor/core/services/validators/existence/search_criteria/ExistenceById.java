@@ -1,21 +1,20 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators.existence.search_criteria;
 
 import lv.javaguru.java2.hospital.database.DoctorDatabase;
-import lv.javaguru.java2.hospital.database.DoctorDatabaseImpl;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.domain.Doctor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 import java.util.Optional;
 
+@Component
 public class ExistenceById implements DoctorExistenceBySearchCriteria {
 
-    private DoctorDatabase database = new DoctorDatabaseImpl();
-
-    public ExistenceById(DoctorDatabaseImpl database) {
-        this.database = database;
-    }
+    @Autowired
+    private DoctorDatabase database;
 
     @Override
     public boolean canValidate(SearchDoctorsRequest request) {
@@ -24,7 +23,7 @@ public class ExistenceById implements DoctorExistenceBySearchCriteria {
 
     @Override
     public Optional<CoreError> validateExistence(SearchDoctorsRequest request) {
-        for (Doctor doctor : database.getDoctorsList()) {
+        for (Doctor doctor : database.showAllDoctors()) {
             if (Objects.equals(doctor.getId(), request.getId())) {
                 return Optional.empty();
             }
