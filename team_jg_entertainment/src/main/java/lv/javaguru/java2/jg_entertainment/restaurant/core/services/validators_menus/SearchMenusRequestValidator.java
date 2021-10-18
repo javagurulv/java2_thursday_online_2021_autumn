@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsMenus;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_menus;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.OrderingMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.PagingMenu;

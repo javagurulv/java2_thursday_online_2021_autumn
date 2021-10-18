@@ -56,4 +56,5 @@ public class SearchMenusRequest {
     public PagingMenu getPagingMenu() {
         return pagingMenu;
     }
+
 }

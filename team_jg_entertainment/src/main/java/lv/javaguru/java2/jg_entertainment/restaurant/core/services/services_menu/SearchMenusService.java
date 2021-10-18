@@ -11,7 +11,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.PagingM
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.SearchMenusRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.SearchMenusResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validatorsMenus.SearchMenusRequestValidator;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_menus.SearchMenusRequestValidator;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
