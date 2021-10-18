@@ -15,7 +15,8 @@ public class AddVisitUIAction implements VisitUIAction{
         String patientsPersonalCode = getUserInput.getUserStringInput("Please enter patient personal code: ");
         String doctorName = getUserInput.getUserStringInput("Please enter doctor name: ");
         String doctorSurname = getUserInput.getUserStringInput("Please enter doctor surname: ");
-        String visitDate = getUserInput.getUserStringInput("Please enter visit date in format dd/MM/yyyy HH:mm: ");
+        String visitDate = getUserInput.getUserStringInput("Visits are possible every hour from 9 till 17 on working days only. " +
+                "Please enter visit date in format dd/MM/yyyy HH:mm: ");
 
         AddVisitRequest request =
                 new AddVisitRequest(patientsPersonalCode, doctorName,

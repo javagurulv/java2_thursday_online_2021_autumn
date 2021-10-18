@@ -16,6 +16,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,6 +26,7 @@ class AddVisitValidatorTest {
 
     @Mock PatientDatabase patientDatabase;
     @Mock DoctorDatabase doctorDatabase;
+    @Mock DateValidator dateValidator;
     @InjectMocks AddVisitValidator addVisitValidator;
 
     @Test
@@ -144,7 +146,8 @@ class AddVisitValidatorTest {
                 .thenReturn(patients);
         Mockito.when(doctorDatabase.findByNameAndSurname(addVisitRequest.getDoctorsName(), addVisitRequest.getDoctorsSurname()))
                 .thenReturn(doctors);
-
+        Mockito.when(dateValidator.validate(addVisitRequest.getVisitDate())).thenReturn
+                (Optional.of(new CoreError("Date", "input is incorrect!")));
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.get(0).getField(), "Date");

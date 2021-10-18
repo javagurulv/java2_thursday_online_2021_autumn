@@ -7,8 +7,6 @@ import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +18,8 @@ public class AddVisitValidator {
     private PatientDatabase patientDatabase;
     @Autowired
     private DoctorDatabase doctorDatabase;
+    @Autowired
+    private DateValidator dateValidator;
 
     public List<CoreError> validate(AddVisitRequest patientVisitRequest) {
         List<CoreError> errors = new ArrayList<>();
@@ -66,11 +66,9 @@ public class AddVisitValidator {
     }
 
     private Optional<CoreError> validateDate(AddVisitRequest request) {
-        try {
-            new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(request.getVisitDate());
-            return Optional.empty();
-        } catch (ParseException e) {
-            return Optional.of(new CoreError("Date", "input is incorrect!"));
+        if (dateValidator.validate(request.getVisitDate()).isPresent()) {
+            return dateValidator.validate(request.getVisitDate());
         }
+        return Optional.empty();
     }
 }
