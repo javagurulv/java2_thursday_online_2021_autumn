@@ -4,6 +4,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
 
 import java.util.List;
 
+
 public interface DatabaseMenu {
 
     void save(Menu menu);
