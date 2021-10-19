@@ -4,6 +4,7 @@ import lv.javaguru.java2.hospital.database.DoctorDatabase;
 import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
+import lv.javaguru.java2.hospital.visit.core.services.validators.date_validator.DateValidatorExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,22 +15,19 @@ import java.util.Optional;
 @Component
 public class AddVisitValidator {
 
-    @Autowired
-    private PatientDatabase patientDatabase;
-    @Autowired
-    private DoctorDatabase doctorDatabase;
-    @Autowired
-    private DateValidator dateValidator;
+    @Autowired private PatientDatabase patientDatabase;
+    @Autowired private DoctorDatabase doctorDatabase;
+    @Autowired private DateValidatorExecution dateValidator;
 
     public List<CoreError> validate(AddVisitRequest patientVisitRequest) {
         List<CoreError> errors = new ArrayList<>();
         validatePatientsPersonalCode(patientVisitRequest).ifPresent(errors::add);
         validateDoctorsName(patientVisitRequest).ifPresent(errors::add);
         validateDoctorsSurname(patientVisitRequest).ifPresent(errors::add);
-        validateVisitDate(patientVisitRequest).ifPresent(errors::add);
+        validateDateFieldOnEmptiness(patientVisitRequest).ifPresent(errors::add);
         validatePatientExistence(patientVisitRequest).ifPresent(errors::add);
         validateDoctorExistence(patientVisitRequest).ifPresent(errors::add);
-        validateDate(patientVisitRequest).ifPresent(errors::add);
+        errors.addAll(validateDate(patientVisitRequest));
         return errors;
     }
 
@@ -48,7 +46,7 @@ public class AddVisitValidator {
                 ? Optional.of(new CoreError("Doctor surname", "must not be empty!")) : Optional.empty();
     }
 
-    private Optional<CoreError> validateVisitDate(AddVisitRequest request) {
+    private Optional<CoreError> validateDateFieldOnEmptiness(AddVisitRequest request) {
         return (request.getVisitDate() == null || request.getVisitDate().isEmpty())
                 ? Optional.of(new CoreError("Visit date", "must not be empty!")) : Optional.empty();
     }
@@ -65,10 +63,7 @@ public class AddVisitValidator {
                         Optional.of(new CoreError("Doctor", "does not exist!")) : Optional.empty();
     }
 
-    private Optional<CoreError> validateDate(AddVisitRequest request) {
-        if (dateValidator.validate(request.getVisitDate()).isPresent()) {
-            return dateValidator.validate(request.getVisitDate());
-        }
-        return Optional.empty();
+    private List<CoreError> validateDate(AddVisitRequest request){
+       return request == null ? new ArrayList<>() : dateValidator.validate(request);
     }
 }

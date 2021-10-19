@@ -6,6 +6,7 @@ import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
+import lv.javaguru.java2.hospital.visit.core.services.validators.date_validator.DateValidatorExecution;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -14,9 +15,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +27,7 @@ class AddVisitValidatorTest {
 
     @Mock PatientDatabase patientDatabase;
     @Mock DoctorDatabase doctorDatabase;
-    @Mock DateValidator dateValidator;
+    @Mock DateValidatorExecution dateValidator;
     @InjectMocks AddVisitValidator addVisitValidator;
 
     @Test
@@ -141,17 +142,104 @@ class AddVisitValidatorTest {
         patients.add(new Patient("name", "surname", "1234"));
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("name", "surname", "speciality"));
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Date", "input is incorrect!"));
 
         Mockito.when(patientDatabase.findPatientsByPersonalCode(addVisitRequest.getPatientsPersonalCode()))
                 .thenReturn(patients);
         Mockito.when(doctorDatabase.findByNameAndSurname(addVisitRequest.getDoctorsName(), addVisitRequest.getDoctorsSurname()))
                 .thenReturn(doctors);
-        Mockito.when(dateValidator.validate(addVisitRequest.getVisitDate())).thenReturn
-                (Optional.of(new CoreError("Date", "input is incorrect!")));
+        Mockito.when(dateValidator.validate(addVisitRequest))
+                .thenReturn(errors);
+
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.get(0).getField(), "Date");
         assertEquals(errorList.get(0).getDescription(), "input is incorrect!");
+    }
+
+    @Test
+    public void shouldReturnFutureDateError(){
+        AddVisitRequest addVisitRequest = new AddVisitRequest(
+                "1234",
+                "name",
+                "surname",
+                "12/9/2021 12:00");
+
+        List<Patient> patients = new ArrayList<>();
+        patients.add(new Patient("name", "surname", "1234"));
+        List<Doctor> doctors = new ArrayList<>();
+        doctors.add(new Doctor("name", "surname", "speciality"));
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Date", "is not in the future!"));
+
+        Mockito.when(patientDatabase.findPatientsByPersonalCode(addVisitRequest.getPatientsPersonalCode()))
+                .thenReturn(patients);
+        Mockito.when(doctorDatabase.findByNameAndSurname(addVisitRequest.getDoctorsName(), addVisitRequest.getDoctorsSurname()))
+                .thenReturn(doctors);
+        Mockito.when(dateValidator.validate(addVisitRequest))
+                .thenReturn(errors);
+
+        List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
+        assertFalse(errorList.isEmpty());
+        assertEquals(errorList.get(0).getField(), "Date");
+        assertEquals(errorList.get(0).getDescription(), "is not in the future!");
+    }
+
+    @Test
+    public void shouldReturnWorkingDayDateError(){
+        AddVisitRequest addVisitRequest = new AddVisitRequest(
+                "1234",
+                "name",
+                "surname",
+                "5/1/2025 12:00");
+
+        List<Patient> patients = new ArrayList<>();
+        patients.add(new Patient("name", "surname", "1234"));
+        List<Doctor> doctors = new ArrayList<>();
+        doctors.add(new Doctor("name", "surname", "speciality"));
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Date", "is not working day!"));
+
+        Mockito.when(patientDatabase.findPatientsByPersonalCode(addVisitRequest.getPatientsPersonalCode()))
+                .thenReturn(patients);
+        Mockito.when(doctorDatabase.findByNameAndSurname(addVisitRequest.getDoctorsName(), addVisitRequest.getDoctorsSurname()))
+                .thenReturn(doctors);
+        Mockito.when(dateValidator.validate(addVisitRequest))
+                .thenReturn(errors);
+
+        List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
+        assertFalse(errorList.isEmpty());
+        assertEquals(errorList.get(0).getField(), "Date");
+        assertEquals(errorList.get(0).getDescription(), "is not working day!");
+    }
+
+    @Test
+    public void shouldReturnWorkingHoursDateError(){
+        AddVisitRequest addVisitRequest = new AddVisitRequest(
+                "1234",
+                "name",
+                "surname",
+                "1/1/2025 21:00");
+
+        List<Patient> patients = new ArrayList<>();
+        patients.add(new Patient("name", "surname", "1234"));
+        List<Doctor> doctors = new ArrayList<>();
+        doctors.add(new Doctor("name", "surname", "speciality"));
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Date", "is not working hour!"));
+
+        Mockito.when(patientDatabase.findPatientsByPersonalCode(addVisitRequest.getPatientsPersonalCode()))
+                .thenReturn(patients);
+        Mockito.when(doctorDatabase.findByNameAndSurname(addVisitRequest.getDoctorsName(), addVisitRequest.getDoctorsSurname()))
+                .thenReturn(doctors);
+        Mockito.when(dateValidator.validate(addVisitRequest))
+                .thenReturn(errors);
+
+        List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
+        assertFalse(errorList.isEmpty());
+        assertEquals(errorList.get(0).getField(), "Date");
+        assertEquals(errorList.get(0).getDescription(), "is not working hour!");
     }
 
     @Test
