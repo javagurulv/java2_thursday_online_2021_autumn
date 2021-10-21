@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
 import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import lv.javaguru.java2.hospital.patient.core.responses.EditPatientResponse;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Locale;
 
 @Component
 public class EditPatientService {
@@ -23,11 +25,11 @@ public class EditPatientService {
         } else {
             database.editActions(
                     request.getPatientID(),
-                    request.getEnums(),
+                    EditPatientEnum.valueOf(request.getUserInputEnum().toUpperCase(Locale.ROOT)),
                     request.getChanges());
             return new EditPatientResponse(
                     request.getPatientID(),
-                    request.getEnums(),
+                    EditPatientEnum.valueOf(request.getUserInputEnum().toUpperCase(Locale.ROOT)),
                     request.getChanges()
                     );
         }

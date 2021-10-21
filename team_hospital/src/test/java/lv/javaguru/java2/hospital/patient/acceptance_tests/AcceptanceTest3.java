@@ -2,7 +2,6 @@ package lv.javaguru.java2.hospital.patient.acceptance_tests;
 
 import lv.javaguru.java2.hospital.config.HospitalConfiguration;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
-import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.AddPatientResponse;
@@ -33,7 +32,7 @@ public class AcceptanceTest3 {
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
-                EditPatientEnum.NAME, "NewName");
+                "NAME", "NewName");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
 
 		SearchPatientsRequest searchPatientsRequest = new SearchPatientsRequest("NewName", "surname", "");
@@ -50,7 +49,7 @@ public class AcceptanceTest3 {
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
-                EditPatientEnum.SURNAME, "NewSurname");
+                "SURNAME", "NewSurname");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
 
 		SearchPatientsRequest searchPatientsRequest = new SearchPatientsRequest("name10", "NewSurname", "");
@@ -67,7 +66,7 @@ public class AcceptanceTest3 {
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
-                EditPatientEnum.PERSONAL_CODE, "New22222");
+                "PERSONAL_CODE", "New22222");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
 
 		SearchPatientsRequest searchPatientsRequest = new SearchPatientsRequest("name11", "surname", "");

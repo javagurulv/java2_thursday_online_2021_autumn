@@ -1,5 +1,4 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
-import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.PatientExistenceByIDValidator;
@@ -9,28 +8,44 @@ import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
 class EditPatientValidatorTest {
 
+    @Mock private PatientEnumChecker checker;
     @Mock private PatientExistenceByIDValidator idValidator;
     @InjectMocks private EditPatientValidator validator;
 
     @Test
     public void shouldReturnEmptyList(){
-        EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.NAME, "Name");
+        EditPatientRequest request = new EditPatientRequest(1L, "NAME", "Name");
+        Mockito.when(idValidator.existenceByID(request.getPatientID())).thenReturn(Optional.empty());
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
+    public void shouldReturnPatientExistenceError(){
+        EditPatientRequest request = new EditPatientRequest(1L, "NAME", "Name");
+        Mockito.when(idValidator.existenceByID(request.getPatientID()))
+                .thenReturn(Optional.of(new CoreError("Patient", "does not exist!")));
+        List<CoreError> errorList = validator.validate(request);
+        assertFalse(errorList.isEmpty());
+        assertEquals(errorList.get(0).getField(),"Patient");
+        assertEquals(errorList.get(0).getDescription(), "does not exist!");
+    }
+
+    @Test
     public void shouldReturnPatientIDError(){
-        EditPatientRequest request = new EditPatientRequest(null, EditPatientEnum.NAME, "Name");
+        EditPatientRequest request = new EditPatientRequest(null, "NAME", "Name");
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "ID");
@@ -48,11 +63,22 @@ class EditPatientValidatorTest {
 
     @Test
     public void shouldReturnChangesError(){
-        EditPatientRequest request = new EditPatientRequest(1L, EditPatientEnum.NAME, "");
+        EditPatientRequest request = new EditPatientRequest(1L, "NAME", "");
         List<CoreError> errorsList = validator.validate(request);
         assertEquals(errorsList.size(), 1);
         assertEquals(errorsList.get(0).getField(), "Changes");
         assertEquals(errorsList.get(0).getDescription(), "Must not be empty!");
+    }
+
+    @Test public void shouldReturnEnumError(){
+        String input = "input";
+        EditPatientRequest request = new EditPatientRequest(1L, input, "changes");
+        Mockito.when(checker.validateEnum(input))
+                .thenReturn(Optional.of(new CoreError("User input", "must be NAME, SURNAME OR PERSONAL_CODE")));
+        List<CoreError> errorList = validator.validate(request);
+        assertFalse(errorList.isEmpty());
+        assertEquals(errorList.get(0).getField(), "User input");
+        assertEquals(errorList.get(0).getDescription(), "must be NAME, SURNAME OR PERSONAL_CODE");
     }
 
     @Test

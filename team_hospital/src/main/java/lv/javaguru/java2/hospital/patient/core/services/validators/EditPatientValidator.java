@@ -14,6 +14,7 @@ import java.util.Optional;
 public class EditPatientValidator {
 
     @Autowired PatientExistenceByIDValidator validator;
+    @Autowired PatientEnumChecker checker;
 
     public List<CoreError> validate(EditPatientRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -21,6 +22,7 @@ public class EditPatientValidator {
         validateUserChoice(request).ifPresent(errors::add);
         validateChanges(request).ifPresent(errors::add);
         validatePatientExistence(request).ifPresent(errors::add);
+        validateEnum(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -30,7 +32,7 @@ public class EditPatientValidator {
     }
 
     private Optional<CoreError> validateUserChoice(EditPatientRequest request) {
-        return (request.getEnums() == null)
+        return (request.getUserInputEnum() == null || request.getUserInputEnum().isEmpty())
                 ? Optional.of(new CoreError("User choice", "Must not be empty!")) : Optional.empty();
     }
 
@@ -40,9 +42,11 @@ public class EditPatientValidator {
     }
 
     private Optional<CoreError> validatePatientExistence(EditPatientRequest request) {
-        if (request.getPatientID() == null) {
-            return Optional.empty();
-        }
-        return validator.existenceByID(request.getPatientID());
+        return request.getPatientID() == null ? Optional.empty() : validator.existenceByID(request.getPatientID());
+    }
+
+    private Optional<CoreError> validateEnum(EditPatientRequest request){
+        return  (request.getUserInputEnum() == null || request.getUserInputEnum().isEmpty())
+                ? Optional.empty() : checker.validateEnum(request.getUserInputEnum());
     }
 }
