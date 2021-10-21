@@ -14,12 +14,14 @@ import java.util.Optional;
 public class EditVisitValidator {
 
     @Autowired private VisitExistenceByIdValidator validator;
+    @Autowired private VisitEnumChecker checker;
 
     public List<CoreError> validate(EditVisitRequest request) {
         List<CoreError> errors = new ArrayList<>();
         validateId(request).ifPresent(errors::add);
         validateVisitExistence(request.getVisitID()).ifPresent(errors::add);
         validateChanges(request).ifPresent(errors::add);
+        validateEnum(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -40,5 +42,10 @@ public class EditVisitValidator {
         return (request.getChanges() == null || request.getChanges().isEmpty())
                 ? Optional.of(new CoreError("changes", "Must not be empty!"))
                 : Optional.empty();
+    }
+
+    private Optional<CoreError> validateEnum(EditVisitRequest request){
+        return (request.getEditEnums() == null || request.getEditEnums().isEmpty())
+                ? Optional.empty() : checker.validateEnum(request.getEditEnums());
     }
 }

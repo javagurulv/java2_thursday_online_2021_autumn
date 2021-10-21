@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
 import lv.javaguru.java2.hospital.database.VisitDatabase;
+import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.responses.EditVisitResponse;
@@ -21,7 +22,9 @@ public class EditVisitService {
         if (!errors.isEmpty()) {
             return new EditVisitResponse(errors);
         }
-        boolean isVisitEdited = database.editVisit(request.getVisitID(), request.getEditEnums(), request.getChanges());
+        boolean isVisitEdited = database.editVisit(request.getVisitID(),
+                EditVisitEnum.valueOf(request.getEditEnums()),
+                request.getChanges());
         return new EditVisitResponse(isVisitEdited);
     }
 }

@@ -3,10 +3,10 @@ package lv.javaguru.java2.hospital.visit.core.requests;
 public class EditVisitRequest {
 
     private Long visitID;
-    private EditVisitEnum editEnums;
+    private String editEnums;
     private String changes;
 
-    public EditVisitRequest(Long visitID, EditVisitEnum editEnums, String changes) {
+    public EditVisitRequest(Long visitID, String editEnums, String changes) {
         this.visitID = visitID;
         this.editEnums = editEnums;
         this.changes = changes;
@@ -16,7 +16,7 @@ public class EditVisitRequest {
         return visitID;
     }
 
-    public EditVisitEnum getEditEnums() {
+    public String getEditEnums() {
         return editEnums;
     }
 

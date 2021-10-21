@@ -9,7 +9,6 @@ import lv.javaguru.java2.hospital.patient.core.responses.AddPatientResponse;
 import lv.javaguru.java2.hospital.patient.core.services.AddPatientService;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
-import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
 import lv.javaguru.java2.hospital.visit.core.responses.AddVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.responses.EditVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.AddVisitService;
@@ -46,8 +45,7 @@ public class AcceptanceTest3 {
         AddVisitResponse addVisitResponse = getAddVisitService().execute(request);
 
         EditVisitRequest editVisitRequest = new EditVisitRequest(
-                addVisitResponse.getPatientVisit().getVisitID(),
-                EditVisitEnum.DOCTOR,
+                addVisitResponse.getPatientVisit().getVisitID(), "DOCTOR",
                 addDoctorResponse2.getNewDoctor().getId().toString());
         EditVisitResponse editVisitResponse = getEditVisitService().execute(editVisitRequest);
         assertTrue(editVisitResponse.isVisitEdited());
