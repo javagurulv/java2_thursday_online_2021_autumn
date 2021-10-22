@@ -1,17 +1,17 @@
 package lv.javaguru.java2.hospital.domain;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Visit {
     private Doctor doctor;
     private Patient patient;
-    private Date visitDate;
+    private LocalDateTime visitDate;
     private Long visitID;
     private static final AtomicLong count = new AtomicLong(0);
 
-    public Visit(Doctor doctor, Patient patient, Date visitDate) {
+    public Visit(Doctor doctor, Patient patient, LocalDateTime visitDate) {
         this.doctor = doctor;
         this.patient = patient;
         this.visitDate = visitDate;
@@ -24,10 +24,6 @@ public class Visit {
 
     public Patient getPatient() {
         return patient;
-    }
-
-    public Date getVisitDate() {
-        return visitDate;
     }
 
     public Long getVisitID() {
@@ -52,7 +48,11 @@ public class Visit {
         this.patient = patient;
     }
 
-    public void setVisitDate(Date visitDate) {
+    public LocalDateTime getVisitDate() {
+        return visitDate;
+    }
+
+    public void setVisitDate(LocalDateTime visitDate) {
         this.visitDate = visitDate;
     }
 

@@ -4,7 +4,8 @@ import lv.javaguru.java2.hospital.database.VisitDatabase;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class PatientIdAndDateSearchCriteria implements VisitsSearchCriteria{
@@ -25,11 +26,7 @@ public class PatientIdAndDateSearchCriteria implements VisitsSearchCriteria{
 
     @Override
     public List<Visit> process(SearchVisitRequest request) {
-        return database.findByPatientIdAndDate(request.getPatientId(), getVisitDate(request));
-    }
-
-    private Date getVisitDate(SearchVisitRequest request) {
-        GetVisitDate getVisitDate = new GetVisitDate();
-        return getVisitDate.getVisitDateFromString(request.getVisitDate());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return database.findByPatientIdAndDate(request.getPatientId(), LocalDateTime.parse(request.getVisitDate(), formatter));
     }
 }

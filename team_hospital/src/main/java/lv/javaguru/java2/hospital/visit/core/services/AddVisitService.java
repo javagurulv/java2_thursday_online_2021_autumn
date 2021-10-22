@@ -1,6 +1,8 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
-import lv.javaguru.java2.hospital.database.*;
+import lv.javaguru.java2.hospital.database.DoctorDatabase;
+import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.VisitDatabase;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Visit;
@@ -11,9 +13,8 @@ import lv.javaguru.java2.hospital.visit.core.services.validators.AddVisitValidat
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Component
@@ -32,8 +33,7 @@ public class AddVisitService {
 
         Patient patient = getPatient(request);
         Doctor doctor = getDoctor(request);
-        Date date = getVisitDate(request);
-
+        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(request.getVisitDate()));
         Visit visit = new Visit(doctor, patient, date);
 
         visitDatabase.recordVisit(visit);
@@ -48,15 +48,5 @@ public class AddVisitService {
     private Patient getPatient(AddVisitRequest request) {
         return patientDatabase
                 .findPatientsByPersonalCode(request.getPatientsPersonalCode()).get(0);
-    }
-
-    private Date getVisitDate(AddVisitRequest request) {
-        Date visitDate = null;
-        try {
-            visitDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(request.getVisitDate());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return visitDate;
     }
 }

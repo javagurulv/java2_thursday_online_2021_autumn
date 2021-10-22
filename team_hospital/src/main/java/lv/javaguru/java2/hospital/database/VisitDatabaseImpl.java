@@ -5,8 +5,7 @@ import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -48,12 +47,8 @@ public class VisitDatabaseImpl implements VisitDatabase {
                 visitToEdit.setPatient(patientDatabase.findById(Long.parseLong(changes)).get());
                 isVisitEdited = true;
             } else {
-                try {
-                    visitToEdit.setVisitDate(new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(changes));
-                    isVisitEdited = true;
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                visitToEdit.setVisitDate(LocalDateTime.parse(changes));
+                isVisitEdited = true;
             }
         }
         return isVisitEdited;
@@ -81,7 +76,7 @@ public class VisitDatabaseImpl implements VisitDatabase {
     }
 
     @Override
-    public List<Visit> findByDate(Date date) {
+    public List<Visit> findByDate(LocalDateTime date) {
         return visits.stream()
                 .filter(visit -> visit.getVisitDate().equals(date))
                 .collect(Collectors.toList());
@@ -96,7 +91,7 @@ public class VisitDatabaseImpl implements VisitDatabase {
     }
 
     @Override
-    public List<Visit> findByDoctorIdAndDate(Long doctorId, Date date) {
+    public List<Visit> findByDoctorIdAndDate(Long doctorId, LocalDateTime date) {
         return visits.stream()
                 .filter(visit -> Objects.equals(visit.getDoctor().getId(), doctorId))
                 .filter(visit -> visit.getVisitDate().equals(date))
@@ -104,7 +99,7 @@ public class VisitDatabaseImpl implements VisitDatabase {
     }
 
     @Override
-    public List<Visit> findByPatientIdAndDate(Long patientId, Date date) {
+    public List<Visit> findByPatientIdAndDate(Long patientId, LocalDateTime date) {
         return visits.stream()
                 .filter(visit -> Objects.equals(visit.getPatient().getId(), patientId))
                 .filter(visit -> visit.getVisitDate().equals(date))
@@ -112,7 +107,7 @@ public class VisitDatabaseImpl implements VisitDatabase {
     }
 
     @Override
-    public List<Visit> findByDoctorIdAndPatientIdAndDate(Long doctorId, Long patientId, Date date) {
+    public List<Visit> findByDoctorIdAndPatientIdAndDate(Long doctorId, Long patientId, LocalDateTime date) {
         return visits.stream()
                 .filter(visit -> Objects.equals(visit.getDoctor().getId(), doctorId))
                 .filter(visit -> Objects.equals(visit.getPatient().getId(), patientId))

@@ -15,8 +15,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,11 +33,11 @@ class ShowAllVisitServiceTest {
     ShowAllVisitService service;
 
     @Test
-    public void shouldGetBooksFromDb() {
+    public void shouldGetPatientDoctorVisitFromDb() {
         List<Visit> visits = new ArrayList<>();
         Doctor doctor = new Doctor("Name", "Surname", "Speciality");
         Patient patient = new Patient("Name", "Surname", "120593-15634");
-        Date date = new Date(2021, 12, 21, 15, 00);
+        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("21/12/2021 15:00"));
         visits.add(new Visit(doctor, patient, date));
         Mockito.when(database.showAllVisits()).thenReturn(visits);
         ShowAllVisitRequest request = new ShowAllVisitRequest();

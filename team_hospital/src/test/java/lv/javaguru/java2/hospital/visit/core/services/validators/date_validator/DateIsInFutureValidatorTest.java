@@ -11,8 +11,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -26,7 +28,8 @@ class DateIsInFutureValidatorTest {
     @Test
     public void shouldReturnDateFutureError() {
         String date = "17/01/2020 15:00";
-        Mockito.when(getVisitDate.getVisitDateFromString(date)).thenReturn(new Date(date));
+        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date));
+        Mockito.when(getVisitDate.getVisitDateFromString(date)).thenReturn(localDateTime);
         Optional<CoreError> error = validator.validate(date);
         assertTrue(error.isPresent());
         assertEquals(error.get().getField(), "Date");

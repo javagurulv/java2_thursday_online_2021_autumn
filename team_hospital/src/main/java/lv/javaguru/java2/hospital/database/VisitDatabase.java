@@ -2,9 +2,8 @@ package lv.javaguru.java2.hospital.database;
 
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
-import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface VisitDatabase {
@@ -23,14 +22,14 @@ public interface VisitDatabase {
 
     List<Visit> findByPatientId(Long id);
 
-    List<Visit> findByDate(Date date);
+    List<Visit> findByDate(LocalDateTime date);
 
     List<Visit> findByDoctorIdAndPatientId(Long doctorId, Long patientId);
 
-    List<Visit> findByDoctorIdAndDate(Long doctorId, Date date);
+    List<Visit> findByDoctorIdAndDate(Long doctorId, LocalDateTime date);
 
-    List<Visit> findByPatientIdAndDate(Long patientId, Date date);
+    List<Visit> findByPatientIdAndDate(Long patientId, LocalDateTime date);
 
-    List<Visit> findByDoctorIdAndPatientIdAndDate(Long doctorId, Long patientId, Date date);
+    List<Visit> findByDoctorIdAndPatientIdAndDate(Long doctorId, Long patientId, LocalDateTime date);
 
 }

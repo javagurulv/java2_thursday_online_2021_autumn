@@ -12,8 +12,8 @@ import java.util.List;
 @Component
 public class DateValidatorExecution {
 
-    @Autowired private GetVisitDate getVisitDate;
     @Autowired private DateFormatValidator dateFormatValidator;
+    @Autowired private GetVisitDate getVisitDate;
 
     public List<CoreError> validate(AddVisitRequest request) {
         List<CoreError> errors = new ArrayList<>();

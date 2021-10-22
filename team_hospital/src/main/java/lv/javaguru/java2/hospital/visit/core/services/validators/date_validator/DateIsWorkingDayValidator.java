@@ -4,7 +4,7 @@ import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria.GetVisitDate;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Component
@@ -18,9 +18,9 @@ public class DateIsWorkingDayValidator implements DateValidator {
 
     @Override
     public Optional<CoreError> validate(String date) {
-        Date visitDate = getVisitDate.getVisitDateFromString(date);
-        boolean dateIsWorkingDay = visitDate.getDay() > 0 &&
-                visitDate.getDay() <= 5;
+        LocalDateTime visitDate = getVisitDate.getVisitDateFromString(date);
+        boolean dateIsWorkingDay = visitDate.getDayOfWeek().getValue() >= 1  &&
+                visitDate.getDayOfWeek().getValue() <= 5;
         if (dateIsWorkingDay) {
             return Optional.empty();
         } else {

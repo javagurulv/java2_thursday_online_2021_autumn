@@ -15,9 +15,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,14 +42,15 @@ class DoctorIdAndPatientIdSearchCriteriaTest {
     }
 
     @Test
-    public void shouldReturnCorrectVisit() throws ParseException {
+    public void shouldReturnCorrectVisit() {
         Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
         Patient patient = new Patient("PatientsName", "PatientsSurname", "150254-12636");
         Long doctorId = doctor.getId();
         Long patientId = patient.getId();
 
         List<Visit> visits = new ArrayList<>();
-        Date date = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse("11/12/2021 13:00");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime date = LocalDateTime.parse("11/12/2021 13:00", formatter);
         visits.add(new Visit(doctor, patient, date));
 
         Mockito.when(database.findByDoctorIdAndPatientId(doctorId, patientId)).thenReturn(visits);
@@ -71,8 +72,9 @@ class DoctorIdAndPatientIdSearchCriteriaTest {
         Long patientId = patient.getId();
 
         List<Visit> visits = new ArrayList<>();
-        Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse("07/12/2021 13:00");
-        Date date2 = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse("17/12/2021 11:00");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime date1 = LocalDateTime.parse("07/12/2021 13:00", formatter);
+        LocalDateTime date2 = LocalDateTime.parse("17/12/2021 11:00", formatter);
         visits.add(new Visit(doctor, patient, date1));
         visits.add(new Visit(doctor, patient, date2));
 

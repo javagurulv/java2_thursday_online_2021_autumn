@@ -4,7 +4,7 @@ import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria.GetVisitDate;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Component
@@ -18,8 +18,8 @@ public class DateIsInFutureValidator implements DateValidator {
 
     @Override
     public Optional<CoreError> validate(String date) {
-        Date visitDate = getVisitDate.getVisitDateFromString(date);
-        boolean dateIsInFuture = visitDate.after(new Date());
+        LocalDateTime visitDate = getVisitDate.getVisitDateFromString(date);
+        boolean dateIsInFuture = visitDate.isAfter(LocalDateTime.now());
         if (dateIsInFuture) {
             return Optional.empty();
         } else {

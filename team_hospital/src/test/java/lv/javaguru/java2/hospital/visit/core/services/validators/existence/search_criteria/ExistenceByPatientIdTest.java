@@ -16,9 +16,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,7 +58,7 @@ class ExistenceByPatientIdTest {
         Patient patient = new Patient("PatientsName1", "PatientsSurname1", "150254-12636");
         Long patientId = patient.getId();
         List<Visit> visits = new ArrayList<>();
-        Date date = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse("27/12/2021 16:00");
+        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("27/12/2021 16:00"));
         visits.add(new Visit(doctor, patient, date));
 
         SearchVisitRequest request = new SearchVisitRequest(null, null, patientId, "");

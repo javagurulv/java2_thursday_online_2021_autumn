@@ -15,9 +15,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,7 +48,9 @@ class DoctorIdAndDateSearchCriteriaTest {
         Long doctorId = doctor.getId();
 
         List<Visit> visits = new ArrayList<>();
-        Date date = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse("21/12/2021 13:00");
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime date = LocalDateTime.parse("21/12/2021 13:00", formatter);
         visits.add(new Visit(doctor, patient, date));
 
         Mockito.when(database.findByDoctorIdAndDate(doctorId, date)).thenReturn(visits);

@@ -11,9 +11,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
@@ -25,10 +28,11 @@ class DateTimeIsInWorkingHoursValidatorTest {
     @Test
     public void shouldReturnDateWorkingHoursError() {
         String date = "17/01/2022 20:00";
-        Mockito.when(getVisitDate.getVisitDateFromString(date)).thenReturn(new Date(date));
+        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date));
+        Mockito.when(getVisitDate.getVisitDateFromString(date)).thenReturn(localDateTime);
         Optional<CoreError> error = workingHoursValidator.validate(date);
         assertTrue(error.isPresent());
-        assertEquals(error.get().getField(), "Date");
+        assertEquals(error.get().getField(), "Time in the date");
         assertEquals(error.get().getDescription(), "is not working hour!");
     }
 

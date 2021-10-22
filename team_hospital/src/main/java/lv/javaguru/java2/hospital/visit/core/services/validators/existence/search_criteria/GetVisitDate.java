@@ -2,20 +2,13 @@ package lv.javaguru.java2.hospital.visit.core.services.validators.existence.sear
 
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class GetVisitDate {
 
-    public Date getVisitDateFromString(String date) {
-        Date visitDate = null;
-        try {
-            visitDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return visitDate;
+    public LocalDateTime getVisitDateFromString(String date) {
+        return LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date));
     }
 }

@@ -5,15 +5,15 @@ import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Visit;
 import org.mockito.ArgumentMatcher;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class VisitMatcher implements ArgumentMatcher<Visit> {
 
     private Doctor doctor;
     private Patient patient;
-    private Date visitDate;
+    private LocalDateTime visitDate;
 
-    public VisitMatcher(Doctor doctor, Patient patient, Date visitDate) {
+    public VisitMatcher(Doctor doctor, Patient patient, LocalDateTime visitDate) {
         this.doctor = doctor;
         this.patient = patient;
         this.visitDate = visitDate;
