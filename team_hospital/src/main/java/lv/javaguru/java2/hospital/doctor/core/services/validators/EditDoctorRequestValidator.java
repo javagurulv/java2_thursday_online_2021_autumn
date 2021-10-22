@@ -1,6 +1,5 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators;
 
-import lv.javaguru.java2.hospital.doctor.core.requests.DeleteDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.doctor.core.services.validators.existence.DoctorExistenceByIdValidator;
@@ -33,14 +32,16 @@ public class EditDoctorRequestValidator {
     }
 
     private Optional<CoreError> validateEditOption(EditDoctorRequest request) {
-        return (request.getEditOption() == null
-                && !request.getEditOption().equals("NAME")
-                || request.getEditOption().equals("SURNAME")
-                || request.getEditOption().equals("SPECIALITY"))
-                ? Optional.of(new CoreError("edit option", "Must contain 'NAME', 'SURNAME' or 'SPECIALITY' only!"))
-                : Optional.empty();
+        if (request.getUserInputEnum() == null || request.getUserInputEnum().isEmpty()) {
+            return Optional.of(new CoreError("edit option", "Must not be empty!"));
+        }
+        else if (!request.getUserInputEnum().equals("NAME")
+                    && !request.getUserInputEnum().equals("SURNAME")
+                    && !request.getUserInputEnum().equals("SPECIALITY")) {
+                return Optional.of(new CoreError("edit option", "Must contain 'NAME', 'SURNAME' or 'SPECIALITY' only!"));
+            }
+        return Optional.empty();
     }
-
 
     private Optional<CoreError> validateChanges(EditDoctorRequest request) {
         return (request.getChanges() == null || request.getChanges().isEmpty())

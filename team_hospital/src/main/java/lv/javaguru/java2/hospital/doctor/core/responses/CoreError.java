@@ -18,4 +18,11 @@ public class CoreError {
         return message;
     }
 
+    @Override
+    public String toString() {
+        return "CoreError{" +
+                "field='" + field + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
