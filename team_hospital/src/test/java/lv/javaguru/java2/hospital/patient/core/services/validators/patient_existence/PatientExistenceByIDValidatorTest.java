@@ -38,6 +38,7 @@ public class PatientExistenceByIDValidatorTest {
     @Test
     public void shouldReturnEmptyList(){
         Patient patient = new Patient("name", "surname", "1234");
+        patient.setId(136L);
         List<Patient> patients = new ArrayList<>();
         patients.add(patient);
         Mockito.when(database.showAllPatients()).thenReturn(patients);

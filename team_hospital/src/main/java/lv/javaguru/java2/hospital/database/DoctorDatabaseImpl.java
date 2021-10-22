@@ -11,10 +11,13 @@ import java.util.stream.Collectors;
 @Component
 public class DoctorDatabaseImpl implements DoctorDatabase {
 
+    private Long nextId = 1L;
     private List<Doctor> doctorsList = new ArrayList<>();
 
     @Override
     public void addDoctor(Doctor doctor) {
+        doctor.setId(nextId);
+        nextId++;
         doctorsList.add(doctor);
     }
 

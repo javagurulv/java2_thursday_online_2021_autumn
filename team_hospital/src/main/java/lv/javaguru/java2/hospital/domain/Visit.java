@@ -9,13 +9,11 @@ public class Visit {
     private Patient patient;
     private LocalDateTime visitDate;
     private Long visitID;
-    private static final AtomicLong count = new AtomicLong(0);
 
     public Visit(Doctor doctor, Patient patient, LocalDateTime visitDate) {
         this.doctor = doctor;
         this.patient = patient;
         this.visitDate = visitDate;
-        this.visitID = count.incrementAndGet();
     }
 
     public Doctor getDoctor() {
@@ -38,6 +36,10 @@ public class Visit {
                 ", visitDate=" + visitDate +
                 ", visitID=" + visitID +
                 '}';
+    }
+
+    public void setVisitID(Long visitID) {
+        this.visitID = visitID;
     }
 
     public void setDoctor(Doctor doctor) {

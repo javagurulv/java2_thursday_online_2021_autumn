@@ -56,7 +56,8 @@ class ExistenceByDoctorIdAndDateTest {
     public void shouldReturnEmptyList() throws ParseException {
         Doctor doctor = new Doctor("DoctorsName1", "DoctorsSurname1", "Speciality1");
         Patient patient = new Patient("PatientsName1", "PatientsSurname1", "150254-12636");
-        Long doctorId = doctor.getId();
+        Long doctorId = 151L;
+        doctor.setId(doctorId);
         List<Visit> visits = new ArrayList<>();
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("27/12/2021 16:00"));
         visits.add(new Visit(doctor, patient, date));

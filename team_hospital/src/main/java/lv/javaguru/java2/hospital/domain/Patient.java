@@ -4,7 +4,6 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Patient {
-    private static final AtomicInteger count = new AtomicInteger(0);
     private Long id;
     private String name;
     private String surname;
@@ -14,7 +13,6 @@ public class Patient {
         this.name = name;
         this.surname = surname;
         this.personalCode = personalCode;
-        this.id = (long) count.incrementAndGet();
     }
 
     public Long getId() {

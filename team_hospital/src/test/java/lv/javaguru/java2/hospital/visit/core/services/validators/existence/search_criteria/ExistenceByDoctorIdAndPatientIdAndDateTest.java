@@ -57,8 +57,10 @@ class ExistenceByDoctorIdAndPatientIdAndDateTest {
     public void shouldReturnEmptyList() {
         Doctor doctor = new Doctor("DoctorsName1", "DoctorsSurname1", "Speciality1");
         Patient patient = new Patient("PatientsName1", "PatientsSurname1", "150254-12636");
-        Long doctorId = doctor.getId();
-        Long patientId = patient.getId();
+        Long doctorId = 18L;
+        doctor.setId(doctorId);
+        Long patientId = 15L;
+        patient.setId(patientId);
         List<Visit> visits = new ArrayList<>();
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("27/12/2021 16:00"));
         visits.add(new Visit(doctor, patient, date));

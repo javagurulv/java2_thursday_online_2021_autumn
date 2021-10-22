@@ -46,7 +46,8 @@ class VisitExistenceByIdValidatorTest {
         List<Visit> visits = new ArrayList<>();
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("20/12/2021 14:00"));
         visits.add(new Visit(doctor, patient, date));
-        Long visitId = visits.get(0).getVisitID();
+        Long visitId = 165L;
+        visits.get(0).setVisitID(visitId);
 
         Mockito.when(database.showAllVisits()).thenReturn(visits);
         Optional<CoreError> errors = validator.validateExistenceById(visitId);

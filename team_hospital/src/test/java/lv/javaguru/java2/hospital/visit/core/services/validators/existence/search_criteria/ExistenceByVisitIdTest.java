@@ -61,7 +61,8 @@ class ExistenceByVisitIdTest {
         List<Visit> visits = new ArrayList<>();
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("27/12/2021 16:00"));
         visits.add(new Visit(doctor, patient, date));
-        Long visitId = visits.get(0).getVisitID();
+        Long visitId = 158L;
+        visits.get(0).setVisitID(visitId);
 
         SearchVisitRequest request = new SearchVisitRequest(visitId, null, null, "");
         Mockito.when(database.showAllVisits()).thenReturn(visits);

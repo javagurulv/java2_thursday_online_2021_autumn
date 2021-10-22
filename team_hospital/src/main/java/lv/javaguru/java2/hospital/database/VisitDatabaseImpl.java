@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class VisitDatabaseImpl implements VisitDatabase {
+    private Long nextId = 1L;
     private final List<Visit> visits = new ArrayList<>();
     @Autowired
     PatientDatabase patientDatabase;
@@ -19,6 +20,8 @@ public class VisitDatabaseImpl implements VisitDatabase {
 
     @Override
     public void recordVisit(Visit visit) {
+        visit.setVisitID(nextId);
+        nextId++;
         visits.add(visit);
     }
 
