@@ -71,7 +71,7 @@ public class AddReservationService {
         try {
             dateReservation = new SimpleDateFormat("dd/MM/yyyy").parse(request.getReservationDate());
         } catch (ParseException exception) {
-            exception.printStackTrace();
+            System.out.println("Date is not correct!");
         }
         return dateReservation;
     }

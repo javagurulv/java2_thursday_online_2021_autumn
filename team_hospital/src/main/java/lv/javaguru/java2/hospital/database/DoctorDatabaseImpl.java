@@ -1,6 +1,5 @@
 package lv.javaguru.java2.hospital.database;
 
-import lv.javaguru.java2.hospital.doctor.core.requests.EditOption;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import org.springframework.stereotype.Component;
 
@@ -39,7 +38,7 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
     }
 
     @Override
-    public boolean editDoctor(Long doctorId, EditOption infoToEdit, String changes) {
+    public boolean editDoctor(Long doctorId, String infoToEdit, String changes) {
         boolean isDoctorEdited = false;
         Optional<Doctor> doctorToEditOpt = doctorsList.stream()
                 .filter(doctor -> doctor.getId() == doctorId)
@@ -47,9 +46,9 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
         if (doctorToEditOpt.isPresent()) {
             Doctor doctorToEdit = doctorToEditOpt.get();
             switch (infoToEdit) {
-                case NAME -> doctorToEdit.setName(changes);
-                case SURNAME -> doctorToEdit.setSurname(changes);
-                case SPECIALITY -> doctorToEdit.setSpeciality(changes);
+                case "NAME" -> doctorToEdit.setName(changes);
+                case "SURNAME" -> doctorToEdit.setSurname(changes);
+                case "SPECIALITY" -> doctorToEdit.setSpeciality(changes);
             }
             isDoctorEdited = true;
         }
