@@ -28,7 +28,7 @@ public interface Database {
 
     List<Client> findClientBySurname(String clientSurname);
 
-    List<Client> findClientByIdAndNameAndSurname(Long id, String clientName, String clientSurname);
+    List<Client> findClientByIdAndNameAndSurname(Long clientId, String clientName, String clientSurname);
 
     List<Specialist> findSpecialistById(Long specialistId);
 
@@ -36,7 +36,7 @@ public interface Database {
 
     List<Specialist> findSpecialistBySurname(String specialistSurname);
 
-    List<Specialist> findSpecialistByProfession(String profession);
+    List<Specialist> findSpecialistByProfession(String specialistProfession);
 
     List<Specialist> findSpecialistByNameAndSurnameAndProfession(String specialistName, String specialistSurname, String specialistProfession);
 
