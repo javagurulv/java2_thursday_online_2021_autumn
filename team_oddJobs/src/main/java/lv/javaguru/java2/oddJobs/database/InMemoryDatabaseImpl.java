@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class InMemoryDatabaseImpl implements Database {
 
     private Long nextId = 1L;
@@ -33,6 +33,16 @@ public class InMemoryDatabaseImpl implements Database {
         client.setClientId(nextId);
         ++nextId;
         clients.add(client);
+    }
+
+    @Override
+    public boolean removeClientById(Long clientId) {
+        return false;
+    }
+
+    @Override
+    public boolean removeSpecialistById(Long specialistId) {
+        return false;
     }
 
     @Override
@@ -202,7 +212,7 @@ public class InMemoryDatabaseImpl implements Database {
     }
 
     @Override
-    public List<Advertisement> getAllAdvertisemets() {
+    public List<Advertisement> getAllAdvertisement() {
         return advBoards;
     }
 

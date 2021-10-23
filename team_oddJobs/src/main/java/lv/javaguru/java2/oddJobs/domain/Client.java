@@ -14,8 +14,18 @@ public class Client {
         this.clientSurname = clientSurname;
     }
 
+    public Client(Long clientId, String clientName, String clientSurname) {
+        this.clientId = clientId;
+        this.clientName = clientName;
+        this.clientSurname = clientSurname;
+    }
+
     public Client(Long clientId) {
         this.clientId = clientId;
+    }
+
+    public Client() {
+
     }
 
     public Long getClientId() {

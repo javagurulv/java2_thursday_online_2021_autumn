@@ -13,6 +13,6 @@ public class GetAllAdvertisementsService {
     private Database database;
 
     public List<Advertisement> execute() {
-        return database.getAllAdvertisemets();
+        return database.getAllAdvertisement();
     }
 }

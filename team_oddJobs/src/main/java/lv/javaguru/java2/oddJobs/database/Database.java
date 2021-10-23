@@ -13,6 +13,10 @@ public interface Database {
 
     void addClient(Client client);
 
+    boolean removeClientById(Long clientId);
+
+    boolean removeSpecialistById(Long specialistId);
+
     boolean removeSpecialist(Long id, String name, String surName);
 
     boolean removeClient(Long id, String name, String surName);
@@ -52,6 +56,6 @@ public interface Database {
 
     List<Client> getAllClients();
 
-    List<Advertisement> getAllAdvertisemets();
+    List<Advertisement> getAllAdvertisement();
 
 }
