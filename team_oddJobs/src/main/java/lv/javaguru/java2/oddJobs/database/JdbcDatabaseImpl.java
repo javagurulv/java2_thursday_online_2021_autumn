@@ -150,7 +150,7 @@ public class JdbcDatabaseImpl implements Database {
 
     @Override
     public List<Specialist> getAllSpecialist() {
-        String sql = "SELECT * FROM clients";
+        String sql = "SELECT * FROM specialists";
         return jdbcTemplate.query(sql, new SpecialistRowMapper());
     }
 
