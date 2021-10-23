@@ -5,7 +5,7 @@ import lv.javaguru.java2.oddJobs.core.requests.find.Ordering;
 import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.find.FindSpecialistResponse;
-import lv.javaguru.java2.oddJobs.core.validations.FindSpecialistValidator;
+import lv.javaguru.java2.oddJobs.core.validations.find.FindSpecialistValidator;
 import lv.javaguru.java2.oddJobs.database.Database;
 import lv.javaguru.java2.oddJobs.domain.Specialist;
 import org.springframework.beans.factory.annotation.Autowired;

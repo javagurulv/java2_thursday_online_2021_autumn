@@ -12,7 +12,7 @@ public class AdvertisementRowMapper implements RowMapper<Advertisement> {
     public Advertisement mapRow(ResultSet rs, int rowNum) throws SQLException {
 
         Advertisement advertisement = new Advertisement();
-        advertisement.setAdvId(rs.getLong("id"));
+        advertisement.setAdvId(rs.getLong("advId"));
         advertisement.setAdvTitle(rs.getString("advTitle"));
         advertisement.setAdvDescription(rs.getString("advDescription"));
         return advertisement;

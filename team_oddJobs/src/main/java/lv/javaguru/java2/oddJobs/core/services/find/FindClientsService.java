@@ -5,7 +5,7 @@ import lv.javaguru.java2.oddJobs.core.requests.find.Ordering;
 import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.find.FindClientsResponse;
-import lv.javaguru.java2.oddJobs.core.validations.FindClientsValidator;
+import lv.javaguru.java2.oddJobs.core.validations.find.FindClientsValidator;
 import lv.javaguru.java2.oddJobs.database.Database;
 import lv.javaguru.java2.oddJobs.domain.Client;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,19 +38,17 @@ public class FindClientsService {
         }
 
         List<Client> clients = find(request);
-        clients = order(clients, request.getOrdering());
+        clients = ordering(clients, request.getOrdering());
         clients = paging(clients, request.getPaging());
 
         return new FindClientsResponse(clients, null);
     }
 
-    private List<Client> order(List<Client> clients, Ordering ordering) {
-
-        if (ordering != null) {
-            Comparator<Client> comparator = ordering.getOrderBy().equals("clientSurname")
-                    ? Comparator.comparing(Client::getClientSurname)
-                    : Comparator.comparing(Client::getClientName);
-
+    private List<Client> ordering(List<Client> clients, Ordering ordering) {
+        if (orderingEnabled && ordering != null) {
+            Comparator<Client> comparator = ordering.getOrderBy().equals("Name")
+                    ? Comparator.comparing(Client::getClientName)
+                    : Comparator.comparing(Client::getClientSurname);
             if (ordering.getOrderDirection().equals("DESCENDING")) {
                 comparator = comparator.reversed();
             }
@@ -58,7 +56,6 @@ public class FindClientsService {
         } else {
             return clients;
         }
-
     }
 
     private List<Client> paging(List<Client> clients, Paging paging) {

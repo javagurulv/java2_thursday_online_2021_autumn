@@ -2,6 +2,7 @@ package lv.javaguru.java2.oddJobs.core.validations;
 
 import lv.javaguru.java2.oddJobs.core.requests.find.FindSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
+import lv.javaguru.java2.oddJobs.core.validations.find.FindSpecialistsFieldValidator;
 import org.junit.Test;
 
 import java.util.List;

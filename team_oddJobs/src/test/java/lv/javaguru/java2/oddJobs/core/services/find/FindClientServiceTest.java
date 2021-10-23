@@ -4,7 +4,7 @@ package lv.javaguru.java2.oddJobs.core.services.find;
 import lv.javaguru.java2.oddJobs.core.requests.find.FindClientsRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.find.FindClientsResponse;
-import lv.javaguru.java2.oddJobs.core.validations.FindClientsValidator;
+import lv.javaguru.java2.oddJobs.core.validations.find.FindClientsValidator;
 import lv.javaguru.java2.oddJobs.database.Database;
 import lv.javaguru.java2.oddJobs.domain.Client;
 import org.junit.Before;
@@ -80,8 +80,8 @@ public class FindClientServiceTest {
 
         //then
         assertFalse(response.hasErrors());
-        assertEquals(response.getClient().get(0).getClientName(), "Name");
-        assertEquals(response.getClient().get(0).getClientSurname(), "Surname");
+        assertEquals(response.getClients().get(0).getClientName(), "Name");
+        assertEquals(response.getClients().get(0).getClientSurname(), "Surname");
 
     }    @Test
     public void shouldReturnClientWhenSearchedBySurname() {
@@ -98,9 +98,9 @@ public class FindClientServiceTest {
 
         //then
         assertFalse(response.hasErrors());
-        assertEquals(response.getClient().size(), 1);
-        assertEquals(response.getClient().get(0).getClientName(), "Name");
-        assertEquals(response.getClient().get(0).getClientSurname(), "Surname");
+        assertEquals(response.getClients().size(), 1);
+        assertEquals(response.getClients().get(0).getClientName(), "Name");
+        assertEquals(response.getClients().get(0).getClientSurname(), "Surname");
 
     }
 

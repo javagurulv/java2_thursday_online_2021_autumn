@@ -1,4 +1,4 @@
-package lv.javaguru.java2.oddJobs.core.validations;
+package lv.javaguru.java2.oddJobs.core.validations.remove;
 
 import lv.javaguru.java2.oddJobs.core.requests.remove.RemoveAdvertismentRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;

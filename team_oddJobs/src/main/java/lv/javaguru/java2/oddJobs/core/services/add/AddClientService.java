@@ -3,7 +3,7 @@ package lv.javaguru.java2.oddJobs.core.services.add;
 import lv.javaguru.java2.oddJobs.core.requests.add.AddClientRequest;
 import lv.javaguru.java2.oddJobs.core.responce.add.AddClientResponse;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
-import lv.javaguru.java2.oddJobs.core.validations.AddClientValidator;
+import lv.javaguru.java2.oddJobs.core.validations.add.AddClientValidator;
 import lv.javaguru.java2.oddJobs.database.Database;
 import lv.javaguru.java2.oddJobs.domain.Client;
 import org.springframework.beans.factory.annotation.Autowired;

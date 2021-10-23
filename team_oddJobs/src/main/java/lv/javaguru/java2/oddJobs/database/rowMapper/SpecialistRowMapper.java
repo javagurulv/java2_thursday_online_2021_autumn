@@ -11,7 +11,7 @@ public class SpecialistRowMapper implements RowMapper<Specialist> {
     @Override
     public Specialist mapRow(ResultSet rs, int rowNum) throws SQLException {
         Specialist specialist = new Specialist();
-        specialist.setSpecialistId(rs.getLong("id"));
+        specialist.setSpecialistId(rs.getLong("specialistId"));
         specialist.setSpecialistName(rs.getString("specialistName"));
         specialist.setSpecialistSurname(rs.getString("specialistSurname"));
         specialist.setSpecialistProfession("specialistProfession");

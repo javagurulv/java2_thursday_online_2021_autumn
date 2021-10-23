@@ -4,6 +4,8 @@ import lv.javaguru.java2.oddJobs.core.requests.find.FindSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.requests.find.Ordering;
 import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
+import lv.javaguru.java2.oddJobs.core.validations.find.FindSpecialistValidator;
+import lv.javaguru.java2.oddJobs.core.validations.find.FindSpecialistsFieldValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,7 +28,7 @@ public class FindSpecialistValidatorTest {
     @Mock
     private SpecialistOrderingValidator specialistOrderingValidator;
     @Mock
-    private SpecialistPagingValidator specialistPagingValidator;
+    private PagingValidator specialistPagingValidator;
 
 
     @Test
