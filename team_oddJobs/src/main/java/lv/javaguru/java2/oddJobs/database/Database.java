@@ -13,9 +13,13 @@ public interface Database {
 
     void addClient(Client client);
 
-    boolean removeSpecialist(Long id, String name, String surName);
+    boolean removeClientById(Long clientId);
 
-    boolean removeClient(Long id, String name, String surName);
+    boolean removeSpecialistById(Long specialistId);
+
+    boolean removeSpecialist(Long specialistId, String specialistName, String specialistSurname);
+
+    boolean removeClient(Long clientId, String clientName, String clientSurname);
 
 
     List<Client> findClientsById(Long clientId);
@@ -24,7 +28,7 @@ public interface Database {
 
     List<Client> findClientBySurname(String clientSurname);
 
-    List<Client> findClientByIdAndNameAndSurname(Long id, String clientName, String clientSurname);
+    List<Client> findClientByIdAndNameAndSurname(Long clientId, String clientName, String clientSurname);
 
     List<Specialist> findSpecialistById(Long specialistId);
 
@@ -32,7 +36,7 @@ public interface Database {
 
     List<Specialist> findSpecialistBySurname(String specialistSurname);
 
-    List<Specialist> findSpecialistByProfession(String profession);
+    List<Specialist> findSpecialistByProfession(String specialistProfession);
 
     List<Specialist> findSpecialistByNameAndSurnameAndProfession(String specialistName, String specialistSurname, String specialistProfession);
 
@@ -52,6 +56,6 @@ public interface Database {
 
     List<Client> getAllClients();
 
-    List<Advertisement> getAllAdvertisemets();
+    List<Advertisement> getAllAdvertisement();
 
 }

@@ -14,6 +14,10 @@ public class Advertisement {
         this.advDescription = aBoardDescription;
     }
 
+    public Advertisement() {
+
+    }
+
     public Long getAdvId() {
         return advId;
     }

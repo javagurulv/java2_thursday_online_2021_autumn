@@ -53,7 +53,7 @@ public class FindSpecialistUIAction implements UIAction {
             response.getErrors().forEach(coreError ->
                     System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));
         } else {
-            response.getSpecialists().forEach(Specialist::toString);
+            response.getSpecialists().forEach(System.out::println);
         }
     }
 }

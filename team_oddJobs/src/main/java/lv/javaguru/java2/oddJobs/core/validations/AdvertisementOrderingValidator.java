@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class ClientOrderingValidator {
+public class AdvertisementOrderingValidator {
 
     public List<CoreError> validate(Ordering ordering) {
         List<CoreError> errors = new ArrayList<>();
@@ -22,11 +22,10 @@ public class ClientOrderingValidator {
         }
     }
 
-
     private Optional<CoreError> validateOrderBy(Ordering ordering) {
         return (ordering.getOrderBy() != null
-                && !(ordering.getOrderBy().equals("Name") || ordering.getOrderBy().equals("Surname")))
-                ? Optional.of(new CoreError("orderBy", "Must contain 'Name' or 'Surname'!"))
+                && !(ordering.getOrderBy().equals("Title")))
+                ? Optional.of(new CoreError("orderBy", "Must contain 'Title'"))
                 : Optional.empty();
     }
 

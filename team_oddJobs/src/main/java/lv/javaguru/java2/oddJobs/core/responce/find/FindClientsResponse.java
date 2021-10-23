@@ -15,7 +15,7 @@ public class FindClientsResponse extends CoreResponse {
         this.clients = clients;
     }
 
-    public List<Client> getClient() {
+    public List<Client> getClients() {
         return clients;
     }
 }

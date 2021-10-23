@@ -7,6 +7,7 @@ import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 
 import java.util.List;
 
+import lv.javaguru.java2.oddJobs.core.validations.add.AddSpecialistValidator;
 import org.junit.Test;
 
 public class AddSpecialistValidatorTest {

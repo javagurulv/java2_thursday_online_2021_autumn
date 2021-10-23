@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class SpecialistPagingValidatorTest {
 
-    private SpecialistPagingValidator validator = new SpecialistPagingValidator();
+    private PagingValidator validator = new PagingValidator();
 
     @Test
     public void shouldReturnErrorWhenPageNumberContainNotValidValue() {

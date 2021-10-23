@@ -22,6 +22,10 @@ public class Specialist {
         this.specialistProfession = specialistProfession;
     }
 
+    public Specialist() {
+
+    }
+
     public Long getSpecialistId() {
         return specialistId;
     }

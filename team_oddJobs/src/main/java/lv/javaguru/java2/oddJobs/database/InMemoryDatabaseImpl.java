@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class InMemoryDatabaseImpl implements Database {
 
     private Long nextId = 1L;
@@ -36,11 +36,21 @@ public class InMemoryDatabaseImpl implements Database {
     }
 
     @Override
-    public boolean removeSpecialist(Long id, String name, String surname) {
+    public boolean removeClientById(Long clientId) {
+        return false;
+    }
+
+    @Override
+    public boolean removeSpecialistById(Long specialistId) {
+        return false;
+    }
+
+    @Override
+    public boolean removeSpecialist(Long specialistId, String specialistName, String specialistSurname) {
 
         boolean isSpecialistDeleted = false;
         Optional<Specialist> specialistToDelete = specialists.stream()
-                .filter(specialist -> specialist.getSpecialistId().equals(id) && specialist.getSpecialistName().equals(name) && specialist.getSpecialistSurname().equals(surname))
+                .filter(specialist -> specialist.getSpecialistId().equals(specialistId) && specialist.getSpecialistName().equals(specialistName) && specialist.getSpecialistSurname().equals(specialistSurname))
                 .findFirst();
         if (specialistToDelete.isPresent()) {
             Specialist specialistToRemove = specialistToDelete.get();
@@ -50,12 +60,12 @@ public class InMemoryDatabaseImpl implements Database {
     }
 
     @Override
-    public boolean removeClient(Long id, String name, String surname) {
+    public boolean removeClient(Long clientId, String clientName, String clientSurname) {
 
         boolean isClientRemoved = false;
 
         Optional<Client> clientToDelete = clients.stream()
-                .filter(client -> client.getClientId().equals(id) && client.getClientName().equals(name) && client.getClientSurname().equals(surname))
+                .filter(client -> client.getClientId().equals(clientId) && client.getClientName().equals(clientName) && client.getClientSurname().equals(clientSurname))
                 .findFirst();
         if (clientToDelete.isPresent()) {
             Client clientToRemove = clientToDelete.get();
@@ -202,7 +212,7 @@ public class InMemoryDatabaseImpl implements Database {
     }
 
     @Override
-    public List<Advertisement> getAllAdvertisemets() {
+    public List<Advertisement> getAllAdvertisement() {
         return advBoards;
     }
 
