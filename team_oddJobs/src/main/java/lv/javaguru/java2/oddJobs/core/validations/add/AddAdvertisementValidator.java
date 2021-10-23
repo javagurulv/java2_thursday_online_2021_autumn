@@ -1,4 +1,4 @@
-package lv.javaguru.java2.oddJobs.core.validations;
+package lv.javaguru.java2.oddJobs.core.validations.add;
 import lv.javaguru.java2.oddJobs.core.requests.add.AddAdvertismentRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Component
-public class AddAdvertismentValidator {
+public class AddAdvertisementValidator {
     public List<CoreError> validate(AddAdvertismentRequest request){
         List<CoreError> errors = new ArrayList<>();
         validateTitle(request).ifPresent(errors::add);

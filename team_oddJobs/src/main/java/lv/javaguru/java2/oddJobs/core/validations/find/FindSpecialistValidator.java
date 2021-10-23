@@ -1,9 +1,11 @@
-package lv.javaguru.java2.oddJobs.core.validations;
+package lv.javaguru.java2.oddJobs.core.validations.find;
 
 import lv.javaguru.java2.oddJobs.core.requests.find.FindSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.requests.find.Ordering;
 import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
+import lv.javaguru.java2.oddJobs.core.validations.PagingValidator;
+import lv.javaguru.java2.oddJobs.core.validations.SpecialistOrderingValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +17,7 @@ public class FindSpecialistValidator {
     @Autowired
     private FindSpecialistsFieldValidator fieldValidator;
     @Autowired private SpecialistOrderingValidator specialistOrderingValidator;
-    @Autowired private SpecialistPagingValidator specialistPagingValidator;
+    @Autowired private PagingValidator specialistPagingValidator;
 
 
     public List<CoreError> validate(FindSpecialistRequest request) {

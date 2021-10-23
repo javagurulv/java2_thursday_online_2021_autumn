@@ -17,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import lv.javaguru.java2.oddJobs.core.requests.add.AddSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.responce.add.AddSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
-import lv.javaguru.java2.oddJobs.core.validations.AddSpecialistValidator;
+import lv.javaguru.java2.oddJobs.core.validations.add.AddSpecialistValidator;
 import lv.javaguru.java2.oddJobs.database.Database;
 
 @RunWith(MockitoJUnitRunner.class)

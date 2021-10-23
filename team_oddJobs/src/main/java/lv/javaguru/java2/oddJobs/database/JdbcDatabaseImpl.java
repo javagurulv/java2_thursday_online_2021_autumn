@@ -29,14 +29,16 @@ public class JdbcDatabaseImpl implements Database {
     }
 
     @Override
-    public boolean removeClient(Long id, String name, String surName) {
-        return false;
+    public boolean removeClient(Long clientId, String clientName, String clientSurname) {
+        String sql = "DELETE FROM clients WHERE clientId = ? AND clientName = ? AND clientSurname = ? ";
+        Object[] args = new Object[]{clientId, clientName, clientSurname};
+        return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
     public boolean removeClientById(Long clientId) {
 
-        String sql = "DELETE FROM clients WHERE id = ?";
+        String sql = "DELETE FROM clients WHERE clientId = ?";
         Object[] args = new Object[]{clientId};
         return jdbcTemplate.update(sql, args) == 1;
     }
@@ -81,13 +83,15 @@ public class JdbcDatabaseImpl implements Database {
     }
 
     @Override
-    public boolean removeSpecialist(Long id, String name, String surName) {
-        return false;
+    public boolean removeSpecialist(Long specialistId, String specialistName, String specialistSurname) {
+        String sql = "DELETE FROM specialists WHERE specialistId = ? AND specialistName = ? AND specialistSurname = ?";
+        Object[] args = new Object[]{specialistId, specialistName, specialistSurname};
+        return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
     public boolean removeSpecialistById(Long specialistId) {
-        String sql = "DELETE FROM specialists WHERE id = ?";
+        String sql = "DELETE FROM specialists WHERE specialistId = ?";
         Object[] args = new Object[]{specialistId};
         return jdbcTemplate.update(sql, args) == 1;
     }
@@ -131,21 +135,32 @@ public class JdbcDatabaseImpl implements Database {
     @Override
     public void addAdvertisement(Advertisement advBoard) {
 
+        jdbcTemplate.update(
+                "INSERT INTO Advertisements (advTitle, advDescription) "
+                        + "VALUES (?, ?)",
+                advBoard.getAdvTitle(), advBoard.getAdvDescription()
+        );
     }
 
     @Override
     public boolean removeAdvertisement(Long advId, String advBoardTitle) {
-        return false;
+        String sql = "DELETE FROM advertisements WHERE advId = ? AND advBoardTitle = ?";
+        Object[] args = new Object[]{advId, advBoardTitle};
+        return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
     public List<Advertisement> findAdvertisementByTitle(String advTitle) {
-        return null;
+        String sql = "SELECT * FROM advertisements WHERE advTitle = ? ";
+        Object[] args = new Object[]{advTitle};
+        return jdbcTemplate.query(sql, args, new AdvertisementRowMapper());
     }
 
     @Override
     public List<Advertisement> findAdvertisementById(long advId) {
-        return null;
+        String sql = "SELECT * FROM advertisements WHERE advId = ? ";
+        Object[] args = new Object[]{advId};
+        return jdbcTemplate.query(sql, args, new AdvertisementRowMapper());
     }
 
     @Override

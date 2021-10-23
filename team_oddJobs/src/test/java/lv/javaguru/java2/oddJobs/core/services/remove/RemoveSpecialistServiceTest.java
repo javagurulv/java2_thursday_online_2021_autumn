@@ -3,7 +3,7 @@ package lv.javaguru.java2.oddJobs.core.services.remove;
 import lv.javaguru.java2.oddJobs.core.requests.remove.RemoveSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.remove.RemoveSpecialistResponse;
-import lv.javaguru.java2.oddJobs.core.validations.RemoveSpecialistValidator;
+import lv.javaguru.java2.oddJobs.core.validations.remove.RemoveSpecialistValidator;
 import lv.javaguru.java2.oddJobs.database.Database;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package lv.javaguru.java2.oddJobs.core.validations;
+package lv.javaguru.java2.oddJobs.core.validations.add;
 import lv.javaguru.java2.oddJobs.core.requests.add.AddClientRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import org.springframework.stereotype.Component;

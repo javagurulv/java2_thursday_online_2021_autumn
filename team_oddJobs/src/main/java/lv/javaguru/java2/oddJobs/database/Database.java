@@ -17,9 +17,9 @@ public interface Database {
 
     boolean removeSpecialistById(Long specialistId);
 
-    boolean removeSpecialist(Long id, String name, String surName);
+    boolean removeSpecialist(Long specialistId, String specialistName, String specialistSurname);
 
-    boolean removeClient(Long id, String name, String surName);
+    boolean removeClient(Long clientId, String clientName, String clientSurname);
 
 
     List<Client> findClientsById(Long clientId);

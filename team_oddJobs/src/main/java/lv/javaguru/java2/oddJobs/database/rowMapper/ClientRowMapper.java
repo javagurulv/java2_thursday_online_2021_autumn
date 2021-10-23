@@ -12,7 +12,7 @@ public class ClientRowMapper implements RowMapper<Client> {
     public Client mapRow(ResultSet rs, int rowNum) throws SQLException {
 
         Client client = new Client();
-        client.setClientId(rs.getLong("id"));
+        client.setClientId(rs.getLong("clientId"));
         client.setClientName(rs.getString("clientName"));
         client.setClientSurname(rs.getString("clientSurname"));
         return client;
