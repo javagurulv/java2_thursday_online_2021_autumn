@@ -1,7 +1,8 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
-import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
+import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
+import lv.javaguru.java2.hospital.visit.core.services.validators.date_validator.DateValidatorExecution;
 import lv.javaguru.java2.hospital.visit.core.services.validators.existence.VisitExistenceByIdValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ public class EditVisitValidator {
 
     @Autowired private VisitExistenceByIdValidator validator;
     @Autowired private VisitEnumChecker checker;
+    @Autowired private DateValidatorExecution dateValidator;
 
     public List<CoreError> validate(EditVisitRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -22,6 +24,7 @@ public class EditVisitValidator {
         validateVisitExistence(request.getVisitID()).ifPresent(errors::add);
         validateChanges(request).ifPresent(errors::add);
         validateEnum(request).ifPresent(errors::add);
+        errors.addAll(validateDate(request));
         return errors;
     }
 
@@ -47,5 +50,11 @@ public class EditVisitValidator {
     private Optional<CoreError> validateEnum(EditVisitRequest request){
         return (request.getEditEnums() == null || request.getEditEnums().isEmpty())
                 ? Optional.empty() : checker.validateEnum(request.getEditEnums());
+    }
+
+    private List<CoreError> validateDate(EditVisitRequest request){
+        return request == null ? new ArrayList<>()
+                : request.getEditEnums().equals("DATE")
+                ? dateValidator.validate(request.getChanges()) : new ArrayList<>();
     }
 }

@@ -11,7 +11,6 @@ import java.util.Optional;
 public class PatientEnumChecker {
 
     public Optional<CoreError> validateEnum(String input) {
-
         try {
             EditPatientEnum.valueOf(input.toUpperCase(Locale.ROOT));
             return Optional.empty();

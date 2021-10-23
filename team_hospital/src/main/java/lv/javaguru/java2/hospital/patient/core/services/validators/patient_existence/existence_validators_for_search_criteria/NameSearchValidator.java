@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.validators_for_search_criteria;
+package lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.existence_validators_for_search_criteria;
 
 import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;

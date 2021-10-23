@@ -64,6 +64,6 @@ public class AddVisitValidator {
     }
 
     private List<CoreError> validateDate(AddVisitRequest request){
-       return request == null ? new ArrayList<>() : dateValidator.validate(request);
+       return request == null ? new ArrayList<>() : dateValidator.validate(request.getVisitDate());
     }
 }

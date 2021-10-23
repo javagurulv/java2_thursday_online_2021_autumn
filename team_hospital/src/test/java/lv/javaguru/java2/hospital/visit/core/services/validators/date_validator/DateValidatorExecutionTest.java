@@ -41,7 +41,7 @@ public class DateValidatorExecutionTest {
         Mockito.when(formatValidator.validateFormat(request.getVisitDate())).thenReturn(Optional.empty());
         LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(request.getVisitDate()));
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate())).thenReturn(localDateTime);
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = validator.validate(request.getVisitDate());
         assertTrue(errors.isEmpty());
     }
 
@@ -57,7 +57,7 @@ public class DateValidatorExecutionTest {
                 formatValidator.validateFormat(request.getVisitDate()))
                 .thenReturn(Optional.of(new CoreError("Date", "input is incorrect!")));
 
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = validator.validate(request.getVisitDate());
         System.out.println(errors);
         assertFalse(errors.isEmpty());
         assertEquals(errors.size(), 1);
@@ -75,7 +75,7 @@ public class DateValidatorExecutionTest {
         );
         LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(request.getVisitDate()));
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate())).thenReturn(localDateTime);
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = validator.validate(request.getVisitDate());
         assertFalse(errors.isEmpty());
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Date");
@@ -92,7 +92,7 @@ public class DateValidatorExecutionTest {
         );
         LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(request.getVisitDate()));
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate())).thenReturn(localDateTime);
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = validator.validate(request.getVisitDate());
         assertFalse(errors.isEmpty());
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Date");
@@ -109,7 +109,7 @@ public class DateValidatorExecutionTest {
         );
         LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(request.getVisitDate()));
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate())).thenReturn(localDateTime);
-        List<CoreError> errors = validator.validate(request);
+        List<CoreError> errors = validator.validate(request.getVisitDate());
         assertFalse(errors.isEmpty());
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Time in the date");
