@@ -74,7 +74,7 @@ public class JdbcDatabaseImpl implements Database {
     public void addSpecialist(Specialist specialist) {
 
         jdbcTemplate.update(
-                "INSERT INTO Client (specialistName, specialistSurname,) "
+                "INSERT INTO Specialists (specialistName, specialistSurname,specialistProfession) "
                         + "VALUES (?, ?,?)",
                 specialist.getSpecialistName(), specialist.getSpecialistSurname(), specialist.getSpecialistProfession()
         );
