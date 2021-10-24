@@ -17,9 +17,9 @@ public class SQLTest2 {
     private static final List<CoreRequest> requestList = List.of(
             new FilterStocksByIndustryRequest("Technology"),
             new FilterStocksByAnyDoubleParameterRequest("dividend_yield", ">", "1"),
-            new FilterStocksByAnyDoubleParameterRequest("risk_weight", "<", "1"),
+            new FilterStocksByAnyDoubleParameterRequest("risk_weight", ">", "0.8"),
             new FilterStocksByAnyDoubleParameterRequest("market_price", ">", "100"),
-            new OrderingRequest("risk_weight", "ASCENDING")
+            new OrderingRequest("ticker", "DESC")
     );
     private static String query = "SELECT * FROM stocks";
 
@@ -56,7 +56,8 @@ public class SQLTest2 {
                     query = query + "  AND";
                 }
                 if (requestList.get(i).getClass().getSimpleName().equals("OrderingRequest")) {
-                    query = query + " ORDER BY " + ((OrderingRequest) requestList.get(i)).getOrderBy();
+                    query = query + " ORDER BY " + ((OrderingRequest) requestList.get(i)).getOrderBy() + " " +
+                            ((OrderingRequest) requestList.get(i)).getOrderDirection();
                 }
                 if (requestList.get(i).getClass().getSimpleName().equals("FilterStocksByIndustryRequest")) {
                     query = query + " industry = " + "'" + ((FilterStocksByIndustryRequest) requestList.get(i)).getIndustry() + "'" + "\n";
