@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.database;
 
 import lv.javaguru.java2.hospital.domain.Doctor;
+import lv.javaguru.java2.hospital.domain.Visit;
 
 import java.util.List;
 
@@ -29,5 +30,7 @@ public interface DoctorDatabase {
     List<Doctor> findBySurnameAndSpeciality(String surname, String speciality);
 
     List<Doctor> findByNameAndSurnameAndSpeciality(String name, String surname, String speciality);
+
+    List<Visit> getDoctorVisits(Long id);
 
 }

@@ -22,7 +22,8 @@ public class DoctorProgramMenu {
         menuNumberToUIActionMap.put(3, findUIAction(uiActions, DeleteDoctorUIAction.class));
         menuNumberToUIActionMap.put(4, findUIAction(uiActions, EditDoctorUIAction.class));
         menuNumberToUIActionMap.put(5, findUIAction(uiActions, SearchDoctorsUIAction.class));
-        menuNumberToUIActionMap.put(6, findUIAction(uiActions, ExitDoctorUIAction.class));
+        menuNumberToUIActionMap.put(6, findUIAction(uiActions, ShowDoctorVisitsUIAction.class));
+        menuNumberToUIActionMap.put(7, findUIAction(uiActions, ExitDoctorUIAction.class));
     }
 
     private DoctorUIAction findUIAction(List<DoctorUIAction> uiActions, Class uiActionClass) {
@@ -39,11 +40,12 @@ public class DoctorProgramMenu {
         System.out.println("3. Delete the doctor by ID");
         System.out.println("4. Edit the doctor's information");
         System.out.println("5. Search doctors");
-        System.out.println("6. Exit");
+        System.out.println("6. Show doctor's visits");
+        System.out.println("7. Exit");
     }
 
     public int getDoctorMenuNumberFromUser() {
-        return inputNumChecker.execute(1, 6);
+        return inputNumChecker.execute(1, 7);
     }
 
     public void executeSelectedMenuItem(int selectedMenu) {

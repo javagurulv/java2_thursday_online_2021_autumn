@@ -1,6 +1,8 @@
 package lv.javaguru.java2.hospital.database;
 
 import lv.javaguru.java2.hospital.domain.Doctor;
+import lv.javaguru.java2.hospital.domain.Visit;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
 
     private Long nextId = 1L;
     private List<Doctor> doctorsList = new ArrayList<>();
+    @Autowired VisitDatabase visitDatabase;
 
     @Override
     public void addDoctor(Doctor doctor) {
@@ -117,5 +120,10 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
                 .filter(doctor -> doctor.getSurname().equals(surname))
                 .filter(doctor -> doctor.getSpeciality().equals(speciality))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visit> getDoctorVisits(Long id) {
+        return visitDatabase.findByDoctorId(id);
     }
 }
