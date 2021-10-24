@@ -3,9 +3,14 @@ package lv.javaguru.java2.qwe;
 import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.requests.data_requests.FilterStocksByAnyDoubleParameterRequest;
 import lv.javaguru.java2.qwe.core.requests.data_requests.FilterStocksByIndustryRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.OrderingRequest;
 
 import java.sql.*;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.IntStream;
 
 public class SQLTest2 {
 
@@ -13,7 +18,8 @@ public class SQLTest2 {
             new FilterStocksByIndustryRequest("Technology"),
             new FilterStocksByAnyDoubleParameterRequest("dividend_yield", ">", "1"),
             new FilterStocksByAnyDoubleParameterRequest("risk_weight", "<", "1"),
-            new FilterStocksByAnyDoubleParameterRequest("market_price", ">", "100")
+            new FilterStocksByAnyDoubleParameterRequest("market_price", ">", "100"),
+            new OrderingRequest("risk_weight", "ASCENDING")
     );
     private static String query = "SELECT * FROM stocks";
 
@@ -24,7 +30,7 @@ public class SQLTest2 {
             Connection dbConn = DriverManager.getConnection(URL, "root", "DG8H-HPAS-9ZGR");
             PreparedStatement pstm1 = dbConn.prepareStatement(getQuery(requestList));
             ResultSet answer = pstm1.executeQuery();
-            while(answer.next()) {
+            while (answer.next()) {
                 String res = String.join(", ",
                         answer.getString(1),
                         answer.getString(2),
@@ -36,30 +42,33 @@ public class SQLTest2 {
                 System.out.println(res);
             }
             dbConn.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     static private String getQuery(List<CoreRequest> requestList) {
+
         if (requestList.size() > 0) {
             query = query + "\n  WHERE";
             for (int i = 0; i < requestList.size(); i++) {
-                if (i != 0) {
+                if (i != 0 && !requestList.get(i).getClass().getSimpleName().equals("OrderingRequest")) {
                     query = query + "  AND";
                 }
-                if (requestList.get(i).getClass().getSimpleName().equals("FilterStocksByIndustryRequest")) {
-                    query = query + " industry = " + "'" + ((FilterStocksByIndustryRequest)requestList.get(i)).getIndustry() + "'" + "\n";
+                if (requestList.get(i).getClass().getSimpleName().equals("OrderingRequest")) {
+                    query = query + " ORDER BY " + ((OrderingRequest) requestList.get(i)).getOrderBy();
                 }
-                else {
-                    query = query + " " + ((FilterStocksByAnyDoubleParameterRequest)requestList.get(i)).getParameter() + " " +
-                            ((FilterStocksByAnyDoubleParameterRequest)requestList.get(i)).getOperator() + " " +
-                            ((FilterStocksByAnyDoubleParameterRequest)requestList.get(i)).getTargetAmount() + "\n";
+                if (requestList.get(i).getClass().getSimpleName().equals("FilterStocksByIndustryRequest")) {
+                    query = query + " industry = " + "'" + ((FilterStocksByIndustryRequest) requestList.get(i)).getIndustry() + "'" + "\n";
+                }
+                if (requestList.get(i).getClass().getSimpleName().equals("FilterStocksByAnyDoubleParameterRequest")) {
+                    query = query + " " + ((FilterStocksByAnyDoubleParameterRequest) requestList.get(i)).getParameter() + " " +
+                            ((FilterStocksByAnyDoubleParameterRequest) requestList.get(i)).getOperator() + " " +
+                            ((FilterStocksByAnyDoubleParameterRequest) requestList.get(i)).getTargetAmount() + "\n";
                 }
             }
         }
-        System.out.println(query);
+        System.out.println("====================================\n" + query + "\n====================================");
         return query;
     }
 
