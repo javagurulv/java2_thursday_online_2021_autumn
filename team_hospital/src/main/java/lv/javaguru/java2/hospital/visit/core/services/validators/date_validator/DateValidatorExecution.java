@@ -31,7 +31,8 @@ public class DateValidatorExecution {
         DateValidator[] validators = {
                 new DateIsInFutureValidator(getVisitDate),
                 new DateIsWorkingDayValidator(getVisitDate),
-                new DateTimeIsInWorkingHoursValidator(getVisitDate)};
+                new DateTimeIsInWorkingHoursValidator(getVisitDate),
+                new DateIsHourlyVisitValidator(getVisitDate)};
 
         for (DateValidator d : validators) {
             d.validate(request).ifPresent(errors::add);
