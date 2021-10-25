@@ -19,6 +19,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnEmptyList() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "Gazprom 4.75 31/12/2031",
                 "Energy",
                 "USD",
@@ -35,6 +36,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnNameError1() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "",
                 "Energy",
                 "USD",
@@ -52,9 +54,10 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
 
     @Test
     public void shouldReturnNameError2() {
-        database.addBond(new Bond("Gazprom 4.75 31/12/2031", "Energy", "USD", 108.75,
+        database.addBond(new Bond("GAZPRU", "Gazprom 4.75 31/12/2031", "Energy", "USD", 108.75,
                 4.75, "BBB+", 1000, "31/12/2031"));
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "Gazprom 4.75 31/12/2031",
                 "Energy",
                 "USD",
@@ -73,6 +76,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnIndustryError() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "Gazprom 4.75 31/12/2031",
                 "",
                 "USD",
@@ -91,6 +95,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnCurrencyError() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "Gazprom 4.75 31/12/2031",
                 "Energy",
                 "",
@@ -109,6 +114,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnMarketPriceError1() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "Gazprom 4.75 31/12/2031",
                 "Energy",
                 "USD",
@@ -127,6 +133,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnMarketPriceError2() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "Gazprom 4.75 31/12/2031",
                 "Energy",
                 "USD",
@@ -145,6 +152,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnCouponError1() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "Gazprom 4.75 31/12/2031",
                 "Energy",
                 "USD",
@@ -163,6 +171,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnCouponError2() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "Gazprom 4.75 31/12/2031",
                 "Energy",
                 "USD",
@@ -181,6 +190,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnRatingError1() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "Gazprom 4.75 31/12/2031",
                 "Energy",
                 "USD",
@@ -199,6 +209,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnRatingError2() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "Gazprom 4.75 31/12/2031",
                 "Energy",
                 "USD",
@@ -217,6 +228,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnNominalError1() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "Gazprom 4.75 31/12/2031",
                 "Energy",
                 "USD",
@@ -235,6 +247,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnNominalError2() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "Gazprom 4.75 31/12/2031",
                 "Energy",
                 "USD",
@@ -253,6 +266,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnMaturityError1() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "Gazprom 4.75 31/12/2031",
                 "Energy",
                 "USD",
@@ -271,6 +285,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnMaturityError2() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "Gazprom 4.75 31/12/2031",
                 "Energy",
                 "USD",
@@ -289,6 +304,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnNameCurrencyRatingNominalErrors() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "Ga",
                 "Energy",
                 "",
@@ -309,6 +325,7 @@ public class AddBondValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnAllErrors() {
         AddBondRequest request = new AddBondRequest(
+                "GAZPRU",
                 "",
                 "",
                 "",

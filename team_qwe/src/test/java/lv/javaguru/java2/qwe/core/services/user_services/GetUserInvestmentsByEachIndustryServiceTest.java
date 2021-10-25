@@ -54,7 +54,7 @@ public class GetUserInvestmentsByEachIndustryServiceTest {
                 new GetUserInvestmentsByEachIndustryRequest("Alexander");
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
-        User user = new User("Alexander", 25, Type.SUPER_RICH, 1_000_000);
+        User user = new User(1, "Alexander", 25, Type.SUPER_RICH, 1_000_000);
         Map<String, Double> map = Map.ofEntries(
                 Map.entry("Technology", 50000.),
                 Map.entry("Energy", 25000.),

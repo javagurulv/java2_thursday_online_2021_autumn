@@ -17,13 +17,14 @@ public class AddStockUIAction implements UIAction {
 
     @Override
     public void execute() {
+        String ticker = utils.inputDialog("Security ticker");
         String name = utils.inputDialog("Security name");
         String industry = utils.inputDialog("Industry", "CHOOSE INDUSTRY", utils.generateIndustriesArray());
         String currency = utils.inputDialog("Currency", "CHOOSE CURRENCY", new String[]{"USD"});
         String marketPrice = utils.inputDialog("Market price");
         String dividend = utils.inputDialog("Dividend");
         String riskWeight = utils.inputDialog("Risk weight");
-        CoreRequest stockRequest = new AddStockRequest(name, industry, currency,
+        CoreRequest stockRequest = new AddStockRequest(ticker, name, industry, currency,
                 marketPrice, dividend, riskWeight);
         AddStockResponse stockResponse = addStockService.execute(stockRequest);
         printResponse(stockResponse);

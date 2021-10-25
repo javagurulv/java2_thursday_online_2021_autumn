@@ -16,6 +16,7 @@ public class AddUserValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnEmptyList() {
         AddUserRequest request = new AddUserRequest(
+                "1",
                 "Michael",
                 "40",
                 "SUPER_RICH",
@@ -28,6 +29,7 @@ public class AddUserValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnNameError1() {
         AddUserRequest request = new AddUserRequest(
+                "1",
                 "",
                 "40",
                 "SUPER_RICH",
@@ -42,6 +44,7 @@ public class AddUserValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnNameError2() {
         AddUserRequest request = new AddUserRequest(
+                "1",
                 "Al",
                 "40",
                 "SUPER_RICH",
@@ -56,6 +59,7 @@ public class AddUserValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnNameError3() {
         AddUserRequest request = new AddUserRequest(
+                "1",
                 "Michaelrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr" +
                         "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr" +
                         "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
@@ -72,6 +76,7 @@ public class AddUserValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnNameError4() {
         AddUserRequest request = new AddUserRequest(
+                "1",
                 "Alexander",
                 "40",
                 "SUPER_RICH",
@@ -86,6 +91,7 @@ public class AddUserValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnAgeError1() {
         AddUserRequest request = new AddUserRequest(
+                "1",
                 "Michael",
                 "a",
                 "SUPER_RICH",
@@ -100,6 +106,7 @@ public class AddUserValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnAgeError2() {
         AddUserRequest request = new AddUserRequest(
+                "1",
                 "Michael",
                 "",
                 "SUPER_RICH",
@@ -114,6 +121,7 @@ public class AddUserValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnAgeError3() {
         AddUserRequest request = new AddUserRequest(
+                "1",
                 "Michael",
                 "15",
                 "SUPER_RICH",
@@ -128,6 +136,7 @@ public class AddUserValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnAgeError4() {
         AddUserRequest request = new AddUserRequest(
+                "1",
                 "Michael",
                 "150",
                 "SUPER_RICH",
@@ -142,6 +151,7 @@ public class AddUserValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnTypeError() {
         AddUserRequest request = new AddUserRequest(
+                "1",
                 "Michael",
                 "40",
                 "",
@@ -156,6 +166,7 @@ public class AddUserValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnInitialInvestmentError1() {
         AddUserRequest request = new AddUserRequest(
+                "1",
                 "Michael",
                 "40",
                 "SUPER_RICH",
@@ -170,6 +181,7 @@ public class AddUserValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnInitialInvestmentError2() {
         AddUserRequest request = new AddUserRequest(
+                "1",
                 "Michael",
                 "40",
                 "SUPER_RICH",
@@ -184,6 +196,7 @@ public class AddUserValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnInitialInvestmentError3() {
         AddUserRequest request = new AddUserRequest(
+                "1",
                 "Michael",
                 "40",
                 "SUPER_RICH",
@@ -198,6 +211,7 @@ public class AddUserValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnNameAgeInitialInvestmentErrors() {
         AddUserRequest request = new AddUserRequest(
+                "1",
                 "Al",
                 "12",
                 "SUPER_RICH",
@@ -213,6 +227,7 @@ public class AddUserValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnAllErrors() {
         AddUserRequest request = new AddUserRequest(
+                "1",
                 "",
                 "",
                 "",

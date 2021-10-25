@@ -19,6 +19,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnEmptyList() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -33,6 +34,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnNameError1() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "In",
                 "Technology",
                 "USD",
@@ -48,9 +50,10 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
 
     @Test
     public void shouldReturnNameError2() {
-        database.addStock(new Stock("Alibaba", "Technology", "USD", 165.23,
+        database.addStock(new Stock("BABA US", "Alibaba", "Technology", "USD", 165.23,
                 0, 1.32));
         AddStockRequest request = new AddStockRequest(
+                "BABA US",
                 "Alibaba",
                 "Technology",
                 "USD",
@@ -67,6 +70,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnIndustryError() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "",
                 "USD",
@@ -83,6 +87,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnCurrencyError() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "",
@@ -99,6 +104,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnMarketPriceError1() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -115,6 +121,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnMarketPriceError2() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -131,6 +138,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnDividendError1() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -147,6 +155,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnDividendError2() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -163,6 +172,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnRiskWeightError1() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -179,6 +189,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnRiskWeightError2() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -195,6 +206,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnNameCurrencyRiskWeightErrors() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "In",
                 "Technology",
                 "",
@@ -212,6 +224,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnMarketPriceDividendErrors() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -228,6 +241,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnAllErrors() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "",
                 "",
                 "",

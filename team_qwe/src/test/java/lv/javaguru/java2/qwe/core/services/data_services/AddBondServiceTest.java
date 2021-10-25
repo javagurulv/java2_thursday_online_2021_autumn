@@ -32,7 +32,7 @@ public class AddBondServiceTest {
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
         AddBondRequest request = new AddBondRequest(
-                "", "Energy", "USD", "108.75",
+                "GAZPRU", "", "Energy", "USD", "108.75",
                 "4.75", "BBB+", "1000", "31/12/2031");
         List<CoreError> errors = List.of(
                 new CoreError("Name", "3 to 100 symbols required!")
@@ -51,12 +51,12 @@ public class AddBondServiceTest {
     public void shouldAddBondToDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         AddBondRequest request = new AddBondRequest(
-                "", "Energy", "USD", "108.75",
+                "GAZPRU", "Gazprom 4.75 31/12/2031", "Energy", "USD", "108.75",
                 "4.75", "BBB+", "1000", "31/12/2031");
         AddBondResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         Mockito.verify(database).addBond(argThat(new BondMatcher(new Bond(
-                "", "Energy", "USD", 108.75,
+                "GAZPRU","Gazprom 4.75 31/12/2031", "Energy", "USD", 108.75,
                 4.75, "BBB+", 1000, "31/12/2031"
         ))));
     }

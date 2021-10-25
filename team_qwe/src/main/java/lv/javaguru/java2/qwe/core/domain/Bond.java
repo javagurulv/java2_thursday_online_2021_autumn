@@ -9,9 +9,9 @@ public class Bond extends Security {
     private final Integer nominal;
     private final String maturity;
 
-    public Bond(String name, String industry, String currency, Double marketPrice,
+    public Bond(String ticker, String name, String industry, String currency, Double marketPrice,
                 Double coupon, String rating, Integer nominal, String maturity) {
-        super(name, industry, currency, marketPrice);
+        super(ticker, name, industry, currency, marketPrice);
         this.coupon = coupon;
         this.rating = rating;
         this.nominal = nominal;
@@ -37,7 +37,8 @@ public class Bond extends Security {
     @Override
     public String toString() {
         return "Bond{" +
-                "name=" + this.getName() +
+                "ticker=" + this.getTicker() +
+                ", name=" + this.getName() +
                 ", industry=" + this.getIndustry() +
                 ", currency=" + this.getCurrency() +
                 ", marketPrice=" + this.getMarketPrice() +

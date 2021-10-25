@@ -54,7 +54,7 @@ public class GetUserPortfolioGroupedByIndustryServiceTest {
                 new GetUserPortfolioGroupedByIndustryRequest("Alexander");
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
-        User user = new User("Alexander", 25, Type.SUPER_RICH, 1_000_000);
+        User user = new User(1, "Alexander", 25, Type.SUPER_RICH, 1_000_000);
         Map<String, List<String>> map = Map.ofEntries(
                 Map.entry("Technology", List.of("Apple", "Intel")),
                 Map.entry("Energy", List.of("Gazprom", "Total")),

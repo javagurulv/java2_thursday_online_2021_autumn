@@ -55,11 +55,11 @@ public class GetUserPortfolioServiceTest {
                 new GetUserPortfolioRequest("Alexander");
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
-        User user = new User("Alexander", 25, Type.SUPER_RICH, 1_000_000);
+        User user = new User(1, "Alexander", 25, Type.SUPER_RICH, 1_000_000);
         List<Position> portfolio = List.of(
-                new Position(new Stock("Alibaba", "Technology", "USD", 175.23, 0, 1.32), 100, 175.23),
-                new Position(new Stock("Gazprom", "Energy", "USD", 9.25, 0.51, 0.95), 2500, 9.25),
-                new Position(new Stock("Pfizer", "Health care", "USD", 78.93, 0.64, 0.98), 1000, 78.93)
+                new Position(new Stock("BABA US", "Alibaba", "Technology", "USD", 175.23, 0, 1.32), 100, 175.23),
+                new Position(new Stock("OGZD LN", "Gazprom", "Energy", "USD", 9.25, 0.51, 0.95), 2500, 9.25),
+                new Position(new Stock("PFE US", "Pfizer", "Health care", "USD", 78.93, 0.64, 0.98), 1000, 78.93)
         );
         user.setPortfolio(portfolio);
         Mockito.when(userData.findUserByName("Alexander")).thenReturn(Optional.of(user));

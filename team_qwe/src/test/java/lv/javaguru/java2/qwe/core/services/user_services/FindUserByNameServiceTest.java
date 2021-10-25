@@ -52,13 +52,13 @@ public class FindUserByNameServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         Optional<User> user = Optional.of(
-                new User("Alexander", 25, Type.SUPER_RICH, 1_000_000)
+                new User(1,"Alexander", 25, Type.SUPER_RICH, 1_000_000)
         );
         Mockito.when(userData.findUserByName("Alexander")).thenReturn(user);
 
         FindUserByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        Assert.assertEquals(response.getUser(), new User("Alexander", 25,
+        Assert.assertEquals(response.getUser(), new User(1,"Alexander", 25,
                 Type.SUPER_RICH, 1_000_000)
         );
     }

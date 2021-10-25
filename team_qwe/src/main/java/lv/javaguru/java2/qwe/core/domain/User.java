@@ -9,6 +9,7 @@ import static lv.javaguru.java2.qwe.core.domain.Type.*;
 
 public class User {
 
+    private final long id;
     private final String name;
     private final int age;
     private final Type type; // общий уровень благосостояния клиента
@@ -18,13 +19,18 @@ public class User {
     private List<Position> portfolio = new ArrayList<>();
     private final Map<String, Double[]> distribution = createDistributionMatrix();
 
-    public User(String name, int age, Type type, double initialInvestment) {
+    public User(long id, String name, int age, Type type, double initialInvestment) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.type = type;
         this.initialInvestment = initialInvestment;
         calculateRiskTolerance();
         portfolio.add(new Position(new Cash(), initialInvestment, 1));
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getName() {
@@ -119,7 +125,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", age=" + age +
                 ", type=" + type +
                 ", initialInvestment=" + initialInvestment +
@@ -133,7 +140,7 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return age == user.age && Double.compare(user.initialInvestment, initialInvestment) == 0
-                && Objects.equals(name, user.name) && type == user.type;
+                && Objects.equals(name, user.name) && type == user.type && id == user.id;
     }
 
 }

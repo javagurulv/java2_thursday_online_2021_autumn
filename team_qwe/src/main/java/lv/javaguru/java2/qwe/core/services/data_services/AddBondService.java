@@ -30,6 +30,7 @@ public class AddBondService {
 
     private Bond createBond(AddBondRequest request) {
         return new Bond(
+                request.getTicker(),
                 request.getName(),
                 request.getIndustry(),
                 request.getCurrency(),

@@ -66,9 +66,9 @@ public class FilterStocksByMultipleParametersServiceTest extends AcceptanceTestF
         assertFalse(response.hasErrors());
 
         List<Security> list = List.of(
-                new Stock("Citrix Systems Inc.", "Technology", "USD", 103.22, 1.43, 0.62),
-                new Stock("Jack Henry & Associates Inc.", "Technology", "USD", 177.13, 1.04, 0.89),
-                new Stock("NortonLifeLock Inc.", "Technology", "USD", 25.75, 1.94, 0.76)
+                new Stock("CTXS US", "Citrix Systems Inc.", "Technology", "USD", 103.22, 1.43, 0.62),
+                new Stock("JKHY US", "Jack Henry & Associates Inc.", "Technology", "USD", 177.13, 1.04, 0.89),
+                new Stock("NLOK US","NortonLifeLock Inc.", "Technology", "USD", 25.75, 1.94, 0.76)
         );
 
         assertEquals(list, response.getList());
@@ -90,8 +90,8 @@ public class FilterStocksByMultipleParametersServiceTest extends AcceptanceTestF
         assertFalse(response.hasErrors());
 
         List<Security> list = List.of(
-                new Stock("Occidental Petroleum Corporation", "Energy", "USD", 21.95, 0.18, 1.69),
-                new Stock("Hess Corporation", "Energy", "USD", 64.32, 1.55, 1.22)
+                new Stock("OXY US", "Occidental Petroleum Corporation", "Energy", "USD", 21.95, 0.18, 1.69),
+                new Stock("HES US", "Hess Corporation", "Energy", "USD", 64.32, 1.55, 1.22)
         );
 
         assertEquals(list, response.getList());

@@ -32,7 +32,7 @@ public class AddStockServiceTest {
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
         AddStockRequest request = new AddStockRequest(
-                "In", "Technology", "USD",
+                "INTC US", "In", "Technology", "USD",
                 "54.23", "1.15", "1.09");
         List<CoreError> errors = List.of(
                 new CoreError("Name", "3 to 100 symbols required!")
@@ -51,12 +51,12 @@ public class AddStockServiceTest {
     public void shouldAddStockToDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         AddStockRequest request = new AddStockRequest(
-                "Intel", "Technology", "USD",
+                "INTC US", "Intel", "Technology", "USD",
                 "54.23", "1.15", "1.09");
         AddStockResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         Mockito.verify(database).addStock(argThat(new StockMatcher(new Stock(
-                "Intel", "Technology", "USD",
+                "INTC US", "Intel", "Technology", "USD",
                 54.23, 1.15, 1.09
         ))));
     }

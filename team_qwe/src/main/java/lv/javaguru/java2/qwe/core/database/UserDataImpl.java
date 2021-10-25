@@ -22,10 +22,10 @@ public class UserDataImpl implements UserData {
 
     public UserDataImpl() {
         this.userList = new ArrayList<>();
-        userList.add(new User("Alexander", 25, SUPER_RICH, 1_000_000));
-        userList.add(new User("Tatyana", 32, UPPER_MIDDLE, 125_000));
-        userList.add(new User("Vladimir", 78, LOWER_MIDDLE, 30_000));
-        userList.add(new User("John", 55, MIDDLE, 50_000));
+        userList.add(new User(1,"Alexander", 25, SUPER_RICH, 1_000_000));
+        userList.add(new User(2,"Tatyana", 32, UPPER_MIDDLE, 125_000));
+        userList.add(new User(3,"Vladimir", 78, LOWER_MIDDLE, 30_000));
+        userList.add(new User(4,"John", 55, MIDDLE, 50_000));
     }
 
     @Override

@@ -48,8 +48,8 @@ public class ImportSecuritiesService {
         List<CoreRequest> requestList = IntStream.rangeClosed(0, list.size() - 1)
                 .filter(i -> list.get(i)[0].equals("Stock"))
                 .mapToObj(i -> new AddStockRequest(
-                        list.get(i)[1], list.get(i)[2], list.get(i)[3],
-                        list.get(i)[4], list.get(i)[5], list.get(i)[6]
+                        list.get(i)[1], list.get(i)[2], list.get(i)[3], list.get(i)[4],
+                        list.get(i)[5], list.get(i)[6], list.get(i)[7]
                 ))
                 .collect(Collectors.toList());
 
@@ -74,9 +74,10 @@ public class ImportSecuritiesService {
                         list.get(i)[1],
                         list.get(i)[2],
                         list.get(i)[3],
-                        Double.parseDouble(list.get(i)[4]),
+                        list.get(i)[4],
                         Double.parseDouble(list.get(i)[5]),
-                        Double.parseDouble(list.get(i)[6])
+                        Double.parseDouble(list.get(i)[6]),
+                        Double.parseDouble(list.get(i)[7])
                 )));
     }
 

@@ -23,10 +23,10 @@ public class AcceptanceTestForUserData extends AcceptanceTestForDatabase {
     public void init() {
         getAllUserListService().getUserData().getUserList().get(0).setPortfolio(
                 of(
-                        new Position(new Stock("APA Corp.", "Energy", "USD", 16.07, 0.62, 2), 3266, 16.07),
-                        new Position(new Stock("Freeport-McMoRan Inc.", "Materials", "USD", 32.8, 0.91, 1.59), 1371, 32.8),
-                        new Position(new Stock("Boeing Company", "Industrials", "USD", 212.67, 0, 2.18), 352, 212.67),
-                        new Position(new Stock("Occidental Petroleum Corporation", "Energy", "USD", 21.95, 0.18, 1.69), 2391, 21.95),
+                        new Position(new Stock("APA US", "APA Corp.", "Energy", "USD", 16.07, 0.62, 2), 3266, 16.07),
+                        new Position(new Stock("FCX US", "Freeport-McMoRan Inc.", "Materials", "USD", 32.8, 0.91, 1.59), 1371, 32.8),
+                        new Position(new Stock("BA US", "Boeing Company", "Industrials", "USD", 212.67, 0, 2.18), 352, 212.67),
+                        new Position(new Stock("OXY US","Occidental Petroleum Corporation", "Energy", "USD", 21.95, 0.18, 1.69), 2391, 21.95),
                         new Position(new Cash(), 50125.15, 1)
                 )
         );
@@ -35,10 +35,10 @@ public class AcceptanceTestForUserData extends AcceptanceTestForDatabase {
     @Test
     public void addUserToUserDataTest() {
         AddUserRequest request1 = new AddUserRequest(
-                "Marina", "42", "WEALTHY", "500000"
+                "5", "Marina", "42", "WEALTHY", "500000"
         );
         AddUserRequest request2 = new AddUserRequest(
-                "Michael", "12", "LOWER_MIDDLE", "25000"
+                "6","Michael", "12", "LOWER_MIDDLE", "25000"
         );
         getAddUserService().execute(request1);
         getAddUserService().execute(request2);
@@ -56,7 +56,7 @@ public class AcceptanceTestForUserData extends AcceptanceTestForDatabase {
         FindUserByNameResponse response2 = getFindUserByName().execute(request2);
 
         assertEquals(new User(
-                "Vladimir", 78, Type.LOWER_MIDDLE, 30000
+                3,"Vladimir", 78, Type.LOWER_MIDDLE, 30000
         ), response1.getUser());
         assertNull(response2.getUser());
     }
@@ -120,10 +120,10 @@ public class AcceptanceTestForUserData extends AcceptanceTestForDatabase {
         GetUserPortfolioResponse response2 =
                 getUserPortfolioService().execute(request2);
         List<Position> list = of(
-                new Position(new Stock("APA Corp.", "Energy", "USD", 16.07, 0.62, 2), 3266, 16.07),
-                new Position(new Stock("Freeport-McMoRan Inc.", "Materials", "USD", 32.8, 0.91, 1.59), 1371, 32.8),
-                new Position(new Stock("Boeing Company", "Industrials", "USD", 212.67, 0, 2.18), 352, 212.67),
-                new Position(new Stock("Occidental Petroleum Corporation", "Energy", "USD", 21.95, 0.18, 1.69), 2391, 21.95),
+                new Position(new Stock("APA US", "APA Corp.", "Energy", "USD", 16.07, 0.62, 2), 3266, 16.07),
+                new Position(new Stock("FCX US", "Freeport-McMoRan Inc.", "Materials", "USD", 32.8, 0.91, 1.59), 1371, 32.8),
+                new Position(new Stock("BA US", "Boeing Company", "Industrials", "USD", 212.67, 0, 2.18), 352, 212.67),
+                new Position(new Stock("OXY US", "Occidental Petroleum Corporation", "Energy", "USD", 21.95, 0.18, 1.69), 2391, 21.95),
                 new Position(new Cash(), 50125.15, 1)
         );
 

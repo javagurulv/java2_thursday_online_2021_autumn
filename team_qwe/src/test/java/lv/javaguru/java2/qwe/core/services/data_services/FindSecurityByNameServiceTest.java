@@ -52,14 +52,14 @@ public class FindSecurityByNameServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         Optional<Security> security = Optional.of(
-                new Stock("Alibaba", "Technology", "USD",
+                new Stock("BABA US", "Alibaba", "Technology", "USD",
                         175.32, 0, 1.32)
         );
         Mockito.when(database.findSecurityByName("Alibaba")).thenReturn(security);
 
         FindSecurityByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        Assert.assertEquals(response.getSecurity(), new Stock("Alibaba", "Technology", "USD",
+        Assert.assertEquals(response.getSecurity(), new Stock("BABA US", "Alibaba", "Technology", "USD",
                 175.32, 0, 1.32));
     }
 

@@ -19,6 +19,7 @@ public class AddUserUIAction implements UIAction {
 
     @Override
     public void execute() {
+        String id = utils.inputDialog("User id:");
         String name = utils.inputDialog("User name:");
         String age = utils.inputDialog("User age:");
         String type = utils.inputDialog("User type:", "TYPE", new String[]{
@@ -29,7 +30,7 @@ public class AddUserUIAction implements UIAction {
                 String.valueOf(SUPER_RICH)
         });
         String initialInvestment = utils.inputDialog("Initial investment:");
-        AddUserRequest userRequest = new AddUserRequest(name, age, type, initialInvestment);
+        AddUserRequest userRequest = new AddUserRequest(id, name, age, type, initialInvestment);
         AddUserResponse userResponse = addUserService.execute(userRequest);
         printResponse(userResponse);
     }

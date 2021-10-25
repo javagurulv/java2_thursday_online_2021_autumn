@@ -28,19 +28,19 @@ public class AcceptanceTestForDatabase {
     @Test
     public void addSecuritiesToDatabaseTest() {
         AddStockRequest request1 = new AddStockRequest(
-                "Alibaba", "Technology", "USD",
+                "BABA US", "Alibaba", "Technology", "USD",
                 "160.13", "0", "1.32"
         );
         AddStockRequest request2 = new AddStockRequest(
-                "Intel", "Technology", "USD",
+                "INTC US", "Intel", "Technology", "USD",
                 "53.73", "2.o5", "1.12"
         );
         AddBondRequest request3 = new AddBondRequest(
-                "Gazprom 4.75 30/12/2031", "Energy", "USD", "108.75",
+                "GAZPRU", "Gazprom 4.75 30/12/2031", "Energy", "USD", "108.75",
                 "4.75", "BBB+", "1000", "30/12/2031"
         );
         AddBondRequest request4 = new AddBondRequest(
-                "Vale 2.875 30/06/2027", "Materials", "USD", "104.25",
+                "VALEBZ", "Vale 2.875 30/06/2027", "Materials", "USD", "104.25",
                 "2.875", "BBB", "1000", "30/12/20031"
         );
         getAddStockService().execute(request1);
@@ -57,11 +57,11 @@ public class AcceptanceTestForDatabase {
     @Test
     public void removeSecuritiesFromDatabaseTest() {
         AddStockRequest request1 = new AddStockRequest(
-                "Alibaba", "Technology", "USD",
+                "BABA US", "Alibaba", "Technology", "USD",
                 "160.13", "0", "1.32"
         );
         AddBondRequest request2 = new AddBondRequest(
-                "Gazprom 4.75 30/12/2031", "Energy", "USD", "108.75",
+                "GAZPRU", "Gazprom 4.75 30/12/2031", "Energy", "USD", "108.75",
                 "4.75", "BBB+", "1000", "30/12/2031"
         );
         RemoveSecurityRequest request3 = new RemoveSecurityRequest("Alibaba");
@@ -81,11 +81,11 @@ public class AcceptanceTestForDatabase {
     @Test
     public void findSecurityByNameInDatabaseTest() {
         AddStockRequest request1 = new AddStockRequest(
-                "Alibaba", "Technology", "USD",
+                "BABA", "Alibaba", "Technology", "USD",
                 "160.13", "0", "1.32"
         );
         AddBondRequest request2 = new AddBondRequest(
-                "Gazprom 4.75 30/12/2031", "Energy", "USD", "108.75",
+                "GAZPRU", "Gazprom 4.75 30/12/2031", "Energy", "USD", "108.75",
                 "4.75", "BBB+", "1000", "30/12/2031"
         );
         FindSecurityByNameRequest request3 = new FindSecurityByNameRequest("Gazprom 4.75 30/12/2031");
@@ -96,7 +96,7 @@ public class AcceptanceTestForDatabase {
         FindSecurityByNameResponse response2 = getFindSecurityByNameService().execute(request4);
 
         assertEquals(new Bond(
-                "Gazprom 4.75 30/12/2031", "Energy", "USD", 108.75,
+                "GAZPRU", "Gazprom 4.75 30/12/2031", "Energy", "USD", 108.75,
                 4.75, "BBB+", 1000, "30/12/2031"
         ), response1.getSecurity());
         assertNull(response2.getSecurity());
@@ -105,19 +105,19 @@ public class AcceptanceTestForDatabase {
     @Test
     public void filterStocksByMultipleParametersTest() {
         AddStockRequest request1 = new AddStockRequest(
-                "Alibaba", "Technology", "USD",
+                "BABA US", "Alibaba", "Technology", "USD",
                 "160.13", "0", "1.32"
         );
         AddStockRequest request2 = new AddStockRequest(
-                "Intel", "Technology", "USD",
+                "INTC US", "Intel", "Technology", "USD",
                 "53.73", "2.05", "0.9"
         );
         AddStockRequest request3 = new AddStockRequest(
-                "Petrobras", "Energy", "USD",
+                "PBR US", "Petrobras", "Energy", "USD",
                 "9.57", "4.5", "1.23"
         );
         AddStockRequest request4 = new AddStockRequest(
-                "Facebook", "Communications", "USD",
+                "FB US", "Facebook", "Communications", "USD",
                 "359.23", "0", "0.87"
         );
         FilterStocksByMultipleParametersRequest request5 = new FilterStocksByMultipleParametersRequest(
@@ -142,12 +142,12 @@ public class AcceptanceTestForDatabase {
                 getFilterStocksByMultipleParametersService().execute(request6);
 
         assertEquals(of(
-                new Stock("Intel", "Technology", "USD", 53.73, 2.05, 0.9),
-                new Stock("Alibaba", "Technology", "USD", 160.13, 0, 1.32)
+                new Stock("INTC US", "Intel", "Technology", "USD", 53.73, 2.05, 0.9),
+                new Stock("BABA US", "Alibaba", "Technology", "USD", 160.13, 0, 1.32)
         ), response1.getList());
 
         assertEquals(of(
-                new Stock("Intel", "Technology", "USD", 53.73, 2.05, 0.9)
+                new Stock("INTC US", "Intel", "Technology", "USD", 53.73, 2.05, 0.9)
         ), response2.getList());
     }
 

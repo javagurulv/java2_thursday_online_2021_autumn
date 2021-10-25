@@ -26,9 +26,9 @@ public class GetAllUserListServiceTest {
     @Test
     public void shouldGetAllUsersFromUserData() {
         List<User> userList = new ArrayList<>();
-        userList.add(new User("Alexander", 25, Type.SUPER_RICH, 1_000_000));
-        userList.add(new User("Marina", 42, Type.WEALTHY, 500_000));
-        userList.add(new User("Vladimir", 65, Type.LOWER_MIDDLE, 30_000));
+        userList.add(new User(1,"Alexander", 25, Type.SUPER_RICH, 1_000_000));
+        userList.add(new User(2,"Marina", 42, Type.WEALTHY, 500_000));
+        userList.add(new User(3,"Vladimir", 65, Type.LOWER_MIDDLE, 30_000));
 
         Mockito.when(userData.getAllUserList()).thenReturn(userList);
 

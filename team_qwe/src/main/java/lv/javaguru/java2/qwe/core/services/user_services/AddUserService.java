@@ -35,6 +35,7 @@ public class AddUserService {
 
     private User createUser(AddUserRequest request) {
         return new User(
+                Long.parseLong(request.getId()),
                 request.getName(),
                 Integer.parseInt(request.getAge()),
                 valueOf(request.getType()),
