@@ -96,6 +96,22 @@ class AddPatientServiceTest {
     }
 
     @Test
+    public void shouldReturnResponseWithErrorsWhenPersonalCodeNumValidationFails() {
+        AddPatientRequest request = new AddPatientRequest("name", "surname", "1234code567");
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Personal code", "must consist only from numbers!"));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        AddPatientResponse response = addPatientService.execute(request);
+        assertTrue(response.hasErrors());
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "Personal code");
+        assertEquals(response.getErrors().get(0).getDescription(), "must consist only from numbers!");
+
+        Mockito.verifyNoInteractions(patientDatabase);
+    }
+
+    @Test
     public void shouldReturnResponseWithErrorsWhenPatientExistsValidationFails() {
         AddPatientRequest request = new AddPatientRequest("name", "surname", "12345678901");
         List<CoreError> errors = new ArrayList<>();

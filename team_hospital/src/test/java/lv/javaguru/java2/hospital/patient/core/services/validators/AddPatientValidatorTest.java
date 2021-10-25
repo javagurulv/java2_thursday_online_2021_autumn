@@ -20,23 +20,25 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class AddPatientValidatorTest {
 
-    @Mock private PatientDatabaseImpl database;
-    @InjectMocks private AddPatientValidator validator;
+    @Mock
+    private PatientDatabaseImpl database;
+    @InjectMocks
+    private AddPatientValidator validator;
 
     @Test
-    public void shouldReturnEmptyList(){
-            AddPatientRequest request =
-                    new AddPatientRequest("Name", "Surname", "12345678901");
-            Mockito.when(database.findPatientByNameSurnamePersonalCode(
-                    request.getName(),
-                    request.getSurname(),
-                    request.getPersonalCode())).thenReturn(new ArrayList<>());
-            List<CoreError> errors = validator.validate(request);
-            assertTrue(errors.isEmpty());
-        }
+    public void shouldReturnEmptyList() {
+        AddPatientRequest request =
+                new AddPatientRequest("Name", "Surname", "12345678901");
+        Mockito.when(database.findPatientByNameSurnamePersonalCode(
+                request.getName(),
+                request.getSurname(),
+                request.getPersonalCode())).thenReturn(new ArrayList<>());
+        List<CoreError> errors = validator.validate(request);
+        assertTrue(errors.isEmpty());
+    }
 
     @Test
-    public void shouldReturnNameError(){
+    public void shouldReturnNameError() {
         AddPatientRequest request =
                 new AddPatientRequest("", "Surname", "23456789012");
         List<CoreError> errors = validator.validate(request);
@@ -46,7 +48,7 @@ class AddPatientValidatorTest {
     }
 
     @Test
-    public void shouldReturnSurnameError(){
+    public void shouldReturnSurnameError() {
         AddPatientRequest request =
                 new AddPatientRequest("Name", "", "34567890123");
         List<CoreError> errors = validator.validate(request);
@@ -56,7 +58,7 @@ class AddPatientValidatorTest {
     }
 
     @Test
-    public void shouldReturnPersonalCodeError(){
+    public void shouldReturnPersonalCodeError() {
         AddPatientRequest request =
                 new AddPatientRequest("Name", "Surname", "");
         List<CoreError> errors = validator.validate(request);
@@ -66,7 +68,7 @@ class AddPatientValidatorTest {
     }
 
     @Test
-    public void shouldReturnAll3Errors(){
+    public void shouldReturnAll3Errors() {
         AddPatientRequest request =
                 new AddPatientRequest("", "", "");
         List<CoreError> errors = validator.validate(request);
@@ -97,7 +99,7 @@ class AddPatientValidatorTest {
     }
 
     @Test
-    public void shouldReturnPersonalCodeLengthError(){
+    public void shouldReturnPersonalCodeLengthError() {
         AddPatientRequest request =
                 new AddPatientRequest("Name", "Surname", "1234");
         List<CoreError> errors = validator.validate(request);
@@ -105,5 +107,16 @@ class AddPatientValidatorTest {
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Personal code");
         assertEquals(errors.get(0).getDescription(), "must consist of 11 symbols!");
+    }
+
+    @Test
+    public void shouldReturnNumFormatExceptionError() {
+        AddPatientRequest request =
+                new AddPatientRequest("Name", "Surname", "1234code567");
+        List<CoreError> errors = validator.validate(request);
+        assertFalse(errors.isEmpty());
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "Personal code");
+        assertEquals(errors.get(0).getDescription(), "must consist only from numbers!");
     }
 }
