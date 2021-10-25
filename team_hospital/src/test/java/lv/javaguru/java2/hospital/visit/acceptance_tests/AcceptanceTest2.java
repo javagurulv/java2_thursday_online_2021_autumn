@@ -31,7 +31,7 @@ public class AcceptanceTest2 {
 
     @Test
     public void shouldReturnTrueIfDeleted(){
-        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name2", "surname2", "4321");
+        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name2", "surname2", "22223333444");
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
         AddDoctorRequest addDoctorRequest = new AddDoctorRequest("name2", "surname2", "speciality2");
         AddDoctorResponse addDoctorResponse = getAddDoctorService().execute(addDoctorRequest);

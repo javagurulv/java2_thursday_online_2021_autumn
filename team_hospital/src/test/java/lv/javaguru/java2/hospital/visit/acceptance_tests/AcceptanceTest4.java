@@ -31,7 +31,7 @@ public class AcceptanceTest4 {
 
     @Test
     public void shouldMakeCorrectSearchByID(){
-        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name4", "surname4", "2222");
+        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name4", "surname4", "66667777888");
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
         AddDoctorRequest addDoctorRequest = new AddDoctorRequest("name5", "surname5", "speciality5");
         AddDoctorResponse addDoctorResponse = getAddDoctorService().execute(addDoctorRequest);

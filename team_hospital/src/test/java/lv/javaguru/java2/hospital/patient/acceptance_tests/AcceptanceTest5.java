@@ -30,13 +30,13 @@ public class AcceptanceTest5 {
 
     @Test
     public void shouldReturnCorrectFindByIDPatient() {
-        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name1", "surname1", "1234");
+        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name1", "surname1", "11122233344");
         getAddPatienceService().execute(addPatientRequest1);
 
-        AddPatientRequest addPatientRequest2 = new AddPatientRequest("name2", "surname2", "1235");
+        AddPatientRequest addPatientRequest2 = new AddPatientRequest("name2", "surname2", "22233344455");
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest2);
 
-        AddPatientRequest addPatientRequest3 = new AddPatientRequest("name3", "surname3", "1236");
+        AddPatientRequest addPatientRequest3 = new AddPatientRequest("name3", "surname3", "33344455566");
         getAddPatienceService().execute(addPatientRequest3);
 
         FindPatientByIDResponse findPatientByIDResponse = getFindPatientByIdService().execute(

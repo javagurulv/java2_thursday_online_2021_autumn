@@ -28,7 +28,7 @@ public class AcceptanceTest3 {
 
     @Test
     public void shouldReturnCorrectNameAfterEditing() {
-        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name9", "surname", "9999");
+        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name9", "surname", "11223344556");
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
@@ -40,12 +40,12 @@ public class AcceptanceTest3 {
 
 		assertEquals(searchPatientsResponse.getPatientList().get(0).getName(), "NewName");
 		assertEquals(searchPatientsResponse.getPatientList().get(0).getSurname(), "surname");
-		assertEquals(searchPatientsResponse.getPatientList().get(0).getPersonalCode(), "9999");
+		assertEquals(searchPatientsResponse.getPatientList().get(0).getPersonalCode(), "11223344556");
     }
 
     @Test
     public void shouldReturnCorrectSurnameAfterEditing() {
-        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name10", "surname", "12345");
+        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name10", "surname", "22334455667");
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
@@ -57,16 +57,16 @@ public class AcceptanceTest3 {
 
 		assertEquals(searchPatientsResponse.getPatientList().get(0).getName(), "name10");
 		assertEquals(searchPatientsResponse.getPatientList().get(0).getSurname(), "NewSurname");
-		assertEquals(searchPatientsResponse.getPatientList().get(0).getPersonalCode(), "12345");
+		assertEquals(searchPatientsResponse.getPatientList().get(0).getPersonalCode(), "22334455667");
     }
 
     @Test
     public void shouldReturnCorrectPersonalCodeAfterEditing() {
-        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name11", "surname", "22222");
+        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name11", "surname", "33445566778");
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId(),
-                "PERSONAL_CODE", "New22222");
+                "PERSONAL_CODE", "44556677889");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
 
 		SearchPatientsRequest searchPatientsRequest = new SearchPatientsRequest("name11", "surname", "");
@@ -74,7 +74,7 @@ public class AcceptanceTest3 {
 
 		assertEquals(searchPatientsResponse.getPatientList().get(0).getName(), "name11");
 		assertEquals(searchPatientsResponse.getPatientList().get(0).getSurname(), "surname");
-		assertEquals(searchPatientsResponse.getPatientList().get(0).getPersonalCode(), "New22222");
+		assertEquals(searchPatientsResponse.getPatientList().get(0).getPersonalCode(), "44556677889");
     }
 
     private AddPatientService getAddPatienceService() {

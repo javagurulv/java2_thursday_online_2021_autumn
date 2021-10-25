@@ -26,7 +26,7 @@ class AddPatientValidatorTest {
     @Test
     public void shouldReturnEmptyList(){
             AddPatientRequest request =
-                    new AddPatientRequest("Name", "Surname", "1234");
+                    new AddPatientRequest("Name", "Surname", "12345678901");
             Mockito.when(database.findPatientByNameSurnamePersonalCode(
                     request.getName(),
                     request.getSurname(),
@@ -38,21 +38,21 @@ class AddPatientValidatorTest {
     @Test
     public void shouldReturnNameError(){
         AddPatientRequest request =
-                new AddPatientRequest("", "Surname", "1234");
+                new AddPatientRequest("", "Surname", "23456789012");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Name");
-        assertEquals(errors.get(0).getDescription(), "Must not be empty!");
+        assertEquals(errors.get(0).getDescription(), "must not be empty!");
     }
 
     @Test
     public void shouldReturnSurnameError(){
         AddPatientRequest request =
-                new AddPatientRequest("Name", "", "1234");
+                new AddPatientRequest("Name", "", "34567890123");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Surname");
-        assertEquals(errors.get(0).getDescription(), "Must not be empty!");
+        assertEquals(errors.get(0).getDescription(), "must not be empty!");
     }
 
     @Test
@@ -62,7 +62,7 @@ class AddPatientValidatorTest {
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Personal code");
-        assertEquals(errors.get(0).getDescription(), "Must not be empty!");
+        assertEquals(errors.get(0).getDescription(), "must not be empty!");
     }
 
     @Test
@@ -72,17 +72,17 @@ class AddPatientValidatorTest {
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 3);
         assertEquals(errors.get(0).getField(), "Name");
-        assertEquals(errors.get(0).getDescription(), "Must not be empty!");
+        assertEquals(errors.get(0).getDescription(), "must not be empty!");
         assertEquals(errors.get(1).getField(), "Surname");
-        assertEquals(errors.get(1).getDescription(), "Must not be empty!");
+        assertEquals(errors.get(1).getDescription(), "must not be empty!");
         assertEquals(errors.get(2).getField(), "Personal code");
-        assertEquals(errors.get(2).getDescription(), "Must not be empty!");
+        assertEquals(errors.get(2).getDescription(), "must not be empty!");
     }
 
     @Test
-    public void shouldReturnError() {
+    public void shouldReturnPatientExistError() {
         AddPatientRequest request =
-                new AddPatientRequest("Name", "Surname", "1234");
+                new AddPatientRequest("Name", "Surname", "45678901234");
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
         Mockito.when(database.findPatientByNameSurnamePersonalCode(
@@ -94,5 +94,16 @@ class AddPatientValidatorTest {
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Patient");
         assertEquals(errors.get(0).getDescription(), "already exist!");
+    }
+
+    @Test
+    public void shouldReturnPersonalCodeLengthError(){
+        AddPatientRequest request =
+                new AddPatientRequest("Name", "Surname", "1234");
+        List<CoreError> errors = validator.validate(request);
+        assertFalse(errors.isEmpty());
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "Personal code");
+        assertEquals(errors.get(0).getDescription(), "must consist of 11 symbols!");
     }
 }
