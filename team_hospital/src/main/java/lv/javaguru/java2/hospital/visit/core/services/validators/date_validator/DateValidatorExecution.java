@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.date_validator;
 
+import lv.javaguru.java2.hospital.database.VisitDatabase;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria.GetVisitDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import java.util.List;
 @Component
 public class DateValidatorExecution {
 
+    @Autowired private VisitDatabase database;
     @Autowired private DateFormatValidator dateFormatValidator;
     @Autowired private GetVisitDate getVisitDate;
 
@@ -31,7 +33,9 @@ public class DateValidatorExecution {
         DateValidator[] validators = {
                 new DateIsInFutureValidator(getVisitDate),
                 new DateIsWorkingDayValidator(getVisitDate),
-                new DateTimeIsInWorkingHoursValidator(getVisitDate)};
+                new DateTimeIsInWorkingHoursValidator(getVisitDate),
+                new DateIsHourlyVisitValidator(getVisitDate),
+                new DateExistenceValidator(getVisitDate, database)};
 
         for (DateValidator d : validators) {
             d.validate(request).ifPresent(errors::add);
