@@ -30,7 +30,7 @@ public class AcceptanceTest1 {
 
     @Test
     public void shouldCorrectAddVisit() {
-        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name", "surname", "1234");
+        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name", "surname", "11112222333");
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
         AddDoctorRequest addDoctorRequest = new AddDoctorRequest("name", "surname", "speciality");
         AddDoctorResponse addDoctorResponse = getAddDoctorService().execute(addDoctorRequest);

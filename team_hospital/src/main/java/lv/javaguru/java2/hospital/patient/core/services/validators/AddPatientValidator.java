@@ -21,24 +21,25 @@ public class AddPatientValidator {
         validateSurname(request).ifPresent(errors::add);
         validatePersonalCode(request).ifPresent(errors::add);
         validatePatientExistence(request).ifPresent(errors::add);
+        validatePersonalCodeLength(request).ifPresent(errors::add);
         return errors;
     }
 
     private Optional<CoreError> validateName(AddPatientRequest request) {
         return (request.getName() == null || request.getName().isEmpty())
-                ? Optional.of(new CoreError("Name", "Must not be empty!")) : Optional.empty();
+                ? Optional.of(new CoreError("Name", "must not be empty!")) : Optional.empty();
 
     }
 
     private Optional<CoreError> validateSurname(AddPatientRequest request) {
         return (request.getSurname() == null || request.getSurname().isEmpty())
-                ? Optional.of(new CoreError("Surname", "Must not be empty!")) : Optional.empty();
+                ? Optional.of(new CoreError("Surname", "must not be empty!")) : Optional.empty();
 
     }
 
     private Optional<CoreError> validatePersonalCode(AddPatientRequest request) {
         return (request.getPersonalCode() == null || request.getPersonalCode().isEmpty())
-                ? Optional.of(new CoreError("Personal code", "Must not be empty!")) : Optional.empty();
+                ? Optional.of(new CoreError("Personal code", "must not be empty!")) : Optional.empty();
 
     }
 
@@ -50,5 +51,11 @@ public class AddPatientValidator {
                     request.getPersonalCode()).isEmpty()
                 ? Optional.empty()
                 : Optional.of(new CoreError("Patient", "already exist!"));
+    }
+
+    private Optional<CoreError> validatePersonalCodeLength(AddPatientRequest request){
+        return request.getPersonalCode().length() == 11 || request.getPersonalCode().isEmpty()
+                ? Optional.empty()
+                : Optional.of(new CoreError("Personal code", "must consist of 11 symbols!"));
     }
 }

@@ -28,10 +28,10 @@ class AcceptanceTest4 {
 
     @Test
     public void shouldReturnCorrectPatientsListAfterDelete() {
-        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name1", "surname1", "1234");
+        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name1", "surname1", "11223344556");
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
 
-        AddPatientRequest addPatientRequest2 = new AddPatientRequest("name2", "surname2", "1235");
+        AddPatientRequest addPatientRequest2 = new AddPatientRequest("name2", "surname2", "22334455667");
         getAddPatienceService().execute(addPatientRequest2);
 
         DeletePatientRequest deletePatientRequest = new DeletePatientRequest(addPatientResponse.getPatient().getId());
@@ -41,7 +41,7 @@ class AcceptanceTest4 {
         assertEquals(response.getPatients().size(), 1);
         assertEquals(response.getPatients().get(0).getName(), "name2");
         assertEquals(response.getPatients().get(0).getSurname(), "surname2");
-        assertEquals(response.getPatients().get(0).getPersonalCode(), "1235");
+        assertEquals(response.getPatients().get(0).getPersonalCode(), "22334455667");
     }
 
 

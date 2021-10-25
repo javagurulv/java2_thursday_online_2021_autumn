@@ -37,7 +37,7 @@ public class PatientProgramMenu {
         System.out.println("3. Find patient by ID");
         System.out.println("4. Delete the by ID");
         System.out.println("5. Edit the patient's information");
-        System.out.println("6. Patient`s search");
+        System.out.println("6. Patient search");
         System.out.println("7. Exit");
     }
 

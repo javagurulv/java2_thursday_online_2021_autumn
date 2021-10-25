@@ -35,10 +35,7 @@ public class EditVisitValidator {
     }
 
     private Optional<CoreError> validateVisitExistence(Long id)  {
-        if(id == null) {
-            return Optional.empty();
-        }
-        return validator.validateExistenceById(id);
+        return id == null ? Optional.empty() : validator.validateExistenceById(id);
     }
 
     private Optional<CoreError> validateChanges(EditVisitRequest request) {

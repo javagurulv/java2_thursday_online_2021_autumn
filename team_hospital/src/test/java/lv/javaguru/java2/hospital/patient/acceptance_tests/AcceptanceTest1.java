@@ -23,14 +23,14 @@ public class AcceptanceTest1 {
 
     @Test
     public void shouldCorrectAddPatient() {
-        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name", "surname", "1234");
+        AddPatientRequest addPatientRequest1 = new AddPatientRequest("name", "surname", "01234567890");
         getAddPatienceService().execute(addPatientRequest1);
 
         ShowAllPatientsResponse response = getShowAllPatientsService().execute(new ShowAllPatientsRequest());
         assertEquals(response.getPatients().size(), 1);
         assertEquals(response.getPatients().get(0).getName(), "name");
         assertEquals(response.getPatients().get(0).getSurname(), "surname");
-        assertEquals(response.getPatients().get(0).getPersonalCode(), "1234");
+        assertEquals(response.getPatients().get(0).getPersonalCode(), "01234567890");
     }
 
     private AddPatientService getAddPatienceService() {
