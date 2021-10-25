@@ -1,0 +1,504 @@
+<Type>,<Ticker>,<Name>,<Industry>,<Currency>,<Market price>,<Dividend>,<Risk weight>
+Stock,AAPL US,Apple Inc.,Technology,USD,148.19,0.59,1
+Stock,MSFT US,Microsoft Corporation,Technology,USD,304.36,0.74,0.88
+Stock,AMZN US,Amazon.com Inc.,Consumer Discretionary,USD,3199.95,0,0.69
+Stock,FB US,Facebook Inc. Class A,Communications,USD,359.37,0,0.99
+Stock,GOOGL US,Alphabet Inc. Class A,Communications,USD,2748.59,0,0.91
+Stock,GOOG US,Alphabet Inc. Class C,Communications,USD,2768.74,0,0.91
+Stock,BRK/B US,Berkshire Hathaway Inc. Class B,Financials,USD,285.27,0,0.87
+Stock,TSLA US,Tesla Inc,Consumer Discretionary,USD,680.26,0,1.63
+Stock,NVDA US,NVIDIA Corporation,Technology,USD,208.16,0.08,1.12
+Stock,JNJ US,Johnson & Johnson,Health Care,USD,179.44,2.36,0.71
+Stock,JPM US,JPMorgan Chase & Co.,Financials,USD,154.72,2.33,1.15
+Stock,UNH US,UnitedHealth Group Incorporated,Health Care,USD,429.71,1.35,1.18
+Stock,V US,Visa Inc. Class A,Technology,USD,231.36,0.55,1.03
+Stock,PG US,Procter & Gamble Company,Consumer Staples,USD,145.09,2.4,0.72
+Stock,HD US,Home Depot Inc.,Consumer Discretionary,USD,329.24,2,1.2
+Stock,PYPL US,PayPal Holdings Inc,Technology,USD,272.96,0,1.09
+Stock,DIS US,Walt Disney Company,Communications,USD,175.12,0,1.06
+Stock,MA US,Mastercard Incorporated Class A,Technology,USD,354.99,0.5,1.18
+Stock,ADBE US,Adobe Inc.,Technology,USD,647.34,0,0.84
+Stock,BAC US,Bank of America Corp,Financials,USD,40.37,2.08,1.23
+Stock,PFE US,Pfizer Inc.,Health Care,USD,48.72,3.2,0.72
+Stock,CMCSA US,Comcast Corporation Class A,Communications,USD,59.41,1.68,0.88
+Stock,CRM US,salesforce.com inc.,Technology,USD,256.13,0,0.97
+Stock,CSCO US,Cisco Systems Inc.,Technology,USD,58.22,2.54,0.82
+Stock,NFLX US,Netflix Inc.,Communications,USD,546.88,0,0.69
+Stock,VZ US,Verizon Communications Inc.,Communications,USD,55.52,4.52,0.6
+Stock,ABT US,Abbott Laboratories,Health Care,USD,126.32,1.42,0.84
+Stock,XOM US,Exxon Mobil Corporation,Energy,USD,52.74,6.6,1.1
+Stock,KO US,Coca-Cola Company,Consumer Staples,USD,56.64,2.97,1
+Stock,PEP US,PepsiCo Inc.,Consumer Staples,USD,158.35,2.72,0.88
+Stock,TMO US,Thermo Fisher Scientific Inc.,Health Care,USD,555,0.19,0.79
+Stock,LLY US,Eli Lilly and Company,Health Care,USD,270.91,1.26,0.74
+Stock,INTC US,Intel Corporation,Technology,USD,52.01,2.67,0.95
+Stock,NKE US,NIKE Inc. Class B,Consumer Discretionary,USD,167.79,0.66,1.1
+Stock,ACN US,Accenture Plc Class A,Technology,USD,332.65,1.06,0.98
+Stock,ABBV US,AbbVie Inc.,Health Care,USD,118.82,4.38,0.86
+Stock,WMT US,Walmart Inc.,Consumer Staples,USD,151.45,1.45,0.55
+Stock,DHR US,Danaher Corporation,Health Care,USD,321.54,0.26,0.83
+Stock,COST US,Costco Wholesale Corporation,Consumer Staples,USD,458.99,0.69,0.69
+Stock,MRK US,Merck & Co. Inc.,Health Care,USD,78.68,3.3,0.66
+Stock,T US,AT&T Inc.,Communications,USD,27.57,7.54,0.88
+Stock,WFC US,Wells Fargo & Company,Financials,USD,47.42,1.69,1.26
+Stock,AVGO US,Broadcom Inc.,Technology,USD,475.17,3.03,1.08
+Stock,CVX US,Chevron Corporation,Energy,USD,94.3,5.68,1.2
+Stock,MCD US,McDonald's Corporation,Consumer Discretionary,USD,238.49,2.16,0.93
+Stock,MDT US,Medtronic Plc,Health Care,USD,129.9,1.94,1.08
+Stock,TXN US,Texas Instruments Incorporated,Technology,USD,184.97,2.21,0.89
+Stock,NEE US,NextEra Energy Inc.,Utilities,USD,86.28,1.78,0.99
+Stock,LIN US,Linde plc,Materials,USD,313.85,1.35,1.1
+Stock,ORCL US,Oracle Corporation,Technology,USD,88.94,1.44,0.71
+Stock,QCOM US,Qualcomm Inc,Technology,USD,142.09,1.91,1.06
+Stock,HON US,Honeywell International Inc.,Industrials,USD,227.7,1.63,1.2
+Stock,PM US,Philip Morris International Inc.,Consumer Staples,USD,101.42,4.73,0.92
+Stock,BMY US,Bristol-Myers Squibb Company,Health Care,USD,69.2,2.83,0.8
+Stock,UNP US,Union Pacific Corporation,Industrials,USD,223.71,1.91,1.07
+Stock,INTU US,Intuit Inc.,Technology,USD,545.3,0.43,1.12
+Stock,MS US,Morgan Stanley,Financials,USD,100.66,2.78,1.29
+Stock,C US,Citigroup Inc.,Financials,USD,70.25,2.9,1.46
+Stock,LOW US,Lowe's Companies Inc.,Consumer Discretionary,USD,208.21,1.54,1.35
+Stock,UPS US,United Parcel Service Inc. Class B,Industrials,USD,193.24,2.11,0.84
+Stock,SBUX US,Starbucks Corporation,Consumer Discretionary,USD,114.63,1.57,1.09
+Stock,GS US,Goldman Sachs Group Inc.,Financials,USD,395.87,2.02,1.29
+Stock,AMT US,American Tower Corporation,Real Estate,USD,290.82,1.75,0.94
+Stock,AMGN US,Amgen Inc.,Health Care,USD,223.53,3.15,0.74
+Stock,BLK US,BlackRock Inc.,Financials,USD,917.17,1.8,1.14
+Stock,RTX US,Raytheon Technologies Corporation,Industrials,USD,84.05,2.43,1.4
+Stock,AMD US,Advanced Micro Devices Inc.,Technology,USD,104.65,0,1.14
+Stock,ISRG US,Intuitive Surgical Inc.,Health Care,USD,1043.82,0,1.18
+Stock,IBM US,International Business Machines Corporation,Technology,USD,139.11,4.72,0.99
+Stock,TGT US,Target Corporation,Consumer Staples,USD,253.4,1.42,0.74
+Stock,AMAT US,Applied Materials Inc.,Technology,USD,127.2,0.75,1.38
+Stock,BA US,Boeing Company,Industrials,USD,212.67,0,2.18
+Stock,NOW US,ServiceNow Inc.,Technology,USD,600.52,0,0.86
+Stock,MRNA US,Moderna Inc.,Health Care,USD,382.98,0,0.11
+Stock,MMM US,3M Company,Industrials,USD,194.16,3.05,0.85
+Stock,DE US,Deere & Company,Industrials,USD,351.43,1.02,1.16
+Stock,CAT US,Caterpillar Inc.,Industrials,USD,204.94,2.17,0.92
+Stock,CVS US,CVS Health Corporation,Health Care,USD,84.85,2.36,0.98
+Stock,GE US,General Electric Company,Industrials,USD,100.05,0.32,1.15
+Stock,CHTR US,Charter Communications Inc. Class A,Communications,USD,794.09,0,0.92
+Stock,SCHW US,Charles Schwab Corporation,Financials,USD,71.97,1,0.96
+Stock,SPGI US,S&P Global Inc.,Technology,USD,437.52,0.7,1.01
+Stock,AXP US,American Express Company,Financials,USD,159.75,1.08,1.44
+Stock,PLD US,Prologis Inc.,Real Estate,USD,134.25,1.88,1.19
+Stock,ZTS US,Zoetis Inc. Class A,Health Care,USD,207.05,0.48,0.93
+Stock,ANTM US,Anthem Inc.,Health Care,USD,377.99,1.2,1.26
+Stock,ADP US,Automatic Data Processing Inc.,Technology,USD,211.58,1.76,1.06
+Stock,GILD US,Gilead Sciences Inc.,Health Care,USD,72.44,3.92,0.46
+Stock,MDLZ US,Mondelez International Inc. Class A,Consumer Staples,USD,63.49,2.21,0.82
+Stock,MO US,Altria Group Inc,Consumer Staples,USD,48.47,7.1,0.89
+Stock,TJX US,TJX Companies Inc,Consumer Discretionary,USD,74.04,1.4,1.33
+Stock,LMT US,Lockheed Martin Corporation,Industrials,USD,357.17,2.91,0.96
+Stock,SYK US,Stryker Corporation,Health Care,USD,265.28,0.95,1.2
+Stock,CCI US,Crown Castle International Corp,Real Estate,USD,198.05,2.69,0.88
+Stock,BKNG US,Booking Holdings Inc.,Communications,USD,2074.74,0,1.21
+Stock,CB US,Chubb Limited,Financials,USD,186.21,1.72,1.13
+Stock,TMUS US,T-Mobile US Inc.,Communications,USD,141.81,0,0.83
+Stock,LRCX US,Lam Research Corporation,Technology,USD,565.97,0.92,1.5
+Stock,DUK US,Duke Energy Corporation,Utilities,USD,107.21,3.68,0.98
+Stock,FIS US,Fidelity National Information Services Inc.,Technology,USD,129.98,1.2,1.05
+Stock,MU US,Micron Technology Inc.,Technology,USD,70.23,0.57,1.18
+Stock,MMC US,Marsh & McLennan Companies Inc.,Financials,USD,155.13,1.38,1.03
+Stock,PNC US,PNC Financial Services Group Inc.,Financials,USD,185.82,2.69,1.21
+Stock,CSX US,CSX Corporation,Industrials,USD,33.73,1.11,1.02
+Stock,EL US,Estee Lauder Companies Inc. Class A,Consumer Staples,USD,330.18,0.64,1.01
+Stock,COF US,Capital One Financial Corporation,Financials,USD,168.22,1.43,1.65
+Stock,USB US,U.S. Bancorp,Financials,USD,55.68,3.02,1.15
+Stock,EQIX US,Equinix Inc.,Real Estate,USD,835.63,1.37,0.9
+Stock,TFC US,Truist Financial Corporation,Financials,USD,55.58,3.45,1.31
+Stock,EW US,Edwards Lifesciences Corporation,Health Care,USD,118.95,0,1.06
+Stock,ADSK US,Autodesk Inc.,Technology,USD,334.38,0,0.94
+Stock,SHW US,Sherwin-Williams Company,Materials,USD,307.06,0.72,0.99
+Stock,BDX US,Becton Dickinson and Company,Health Care,USD,249.3,1.33,0.57
+Stock,CME US,CME Group Inc. Class A,Financials,USD,198.36,1.81,0.86
+Stock,COP US,ConocoPhillips,Energy,USD,52.77,3.26,1.18
+Stock,CI US,Cigna Corporation,Health Care,USD,207.53,1.93,1.17
+Stock,SO US,Southern Company,Utilities,USD,67.32,3.92,1.11
+Stock,FISV US,Fiserv Inc.,Technology,USD,116.09,0,1.06
+Stock,REGN US,Regeneron Pharmaceuticals Inc.,Health Care,USD,663.27,0,0.6
+Stock,ILMN US,Illumina Inc.,Health Care,USD,486.71,0,0.81
+Stock,CL US,Colgate-Palmolive Company,Consumer Staples,USD,78.8,2.28,0.69
+Stock,ETN US,Eaton Corp. Plc,Industrials,USD,167.46,1.82,1.2
+Stock,ITW US,Illinois Tool Works Inc.,Industrials,USD,230.57,2.12,1.06
+Stock,NSC US,Norfolk Southern Corporation,Industrials,USD,262.27,1.66,1.07
+Stock,FDX US,FedEx Corporation,Industrials,USD,266.55,1.13,1
+Stock,ICE US,Intercontinental Exchange Inc.,Financials,USD,117.15,1.13,0.84
+Stock,HCA US,HCA Healthcare Inc,Health Care,USD,249.34,0.77,1.46
+Stock,ATVI US,Activision Blizzard Inc.,Communications,USD,82.63,0.57,0.77
+Stock,D US,Dominion Energy Inc,Utilities,USD,80.05,3.15,0.88
+Stock,BSX US,Boston Scientific Corporation,Health Care,USD,44.44,0,1.16
+Stock,GM US,General Motors Company,Consumer Discretionary,USD,48.8,0,1.48
+Stock,AON US,Aon Plc Class A,Financials,USD,279.37,0.73,1.11
+Stock,ADI US,Analog Devices Inc.,Technology,USD,166.64,1.66,1.02
+Stock,EMR US,Emerson Electric Co.,Industrials,USD,101.7,1.99,1.06
+Stock,MCO US,Moody's Corporation,Technology,USD,376.42,0.66,1.12
+Stock,APD US,Air Products and Chemicals Inc.,Materials,USD,267.44,2.24,0.9
+Stock,WM US,Waste Management Inc.,Industrials,USD,152.94,1.5,0.82
+Stock,IDXX US,IDEXX Laboratories Inc.,Health Care,USD,682.14,0,1.06
+Stock,PGR US,Progressive Corporation,Financials,USD,97.57,0.41,0.78
+Stock,NXPI US,NXP Semiconductors NV,Technology,USD,205,1.1,1.33
+Stock,DG US,Dollar General Corporation,Consumer Staples,USD,234.78,0.72,0.68
+Stock,ECL US,Ecolab Inc.,Materials,USD,222.06,0.86,1.17
+Stock,NOC US,Northrop Grumman Corporation,Industrials,USD,363,1.73,0.79
+Stock,HUM US,Humana Inc.,Health Care,USD,413.61,0.68,1.27
+Stock,CMG US,Chipotle Mexican Grill Inc.,Consumer Discretionary,USD,1891.54,0,1.12
+Stock,JCI US,Johnson Controls International plc,Industrials,USD,73.4,1.47,1.15
+Stock,A US,Agilent Technologies Inc.,Health Care,USD,168.13,0.46,0.86
+Stock,BIIB US,Biogen Inc.,Health Care,USD,341.74,0,0.84
+Stock,VRTX US,Vertex Pharmaceuticals Incorporated,Health Care,USD,195.85,0,0.65
+Stock,MSCI US,MSCI Inc. Class A,Technology,USD,618.86,0.67,0.92
+Stock,ROP US,Roper Technologies Inc.,Technology,USD,479.94,0.47,0.87
+Stock,KLAC US,KLA Corporation,Technology,USD,319.97,1.31,1.28
+Stock,TWTR US,Twitter Inc.,Communications,USD,62.52,0,1.2
+Stock,F US,Ford Motor Company,Consumer Discretionary,USD,12.57,0,1.38
+Stock,IQV US,IQVIA Holdings Inc,Health Care,USD,254.7,0,1.25
+Stock,PSA US,Public Storage,Real Estate,USD,324.28,2.47,0.85
+Stock,ALGN US,Align Technology Inc.,Health Care,USD,681.57,0,1.46
+Stock,TEL US,TE Connectivity Ltd.,Industrials,USD,148.06,1.35,1.26
+Stock,DXCM US,DexCom Inc.,Health Care,USD,518.99,0,1.05
+Stock,TROW US,T. Rowe Price Group,Financials,USD,215.47,2,1.05
+Stock,SNPS US,Synopsys Inc.,Technology,USD,316.88,0,1.02
+Stock,GPN US,Global Payments Inc.,Technology,USD,163.06,0.61,1.33
+Stock,EXC US,Exelon Corporation,Utilities,USD,49.36,3.1,1.17
+Stock,LHX US,L3Harris Technologies Inc,Industrials,USD,231.14,1.77,1
+Stock,FCX US,Freeport-McMoRan Inc.,Materials,USD,32.8,0.91,1.59
+Stock,EBAY US,eBay Inc.,Consumer Discretionary,USD,73.36,0.98,1.08
+Stock,KMB US,Kimberly-Clark Corporation,Consumer Staples,USD,138.23,3.3,0.71
+Stock,TT US,Trane Technologies plc,Industrials,USD,193.41,1.22,1.17
+Stock,AIG US,American International Group Inc.,Financials,USD,53.57,2.39,1.63
+Stock,DLR US,Digital Realty Trust Inc.,Real Estate,USD,162.77,2.85,0.74
+Stock,NEM US,Newmont Corporation,Materials,USD,56.35,3.9,0.77
+Stock,CARR US,Carrier Global Corp.,Industrials,USD,55.37,0.87,0.75
+Stock,DOW US,Dow Inc.,Materials,USD,60.89,4.6,1.13
+Stock,ROST US,Ross Stores Inc.,Consumer Discretionary,USD,123.12,0.93,1.45
+Stock,AEP US,American Electric Power Company Inc.,Utilities,USD,91.08,3.25,1
+Stock,MET US,MetLife Inc.,Financials,USD,60.51,3.17,1.46
+Stock,GD US,General Dynamics Corporation,Industrials,USD,197.3,2.41,1.16
+Stock,APH US,Amphenol Corporation Class A,Industrials,USD,74.47,0.78,1.1
+Stock,INFO US,IHS Markit Ltd.,Technology,USD,118.1,0.68,1.03
+Stock,CDNS US,Cadence Design Systems Inc.,Technology,USD,156.67,0,0.97
+Stock,BK US,Bank of New York Mellon Corporation,Financials,USD,53.32,2.55,1.07
+Stock,ORLY US,O'Reilly Automotive Inc.,Consumer Discretionary,USD,606.41,0,1.03
+Stock,SPG US,Simon Property Group Inc.,Real Estate,USD,128.77,4.66,1.86
+Stock,SRE US,Sempra Energy,Utilities,USD,133.36,3.3,1.1
+Stock,APTV US,Aptiv PLC,Consumer Discretionary,USD,154.65,0,1.59
+Stock,PRU US,Prudential Financial Inc.,Financials,USD,104.34,4.41,1.44
+Stock,RMD US,ResMed Inc.,Health Care,USD,285.69,0.59,0.95
+Stock,EA US,Electronic Arts Inc.,Communications,USD,140.17,0.49,0.72
+Stock,TRV US,Travelers Companies Inc.,Financials,USD,160.84,2.19,1.13
+Stock,CTSH US,Cognizant Technology Solutions Corporation Class A,Technology,USD,76.7,1.25,1.07
+Stock,YUM US,Yum! Brands Inc.,Consumer Discretionary,USD,134.46,1.49,1.25
+Stock,ALL US,Allstate Corporation,Financials,USD,134.56,2.41,1.12
+Stock,MSI US,Motorola Solutions Inc.,Technology,USD,240,1.18,0.96
+Stock,FTNT US,Fortinet Inc.,Technology,USD,297.94,0,0.92
+Stock,MCHP US,Microchip Technology Incorporated,Technology,USD,144.84,1.21,1.38
+Stock,SBAC US,SBA Communications Corp. Class A,Real Estate,USD,362.16,0.64,0.9
+Stock,DD US,DuPont de Nemours Inc.,Materials,USD,72.85,1.65,1.14
+Stock,DFS US,Discover Financial Services,Financials,USD,127.26,1.57,2.03
+Stock,SYY US,Sysco Corporation,Consumer Staples,USD,76.79,2.45,1.66
+Stock,PPG US,PPG Industries Inc.,Materials,USD,161.12,1.46,1.08
+Stock,BAX US,Baxter International Inc.,Health Care,USD,75.19,1.49,0.69
+Stock,XEL US,Xcel Energy Inc.,Utilities,USD,70.61,2.59,0.99
+Stock,EOG US,EOG Resources Inc.,Energy,USD,64.47,2.56,1.14
+Stock,CNC US,Centene Corporation,Health Care,USD,64.31,0,1.14
+Stock,IFF US,International Flavors & Fragrances Inc.,Materials,USD,149.76,2.11,1.06
+Stock,PH US,Parker-Hannifin Corporation,Industrials,USD,287.85,1.43,1.4
+Stock,PAYX US,Paychex Inc.,Technology,USD,115.42,2.29,1.14
+Stock,SLB US,Schlumberger NV,Energy,USD,26.46,1.89,1.25
+Stock,GIS US,General Mills Inc.,Consumer Staples,USD,60.3,3.38,0.47
+Stock,OTIS US,Otis Worldwide Corporation,Industrials,USD,90.02,1.07,0.63
+Stock,ROK US,Rockwell Automation Inc.,Industrials,USD,315.05,1.36,1.13
+Stock,STZ US,Constellation Brands Inc. Class A,Consumer Staples,USD,213.83,1.42,1.34
+Stock,MTD US,Mettler-Toledo International Inc.,Health Care,USD,1530.51,0,0.9
+Stock,MNST US,Monster Beverage Corporation,Consumer Staples,USD,96.74,0,0.97
+Stock,AFL US,Aflac Incorporated,Financials,USD,56.36,2.34,1.35
+Stock,AZO US,AutoZone Inc.,Consumer Discretionary,USD,1640.76,0,1.08
+Stock,WELL US,Welltower Inc.,Real Estate,USD,84.22,2.9,1.55
+Stock,XLNX US,Xilinx Inc.,Technology,USD,144.27,0,0.86
+Stock,NUE US,Nucor Corporation,Materials,USD,116.42,1.39,1.04
+Stock,KR US,Kroger Co.,Consumer Staples,USD,46.94,1.79,0.34
+Stock,MAR US,Marriott International Inc. Class A,Consumer Discretionary,USD,131.15,0,1.49
+Stock,MPC US,Marathon Petroleum Corporation,Energy,USD,54.77,4.24,1.63
+Stock,CTAS US,Cintas Corporation,Industrials,USD,391.81,0.97,1.2
+Stock,CMI US,Cummins Inc.,Industrials,USD,231.67,2.5,0.97
+Stock,WBA US,Walgreens Boots Alliance Inc,Consumer Staples,USD,48.3,3.95,0.79
+Stock,FRC US,First Republic Bank,Financials,USD,194.6,0.45,1.07
+Stock,HPQ US,HP Inc.,Technology,USD,28.22,2.75,1.22
+Stock,ADM US,Archer-Daniels-Midland Company,Consumer Staples,USD,58.94,2.51,0.97
+Stock,HLT US,Hilton Worldwide Holdings Inc,Consumer Discretionary,USD,121.77,0,1.3
+Stock,WST US,West Pharmaceutical Services Inc.,Health Care,USD,449.51,0.15,0.74
+Stock,AWK US,American Water Works Company Inc.,Utilities,USD,184.1,1.31,1.05
+Stock,PXD US,Pioneer Natural Resources Company,Energy,USD,141.32,1.59,1.13
+Stock,PEG US,Public Service Enterprise Group Inc,Utilities,USD,64.95,3.14,1.09
+Stock,TDG US,TransDigm Group Incorporated,Industrials,USD,595.4,0,1.46
+Stock,SIVB US,SVB Financial Group,Financials,USD,550.95,0,1.24
+Stock,VRSK US,Verisk Analytics Inc,Technology,USD,196.39,0.59,0.9
+Stock,MCK US,McKesson Corporation,Health Care,USD,200.41,0.94,0.93
+Stock,CTVA US,Corteva Inc,Materials,USD,41.94,1.34,0.99
+Stock,FAST US,Fastenal Company,Industrials,USD,55.47,2.02,0.94
+Stock,EFX US,Equifax Inc.,Technology,USD,258.51,0.6,1.15
+Stock,GLW US,Corning Inc,Technology,USD,40.17,2.39,1.19
+Stock,ES US,Eversource Energy,Utilities,USD,92.11,2.62,1.06
+Stock,AVB US,AvalonBay Communities Inc.,Real Estate,USD,224.63,2.83,1.34
+Stock,KEYS US,Keysight Technologies Inc,Industrials,USD,168.79,0,0.77
+Stock,AME US,AMETEK Inc.,Industrials,USD,134.77,0.59,1.11
+Stock,KMI US,Kinder Morgan Inc Class P,Energy,USD,15.94,6.78,1.1
+Stock,ANSS US,ANSYS Inc.,Technology,USD,362.22,0,0.96
+Stock,DHI US,D.R. Horton Inc.,Consumer Discretionary,USD,94.9,0.84,1.32
+Stock,CBRE US,CBRE Group Inc. Class A,Real Estate,USD,92.66,0,1.37
+Stock,WEC US,WEC Energy Group Inc,Utilities,USD,97.59,2.78,0.98
+Stock,SWK US,Stanley Black & Decker Inc.,Industrials,USD,190.39,1.66,1.37
+Stock,AMP US,Ameriprise Financial Inc.,Financials,USD,261.6,1.73,1.38
+Stock,BLL US,Ball Corporation,Materials,USD,94.63,0.85,1.03
+Stock,ZBRA US,Zebra Technologies Corporation Class A,Technology,USD,571.49,0,0.98
+Stock,STT US,State Street Corporation,Financials,USD,86.09,2.65,1.15
+Stock,ZBH US,Zimmer Biomet Holdings Inc.,Health Care,USD,145.46,0.66,1.19
+Stock,LH US,Laboratory Corporation of America Holdings,Health Care,USD,306.26,0,1.23
+Stock,SWKS US,Skyworks Solutions Inc.,Technology,USD,178.88,1.25,1.14
+Stock,AJG US,Arthur J. Gallagher & Co.,Financials,USD,143,1.34,1.02
+Stock,WMB US,Williams Companies Inc.,Energy,USD,24.04,6.82,1.21
+Stock,PSX US,Phillips 66,Energy,USD,65.95,5.46,1.17
+Stock,CPRT US,Copart Inc.,Consumer Discretionary,USD,139.98,0,1.18
+Stock,LEN US,Lennar Corporation Class A,Consumer Discretionary,USD,105.32,0.95,1.46
+Stock,EQR US,Equity Residential,Real Estate,USD,82.51,2.92,1.26
+Stock,ARE US,Alexandria Real Estate Equities Inc.,Real Estate,USD,207.06,2.16,1.02
+Stock,LUV US,Southwest Airlines Co.,Industrials,USD,47.36,0,1.3
+Stock,PCAR US,PACCAR Inc,Industrials,USD,80.27,1.69,1
+Stock,WLTW US,Willis Towers Watson Public Limited Company,Financials,USD,218.75,1.46,1.08
+Stock,CDW US,CDW Corp.,Technology,USD,195.77,0.82,1.33
+Stock,MXIM US,Maxim Integrated Products Inc.,Technology,USD,101.65,0,0.95
+Stock,ODFL US,Old Dominion Freight Line Inc.,Industrials,USD,282.51,0.28,0.98
+Stock,O US,Realty Income Corporation,Real Estate,USD,71.91,3.93,1.34
+Stock,SYF US,Synchrony Financial,Financials,USD,49.2,1.79,1.74
+Stock,FITB US,Fifth Third Bancorp,Financials,USD,37.62,2.87,1.61
+Stock,KSU US,Kansas City Southern,Industrials,USD,290.26,0.74,1.08
+Stock,HSY US,Hershey Company,Consumer Staples,USD,180.03,2,0.85
+Stock,ED US,Consolidated Edison Inc.,Utilities,USD,76.95,4.03,0.79
+Stock,IT US,Gartner Inc.,Technology,USD,302.4,0,1.37
+Stock,RSG US,Republic Services Inc.,Industrials,USD,122.1,1.51,0.94
+Stock,WY US,Weyerhaeuser Company,Real Estate,USD,34.16,1.99,1.62
+Stock,WAT US,Waters Corporation,Health Care,USD,402.25,0,0.85
+Stock,LYB US,LyondellBasell Industries NV,Materials,USD,98.21,4.6,1.4
+Stock,GRMN US,Garmin Ltd.,Technology,USD,170.43,1.57,1.01
+Stock,ALB US,Albemarle Corporation,Materials,USD,219.68,0.71,1.31
+Stock,FTV US,Fortive Corp.,Industrials,USD,73.43,0.38,1.1
+Stock,DOV US,Dover Corporation,Industrials,USD,172.7,1.16,1.28
+Stock,GNRC US,Generac Holdings Inc.,Industrials,USD,400.32,0,1.1
+Stock,VLO US,Valero Energy Corporation,Energy,USD,60.2,6.51,1.45
+Stock,BBY US,Best Buy Co. Inc.,Consumer Discretionary,USD,112.63,2.49,1.25
+Stock,ETSY US,Etsy Inc.,Consumer Discretionary,USD,199.27,0,1.47
+Stock,VFC US,V.F. Corporation,Consumer Discretionary,USD,76.43,2.56,1.25
+Stock,CERN US,Cerner Corporation,Technology,USD,78.96,1.11,0.89
+Stock,VMC US,Vulcan Materials Company,Materials,USD,183.39,0.81,1.12
+Stock,DAL US,Delta Air Lines Inc.,Industrials,USD,38.12,0,1.76
+Stock,VIAC US,ViacomCBS Inc. Class B,Communications,USD,39.71,2.42,1.35
+Stock,URI US,United Rentals Inc.,Industrials,USD,330.13,0,1.49
+Stock,KHC US,Kraft Heinz Company,Consumer Staples,USD,36.6,4.37,0.82
+Stock,DLTR US,Dollar Tree Inc.,Consumer Staples,USD,102.67,0,0.76
+Stock,NTRS US,Northern Trust Corporation,Financials,USD,114.6,2.44,1.08
+Stock,TSN US,Tyson Foods Inc. Class A,Consumer Staples,USD,79.94,2.23,0.85
+Stock,EXR US,Extra Space Storage Inc.,Real Estate,USD,177.56,2.25,0.95
+Stock,HIG US,Hartford Financial Services Group Inc.,Financials,USD,66.24,2.11,1.35
+Stock,XYL US,Xylem Inc.,Industrials,USD,131.57,0.85,1.07
+Stock,DTE US,DTE Energy Company,Utilities,USD,121.48,2.72,1.14
+Stock,MLM US,Martin Marietta Materials Inc.,Materials,USD,375,0.65,1.24
+Stock,AEE US,Ameren Corporation,Utilities,USD,89.59,2.46,0.95
+Stock,IP US,International Paper Company,Materials,USD,58.76,3.49,0.97
+Stock,TSCO US,Tractor Supply Company,Consumer Discretionary,USD,198.11,1.05,0.86
+Stock,PPL US,PPL Corporation,Utilities,USD,29.74,5.58,1.32
+Stock,PAYC US,Paycom Software Inc.,Technology,USD,469.42,0,1.26
+Stock,ETR US,Entergy Corporation,Utilities,USD,114.6,3.32,1.19
+Stock,TRMB US,Trimble Inc.,Industrials,USD,90.59,0,1.28
+Stock,ENPH US,Enphase Energy Inc.,Energy,USD,165.99,0,1.67
+Stock,EIX US,Edison International,Utilities,USD,59.53,4.45,1.1
+Stock,OKE US,ONEOK Inc.,Energy,USD,50.43,7.42,1.62
+Stock,MKC US,McCormick & Company Incorporated,Consumer Staples,USD,87.56,1.55,0.7
+Stock,COO US,Cooper Companies Inc.,Health Care,USD,444.18,0.01,0.93
+Stock,NDAQ US,Nasdaq Inc.,Financials,USD,188.67,1.14,0.99
+Stock,HBAN US,Huntington Bancshares Incorporated,Financials,USD,14.76,4.07,1.29
+Stock,MAA US,Mid-America Apartment Communities Inc.,Real Estate,USD,190.28,2.16,1.28
+Stock,CLX US,Clorox Company,Consumer Staples,USD,170.06,2.73,0.36
+Stock,FLT US,FLEETCOR Technologies Inc.,Technology,USD,257.83,0,1.18
+Stock,CHD US,Church & Dwight Co. Inc.,Consumer Staples,USD,86.02,1.17,0.49
+Stock,FE US,FirstEnergy Corp.,Utilities,USD,39.09,3.99,1.03
+Stock,VRSN US,VeriSign Inc.,Communications,USD,213.04,0,0.77
+Stock,STE US,STERIS Plc,Health Care,USD,214.9,0.8,0.91
+Stock,CRL US,Charles River Laboratories International Inc.,Health Care,USD,424.75,0,1.17
+Stock,ESS US,Essex Property Trust Inc.,Real Estate,USD,319.49,2.62,1.32
+Stock,TDY US,Teledyne Technologies Incorporated,Industrials,USD,450.46,0,1.19
+Stock,EXPD US,Expeditors International of Washington Inc.,Industrials,USD,123.03,0.94,0.91
+Stock,CTLT US,Catalent Inc,Health Care,USD,123.42,0,1.09
+Stock,VTR US,Ventas Inc.,Real Estate,USD,54.59,3.3,1.85
+Stock,QRVO US,Qorvo Inc.,Technology,USD,181.56,0,1.08
+Stock,PKI US,PerkinElmer Inc.,Health Care,USD,181.1,0.15,0.8
+Stock,KMX US,CarMax Inc.,Consumer Discretionary,USD,124.76,0,1.64
+Stock,DPZ US,Domino's Pizza Inc.,Consumer Discretionary,USD,509.52,0.74,0.68
+Stock,BR US,Broadridge Financial Solutions Inc.,Technology,USD,174.54,1.47,0.83
+Stock,ANET US,Arista Networks Inc.,Technology,USD,369.86,0,0.97
+Stock,MPWR US,Monolithic Power Systems Inc.,Technology,USD,476.17,0.5,1.15
+Stock,DGX US,Quest Diagnostics Incorporated,Health Care,USD,152,1.63,0.96
+Stock,ULTA US,Ulta Beauty Inc,Consumer Discretionary,USD,366.77,0,1.46
+Stock,HOLX US,Hologic Inc.,Health Care,USD,77.09,0,1.06
+Stock,EXPE US,Expedia Group Inc.,Communications,USD,137.79,0,1.64
+Stock,POOL US,Pool Corporation,Consumer Discretionary,USD,486.43,0.66,0.95
+Stock,AMCR US,Amcor PLC,Materials,USD,12.79,3.67,0.91
+Stock,KEY US,KeyCorp,Financials,USD,19.91,3.72,1.52
+Stock,TYL US,Tyler Technologies Inc.,Technology,USD,472.68,0,0.76
+Stock,TER US,Teradyne Inc.,Technology,USD,113.56,0.35,1.36
+Stock,PEAK US,Healthpeak Properties Inc.,Real Estate,USD,35.16,3.41,1.42
+Stock,DRE US,Duke Realty Corporation,Real Estate,USD,50.82,2.01,1.1
+Stock,GWW US,W.W. Grainger Inc.,Industrials,USD,430.99,1.5,1.1
+Stock,RF US,Regions Financial Corporation,Financials,USD,20.03,3.39,1.44
+Stock,TTWO US,Take-Two Interactive Software Inc.,Communications,USD,160.96,0,0.74
+Stock,HPE US,Hewlett Packard Enterprise Co.,Technology,USD,14.58,3.29,1.12
+Stock,IR US,Ingersoll Rand Inc.,Industrials,USD,50.08,0,1.17
+Stock,OXY US,Occidental Petroleum Corporation,Energy,USD,21.95,0.18,1.69
+Stock,CMS US,CMS Energy Corporation,Utilities,USD,64.81,2.68,0.98
+Stock,AKAM US,Akamai Technologies Inc.,Technology,USD,114.49,0,0.72
+Stock,CINF US,Cincinnati Financial Corporation,Financials,USD,123.31,2.04,1.1
+Stock,WDC US,Western Digital Corporation,Technology,USD,60.04,0,1.48
+Stock,MKTX US,MarketAxess Holdings Inc.,Technology,USD,475.5,0.56,0.67
+Stock,AVY US,Avery Dennison Corporation,Materials,USD,218.28,1.25,1.15
+Stock,DRI US,Darden Restaurants Inc.,Consumer Discretionary,USD,139.31,3.16,1.85
+Stock,CFG US,Citizens Financial Group Inc.,Financials,USD,42.34,3.68,1.45
+Stock,VTRS US,Viatris Inc.,Health Care,USD,14.69,3,0.88
+Stock,STX US,Seagate Technology Holdings PLC,Technology,USD,89.44,3,1.02
+Stock,GPC US,Genuine Parts Company,Consumer Discretionary,USD,123.82,2.63,1.26
+Stock,NTAP US,NetApp Inc.,Technology,USD,80.67,2.48,1.06
+Stock,ABC US,AmerisourceBergen Corporation,Health Care,USD,119.54,1.47,0.8
+Stock,TFX US,Teleflex Incorporated,Health Care,USD,377.07,0.36,1.12
+Stock,NVR US,NVR Inc.,Consumer Discretionary,USD,5160.73,0,1.32
+Stock,CE US,Celanese Corporation,Materials,USD,153.81,1.77,1.23
+Stock,HES US,Hess Corporation,Energy,USD,64.32,1.55,1.22
+Stock,BBWI US,Bath & Body Works Inc.,Consumer Discretionary,USD,66.26,0.91,1.77
+Stock,MTB US,M&T Bank Corporation,Financials,USD,135.7,3.24,1.14
+Stock,CCL US,Carnival Corporation,Consumer Discretionary,USD,21.96,0,1.92
+Stock,CZR US,Caesars Entertainment Inc,Consumer Discretionary,USD,85.64,0,2.93
+Stock,J US,Jacobs Engineering Group Inc.,Industrials,USD,132.75,0.63,1.08
+Stock,K US,Kellogg Company,Consumer Staples,USD,66.16,3.51,0.64
+Stock,RCL US,Royal Caribbean Group,Consumer Discretionary,USD,78.21,0,2.27
+Stock,IEX US,IDEX Corporation,Industrials,USD,221.29,0.98,1
+Stock,BIO US,Bio-Rad Laboratories Inc. Class A,Health Care,USD,780.03,0,0.7
+Stock,CAG US,Conagra Brands Inc.,Consumer Staples,USD,33.73,3.7,0.63
+Stock,PFG US,Principal Financial Group Inc.,Financials,USD,65.03,3.87,1.56
+Stock,RJF US,Raymond James Financial Inc.,Financials,USD,135.83,1.15,1.08
+Stock,HAL US,Halliburton Company,Energy,USD,18.21,0.99,1.59
+Stock,BXP US,Boston Properties Inc.,Real Estate,USD,113.12,3.47,1.26
+Stock,TXT US,Textron Inc.,Industrials,USD,70.96,0.11,1.43
+Stock,AES US,AES Corporation,Utilities,USD,24.32,2.48,1.22
+Stock,UDR US,UDR Inc.,Real Estate,USD,53.09,2.73,1.33
+Stock,EVRG US,Evergy Inc.,Utilities,USD,69.26,3.09,1.07
+Stock,MGM US,MGM Resorts International,Consumer Discretionary,USD,38.4,0.03,2.02
+Stock,MAS US,Masco Corporation,Consumer Discretionary,USD,60.73,1.55,1.16
+Stock,LNT US,Alliant Energy Corp,Utilities,USD,62.18,2.59,1.03
+Stock,OMC US,Omnicom Group Inc,Communications,USD,71.64,3.91,1.03
+Stock,WAB US,Westinghouse Air Brake Technologies Corporation,Industrials,USD,85.74,0.56,1.37
+Stock,ABMD US,ABIOMED Inc.,Health Care,USD,348.11,0,0.96
+Stock,CAH US,Cardinal Health Inc.,Health Care,USD,51.39,3.82,0.92
+Stock,CNP US,CenterPoint Energy Inc.,Utilities,USD,26.34,2.43,1.41
+Stock,NLOK US,NortonLifeLock Inc.,Technology,USD,25.75,1.94,0.76
+Stock,DVN US,Devon Energy Corporation,Energy,USD,25.7,1.71,1.53
+Stock,EMN US,Eastman Chemical Company,Materials,USD,109.9,2.51,1.3
+Stock,BKR US,Baker Hughes Company Class A,Energy,USD,20.43,3.52,1.39
+Stock,SJM US,J.M. Smucker Company,Consumer Staples,USD,131.28,3.02,0.5
+Stock,JBHT US,J.B. Hunt Transport Services Inc.,Industrials,USD,174.49,0.69,0.95
+Stock,LKQ US,LKQ Corporation,Consumer Discretionary,USD,50.96,0,1.54
+Stock,IPG US,Interpublic Group of Companies Inc.,Communications,USD,36.45,2.96,1.36
+Stock,UAL US,United Airlines Holdings Inc.,Industrials,USD,44.03,0,1.98
+Stock,INCY US,Incyte Corporation,Health Care,USD,74.9,0,0.7
+Stock,WHR US,Whirlpool Corporation,Consumer Discretionary,USD,221.2,2.53,1.34
+Stock,PKG US,Packaging Corporation of America,Materials,USD,148.3,2.7,0.79
+Stock,PHM US,PulteGroup Inc.,Consumer Discretionary,USD,52.71,1.06,1.68
+Stock,CBOE US,Cboe Global Markets Inc,Financials,USD,129.76,1.48,0.83
+Stock,AAP US,Advance Auto Parts Inc.,Consumer Discretionary,USD,209.68,1.91,1.37
+Stock,FBHS US,Fortune Brands Home & Security Inc.,Consumer Discretionary,USD,98.46,1.06,1.5
+Stock,JKHY US,Jack Henry & Associates Inc.,Technology,USD,177.13,1.04,0.89
+Stock,PTC US,PTC Inc.,Technology,USD,128.29,0,1.29
+Stock,PWR US,Quanta Services Inc.,Industrials,USD,96.3,0.25,1.16
+Stock,IRM US,Iron Mountain Inc.,Real Estate,USD,45.67,5.42,1.05
+Stock,XRAY US,DENTSPLY SIRONA Inc.,Health Care,USD,59.86,0.74,1.14
+Stock,HRL US,Hormel Foods Corporation,Consumer Staples,USD,46.33,2.12,0.39
+Stock,PNR US,Pentair plc,Industrials,USD,78.83,1.02,1.3
+Stock,ATO US,Atmos Energy Corporation,Utilities,USD,98.77,2.53,0.93
+Stock,LDOS US,Leidos Holdings Inc.,Technology,USD,96.31,1.5,1.18
+Stock,WRK US,WestRock Company,Materials,USD,49.43,1.94,1.12
+Stock,ALLE US,Allegion PLC,Industrials,USD,138.58,1.04,1.2
+Stock,KIM US,Kimco Realty Corporation,Real Estate,USD,21.32,3.19,1.36
+Stock,CTXS US,Citrix Systems Inc.,Technology,USD,103.22,1.43,0.62
+Stock,L US,Loews Corporation,Financials,USD,55.02,0.45,1.18
+Stock,HWM US,Howmet Aerospace Inc.,Industrials,USD,31.81,0.25,1.49
+Stock,FANG US,Diamondback Energy Inc.,Energy,USD,68.18,2.64,1.59
+Stock,HAS US,Hasbro Inc.,Consumer Discretionary,USD,95.84,2.84,1.31
+Stock,FOXA US,Fox Corporation Class A,Communications,USD,36.76,1.31,1
+Stock,LVS US,Las Vegas Sands Corp.,Consumer Discretionary,USD,37.55,0,1.12
+Stock,AAL US,American Airlines Group Inc.,Industrials,USD,18.5,0,1.86
+Stock,FFIV US,F5 Networks Inc.,Technology,USD,199.86,0,0.89
+Stock,LNC US,Lincoln National Corporation,Financials,USD,65.81,2.55,2.17
+Stock,CHRW US,C.H. Robinson Worldwide Inc.,Industrials,USD,88.69,2.3,0.67
+Stock,UHS US,Universal Health Services Inc. Class B,Health Care,USD,153.39,0.52,1.35
+Stock,SNA US,Snap-on Incorporated,Industrials,USD,219.53,2.24,1.16
+Stock,MHK US,Mohawk Industries Inc.,Consumer Discretionary,USD,200.78,0,1.73
+Stock,RHI US,Robert Half International Inc.,Industrials,USD,102.07,1.49,1.17
+Stock,FMC US,FMC Corporation,Materials,USD,87.77,2.19,1.24
+Stock,LYV US,Live Nation Entertainment Inc.,Consumer Discretionary,USD,80.2,0,1.58
+Stock,LUMN US,Lumen Technologies Inc.,Communications,USD,11.83,8.45,0.89
+Stock,TPR US,Tapestry Inc.,Consumer Discretionary,USD,40.58,2.46,1.69
+Stock,RE US,Everest Re Group Ltd.,Financials,USD,271.94,2.28,1.05
+Stock,HSIC US,Henry Schein Inc.,Health Care,USD,75.63,0,1.06
+Stock,WRB US,W. R. Berkley Corporation,Financials,USD,76.38,0.68,1.14
+Stock,HST US,Host Hotels & Resorts Inc.,Real Estate,USD,15.16,0,1.22
+Stock,NRG US,NRG Energy Inc.,Utilities,USD,43.41,2.99,1.26
+Stock,DISH US,DISH Network Corporation Class A,Communications,USD,42.88,0,1.22
+Stock,MOS US,Mosaic Company,Materials,USD,30.72,0.98,1.25
+Stock,REG US,Regency Centers Corporation,Real Estate,USD,64.87,3.67,1.38
+Stock,BWA US,BorgWarner Inc.,Consumer Discretionary,USD,42.48,1.6,1.27
+Stock,AIZ US,Assurant Inc.,Financials,USD,165.13,1.6,1.01
+Stock,CMA US,Comerica Incorporated,Financials,USD,71.28,3.82,1.37
+Stock,NI US,NiSource Inc,Utilities,USD,25.71,3.42,1.01
+Stock,PENN US,Penn National Gaming Inc.,Consumer Discretionary,USD,67.65,0,2.33
+Stock,LW US,Lamb Weston Holdings Inc.,Consumer Staples,USD,65.08,1.44,1.33
+Stock,DVA US,DaVita Inc.,Health Care,USD,132.65,0,1.03
+Stock,JNPR US,Juniper Networks Inc.,Technology,USD,29.07,2.75,0.96
+Stock,AOS US,A. O. Smith Corporation,Industrials,USD,71.06,1.46,1
+Stock,WYNN US,Wynn Resorts Limited,Consumer Discretionary,USD,88.3,0,1.81
+Stock,CF US,CF Industries Holdings Inc.,Materials,USD,44.47,2.7,1.24
+Stock,SEE US,Sealed Air Corporation,Materials,USD,59.36,1.35,1.09
+Stock,NWL US,Newell Brands Inc,Consumer Discretionary,USD,24.51,3.75,1.19
+Stock,TAP US,Molson Coors Beverage Company Class B,Consumer Staples,USD,47.79,2.85,0.96
+Stock,PNW US,Pinnacle West Capital Corporation,Utilities,USD,80.16,4.14,1.16
+Stock,GL US,Globe Life Inc.,Financials,USD,94.98,0.83,1.25
+Stock,DXC US,DXC Technology Co.,Technology,USD,35.44,0,1.59
+Stock,WU US,Western Union Company,Technology,USD,21.61,4.35,1.07
+Stock,IVZ US,Invesco Ltd.,Financials,USD,23.99,2.83,1.43
+Stock,CPB US,Campbell Soup Company,Consumer Staples,USD,43.28,3.42,0.48
+Stock,ZION US,Zions Bancorporation N.A.,Financials,USD,53.87,2.82,1.21
+Stock,ROL US,Rollins Inc.,Industrials,USD,39.33,0.81,0.69
+Stock,NWSA US,News Corporation Class A,Communications,USD,22.1,0.9,1.02
+Stock,MRO US,Marathon Oil Corporation,Energy,USD,10.72,1.87,1.31
+Stock,NCLH US,Norwegian Cruise Line Holdings Ltd.,Consumer Discretionary,USD,23.63,0,2.14
+Stock,BEN US,Franklin Resources Inc.,Financials,USD,31.13,3.6,1.01
+Stock,HII US,Huntington Ingalls Industries Inc.,Industrials,USD,202.73,2.25,0.97
+Stock,NLSN US,Nielsen Holdings Plc,Technology,USD,22.5,1.07,0.95
+Stock,FRT US,Federal Realty Investment Trust,Real Estate,USD,116.06,3.69,1.33
+Stock,DISCK US,Discovery Inc. Class C,Communications,USD,26.82,0,1.02
+Stock,PVH US,PVH Corp.,Consumer Discretionary,USD,104.55,0,2
+Stock,ALK US,Alaska Air Group Inc.,Industrials,USD,54.35,0,1.71
+Stock,PBCT US,People's United Financial Inc.,Financials,USD,15.82,4.61,1.01
+Stock,HBI US,Hanesbrands Inc.,Consumer Discretionary,USD,18.95,3.17,1.06
+Stock,VNO US,Vornado Realty Trust,Real Estate,USD,40.89,5.18,1.49
+Stock,LEG US,Leggett & Platt Incorporated,Consumer Discretionary,USD,47.8,3.52,1.39
+Stock,APA US,APA Corp.,Energy,USD,16.07,0.62,2
+Stock,IPGP US,IPG Photonics Corporation,Technology,USD,167.37,0,0.92
+Stock,COG US,Cabot Oil & Gas Corporation,Energy,USD,14.42,3.05,0.79
+Stock,GPS US,Gap Inc.,Consumer Discretionary,USD,28.27,1.7,1.85
+Stock,RL US,Ralph Lauren Corporation Class A,Consumer Discretionary,USD,116.27,2.37,1.35
+Stock,PRGO US,Perrigo Co. Plc,Health Care,USD,40.96,2.34,0.93
+Stock,UNM US,Unum Group,Financials,USD,25.43,4.72,1.72
+Stock,FOX US,Fox Corporation Class B,Communications,USD,34.01,1.41,1.06
+Stock,NOV US,NOV Inc.,Energy,USD,12.19,0,1.17
+Stock,DISCA US,Discovery Inc. Class A,Communications,USD,28.07,0,1
+Stock,UAA US,Under Armour Inc. Class A,Consumer Discretionary,USD,23.45,0,1.41
+Stock,UA US,Under Armour Inc. Class C,Consumer Discretionary,USD,19.74,0,1.39
+Stock,NWS US,News Corporation Class B,Communications,USD,21.49,0.93,1.1
