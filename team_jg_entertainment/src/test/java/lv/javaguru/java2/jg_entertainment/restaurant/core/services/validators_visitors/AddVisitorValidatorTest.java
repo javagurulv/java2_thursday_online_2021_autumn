@@ -14,14 +14,14 @@ class AddVisitorValidatorTest {
 
     @Test
     public void coreErrorsNotEmpty() {
-        AddVisitorRequest request = new AddVisitorRequest("Nika", "Plotnikova", 3256489742L);
+        AddVisitorRequest request = new AddVisitorRequest("Nika", "Plotnikova", 372L);
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertTrue(coreErrorList.isEmpty());
     }
 
     @Test
     public void coreErrorsEmptyName() {
-        AddVisitorRequest request = new AddVisitorRequest("", "Plotnikova", 3256489742L);
+        AddVisitorRequest request = new AddVisitorRequest("", "Plotnikova", 325L);
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertEquals(coreErrorList.size(), 1);
         assertEquals(coreErrorList.get(0).getField(), "name visitors");
@@ -30,7 +30,7 @@ class AddVisitorValidatorTest {
 
     @Test
     public void coreErrorsEmptySurname() {
-        AddVisitorRequest request = new AddVisitorRequest("Nika", "", 3256489742L);
+        AddVisitorRequest request = new AddVisitorRequest("Nika", "", 325L);
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertEquals(coreErrorList.size(), 1);
         assertEquals(coreErrorList.get(0).getField(), "surname");
@@ -42,7 +42,7 @@ class AddVisitorValidatorTest {
         AddVisitorRequest request = new AddVisitorRequest("Nika", "Plotnikova", null);
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertEquals(coreErrorList.size(), 1);
-        assertEquals(coreErrorList.get(0).getField(), "telephone");
+        assertEquals(coreErrorList.get(0).getField(), "telephoneNumber");
         assertEquals(coreErrorList.get(0).getMessageError(), "not correct, telephone can't be null");
     }
 
@@ -55,7 +55,7 @@ class AddVisitorValidatorTest {
         assertEquals(coreErrorList.get(0).getMessageError(), "Shouldn't be empty");
         assertEquals(coreErrorList.get(1).getField(), "surname");
         assertEquals(coreErrorList.get(1).getMessageError(), "Shouldn't be empty");
-        assertEquals(coreErrorList.get(2).getField(), "telephone");
+        assertEquals(coreErrorList.get(2).getField(), "telephoneNumber");
         assertEquals(coreErrorList.get(2).getMessageError(), "not correct, telephone can't be null");
     }
 }

@@ -13,7 +13,7 @@ public class AddVisitorValidator {
         List<CoreError> coreErrors = new ArrayList<>();
         validatorName(request).ifPresent(coreErrors::add);
         validatorSurname(request).ifPresent(coreErrors::add);
-        validatorTelephone(request).ifPresent(coreErrors::add);
+        validatorPhoneNumberNull(request).ifPresent(coreErrors::add);
         return coreErrors;
     }
 
@@ -29,10 +29,9 @@ public class AddVisitorValidator {
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validatorTelephone(AddVisitorRequest requestVisitor) {
+    private Optional<CoreError> validatorPhoneNumberNull(AddVisitorRequest requestVisitor) {
         return (requestVisitor.getTelephone() == null)
-                ? Optional.of(new CoreError("telephone", "not correct, telephone can't be null"))
+                ? Optional.of(new CoreError("telephoneNumber", "not correct, telephone can't be null"))
                 : Optional.empty();
-
     }
 }
