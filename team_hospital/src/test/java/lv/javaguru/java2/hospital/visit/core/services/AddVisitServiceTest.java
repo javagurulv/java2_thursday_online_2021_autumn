@@ -171,7 +171,7 @@ class AddVisitServiceTest {
     }
 
     @Test
-    public void shouldAddVisitToDatabase() {
+    public void shouldAddVisitWithoutDescriptionToDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
         Patient patient = new Patient("PatientsName", "PatientsSurname", "12345678901");
@@ -192,5 +192,30 @@ class AddVisitServiceTest {
                 new VisitMatcher(response.getPatientVisit().getDoctor(),
                         response.getPatientVisit().getPatient(),
                         response.getPatientVisit().getVisitDate())));
+    }
+
+    @Test
+    public void shouldAddVisitWithDescriptionToDatabase() {
+        Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
+        Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
+        Patient patient = new Patient("PatientsName", "PatientsSurname", "12345678901");
+        List<Patient> patients = new ArrayList<>();
+        patients.add(patient);
+        List<Doctor> doctors = new ArrayList<>();
+        doctors.add(doctor);
+        Mockito.when(patientDatabase.findPatientsByPersonalCode(patient.getPersonalCode()))
+                .thenReturn((patients));
+        Mockito.when(doctorDatabase.findByNameAndSurname(doctor.getName(), doctor.getSurname()))
+                .thenReturn((doctors));
+
+        AddVisitRequest request = new AddVisitRequest(patient.getPersonalCode(), doctor.getName(), doctor.getSurname(),
+                "21/12/2021 15:00", "Visit description");
+        AddVisitResponse response = service.execute(request);
+        assertFalse(response.hasErrors());
+        Mockito.verify(visitDatabase).recordVisit(argThat(
+                new VisitMatcher(response.getPatientVisit().getDoctor(),
+                        response.getPatientVisit().getPatient(),
+                        response.getPatientVisit().getVisitDate(),
+                        response.getPatientVisit().getDescription())));
     }
 }
