@@ -44,7 +44,8 @@ public class AddReservationUIAction implements ReservationUIAction {
             System.out.println("Successful reservation!");
             System.out.println();
             System.out.println("Info reservation: "
-                    + "visitor name-> " + name + " " + ", telephone->" + telephone
+                    + "visitor name-> " + name
+                    + ", telephone->" + telephone
                     + ", menu title-> " + menu
                     + ", table-> " + table
                     + ", date-> " + date);
