@@ -69,7 +69,7 @@ public class AddPatientValidator {
                 try {
                     Integer.parseInt(s);
                 } catch (NumberFormatException e) {
-                    return Optional.of(new CoreError("Personal code", "must consist only from numbers!"));
+                    return Optional.of(new CoreError("Personal code", "must consist from numbers only!"));
                 }
             }
         }
