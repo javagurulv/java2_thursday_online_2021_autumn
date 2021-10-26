@@ -83,17 +83,28 @@ class EditVisitValidatorTest {
     }
 
     @Test
-    public void shouldReturnEnumError() {
+    public void shouldReturnEnumErrorIsEmpty() {
+        EditVisitRequest request = new EditVisitRequest(11L, "", "changes");
+        Mockito.when(existence.validateExistenceById(11L)).thenReturn(Optional.empty());
+        List<CoreError> errorList = validator.validate(request);
+        assertFalse(errorList.isEmpty());
+        assertEquals(errorList.size(), 1);
+        assertEquals(errorList.get(0).getField(), "edit option");
+        assertEquals(errorList.get(0).getDescription(), "Must not be empty!");
+    }
+
+    @Test
+    public void shouldReturnEnumErrorInvalidInput() {
         EditVisitRequest request = new EditVisitRequest(11L, "ENUM", "changes");
         Mockito.when(existence.validateExistenceById(11L)).thenReturn(Optional.empty());
         Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.of(
-                new CoreError("User choice", "must be DOCTOR, PATIENT OR DATE")
+                new CoreError("edit option", "must be DOCTOR, PATIENT, DATE OR DESCRIPTION!")
         ));
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
-        assertEquals(errorList.get(0).getField(), "User choice");
-        assertEquals(errorList.get(0).getDescription(), "must be DOCTOR, PATIENT OR DATE");
+        assertEquals(errorList.get(0).getField(), "edit option");
+        assertEquals(errorList.get(0).getDescription(), "must be DOCTOR, PATIENT, DATE OR DESCRIPTION!");
     }
 
     @Test

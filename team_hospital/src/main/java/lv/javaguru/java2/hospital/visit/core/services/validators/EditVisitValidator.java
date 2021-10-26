@@ -46,7 +46,8 @@ public class EditVisitValidator {
 
     private Optional<CoreError> validateEnum(EditVisitRequest request){
         return (request.getEditEnums() == null || request.getEditEnums().isEmpty())
-                ? Optional.empty() : checker.validateEnum(request.getEditEnums());
+                ? Optional.of(new CoreError("edit option", "Must not be empty!"))
+                : checker.validateEnum(request.getEditEnums());
     }
 
     private List<CoreError> validateDate(EditVisitRequest request){
