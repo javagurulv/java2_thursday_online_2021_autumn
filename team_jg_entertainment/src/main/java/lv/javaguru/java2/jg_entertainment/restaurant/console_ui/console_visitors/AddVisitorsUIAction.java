@@ -23,7 +23,7 @@ public class AddVisitorsUIAction implements VisitorUIAction {
         System.out.println("Please, enter visitor's surname: ");
         String visitorsSurname = scanner.nextLine();
         System.out.println("Enter visitor's telephone number: ");
-        Long telephoneNumber = scanner.nextLong();
+        String telephoneNumber = scanner.nextLine();
 
         AddVisitorRequest request = new AddVisitorRequest(visitorsName, visitorsSurname, telephoneNumber);
         AddVisitorResponse response = addAllVisitorsService.execute(request);

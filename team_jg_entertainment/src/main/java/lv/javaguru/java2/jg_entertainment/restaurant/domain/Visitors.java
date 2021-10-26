@@ -7,21 +7,21 @@ public class Visitors {
     private String clientName;
     private String surname;
     private int age;
-    private Long telephoneNumber;
+    private String telephoneNumber;
 
     public Visitors(String clientName, String surname) {
         this.clientName = clientName;
         this.surname = surname;
     }
 
-    public Visitors(String clientName, String surname, int age, long telephoneNumber) {
+    public Visitors(String clientName, String surname, int age, String telephoneNumber) {
         this.clientName = clientName;
         this.surname = surname;
         this.age = age;
         this.telephoneNumber = telephoneNumber;
     }
 
-    public Visitors(String clientName, String surname, long telephoneNumber) {
+    public Visitors(String clientName, String surname, String telephoneNumber) {
         this.clientName = clientName;
         this.surname = surname;
         this.telephoneNumber = telephoneNumber;
@@ -59,11 +59,11 @@ public class Visitors {
         this.age = age;
     }
 
-    public long getTelephoneNumber() {
+    public String getTelephoneNumber() {
         return telephoneNumber;
     }
 
-    public void setTelephoneNumber(long telephoneNumber) {
+    public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
     }
 

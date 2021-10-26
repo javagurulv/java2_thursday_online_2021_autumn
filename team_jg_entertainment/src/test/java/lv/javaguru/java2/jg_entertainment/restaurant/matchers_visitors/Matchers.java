@@ -7,9 +7,9 @@ public class Matchers implements ArgumentMatcher<Visitors> {
 
     private String nameVisitor;
     private String surnameVisitor;
-    private Long telephoneNumber;
+    private String telephoneNumber;
 
-    public Matchers(String nameVisitor, String surnameVisitor, Long telephoneNumber) {
+    public Matchers(String nameVisitor, String surnameVisitor, String telephoneNumber) {
         this.nameVisitor = nameVisitor;
         this.surnameVisitor = surnameVisitor;
         this.telephoneNumber = telephoneNumber;
@@ -19,6 +19,6 @@ public class Matchers implements ArgumentMatcher<Visitors> {
     public boolean matches(Visitors visitors) {
         return visitors.getClientName().equals(nameVisitor)
                 && visitors.getSurname().equals(surnameVisitor)
-                && visitors.getTelephoneNumber() == telephoneNumber;
+                && visitors.getTelephoneNumber().equals(telephoneNumber);
     }
 }

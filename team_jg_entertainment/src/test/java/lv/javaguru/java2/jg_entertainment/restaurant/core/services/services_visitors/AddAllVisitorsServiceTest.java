@@ -29,7 +29,7 @@ public class AddAllVisitorsServiceTest {
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
-        AddVisitorRequest notValidRequest = new AddVisitorRequest(null, "surname", 252525L);
+        AddVisitorRequest notValidRequest = new AddVisitorRequest(null, "surname", "252525");
         when(validator.coreErrors(notValidRequest)).thenReturn(List.of(new CoreError("name", "Shouldn't be empty")));
         AddVisitorResponse response = service.execute(notValidRequest);
         assertTrue(response.hasError());
@@ -37,7 +37,7 @@ public class AddAllVisitorsServiceTest {
 
     @Test
     public void shouldReturnResponseWithErrorsReceivedFromValidator() {
-        AddVisitorRequest notValidRequest = new AddVisitorRequest(null, "surname", 252525L);
+        AddVisitorRequest notValidRequest = new AddVisitorRequest(null, "surname", "252525");
         when(validator.coreErrors(notValidRequest)).thenReturn(List.of(new CoreError("name", "Shouldn't be empty")));
         AddVisitorResponse addVisitorResponse = service.execute(notValidRequest);
         assertEquals(addVisitorResponse.getErrorsList().size(), 1);
@@ -47,7 +47,7 @@ public class AddAllVisitorsServiceTest {
 
     @Test
     public void shouldNotInvokeDatabaseWhenRequestValidationFails() {
-        AddVisitorRequest notValidRequest = new AddVisitorRequest(null, "surname", 252525L);
+        AddVisitorRequest notValidRequest = new AddVisitorRequest(null, "surname", "252525");
         when(validator.coreErrors(notValidRequest)).thenReturn(List.of(new CoreError("name", "Shouldn't be empty")));
         service.execute(notValidRequest);
         verifyNoInteractions(databaseVisitors);
@@ -55,15 +55,15 @@ public class AddAllVisitorsServiceTest {
 
     @Test
     public void shouldAddVisitorToDatabaseWhenRequestIsValid() {
-        AddVisitorRequest validRequest = new AddVisitorRequest("name", "surname", 252525L);
+        AddVisitorRequest validRequest = new AddVisitorRequest("name", "surname", "252525");
         when(validator.coreErrors(validRequest)).thenReturn(List.of());
         service.execute(validRequest);
-        verify(databaseVisitors).saveClientToRestaurantList(argThat(new Matchers("name", "surname", 252525L)));
+        verify(databaseVisitors).saveClientToRestaurantList(argThat(new Matchers("name", "surname", "252525")));
     }
 
     @Test
     public void shouldReturnResponseWithoutErrorsWhenRequestIsValid() {
-        AddVisitorRequest validRequest = new AddVisitorRequest("name", "surname", 252525L);
+        AddVisitorRequest validRequest = new AddVisitorRequest("name", "surname", "252525");
         when((validator.coreErrors(validRequest))).thenReturn(List.of());
         AddVisitorResponse response = service.execute(validRequest);
         assertFalse(response.hasError());
@@ -71,7 +71,7 @@ public class AddAllVisitorsServiceTest {
 
     @Test
     public void shouldReturnResponseWithVisitorWhenRequestIsValid() {
-        AddVisitorRequest validRequest = new AddVisitorRequest("name", "surname", 252525L);
+        AddVisitorRequest validRequest = new AddVisitorRequest("name", "surname", "252525");
         when(validator.coreErrors(validRequest)).thenReturn(List.of());
         AddVisitorResponse response = service.execute(validRequest);
         assertNotNull(response.getNewVisitor());

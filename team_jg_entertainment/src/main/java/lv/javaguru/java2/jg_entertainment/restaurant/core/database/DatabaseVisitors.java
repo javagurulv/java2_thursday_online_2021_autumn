@@ -9,7 +9,7 @@ public interface DatabaseVisitors {
 
     void saveClientToRestaurantList(Visitors clientInfo);
 
-    List<Visitors> findVisitorsByNameAndTelephoneNumber(String nameVisitors, Long telephoneNumber);
+    List<Visitors> findVisitorsByNameAndTelephoneNumber(String nameVisitors, String telephoneNumber);
 
     List<Visitors> findClientById(Long idVisitors);
 

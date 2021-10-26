@@ -22,7 +22,7 @@ public class AddReservationUIAction implements ReservationUIAction {
         String name = scanner.nextLine();
 
         System.out.println("Please, enter telephone number: ");
-        Long telephone = scanner.nextLong();
+        String telephone = scanner.next();
 
         System.out.println("Please, enter title menu: ");
         String menu = scanner.next();

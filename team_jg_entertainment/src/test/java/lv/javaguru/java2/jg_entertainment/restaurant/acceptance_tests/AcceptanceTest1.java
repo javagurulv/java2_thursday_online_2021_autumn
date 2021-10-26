@@ -18,10 +18,10 @@ public class AcceptanceTest1 {
 
     @Test
     public void shouldReturnCorrectListVisitor() {
-        AddVisitorRequest addVisitor = new AddVisitorRequest("name", "surname", 252525L);
+        AddVisitorRequest addVisitor = new AddVisitorRequest("name", "surname", "252525");
         getAddVisitorService().execute(addVisitor);
 
-        AddVisitorRequest addVisitor1 = new AddVisitorRequest("name", "surname", 252525L);
+        AddVisitorRequest addVisitor1 = new AddVisitorRequest("name", "surname", "252525");
         getAddVisitorService().execute(addVisitor1);
 
         ShowAllVisitorsResponse response = getAllVisitorsService().execute(new ShowAllVisitorsRequest());
