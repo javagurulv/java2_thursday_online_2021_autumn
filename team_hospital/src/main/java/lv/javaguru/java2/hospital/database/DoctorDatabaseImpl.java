@@ -15,7 +15,6 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
 
     private Long nextId = 1L;
     private List<Doctor> doctorsList = new ArrayList<>();
-    @Autowired VisitDatabase visitDatabase;
 
     @Override
     public void addDoctor(Doctor doctor) {
@@ -122,8 +121,4 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<Visit> getDoctorVisits(Long id) {
-        return visitDatabase.findByDoctorId(id);
-    }
 }
