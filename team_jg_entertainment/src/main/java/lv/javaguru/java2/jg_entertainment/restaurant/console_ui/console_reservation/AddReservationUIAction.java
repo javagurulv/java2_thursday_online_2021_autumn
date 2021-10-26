@@ -30,7 +30,7 @@ public class AddReservationUIAction implements ReservationUIAction {
         System.out.println("Please, enter title table: ");
         String table = scanner.next();
 
-        System.out.println("Please, enter date when you want to reservation:");
+        System.out.println("Please, enter date when you want to reservation (dd/MM/yyyy):");
         String date = scanner.next();
 
         AddReservationRequest request = new AddReservationRequest(name, telephone, menu, table, date);
