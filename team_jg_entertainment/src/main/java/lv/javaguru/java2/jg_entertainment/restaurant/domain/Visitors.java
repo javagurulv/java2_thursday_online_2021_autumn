@@ -8,7 +8,6 @@ public class Visitors {
     private String surname;
     private int age;
     private Long telephoneNumber;
-    // private String emailClient;
 
     public Visitors(String clientName, String surname) {
         this.clientName = clientName;
@@ -68,12 +67,6 @@ public class Visitors {
         this.telephoneNumber = telephoneNumber;
     }
 
-    //    public String getEmailClient() {
-//        return emailClient;
-//    }
-//    public void setEmailClient(String emailClient) {
-//        this.emailClient = emailClient;
-//    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
