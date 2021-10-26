@@ -117,6 +117,6 @@ class AddPatientValidatorTest {
         assertFalse(errors.isEmpty());
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Personal code");
-        assertEquals(errors.get(0).getDescription(), "must consist only from numbers!");
+        assertEquals(errors.get(0).getDescription(), "must consist from numbers only!");
     }
 }
