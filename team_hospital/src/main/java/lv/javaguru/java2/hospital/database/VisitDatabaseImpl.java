@@ -14,9 +14,9 @@ public class VisitDatabaseImpl implements VisitDatabase {
     private Long nextId = 1L;
     private final List<Visit> visits = new ArrayList<>();
     @Autowired
-    PatientDatabase patientDatabase;
+    private PatientDatabase patientDatabase;
     @Autowired
-    DoctorDatabase doctorDatabase;
+    private DoctorDatabase doctorDatabase;
 
     @Override
     public void recordVisit(Visit visit) {

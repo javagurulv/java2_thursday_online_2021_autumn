@@ -171,6 +171,23 @@ class AddVisitServiceTest {
     }
 
     @Test
+    public void shouldReturnResponseWithDateExistenceError() {
+        AddVisitRequest request = new AddVisitRequest
+                ("12345678901", "name", "surname", "02/12/2025 12:00");
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Date", "already is busy!"));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        AddVisitResponse response = service.execute(request);
+        assertTrue(response.hasErrors());
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "Date");
+        assertEquals(response.getErrors().get(0).getDescription(), "already is busy!");
+
+        Mockito.verifyNoMoreInteractions(visitDatabase);
+    }
+
+    @Test
     public void shouldAddVisitToDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
@@ -179,6 +196,7 @@ class AddVisitServiceTest {
         patients.add(patient);
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
+
         Mockito.when(patientDatabase.findPatientsByPersonalCode(patient.getPersonalCode()))
                 .thenReturn((patients));
         Mockito.when(doctorDatabase.findByNameAndSurname(doctor.getName(), doctor.getSurname()))
