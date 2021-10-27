@@ -24,6 +24,7 @@ public class PrescriptionDatabaseImpl implements PrescriptionDatabase {
         prescriptions.add(prescription);
     }
 
+    @Override
     public boolean EditPrescription(Long prescriptionID, EditPrescriptionEnum prescriptionEnum, String changes) {
         Optional<Prescription> prescriptionToEdit = prescriptions.stream()
                 .filter(prescription -> Objects.equals(prescription.getId(), prescriptionID))
@@ -44,7 +45,22 @@ public class PrescriptionDatabaseImpl implements PrescriptionDatabase {
         return false;
     }
 
+    @Override
     public List<Prescription> getPrescriptions() {
         return prescriptions;
     }
+
+    @Override
+    public boolean deletePrescriptionById(Long id) {
+        boolean isPrescriptionDeleted = false;
+        Optional<Prescription> prescriptionToDeleteOpt = prescriptions.stream()
+                .filter(prescription -> prescription.getId() == id)
+                .findFirst();
+        if(prescriptionToDeleteOpt.isPresent()) {
+            Prescription prescriptionToDelete = prescriptionToDeleteOpt.get();
+            isPrescriptionDeleted = prescriptions.remove(prescriptionToDelete);
+        }
+        return isPrescriptionDeleted;
+    }
+
 }

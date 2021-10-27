@@ -13,4 +13,5 @@ public interface PrescriptionDatabase {
 
     List<Prescription> getPrescriptions();
 
+    boolean deletePrescriptionById(Long id);
 }
