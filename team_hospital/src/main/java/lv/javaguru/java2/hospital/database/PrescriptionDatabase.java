@@ -6,7 +6,11 @@ import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionEnu
 import java.util.List;
 
 public interface PrescriptionDatabase {
+
     void addPrescription(Prescription prescription);
+
     boolean EditPrescription(Long prescriptionID, EditPrescriptionEnum prescriptionEnum, String changes);
+
     List<Prescription> getPrescriptions();
+
 }
