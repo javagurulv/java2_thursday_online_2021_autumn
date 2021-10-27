@@ -17,6 +17,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     private final Database database = super.getAppContext().getBean(Database.class);
     private final AddStockValidator validator = super.getAppContext().getBean(AddStockValidator.class);
 
+    @Ignore
     @Test
     public void shouldReturnEmptyList() {
         AddStockRequest request = new AddStockRequest(
@@ -32,6 +33,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
         assertTrue(errorList.isEmpty());
     }
 
+    @Ignore
     @Test
     public void shouldReturnNameError1() {
         AddStockRequest request = new AddStockRequest(
@@ -69,6 +71,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
         assertEquals(errorList.get(0).getMessage(), "security with such name already exists in the database!");
     }
 
+    @Ignore
     @Test
     public void shouldReturnIndustryError() {
         AddStockRequest request = new AddStockRequest(
@@ -86,6 +89,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
         assertEquals(errorList.get(0).getMessage(), "is empty!");
     }
 
+    @Ignore
     @Test
     public void shouldReturnCurrencyError() {
         AddStockRequest request = new AddStockRequest(
@@ -103,6 +107,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
         assertEquals(errorList.get(0).getMessage(), "is empty!");
     }
 
+    @Ignore
     @Test
     public void shouldReturnMarketPriceError1() {
         AddStockRequest request = new AddStockRequest(
@@ -120,6 +125,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
         assertEquals(errorList.get(0).getMessage(), "wrong format! Must be double!");
     }
 
+    @Ignore
     @Test
     public void shouldReturnMarketPriceError2() {
         AddStockRequest request = new AddStockRequest(
@@ -137,6 +143,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
         assertEquals(errorList.get(0).getMessage(), "cannot be negative!");
     }
 
+    @Ignore
     @Test
     public void shouldReturnDividendError1() {
         AddStockRequest request = new AddStockRequest(
@@ -154,6 +161,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
         assertEquals(errorList.get(0).getMessage(), "wrong format! Must be double!");
     }
 
+    @Ignore
     @Test
     public void shouldReturnDividendError2() {
         AddStockRequest request = new AddStockRequest(
@@ -171,6 +179,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
         assertEquals(errorList.get(0).getMessage(), "cannot be negative!");
     }
 
+    @Ignore
     @Test
     public void shouldReturnRiskWeightError1() {
         AddStockRequest request = new AddStockRequest(
@@ -188,6 +197,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
         assertEquals(errorList.get(0).getMessage(), "wrong format! Must be double!");
     }
 
+    @Ignore
     @Test
     public void shouldReturnRiskWeightError2() {
         AddStockRequest request = new AddStockRequest(
@@ -205,6 +215,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
         assertEquals(errorList.get(0).getMessage(), "cannot be negative!");
     }
 
+    @Ignore
     @Test
     public void shouldReturnNameCurrencyRiskWeightErrors() {
         AddStockRequest request = new AddStockRequest(
@@ -223,6 +234,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
         assertTrue(errorList.contains(new CoreError("Currency", "is empty!")));
     }
 
+    @Ignore
     @Test
     public void shouldReturnMarketPriceDividendErrors() {
         AddStockRequest request = new AddStockRequest(
@@ -240,6 +252,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
         assertTrue(errorList.contains(new CoreError("Dividend", "cannot be negative!")));
     }
 
+    @Ignore
     @Test
     public void shouldReturnAllErrors() {
         AddStockRequest request = new AddStockRequest(
