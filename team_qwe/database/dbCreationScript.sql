@@ -18,6 +18,20 @@ CREATE TABLE IF NOT EXISTS `stocks` (
 )
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `bonds` (
+  `ticker` VARCHAR(10) NOT NULL,
+  `name` VARCHAR(100) NOT NULL,
+  `industry` VARCHAR(50) NOT NULL,
+  `currency` CHAR(3) NOT NULL,
+  `market_price` DECIMAL(8,2) NOT NULL,
+  `coupon` DECIMAL(4,2) NOT NULL,
+  `rating` CHAR(4),
+  `nominal` DECIMAL(10,2) NOT NULL,
+  `maturity` DATE NOT NULL,
+  PRIMARY KEY (`ticker`)
+)
+ENGINE = InnoDB;
+
 CREATE TABLE IF NOT EXISTS `users` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,

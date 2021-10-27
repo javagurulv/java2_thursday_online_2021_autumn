@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import static java.util.Map.*;
 
-public class FilterStocksByMultipleParametersRequest {
+public class FilterStocksByMultipleParametersRequest extends CoreRequest {
 
     private final List<CoreRequest> requestList;
     private final List<Predicate<Security>> predicateList = new ArrayList<>();
@@ -24,17 +24,21 @@ public class FilterStocksByMultipleParametersRequest {
     private double marketPriceTarget;
     private double dividendTarget;
     private double riskWeightTarget;
-    private final Map<String, Map<String, Predicate<Security>>> predicateMap;
+//    private final Map<String, Map<String, Predicate<Security>>> predicateMap;
 
     public FilterStocksByMultipleParametersRequest(List<CoreRequest> requestList) throws NumberFormatException {
         this.requestList = requestList;
-        this.predicateMap = getPredicateMap();
-        setTargetsForDoubleParameters();
-        setTargetForIndustryParameter();
-        setPredicatesForDoubleParameters();
-        setPredicateForIndustryParameter();
-        setOrdering();
-        setPaging();
+//        this.predicateMap = getPredicateMap();
+//        setTargetsForDoubleParameters();
+//        setTargetForIndustryParameter();
+//        setPredicatesForDoubleParameters();
+//        setPredicateForIndustryParameter();
+//        setOrdering();
+//        setPaging();
+    }
+
+    public List<CoreRequest> getRequestList() {
+        return requestList;
     }
 
     public List<Predicate<Security>> getList() {
@@ -73,7 +77,7 @@ public class FilterStocksByMultipleParametersRequest {
         return pageSize;
     }
 
-    private void setTargetsForDoubleParameters() throws NumberFormatException {
+/*    private void setTargetsForDoubleParameters() throws NumberFormatException {
         requestList.stream()
                 .filter(request -> request.getClass().getSimpleName().equals("FilterStocksByAnyDoubleParameterRequest"))
                 .map(request -> (FilterStocksByAnyDoubleParameterRequest) request)
@@ -161,7 +165,7 @@ public class FilterStocksByMultipleParametersRequest {
                     .map(entry1 -> entry1.get("Industry"))
                     .findAny().get();
         }
-    }
+    }*/
 
     private Map<String, Map<String, Predicate<Security>>> getPredicateMap() {
         return ofEntries(

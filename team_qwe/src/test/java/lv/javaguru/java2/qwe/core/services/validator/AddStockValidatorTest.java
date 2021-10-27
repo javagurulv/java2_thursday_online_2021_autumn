@@ -5,6 +5,7 @@ import lv.javaguru.java2.qwe.acceptance_test.AcceptanceTestForDatabase;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -48,6 +49,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
         assertEquals(errorList.get(0).getMessage(), "3 to 100 symbols required!");
     }
 
+    @Ignore
     @Test
     public void shouldReturnNameError2() {
         database.addStock(new Stock("BABA US", "Alibaba", "Technology", "USD", 165.23,

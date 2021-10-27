@@ -28,7 +28,7 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
 
     @Autowired private FilterStocksByMultipleParametersService multipleParametersService;
     @Autowired private UtilityMethods utils;
-    private final String[] parameters = {"Industry", "Market price", "Dividend", "Risk weight", "none"};
+    private final String[] parameters = {"industry", "market_price", "dividend_yield", "risk_weight", "none"};
     private final String[] operators = {">", ">=", "<", "<=", "="};
     private final String[] industries = new String[]{"Consumer Staples", "Utilities", "Communications",
             "Health Care", "Technology", "Materials", "Energy", "Financials", "Real Estate",
@@ -62,6 +62,9 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
 
     private List<CoreRequest> createRequestList(List<String> finalParameterList, String[] operators, String[] industries) {
         List<CoreRequest> requestList = new ArrayList<>();
+        if (finalParameterList.isEmpty()) {
+            return requestList;
+        }
         addDoubleParametersRequests(requestList, finalParameterList, operators);
         addIndustryParameterRequest(requestList, finalParameterList, industries);
         if (orderingEnabled) {
@@ -76,7 +79,7 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
     private void addDoubleParametersRequests(List<CoreRequest> requestList,
                                              List<String> finalParameterList, String[] operators) {
         IntStream.rangeClosed(0, finalParameterList.size() - 1)
-                .filter(i -> !finalParameterList.get(i).equals("Industry"))
+                .filter(i -> !finalParameterList.get(i).equals("industry"))
                 .forEach(i -> requestList.add(new FilterStocksByAnyDoubleParameterRequest(
                         finalParameterList.get(i),
                         utils.inputDialog("Choose operator:", "PARAMETER " + finalParameterList.get(i), operators),
@@ -87,7 +90,7 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
     private void addIndustryParameterRequest(List<CoreRequest> requestList,
                                              List<String> finalParameterList, String[] industries) {
         IntStream.rangeClosed(0, finalParameterList.size() - 1)
-                .filter(i -> finalParameterList.get(i).equals("Industry"))
+                .filter(i -> finalParameterList.get(i).equals("industry"))
                 .forEach(i -> requestList.add(new FilterStocksByIndustryRequest(
                         utils.inputDialog("Choose industry:", "FILTER", industries)
                 )));
@@ -96,11 +99,13 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
     private void addOrderingRequest(List<CoreRequest> requestList) {
         String orderBy = utils.inputDialog(
                 "Choose parameter:", "ORDERING", new String[]
-                        {"Name", "Industry", "Currency", "Market price", "Dividend", "Risk weight"});
+                        {"name", "industry", "currency", "market_price", "dividend_yield", "risk_weight"});
         String orderDirection = utils.inputDialog(
-                "Choose ordering direction:", "ORDERING", new String[]{"ASCENDING", "DESCENDING"}
+                "Choose ordering direction:", "ORDERING", new String[]{"ASC", "DESC"}
         );
-        requestList.add(new OrderingRequest(orderBy, orderDirection));
+        if (!orderBy.isEmpty() && !orderDirection.isEmpty()) {
+            requestList.add(new OrderingRequest(orderBy, orderDirection));
+        }
     }
 
     private void addPagingRequest(List<CoreRequest> requestList) {
