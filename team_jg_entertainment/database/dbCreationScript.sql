@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `visitors` (
   `visitor_id` BIGINT NOT NULL AUTO_INCREMENT,
   `visitor_name` VARCHAR(100) NOT NULL,
   `visitor_surname` VARCHAR(100) NOT NULL,
-  `visitor_telephone_number` BIGINT (50) NOT NULL,
+  `visitor_telephone_number` VARCHAR (50) NOT NULL,
   PRIMARY KEY (`visitor_id`)
 )
 ENGINE = InnoDB
@@ -54,7 +54,6 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   )
 ENGINE = InnoDB
 AUTO_INCREMENT = 1001;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
