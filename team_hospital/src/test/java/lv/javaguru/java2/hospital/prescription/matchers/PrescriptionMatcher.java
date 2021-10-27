@@ -1,11 +1,9 @@
-package lv.javaguru.java2.hospital.prescription.core.services.matchers;
+package lv.javaguru.java2.hospital.prescription.matchers;
 
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Prescription;
 import org.mockito.ArgumentMatcher;
-
-import java.time.LocalDate;
 
 public class PrescriptionMatcher implements ArgumentMatcher<Prescription> {
 

@@ -12,6 +12,14 @@ public class VisitMatcher implements ArgumentMatcher<Visit> {
     private Doctor doctor;
     private Patient patient;
     private LocalDateTime visitDate;
+    private String description;
+
+    public VisitMatcher(Doctor doctor, Patient patient, LocalDateTime visitDate, String description) {
+        this.doctor = doctor;
+        this.patient = patient;
+        this.visitDate = visitDate;
+        this.description = description;
+    }
 
     public VisitMatcher(Doctor doctor, Patient patient, LocalDateTime visitDate) {
         this.doctor = doctor;
@@ -21,8 +29,15 @@ public class VisitMatcher implements ArgumentMatcher<Visit> {
 
     @Override
     public boolean matches(Visit visit) {
-        return visit.getPatient().equals(patient)
-                && visit.getDoctor().equals(doctor)
-                && visit.getVisitDate().equals(visitDate);
+        if(description == null || description.isEmpty()) {
+            return visit.getPatient().equals(patient)
+                    && visit.getDoctor().equals(doctor)
+                    && visit.getVisitDate().equals(visitDate);
+        } else {
+            return visit.getPatient().equals(patient)
+                    && visit.getDoctor().equals(doctor)
+                    && visit.getVisitDate().equals(visitDate)
+                    && visit.getDescription().equals(description);
+        }
     }
 }

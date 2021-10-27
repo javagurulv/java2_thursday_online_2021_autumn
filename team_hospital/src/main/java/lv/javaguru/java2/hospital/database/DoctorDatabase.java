@@ -13,7 +13,7 @@ public interface DoctorDatabase {
 
     List<Doctor> showAllDoctors();
 
-    boolean editDoctor(Long doctorId, String infoToEdit, String input);
+    boolean editDoctor(Long doctorId, Enum infoToEdit, String input);
 
     List<Doctor> findByName(String name);
 

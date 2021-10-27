@@ -9,6 +9,7 @@ public class Visit {
     private Patient patient;
     private LocalDateTime visitDate;
     private Long visitID;
+    private String description;
 
     public Visit(Doctor doctor, Patient patient, LocalDateTime visitDate) {
         this.doctor = doctor;
@@ -56,6 +57,14 @@ public class Visit {
 
     public void setVisitDate(LocalDateTime visitDate) {
         this.visitDate = visitDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

@@ -8,7 +8,7 @@ import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.prescription.core.requests.AddPrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.AddPrescriptionResponse;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
-import lv.javaguru.java2.hospital.prescription.core.services.matchers.PrescriptionMatcher;
+import lv.javaguru.java2.hospital.prescription.matchers.PrescriptionMatcher;
 import lv.javaguru.java2.hospital.prescription.core.services.validators.AddPrescriptionValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
