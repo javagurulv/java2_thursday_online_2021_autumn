@@ -17,10 +17,11 @@ public class AddVisitUIAction implements VisitUIAction{
         String doctorSurname = getUserInput.getUserStringInput("Please enter doctor surname: ");
         String visitDate = getUserInput.getUserStringInput("Visits are possible every hour from 9 till 17 on working days only. " +
                 "Please enter visit date in format dd/MM/yyyy HH:mm: ");
+        String description = getUserInput.getUserStringInput("If needed, add any additional information: ");
 
         AddVisitRequest request =
                 new AddVisitRequest(patientsPersonalCode, doctorName,
-                        doctorSurname, visitDate);
+                        doctorSurname, visitDate, description);
         AddVisitResponse response = patientsVisitService.execute(request);
 
         if (response.hasErrors()) {

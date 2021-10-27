@@ -14,9 +14,9 @@ public class VisitDatabaseImpl implements VisitDatabase {
     private Long nextId = 1L;
     private final List<Visit> visits = new ArrayList<>();
     @Autowired
-    PatientDatabase patientDatabase;
+    private PatientDatabase patientDatabase;
     @Autowired
-    DoctorDatabase doctorDatabase;
+    private DoctorDatabase doctorDatabase;
 
     @Override
     public void recordVisit(Visit visit) {
@@ -49,8 +49,11 @@ public class VisitDatabaseImpl implements VisitDatabase {
             } else if (userInput.equals(EditVisitEnum.PATIENT)) {
                 visitToEdit.setPatient(patientDatabase.findById(Long.parseLong(changes)).get());
                 isVisitEdited = true;
-            } else {
+            } else if (userInput.equals(EditVisitEnum.DATE)){
                 visitToEdit.setVisitDate(LocalDateTime.parse(changes));
+                isVisitEdited = true;
+            } else if (userInput.equals(EditVisitEnum.DESCRIPTION)) {
+                visitToEdit.setDescription(changes);
                 isVisitEdited = true;
             }
         }

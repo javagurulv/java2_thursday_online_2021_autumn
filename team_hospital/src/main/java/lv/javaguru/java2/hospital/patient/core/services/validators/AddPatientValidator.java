@@ -58,7 +58,7 @@ public class AddPatientValidator {
     private Optional<CoreError> validatePersonalCodeLength(AddPatientRequest request) {
         return request.getPersonalCode().length() == 11 || request.getPersonalCode().isEmpty()
                 ? Optional.empty()
-                : Optional.of(new CoreError("Personal code", "must consist of 11 symbols!"));
+                : Optional.of(new CoreError("Personal code", "must consist of 11 numbers!"));
     }
 
     private Optional<CoreError> validateNumInPersonalCode(AddPatientRequest request) {
@@ -69,7 +69,7 @@ public class AddPatientValidator {
                 try {
                     Integer.parseInt(s);
                 } catch (NumberFormatException e) {
-                    return Optional.of(new CoreError("Personal code", "must consist only from numbers!"));
+                    return Optional.of(new CoreError("Personal code", "must consist from numbers only!"));
                 }
             }
         }

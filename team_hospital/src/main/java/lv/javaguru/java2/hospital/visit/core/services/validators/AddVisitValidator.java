@@ -52,18 +52,20 @@ public class AddVisitValidator {
     }
 
     private Optional<CoreError> validatePatientExistence(AddVisitRequest request) {
-        return request == null ? Optional.empty() :
+        return request.getPatientsPersonalCode() == null || request.getPatientsPersonalCode().isEmpty() ? Optional.empty() :
                 patientDatabase.findPatientsByPersonalCode(request.getPatientsPersonalCode()).isEmpty() ?
                         Optional.of(new CoreError("Patient", "does not exist!")) : Optional.empty();
     }
 
     private Optional<CoreError> validateDoctorExistence(AddVisitRequest request) {
-        return request == null ? Optional.empty() :
+        return request.getDoctorsName() == null || request.getDoctorsName().isEmpty()
+                || request.getDoctorsSurname() == null || request.getDoctorsSurname().isEmpty() ? Optional.empty() :
                 doctorDatabase.findByNameAndSurname(request.getDoctorsName(), request.getDoctorsSurname()).isEmpty() ?
                         Optional.of(new CoreError("Doctor", "does not exist!")) : Optional.empty();
     }
 
     private List<CoreError> validateDate(AddVisitRequest request){
-       return request == null ? new ArrayList<>() : dateValidator.validate(request.getVisitDate());
+       return request.getVisitDate() == null || request.getVisitDate().isEmpty()
+               ? new ArrayList<>() : dateValidator.validate(request.getVisitDate());
     }
 }

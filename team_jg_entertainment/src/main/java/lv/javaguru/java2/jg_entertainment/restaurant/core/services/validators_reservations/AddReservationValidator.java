@@ -28,7 +28,8 @@ public class AddReservationValidator {
     public List<CoreError> validate(AddReservationRequest request) {
         List<CoreError> errors = new ArrayList<>();
         validateVisitor(request).ifPresent(errors::add);
-        validateTelephone(request).ifPresent(errors::add);//
+        validateTelephoneEmpty(request).ifPresent(errors::add);//
+        validateTelephoneLength(request).ifPresent(errors::add);
         validateMenuTitle(request).ifPresent(errors::add);
         validateTableTitle(request).ifPresent(errors::add);
         validateReservationDate(request).ifPresent(errors::add);
@@ -45,10 +46,17 @@ public class AddReservationValidator {
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateTelephone(AddReservationRequest request) {//visitor
+    private Optional<CoreError> validateTelephoneEmpty(AddReservationRequest request) {//visitor
         return (request.getTelephoneNumber() == null
-                || request.getTelephoneNumber() < 0)
-                ? Optional.of(new CoreError("telephoneNumber", "Must not be empty or less than 0!"))
+                || request.getTelephoneNumber().isEmpty())
+                ? Optional.of(new CoreError("telephoneNumber", "Must not be empty!"))
+                : Optional.empty();
+    }
+
+    private Optional<CoreError> validateTelephoneLength(AddReservationRequest request) {//visitor
+        return (request.getTelephoneNumber().length() < 3
+                || request.getTelephoneNumber().length() > 15)
+                ? Optional.of(new CoreError("telephoneNumber", "length must have figures from 3 to 15!"))
                 : Optional.empty();
     }
 

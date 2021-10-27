@@ -124,14 +124,14 @@ class EditVisitServiceTest {
     public void shouldReturnErrorWhenEnumIncorrect() {
         EditVisitRequest request = new EditVisitRequest(1L, "INPUT", "changes");
         List<CoreError> errors = new ArrayList<>();
-        errors.add(new CoreError("User choice", "must be DOCTOR, PATIENT OR DATE"));
+        errors.add(new CoreError("edit option", "must be DOCTOR, PATIENT, DATE OR DESCRIPTION!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
 
         EditVisitResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrors().size(), 1);
-        assertEquals(response.getErrors().get(0).getField(), "User choice");
-        assertEquals(response.getErrors().get(0).getDescription(), "must be DOCTOR, PATIENT OR DATE");
+        assertEquals(response.getErrors().get(0).getField(), "edit option");
+        assertEquals(response.getErrors().get(0).getDescription(), "must be DOCTOR, PATIENT, DATE OR DESCRIPTION!");
     }
 
 }

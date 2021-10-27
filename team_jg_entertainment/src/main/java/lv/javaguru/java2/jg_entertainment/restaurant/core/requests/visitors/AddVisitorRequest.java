@@ -4,9 +4,9 @@ public class AddVisitorRequest {
 
     private String name;
     private String surname;
-    private Long telephone;
+    private String telephone;
 
-    public AddVisitorRequest(String name, String surname, Long telephone) {
+    public AddVisitorRequest(String name, String surname, String telephone) {
         this.name = name;
         this.surname = surname;
         this.telephone = telephone;
@@ -20,7 +20,7 @@ public class AddVisitorRequest {
         return surname;
     }
 
-    public Long getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 }

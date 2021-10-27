@@ -14,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -39,7 +38,7 @@ class VisitExistenceByIdValidatorTest {
     }
 
     @Test
-    public void shouldReturnEmptyList() throws ParseException {
+    public void shouldReturnEmptyList() {
         Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
         Patient patient = new Patient("PatientsName", "PatientsSurname", "110254-12636");
 

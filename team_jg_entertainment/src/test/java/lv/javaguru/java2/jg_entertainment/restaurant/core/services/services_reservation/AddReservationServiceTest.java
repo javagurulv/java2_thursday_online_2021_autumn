@@ -34,7 +34,7 @@ public class AddReservationServiceTest {
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
-        AddReservationRequest notValidRequest = new AddReservationRequest(null, 252525L, "title", "title", "11/12/2021");
+        AddReservationRequest notValidRequest = new AddReservationRequest(null, "252525L", "title", "title", "11/12/2021");
         when(validator.validate(notValidRequest))
                 .thenReturn(List.of(new CoreError("visitorName", "Must not be empty!")));
         AddReservationResponse response = service.execute(notValidRequest);
@@ -43,7 +43,7 @@ public class AddReservationServiceTest {
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails1() {
-        AddReservationRequest notValidRequest = new AddReservationRequest("name", 1L, null, "title", "11/12/2021");
+        AddReservationRequest notValidRequest = new AddReservationRequest("name", "123", null, "title", "11/12/2021");
         List<CoreError> errorList = new ArrayList<>();
         errorList.add(new CoreError("menuTitle", "Must not be empty!"));
         when(validator.validate(notValidRequest))
@@ -71,7 +71,7 @@ public class AddReservationServiceTest {
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails3() {
-        AddReservationRequest notValidRequest = new AddReservationRequest("name", 252525L, "title", null, "11/12/2021");
+        AddReservationRequest notValidRequest = new AddReservationRequest("name", "252525L", "title", null, "11/12/2021");
         when(validator.validate(notValidRequest))
                 .thenReturn(List.of(new CoreError("tableTitle", "Must not be empty!")));
         AddReservationResponse response = service.execute(notValidRequest);
@@ -81,7 +81,7 @@ public class AddReservationServiceTest {
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails4() {
         AddReservationRequest notValidRequest =
-                new AddReservationRequest("name", 252525L, "title", "title", " ");
+                new AddReservationRequest("name", "252525", "title", "title", " ");
         when(validator.validate(notValidRequest))
                 .thenReturn(List.of(new CoreError("date", "Must not be empty!")));
         AddReservationResponse response = service.execute(notValidRequest);
@@ -90,7 +90,7 @@ public class AddReservationServiceTest {
 
     @Test
     public void shouldAddAllInformationToReservationWhenRequestIsValid() {
-        Visitors visitors = new Visitors("name", "surname", 1L);
+        Visitors visitors = new Visitors("name", "surname", "1");
         Menu menu = new Menu("title", "description", 2.0);
         Table table = new Table("title", 2, 2.0);
         List<Visitors> visitorsList = new ArrayList<>();

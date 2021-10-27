@@ -15,6 +15,7 @@ public class EditDoctorRequestValidator {
 
     @Autowired
     private DoctorExistenceByIdValidator validator;
+    @Autowired private DoctorEnumChecker checker;
 
     public List<CoreError> validate(EditDoctorRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -32,15 +33,9 @@ public class EditDoctorRequestValidator {
     }
 
     private Optional<CoreError> validateEditOption(EditDoctorRequest request) {
-        if (request.getUserInputEnum() == null || request.getUserInputEnum().isEmpty()) {
-            return Optional.of(new CoreError("edit option", "Must not be empty!"));
-        }
-        else if (!request.getUserInputEnum().equals("NAME")
-                    && !request.getUserInputEnum().equals("SURNAME")
-                    && !request.getUserInputEnum().equals("SPECIALITY")) {
-                return Optional.of(new CoreError("edit option", "Must contain 'NAME', 'SURNAME' or 'SPECIALITY' only!"));
-            }
-        return Optional.empty();
+        return (request.getUserInputEnum() == null || request.getUserInputEnum().isEmpty())
+                ? Optional.of(new CoreError("User choice", "Must not be empty!"))
+                : checker.validateEnum(request.getUserInputEnum());
     }
 
     private Optional<CoreError> validateChanges(EditDoctorRequest request) {

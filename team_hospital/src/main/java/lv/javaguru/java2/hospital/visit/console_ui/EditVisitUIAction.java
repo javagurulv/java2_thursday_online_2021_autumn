@@ -19,12 +19,13 @@ public class EditVisitUIAction implements VisitUIAction {
         GetUserInput getUserInput = new GetUserInput();
         Long id = getUserInput.getUserLongInput("Please, enter the patient visit's id: ");
         String userInput = getUserInput.getUserStringInput("What information you would like to edit " +
-                "(DOCTOR||PATIENT||DATE)? ").toUpperCase(Locale.ROOT);
+                "(DOCTOR||PATIENT||DATE||DESCRIPTION)? ").toUpperCase(Locale.ROOT);
         String changes = "";
         switch (userInput) {
             case "DOCTOR" -> changes = getUserInput.getUserStringInput("Enter new doctor id: ");
             case "PATIENT" -> changes = getUserInput.getUserStringInput("Enter new patient id: ");
             case "DATE" -> changes = getUserInput.getUserStringInput("Enter new visit date and time in format dd/MM/yyyy HH:mm: ");
+            case "DESCRIPTION" -> changes = getUserInput.getUserStringInput("Enter new visit description: ");
         }
         EditVisitRequest request = new EditVisitRequest(id, userInput, changes);
         EditVisitResponse response = editPatientVisit.execute(request);

@@ -17,6 +17,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,8 +39,13 @@ class AddVisitValidatorTest {
                 "surname",
                 "12/12/21 12:00");
 
+        Mockito.when(doctorDatabase
+                .findByNameAndSurname(addVisitRequest.getDoctorsName(), addVisitRequest.getDoctorsSurname()))
+                .thenReturn(Collections.singletonList(new Doctor("name", "surname", "speciality")));
+
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
+        assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Patient personal code");
         assertEquals(errorList.get(0).getDescription(), "must not be empty!");
     }
@@ -47,13 +53,17 @@ class AddVisitValidatorTest {
     @Test
     public void shouldDoctorNameError(){
         AddVisitRequest addVisitRequest = new AddVisitRequest(
-                "1234",
+                "12345678901",
                 "",
                 "surname",
                 "12/12/21 12:00");
 
+        Mockito.when(patientDatabase.findPatientsByPersonalCode(addVisitRequest.getPatientsPersonalCode()))
+                .thenReturn(Collections.singletonList(new Patient("name", "surname", "12345678901")));
+
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
+        assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Doctor name");
         assertEquals(errorList.get(0).getDescription(), "must not be empty!");
     }
@@ -66,8 +76,12 @@ class AddVisitValidatorTest {
                 "",
                 "12/12/21 12:00");
 
+        Mockito.when(patientDatabase.findPatientsByPersonalCode(addVisitRequest.getPatientsPersonalCode()))
+                .thenReturn(Collections.singletonList(new Patient("name", "surname", "12345678901")));
+
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
+        assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Doctor surname");
         assertEquals(errorList.get(0).getDescription(), "must not be empty!");
     }
@@ -80,7 +94,14 @@ class AddVisitValidatorTest {
                 "surname",
                 "");
 
+        Mockito.when(patientDatabase.findPatientsByPersonalCode(addVisitRequest.getPatientsPersonalCode()))
+                .thenReturn(Collections.singletonList(new Patient("name", "surname", "12345678901")));
+        Mockito.when(doctorDatabase
+                        .findByNameAndSurname(addVisitRequest.getDoctorsName(), addVisitRequest.getDoctorsSurname()))
+                .thenReturn(Collections.singletonList(new Doctor("name", "surname", "speciality")));
+
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
+        assertEquals(errorList.size(), 1);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.get(0).getField(), "Visit date");
         assertEquals(errorList.get(0).getDescription(), "must not be empty!");
@@ -104,6 +125,7 @@ class AddVisitValidatorTest {
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
+        assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Patient");
         assertEquals(errorList.get(0).getDescription(), "does not exist!");
     }
@@ -126,6 +148,7 @@ class AddVisitValidatorTest {
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
+        assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Doctor");
         assertEquals(errorList.get(0).getDescription(), "does not exist!");
     }
@@ -154,6 +177,7 @@ class AddVisitValidatorTest {
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
+        assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Date");
         assertEquals(errorList.get(0).getDescription(), "input is incorrect!");
     }
@@ -182,6 +206,7 @@ class AddVisitValidatorTest {
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
+        assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Date");
         assertEquals(errorList.get(0).getDescription(), "is not in the future!");
     }
@@ -210,6 +235,7 @@ class AddVisitValidatorTest {
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
+        assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Date");
         assertEquals(errorList.get(0).getDescription(), "is not working day!");
     }
@@ -238,6 +264,7 @@ class AddVisitValidatorTest {
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
+        assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Date");
         assertEquals(errorList.get(0).getDescription(), "is not working hour!");
     }
@@ -268,6 +295,7 @@ class AddVisitValidatorTest {
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
+        assertEquals(errorList.size(), 3);
         assertEquals(errorList.get(0).getField(), "Date");
         assertEquals(errorList.get(0).getDescription(), "is not in the future!");
         assertEquals(errorList.get(1).getField(), "Date");
@@ -295,6 +323,7 @@ class AddVisitValidatorTest {
                 .thenReturn(doctors);
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
+        assertEquals(errorList.size(), 0);
         assertTrue(errorList.isEmpty());
     }
 }

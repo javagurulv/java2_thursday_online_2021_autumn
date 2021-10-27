@@ -33,6 +33,18 @@ class DeletePatientValidatorTest {
     }
 
     @Test
+    public void shouldReturnPatientExistenceError(){
+        DeletePatientRequest request =
+                new DeletePatientRequest(123L);
+        Mockito.when(existenceValidator.existenceByID(request.getIdRequest()))
+                .thenReturn(Optional.of(new CoreError("Patient", "does not exist!")));
+        List<CoreError> errors = validator.validate(request);
+        assertFalse(errors.isEmpty());
+        assertEquals(errors.get(0).getField(), "Patient");
+        assertEquals(errors.get(0).getDescription(), "does not exist!");
+    }
+
+    @Test
     public void shouldReturnIDError(){
         DeletePatientRequest request = new DeletePatientRequest(null);
         List<CoreError> errors = validator.validate(request);

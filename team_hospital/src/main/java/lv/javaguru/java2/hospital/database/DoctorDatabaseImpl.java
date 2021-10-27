@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.database;
 
+import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorEnum;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Visit;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
 
     private Long nextId = 1L;
     private List<Doctor> doctorsList = new ArrayList<>();
-    @Autowired VisitDatabase visitDatabase;
 
     @Override
     public void addDoctor(Doctor doctor) {
@@ -44,19 +44,23 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
     }
 
     @Override
-    public boolean editDoctor(Long doctorId, String infoToEdit, String changes) {
+    public boolean editDoctor(Long doctorId, Enum infoToEdit, String changes) {
         boolean isDoctorEdited = false;
         Optional<Doctor> doctorToEditOpt = doctorsList.stream()
                 .filter(doctor -> doctor.getId() == doctorId)
                 .findFirst();
         if (doctorToEditOpt.isPresent()) {
             Doctor doctorToEdit = doctorToEditOpt.get();
-            switch (infoToEdit) {
-                case "NAME" -> doctorToEdit.setName(changes);
-                case "SURNAME" -> doctorToEdit.setSurname(changes);
-                case "SPECIALITY" -> doctorToEdit.setSpeciality(changes);
+            if (EditDoctorEnum.NAME.equals(infoToEdit)) {
+                doctorToEdit.setName(changes);
+                isDoctorEdited = true;
+            } else if (EditDoctorEnum.SURNAME.equals(infoToEdit)) {
+                doctorToEdit.setSurname(changes);
+                isDoctorEdited = true;
+            } else if (EditDoctorEnum.SPECIALITY.equals(infoToEdit)) {
+                doctorToEdit.setSpeciality(changes);
+                isDoctorEdited = true;
             }
-            isDoctorEdited = true;
         }
         return isDoctorEdited;
     }
@@ -122,8 +126,4 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<Visit> getDoctorVisits(Long id) {
-        return visitDatabase.findByDoctorId(id);
-    }
 }
