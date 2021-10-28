@@ -29,8 +29,23 @@ CREATE TABLE IF NOT EXISTS `visits` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `doctor_id` BIGINT NOT NULL,
   `patient_id` BIGINT NOT NULL,
-  `visitDate` DATETIME NOT NULL,
+  `visit_date` DATETIME NOT NULL,
   `description` VARCHAR(200),
+  PRIMARY KEY (id),
+  FOREIGN KEY (`doctor_id`) REFERENCES `doctors`(`id`),
+  FOREIGN KEY (`patient_id`) REFERENCES `patients`(`id`)
+)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1001;
+
+CREATE TABLE IF NOT EXISTS `prescriptions` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `doctor_id` BIGINT NOT NULL,
+  `patient_id` BIGINT NOT NULL,
+  `medication_name` VARCHAR(150) NOT NULL,
+  `quantity` INTEGER NOT NULL,
+  `date` DATE,
+  `valid_till` DATE,
   PRIMARY KEY (id),
   FOREIGN KEY (`doctor_id`) REFERENCES `doctors`(`id`),
   FOREIGN KEY (`patient_id`) REFERENCES `patients`(`id`)

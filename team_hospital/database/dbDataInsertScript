@@ -28,41 +28,54 @@ VALUES (1009, "Bhattacharyya", "Sudhansu", "Cardiovascular Surgery");
 INSERT INTO doctors
 VALUES (1010, "Mona", "Abaza", "Otolaryngology");
 
-INSERT INTO patients
+
+
+INSERT INTO patients (name, surname, personal_code)
 VALUES ("John", "Dorian", "11112222333");
 
-INSERT INTO patients
+INSERT INTO patients (name, surname, personal_code)
 VALUES ("Elliot", "Reid", "22223333444");
 
-INSERT INTO patients
+INSERT INTO patients (name, surname, personal_code)
 VALUES ("Christopher", "Turk", "33334444555");
 
 INSERT INTO patients
-VALUES (1001, "Percival", "Cox", "44445555666");
+VALUES (1004, "Percival", "Cox", "44445555666");
 
 INSERT INTO patients
-VALUES (1002, "Bob", "Kelso", "55556666777");
+VALUES (1005, "Bob", "Kelso", "55556666777");
 
 INSERT INTO patients
-VALUES (1003, "Todd", "Quinlan", "66667777888");
+VALUES (1006, "Todd", "Quinlan", "66667777888");
 
 INSERT INTO patients
-VALUES (1004, "John", "Wen", "77778888999");
+VALUES (1007, "John", "Wen", "77778888999");
 
 INSERT INTO patients
-VALUES (1005, "Keith", "Quinlan", "88889999000");
+VALUES (1008, "Keith", "Quinlan", "88889999000");
 
 INSERT INTO patients
-VALUES (1006, "Molly", "Clock", "99990000111");
+VALUES (1009, "Molly", "Clock", "99990000111");
 
 INSERT INTO patients
-VALUES (1007, "John", "Smith", "00001111222");
+VALUES (1010, "John", "Smith", "00001111222");
 
-INSERT INTO visits
-VALUES (1, 1, 2023-01-02 12:00:00, "Visit to the orthopedist");
 
-INSERT INTO visits
-VALUES (2, 2, 2023-01-03 14:00:00, "Visit to the pediatrician");
+INSERT INTO visits (doctor_id, patient_id, visit_date, description)
+VALUES (1001, 1001, '2023-01-02 12:00:00', "Visit to the orthopedist");
 
-INSERT INTO visits
-VALUES (1008, 1006, 2023-01-04 16:00:00, "Visit to the cardiologist");
+INSERT INTO visits (doctor_id, patient_id, visit_date, description)
+VALUES (1002, 1002, '2023-01-03 14:00:00', "Visit to the pediatrician");
+
+INSERT INTO visits (doctor_id, patient_id, visit_date, description)
+VALUES (1008, 1006, '2023-01-04 16:00:00', "Visit to the cardiologist");
+
+
+INSERT INTO prescriptions (doctor_id, patient_id, medication_name, quantity, date, valid_till)
+VALUES (1001, 1001, "Prednisone", 1, CURDATE(), ADDDATE(CURDATE(), INTERVAL 2 MONTH));
+
+INSERT INTO prescriptions (doctor_id, patient_id, medication_name, quantity, date, valid_till)
+VALUES (1002, 1002, "Nasonex", 1, CURDATE(), ADDDATE(CURDATE(), INTERVAL 2 MONTH));
+
+INSERT INTO prescriptions (doctor_id, patient_id, medication_name, quantity, date, valid_till)
+VALUES (1002, 1002, "Aspirin", 2, CURDATE(), ADDDATE(CURDATE(), INTERVAL 2 MONTH));
