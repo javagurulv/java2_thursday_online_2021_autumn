@@ -15,7 +15,7 @@ public class ShowAllVisitService {
     @Autowired private VisitDatabase database;
 
     public ShowAllVisitResponse execute(ShowAllVisitRequest request) {
-        List<Visit> visits = database.showAllVisits();
+        List<Visit> visits = database.getAllVisits();
         return new ShowAllVisitResponse(visits);
     }
 }

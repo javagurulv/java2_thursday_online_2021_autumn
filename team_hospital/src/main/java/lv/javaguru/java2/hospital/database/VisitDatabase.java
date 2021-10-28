@@ -12,7 +12,7 @@ public interface VisitDatabase {
 
     boolean deleteVisit(Long id);
 
-    List<Visit> showAllVisits();
+    List<Visit> getAllVisits();
 
     boolean editVisit(Long visitId, EditVisitEnum userInput, String changes);
 

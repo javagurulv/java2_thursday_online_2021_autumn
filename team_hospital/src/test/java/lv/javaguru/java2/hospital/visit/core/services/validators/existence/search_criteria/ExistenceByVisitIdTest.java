@@ -65,7 +65,7 @@ class ExistenceByVisitIdTest {
         visits.get(0).setVisitID(visitId);
 
         SearchVisitRequest request = new SearchVisitRequest(visitId, null, null, "");
-        Mockito.when(database.showAllVisits()).thenReturn(visits);
+        Mockito.when(database.getAllVisits()).thenReturn(visits);
         Optional<CoreError> error = existence.validateExistence(request);
         assertTrue(error.isEmpty());
     }

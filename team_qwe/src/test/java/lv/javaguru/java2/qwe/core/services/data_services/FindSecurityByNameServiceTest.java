@@ -3,9 +3,9 @@ package lv.javaguru.java2.qwe.core.services.data_services;
 import lv.javaguru.java2.qwe.core.domain.Security;
 import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.database.Database;
-import lv.javaguru.java2.qwe.core.requests.data_requests.FindSecurityByNameRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.FindSecurityByTickerOrNameRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
-import lv.javaguru.java2.qwe.core.responses.data_responses.FindSecurityByNameResponse;
+import lv.javaguru.java2.qwe.core.responses.data_responses.FindSecurityByTickerOrNameResponse;
 import lv.javaguru.java2.qwe.core.services.validator.FindSecurityByNameValidator;
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,16 +28,16 @@ public class FindSecurityByNameServiceTest {
 
     @Mock private Database database;
     @Mock private FindSecurityByNameValidator validator;
-    @InjectMocks private FindSecurityByNameService service;
+    @InjectMocks private FindSecurityByTickerOrNameService service;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
-        FindSecurityByNameRequest request = new FindSecurityByNameRequest("");
+        FindSecurityByTickerOrNameRequest request = new FindSecurityByTickerOrNameRequest("");
         List<CoreError> errors = List.of(
                 new CoreError("Name", "minimum 3 symbols required!")
         );
         Mockito.when(validator.validate(request)).thenReturn(errors);
-        FindSecurityByNameResponse response = service.execute(request);
+        FindSecurityByTickerOrNameResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrors().size(), 1);
         assertEquals(errors.get(0).getField(), "Name");
@@ -48,16 +48,16 @@ public class FindSecurityByNameServiceTest {
 
     @Test
     public void shouldReturnSearchResult() {
-        FindSecurityByNameRequest request = new FindSecurityByNameRequest("Alibaba");
+        FindSecurityByTickerOrNameRequest request = new FindSecurityByTickerOrNameRequest("Alibaba");
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
         Optional<Security> security = Optional.of(
                 new Stock("BABA US", "Alibaba", "Technology", "USD",
                         175.32, 0, 1.32)
         );
-        Mockito.when(database.findSecurityByName("Alibaba")).thenReturn(security);
+        Mockito.when(database.findSecurityByTickerOrName("Alibaba")).thenReturn(security);
 
-        FindSecurityByNameResponse response = service.execute(request);
+        FindSecurityByTickerOrNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         Assert.assertEquals(response.getSecurity(), new Stock("BABA US", "Alibaba", "Technology", "USD",
                 175.32, 0, 1.32));

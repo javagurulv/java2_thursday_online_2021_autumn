@@ -1,5 +1,7 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators;
 
+import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
 import org.junit.jupiter.api.Test;
@@ -20,29 +22,44 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class EditPrescriptionValidatorTest {
 
+    @Mock private PatientDatabase patientDatabase;
     @Mock private PrescriptionExistenceByIDValidator prescriptionExistenceIDValidator;
+    @Mock private LongNumChecker longNumChecker;
     @Mock private PrescriptionEnumChecker enumChecker;
-    @Mock private IDNumChecker idNumChecker;
+    @Mock private IntegerNumChecker integerNumChecker;
     @InjectMocks EditPrescriptionValidator validator;
 
     @Test
     public void shouldReturnRequestIDError(){
         EditPrescriptionRequest request = new EditPrescriptionRequest(null, "PATIENT", "1");
         Mockito.when(enumChecker.validate(request.getEditPrescriptionEnum())).thenReturn(Optional.empty());
-        Mockito.when(idNumChecker.validate(request.getChanges())).thenReturn(Optional.empty());
+        Mockito.when(integerNumChecker.validate(request.getChanges())).thenReturn(Optional.empty());
 
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
         assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "ID field");
+        assertEquals(errors.get(0).getField(), "Prescription ID");
         assertEquals(errors.get(0).getMessage(), "must not be empty!");
     }
 
     @Test
+    public void shouldReturnPrescriptionIDError(){
+        EditPrescriptionRequest request = new EditPrescriptionRequest("str", "PATIENT", "1");
+        Mockito.when(enumChecker.validate(request.getEditPrescriptionEnum())).thenReturn(Optional.empty());
+        Mockito.when(integerNumChecker.validate(request.getChanges())).thenReturn(Optional.empty());
+        Mockito.when(longNumChecker.validate(request.getPrescriptionID()))
+                .thenReturn(Optional.of(new CoreError("Prescription ID", "must be a number!")));
+
+        List<CoreError> errors = validator.validate(request);
+        assertFalse(errors.isEmpty());
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "Prescription ID");
+        assertEquals(errors.get(0).getMessage(), "must be a number!");
+    }
+
+    @Test
     public void shouldReturnRequestEnumError(){
-        EditPrescriptionRequest request = new EditPrescriptionRequest(1L, null, "1");
-        Mockito.when(prescriptionExistenceIDValidator.execute(request.getPrescriptionID()))
-                .thenReturn(Optional.empty());
+        EditPrescriptionRequest request = new EditPrescriptionRequest("1", null, "1");
 
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -53,9 +70,7 @@ class EditPrescriptionValidatorTest {
 
     @Test
     public void shouldReturnRequestChangesError(){
-        EditPrescriptionRequest request = new EditPrescriptionRequest(1L, "PATIENT", "");
-        Mockito.when(prescriptionExistenceIDValidator.execute(request.getPrescriptionID()))
-                .thenReturn(Optional.empty());
+        EditPrescriptionRequest request = new EditPrescriptionRequest("1", "PATIENT", "");
 
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -66,9 +81,11 @@ class EditPrescriptionValidatorTest {
 
     @Test
     public void shouldReturnPrescriptionExistenceError(){
-        EditPrescriptionRequest request = new EditPrescriptionRequest(1L, "PATIENT", "changes");
-        Mockito.when(prescriptionExistenceIDValidator.execute(request.getPrescriptionID()))
+        EditPrescriptionRequest request = new EditPrescriptionRequest("1", "PATIENT", "2");
+        Mockito.when(prescriptionExistenceIDValidator.execute(Long.valueOf(request.getPrescriptionID())))
                 .thenReturn(Optional.of(new CoreError("Prescription", "does not exist!")));
+        Mockito.when(patientDatabase.findById(Long.valueOf(request.getChanges())))
+                .thenReturn(Optional.of(new Patient("name", "surname", "speciality")));
 
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -79,9 +96,7 @@ class EditPrescriptionValidatorTest {
 
     @Test
     public void shouldReturnEnumError(){
-        EditPrescriptionRequest request = new EditPrescriptionRequest(1L, "enum", "changes");
-        Mockito.when(prescriptionExistenceIDValidator.execute(request.getPrescriptionID()))
-                .thenReturn(Optional.empty());
+        EditPrescriptionRequest request = new EditPrescriptionRequest("1", "enum", "changes");
         Mockito.when(enumChecker.validate(request.getEditPrescriptionEnum()))
                 .thenReturn(Optional.of(new CoreError("User choice", "must be PATIENT, MEDICATION_NAME or QUANTITY!")));
 
@@ -94,10 +109,8 @@ class EditPrescriptionValidatorTest {
 
     @Test
     public void shouldReturnIDInChangesError(){
-        EditPrescriptionRequest request = new EditPrescriptionRequest(1L, "PATIENT", "changes");
-        Mockito.when(prescriptionExistenceIDValidator.execute(request.getPrescriptionID()))
-                .thenReturn(Optional.empty());
-        Mockito.when(idNumChecker.validate(request.getChanges()))
+        EditPrescriptionRequest request = new EditPrescriptionRequest("1", "PATIENT", "changes");
+        Mockito.when(integerNumChecker.validate(request.getChanges()))
                 .thenReturn(Optional.of(new CoreError("ID", "must be a number!")));
 
         List<CoreError> errors = validator.validate(request);
@@ -108,10 +121,27 @@ class EditPrescriptionValidatorTest {
     }
 
     @Test
-    public void shouldNotReturnError(){
-        EditPrescriptionRequest request = new EditPrescriptionRequest(1L, "PATIENT", "1");
-        Mockito.when(prescriptionExistenceIDValidator.execute(request.getPrescriptionID()))
+    public void shouldReturnPatientExistenceError(){
+        EditPrescriptionRequest request = new EditPrescriptionRequest("1", "PATIENT", "2");
+        Mockito.when(prescriptionExistenceIDValidator.execute(Long.valueOf(request.getPrescriptionID())))
                 .thenReturn(Optional.empty());
+        Mockito.when(patientDatabase.findById(Long.valueOf(request.getChanges())))
+                .thenReturn(Optional.empty());
+
+        List<CoreError> errors = validator.validate(request);
+        assertFalse(errors.isEmpty());
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "Patient");
+        assertEquals(errors.get(0).getMessage(), "does not exist!");
+    }
+
+    @Test
+    public void shouldNotReturnError(){
+        EditPrescriptionRequest request = new EditPrescriptionRequest("1", "PATIENT", "2");
+        Mockito.when(prescriptionExistenceIDValidator.execute(Long.valueOf(request.getPrescriptionID())))
+              .thenReturn(Optional.empty());
+        Mockito.when(patientDatabase.findById(Long.valueOf(request.getChanges())))
+                .thenReturn(Optional.of(new Patient("name", "surname", "12345678901")));
 
         List<CoreError> errors = validator.validate(request);
         assertTrue(errors.isEmpty());

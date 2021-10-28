@@ -7,9 +7,9 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class IDNumCheckerTest {
+public class IntegerNumCheckerTest {
 
-    private final IDNumChecker checker = new IDNumChecker();
+    private final IntegerNumChecker checker = new IntegerNumChecker();
 
     @Test
     public void shouldIDNumReturnError(){

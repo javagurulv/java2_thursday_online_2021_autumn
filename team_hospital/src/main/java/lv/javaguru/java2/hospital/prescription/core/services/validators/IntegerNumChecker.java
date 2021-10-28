@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class IDNumChecker {
+public class IntegerNumChecker {
 
     public Optional<CoreError> validate(String input) {
 

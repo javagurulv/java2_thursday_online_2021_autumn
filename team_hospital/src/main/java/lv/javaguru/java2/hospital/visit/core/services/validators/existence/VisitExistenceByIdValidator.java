@@ -15,7 +15,7 @@ public class VisitExistenceByIdValidator {
     private VisitDatabase database;
 
     public Optional<CoreError> validateExistenceById(Long id) {
-        for (Visit visit : database.showAllVisits()) {
+        for (Visit visit : database.getAllVisits()) {
             if (visit.getVisitID().equals(id)) {
                 return Optional.empty();
             }

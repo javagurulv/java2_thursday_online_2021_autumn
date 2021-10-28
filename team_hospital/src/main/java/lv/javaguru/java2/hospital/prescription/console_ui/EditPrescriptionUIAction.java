@@ -9,15 +9,15 @@ import org.springframework.stereotype.Component;
 import java.util.Locale;
 
 @Component
-public class EditPrescriptionUIAction {
+public class EditPrescriptionUIAction implements PrescriptionUIAction {
 
     @Autowired
     private EditPrescriptionService service;
 
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
-        Long prescriptionID =
-                getUserInput.getUserLongInput("Please enter prescription ID: ");
+        String prescriptionID =
+                getUserInput.getUserStringInput("Please enter prescription ID: ");
         String userChoice =
                 getUserInput.getUserStringInput("Please enter what do you like to change (PATIENT||MEDICATION_NAME||QUANTITY)?")
                         .toUpperCase(Locale.ROOT);
@@ -26,10 +26,11 @@ public class EditPrescriptionUIAction {
         EditPrescriptionRequest request = new EditPrescriptionRequest(prescriptionID, userChoice, changes);
         EditPrescriptionResponse response = service.execute(request);
 
-        if (response.isPrescriptionEdited()) {
-            System.out.println("Changes are made!");
+        if (response.hasErrors()) {
+            response.getErrors().forEach(coreError ->
+                    System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));
         } else {
-            System.out.println("Changes are not made!");
+            System.out.println("Changes are made!");
         }
     }
 }

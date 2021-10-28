@@ -19,11 +19,11 @@ public class RemoveSecurityUIAction implements UIAction {
     @Override
     public void execute() {
         RemoveSecurityRequest request =
-                new RemoveSecurityRequest(utils.inputDialog("Enter name:"));
+                new RemoveSecurityRequest(utils.inputDialog("Enter ticker:"));
         RemoveSecurityResponse response =
                 removeSecurityService.execute(request);
-        String info = response.isRemoved() ? "Security " + request.getName() + " has been removed!" :
-                "No security with such name!";
+        String info = response.isRemoved() ? "Security " + request.getTicker() + " has been removed!" :
+                "No security with such ticker!";
         utils.messageDialog(info);
     }
 

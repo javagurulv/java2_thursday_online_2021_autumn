@@ -23,7 +23,7 @@ public class DateExistenceValidator implements DateValidator {
     @Override
     public Optional<CoreError> validate(String date) {
         LocalDateTime dateTime = getVisitDate.getVisitDateFromString(date);
-        for (Visit d : database.showAllVisits()) {
+        for (Visit d : database.getAllVisits()) {
             if (d.getVisitDate().isEqual(dateTime)) {
                 return Optional.of(new CoreError("Date", "already is busy!"));
             }

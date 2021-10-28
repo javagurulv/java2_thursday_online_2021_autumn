@@ -31,7 +31,7 @@ public class VisitDatabaseImpl implements VisitDatabase {
     }
 
     @Override
-    public List<Visit> showAllVisits() {
+    public List<Visit> getAllVisits() {
         return visits;
     }
 

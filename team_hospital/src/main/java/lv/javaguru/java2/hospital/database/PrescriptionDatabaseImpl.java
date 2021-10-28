@@ -46,7 +46,7 @@ public class PrescriptionDatabaseImpl implements PrescriptionDatabase {
     }
 
     @Override
-    public List<Prescription> getPrescriptions() {
+    public List<Prescription> getAllPrescriptions() {
         return prescriptions;
     }
 

@@ -7,6 +7,7 @@ import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.requests.data_requests.*;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.data_responses.FilterStocksByMultipleParametersResponse;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
@@ -26,6 +27,7 @@ public class FilterStocksByMultipleParametersServiceTest extends AcceptanceTestF
     private final FilterStocksByMultipleParametersService service =
             super.getAppContext().getBean(FilterStocksByMultipleParametersService.class);
 
+    @Ignore
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
 
@@ -50,6 +52,7 @@ public class FilterStocksByMultipleParametersServiceTest extends AcceptanceTestF
         Mockito.verifyNoInteractions(database);
     }
 
+    @Ignore
     @Test
     public void shouldReturnFilteredSecurityList1() {
 
@@ -74,6 +77,7 @@ public class FilterStocksByMultipleParametersServiceTest extends AcceptanceTestF
         assertEquals(list, response.getList());
     }
 
+    @Ignore
     @Test
     public void shouldReturnFilteredSecurityList2() {
 

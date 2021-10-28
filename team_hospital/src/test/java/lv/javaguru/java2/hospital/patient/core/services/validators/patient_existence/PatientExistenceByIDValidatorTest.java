@@ -41,7 +41,7 @@ public class PatientExistenceByIDValidatorTest {
         patient.setId(136L);
         List<Patient> patients = new ArrayList<>();
         patients.add(patient);
-        Mockito.when(database.showAllPatients()).thenReturn(patients);
+        Mockito.when(database.getAllPatients()).thenReturn(patients);
         Optional<CoreError> error = validator.existenceByID(patient.getId());
         assertTrue(error.isEmpty());
     }

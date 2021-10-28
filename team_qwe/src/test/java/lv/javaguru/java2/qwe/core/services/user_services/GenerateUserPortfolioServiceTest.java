@@ -9,6 +9,7 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRe
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GenerateUserPortfolioResponse;
 import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -44,6 +45,7 @@ public class GenerateUserPortfolioServiceTest extends AcceptanceTestForDatabase 
         Mockito.verifyNoInteractions(database);
     }
 
+    @Ignore
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails2() {
 
@@ -65,6 +67,7 @@ public class GenerateUserPortfolioServiceTest extends AcceptanceTestForDatabase 
         Mockito.verifyNoInteractions(database);
     }
 
+    @Ignore
     @Test
     public void shouldReturnGeneratedUserPortfolio() {
 

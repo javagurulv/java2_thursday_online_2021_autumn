@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 import static java.util.Map.entry;
 import static java.util.Map.ofEntries;
 
-@Component
-public class DatabaseImpl implements Database {
+//@Component
+public class DatabaseImpl /*implements Database*/ {
 
     private ArrayList<Security> securityList;
 
@@ -23,39 +23,39 @@ public class DatabaseImpl implements Database {
         securityList.add(new Cash());
     }
 
-    @Override
+//    @Override
     public ArrayList<Security> getSecurityList() {
         return securityList;
     }
 
-    @Override
+//    @Override
     public void addStock(Stock stock) {
         securityList.add(stock);
     }
 
-    @Override
+//    @Override
     public void addBond(Bond bond) {
         securityList.add(bond);
     }
 
-    @Override
+//    @Override
     public boolean removeSecurity(String name) {
         return securityList.removeIf(security -> security.getName().equals(name));
     }
 
-    @Override
+//    @Override
     public List<Security> getAllSecurityList() {
         return getSecurityList();
     }
 
-    @Override
-    public Optional<Security> findSecurityByName(String name) {
+//    @Override
+    public Optional<Security> findSecurityByTickerOrName(String name) {
         return securityList.stream()
                 .filter(security -> security.getName().equals(name))
                 .findAny();
     }
 
-    @Override
+//    @Override
     public final List<Security> filterStocksByMultipleParameters(
             List<Security> list, FilterStocksByMultipleParametersRequest request, int i) {
         List<Security> nextList = list;
