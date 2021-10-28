@@ -14,4 +14,12 @@ public interface PrescriptionDatabase {
     List<Prescription> getAllPrescriptions();
 
     boolean deletePrescriptionById(Long id);
+
+    List<Prescription> findByPrescriptionId(Long prescriptionId);
+
+    List<Prescription> findByDoctorId(Long doctorId);
+
+    List<Prescription> findByPatientId(Long patientId);
+
+    List<Prescription> findByDoctorAndPatientId(Long doctorId, Long patientId);
 }
