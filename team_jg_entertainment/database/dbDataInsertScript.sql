@@ -38,3 +38,6 @@ values ("title2", "4", "80");
 
 insert into jg_entertainment.tables(table_title, table_capacity, table_price)
 values ("title3", "6", "110");
+
+insert into jg_entertainment.tables(table_id, table_title, table_capacity, table_price)
+values (1004, "title4", "6", "110");
