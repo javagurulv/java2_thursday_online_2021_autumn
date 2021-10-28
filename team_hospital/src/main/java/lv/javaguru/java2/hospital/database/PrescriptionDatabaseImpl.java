@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class PrescriptionDatabaseImpl implements PrescriptionDatabase {
@@ -16,6 +17,7 @@ public class PrescriptionDatabaseImpl implements PrescriptionDatabase {
     private Long nextId = 1L;
     private List<Prescription> prescriptions = new ArrayList<>();
     @Autowired private PatientDatabase patientDatabase;
+    @Autowired private DoctorDatabase doctorDatabase;
 
     @Override
     public void addPrescription(Prescription prescription) {
@@ -61,6 +63,35 @@ public class PrescriptionDatabaseImpl implements PrescriptionDatabase {
             isPrescriptionDeleted = prescriptions.remove(prescriptionToDelete);
         }
         return isPrescriptionDeleted;
+    }
+
+    @Override
+    public List<Prescription> findByPrescriptionId(Long prescriptionId) {
+        return prescriptions.stream()
+                .filter(prescription -> prescription.getId().equals(prescriptionId))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Prescription> findByDoctorId(Long doctorId) {
+        return prescriptions.stream()
+                .filter(prescription -> prescription.getDoctor().getId().equals(doctorId))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Prescription> findByPatientId(Long patientId) {
+        return prescriptions.stream()
+                .filter(prescription -> prescription.getPatient().getId().equals(patientId))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Prescription> findByDoctorAndPatientId(Long doctorId, Long patientId) {
+        return prescriptions.stream()
+                .filter(prescription -> prescription.getDoctor().getId().equals(doctorId))
+                .filter(prescription -> prescription.getPatient().getId().equals(patientId))
+                .collect(Collectors.toList());
     }
 
 }
