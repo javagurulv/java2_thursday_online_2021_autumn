@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.core.services.validator;
 
 import lv.javaguru.java2.qwe.acceptance_test.AcceptanceTestForDatabase;
-import lv.javaguru.java2.qwe.core.requests.data_requests.FindSecurityByNameRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.FindSecurityByTickerOrNameRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import org.junit.Test;
 
@@ -16,21 +16,21 @@ public class FindSecurityByNameValidatorTest extends AcceptanceTestForDatabase {
 
     @Test
     public void shouldReturnEmptyList1() {
-        FindSecurityByNameRequest request = new FindSecurityByNameRequest("Alibaba");
+        FindSecurityByTickerOrNameRequest request = new FindSecurityByTickerOrNameRequest("Alibaba");
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnEmptyList2() {
-        FindSecurityByNameRequest request = new FindSecurityByNameRequest("Ali");
+        FindSecurityByTickerOrNameRequest request = new FindSecurityByTickerOrNameRequest("Ali");
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnNameError1() {
-        FindSecurityByNameRequest request = new FindSecurityByNameRequest("Al");
+        FindSecurityByTickerOrNameRequest request = new FindSecurityByTickerOrNameRequest("Al");
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Name");
@@ -39,7 +39,7 @@ public class FindSecurityByNameValidatorTest extends AcceptanceTestForDatabase {
 
     @Test
     public void shouldReturnNameError2() {
-        FindSecurityByNameRequest request = new FindSecurityByNameRequest("");
+        FindSecurityByTickerOrNameRequest request = new FindSecurityByTickerOrNameRequest("");
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Name");

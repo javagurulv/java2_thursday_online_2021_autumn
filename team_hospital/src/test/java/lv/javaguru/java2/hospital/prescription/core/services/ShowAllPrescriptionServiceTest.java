@@ -36,7 +36,7 @@ class ShowAllPrescriptionServiceTest {
         List<Prescription> prescriptions = new ArrayList<>();
         prescriptions.add(new Prescription(doctor, patient, "Drug1", 1));
         prescriptions.add(new Prescription(doctor, patient, "Drug2", 2));
-        Mockito.when(database.getPrescriptions()).thenReturn(prescriptions);
+        Mockito.when(database.getAllPrescriptions()).thenReturn(prescriptions);
         ShowAllPrescriptionRequest request = new ShowAllPrescriptionRequest();
         ShowAllPrescriptionResponse response = service.execute(request);
         assertFalse(response.hasErrors());

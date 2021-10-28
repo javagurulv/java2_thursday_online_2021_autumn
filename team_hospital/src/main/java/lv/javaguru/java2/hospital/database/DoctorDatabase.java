@@ -11,7 +11,7 @@ public interface DoctorDatabase {
 
     boolean deleteDoctorById(Long id);
 
-    List<Doctor> showAllDoctors();
+    List<Doctor> getAllDoctors();
 
     boolean editDoctor(Long doctorId, Enum infoToEdit, String input);
 

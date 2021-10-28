@@ -11,7 +11,7 @@ public interface PrescriptionDatabase {
 
     boolean EditPrescription(Long prescriptionID, EditPrescriptionEnum prescriptionEnum, String changes);
 
-    List<Prescription> getPrescriptions();
+    List<Prescription> getAllPrescriptions();
 
     boolean deletePrescriptionById(Long id);
 }

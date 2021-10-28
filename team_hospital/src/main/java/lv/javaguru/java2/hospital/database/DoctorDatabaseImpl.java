@@ -39,7 +39,7 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
     }
 
     @Override
-    public List<Doctor> showAllDoctors() {
+    public List<Doctor> getAllDoctors() {
         return doctorsList;
     }
 

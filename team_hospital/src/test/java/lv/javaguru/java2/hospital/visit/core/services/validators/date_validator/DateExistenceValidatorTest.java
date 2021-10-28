@@ -41,7 +41,7 @@ class DateExistenceValidatorTest {
 
         Mockito.when(getVisitDate.getVisitDateFromString(date))
                 .thenReturn(LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date)));
-        Mockito.when(database.showAllVisits()).thenReturn(visits);
+        Mockito.when(database.getAllVisits()).thenReturn(visits);
 
         Optional<CoreError> error = validator.validate(date);
         assertFalse(error.isEmpty());
@@ -60,7 +60,7 @@ class DateExistenceValidatorTest {
 
         Mockito.when(getVisitDate.getVisitDateFromString(date))
                 .thenReturn(LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("25/12/2025 13:00")));
-        Mockito.when(database.showAllVisits()).thenReturn(visits);
+        Mockito.when(database.getAllVisits()).thenReturn(visits);
 
         Optional<CoreError> error = validator.validate(date);
         assertTrue(error.isEmpty());

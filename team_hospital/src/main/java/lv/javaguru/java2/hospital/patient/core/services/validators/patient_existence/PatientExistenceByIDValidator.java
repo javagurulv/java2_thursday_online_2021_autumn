@@ -1,7 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence;
 
 import lv.javaguru.java2.hospital.database.PatientDatabase;
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ public class PatientExistenceByIDValidator {
     @Autowired private PatientDatabase patientDatabase;
 
     public Optional<CoreError> existenceByID(Long id) {
-        for (Patient p : patientDatabase.showAllPatients()) {
+        for (Patient p : patientDatabase.getAllPatients()) {
             if (p.getId().equals(id)) {
                 return Optional.empty();
             }

@@ -36,7 +36,7 @@ public class PrescriptionExistenceByIDValidatorTest {
         List<Prescription> prescriptionsList = new ArrayList<>();
         prescriptionsList.add(prescription);
 
-        Mockito.when(database.getPrescriptions()).thenReturn(prescriptionsList);
+        Mockito.when(database.getAllPrescriptions()).thenReturn(prescriptionsList);
 
         Optional<CoreError> error = idValidator.execute(prescription.getId());
         assertTrue(error.isEmpty());
@@ -44,7 +44,7 @@ public class PrescriptionExistenceByIDValidatorTest {
 
     @Test
     public void shouldReturnError(){
-        Mockito.when(database.getPrescriptions()).thenReturn(new ArrayList<>());
+        Mockito.when(database.getAllPrescriptions()).thenReturn(new ArrayList<>());
         Optional<CoreError> error = idValidator.execute(10L);
         assertFalse(error.isEmpty());
         assertEquals(error.get().getField(), "Prescription");

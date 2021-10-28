@@ -17,13 +17,13 @@ public class ChooseDataMenuUIAction implements UIAction {
     @Override
     public void execute() {
 
-        String[] dataMenu = {"IMPORT DATA FROM FILE", "ADD STOCK", "ADD BOND", "REMOVE SECURITY",
+        String[] dataMenu = {/*"IMPORT DATA FROM FILE", */"ADD STOCK", "ADD BOND", "REMOVE SECURITY",
                 "SHOW LIST", "FIND SECURITY BY NAME", "FILTER SECURITIES(STOCKS) BY MULTIPLE PARAMETERS",
                 "RETURN TO MAIN MENU"};
 
         Map<String, UIAction> dataMenuMap = ofEntries(
-                entry("IMPORT DATA FROM FILE",
-                        getApplicationContext().getBean(ImportDataFromFileUIAction.class)),
+//                entry("IMPORT DATA FROM FILE",
+//                        getApplicationContext().getBean(ImportDataFromFileUIAction.class)),
                 entry("ADD STOCK",
                         getApplicationContext().getBean(AddStockUIAction.class)),
                 entry("ADD BOND",

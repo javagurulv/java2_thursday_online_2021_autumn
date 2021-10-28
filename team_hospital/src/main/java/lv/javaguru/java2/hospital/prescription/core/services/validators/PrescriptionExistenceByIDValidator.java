@@ -14,7 +14,7 @@ public class PrescriptionExistenceByIDValidator {
     @Autowired private PrescriptionDatabase database;
 
     public Optional<CoreError> execute(Long ID) {
-        for (Prescription prescription : database.getPrescriptions()) {
+        for (Prescription prescription : database.getAllPrescriptions()) {
             if (prescription.getId().equals(ID)) {
                 return Optional.empty();
             }

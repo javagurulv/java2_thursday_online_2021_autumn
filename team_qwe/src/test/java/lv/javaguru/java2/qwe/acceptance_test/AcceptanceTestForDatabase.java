@@ -5,10 +5,11 @@ import lv.javaguru.java2.qwe.config.AppConfiguration;
 import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.requests.data_requests.*;
 import lv.javaguru.java2.qwe.core.responses.data_responses.FilterStocksByMultipleParametersResponse;
-import lv.javaguru.java2.qwe.core.responses.data_responses.FindSecurityByNameResponse;
+import lv.javaguru.java2.qwe.core.responses.data_responses.FindSecurityByTickerOrNameResponse;
 import lv.javaguru.java2.qwe.core.responses.data_responses.GetAllSecurityListResponse;
 import lv.javaguru.java2.qwe.core.responses.data_responses.RemoveSecurityResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.*;
+import org.junit.Ignore;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.junit.Test;
@@ -25,6 +26,7 @@ public class AcceptanceTestForDatabase {
         return appContext;
     }
 
+    @Ignore
     @Test
     public void addSecuritiesToDatabaseTest() {
         AddStockRequest request1 = new AddStockRequest(
@@ -54,6 +56,7 @@ public class AcceptanceTestForDatabase {
         assertEquals("Gazprom 4.75 30/12/2031", response.getList().get(2).getName());
     }
 
+    @Ignore
     @Test
     public void removeSecuritiesFromDatabaseTest() {
         AddStockRequest request1 = new AddStockRequest(
@@ -78,6 +81,7 @@ public class AcceptanceTestForDatabase {
         assertEquals("Gazprom 4.75 30/12/2031", response3.getList().get(1).getName());
     }
 
+    @Ignore
     @Test
     public void findSecurityByNameInDatabaseTest() {
         AddStockRequest request1 = new AddStockRequest(
@@ -88,12 +92,12 @@ public class AcceptanceTestForDatabase {
                 "GAZPRU", "Gazprom 4.75 30/12/2031", "Energy", "USD", "108.75",
                 "4.75", "BBB+", "1000", "30/12/2031"
         );
-        FindSecurityByNameRequest request3 = new FindSecurityByNameRequest("Gazprom 4.75 30/12/2031");
-        FindSecurityByNameRequest request4 = new FindSecurityByNameRequest("Intel");
+        FindSecurityByTickerOrNameRequest request3 = new FindSecurityByTickerOrNameRequest("Gazprom 4.75 30/12/2031");
+        FindSecurityByTickerOrNameRequest request4 = new FindSecurityByTickerOrNameRequest("Intel");
         getAddStockService().execute(request1);
         getAddBondService().execute(request2);
-        FindSecurityByNameResponse response1 = getFindSecurityByNameService().execute(request3);
-        FindSecurityByNameResponse response2 = getFindSecurityByNameService().execute(request4);
+        FindSecurityByTickerOrNameResponse response1 = getFindSecurityByNameService().execute(request3);
+        FindSecurityByTickerOrNameResponse response2 = getFindSecurityByNameService().execute(request4);
 
         assertEquals(new Bond(
                 "GAZPRU", "Gazprom 4.75 30/12/2031", "Energy", "USD", 108.75,
@@ -102,6 +106,7 @@ public class AcceptanceTestForDatabase {
         assertNull(response2.getSecurity());
     }
 
+    @Ignore
     @Test
     public void filterStocksByMultipleParametersTest() {
         AddStockRequest request1 = new AddStockRequest(
@@ -167,8 +172,8 @@ public class AcceptanceTestForDatabase {
         return appContext.getBean(RemoveSecurityService.class);
     }
 
-    private FindSecurityByNameService getFindSecurityByNameService() {
-        return appContext.getBean(FindSecurityByNameService.class);
+    private FindSecurityByTickerOrNameService getFindSecurityByNameService() {
+        return appContext.getBean(FindSecurityByTickerOrNameService.class);
     }
 
     private FilterStocksByMultipleParametersService getFilterStocksByMultipleParametersService() {

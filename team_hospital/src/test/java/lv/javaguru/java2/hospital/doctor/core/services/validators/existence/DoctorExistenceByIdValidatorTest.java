@@ -39,7 +39,7 @@ class DoctorExistenceByIdValidatorTest {
         Long doctorId = doctor.getId();
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
-        Mockito.when(database.showAllDoctors()).thenReturn(doctors);
+        Mockito.when(database.getAllDoctors()).thenReturn(doctors);
         Optional<CoreError> errors = validator.validateExistenceById(doctorId);
         assertTrue(errors.isEmpty());
     }

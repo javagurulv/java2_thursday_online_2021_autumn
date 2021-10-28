@@ -1,13 +1,13 @@
 package lv.javaguru.java2.qwe.core.services.validator;
 
-import lv.javaguru.java2.qwe.core.requests.data_requests.FilterStocksByMultipleParametersRequest;
+import lv.javaguru.java2.qwe.core.requests.data_requests.*;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import static java.util.Map.entry;
 
@@ -15,7 +15,7 @@ import static java.util.Map.entry;
 public class FilterStocksByMultipleParametersValidator {
 
     private final Map<Predicate<FilterStocksByMultipleParametersRequest>, CoreError> validator = Map.ofEntries(
-            entry(request -> request.getList().isEmpty(),
+            entry(request -> request.getRequestList().isEmpty(),
                     new CoreError("Choose parameter", "at least one parameter is required!")),
             entry(request -> request.getMarketPriceTarget() < 0,
                     new CoreError("Market price target", "cannot be negative!")),
@@ -38,10 +38,20 @@ public class FilterStocksByMultipleParametersValidator {
     );
 
     public List<CoreError> validate(FilterStocksByMultipleParametersRequest request) {
-        return validator.entrySet().stream()
-                .filter(entry -> entry.getKey().test(request))
-                .map(Map.Entry::getValue)
-                .collect(Collectors.toList());
+        List<CoreError> errorList = new ArrayList<>();
+        List<CoreRequest> requestList = request.getRequestList();
+        for (int i = 0; i < request.getRequestList().size(); i++) {
+            if (requestList.get(i).getClass().getSimpleName().equals("FilterStocksByAnyDoubleParameterRequest")) {
+                errorList.addAll(new FilterStocksByAnyDoubleParameterValidator().validate(requestList.get(i)));
+            }
+            else if (requestList.get(i).getClass().getSimpleName().equals("FilterStocksByIndustryRequest")) {
+                errorList.addAll(new FilterStockByIndustryValidator().validate(requestList.get(i)));
+            }
+            else {
+                errorList.addAll(new OrderingRequestValidator().validate(requestList.get(i)));
+            }
+        }
+        return errorList;
     }
 
 }

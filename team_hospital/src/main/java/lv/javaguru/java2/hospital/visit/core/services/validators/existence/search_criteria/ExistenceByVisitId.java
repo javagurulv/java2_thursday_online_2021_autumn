@@ -22,7 +22,7 @@ public class ExistenceByVisitId implements VisitExistenceBySearchCriteria {
 
     @Override
     public Optional<CoreError> validateExistence(SearchVisitRequest request) {
-        for (Visit visit : database.showAllVisits()) {
+        for (Visit visit : database.getAllVisits()) {
             if (visit.getVisitID().equals(request.getVisitId())) {
                 return Optional.empty();
             }

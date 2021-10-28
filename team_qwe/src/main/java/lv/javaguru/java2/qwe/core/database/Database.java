@@ -21,9 +21,8 @@ public interface Database {
 
     List<Security> getAllSecurityList();
 
-    Optional<Security> findSecurityByName(String name);
+    Optional<Security> findSecurityByTickerOrName(String name);
 
-    List<Security> filterStocksByMultipleParameters(List<Security> list,
-                                                    FilterStocksByMultipleParametersRequest request, int i);
+    List<Security> filterStocksByMultipleParameters(String sql);
 
 }

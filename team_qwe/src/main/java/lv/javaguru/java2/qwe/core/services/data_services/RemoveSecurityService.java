@@ -12,7 +12,7 @@ public class RemoveSecurityService {
     @Autowired private Database database;
 
     public RemoveSecurityResponse execute(RemoveSecurityRequest request) {
-        return new RemoveSecurityResponse(database.removeSecurity(request.getName()));
+        return new RemoveSecurityResponse(database.removeSecurity(request.getTicker()));
     }
 
 }

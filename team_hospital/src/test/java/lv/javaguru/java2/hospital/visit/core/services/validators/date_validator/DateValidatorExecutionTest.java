@@ -142,7 +142,7 @@ public class DateValidatorExecutionTest {
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate()))
                 .thenReturn(LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
                         .parse(request.getVisitDate())));
-        Mockito.when(database.showAllVisits()).thenReturn(visits);
+        Mockito.when(database.getAllVisits()).thenReturn(visits);
 
         List<CoreError> errors = validator.validate(request.getVisitDate());
         assertFalse(errors.isEmpty());
