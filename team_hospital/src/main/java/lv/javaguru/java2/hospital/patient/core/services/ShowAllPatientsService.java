@@ -2,7 +2,6 @@ package lv.javaguru.java2.hospital.patient.core.services;
 
 import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.domain.Patient;
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
 import lv.javaguru.java2.hospital.patient.core.requests.ShowAllPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.ShowAllPatientsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ public class ShowAllPatientsService {
    @Autowired private PatientDatabase database;
 
     public ShowAllPatientsResponse execute(ShowAllPatientsRequest request) {
-        List<Patient> patients = database.showAllPatients();
+        List<Patient> patients = database.getAllPatients();
         return new ShowAllPatientsResponse(patients);
     }
 }

@@ -15,7 +15,7 @@ public class ShowAllPrescriptionService {
     @Autowired private PrescriptionDatabase database;
 
     public ShowAllPrescriptionResponse execute(ShowAllPrescriptionRequest request) {
-        List<Prescription> prescriptions = database.getPrescriptions();
+        List<Prescription> prescriptions = database.getAllPrescriptions();
         return new ShowAllPrescriptionResponse(prescriptions);
     }
 }

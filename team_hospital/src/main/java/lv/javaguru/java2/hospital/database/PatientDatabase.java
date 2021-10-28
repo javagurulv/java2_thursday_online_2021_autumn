@@ -12,7 +12,7 @@ public interface PatientDatabase {
 
     void deleteById(Long id);
 
-    List<Patient> showAllPatients();
+    List<Patient> getAllPatients();
 
     boolean editActions(Long patientID, Enum userInput, String input);
 

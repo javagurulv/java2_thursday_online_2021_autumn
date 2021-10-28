@@ -28,7 +28,7 @@ public class SurnameSearchValidator implements SearchValidator {
 
     @Override
     public Optional<CoreError> process(SearchPatientsRequest request) {
-        for (Patient p : database.showAllPatients()) {
+        for (Patient p : database.getAllPatients()) {
             if (p.getSurname().equals(request.getSurname())) {
                 return Optional.empty();
             }

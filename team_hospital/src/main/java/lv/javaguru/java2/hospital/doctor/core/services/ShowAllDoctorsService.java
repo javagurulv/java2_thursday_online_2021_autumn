@@ -15,7 +15,7 @@ public class ShowAllDoctorsService {
     @Autowired private DoctorDatabase database;
 
     public ShowAllDoctorsResponse execute(ShowAllDoctorsRequest request) {
-        List<Doctor> doctors = database.showAllDoctors();
+        List<Doctor> doctors = database.getAllDoctors();
         return new ShowAllDoctorsResponse(doctors);
     }
 }

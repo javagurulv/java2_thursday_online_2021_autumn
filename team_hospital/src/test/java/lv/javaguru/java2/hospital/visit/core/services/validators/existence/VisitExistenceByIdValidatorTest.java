@@ -48,7 +48,7 @@ class VisitExistenceByIdValidatorTest {
         Long visitId = 165L;
         visits.get(0).setVisitID(visitId);
 
-        Mockito.when(database.showAllVisits()).thenReturn(visits);
+        Mockito.when(database.getAllVisits()).thenReturn(visits);
         Optional<CoreError> errors = validator.validateExistenceById(visitId);
         assertTrue(errors.isEmpty());
     }

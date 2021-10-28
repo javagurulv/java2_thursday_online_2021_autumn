@@ -30,7 +30,7 @@ class ShowAllPatientsServiceTest {
     public void shouldGetPatientsFromDb() {
         List<Patient> patientList = new ArrayList<>();
         patientList.add(new Patient("name", "surname", "personalCode"));
-        Mockito.when(database.showAllPatients()).thenReturn(patientList);
+        Mockito.when(database.getAllPatients()).thenReturn(patientList);
 
         ShowAllPatientsRequest request = new ShowAllPatientsRequest();
         ShowAllPatientsResponse response = showAllPatientsService.execute(request);
