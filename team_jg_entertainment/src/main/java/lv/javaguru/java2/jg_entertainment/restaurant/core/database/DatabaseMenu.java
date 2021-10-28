@@ -18,5 +18,4 @@ public interface DatabaseMenu {
     List<Menu> findByDescription(String description);
 
     List<Menu> findByTitleAndDescription(String title, String description);
-
 }
