@@ -26,11 +26,7 @@ values ("title1", "description1", "10")
 insert into jg_entertainment.menu(menu_title, menu_description, menu_price)
 values ("title2", "description2", "20")
 
-insert into jg_entertainment.menu(menu_title, menu_description, menu_price)
-values ("title3", "description3", "30")
-
 insert into jg_entertainment.menu(menu_id, menu_title, menu_description, menu_price)
-values (1004, "title4", "description4", "40")
+values (1003, "title4", "description4", "40")
 
-insert into jg_entertainment.menu(menu_id, menu_title, menu_description, menu_price)
-values (1005, "title5", "description5", "50")
+
