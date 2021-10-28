@@ -27,7 +27,7 @@ insert into jg_entertainment.menu(menu_title, menu_description, menu_price)
 values ("title2", "description2", "20");
 
 insert into jg_entertainment.menu(menu_id, menu_title, menu_description, menu_price)
-values (1003, "title4", "description4", "30");
+values (1003, "title3", "description3", "30");
 
 
 insert into jg_entertainment.tables(table_title, table_capacity, table_price)
