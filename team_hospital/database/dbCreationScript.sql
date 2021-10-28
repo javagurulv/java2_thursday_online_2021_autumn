@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `prescriptions` (
   `patient_id` BIGINT NOT NULL,
   `medication_name` VARCHAR(150) NOT NULL,
   `quantity` INTEGER NOT NULL,
-  `date` DATE,
-  `valid_till` DATE,
+  `date` DATE NOT NULL,
+  `valid_till` DATE NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (`doctor_id`) REFERENCES `doctors`(`id`),
   FOREIGN KEY (`patient_id`) REFERENCES `patients`(`id`)
