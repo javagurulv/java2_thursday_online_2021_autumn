@@ -13,6 +13,12 @@ values ("Name4", "Surname4", "3724")
 insert into jg_entertainment.visitors(visitor_id, visitor_name, visitor_surname, visitor_telephone_number)
 values (1005, "Name5", "Surname5", "3725")
 
+insert into jg_entertainment.visitors(visitor_id, visitor_name, visitor_surname, visitor_telephone_number)
+values (1006, "Name6", "Surname6", "3726")
+
+insert into jg_entertainment.visitors(visitor_id, visitor_name, visitor_surname, visitor_telephone_number)
+values (1007, "Name7", "Surname7", "3727")
+
 
 insert into jg_entertainment.menu(menu_title, menu_description, menu_price)
 values ("title1", "description1", "10")
