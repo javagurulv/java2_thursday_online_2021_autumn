@@ -13,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,7 +87,7 @@ class EditPrescriptionValidatorTest {
         Mockito.when(prescriptionExistenceIDValidator.execute(Long.valueOf(request.getPrescriptionID())))
                 .thenReturn(Optional.of(new CoreError("Prescription", "does not exist!")));
         Mockito.when(patientDatabase.findById(Long.valueOf(request.getChanges())))
-                .thenReturn(Optional.of(new Patient("name", "surname", "speciality")));
+                .thenReturn(Collections.singletonList(new Patient("name", "surname", "speciality")));
 
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -126,7 +128,7 @@ class EditPrescriptionValidatorTest {
         Mockito.when(prescriptionExistenceIDValidator.execute(Long.valueOf(request.getPrescriptionID())))
                 .thenReturn(Optional.empty());
         Mockito.when(patientDatabase.findById(Long.valueOf(request.getChanges())))
-                .thenReturn(Optional.empty());
+                .thenReturn(new ArrayList<>());
 
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -141,7 +143,7 @@ class EditPrescriptionValidatorTest {
         Mockito.when(prescriptionExistenceIDValidator.execute(Long.valueOf(request.getPrescriptionID())))
               .thenReturn(Optional.empty());
         Mockito.when(patientDatabase.findById(Long.valueOf(request.getChanges())))
-                .thenReturn(Optional.of(new Patient("name", "surname", "12345678901")));
+                .thenReturn(Collections.singletonList(new Patient("name", "surname", "12345678901")));
 
         List<CoreError> errors = validator.validate(request);
         assertTrue(errors.isEmpty());

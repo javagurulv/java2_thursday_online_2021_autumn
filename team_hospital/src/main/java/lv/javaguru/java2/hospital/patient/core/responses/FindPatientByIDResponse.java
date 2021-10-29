@@ -3,17 +3,16 @@ package lv.javaguru.java2.hospital.patient.core.responses;
 import lv.javaguru.java2.hospital.domain.Patient;
 
 import java.util.List;
-import java.util.Optional;
 
 public class FindPatientByIDResponse extends CoreResponse {
     private Long idResponse;
-    private Optional <Patient> patient;
+    private List<Patient> patient;
 
     public FindPatientByIDResponse(List<CoreError> errors) {
         super(errors);
     }
 
-    public FindPatientByIDResponse(Long idResponse, Optional<Patient> patient) {
+    public FindPatientByIDResponse(Long idResponse, List<Patient> patient) {
         this.idResponse = idResponse;
         this.patient = patient;
     }
@@ -22,7 +21,7 @@ public class FindPatientByIDResponse extends CoreResponse {
         return idResponse;
     }
 
-    public Optional<Patient> getPatient() {
+    public List<Patient> getPatient() {
         return patient;
     }
 }

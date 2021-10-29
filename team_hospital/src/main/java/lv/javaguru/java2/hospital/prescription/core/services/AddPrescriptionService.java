@@ -40,8 +40,8 @@ public class AddPrescriptionService {
     }
 
     private Patient getPatient(AddPrescriptionRequest request) {
-        if (patientDatabase.findById(request.getPatientId()).isPresent()) {
-            return patientDatabase.findById(request.getPatientId()).get();
+        if (!patientDatabase.findById(request.getPatientId()).isEmpty()) {
+            return patientDatabase.findById(request.getPatientId()).get(0);
         }
         else return null;
     }

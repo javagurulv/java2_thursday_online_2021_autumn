@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -24,13 +23,15 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public Optional<Patient> findById(Long id) {
+    public List<Patient> findById(Long id) {
+        List<Patient> patients = new ArrayList<>();
         for (Patient patient : patientsList) {
             if (Objects.equals(id, patient.getId())) {
-                return Optional.of(patient);
+                patients.add(patient);
+                return patients;
             }
         }
-        return Optional.empty();
+        return new ArrayList<>();
     }
 
     @Override

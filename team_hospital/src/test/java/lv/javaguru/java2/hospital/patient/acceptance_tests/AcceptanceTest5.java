@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.patient.acceptance_tests;
 
 import lv.javaguru.java2.hospital.config.HospitalConfiguration;
-import org.springframework.context.ApplicationContext;
+import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.requests.FindPatientByIdRequest;
 import lv.javaguru.java2.hospital.patient.core.requests.ShowAllPatientsRequest;
@@ -13,9 +13,11 @@ import lv.javaguru.java2.hospital.patient.core.services.FindPatientByIdService;
 import lv.javaguru.java2.hospital.patient.core.services.ShowAllPatientsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -42,7 +44,9 @@ public class AcceptanceTest5 {
         FindPatientByIDResponse findPatientByIDResponse = getFindPatientByIdService().execute(
                 new FindPatientByIdRequest(addPatientResponse.getPatient().getId()));
         ShowAllPatientsResponse showAllPatientsResponse = getShowAllPatientsService().execute(new ShowAllPatientsRequest());
-        assertEquals(findPatientByIDResponse.getPatient(), Optional.of(showAllPatientsResponse.getPatients().get(1)));
+        List<Patient> patients = new ArrayList<>();
+        patients.add(showAllPatientsResponse.getPatients().get(1));
+        assertEquals(findPatientByIDResponse.getPatient(), patients);
     }
 
     private AddPatientService getAddPatienceService() {

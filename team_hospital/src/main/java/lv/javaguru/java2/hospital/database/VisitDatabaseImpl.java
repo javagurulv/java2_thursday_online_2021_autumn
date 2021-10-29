@@ -47,7 +47,7 @@ public class VisitDatabaseImpl implements VisitDatabase {
                 visitToEdit.setDoctor(doctorDatabase.findById(Long.parseLong(changes)).get(0));
                 isVisitEdited = true;
             } else if (userInput.equals(EditVisitEnum.PATIENT)) {
-                visitToEdit.setPatient(patientDatabase.findById(Long.parseLong(changes)).get());
+                visitToEdit.setPatient(patientDatabase.findById(Long.parseLong(changes)).get(0));
                 isVisitEdited = true;
             } else if (userInput.equals(EditVisitEnum.DATE)){
                 visitToEdit.setVisitDate(LocalDateTime.parse(changes));

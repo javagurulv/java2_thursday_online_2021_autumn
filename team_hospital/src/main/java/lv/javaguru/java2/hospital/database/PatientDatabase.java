@@ -3,12 +3,11 @@ package lv.javaguru.java2.hospital.database;
 import lv.javaguru.java2.hospital.domain.Patient;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PatientDatabase {
     void add(Patient patient);
 
-    Optional<Patient> findById(Long id);
+    List<Patient> findById(Long id);
 
     void deleteById(Long id);
 
