@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.search_patient.search_criteria;
 
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.services.search_patient_service.search_criteria.SurnameAndPersonalCodeSearchCriteria;
@@ -17,13 +17,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
 class SurnameAndPersonalCodeSearchCriteriaTest {
 
-    @Mock private PatientDatabaseImpl database;
+    @Mock private PatientDatabase database;
     @InjectMocks private SurnameAndPersonalCodeSearchCriteria searchCriteria;
 
     @Test

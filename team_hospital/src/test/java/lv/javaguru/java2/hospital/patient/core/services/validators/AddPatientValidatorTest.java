@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
@@ -12,8 +12,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -21,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AddPatientValidatorTest {
 
     @Mock
-    private PatientDatabaseImpl database;
+    private PatientDatabase database;
     @InjectMocks
     private AddPatientValidator validator;
 

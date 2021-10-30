@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.PatientOrdering;
 import lv.javaguru.java2.hospital.patient.core.requests.PatientPaging;
@@ -31,7 +31,7 @@ import static org.mockito.ArgumentMatchers.any;
 class SearchPatientsServiceTest {
 
     @Mock
-    private PatientDatabaseImpl database;
+    private PatientDatabase database;
     @Mock
     private SearchPatientsValidator validator;
     @InjectMocks

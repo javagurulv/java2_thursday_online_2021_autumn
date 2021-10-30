@@ -1,11 +1,11 @@
 package lv.javaguru.java2.hospital.patient.core.services.search_patient.search_criteria;
 
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.services.search_patient_service.search_criteria.NameAndSurnameSearchCriteria;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @RunWith(JUnitPlatform.class)
 public class NameAndSurnameSearchCriteriaTest {
 
-    @Mock private PatientDatabaseImpl database;
+    @Mock private PatientDatabase database;
     @InjectMocks private NameAndSurnameSearchCriteria searchCriteria;
 
     @Test
