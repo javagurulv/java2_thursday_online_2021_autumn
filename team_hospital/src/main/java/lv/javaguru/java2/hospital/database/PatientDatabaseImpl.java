@@ -35,8 +35,8 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public void deleteById(Long id) {
-        patientsList.removeIf(patient -> Objects.equals(patient.getId(), id));
+    public boolean deleteById(Long id) {
+       return patientsList.removeIf(patient -> Objects.equals(patient.getId(), id));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public boolean editActions(Long patientID, Enum userInput, String input) {
+    public boolean editActions(Long patientID, EditPatientEnum userInput, String input) {
         for (Patient patient : patientsList) {
             if (Objects.equals(patient.getId(), patientID)) {
                 if (EditPatientEnum.NAME.equals(userInput)) {
@@ -58,17 +58,6 @@ public class PatientDatabaseImpl implements PatientDatabase {
                     patient.setPersonalCode(input);
                     return true;
                 }
-            }
-        }
-        return false;
-    }
-
-
-    @Override
-    public boolean patientExists(Long id) {
-        for (Patient patient : patientsList) {
-            if (Objects.equals(patient.getId(), id)) {
-                return true;
             }
         }
         return false;

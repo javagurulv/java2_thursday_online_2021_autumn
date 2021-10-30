@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.database;
 
 import lv.javaguru.java2.hospital.domain.Patient;
+import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 
 import java.util.List;
 
@@ -9,13 +10,11 @@ public interface PatientDatabase {
 
     List<Patient> findById(Long id);
 
-    void deleteById(Long id);
+    boolean deleteById(Long id);
 
     List<Patient> getAllPatients();
 
-    boolean editActions(Long patientID, Enum userInput, String input);
-
-    boolean patientExists(Long id);
+    boolean editActions(Long patientID, EditPatientEnum userInput, String input);
 
     List<Patient> findPatientsByName(String name);
 
