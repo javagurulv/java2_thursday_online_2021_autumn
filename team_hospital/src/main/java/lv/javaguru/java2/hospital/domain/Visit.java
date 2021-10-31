@@ -2,53 +2,44 @@ package lv.javaguru.java2.hospital.domain;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class Visit {
-    private Doctor doctor;
-    private Patient patient;
-    private LocalDateTime visitDate;
     private Long visitID;
+    private Long doctorID;
+    private Long patientID;
+    private LocalDateTime visitDate;
     private String description;
 
-    public Visit(Doctor doctor, Patient patient, LocalDateTime visitDate) {
-        this.doctor = doctor;
-        this.patient = patient;
+    public Visit() {
+    }
+
+    public Visit(Long doctorID, Long patientID, LocalDateTime visitDate) {
+        this.doctorID = doctorID;
+        this.patientID = patientID;
         this.visitDate = visitDate;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public Visit(Long doctorID, Long patientID, LocalDateTime visitDate, String description) {
+        this.doctorID = doctorID;
+        this.patientID = patientID;
+        this.visitDate = visitDate;
+        this.description = description;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public Long getDoctorID() {
+        return doctorID;
     }
 
-    public Long getVisitID() {
-        return visitID;
+    public void setDoctorID(Long doctorID) {
+        this.doctorID = doctorID;
     }
 
-    @Override
-    public String toString() {
-        return "PatientVisit{" +
-                "doctor=" + doctor +
-                ", patient=" + patient +
-                ", visitDate=" + visitDate +
-                ", visitID=" + visitID +
-                '}';
+    public Long getPatientID() {
+        return patientID;
     }
 
-    public void setVisitID(Long visitID) {
-        this.visitID = visitID;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setPatientID(Long patientID) {
+        this.patientID = patientID;
     }
 
     public LocalDateTime getVisitDate() {
@@ -57,6 +48,14 @@ public class Visit {
 
     public void setVisitDate(LocalDateTime visitDate) {
         this.visitDate = visitDate;
+    }
+
+    public Long getVisitID() {
+        return visitID;
+    }
+
+    public void setVisitID(Long visitID) {
+        this.visitID = visitID;
     }
 
     public String getDescription() {
@@ -72,14 +71,11 @@ public class Visit {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Visit visit = (Visit) o;
-        return Objects.equals(doctor, visit.doctor)
-                && Objects.equals(patient, visit.patient)
-                && Objects.equals(visitDate, visit.visitDate)
-                && Objects.equals(visitID, visit.visitID);
+        return Objects.equals(doctorID, visit.doctorID) && Objects.equals(patientID, visit.patientID) && Objects.equals(visitDate, visit.visitDate) && Objects.equals(visitID, visit.visitID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(doctor, patient, visitDate, visitID);
+        return Objects.hash(doctorID, patientID, visitDate, visitID);
     }
 }

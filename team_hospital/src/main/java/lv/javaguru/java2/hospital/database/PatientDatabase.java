@@ -24,10 +24,10 @@ public interface PatientDatabase {
 
     List<Patient> findPatientsByNameAndSurname(String name, String surname);
 
-    List<Patient> findPatientsByNameAndPersonalCode(String name, String personalCode);
+    List<Patient> findPatientsByNameAndPersonalCode(String name, String personal_code);
 
-    List<Patient> findPatientsBySurnameAndPersonalCode(String surname, String personalCode);
+    List<Patient> findPatientsBySurnameAndPersonalCode(String surname, String personal_code);
 
-    List<Patient> findPatientByNameSurnamePersonalCode(String name, String surname, String personalCode);
+    List<Patient> findPatientByNameSurnamePersonalCode(String name, String surname, String personal_code);
 
 }

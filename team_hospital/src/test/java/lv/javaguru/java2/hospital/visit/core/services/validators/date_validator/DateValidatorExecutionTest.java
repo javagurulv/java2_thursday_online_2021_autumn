@@ -40,9 +40,8 @@ public class DateValidatorExecutionTest {
     @Test
     public void shouldReturnEmptyList() {
         AddVisitRequest request = new AddVisitRequest(
-                "1234",
-                "name",
-                "surname",
+                "1",
+                "2",
                 "17/01/2022 15:00"
         );
         Mockito.when(formatValidator.validateFormat(request.getVisitDate())).thenReturn(Optional.empty());
@@ -55,9 +54,8 @@ public class DateValidatorExecutionTest {
     @Test
     public void ShouldReturnFormatError() {
         AddVisitRequest request = new AddVisitRequest(
-                "1234",
-                "name",
-                "surname",
+                "1",
+                "2",
                 "17.01.2022 15:00"
         );
         Mockito.when(
@@ -74,9 +72,8 @@ public class DateValidatorExecutionTest {
     @Test
     public void ShouldReturnFutureError() {
         AddVisitRequest request = new AddVisitRequest(
-                "1234",
-                "name",
-                "surname",
+                "1",
+                "2",
                 "17/01/2020 15:00"
         );
         LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(request.getVisitDate()));
@@ -91,9 +88,8 @@ public class DateValidatorExecutionTest {
     @Test
     public void ShouldReturnWorkingDayError() {
         AddVisitRequest request = new AddVisitRequest(
-                "1234",
-                "name",
-                "surname",
+                "1",
+                "2",
                 "16/01/2022 15:00"
         );
         LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(request.getVisitDate()));
@@ -108,9 +104,8 @@ public class DateValidatorExecutionTest {
     @Test
     public void ShouldReturnWorkingHoursError() {
         AddVisitRequest request = new AddVisitRequest(
-                "1234",
-                "name",
-                "surname",
+                "1",
+                "2",
                 "17/01/2022 20:00"
         );
         LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(request.getVisitDate()));
@@ -126,16 +121,17 @@ public class DateValidatorExecutionTest {
     public void ShouldReturnDateExistError() {
         List<Visit> visits = new ArrayList<>();
         Doctor doctor = new Doctor("name", "surname", "speciality");
+        doctor.setId(1L);
         Patient patient = new Patient("name", "surname", "1234");
+        patient.setId(2L);
         String date = "25/12/2025 12:00";
-        Visit visit = new Visit(doctor, patient, LocalDateTime
+        Visit visit = new Visit(doctor.getId(), patient.getId(), LocalDateTime
                 .from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date)));
         visits.add(visit);
 
         AddVisitRequest request = new AddVisitRequest(
-                "1234",
-                "name",
-                "surname",
+                "1",
+                "2",
                 "25/12/2025 12:00"
         );
 

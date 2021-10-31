@@ -97,11 +97,11 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public List<Patient> findPatientsByNameAndPersonalCode(String name, String personalCode) {
+    public List<Patient> findPatientsByNameAndPersonalCode(String name, String personal_code) {
         List<Patient> list = new ArrayList<>();
         for (Patient patient : patientsList) {
             if (name.equals(patient.getName())
-                    && personalCode.equals(patient.getPersonalCode())) {
+                    && personal_code.equals(patient.getPersonalCode())) {
                 list.add(patient);
                 break;
             }
@@ -110,11 +110,11 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public List<Patient> findPatientsBySurnameAndPersonalCode(String surname, String personalCode) {
+    public List<Patient> findPatientsBySurnameAndPersonalCode(String surname, String personal_code) {
         List<Patient> list = new ArrayList<>();
         for (Patient patient : patientsList) {
             if (surname.equals(patient.getSurname())
-                    && personalCode.equals(patient.getPersonalCode())) {
+                    && personal_code.equals(patient.getPersonalCode())) {
                 list.add(patient);
                 break;
             }
@@ -123,12 +123,12 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public List<Patient> findPatientByNameSurnamePersonalCode(String name, String surname, String personalCode) {
+    public List<Patient> findPatientByNameSurnamePersonalCode(String name, String surname, String personal_code) {
         List<Patient> list = new ArrayList<>();
         for (Patient p : patientsList) {
             if (p.getName().equals(name)
                     && p.getSurname().equals(surname)
-                    && p.getPersonalCode().equals(personalCode)) {
+                    && p.getPersonalCode().equals(personal_code)) {
                 list.add(p);
             }
         }

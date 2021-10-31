@@ -40,11 +40,13 @@ class VisitExistenceByIdValidatorTest {
     @Test
     public void shouldReturnEmptyList() {
         Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
+        doctor.setId(1L);
         Patient patient = new Patient("PatientsName", "PatientsSurname", "110254-12636");
+        patient.setId(2L);
 
         List<Visit> visits = new ArrayList<>();
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("20/12/2021 14:00"));
-        visits.add(new Visit(doctor, patient, date));
+        visits.add(new Visit(doctor.getId(), patient.getId(), date));
         Long visitId = 165L;
         visits.get(0).setVisitID(visitId);
 

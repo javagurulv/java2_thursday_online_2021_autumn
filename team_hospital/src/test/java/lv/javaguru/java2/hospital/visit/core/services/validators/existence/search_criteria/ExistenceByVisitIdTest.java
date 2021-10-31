@@ -57,10 +57,12 @@ class ExistenceByVisitIdTest {
     @Test
     public void shouldReturnEmptyList() throws ParseException {
         Doctor doctor = new Doctor("DoctorsName1", "DoctorsSurname1", "Speciality1");
+        doctor.setId(1L);
         Patient patient = new Patient("PatientsName1", "PatientsSurname1", "150254-12636");
+        patient.setId(2L);
         List<Visit> visits = new ArrayList<>();
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("27/12/2021 16:00"));
-        visits.add(new Visit(doctor, patient, date));
+        visits.add(new Visit(doctor.getId(), patient.getId(), date));
         Long visitId = 158L;
         visits.get(0).setVisitID(visitId);
 

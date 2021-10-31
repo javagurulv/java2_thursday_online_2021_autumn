@@ -44,21 +44,23 @@ class DoctorIdSearchCriteriaTest {
     @Test
     public void shouldReturnCorrectVisit() throws ParseException {
         Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
+        doctor.setId(1L);
         Patient patient = new Patient("PatientsName", "PatientsSurname", "170654-12636");
+        patient.setId(2L);
         Long doctorId = doctor.getId();
 
         List<Visit> visits = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime date = LocalDateTime.parse("27/12/2021 12:00", formatter);
-        visits.add(new Visit(doctor, patient, date));
+        visits.add(new Visit(doctor.getId(), patient.getId(), date));
 
         Mockito.when(database.findByDoctorId(doctorId)).thenReturn(visits);
         SearchVisitRequest request = new SearchVisitRequest
                 (null, doctorId, null, "");
         Visit visit = searchCriteria.process(request).get(0);
         assertEquals(searchCriteria.process(request).size(), 1);
-        assertEquals(visit.getDoctor(), doctor);
-        assertEquals(visit.getPatient(), patient);
+        assertEquals(visit.getDoctorID(), doctor.getId());
+        assertEquals(visit.getPatientID(), patient.getId());
         assertEquals(visit.getVisitID(), visits.get(0).getVisitID());
         assertEquals(visit.getVisitDate(), date);
     }
@@ -66,16 +68,19 @@ class DoctorIdSearchCriteriaTest {
     @Test
     public void shouldReturnCorrectVisits() throws ParseException {
         Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
+        doctor.setId(1L);
         Patient patient1 = new Patient("PatientsName1", "PatientsSurname1", "110654-12636");
+        patient1.setId(2L);
         Patient patient2 = new Patient("PatientsName2", "PatientsSurname2", "110754-12634");
+        patient2.setId(3L);
         Long doctorId = doctor.getId();
 
         List<Visit> visits = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime date1 = LocalDateTime.parse("27/12/2021 12:00", formatter);
         LocalDateTime date2 = LocalDateTime.parse("27/12/2021 16:00", formatter);
-        visits.add(new Visit(doctor, patient1, date1));
-        visits.add(new Visit(doctor, patient2, date2));
+        visits.add(new Visit(doctor.getId(), patient1.getId(), date1));
+        visits.add(new Visit(doctor.getId(), patient2.getId(), date2));
 
         Mockito.when(database.findByDoctorId(doctorId)).thenReturn(visits);
         SearchVisitRequest request = new SearchVisitRequest
@@ -83,12 +88,12 @@ class DoctorIdSearchCriteriaTest {
         Visit visit1 = searchCriteria.process(request).get(0);
         Visit visit2 = searchCriteria.process(request).get(1);
         assertEquals(searchCriteria.process(request).size(), 2);
-        assertEquals(visit1.getDoctor(), doctor);
-        assertEquals(visit1.getPatient(), patient1);
+        assertEquals(visit1.getDoctorID(), doctor.getId());
+        assertEquals(visit1.getPatientID(), patient1.getId());
         assertEquals(visit1.getVisitID(), visits.get(0).getVisitID());
         assertEquals(visit1.getVisitDate(), date1);
-        assertEquals(visit2.getDoctor(), doctor);
-        assertEquals(visit2.getPatient(), patient2);
+        assertEquals(visit2.getDoctorID(), doctor.getId());
+        assertEquals(visit2.getPatientID(), patient2.getId());
         assertEquals(visit2.getVisitID(), visits.get(1).getVisitID());
         assertEquals(visit2.getVisitDate(), date2);
     }

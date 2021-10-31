@@ -55,14 +55,14 @@ class ExistenceByPatientIdTest {
     @Test
     public void shouldReturnEmptyList() throws ParseException {
         Doctor doctor = new Doctor("DoctorsName1", "DoctorsSurname1", "Speciality1");
+        doctor.setId(1L);
         Patient patient = new Patient("PatientsName1", "PatientsSurname1", "150254-12636");
-        Long patientId = 5456L;
-        patient.setId(patientId);
+        patient.setId(5456L);
         List<Visit> visits = new ArrayList<>();
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("27/12/2021 16:00"));
-        visits.add(new Visit(doctor, patient, date));
+        visits.add(new Visit(doctor.getId(), patient.getId(), date));
 
-        SearchVisitRequest request = new SearchVisitRequest(null, null, patientId, "");
+        SearchVisitRequest request = new SearchVisitRequest(null, null, patient.getId(), "");
         Mockito.when(database.getAllVisits()).thenReturn(visits);
         Optional<CoreError> error = existence.validateExistence(request);
         assertTrue(error.isEmpty());

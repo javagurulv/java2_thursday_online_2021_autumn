@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PatientRawMapper implements RowMapper<Patient> {
+public class PatientRowMapper implements RowMapper<Patient> {
 
     @Override
     public Patient mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -14,7 +14,7 @@ public class PatientRawMapper implements RowMapper<Patient> {
         patient.setId(rs.getLong("id"));
         patient.setName(rs.getString("name"));
         patient.setSurname(rs.getString("surname"));
-        patient.setPersonalCode(rs.getString("personalCode"));
+        patient.setPersonalCode(rs.getString("personal_code"));
         return patient;
     }
 }
