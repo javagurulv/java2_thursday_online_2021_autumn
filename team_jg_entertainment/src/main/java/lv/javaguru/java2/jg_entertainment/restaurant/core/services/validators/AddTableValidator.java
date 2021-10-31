@@ -13,9 +13,9 @@ public class AddTableValidator {
 
     public List<CoreError> validate(AddTableRequest addTableRequest) {
         List<CoreError> coreErrors = new ArrayList<>();
-
         tableTitleValidator(addTableRequest).ifPresent(coreErrors::add);
         tablePriceValidator(addTableRequest).ifPresent(coreErrors::add);
+        tableCapacityValidator(addTableRequest).ifPresent(coreErrors::add);
         return coreErrors;
     }
 
@@ -25,15 +25,15 @@ public class AddTableValidator {
                 : Optional.empty();
     }
 
- /*   private Optional<CoreError> tableCapacityValidator(AddTableRequest addTableRequest){
-        return (addTableRequest.getTableCapacity())
-                ? Optional.of(new CoreError("table capacity","Shouldn't be empty"))
+    private Optional<CoreError> tableCapacityValidator(AddTableRequest addTableRequest) {
+        return (addTableRequest.getTableCapacity() <= 0
+                || addTableRequest.getTableCapacity() > 15)
+                ? Optional.of(new CoreError("table capacity", "Shouldn't be 0 or less and more than 15"))
                 : Optional.empty();
     }
-*/
 
     private Optional<CoreError> tablePriceValidator(AddTableRequest addTableRequest) {
-        return (addTableRequest.getPrice() < 0)
+        return (addTableRequest.getPrice() <= 0)
                 ? Optional.of(new CoreError("table price", "Shouldn't be empty or negative (less than 0)"))
                 : Optional.empty();
     }
