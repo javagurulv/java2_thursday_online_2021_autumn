@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.importDataForTests;
 
+/*
 @RunWith(MockitoJUnitRunner.class)
 public class FilterStocksByMultipleParametersServiceTest extends AcceptanceTestForDatabase {
 
@@ -101,4 +102,4 @@ public class FilterStocksByMultipleParametersServiceTest extends AcceptanceTestF
         assertEquals(list, response.getList());
     }
 
-}
+}*/

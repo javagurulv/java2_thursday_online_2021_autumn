@@ -9,6 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/*
 public class FindSecurityByNameValidatorTest extends AcceptanceTestForDatabase {
 
     private final FindSecurityByNameValidator validator =
@@ -46,4 +47,4 @@ public class FindSecurityByNameValidatorTest extends AcceptanceTestForDatabase {
         assertEquals(errorList.get(0).getMessage(), "minimum 3 symbols required!");
     }
 
-}
+}*/

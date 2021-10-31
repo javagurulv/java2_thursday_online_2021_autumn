@@ -15,8 +15,8 @@ import static java.util.Map.*;
 public class FindUserByNameValidator {
 
     private final Map<Predicate<FindUserByNameRequest>, CoreError> validator = ofEntries(
-            entry(request -> request.getUserName().length() < 3,
-                    new CoreError("Name", "minimum 3 symbols required!"))
+//            entry(request -> request.getUserName().length() < 3,
+//                    new CoreError("Name", "minimum 3 symbols required!"))
     );
 
     public List<CoreError> validate(FindUserByNameRequest request) {

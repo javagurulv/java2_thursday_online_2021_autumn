@@ -11,8 +11,6 @@ import java.util.Optional;
 
 public interface Database {
 
-    ArrayList<Security> getSecurityList();
-
     void addStock(Stock stock);
 
     void addBond(Bond bond);

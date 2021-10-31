@@ -9,28 +9,32 @@ import static lv.javaguru.java2.qwe.core.domain.Type.*;
 
 public class User {
 
-    private final long id;
+    private long id;
     private final String name;
     private final int age;
     private final Type type; // общий уровень благосостояния клиента
     private final double initialInvestment; //начальная сумма инвестиций
+    private double cash; //денежный остаток на счете
     private LocalDate portfolioGenerationDate;
     private int riskTolerance;
     private List<Position> portfolio = new ArrayList<>();
     private final Map<String, Double[]> distribution = createDistributionMatrix();
 
-    public User(long id, String name, int age, Type type, double initialInvestment) {
-        this.id = id;
+    public User(String name, int age, Type type, double initialInvestment) {
         this.name = name;
         this.age = age;
         this.type = type;
         this.initialInvestment = initialInvestment;
-        calculateRiskTolerance();
-        portfolio.add(new Position(new Cash(), initialInvestment, 1));
+        if (riskTolerance == 0) {calculateRiskTolerance();}
+//        portfolio.add(new Position(new Cash(), initialInvestment, 1));
     }
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -47,6 +51,14 @@ public class User {
 
     public double getInitialInvestment() {
         return initialInvestment;
+    }
+
+    public double getCash() {
+        return cash;
+    }
+
+    public void setCash(double cash) {
+        this.cash = cash;
     }
 
     public int getRiskTolerance() {
@@ -130,6 +142,7 @@ public class User {
                 ", age=" + age +
                 ", type=" + type +
                 ", initialInvestment=" + initialInvestment +
+                ", portfolioGenerationDate=" + portfolioGenerationDate +
                 ", riskTolerance=" + riskTolerance +
                 '}';
     }

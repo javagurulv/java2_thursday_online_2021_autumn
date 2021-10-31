@@ -40,12 +40,19 @@ public class FilterStocksByMultipleParametersService {
         if (requestList.size() > 0) {
             query.append("\n  WHERE");
             for (int i = 0; i < requestList.size(); i++) {
-                if (i != 0 && !requestList.get(i).getClass().getSimpleName().equals("OrderingRequest")) {
+                if (i != 0 && !requestList.get(i).getClass().getSimpleName().equals("OrderingRequest")
+                && !requestList.get(i).getClass().getSimpleName().equals("PagingRequest")) {
                     query.append("  AND");
                 }
                 if (requestList.get(i).getClass().getSimpleName().equals("OrderingRequest")) {
                     query.append(" ORDER BY ").append(((OrderingRequest) requestList.get(i)).getOrderBy())
-                            .append(" ").append(((OrderingRequest) requestList.get(i)).getOrderDirection());
+                            .append(" ").append(((OrderingRequest) requestList.get(i)).getOrderDirection()).append("\n");
+                }
+                if (requestList.get(i).getClass().getSimpleName().equals("PagingRequest")) {
+                    query.append("  LIMIT ")
+                            .append((getRowNumber(((PagingRequest) requestList.get(i)).getPageNumber(),
+                                    ((PagingRequest) requestList.get(i)).getPageSize())))
+                            .append(", ").append(((PagingRequest) requestList.get(i)).getPageSize());
                 }
                 if (requestList.get(i).getClass().getSimpleName().equals("FilterStocksByIndustryRequest")) {
                     query.append(" industry = ").append("'")
@@ -59,8 +66,12 @@ public class FilterStocksByMultipleParametersService {
                 }
             }
         }
-        System.out.println("====================================\n" + query + "\n====================================");
+//        System.out.println("====================================\n" + query + "\n====================================");
         return query.toString();
+    }
+
+    private static String getRowNumber(String pageNumber, String pageSize) {
+        return String.valueOf(Integer.parseInt(pageNumber) * Integer.parseInt(pageSize));
     }
 
 }

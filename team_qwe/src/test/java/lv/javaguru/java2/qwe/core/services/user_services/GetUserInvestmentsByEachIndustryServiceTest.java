@@ -24,6 +24,7 @@ import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 
+/*
 @RunWith(MockitoJUnitRunner.class)
 public class GetUserInvestmentsByEachIndustryServiceTest {
 
@@ -68,4 +69,4 @@ public class GetUserInvestmentsByEachIndustryServiceTest {
         Assert.assertEquals(map, response.getInvestmentMap());
     }
 
-}
+}*/

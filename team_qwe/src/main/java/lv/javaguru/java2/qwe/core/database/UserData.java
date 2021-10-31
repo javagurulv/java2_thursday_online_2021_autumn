@@ -1,5 +1,6 @@
 package lv.javaguru.java2.qwe.core.database;
 
+import lv.javaguru.java2.qwe.core.domain.Position;
 import lv.javaguru.java2.qwe.core.domain.User;
 
 import java.time.LocalDate;
@@ -9,21 +10,21 @@ import java.util.Optional;
 
 public interface UserData {
 
-    List<User> getUserList();
-
-    Database getDatabase();
-
     LocalDate getCurrentDate();
 
-    void setCurrentDate(LocalDate currentDate);
-
-    void addUser(User user);
+    Optional<Long> addUser(User user);
 
     boolean removeUser(String name);
 
     List<User> getAllUserList();
 
-    Optional<User> findUserByName(String userName);
+    Optional<User> findUserByIdOrName(String userName);
+
+    List<Position> getUserPortfolio(Long userId);
+
+    Optional<Double> getUserCash(Long userID);
+
+    void savePosition(Position position, Long userId);
 
     Map<String, List<String>> getUserPortfolioGroupedByIndustry(User user);
 

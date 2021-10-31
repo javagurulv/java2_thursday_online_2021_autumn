@@ -24,7 +24,7 @@ public class FindUserByNameService {
 
     public FindUserByNameResponse execute(FindUserByNameRequest request) {
         List<CoreError> errors = validator.validate(request);
-        Optional<User> result = userData.findUserByName(request.getUserName());
+        Optional<User> result = userData.findUserByIdOrName(request.getUserName());
         return (errors.isEmpty() && result.isPresent()) ?
                 new FindUserByNameResponse(result.get()) : new FindUserByNameResponse(errors);
     }

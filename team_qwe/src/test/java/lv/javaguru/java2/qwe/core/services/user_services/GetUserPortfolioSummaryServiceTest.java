@@ -47,7 +47,7 @@ public class GetUserPortfolioSummaryServiceTest {
         Mockito.verify(validator).validate(any());
     }
 
-    @Test
+    /*@Test
     public void shouldReturnUserPortfolioSummaryResult() {
         GetUserPortfolioSummaryRequest request =
                 new GetUserPortfolioSummaryRequest("Alexander");
@@ -82,6 +82,6 @@ public class GetUserPortfolioSummaryServiceTest {
         Assert.assertEquals(amountOfPositions, response.getAmountOfPositions());
         Assert.assertEquals(avgWgtDividendYield, response.getAvgWgtDividendYield(), 0.001);
         Assert.assertEquals(avgWgtRiskWeight, response.getAvgWgtRiskWeight(), 0.001);
-    }
+    }*/
 
 }

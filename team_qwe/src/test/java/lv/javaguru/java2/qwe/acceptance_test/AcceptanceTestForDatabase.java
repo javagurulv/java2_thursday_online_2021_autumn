@@ -1,6 +1,5 @@
 package lv.javaguru.java2.qwe.acceptance_test;
 
-import lv.javaguru.java2.qwe.core.domain.Bond;
 import lv.javaguru.java2.qwe.config.AppConfiguration;
 import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.requests.data_requests.*;
@@ -9,24 +8,57 @@ import lv.javaguru.java2.qwe.core.responses.data_responses.FindSecurityByTickerO
 import lv.javaguru.java2.qwe.core.responses.data_responses.GetAllSecurityListResponse;
 import lv.javaguru.java2.qwe.core.responses.data_responses.RemoveSecurityResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.*;
-import org.junit.Ignore;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.junit.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.*;
 import static java.util.List.*;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {AppConfiguration.class})
 public class AcceptanceTestForDatabase {
 
-    private final ApplicationContext appContext =
-            new AnnotationConfigApplicationContext(AppConfiguration.class);
+    @Autowired private ApplicationContext appContext;
+    @Autowired private JdbcTemplate jdbcTemplate;
 
-    public ApplicationContext getAppContext() {
-        return appContext;
+    @Before
+    public void init() {
+        jdbcTemplate.update("DROP TABLE IF EXISTS stocks, bonds");
+        jdbcTemplate.update("CREATE TABLE IF NOT EXISTS `stocks` (\n" +
+                "  `ticker` VARCHAR(10) NOT NULL,\n" +
+                "  `name` VARCHAR(100) NOT NULL,\n" +
+                "  `industry` VARCHAR(50) NOT NULL,\n" +
+                "  `currency` CHAR(3) NOT NULL,\n" +
+                "  `market_price` DECIMAL(8,2) NOT NULL,\n" +
+                "  `dividend_yield` DECIMAL(4,2) NOT NULL,\n" +
+                "  `risk_weight` DECIMAL(5,4) NOT NULL,\n" +
+                "  PRIMARY KEY (`ticker`)\n" +
+                ")");
+        jdbcTemplate.update("CREATE TABLE IF NOT EXISTS `bonds` (\n" +
+                "  `ticker` VARCHAR(10) NOT NULL,\n" +
+                "  `name` VARCHAR(100) NOT NULL,\n" +
+                "  `industry` VARCHAR(50) NOT NULL,\n" +
+                "  `currency` CHAR(3) NOT NULL,\n" +
+                "  `market_price` DECIMAL(8,2) NOT NULL,\n" +
+                "  `coupon` DECIMAL(4,2) NOT NULL,\n" +
+                "  `rating` CHAR(4),\n" +
+                "  `nominal` DECIMAL(10,2) NOT NULL,\n" +
+                "  `maturity` DATE NOT NULL,\n" +
+                "  PRIMARY KEY (`ticker`)\n" +
+                ")");
+        jdbcTemplate.update("INSERT INTO stocks VALUES('AAPL US','Apple Inc.','Technology','USD',148.19,0.59,1)");
+        jdbcTemplate.update("INSERT INTO stocks VALUES('MSFT US','Microsoft Corporation','Technology','USD',304.36,0.74,0.88)");
+        jdbcTemplate.update("INSERT INTO stocks VALUES('AMZN US','Amazon.com Inc.','Consumer Discretionary','USD',3199.95,0,0.69)");
+        jdbcTemplate.update("INSERT INTO stocks VALUES('TSLA US','Tesla Inc','Consumer Discretionary','USD',680.26,0,1.63)");
+        jdbcTemplate.update("INSERT INTO stocks VALUES('JPM US','JPMorgan Chase & Co.','Financials','USD',154.72,2.33,1.15)");
     }
 
-    @Ignore
     @Test
     public void addSecuritiesToDatabaseTest() {
         AddStockRequest request1 = new AddStockRequest(
@@ -35,133 +67,79 @@ public class AcceptanceTestForDatabase {
         );
         AddStockRequest request2 = new AddStockRequest(
                 "INTC US", "Intel", "Technology", "USD",
-                "53.73", "2.o5", "1.12"
-        );
-        AddBondRequest request3 = new AddBondRequest(
-                "GAZPRU", "Gazprom 4.75 30/12/2031", "Energy", "USD", "108.75",
-                "4.75", "BBB+", "1000", "30/12/2031"
-        );
-        AddBondRequest request4 = new AddBondRequest(
-                "VALEBZ", "Vale 2.875 30/06/2027", "Materials", "USD", "104.25",
-                "2.875", "BBB", "1000", "30/12/20031"
+                "53.73", "2.o5", "1.12" //ошибка!
         );
         getAddStockService().execute(request1);
         getAddStockService().execute(request2);
-        getAddBondService().execute(request3);
-        getAddBondService().execute(request4);
         GetAllSecurityListResponse response = getAllSecurityListService().execute(new GetAllSecurityListRequest());
 
-        assertEquals(3, response.getList().size());
-        assertEquals("Alibaba", response.getList().get(1).getName());
-        assertEquals("Gazprom 4.75 30/12/2031", response.getList().get(2).getName());
+        assertEquals(6, response.getList().size());
+        assertEquals("Alibaba", response.getList().get(5).getName());
     }
 
-    @Ignore
     @Test
     public void removeSecuritiesFromDatabaseTest() {
-        AddStockRequest request1 = new AddStockRequest(
-                "BABA US", "Alibaba", "Technology", "USD",
-                "160.13", "0", "1.32"
-        );
-        AddBondRequest request2 = new AddBondRequest(
-                "GAZPRU", "Gazprom 4.75 30/12/2031", "Energy", "USD", "108.75",
-                "4.75", "BBB+", "1000", "30/12/2031"
-        );
-        RemoveSecurityRequest request3 = new RemoveSecurityRequest("Alibaba");
-        RemoveSecurityRequest request4 = new RemoveSecurityRequest("Gazprom");
-        getAddStockService().execute(request1);
-        getAddBondService().execute(request2);
-        RemoveSecurityResponse response1 = getRemoveSecurityService().execute(request3);
-        RemoveSecurityResponse response2 = getRemoveSecurityService().execute(request4);
+        RemoveSecurityRequest request1 = new RemoveSecurityRequest("AAPL US");
+        RemoveSecurityRequest request2 = new RemoveSecurityRequest("AMZN"); //ошибка!
+        RemoveSecurityResponse response1 = getRemoveSecurityService().execute(request1);
+        RemoveSecurityResponse response2 = getRemoveSecurityService().execute(request2);
         GetAllSecurityListResponse response3 = getAllSecurityListService().execute(new GetAllSecurityListRequest());
 
         assertTrue(response1.isRemoved());
         assertFalse(response2.isRemoved());
-        assertEquals(2, response3.getList().size());
-        assertEquals("Gazprom 4.75 30/12/2031", response3.getList().get(1).getName());
+        assertEquals(4, response3.getList().size());
+        assertEquals("Amazon.com Inc.", response3.getList().get(1).getName());
     }
 
-    @Ignore
     @Test
     public void findSecurityByNameInDatabaseTest() {
-        AddStockRequest request1 = new AddStockRequest(
-                "BABA", "Alibaba", "Technology", "USD",
-                "160.13", "0", "1.32"
-        );
-        AddBondRequest request2 = new AddBondRequest(
-                "GAZPRU", "Gazprom 4.75 30/12/2031", "Energy", "USD", "108.75",
-                "4.75", "BBB+", "1000", "30/12/2031"
-        );
-        FindSecurityByTickerOrNameRequest request3 = new FindSecurityByTickerOrNameRequest("Gazprom 4.75 30/12/2031");
-        FindSecurityByTickerOrNameRequest request4 = new FindSecurityByTickerOrNameRequest("Intel");
-        getAddStockService().execute(request1);
-        getAddBondService().execute(request2);
-        FindSecurityByTickerOrNameResponse response1 = getFindSecurityByNameService().execute(request3);
-        FindSecurityByTickerOrNameResponse response2 = getFindSecurityByNameService().execute(request4);
+        FindSecurityByTickerOrNameRequest request1 = new FindSecurityByTickerOrNameRequest("Apple Inc.");
+        FindSecurityByTickerOrNameRequest request2 = new FindSecurityByTickerOrNameRequest("AAPL");
+        FindSecurityByTickerOrNameRequest request3 = new FindSecurityByTickerOrNameRequest("AMZN US");
 
-        assertEquals(new Bond(
-                "GAZPRU", "Gazprom 4.75 30/12/2031", "Energy", "USD", 108.75,
-                4.75, "BBB+", 1000, "30/12/2031"
-        ), response1.getSecurity());
+        FindSecurityByTickerOrNameResponse response1 = getFindSecurityByNameService().execute(request1);
+        FindSecurityByTickerOrNameResponse response2 = getFindSecurityByNameService().execute(request2);
+        FindSecurityByTickerOrNameResponse response3 = getFindSecurityByNameService().execute(request3);
+
+        Stock apple = new Stock("AAPL US", "Apple Inc.", "Technology", "USD", 148.19, 0.59, 1);
+        Stock amazon = new Stock("AMZN US", "Amazon.com Inc.", "Consumer Discretionary", "USD", 3199.95, 0, 0.69);
+
+        assertEquals(apple, response1.getSecurity());
         assertNull(response2.getSecurity());
+        assertEquals(amazon, response3.getSecurity());
     }
 
-    @Ignore
     @Test
     public void filterStocksByMultipleParametersTest() {
-        AddStockRequest request1 = new AddStockRequest(
-                "BABA US", "Alibaba", "Technology", "USD",
-                "160.13", "0", "1.32"
-        );
-        AddStockRequest request2 = new AddStockRequest(
-                "INTC US", "Intel", "Technology", "USD",
-                "53.73", "2.05", "0.9"
-        );
-        AddStockRequest request3 = new AddStockRequest(
-                "PBR US", "Petrobras", "Energy", "USD",
-                "9.57", "4.5", "1.23"
-        );
-        AddStockRequest request4 = new AddStockRequest(
-                "FB US", "Facebook", "Communications", "USD",
-                "359.23", "0", "0.87"
-        );
-        FilterStocksByMultipleParametersRequest request5 = new FilterStocksByMultipleParametersRequest(
+        FilterStocksByMultipleParametersRequest request1 = new FilterStocksByMultipleParametersRequest(
                 of(
                         new FilterStocksByIndustryRequest("Technology"),
-                        new OrderingRequest("Name", "DESCENDING")
+                        new OrderingRequest("name", "DESC")
                 )
         );
-        FilterStocksByMultipleParametersRequest request6 = new FilterStocksByMultipleParametersRequest(
+        FilterStocksByMultipleParametersRequest request2 = new FilterStocksByMultipleParametersRequest(
                 of(
-                        new FilterStocksByAnyDoubleParameterRequest("Dividend", ">", "0"),
-                        new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<", "1")
+                        new FilterStocksByAnyDoubleParameterRequest("dividend_yield", ">", "0"),
+                        new FilterStocksByAnyDoubleParameterRequest("risk_weight", "<", "1")
                 )
         );
-        getAddStockService().execute(request1);
-        getAddStockService().execute(request2);
-        getAddStockService().execute(request3);
-        getAddStockService().execute(request4);
         FilterStocksByMultipleParametersResponse response1 =
-                getFilterStocksByMultipleParametersService().execute(request5);
+                getFilterStocksByMultipleParametersService().execute(request1);
         FilterStocksByMultipleParametersResponse response2 =
-                getFilterStocksByMultipleParametersService().execute(request6);
+                getFilterStocksByMultipleParametersService().execute(request2);
 
         assertEquals(of(
-                new Stock("INTC US", "Intel", "Technology", "USD", 53.73, 2.05, 0.9),
-                new Stock("BABA US", "Alibaba", "Technology", "USD", 160.13, 0, 1.32)
+                new Stock("MSFT US", "Microsoft Corporation", "Technology", "USD", 304.36, 0.74, 0.88),
+                new Stock("AAPL US", "Apple Inc.", "Technology", "USD", 148.19, 0.59, 1)
         ), response1.getList());
 
         assertEquals(of(
-                new Stock("INTC US", "Intel", "Technology", "USD", 53.73, 2.05, 0.9)
+                new Stock("MSFT US", "Microsoft Corporation", "Technology", "USD", 304.36, 0.74, 0.88)
         ), response2.getList());
     }
 
     private AddStockService getAddStockService() {
         return appContext.getBean(AddStockService.class);
-    }
-
-    private AddBondService getAddBondService() {
-        return appContext.getBean(AddBondService.class);
     }
 
     private GetAllSecurityListService getAllSecurityListService() {

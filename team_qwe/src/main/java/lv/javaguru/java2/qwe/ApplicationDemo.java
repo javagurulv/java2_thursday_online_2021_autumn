@@ -22,7 +22,7 @@ public class ApplicationDemo {
         //Симуляция изменения рыночных цен!
         getUtilityMethods().setMarketPriceSimulator(applicationContext);
         //Симуляция изменения текущей даты!
-        getUtilityMethods().setDateSimulator(applicationContext);
+//        getUtilityMethods().setDateSimulator(applicationContext);
 
         AppMenu appMenu = new AppMenu(applicationContext);
 

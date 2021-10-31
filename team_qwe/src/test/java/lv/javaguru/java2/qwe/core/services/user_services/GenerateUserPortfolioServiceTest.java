@@ -23,6 +23,7 @@ import java.util.stream.IntStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/*
 @RunWith(MockitoJUnitRunner.class)
 public class GenerateUserPortfolioServiceTest extends AcceptanceTestForDatabase {
 
@@ -108,4 +109,4 @@ public class GenerateUserPortfolioServiceTest extends AcceptanceTestForDatabase 
 
     }
 
-}
+}*/

@@ -30,7 +30,7 @@ public class GetUserPortfolioSummaryService {
 
     public GetUserPortfolioSummaryResponse execute(GetUserPortfolioSummaryRequest request) {
         List<CoreError> errors = validator.validate(request);
-        Optional<User> user = userData.findUserByName(request.getUserName());
+        Optional<User> user = userData.findUserByIdOrName(request.getUserName());
         if (errors.isEmpty() && user.isPresent()) {
             double portfolioValue = calculatePortfolioValue(user.get());
             int amountOfPositions = calculateAmountOfPosition(user.get());

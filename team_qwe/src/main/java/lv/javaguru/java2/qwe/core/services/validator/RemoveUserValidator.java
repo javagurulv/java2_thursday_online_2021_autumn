@@ -24,7 +24,7 @@ public class RemoveUserValidator {
     private final Map<Predicate<RemoveUserRequest>, CoreError> validator = ofEntries(
             entry(this::checkUserPortfolioIsPresent,
                     new CoreError("Name", "can't remove user, because there are securities in the portfolio!")),
-            entry(request -> userData.findUserByName(request.getName()).isEmpty(),
+            entry(request -> userData.findUserByIdOrName(request.getName()).isEmpty(),
                     new CoreError("Name", "No user with such name!"))
     );
 
@@ -36,8 +36,8 @@ public class RemoveUserValidator {
     }
 
     private boolean checkUserPortfolioIsPresent(RemoveUserRequest request) {
-        Optional<User> user = userData.findUserByName(request.getName());
-        return user.isPresent() && user.get().getPortfolio().size() != 1;
+        Optional<User> user = userData.findUserByIdOrName(request.getName());
+        return user.isPresent() && !user.get().getPortfolio().isEmpty();
     }
 
 }

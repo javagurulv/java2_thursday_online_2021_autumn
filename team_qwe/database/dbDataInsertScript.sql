@@ -1,9 +1,10 @@
 delimiter |
 
-CREATE TRIGGER ins_sec AFTER INSERT ON user1_portfolio
+CREATE TRIGGER ins_sec AFTER INSERT ON users_positions
   FOR EACH ROW
   BEGIN
-    UPDATE users SET cash = cash - NEW.amount * NEW.purchase_price WHERE id = 1;
+    UPDATE users, users_positions SET cash = cash - NEW.amount * NEW.purchase_price
+    WHERE users.id = NEW.user_id;
   END;
 
 |

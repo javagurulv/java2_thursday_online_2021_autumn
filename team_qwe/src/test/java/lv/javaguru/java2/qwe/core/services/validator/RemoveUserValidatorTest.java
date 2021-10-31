@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static lv.javaguru.java2.qwe.utils.UtilityMethods.importDataForTests;
 
+/*
 public class RemoveUserValidatorTest extends AcceptanceTestForDatabase {
 
     private final RemoveUserValidator validator =
@@ -61,4 +62,4 @@ public class RemoveUserValidatorTest extends AcceptanceTestForDatabase {
                 "can't remove user, because there are securities in the portfolio!");
     }
 
-}
+}*/

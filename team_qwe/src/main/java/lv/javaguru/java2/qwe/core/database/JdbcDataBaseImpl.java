@@ -19,11 +19,6 @@ public class JdbcDataBaseImpl implements Database {
     @Autowired private JdbcTemplate jdbcTemplate;
 
     @Override
-    public ArrayList<Security> getSecurityList() {
-        return null;
-    }
-
-    @Override
     public void addStock(Stock stock) {
         jdbcTemplate.update("INSERT INTO stocks (ticker, name, industry, currency, market_price, dividend_yield, risk_weight) VALUES\n" +
                         "(?, ?, ?, ?, ?, ?, ?)",

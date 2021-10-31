@@ -50,7 +50,7 @@ public class UtilityMethods {
     private int dateSimulatorPeriod;
 
     public String[] convertToStringArray(UserData userData) {
-        return userData.getUserList().stream()
+        return userData.getAllUserList().stream()
                 .map(User::getName)
                 .toArray(String[]::new);
     }
@@ -59,14 +59,14 @@ public class UtilityMethods {
         if (marketPriceSimulatorEnabled && marketPriceSimulatorPeriod > 0) {
             ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
             Database database = context.getBean(Database.class);
-            Runnable simulator = () -> simulateMarketPrices(database.getSecurityList());
+            Runnable simulator = () -> simulateMarketPrices(database.getAllSecurityList());
             scheduledExecutorService.scheduleAtFixedRate(
                     simulator, marketPriceSimulatorInitDelay, marketPriceSimulatorPeriod, TimeUnit.SECONDS
             );
         }
     }
 
-    public void setDateSimulator(ApplicationContext context) {
+/*    public void setDateSimulator(ApplicationContext context) {
         if (dateSimulatorEnabled && dateSimulatorPeriod > 0) {
             ScheduledExecutorService scheduledExecutorService1 = Executors.newScheduledThreadPool(1);
             UserData userData = context.getBean(UserData.class);
@@ -74,7 +74,7 @@ public class UtilityMethods {
             scheduledExecutorService1.scheduleAtFixedRate(
                     simulator1, dateSimulatorInitDelay, dateSimulatorPeriod, TimeUnit.SECONDS);
         }
-    }
+    }*/
 
     private void simulateMarketPrices(List<Security> list) {
         if (list.size() > 1) {
@@ -124,6 +124,15 @@ public class UtilityMethods {
             return false;
         } catch (NumberFormatException e) {
             return true;
+        }
+    }
+
+    public boolean isLong(String text) {
+        try {
+            Long.parseLong(text);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 

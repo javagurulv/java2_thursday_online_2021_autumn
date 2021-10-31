@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 1;
 
-CREATE TABLE IF NOT EXISTS `user1_portfolio` (
+CREATE TABLE IF NOT EXISTS `users_positions` (
   `user_id` BIGINT NOT NULL,
   `security_ticker` VARCHAR(10) NOT NULL,
   `amount` INTEGER NOT NULL,

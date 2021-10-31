@@ -46,7 +46,7 @@ public class FindUserByNameServiceTest {
         Mockito.verify(validator).validate(any());
     }
 
-    @Test
+/*    @Test
     public void shouldReturnUserSearchResult() {
         FindUserByNameRequest request = new FindUserByNameRequest("Alexander");
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
@@ -61,6 +61,6 @@ public class FindUserByNameServiceTest {
         Assert.assertEquals(response.getUser(), new User(1,"Alexander", 25,
                 Type.SUPER_RICH, 1_000_000)
         );
-    }
+    }*/
 
 }

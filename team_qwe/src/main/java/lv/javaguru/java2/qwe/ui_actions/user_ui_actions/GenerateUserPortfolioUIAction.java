@@ -13,7 +13,6 @@ public class GenerateUserPortfolioUIAction implements UIAction {
 
     @Autowired private GenerateUserPortfolioService generatePortfolioService;
     @Autowired private UtilityMethods utils;
-    private String userName;
 
     @Override
     public void execute() {
@@ -23,17 +22,18 @@ public class GenerateUserPortfolioUIAction implements UIAction {
                         "GENERATE PORTFOLIO",
                         utils.convertToStringArray(generatePortfolioService.getUserData())
                 ));
-        userName = request.getUserName();
         GenerateUserPortfolioResponse response =
                 generatePortfolioService.execute(request);
         printResponse(response);
     }
 
     public void printResponse(GenerateUserPortfolioResponse response) {
+        String userName = response.getUser().getName() + "(ID: " + response.getUser().getId() + ")";
         if (!response.hasErrors()) {
             utils.messageDialog("Portfolio has been generated for " + userName);
             System.out.println("==============" + userName + "===============");
-            response.getPortfolio().forEach(System.out::println);
+            response.getUser().getPortfolio().forEach(System.out::println);
+            System.out.println("CASH: " + response.getUser().getCash());
             System.out.println("\n");
         } else {
             utils.messageDialog("WRONG INPUT!\n" +

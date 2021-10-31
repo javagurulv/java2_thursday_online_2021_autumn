@@ -12,8 +12,8 @@ import java.util.*;
 import static java.util.stream.Collectors.*;
 import static lv.javaguru.java2.qwe.core.domain.Type.*;
 
-@Component
-public class UserDataImpl implements UserData {
+//@Component
+public class UserDataImpl /*implements UserData*/ {
 
     private List<User> userList;
     @Autowired
@@ -22,60 +22,42 @@ public class UserDataImpl implements UserData {
 
     public UserDataImpl() {
         this.userList = new ArrayList<>();
-        userList.add(new User(1,"Alexander", 25, SUPER_RICH, 1_000_000));
-        userList.add(new User(2,"Tatyana", 32, UPPER_MIDDLE, 125_000));
-        userList.add(new User(3,"Vladimir", 78, LOWER_MIDDLE, 30_000));
-        userList.add(new User(4,"John", 55, MIDDLE, 50_000));
+        userList.add(new User("Alexander", 25, SUPER_RICH, 1_000_000));
+        userList.add(new User("Tatyana", 32, UPPER_MIDDLE, 125_000));
+        userList.add(new User("Vladimir", 78, LOWER_MIDDLE, 30_000));
+        userList.add(new User("John", 55, MIDDLE, 50_000));
     }
 
-    @Override
-    public List<User> getUserList() {
-        return userList;
-    }
-
-    @Override
-    public Database getDatabase() {
-        return database;
-    }
-
-    public LocalDate getCurrentDate() {
-        return currentDate;
-    }
-
-    public void setCurrentDate(LocalDate currentDate) {
-        this.currentDate = currentDate;
-    }
-
-    @Override
+//    @Override
     public void addUser(User user) {
         userList.add(user);
     }
 
-    @Override
+//    @Override
     public boolean removeUser(String name) {
         return userList.removeIf(user -> user.getName().equals(name));
     }
 
-    @Override
-    public List<User> getAllUserList() {
-        return getUserList();
-    }
+//    @Override
+//    public List<User> getAllUserList() {
+//        return getUserList();
+//    }
 
-    @Override
+//    @Override
     public Optional<User> findUserByName(String userName) {
         return userList.stream()
                 .filter(user -> user.getName().equals(userName))
                 .findAny();
     }
 
-    @Override
+//    @Override
     public Map<String, List<String>> getUserPortfolioGroupedByIndustry(User user) {
         return user.getPortfolio().stream()
                 .map(Position::getSecurity)
                 .collect(groupingBy(Security::getIndustry, mapping(Security::getName, toList())));
     }
 
-    @Override
+//    @Override
     public Map<String, Double> getUserInvestmentsByEachIndustry(User user) {
         return user.getPortfolio().stream()
                 .collect(groupingBy(position -> position.getSecurity().getIndustry(),

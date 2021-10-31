@@ -36,7 +36,7 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
 
     @Override
     public void execute() {
-        try {
+//        try {
             List<String> finalParameterList =
                     setFilterParameters(Arrays.stream(parameters).collect(Collectors.toList()), new ArrayList<>());
             utils.messageDialog("You have chosen parameters:\n - " + printList(finalParameterList) + ";");
@@ -45,9 +45,9 @@ public class FilterStocksByMultipleParametersUIAction implements UIAction {
             FilterStocksByMultipleParametersResponse response = multipleParametersService.execute(multiFilterRequest);
             printResponse(response);
             System.out.println("\n");
-        } catch (NumberFormatException e) {
+/*        } catch (NumberFormatException e) {
             utils.messageDialog("Wrong format!");
-        }
+        }*/
     }
 
     private List<String> setFilterParameters(List<String> parameters, List<String> finalParameters) {

@@ -47,6 +47,9 @@ public class FilterStocksByMultipleParametersValidator {
             else if (requestList.get(i).getClass().getSimpleName().equals("FilterStocksByIndustryRequest")) {
                 errorList.addAll(new FilterStockByIndustryValidator().validate(requestList.get(i)));
             }
+            else if (requestList.get(i).getClass().getSimpleName().equals("PagingRequest")) {
+                errorList.addAll(new PagingRequestValidator().validate(requestList.get(i)));
+            }
             else {
                 errorList.addAll(new OrderingRequestValidator().validate(requestList.get(i)));
             }
