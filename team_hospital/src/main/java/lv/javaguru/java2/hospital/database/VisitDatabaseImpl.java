@@ -44,10 +44,10 @@ public class VisitDatabaseImpl implements VisitDatabase {
         if (visitToEditOpt.isPresent()) {
             Visit visitToEdit = visitToEditOpt.get();
             if (userInput.equals(EditVisitEnum.DOCTOR)) {
-                visitToEdit.setDoctor(doctorDatabase.findById(Long.parseLong(changes)).get(0));
+                visitToEdit.setDoctorID(doctorDatabase.findById(Long.parseLong(changes)).get(0).getId());
                 isVisitEdited = true;
             } else if (userInput.equals(EditVisitEnum.PATIENT)) {
-                visitToEdit.setPatient(patientDatabase.findById(Long.parseLong(changes)).get());
+                visitToEdit.setPatientID(patientDatabase.findById(Long.parseLong(changes)).get(0).getId());
                 isVisitEdited = true;
             } else if (userInput.equals(EditVisitEnum.DATE)){
                 visitToEdit.setVisitDate(LocalDateTime.parse(changes));
@@ -70,14 +70,14 @@ public class VisitDatabaseImpl implements VisitDatabase {
     @Override
     public List<Visit> findByDoctorId(Long id) {
         return visits.stream()
-                .filter(visit -> Objects.equals(visit.getDoctor().getId(), id))
+                .filter(visit -> Objects.equals(visit.getDoctorID(), id))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Visit> findByPatientId(Long id) {
         return visits.stream()
-                .filter(visit -> Objects.equals(visit.getPatient().getId(), id))
+                .filter(visit -> Objects.equals(visit.getDoctorID(), id))
                 .collect(Collectors.toList());
     }
 
@@ -91,15 +91,15 @@ public class VisitDatabaseImpl implements VisitDatabase {
     @Override
     public List<Visit> findByDoctorIdAndPatientId(Long doctorId, Long patientId) {
         return visits.stream()
-                .filter(visit -> Objects.equals(visit.getDoctor().getId(), doctorId))
-                .filter(visit -> Objects.equals(visit.getPatient().getId(), patientId))
+                .filter(visit -> Objects.equals(visit.getDoctorID(), doctorId))
+                .filter(visit -> Objects.equals(visit.getPatientID(), patientId))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Visit> findByDoctorIdAndDate(Long doctorId, LocalDateTime date) {
         return visits.stream()
-                .filter(visit -> Objects.equals(visit.getDoctor().getId(), doctorId))
+                .filter(visit -> Objects.equals(visit.getDoctorID(), doctorId))
                 .filter(visit -> visit.getVisitDate().equals(date))
                 .collect(Collectors.toList());
     }
@@ -107,7 +107,7 @@ public class VisitDatabaseImpl implements VisitDatabase {
     @Override
     public List<Visit> findByPatientIdAndDate(Long patientId, LocalDateTime date) {
         return visits.stream()
-                .filter(visit -> Objects.equals(visit.getPatient().getId(), patientId))
+                .filter(visit -> Objects.equals(visit.getPatientID(), patientId))
                 .filter(visit -> visit.getVisitDate().equals(date))
                 .collect(Collectors.toList());
     }
@@ -115,8 +115,8 @@ public class VisitDatabaseImpl implements VisitDatabase {
     @Override
     public List<Visit> findByDoctorIdAndPatientIdAndDate(Long doctorId, Long patientId, LocalDateTime date) {
         return visits.stream()
-                .filter(visit -> Objects.equals(visit.getDoctor().getId(), doctorId))
-                .filter(visit -> Objects.equals(visit.getPatient().getId(), patientId))
+                .filter(visit -> Objects.equals(visit.getDoctorID(), doctorId))
+                .filter(visit -> Objects.equals(visit.getPatientID(), patientId))
                 .filter(visit -> visit.getVisitDate().equals(date))
                 .collect(Collectors.toList());
     }

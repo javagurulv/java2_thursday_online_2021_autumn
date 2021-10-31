@@ -26,7 +26,7 @@ public class ExistenceByPatientIdAndDate implements VisitExistenceBySearchCriter
     @Override
     public Optional<CoreError> validateExistence(SearchVisitRequest request) {
         for (Visit visit : database.getAllVisits()) {
-            if (visit.getPatient().getId().equals(request.getPatientId())
+            if (visit.getPatientID().equals(request.getPatientId())
                     && visit.getVisitDate().equals(getVisitDate.getVisitDateFromString(request.getVisitDate()))) {
                 return Optional.empty();
             }

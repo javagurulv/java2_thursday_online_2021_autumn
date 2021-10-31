@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class AddPatientValidator {
 
     @Autowired
-    private PatientDatabaseImpl database;
+    private PatientDatabase database;
 
     public List<CoreError> validate(AddPatientRequest request) {
         List<CoreError> errors = new ArrayList<>();

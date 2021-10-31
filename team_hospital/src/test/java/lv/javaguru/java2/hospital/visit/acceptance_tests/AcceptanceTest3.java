@@ -38,9 +38,8 @@ public class AcceptanceTest3 {
         AddDoctorResponse addDoctorResponse2 = getAddDoctorService().execute(addDoctorRequest2);
 
         AddVisitRequest request = new AddVisitRequest(
-                addPatientResponse.getPatient().getPersonalCode(),
-                addDoctorResponse.getNewDoctor().getName(),
-                addDoctorResponse.getNewDoctor().getSurname(),
+                addPatientResponse.getPatient().getId().toString(),
+                addDoctorResponse.getNewDoctor().getId().toString(),
                 "10/10/2023 10:00");
         AddVisitResponse addVisitResponse = getAddVisitService().execute(request);
 

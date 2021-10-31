@@ -34,9 +34,11 @@ class DateExistenceValidatorTest {
     public void ShouldReturnDateExistenceError(){
         List<Visit> visits = new ArrayList<>();
         Doctor doctor = new Doctor("name", "surname", "speciality");
+        doctor.setId(1L);
         Patient patient = new Patient("name", "surname", "1234");
+        patient.setId(2L);
         String date = "25/12/2025 12:00";
-        Visit visit = new Visit(doctor, patient, LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date)));
+        Visit visit = new Visit(doctor.getId(), patient.getId(), LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date)));
         visits.add(visit);
 
         Mockito.when(getVisitDate.getVisitDateFromString(date))
@@ -53,9 +55,11 @@ class DateExistenceValidatorTest {
     public void ShouldReturnEmptyError(){
         List<Visit> visits = new ArrayList<>();
         Doctor doctor = new Doctor("name", "surname", "speciality");
+        doctor.setId(1L);
         Patient patient = new Patient("name", "surname", "1234");
+        patient.setId(2L);
         String date = "25/12/2025 12:00";
-        Visit visit = new Visit(doctor, patient, LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date)));
+        Visit visit = new Visit(doctor.getId(), patient.getId(), LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date)));
         visits.add(visit);
 
         Mockito.when(getVisitDate.getVisitDateFromString(date))

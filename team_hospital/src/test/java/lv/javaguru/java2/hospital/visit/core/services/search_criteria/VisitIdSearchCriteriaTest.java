@@ -44,12 +44,14 @@ class VisitIdSearchCriteriaTest {
     @Test
     public void shouldReturnCorrectVisit() throws ParseException {
         Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
+        doctor.setId(1L);
         Patient patient = new Patient("PatientsName", "PatientsSurname", "171154-12636");
+        patient.setId(2L);
 
         List<Visit> visits = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime date = LocalDateTime.parse("18/12/2021 13:00", formatter);
-        visits.add(new Visit(doctor, patient, date));
+        visits.add(new Visit(doctor.getId(), patient.getId(), date));
         Long visitId = visits.get(0).getVisitID();
 
         Mockito.when(database.findByVisitId(visitId)).thenReturn(visits);
@@ -57,8 +59,8 @@ class VisitIdSearchCriteriaTest {
                 (visitId, null, null, "");
         Visit visit = searchCriteria.process(request).get(0);
         assertEquals(searchCriteria.process(request).size(), 1);
-        assertEquals(visit.getDoctor(), doctor);
-        assertEquals(visit.getPatient(), patient);
+        assertEquals(visit.getDoctorID(), doctor.getId());
+        assertEquals(visit.getPatientID(), patient.getId());
         assertEquals(visit.getVisitID(), visits.get(0).getVisitID());
         assertEquals(visit.getVisitDate(), date);
     }

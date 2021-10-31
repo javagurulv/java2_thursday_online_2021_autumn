@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.search_patient_service;
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
@@ -8,6 +9,7 @@ import lv.javaguru.java2.hospital.patient.core.services.validators.SearchPatient
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 @Component
@@ -20,7 +22,7 @@ public class SearchPatientsService {
     private boolean pagingEnabled;
 
     @Autowired
-    private PatientDatabaseImpl patientDatabase;
+    private PatientDatabase patientDatabase;
     @Autowired
     private SearchPatientsValidator validator;
 

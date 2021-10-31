@@ -23,7 +23,6 @@ public class AddVisitValidator {
         List<CoreError> errors = new ArrayList<>();
         validatePatientsPersonalCode(patientVisitRequest).ifPresent(errors::add);
         validateDoctorsName(patientVisitRequest).ifPresent(errors::add);
-        validateDoctorsSurname(patientVisitRequest).ifPresent(errors::add);
         validateDateFieldOnEmptiness(patientVisitRequest).ifPresent(errors::add);
         validatePatientExistence(patientVisitRequest).ifPresent(errors::add);
         validateDoctorExistence(patientVisitRequest).ifPresent(errors::add);
@@ -32,18 +31,13 @@ public class AddVisitValidator {
     }
 
     private Optional<CoreError> validatePatientsPersonalCode(AddVisitRequest request) {
-        return (request.getPatientsPersonalCode() == null || request.getPatientsPersonalCode().isEmpty())
-                ? Optional.of(new CoreError("Patient personal code", "must not be empty!")) : Optional.empty();
+        return (request.getPatientID() == null || request.getPatientID().isEmpty())
+                ? Optional.of(new CoreError("Patient ID", "must not be empty!")) : Optional.empty();
     }
 
     private Optional<CoreError> validateDoctorsName(AddVisitRequest request) {
-        return (request.getDoctorsName() == null || request.getDoctorsName().isEmpty())
-                ? Optional.of(new CoreError("Doctor name", "must not be empty!")) : Optional.empty();
-    }
-
-    private Optional<CoreError> validateDoctorsSurname(AddVisitRequest request) {
-        return (request.getDoctorsSurname() == null || request.getDoctorsSurname().isEmpty())
-                ? Optional.of(new CoreError("Doctor surname", "must not be empty!")) : Optional.empty();
+        return (request.getDoctorsID() == null || request.getDoctorsID().isEmpty())
+                ? Optional.of(new CoreError("Doctor ID", "must not be empty!")) : Optional.empty();
     }
 
     private Optional<CoreError> validateDateFieldOnEmptiness(AddVisitRequest request) {
@@ -52,15 +46,14 @@ public class AddVisitValidator {
     }
 
     private Optional<CoreError> validatePatientExistence(AddVisitRequest request) {
-        return request.getPatientsPersonalCode() == null || request.getPatientsPersonalCode().isEmpty() ? Optional.empty() :
-                patientDatabase.findPatientsByPersonalCode(request.getPatientsPersonalCode()).isEmpty() ?
+        return request.getPatientID() == null || request.getPatientID().isEmpty() ? Optional.empty() :
+                patientDatabase.findById(Long.valueOf(request.getPatientID())).isEmpty() ?
                         Optional.of(new CoreError("Patient", "does not exist!")) : Optional.empty();
     }
 
     private Optional<CoreError> validateDoctorExistence(AddVisitRequest request) {
-        return request.getDoctorsName() == null || request.getDoctorsName().isEmpty()
-                || request.getDoctorsSurname() == null || request.getDoctorsSurname().isEmpty() ? Optional.empty() :
-                doctorDatabase.findByNameAndSurname(request.getDoctorsName(), request.getDoctorsSurname()).isEmpty() ?
+        return request.getDoctorsID() == null || request.getDoctorsID().isEmpty() ? Optional.empty() :
+                doctorDatabase.findById(Long.valueOf(request.getDoctorsID())).isEmpty() ?
                         Optional.of(new CoreError("Doctor", "does not exist!")) : Optional.empty();
     }
 

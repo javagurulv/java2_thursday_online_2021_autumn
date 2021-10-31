@@ -34,7 +34,7 @@ public class VisitExistenceForSearchValidator {
     }
 
     private VisitExistenceBySearchCriteria[] getVisitExistenceBySearchCriteria() {
-        VisitExistenceBySearchCriteria[] visitExistenceBySearchCriteria = {
+        return new VisitExistenceBySearchCriteria[]{
                 existenceByVisitId,
                 existenceByDoctorIdAndPatientIdAndDate,
                 existenceByDoctorIdAndPatientId,
@@ -43,6 +43,5 @@ public class VisitExistenceForSearchValidator {
                 existenceByDoctorId,
                 existenceByPatientId,
                 existenceByDate};
-        return visitExistenceBySearchCriteria;
     }
 }
