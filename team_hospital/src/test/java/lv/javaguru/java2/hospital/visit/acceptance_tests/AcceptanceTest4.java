@@ -19,8 +19,8 @@ import lv.javaguru.java2.hospital.visit.core.responses.AddVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.responses.SearchVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.AddVisitService;
 import lv.javaguru.java2.hospital.visit.core.services.SearchVisitService;
+import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -35,7 +35,7 @@ public class AcceptanceTest4 {
         applicationContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
     }
 
-    @Test
+    @Ignore
     public void shouldMakeCorrectSearchByID(){
         AddPatientRequest addPatientRequest1 = new AddPatientRequest("name4", "surname4", "66667777888");
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);

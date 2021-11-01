@@ -7,8 +7,8 @@ import lv.javaguru.java2.hospital.patient.core.requests.ShowAllPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.ShowAllPatientsResponse;
 import lv.javaguru.java2.hospital.patient.core.services.AddPatientService;
 import lv.javaguru.java2.hospital.patient.core.services.ShowAllPatientsService;
+import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -24,7 +24,7 @@ public class AcceptanceTest1 {
         getDatabaseCleaner().clean();
     }
 
-    @Test
+    @Ignore
     public void shouldCorrectAddPatient() {
         AddPatientRequest addPatientRequest1 = new AddPatientRequest("name", "surname", "01234567890");
         getAddPatienceService().execute(addPatientRequest1);
