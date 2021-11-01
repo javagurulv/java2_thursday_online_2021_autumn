@@ -32,7 +32,7 @@ public class FilterStocksByMultipleParametersService {
         return new FilterStocksByMultipleParametersResponse(errors, emptyList);
     }
 
-    static private String constructQuery(FilterStocksByMultipleParametersRequest request) {
+    private String constructQuery(FilterStocksByMultipleParametersRequest request) {
 
         StringBuilder query = new StringBuilder("SELECT * FROM stocks");
         List<CoreRequest> requestList = request.getRequestList();
@@ -70,7 +70,7 @@ public class FilterStocksByMultipleParametersService {
         return query.toString();
     }
 
-    private static String getRowNumber(String pageNumber, String pageSize) {
+    private String getRowNumber(String pageNumber, String pageSize) {
         return String.valueOf(Integer.parseInt(pageNumber) * Integer.parseInt(pageSize));
     }
 

@@ -16,7 +16,6 @@ import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
-import static java.util.Comparator.*;
 import static java.util.Map.*;
 
 @Component
@@ -36,7 +35,6 @@ public class GenerateUserPortfolioService {
         Optional<User> user = userData.findUserByIdOrName(request.getUserName());
         if (user.isPresent() && user.get().getPortfolio().size() > 0) {
             errors.add(new CoreError("", "portfolio has been already generated for this user!"));
-            List<Position> positions = new ArrayList<>();
             return new GenerateUserPortfolioResponse(errors, user.get());
         }
         if (user.isPresent() && user.get().getPortfolio().size() == 0) {
@@ -46,14 +44,11 @@ public class GenerateUserPortfolioService {
             Map<String, List<Security>> listPerIndustry = calculateListOfSecuritiesPerIndustry(user1, investmentPerIndustry);
             List<Position> userPortfolio = generateUserPortfolio(listPerIndustry, investmentPerIndustry);
             addPortfolioToDatabaseSQL(userPortfolio, user1); // сохраняет сгенерированный портфель в базу данных
-//            double portfolioTotalValue = calculatePortfolioTotalValue(userPortfolio);
-//            addCashResidual(user1, userPortfolio, portfolioTotalValue);
             user1.setPortfolio(userPortfolio);
             user1.setCash(userData.getUserCash(user1.getId()).get());
             user1.setPortfolioGenerationDate(userData.getCurrentDate());
             return new GenerateUserPortfolioResponse(user1);
         } else {
-            List<Position> positions = new ArrayList<>();
             return new GenerateUserPortfolioResponse(errors, user.get());
         }
     }
@@ -95,20 +90,6 @@ public class GenerateUserPortfolioService {
                 .collect(toList());
     }
 
-/*    private double calculatePortfolioTotalValue(List<Position> userPortfolio) {
-        return userPortfolio.stream()
-                .map(position -> position.getAmount() * position.getPurchasePrice())
-                .reduce(Double::sum).orElse(0.);
-    }*/
-
-/*    private void addCashResidual(User user, List<Position> userPortfolio, double portfolioTotalValue) {
-        userPortfolio.add(new Position(
-                new Cash(),
-                utils.round(user.getInitialInvestment() - portfolioTotalValue),
-                1
-        ));
-    }*/
-
     private Map<Integer, List<Security>> securitiesForRiskGroups() {
         return ofEntries(
                 entry(1, database.filterStocksByMultipleParameters("SELECT * FROM stocks\n" +
@@ -132,43 +113,5 @@ public class GenerateUserPortfolioService {
         IntStream.rangeClosed(0, portfolio.size() - 1)
                 .forEach(i -> userData.savePosition(portfolio.get(i), user.getId()));
     }
-
-
-/*    private Map<Integer, List<Security>> securitiesForRiskGroups() {
-        return ofEntries(
-                entry(1, database.getAllSecurityList().stream()
-                        .filter(security -> security.getClass().getSimpleName().equals("Stock"))
-                        .map(security -> (Stock) security)
-                        .filter(stock -> stock.getDividends() > 3)
-                        .filter(stock -> stock.getRiskWeight() < 1.2)
-                        .sorted(comparingDouble(Stock::getRiskWeight))
-                        .collect(toList())),
-                entry(2, database.getAllSecurityList().stream()
-                        .filter(security -> security.getClass().getSimpleName().equals("Stock"))
-                        .map(security -> (Stock) security)
-                        .filter(stock -> stock.getDividends() > 2)
-                        .filter(stock -> stock.getRiskWeight() < 1.2)
-                        .sorted(comparingDouble(Stock::getRiskWeight).reversed())
-                        .collect(toList())),
-                entry(3, database.getAllSecurityList().stream()
-                        .filter(security -> security.getClass().getSimpleName().equals("Stock"))
-                        .map(security -> (Stock) security)
-                        .filter(stock -> stock.getDividends() > 1)
-                        .filter(stock -> stock.getRiskWeight() < 1)
-                        .collect(toList())),
-                entry(4, database.getAllSecurityList().stream()
-                        .filter(security -> security.getClass().getSimpleName().equals("Stock"))
-                        .map(security -> (Stock) security)
-                        .filter(stock -> stock.getDividends() < 1.5)
-                        .filter(stock -> stock.getRiskWeight() > 1.1)
-                        .sorted(comparingDouble(Stock::getRiskWeight).reversed())
-                        .collect(toList())),
-                entry(5, database.getAllSecurityList().stream()
-                        .filter(security -> security.getClass().getSimpleName().equals("Stock"))
-                        .map(security -> (Stock) security)
-                        .sorted(comparingDouble(Stock::getRiskWeight).reversed())
-                        .collect(toList()))
-        );
-    }*/
 
 }

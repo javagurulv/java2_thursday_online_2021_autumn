@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
-
 @Component
 public class FilterStocksByMultipleParametersUIAction implements UIAction {
 

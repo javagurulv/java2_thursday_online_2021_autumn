@@ -60,17 +60,13 @@ public class AcceptanceTestForDatabase {
     }
 
     @Test
-    public void addSecuritiesToDatabaseTest() {
-        AddStockRequest request1 = new AddStockRequest(
+    public void addSecuritiesToDatabaseTest1() {
+        AddStockRequest request = new AddStockRequest(
                 "BABA US", "Alibaba", "Technology", "USD",
                 "160.13", "0", "1.32"
         );
-        AddStockRequest request2 = new AddStockRequest(
-                "INTC US", "Intel", "Technology", "USD",
-                "53.73", "2.o5", "1.12" //ошибка!
-        );
-        getAddStockService().execute(request1);
-        getAddStockService().execute(request2);
+
+        getAddStockService().execute(request);
         GetAllSecurityListResponse response = getAllSecurityListService().execute(new GetAllSecurityListRequest());
 
         assertEquals(6, response.getList().size());
@@ -78,65 +74,102 @@ public class AcceptanceTestForDatabase {
     }
 
     @Test
-    public void removeSecuritiesFromDatabaseTest() {
-        RemoveSecurityRequest request1 = new RemoveSecurityRequest("AAPL US");
-        RemoveSecurityRequest request2 = new RemoveSecurityRequest("AMZN"); //ошибка!
-        RemoveSecurityResponse response1 = getRemoveSecurityService().execute(request1);
-        RemoveSecurityResponse response2 = getRemoveSecurityService().execute(request2);
-        GetAllSecurityListResponse response3 = getAllSecurityListService().execute(new GetAllSecurityListRequest());
+    public void addSecuritiesToDatabaseTest2() {
+        AddStockRequest request = new AddStockRequest(
+                "INTC US", "Intel", "Technology", "USD",
+                "53.73", "2.o5", "1.12" //ошибка!
+        );
+        getAddStockService().execute(request);
+        GetAllSecurityListResponse response = getAllSecurityListService().execute(new GetAllSecurityListRequest());
 
-        assertTrue(response1.isRemoved());
-        assertFalse(response2.isRemoved());
-        assertEquals(4, response3.getList().size());
-        assertEquals("Amazon.com Inc.", response3.getList().get(1).getName());
+        assertEquals(5, response.getList().size());
     }
 
     @Test
-    public void findSecurityByNameInDatabaseTest() {
+    public void removeSecuritiesFromDatabaseTest1() {
+        RemoveSecurityRequest request = new RemoveSecurityRequest("AAPL US");
+        RemoveSecurityResponse response1 = getRemoveSecurityService().execute(request);
+        GetAllSecurityListResponse response2 = getAllSecurityListService().execute(new GetAllSecurityListRequest());
+
+        assertTrue(response1.isRemoved());
+        assertEquals(4, response2.getList().size());
+
+    }
+
+    @Test
+    public void removeSecuritiesFromDatabaseTest2() {
+        RemoveSecurityRequest request = new RemoveSecurityRequest("AMZN"); //ошибка!
+        RemoveSecurityResponse response1 = getRemoveSecurityService().execute(request);
+        GetAllSecurityListResponse response2 = getAllSecurityListService().execute(new GetAllSecurityListRequest());
+
+        assertFalse(response1.isRemoved());
+        assertEquals(5, response2.getList().size());
+        assertEquals("Amazon.com Inc.", response2.getList().get(2).getName());
+    }
+
+    @Test
+    public void findSecurityByNameInDatabaseTest1() {
         FindSecurityByTickerOrNameRequest request1 = new FindSecurityByTickerOrNameRequest("Apple Inc.");
-        FindSecurityByTickerOrNameRequest request2 = new FindSecurityByTickerOrNameRequest("AAPL");
-        FindSecurityByTickerOrNameRequest request3 = new FindSecurityByTickerOrNameRequest("AMZN US");
-
         FindSecurityByTickerOrNameResponse response1 = getFindSecurityByNameService().execute(request1);
-        FindSecurityByTickerOrNameResponse response2 = getFindSecurityByNameService().execute(request2);
-        FindSecurityByTickerOrNameResponse response3 = getFindSecurityByNameService().execute(request3);
-
-        Stock apple = new Stock("AAPL US", "Apple Inc.", "Technology", "USD", 148.19, 0.59, 1);
-        Stock amazon = new Stock("AMZN US", "Amazon.com Inc.", "Consumer Discretionary", "USD", 3199.95, 0, 0.69);
-
+        Stock apple = new Stock("AAPL US", "Apple Inc.",
+                "Technology", "USD", 148.19, 0.59, 1);
         assertEquals(apple, response1.getSecurity());
+
+    }
+
+    @Test
+    public void findSecurityByNameInDatabaseTest2() {
+        FindSecurityByTickerOrNameRequest request2 = new FindSecurityByTickerOrNameRequest("AAPL");
+        FindSecurityByTickerOrNameResponse response2 = getFindSecurityByNameService().execute(request2);
         assertNull(response2.getSecurity());
+    }
+
+    @Test
+    public void findSecurityByNameInDatabaseTest3() {
+        FindSecurityByTickerOrNameRequest request3 = new FindSecurityByTickerOrNameRequest("AMZN US");
+        FindSecurityByTickerOrNameResponse response3 = getFindSecurityByNameService().execute(request3);
+        Stock amazon = new Stock("AMZN US", "Amazon.com Inc.",
+                "Consumer Discretionary", "USD", 3199.95, 0, 0.69);
         assertEquals(amazon, response3.getSecurity());
     }
 
     @Test
-    public void filterStocksByMultipleParametersTest() {
-        FilterStocksByMultipleParametersRequest request1 = new FilterStocksByMultipleParametersRequest(
+    public void filterStocksByMultipleParametersTest1() {
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(
                 of(
                         new FilterStocksByIndustryRequest("Technology"),
                         new OrderingRequest("name", "DESC")
                 )
         );
-        FilterStocksByMultipleParametersRequest request2 = new FilterStocksByMultipleParametersRequest(
-                of(
-                        new FilterStocksByAnyDoubleParameterRequest("dividend_yield", ">", "0"),
-                        new FilterStocksByAnyDoubleParameterRequest("risk_weight", "<", "1")
-                )
-        );
+
         FilterStocksByMultipleParametersResponse response1 =
-                getFilterStocksByMultipleParametersService().execute(request1);
-        FilterStocksByMultipleParametersResponse response2 =
-                getFilterStocksByMultipleParametersService().execute(request2);
+                getFilterStocksByMultipleParametersService().execute(request);
+
 
         assertEquals(of(
                 new Stock("MSFT US", "Microsoft Corporation", "Technology", "USD", 304.36, 0.74, 0.88),
                 new Stock("AAPL US", "Apple Inc.", "Technology", "USD", 148.19, 0.59, 1)
         ), response1.getList());
 
+
+    }
+
+    @Test
+    public void filterStocksByMultipleParametersTest2() {
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(
+                of(
+                        new FilterStocksByAnyDoubleParameterRequest("dividend_yield", ">", "0"),
+                        new FilterStocksByAnyDoubleParameterRequest("risk_weight", "<", "1")
+                )
+        );
+        FilterStocksByMultipleParametersResponse response2 =
+                getFilterStocksByMultipleParametersService().execute(request);
         assertEquals(of(
                 new Stock("MSFT US", "Microsoft Corporation", "Technology", "USD", 304.36, 0.74, 0.88)
         ), response2.getList());
     }
+
+
 
     private AddStockService getAddStockService() {
         return appContext.getBean(AddStockService.class);

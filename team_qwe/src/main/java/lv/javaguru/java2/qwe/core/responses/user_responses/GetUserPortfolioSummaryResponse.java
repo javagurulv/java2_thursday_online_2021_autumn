@@ -6,7 +6,6 @@ import lv.javaguru.java2.qwe.core.responses.CoreResponse;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class GetUserPortfolioSummaryResponse extends CoreResponse {
 

@@ -8,8 +8,6 @@ import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
-
 @Component
 public class RemoveUserUIAction implements UIAction {
 

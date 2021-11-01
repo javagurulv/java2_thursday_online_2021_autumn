@@ -26,7 +26,6 @@ public class User {
         this.type = type;
         this.initialInvestment = initialInvestment;
         if (riskTolerance == 0) {calculateRiskTolerance();}
-//        portfolio.add(new Position(new Cash(), initialInvestment, 1));
     }
 
     public long getId() {

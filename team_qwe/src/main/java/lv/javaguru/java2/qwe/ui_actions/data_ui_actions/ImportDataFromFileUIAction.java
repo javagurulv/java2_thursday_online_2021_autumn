@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.swing.*;
 import java.io.IOException;
 
-@Component
+//@Component
 public class ImportDataFromFileUIAction implements UIAction {
 
     @Autowired private ImportSecuritiesService importSecuritiesService;

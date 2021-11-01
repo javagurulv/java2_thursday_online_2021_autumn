@@ -1,7 +1,6 @@
 package lv.javaguru.java2.qwe.core.database;
 
 import lv.javaguru.java2.qwe.core.domain.Position;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
