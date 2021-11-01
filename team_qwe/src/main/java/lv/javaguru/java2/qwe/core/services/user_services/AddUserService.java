@@ -28,8 +28,8 @@ public class AddUserService {
         List<CoreError> errors = validator.validate(request);
         if (errors.isEmpty()) {
             User user = createUser(request);
-            Optional<Long> id = userData.addUser(user);
-            user.setId(id.orElse(0L));
+            Long id = userData.addUser(user);
+            user.setId(id);
             return new AddUserResponse(user);
         }
         return new AddUserResponse(errors);

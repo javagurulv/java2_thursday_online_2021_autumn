@@ -12,7 +12,7 @@ public interface UserData {
 
     LocalDate getCurrentDate();
 
-    Optional<Long> addUser(User user);
+    Long addUser(User user);
 
     boolean removeUser(String name);
 

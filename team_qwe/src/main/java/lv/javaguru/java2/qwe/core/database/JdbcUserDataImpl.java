@@ -6,11 +6,16 @@ import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
@@ -26,12 +31,10 @@ public class JdbcUserDataImpl implements UserData{
     }
 
     @Override
-    public Optional<Long> addUser(User user) {
-        jdbcTemplate.update("INSERT INTO users (name, age, type, initial_investment, cash, portfolio_generation_date, risk_tolerance) VALUES\n" +
-                "(?, ?, ?, ?, ?, ?, ?)",
-                user.getName(), user.getAge(), String.valueOf(user.getType()), user.getInitialInvestment(),
-                user.getInitialInvestment(), user.getPortfolioGenerationDate(), user.getRiskTolerance());
-        return Optional.ofNullable(jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Long.class));
+    public Long addUser(User user) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(con -> Objects.requireNonNull(getStatement(user)), keyHolder);
+        return Objects.requireNonNull(keyHolder.getKey()).longValue();
     }
 
     @Override
@@ -95,6 +98,26 @@ public class JdbcUserDataImpl implements UserData{
         }
         catch (NumberFormatException e) {
             return -1L;
+        }
+    }
+
+    private PreparedStatement getStatement(User user) {
+        try {
+            Connection connection = Objects.requireNonNull(jdbcTemplate.getDataSource()).getConnection();
+            PreparedStatement ps =
+                    connection.prepareStatement("INSERT INTO users (name, age, type, initial_investment, cash, portfolio_generation_date, risk_tolerance) VALUES\n" +
+                    "(?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, user.getName());
+            ps.setInt(2, user.getAge());
+            ps.setString(3, String.valueOf(user.getType()));
+            ps.setDouble(4, user.getInitialInvestment());
+            ps.setDouble(5, user.getInitialInvestment());
+            ps.setDate(6, null);
+            ps.setInt(7, user.getRiskTolerance());
+            return ps;
+        }
+        catch (SQLException e) {
+            return null;
         }
     }
 
