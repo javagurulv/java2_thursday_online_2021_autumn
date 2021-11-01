@@ -1,8 +1,0 @@
-SELECT * FROM STOCKS
-    WHERE INDUSTRY = 'TECHNOLOGY';
-
-SELECT * FROM users;
-
-SELECT * FROM user1_portfolio;
-
-DELETE FROM user1_portfolio;

@@ -65,10 +65,8 @@ public class AcceptanceTestForDatabase {
                 "BABA US", "Alibaba", "Technology", "USD",
                 "160.13", "0", "1.32"
         );
-
         getAddStockService().execute(request);
         GetAllSecurityListResponse response = getAllSecurityListService().execute(new GetAllSecurityListRequest());
-
         assertEquals(6, response.getList().size());
         assertEquals("Alibaba", response.getList().get(5).getName());
     }
@@ -81,7 +79,6 @@ public class AcceptanceTestForDatabase {
         );
         getAddStockService().execute(request);
         GetAllSecurityListResponse response = getAllSecurityListService().execute(new GetAllSecurityListRequest());
-
         assertEquals(5, response.getList().size());
     }
 
@@ -90,10 +87,8 @@ public class AcceptanceTestForDatabase {
         RemoveSecurityRequest request = new RemoveSecurityRequest("AAPL US");
         RemoveSecurityResponse response1 = getRemoveSecurityService().execute(request);
         GetAllSecurityListResponse response2 = getAllSecurityListService().execute(new GetAllSecurityListRequest());
-
         assertTrue(response1.isRemoved());
         assertEquals(4, response2.getList().size());
-
     }
 
     @Test
@@ -101,7 +96,6 @@ public class AcceptanceTestForDatabase {
         RemoveSecurityRequest request = new RemoveSecurityRequest("AMZN"); //ошибка!
         RemoveSecurityResponse response1 = getRemoveSecurityService().execute(request);
         GetAllSecurityListResponse response2 = getAllSecurityListService().execute(new GetAllSecurityListRequest());
-
         assertFalse(response1.isRemoved());
         assertEquals(5, response2.getList().size());
         assertEquals("Amazon.com Inc.", response2.getList().get(2).getName());
@@ -114,7 +108,6 @@ public class AcceptanceTestForDatabase {
         Stock apple = new Stock("AAPL US", "Apple Inc.",
                 "Technology", "USD", 148.19, 0.59, 1);
         assertEquals(apple, response1.getSecurity());
-
     }
 
     @Test
@@ -141,17 +134,12 @@ public class AcceptanceTestForDatabase {
                         new OrderingRequest("name", "DESC")
                 )
         );
-
         FilterStocksByMultipleParametersResponse response1 =
                 getFilterStocksByMultipleParametersService().execute(request);
-
-
         assertEquals(of(
                 new Stock("MSFT US", "Microsoft Corporation", "Technology", "USD", 304.36, 0.74, 0.88),
                 new Stock("AAPL US", "Apple Inc.", "Technology", "USD", 148.19, 0.59, 1)
         ), response1.getList());
-
-
     }
 
     @Test

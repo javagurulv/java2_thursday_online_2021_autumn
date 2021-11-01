@@ -67,11 +67,6 @@ public class AcceptanceTestForUserData {
                 "  FOREIGN KEY(`user_id`) REFERENCES `users`(`id`),\n" +
                 "  FOREIGN KEY(`security_ticker`) REFERENCES `stocks`(`ticker`)\n" +
                 ")");
-        jdbcTemplate.update("INSERT INTO stocks VALUES('AAPL US','Apple Inc.','Technology','USD',148.19,0.59,1)");
-        jdbcTemplate.update("INSERT INTO stocks VALUES('MSFT US','Microsoft Corporation','Technology','USD',304.36,0.74,0.88)");
-        jdbcTemplate.update("INSERT INTO stocks VALUES('AMZN US','Amazon.com Inc.','Consumer Discretionary','USD',3199.95,0,0.69)");
-        jdbcTemplate.update("INSERT INTO stocks VALUES('TSLA US','Tesla Inc','Consumer Discretionary','USD',680.26,0,1.63)");
-        jdbcTemplate.update("INSERT INTO stocks VALUES('JPM US','JPMorgan Chase & Co.','Financials','USD',154.72,2.33,1.15)");
         jdbcTemplate.update("INSERT INTO users (name, age, type, initial_investment, cash, portfolio_generation_date, risk_tolerance) VALUES\n" +
                 "      ('Alexander', 25, 'SUPER_RICH', 1000000.00, 1000000.00, NULL, 5),\n" +
                 "      ('Tatyana', 32, 'UPPER_MIDDLE', 125000.00, 125000.00, NULL, 4),\n" +

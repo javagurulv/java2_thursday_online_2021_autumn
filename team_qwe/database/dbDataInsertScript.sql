@@ -519,10 +519,3 @@ INSERT INTO users (name, age, type, initial_investment, cash, portfolio_generati
       ('Tatyana', 32, 'UPPER_MIDDLE', 125000.00, 125000.00, NULL, 4),
       ('Vladimir', 78, 'LOWER_MIDDLE', 30000.00, 30000.00, NULL, 1),
       ('John', 55, 'MIDDLE', 50000.00, 50000.00, NULL, 3);
-
-INSERT INTO user1_portfolio (user_id, security_ticker, amount, purchase_price) VALUES
-      (1, 'NOV US', 10000, (SELECT market_price FROM stocks WHERE ticker = 'NOV US')),
-      (1, 'MRO US', 50000, (SELECT market_price FROM stocks WHERE ticker = 'MRO US'));
-
-INSERT INTO user1_portfolio (user_id, security_ticker, amount, purchase_price) VALUES
-      (1, 'AAPL US', 1000, (SELECT market_price FROM stocks WHERE ticker = 'AAPL US'));
