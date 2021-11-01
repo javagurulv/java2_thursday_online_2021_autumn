@@ -13,6 +13,9 @@ public class Prescription {
     private LocalDate date = LocalDate.now();
     private LocalDate validTill = date.plusMonths(2);
 
+    public Prescription() {
+    }
+
     public Prescription(Doctor doctor, Patient patient, String medicationName, Integer quantity) {
         this.doctor = doctor;
         this.patient = patient;

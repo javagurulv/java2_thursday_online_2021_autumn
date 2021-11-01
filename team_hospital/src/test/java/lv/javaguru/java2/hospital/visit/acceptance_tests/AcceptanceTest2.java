@@ -28,7 +28,7 @@ public class AcceptanceTest2 {
     public void setup() {
         applicationContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
     }
-
+/*
     @Test
     public void shouldReturnTrueIfDeleted(){
         AddPatientRequest addPatientRequest1 = new AddPatientRequest("name2", "surname2", "22223333444");
@@ -62,4 +62,6 @@ public class AcceptanceTest2 {
     private DeleteVisitService getDeleteVisitService(){
         return applicationContext.getBean(DeleteVisitService.class);
     }
+
+ */
 }

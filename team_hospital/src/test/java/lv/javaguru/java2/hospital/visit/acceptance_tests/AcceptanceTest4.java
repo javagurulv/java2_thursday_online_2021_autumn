@@ -28,7 +28,7 @@ public class AcceptanceTest4 {
     public void setup() {
         applicationContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
     }
-
+/*
     @Test
     public void shouldMakeCorrectSearchByID(){
         AddPatientRequest addPatientRequest1 = new AddPatientRequest("name4", "surname4", "66667777888");
@@ -66,4 +66,6 @@ public class AcceptanceTest4 {
     private SearchVisitService getSearchVisitService(){
         return applicationContext.getBean(SearchVisitService.class);
     }
+
+ */
 }
