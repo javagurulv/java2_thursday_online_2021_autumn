@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalTime;
 
 public class VisitRowMapper implements RowMapper<Visit> {
 
@@ -14,9 +13,9 @@ public class VisitRowMapper implements RowMapper<Visit> {
         visit.setVisitID(rs.getLong("id"));
         visit.setDoctorID(rs.getLong("doctor_id"));
         visit.setPatientID(rs.getLong("patient_id"));
-        visit.setVisitDate(rs.getDate("visit_date")
-                .toLocalDate()
-                .atTime(LocalTime.ofSecondOfDay(rs.getDate("visit_date").getTime())));
+        visit.setVisitDate(rs.getTimestamp("date").toLocalDateTime());
+        //visit.setSqlDate(rs.getTimestamp("date").toLocalDateTime().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+        visit.setDescription(rs.getString("description"));
         return visit;
     }
 }

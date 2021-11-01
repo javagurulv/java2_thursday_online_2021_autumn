@@ -16,7 +16,7 @@ public class VisitEnumChecker {
             EditVisitEnum.valueOf(input.toUpperCase(Locale.ROOT));
             return Optional.empty();
         } catch (IllegalArgumentException e) {
-            return Optional.of(new CoreError("edit option", "must be DOCTOR, PATIENT, DATE OR DESCRIPTION!"));
+            return Optional.of(new CoreError("Edit option", "must be DOCTOR_ID, PATIENT_ID, DATE OR DESCRIPTION!"));
         }
     }
 }

@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital;
+package lv.javaguru.java2.hospital.database_cleaner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,6 +9,7 @@ import java.util.List;
 
 @Component
 public class DatabaseCleaner {
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -21,8 +22,8 @@ public class DatabaseCleaner {
 
     private List<String> getTableNames() {
         List<String> tableNames = new ArrayList<>();
-        tableNames.add("visits");
         tableNames.add("prescriptions");
+        tableNames.add("visits");
         tableNames.add("doctors");
         tableNames.add("patients");
         return tableNames;

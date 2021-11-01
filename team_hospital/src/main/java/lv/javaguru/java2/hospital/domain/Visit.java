@@ -8,6 +8,7 @@ public class Visit {
     private Long doctorID;
     private Long patientID;
     private LocalDateTime visitDate;
+    private String sqlDate;
     private String description;
 
     public Visit() {
@@ -64,6 +65,21 @@ public class Visit {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setSqlDate(String sqlDate) {
+        this.sqlDate = sqlDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Visit{" +
+                "visitID=" + visitID +
+                ", doctorID=" + doctorID +
+                ", patientID=" + patientID +
+                ", visitDate=" + visitDate +
+                ", description='" + description + '\'' +
+                '}';
     }
 
     @Override

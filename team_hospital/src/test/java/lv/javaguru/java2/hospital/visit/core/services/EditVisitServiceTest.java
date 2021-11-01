@@ -38,7 +38,7 @@ class EditVisitServiceTest {
 
     @Test
     public void shouldReturnErrorWhenVisitIdNotProvided() {
-        EditVisitRequest request = new EditVisitRequest(null, "DOCTOR", "NewDoctorId");
+        EditVisitRequest request = new EditVisitRequest(null, "DOCTOR_ID", "NewDoctorId");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("id", "Must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -52,7 +52,7 @@ class EditVisitServiceTest {
 
     @Test
     public void shouldReturnErrorWhenChangesNotProvided() {
-        EditVisitRequest request = new EditVisitRequest(1L, "DOCTOR", "");
+        EditVisitRequest request = new EditVisitRequest(1L, "DOCTOR_ID", "");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("changes", "Must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -66,7 +66,7 @@ class EditVisitServiceTest {
 
     @Test
     public void shouldChangeDoctor() {
-        EditVisitRequest request = new EditVisitRequest(1L, "DOCTOR", "2");
+        EditVisitRequest request = new EditVisitRequest(1L, "DOCTOR_ID", "2");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         Doctor doctor1 = new Doctor("DoctorsName1", "DoctorsSurname1", "Speciality1");
@@ -78,7 +78,7 @@ class EditVisitServiceTest {
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("21/12/2021 15:00"));
         visits.add(new Visit(doctor1.getId(), patient.getId(), date));
 
-        Mockito.when(database.editVisit(1L, EditVisitEnum.DOCTOR, "2")).thenReturn(true);
+        Mockito.when(database.editVisit(1L, EditVisitEnum.DOCTOR_ID, "2")).thenReturn(true);
         EditVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertTrue(response.isVisitEdited());
@@ -86,7 +86,7 @@ class EditVisitServiceTest {
 
     @Test
     public void shouldChangePatient() {
-        EditVisitRequest request = new EditVisitRequest(1L, "PATIENT", "2");
+        EditVisitRequest request = new EditVisitRequest(1L, "PATIENT_ID", "2");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
@@ -99,7 +99,7 @@ class EditVisitServiceTest {
         LocalDateTime date = LocalDateTime.parse("21/12/2021 15:00", formatter);
         visits.add(new Visit(doctor.getId(), patient1.getId(), date));
 
-        Mockito.when(database.editVisit(1L, EditVisitEnum.PATIENT, "2")).thenReturn(true);
+        Mockito.when(database.editVisit(1L, EditVisitEnum.PATIENT_ID, "2")).thenReturn(true);
         EditVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertTrue(response.isVisitEdited());
@@ -130,14 +130,14 @@ class EditVisitServiceTest {
     public void shouldReturnErrorWhenEnumIncorrect() {
         EditVisitRequest request = new EditVisitRequest(1L, "INPUT", "changes");
         List<CoreError> errors = new ArrayList<>();
-        errors.add(new CoreError("edit option", "must be DOCTOR, PATIENT, DATE OR DESCRIPTION!"));
+        errors.add(new CoreError("edit option", "must be DOCTOR_ID, PATIENT_ID, DATE OR DESCRIPTION!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
 
         EditVisitResponse response = service.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrors().size(), 1);
         assertEquals(response.getErrors().get(0).getField(), "edit option");
-        assertEquals(response.getErrors().get(0).getDescription(), "must be DOCTOR, PATIENT, DATE OR DESCRIPTION!");
+        assertEquals(response.getErrors().get(0).getDescription(), "must be DOCTOR_ID, PATIENT_ID, DATE OR DESCRIPTION!");
     }
 
 }

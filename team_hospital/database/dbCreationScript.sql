@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `visits` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `doctor_id` BIGINT NOT NULL,
   `patient_id` BIGINT NOT NULL,
-  `visit_date` DATETIME NOT NULL,
+  `date` TIMESTAMP NOT NULL,
   `description` VARCHAR(200),
   PRIMARY KEY (id),
   FOREIGN KEY (`doctor_id`) REFERENCES `doctors`(`id`),

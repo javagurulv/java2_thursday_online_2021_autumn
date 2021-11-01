@@ -3,13 +3,15 @@ package lv.javaguru.java2.hospital.database;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class VisitDatabaseImpl implements VisitDatabase {
     private Long nextId = 1L;
     private final List<Visit> visits = new ArrayList<>();
@@ -43,10 +45,10 @@ public class VisitDatabaseImpl implements VisitDatabase {
                 .findFirst();
         if (visitToEditOpt.isPresent()) {
             Visit visitToEdit = visitToEditOpt.get();
-            if (userInput.equals(EditVisitEnum.DOCTOR)) {
+            if (userInput.equals(EditVisitEnum.DOCTOR_ID)) {
                 visitToEdit.setDoctorID(doctorDatabase.findById(Long.parseLong(changes)).get(0).getId());
                 isVisitEdited = true;
-            } else if (userInput.equals(EditVisitEnum.PATIENT)) {
+            } else if (userInput.equals(EditVisitEnum.PATIENT_ID)) {
                 visitToEdit.setPatientID(patientDatabase.findById(Long.parseLong(changes)).get(0).getId());
                 isVisitEdited = true;
             } else if (userInput.equals(EditVisitEnum.DATE)){

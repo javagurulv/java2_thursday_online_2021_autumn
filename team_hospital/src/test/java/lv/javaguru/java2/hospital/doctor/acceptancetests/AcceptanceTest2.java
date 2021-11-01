@@ -1,15 +1,17 @@
 package lv.javaguru.java2.hospital.doctor.acceptancetests;
 
-import lv.javaguru.java2.hospital.DatabaseCleaner;
 import lv.javaguru.java2.hospital.config.HospitalConfiguration;
-import org.junit.Ignore;
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.context.ApplicationContext;
-import lv.javaguru.java2.hospital.doctor.core.requests.*;
+import lv.javaguru.java2.hospital.database_cleaner.DatabaseCleaner;
+import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
+import lv.javaguru.java2.hospital.doctor.core.requests.DoctorOrdering;
+import lv.javaguru.java2.hospital.doctor.core.requests.DoctorPaging;
+import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.SearchDoctorsResponse;
 import lv.javaguru.java2.hospital.doctor.core.services.AddDoctorService;
 import lv.javaguru.java2.hospital.doctor.core.services.SearchDoctorsService;
-import org.junit.jupiter.api.Test;
+import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.patient.acceptance_tests;
 
+import lv.javaguru.java2.hospital.database_cleaner.DatabaseCleaner;
 import lv.javaguru.java2.hospital.config.HospitalConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.context.ApplicationContext;
@@ -22,6 +23,7 @@ public class AcceptanceTest2 {
     @BeforeEach
     public void setup() {
         applicationContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
+        getDatabaseCleaner().clean();
     }
 
     @Test
@@ -158,4 +160,7 @@ public class AcceptanceTest2 {
         return applicationContext.getBean(SearchPatientsService.class);
     }
 
+    private DatabaseCleaner getDatabaseCleaner() {
+        return applicationContext.getBean(DatabaseCleaner.class);
+    }
 }

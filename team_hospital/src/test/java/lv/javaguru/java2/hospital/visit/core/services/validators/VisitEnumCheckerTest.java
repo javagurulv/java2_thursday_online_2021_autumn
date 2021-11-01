@@ -31,7 +31,7 @@ class VisitEnumCheckerTest {
         EditVisitRequest request = new EditVisitRequest(12L, "blabla", "changes");
         Optional<CoreError> error = checker.validateEnum(request.getEditEnums());
         assertTrue(error.isPresent());
-        assertEquals(error.get().getField(), "edit option");
-        assertEquals(error.get().getDescription(), "must be DOCTOR, PATIENT, DATE OR DESCRIPTION!");
+        assertEquals(error.get().getField(), "Edit option");
+        assertEquals(error.get().getDescription(), "must be DOCTOR_ID, PATIENT_ID, DATE OR DESCRIPTION!");
     }
 }

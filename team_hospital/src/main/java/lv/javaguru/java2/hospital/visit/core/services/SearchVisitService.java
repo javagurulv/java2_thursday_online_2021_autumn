@@ -85,6 +85,8 @@ public class SearchVisitService {
             Comparator<Visit> comparator = null;
             if (visitOrdering.getOrderBy().equals("date")) {
                 comparator = Comparator.comparing(Visit::getVisitDate);
+            } else {
+                comparator = Comparator.comparing(Visit::getVisitID);
             }
             if (visitOrdering.getOrderDirection().equals("DESCENDING")) {
                 comparator = comparator.reversed();

@@ -4,11 +4,12 @@ import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Locale;
 
-//@Component
+@Component
 public class JDBCPatientDatabaseImpl implements PatientDatabase {
 
     @Autowired

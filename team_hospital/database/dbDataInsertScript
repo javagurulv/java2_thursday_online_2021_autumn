@@ -61,14 +61,14 @@ INSERT INTO patients
 VALUES (1010, "John", "Smith", "00001111222");
 
 
-INSERT INTO visits (doctor_id, patient_id, visit_date, description)
-VALUES (1001, 1001, '2023-01-02 12:00:00', "Visit to the orthopedist");
+INSERT INTO visits (doctor_id, patient_id, date, description)
+VALUES (1001, 1001, '2023-01-02 12:00', "Visit to the orthopedist");
 
-INSERT INTO visits (doctor_id, patient_id, visit_date, description)
-VALUES (1002, 1002, '2023-01-03 14:00:00', "Visit to the pediatrician");
+INSERT INTO visits (doctor_id, patient_id, date, description)
+VALUES (1002, 1002, '2023-01-03 14:00', "Visit to the pediatrician");
 
-INSERT INTO visits (doctor_id, patient_id, visit_date, description)
-VALUES (1008, 1006, '2023-01-04 16:00:00', "Visit to the cardiologist");
+INSERT INTO visits (doctor_id, patient_id, date, description)
+VALUES (1008, 1006, '2023-01-04 16:00', "Visit to the cardiologist");
 
 
 INSERT INTO prescriptions (doctor_id, patient_id, medication_name, quantity, date, valid_till)
