@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators;
 
+import lv.javaguru.java2.hospital.checkers.LongNumChecker;
 import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
@@ -16,7 +17,6 @@ public class EditPrescriptionValidator {
     @Autowired private PatientDatabase patientDatabase;
     @Autowired private PrescriptionExistenceByIDValidator prescriptionExistenceByIDValidator;
     @Autowired private PrescriptionEnumChecker enumChecker;
-    @Autowired private IntegerNumChecker integerNumChecker;
     @Autowired private LongNumChecker longNumChecker;
 
     public List<CoreError> validate(EditPrescriptionRequest request) {
@@ -51,18 +51,18 @@ public class EditPrescriptionValidator {
 
     private Optional<CoreError> validatePrescriptionID(EditPrescriptionRequest request) {
         return request.getPrescriptionID() == null || request.getPrescriptionID().isEmpty()
-                ? Optional.empty() : longNumChecker.validate(request.getPrescriptionID());
-    }
-
-    private Optional<CoreError> validateUserChoiceEnum(EditPrescriptionRequest request) {
-        return request.getEditPrescriptionEnum() == null || request.getEditPrescriptionEnum().isEmpty()
-                ? Optional.empty() : enumChecker.validate(request.getEditPrescriptionEnum());
+                ? Optional.empty() : longNumChecker.validate(request.getPrescriptionID(), "Prescription ID");
     }
 
     private Optional<CoreError> validateIDInChanges(EditPrescriptionRequest request) {
         return request.getEditPrescriptionEnum() == null || request.getEditPrescriptionEnum().isEmpty()
                 ? Optional.empty() : !request.getEditPrescriptionEnum().equals("PATIENT")
-                ? Optional.empty() : integerNumChecker.validate(request.getChanges());
+                ? Optional.empty() : longNumChecker.validate(request.getChanges(), "ID");
+    }
+
+    private Optional<CoreError> validateUserChoiceEnum(EditPrescriptionRequest request) {
+        return request.getEditPrescriptionEnum() == null || request.getEditPrescriptionEnum().isEmpty()
+                ? Optional.empty() : enumChecker.validate(request.getEditPrescriptionEnum());
     }
 
     private Optional<CoreError> validatePrescriptionExistence(EditPrescriptionRequest request) {

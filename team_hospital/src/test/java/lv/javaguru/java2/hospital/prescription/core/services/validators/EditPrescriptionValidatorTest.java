@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators;
 
+import lv.javaguru.java2.hospital.checkers.LongNumChecker;
 import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionRequest;
@@ -28,14 +29,12 @@ class EditPrescriptionValidatorTest {
     @Mock private PrescriptionExistenceByIDValidator prescriptionExistenceIDValidator;
     @Mock private LongNumChecker longNumChecker;
     @Mock private PrescriptionEnumChecker enumChecker;
-    @Mock private IntegerNumChecker integerNumChecker;
     @InjectMocks EditPrescriptionValidator validator;
 
     @Test
     public void shouldReturnRequestIDError(){
         EditPrescriptionRequest request = new EditPrescriptionRequest(null, "PATIENT", "1");
         Mockito.when(enumChecker.validate(request.getEditPrescriptionEnum())).thenReturn(Optional.empty());
-        Mockito.when(integerNumChecker.validate(request.getChanges())).thenReturn(Optional.empty());
 
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -48,8 +47,8 @@ class EditPrescriptionValidatorTest {
     public void shouldReturnPrescriptionIDError(){
         EditPrescriptionRequest request = new EditPrescriptionRequest("str", "PATIENT", "1");
         Mockito.when(enumChecker.validate(request.getEditPrescriptionEnum())).thenReturn(Optional.empty());
-        Mockito.when(integerNumChecker.validate(request.getChanges())).thenReturn(Optional.empty());
-        Mockito.when(longNumChecker.validate(request.getPrescriptionID()))
+        Mockito.when(longNumChecker.validate(request.getChanges(), "ID")).thenReturn(Optional.empty());
+        Mockito.when(longNumChecker.validate(request.getPrescriptionID(), "Prescription ID"))
                 .thenReturn(Optional.of(new CoreError("Prescription ID", "must be a number!")));
 
         List<CoreError> errors = validator.validate(request);
@@ -112,7 +111,9 @@ class EditPrescriptionValidatorTest {
     @Test
     public void shouldReturnIDInChangesError(){
         EditPrescriptionRequest request = new EditPrescriptionRequest("1", "PATIENT", "changes");
-        Mockito.when(integerNumChecker.validate(request.getChanges()))
+        Mockito.when(longNumChecker.validate(request.getPrescriptionID(), "Prescription ID"))
+                .thenReturn(Optional.empty());
+        Mockito.when(longNumChecker.validate(request.getChanges(), "ID"))
                 .thenReturn(Optional.of(new CoreError("ID", "must be a number!")));
 
         List<CoreError> errors = validator.validate(request);

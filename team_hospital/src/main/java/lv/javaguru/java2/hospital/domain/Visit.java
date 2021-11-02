@@ -77,7 +77,7 @@ public class Visit {
                 "visitID=" + visitID +
                 ", doctorID=" + doctorID +
                 ", patientID=" + patientID +
-                ", visitDate=" + visitDate +
+                ", sqlDate='" + sqlDate + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

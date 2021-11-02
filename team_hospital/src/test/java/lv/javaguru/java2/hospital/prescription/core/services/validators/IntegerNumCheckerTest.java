@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators;
 
+import lv.javaguru.java2.hospital.checkers.IntegerNumChecker;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ public class IntegerNumCheckerTest {
     @Test
     public void shouldIDNumReturnError(){
         String input = "str";
-        Optional<CoreError> error = checker.validate(input);
+        Optional<CoreError> error = checker.validate(input, "ID");
 
         assertFalse(error.isEmpty());
         assertEquals(error.get().getField(), "ID");
@@ -24,7 +25,7 @@ public class IntegerNumCheckerTest {
     @Test
     public void shouldNotReturnError(){
         String input = "8";
-        Optional<CoreError> error = checker.validate(input);
+        Optional<CoreError> error = checker.validate(input, "ID");
         assertTrue(error.isEmpty());
     }
 }
