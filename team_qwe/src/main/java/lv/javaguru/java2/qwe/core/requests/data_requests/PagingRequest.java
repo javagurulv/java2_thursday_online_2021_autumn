@@ -10,9 +10,13 @@ public class PagingRequest extends CoreRequest {
             this.pageNumber = pageNumber;
             this.pageSize = pageSize;
         }
-        else {
+        else if (pageNumber.isEmpty() && pageSize.isEmpty()) {
             this.pageNumber = "0";
             this.pageSize = "1000";
+        }
+        else {
+            this.pageNumber = pageNumber;
+            this.pageSize = pageSize;
         }
     }
 
