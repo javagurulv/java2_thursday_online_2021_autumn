@@ -22,6 +22,10 @@ public class JdbcDoctorDatabaseImpl implements DoctorDatabase {
                 "INSERT INTO doctors (name, surname, speciality) " +
                         "VALUES (?, ?, ?)",
                 doctor.getName(), doctor.getSurname(), doctor.getSpeciality());
+        String sql = "SELECT id FROM doctors WHERE name = ? AND surname = ? AND speciality = ?";
+        Object[] args = new Object[] {doctor.getName(), doctor.getSurname(), doctor.getSpeciality()};
+        Long newDoctorId = jdbcTemplate.queryForObject(sql, args, Long.class);
+        doctor.setId(newDoctorId);
     }
 
     @Override
