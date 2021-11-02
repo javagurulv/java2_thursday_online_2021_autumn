@@ -27,8 +27,8 @@ public class ExistenceByDoctorIdAndPatientIdAndDate implements VisitExistenceByS
     public Optional<CoreError> validateExistence(SearchVisitRequest request) {
 
         for (Visit visit : database.getAllVisits()) {
-            if (visit.getDoctorID().equals(request.getDoctorId())
-            && visit.getPatientID().equals(request.getPatientId())
+            if (visit.getDoctor().getId().equals(request.getDoctorId())
+            && visit.getPatient().getId().equals(request.getPatientId())
             && visit.getVisitDate().equals(getVisitDate.getVisitDateFromString(request.getVisitDate()))) {
                 return Optional.empty();
             }

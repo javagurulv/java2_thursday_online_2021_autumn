@@ -16,6 +16,7 @@ import lv.javaguru.java2.hospital.doctor.core.services.SearchDoctorsService;
 import lv.javaguru.java2.hospital.doctor.core.services.ShowAllDoctorsService;
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -35,23 +36,21 @@ public class AcceptanceTest4 {
     @Ignore
     public void shouldEditDoctorName() {
         AddDoctorRequest request1 = new AddDoctorRequest("Name", "Surname1", "Speciality1");
-		AddDoctorResponse response1 = getAddDoctorService().execute(request1);
+        AddDoctorResponse response1 = getAddDoctorService().execute(request1);
 
-        SearchDoctorsRequest request2 = new SearchDoctorsRequest(null, request1.getName(), request1.getSurname(), request1.getSpeciality());
-        SearchDoctorsResponse response2 = getSearchDoctorService().execute(request2);
-		Long doctorId = response2.getDoctors().get(0).getId();
+        Long doctorId = response1.getNewDoctor().getId();
 
-        EditDoctorRequest request3 = new EditDoctorRequest(doctorId, "NAME", "Name1");
-        EditDoctorResponse response3 = getEditDoctorService().execute(request3);
+        EditDoctorRequest request2 = new EditDoctorRequest(doctorId, "NAME", "Name1");
+        EditDoctorResponse response2 = getEditDoctorService().execute(request2);
 
-        assertTrue(response3.isDoctorEdited());
+        assertTrue(response2.isDoctorEdited());
 
-        ShowAllDoctorsResponse response4 = getShowAllDoctorsService().execute(new ShowAllDoctorsRequest());
+        ShowAllDoctorsResponse response3 = getShowAllDoctorsService().execute(new ShowAllDoctorsRequest());
 
-        assertEquals(response4.getDoctors().size(), 1);
-        assertEquals(response4.getDoctors().get(0).getName(), "Name1");
-        assertEquals(response4.getDoctors().get(0).getSurname(), "Surname1");
-        assertEquals(response4.getDoctors().get(0).getSpeciality(), "Speciality1");
+        assertEquals(response3.getDoctors().size(), 1);
+        assertEquals(response3.getDoctors().get(0).getName(), "Name1");
+        assertEquals(response3.getDoctors().get(0).getSurname(), "Surname1");
+        assertEquals(response3.getDoctors().get(0).getSpeciality(), "Speciality1");
     }
 
     @Ignore
@@ -59,21 +58,19 @@ public class AcceptanceTest4 {
         AddDoctorRequest request1 = new AddDoctorRequest("Name1", "Surname", "Speciality1");
         AddDoctorResponse response1 = getAddDoctorService().execute(request1);
 
-        SearchDoctorsRequest request2 = new SearchDoctorsRequest(null, request1.getName(), request1.getSurname(), request1.getSpeciality());
-        SearchDoctorsResponse response2 = getSearchDoctorService().execute(request2);
-        Long doctorId = response2.getDoctors().get(0).getId();
+        Long doctorId = response1.getNewDoctor().getId();
 
-		EditDoctorRequest request3 = new EditDoctorRequest(doctorId, "SURNAME", "Surname1");
-        EditDoctorResponse response3 = getEditDoctorService().execute(request3);
+        EditDoctorRequest request2 = new EditDoctorRequest(doctorId, "SURNAME", "Surname1");
+        EditDoctorResponse response2 = getEditDoctorService().execute(request2);
 
-        assertTrue(response3.isDoctorEdited());
+        assertTrue(response2.isDoctorEdited());
 
-        ShowAllDoctorsResponse response4 = getShowAllDoctorsService().execute(new ShowAllDoctorsRequest());
+        ShowAllDoctorsResponse response3 = getShowAllDoctorsService().execute(new ShowAllDoctorsRequest());
 
-        assertEquals(response4.getDoctors().size(), 1);
-        assertEquals(response4.getDoctors().get(0).getName(), "Name1");
-        assertEquals(response4.getDoctors().get(0).getSurname(), "Surname1");
-        assertEquals(response4.getDoctors().get(0).getSpeciality(), "Speciality1");
+        assertEquals(response3.getDoctors().size(), 1);
+        assertEquals(response3.getDoctors().get(0).getName(), "Name1");
+        assertEquals(response3.getDoctors().get(0).getSurname(), "Surname1");
+        assertEquals(response3.getDoctors().get(0).getSpeciality(), "Speciality1");
     }
 
     @Ignore
@@ -81,23 +78,20 @@ public class AcceptanceTest4 {
         AddDoctorRequest request1 = new AddDoctorRequest("Name1", "Surname1", "Speciality");
         AddDoctorResponse response1 = getAddDoctorService().execute(request1);
 
-       SearchDoctorsRequest request2 = new SearchDoctorsRequest(null, request1.getName(), request1.getSurname(), request1.getSpeciality());
-       SearchDoctorsResponse response2 = getSearchDoctorService().execute(request2);
-       Long doctorId = response2.getDoctors().get(0).getId();
+        Long doctorId = response1.getNewDoctor().getId();
 
-	   EditDoctorRequest request3 = new EditDoctorRequest(doctorId, "SPECIALITY", "Speciality1");
-        EditDoctorResponse response3 = getEditDoctorService().execute(request3);
+        EditDoctorRequest request2 = new EditDoctorRequest(doctorId, "SPECIALITY", "Speciality1");
+        EditDoctorResponse response2 = getEditDoctorService().execute(request2);
 
-       assertTrue(response3.isDoctorEdited());
+        assertTrue(response2.isDoctorEdited());
 
-        ShowAllDoctorsResponse response4 = getShowAllDoctorsService().execute(new ShowAllDoctorsRequest());
+        ShowAllDoctorsResponse response3 = getShowAllDoctorsService().execute(new ShowAllDoctorsRequest());
 
-        assertEquals(response4.getDoctors().size(), 1);
-        assertEquals(response4.getDoctors().get(0).getName(), "Name1");
-        assertEquals(response4.getDoctors().get(0).getSurname(), "Surname1");
-        assertEquals(response4.getDoctors().get(0).getSpeciality(), "Speciality1");
+        assertEquals(response3.getDoctors().size(), 1);
+        assertEquals(response3.getDoctors().get(0).getName(), "Name1");
+        assertEquals(response3.getDoctors().get(0).getSurname(), "Surname1");
+        assertEquals(response3.getDoctors().get(0).getSpeciality(), "Speciality1");
     }
-
 
     private AddDoctorService getAddDoctorService() {
         return appContext.getBean(AddDoctorService.class);

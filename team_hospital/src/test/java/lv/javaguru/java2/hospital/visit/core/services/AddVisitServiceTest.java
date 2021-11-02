@@ -173,7 +173,6 @@ class AddVisitServiceTest {
 
     @Test
     public void shouldAddVisitToDatabase() {
-        //Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
         doctor.setId(1L);
         Patient patient = new Patient("PatientsName", "PatientsSurname", "12345678901");
@@ -183,18 +182,18 @@ class AddVisitServiceTest {
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
 
-        // Mockito.when(doctorDatabase.findById(1L))
-               // .thenReturn((doctors));
-        //Mockito.when(patientDatabase.findById(2L))
-               // .thenReturn((patients));
+        Mockito.when(doctorDatabase.findById(1L))
+                .thenReturn((doctors));
+        Mockito.when(patientDatabase.findById(2L))
+                .thenReturn((patients));
 
         AddVisitRequest request = new AddVisitRequest(patient.getId().toString(), doctor.getId().toString(),
                 "21-12-2021 15:00");
         AddVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         Mockito.verify(visitDatabase).recordVisit(argThat(
-                new VisitMatcher(response.getPatientVisit().getDoctorID(),
-                        response.getPatientVisit().getPatientID(),
+                new VisitMatcher(response.getPatientVisit().getDoctor(),
+                        response.getPatientVisit().getPatient(),
                         response.getPatientVisit().getVisitDate())));
     }
 }

@@ -125,7 +125,7 @@ public class DateValidatorExecutionTest {
         Patient patient = new Patient("name", "surname", "1234");
         patient.setId(2L);
         String date = "25-12-2025 12:00";
-        Visit visit = new Visit(doctor.getId(), patient.getId(), LocalDateTime
+        Visit visit = new Visit(doctor, patient, LocalDateTime
                 .from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(date)));
         visits.add(visit);
 

@@ -5,8 +5,8 @@ import java.util.Objects;
 
 public class Visit {
     private Long visitID;
-    private Long doctorID;
-    private Long patientID;
+    private Doctor doctor;
+    private Patient patient;
     private LocalDateTime visitDate;
     private String sqlDate;
     private String description;
@@ -14,41 +14,17 @@ public class Visit {
     public Visit() {
     }
 
-    public Visit(Long doctorID, Long patientID, LocalDateTime visitDate) {
-        this.doctorID = doctorID;
-        this.patientID = patientID;
+    public Visit(Doctor doctor, Patient patient, LocalDateTime visitDate) {
+        this.doctor = doctor;
+        this.patient = patient;
         this.visitDate = visitDate;
     }
 
-    public Visit(Long doctorID, Long patientID, LocalDateTime visitDate, String description) {
-        this.doctorID = doctorID;
-        this.patientID = patientID;
+    public Visit(Doctor doctor, Patient patient, LocalDateTime visitDate, String description) {
+        this.doctor = doctor;
+        this.patient = patient;
         this.visitDate = visitDate;
         this.description = description;
-    }
-
-    public Long getDoctorID() {
-        return doctorID;
-    }
-
-    public void setDoctorID(Long doctorID) {
-        this.doctorID = doctorID;
-    }
-
-    public Long getPatientID() {
-        return patientID;
-    }
-
-    public void setPatientID(Long patientID) {
-        this.patientID = patientID;
-    }
-
-    public LocalDateTime getVisitDate() {
-        return visitDate;
-    }
-
-    public void setVisitDate(LocalDateTime visitDate) {
-        this.visitDate = visitDate;
     }
 
     public Long getVisitID() {
@@ -59,6 +35,38 @@ public class Visit {
         this.visitID = visitID;
     }
 
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public LocalDateTime getVisitDate() {
+        return visitDate;
+    }
+
+    public void setVisitDate(LocalDateTime visitDate) {
+        this.visitDate = visitDate;
+    }
+
+    public String getSqlDate() {
+        return sqlDate;
+    }
+
+    public void setSqlDate(String sqlDate) {
+        this.sqlDate = sqlDate;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -67,16 +75,12 @@ public class Visit {
         this.description = description;
     }
 
-    public void setSqlDate(String sqlDate) {
-        this.sqlDate = sqlDate;
-    }
-
     @Override
     public String toString() {
         return "Visit{" +
                 "visitID=" + visitID +
-                ", doctorID=" + doctorID +
-                ", patientID=" + patientID +
+                ", doctor=" + doctor +
+                ", patient=" + patient +
                 ", sqlDate='" + sqlDate + '\'' +
                 ", description='" + description + '\'' +
                 '}';
@@ -87,11 +91,11 @@ public class Visit {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Visit visit = (Visit) o;
-        return Objects.equals(doctorID, visit.doctorID) && Objects.equals(patientID, visit.patientID) && Objects.equals(visitDate, visit.visitDate) && Objects.equals(visitID, visit.visitID);
+        return Objects.equals(visitID, visit.visitID) && Objects.equals(doctor, visit.doctor) && Objects.equals(patient, visit.patient) && Objects.equals(visitDate, visit.visitDate) && Objects.equals(description, visit.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(doctorID, patientID, visitDate, visitID);
+        return Objects.hash(visitID, doctor, patient, visitDate, description);
     }
 }

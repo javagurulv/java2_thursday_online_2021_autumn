@@ -53,15 +53,15 @@ class DateSearchCriteriaTest {
         List<Visit> visits = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime date = LocalDateTime.parse("27-12-2021 15:00", formatter);
-        visits.add(new Visit(doctor.getId(), patient.getId(), date));
+        visits.add(new Visit(doctor, patient, date));
 
         Mockito.when(database.findByDate(date)).thenReturn(visits);
         SearchVisitRequest request = new SearchVisitRequest
                 (null, null, null, "27-12-2021 15:00");
         Visit visit = searchCriteria.process(request).get(0);
         assertEquals(searchCriteria.process(request).size(), 1);
-        assertEquals(visit.getDoctorID(), doctor.getId());
-        assertEquals(visit.getPatientID(), patient.getId());
+        assertEquals(visit.getDoctor(), doctor);
+        assertEquals(visit.getPatient(), patient);
         assertEquals(visit.getVisitID(), visits.get(0).getVisitID());
         assertEquals(visit.getVisitDate(), date);
     }
@@ -80,8 +80,8 @@ class DateSearchCriteriaTest {
         List<Visit> visits = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime date = LocalDateTime.parse("27-12-2021 16:00", formatter);
-        visits.add(new Visit(doctor1.getId(), patient1.getId(), date));
-        visits.add(new Visit(doctor2.getId(), patient2.getId(), date));
+        visits.add(new Visit(doctor1, patient1, date));
+        visits.add(new Visit(doctor2, patient2, date));
 
         Mockito.when(database.findByDate(date)).thenReturn(visits);
         SearchVisitRequest request = new SearchVisitRequest
@@ -89,12 +89,12 @@ class DateSearchCriteriaTest {
         Visit visit1 = searchCriteria.process(request).get(0);
         Visit visit2 = searchCriteria.process(request).get(1);
         assertEquals(searchCriteria.process(request).size(), 2);
-        assertEquals(visit1.getDoctorID(), doctor1.getId());
-        assertEquals(visit1.getPatientID(), patient1.getId());
+        assertEquals(visit1.getDoctor(), doctor1);
+        assertEquals(visit1.getPatient(), patient1);
         assertEquals(visit1.getVisitID(), visits.get(0).getVisitID());
         assertEquals(visit1.getVisitDate(), date);
-        assertEquals(visit2.getDoctorID(), doctor2.getId());
-        assertEquals(visit2.getPatientID(), patient2.getId());
+        assertEquals(visit2.getDoctor(), doctor2);
+        assertEquals(visit2.getPatient(), patient2);
         assertEquals(visit2.getVisitID(), visits.get(1).getVisitID());
         assertEquals(visit2.getVisitDate(), date);
     }

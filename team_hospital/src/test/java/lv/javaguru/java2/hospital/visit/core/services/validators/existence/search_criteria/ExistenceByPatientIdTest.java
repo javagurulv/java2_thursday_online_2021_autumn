@@ -60,7 +60,7 @@ class ExistenceByPatientIdTest {
         patient.setId(5456L);
         List<Visit> visits = new ArrayList<>();
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse("27-12-2021 16:00"));
-        visits.add(new Visit(doctor.getId(), patient.getId(), date));
+        visits.add(new Visit(doctor, patient, date));
 
         SearchVisitRequest request = new SearchVisitRequest(null, null, patient.getId(), "");
         Mockito.when(database.getAllVisits()).thenReturn(visits);
