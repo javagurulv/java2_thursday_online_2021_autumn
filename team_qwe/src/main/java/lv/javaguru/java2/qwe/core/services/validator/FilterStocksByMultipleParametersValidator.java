@@ -13,6 +13,10 @@ public class FilterStocksByMultipleParametersValidator {
     public List<CoreError> validate(FilterStocksByMultipleParametersRequest request) {
         List<CoreError> errorList = new ArrayList<>();
         List<CoreRequest> requestList = request.getRequestList();
+        if (requestList.isEmpty()) {
+            errorList.add(new CoreError("Choose parameter", "at least one parameter is required!"));
+            return errorList;
+        }
         for (int i = 0; i < request.getRequestList().size(); i++) {
             switch (requestList.get(i).getClass().getSimpleName()) {
                 case "FilterStocksByAnyDoubleParameterRequest" ->

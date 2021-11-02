@@ -66,7 +66,7 @@ public class FilterStocksByMultipleParametersService {
                 }
             }
         }
-        System.out.println("====================================\n" + query + "\n====================================");
+//        System.out.println("====================================\n" + query + "\n====================================");
         return query.toString();
     }
 
