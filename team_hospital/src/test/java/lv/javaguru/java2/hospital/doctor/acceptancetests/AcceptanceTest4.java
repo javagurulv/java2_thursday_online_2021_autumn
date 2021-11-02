@@ -33,7 +33,7 @@ public class AcceptanceTest4 {
         getDatabaseCleaner().clean();
     }
 
-    @Test
+    @Ignore
     public void shouldEditDoctorName() {
         AddDoctorRequest request1 = new AddDoctorRequest("Name", "Surname1", "Speciality1");
         AddDoctorResponse response1 = getAddDoctorService().execute(request1);
@@ -53,7 +53,7 @@ public class AcceptanceTest4 {
         assertEquals(response3.getDoctors().get(0).getSpeciality(), "Speciality1");
     }
 
-    @Test
+    @Ignore
     public void shouldEditDoctorSurname() {
         AddDoctorRequest request1 = new AddDoctorRequest("Name1", "Surname", "Speciality1");
         AddDoctorResponse response1 = getAddDoctorService().execute(request1);
@@ -73,7 +73,7 @@ public class AcceptanceTest4 {
         assertEquals(response3.getDoctors().get(0).getSpeciality(), "Speciality1");
     }
 
-    @Test
+    @Ignore
     public void shouldEditDoctorSpeciality() {
         AddDoctorRequest request1 = new AddDoctorRequest("Name1", "Surname1", "Speciality");
         AddDoctorResponse response1 = getAddDoctorService().execute(request1);

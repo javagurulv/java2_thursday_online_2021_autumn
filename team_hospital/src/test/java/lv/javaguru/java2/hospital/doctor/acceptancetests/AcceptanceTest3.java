@@ -32,7 +32,7 @@ public class AcceptanceTest3 {
         getDatabaseCleaner().clean();
     }
 
-    @Test
+    @Ignore
     public void shouldDeleteCorrectDoctor() {
         AddDoctorRequest request1 = new AddDoctorRequest("Name1", "Surname1", "Speciality1");
         AddDoctorResponse response1 = getAddDoctorService().execute(request1);
