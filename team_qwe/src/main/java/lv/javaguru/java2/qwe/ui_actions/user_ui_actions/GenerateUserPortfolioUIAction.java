@@ -28,8 +28,8 @@ public class GenerateUserPortfolioUIAction implements UIAction {
     }
 
     public void printResponse(GenerateUserPortfolioResponse response) {
-        String userName = response.getUser().getName() + "(ID: " + response.getUser().getId() + ")";
         if (!response.hasErrors()) {
+            String userName = response.getUser().getName() + "(ID: " + response.getUser().getId() + ")";
             utils.messageDialog("Portfolio has been generated for " + userName);
             System.out.println("==============" + userName + "===============");
             response.getUser().getPortfolio().forEach(System.out::println);

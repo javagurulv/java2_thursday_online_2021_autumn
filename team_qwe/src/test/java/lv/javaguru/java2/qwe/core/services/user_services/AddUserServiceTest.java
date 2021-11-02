@@ -46,16 +46,28 @@ public class AddUserServiceTest {
         Mockito.verifyNoInteractions(userData);
     }
 
-/*    @Test
-    public void shouldAddUserToUserData() {
+    @Test
+    public void shouldAddUserToUserData1() {
+        Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
+        AddUserRequest request = new AddUserRequest("Marina", "42",
+                "WEALTHY", "500000");
+        Mockito.when(userData.addUser(new User(
+                "Marina", 42, Type.WEALTHY, 500_000))).thenReturn(1L);
+        AddUserResponse response = service.execute(request);
+        assertFalse(response.hasErrors());
+        assertEquals(1, response.getNewUser().getId());
+    }
+
+    @Test
+    public void shouldAddUserToUserData2() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         AddUserRequest request = new AddUserRequest("Marina", "42",
                 "WEALTHY", "500000");
         AddUserResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         Mockito.verify(userData).addUser(argThat(new UserMatcher(new User(
-                5, "Marina", 42, Type.WEALTHY, 500_000)
+                "Marina", 42, Type.WEALTHY, 500_000)
         )));
-    }*/
+    }
 
 }

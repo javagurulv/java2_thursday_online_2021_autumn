@@ -27,8 +27,8 @@ public class GetUserPortfolioUIAction implements UIAction {
     }
 
     public void printResponse(GetUserPortfolioResponse response) {
-        String userName = response.getUser().getName() + "(ID: " + response.getUser().getId() + ")";
         if (!response.hasErrors()) {
+            String userName = response.getUser().getName() + "(ID: " + response.getUser().getId() + ")";
             System.out.println("==============" + userName + "===============");
             response.getUser().getPortfolio().forEach(position -> System.out.println("company=" + position.getSecurity().getName() + ", amount=" +
                     position.getAmount() + ", purchase price=" + position.getPurchasePrice() + ", last market price=" +

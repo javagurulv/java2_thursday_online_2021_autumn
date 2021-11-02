@@ -29,7 +29,7 @@ public class GetUserPortfolioService {
             user.get().setPortfolio(userData.getUserPortfolio(user.get().getId()));
             return new GetUserPortfolioResponse(user.get());
         }
-        return new GetUserPortfolioResponse(errors, user.get());
+        return new GetUserPortfolioResponse(errors, null);
     }
 
 }

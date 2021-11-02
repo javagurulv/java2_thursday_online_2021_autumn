@@ -47,13 +47,13 @@ public class GetUserPortfolioSummaryServiceTest {
         Mockito.verify(validator).validate(any());
     }
 
-    /*@Test
+    @Test
     public void shouldReturnUserPortfolioSummaryResult() {
         GetUserPortfolioSummaryRequest request =
                 new GetUserPortfolioSummaryRequest("Alexander");
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
 
-        User user = new User(1, "Alexander", 25, Type.SUPER_RICH, 1_000_000);
+        User user = new User("Alexander", 25, Type.SUPER_RICH, 1_000_000);
         List<Position> portfolio = List.of(
                 new Position(new Stock("BABA US", "Alibaba", "Technology", "USD", 175.23, 0, 1.32), 525, 175.23),
                 new Position(new Stock("OGZD LN", "Gazprom", "Energy", "USD", 9.25, 5.53, 0.95), 7563, 9.25),
@@ -71,7 +71,7 @@ public class GetUserPortfolioSummaryServiceTest {
         double avgWgtDividendYield = 2.3102;
         double avgWgtRiskWeight = 1.0963;
 
-        Mockito.when(userData.findUserByName("Alexander")).thenReturn(Optional.of(user));
+        Mockito.when(userData.findUserByIdOrName("Alexander")).thenReturn(Optional.of(user));
 
         GetUserPortfolioSummaryResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -82,6 +82,6 @@ public class GetUserPortfolioSummaryServiceTest {
         Assert.assertEquals(amountOfPositions, response.getAmountOfPositions());
         Assert.assertEquals(avgWgtDividendYield, response.getAvgWgtDividendYield(), 0.001);
         Assert.assertEquals(avgWgtRiskWeight, response.getAvgWgtRiskWeight(), 0.001);
-    }*/
+    }
 
 }

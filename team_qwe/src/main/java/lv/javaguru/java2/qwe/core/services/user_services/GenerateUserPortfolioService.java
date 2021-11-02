@@ -49,7 +49,7 @@ public class GenerateUserPortfolioService {
             user1.setPortfolioGenerationDate(userData.getCurrentDate());
             return new GenerateUserPortfolioResponse(user1);
         } else {
-            return new GenerateUserPortfolioResponse(errors, user.get());
+            return new GenerateUserPortfolioResponse(errors, null);
         }
     }
 

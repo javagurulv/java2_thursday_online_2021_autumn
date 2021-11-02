@@ -46,21 +46,34 @@ public class FindUserByNameServiceTest {
         Mockito.verify(validator).validate(any());
     }
 
-/*    @Test
-    public void shouldReturnUserSearchResult() {
+    @Test
+    public void shouldReturnUserSearchResult1() {
         FindUserByNameRequest request = new FindUserByNameRequest("Alexander");
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-
         Optional<User> user = Optional.of(
-                new User(1,"Alexander", 25, Type.SUPER_RICH, 1_000_000)
+                new User("Alexander", 25, Type.SUPER_RICH, 1_000_000)
         );
-        Mockito.when(userData.findUserByName("Alexander")).thenReturn(user);
-
+        Mockito.when(userData.findUserByIdOrName("Alexander")).thenReturn(user);
         FindUserByNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        Assert.assertEquals(response.getUser(), new User(1,"Alexander", 25,
+        Assert.assertEquals(response.getUser(), new User("Alexander", 25,
                 Type.SUPER_RICH, 1_000_000)
         );
-    }*/
+    }
+
+    @Test
+    public void shouldReturnUserSearchResult2() {
+        FindUserByNameRequest request = new FindUserByNameRequest("1");
+        Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
+        Optional<User> user = Optional.of(
+                new User("Alexander", 25, Type.SUPER_RICH, 1_000_000)
+        );
+        Mockito.when(userData.findUserByIdOrName("1")).thenReturn(user);
+        FindUserByNameResponse response = service.execute(request);
+        assertFalse(response.hasErrors());
+        Assert.assertEquals(response.getUser(), new User("Alexander", 25,
+                Type.SUPER_RICH, 1_000_000)
+        );
+    }
 
 }
