@@ -37,7 +37,7 @@ class SearchVisitValidatorTest {
     public void shouldReturnOrderingErrors() {
         VisitOrdering visitOrdering = new VisitOrdering("date", "ASC");
         SearchVisitRequest request = new SearchVisitRequest
-                (1L, 1L, 1L, "12/12/21 12:00", visitOrdering);
+                (1L, 1L, 1L, "12-12-21 12:00", visitOrdering);
         CoreError error = new CoreError("orderBy", "bla bla bla");
 
         Mockito.when(visitOrderingValidator.validate(visitOrdering)).thenReturn(List.of(error));
@@ -52,7 +52,7 @@ class SearchVisitValidatorTest {
     public void shouldNotReturnOrderingErrors() {
         VisitOrdering visitOrdering = new VisitOrdering("date", "ASC");
         SearchVisitRequest request = new SearchVisitRequest
-                (1L, 1L, 1L, "12/12/21 12:00", visitOrdering);
+                (1L, 1L, 1L, "12-12-21 12:00", visitOrdering);
 
         Mockito.when(visitOrderingValidator.validate(visitOrdering))
                 .thenReturn(new ArrayList<>());
@@ -64,7 +64,7 @@ class SearchVisitValidatorTest {
     public void shouldNotCheckOrdering() {
         VisitOrdering visitOrdering = null;
         SearchVisitRequest request = new SearchVisitRequest
-                (1L, 1L, 1L, "12/12/21 12:00", visitOrdering);
+                (1L, 1L, 1L, "12-12-21 12:00", visitOrdering);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
 

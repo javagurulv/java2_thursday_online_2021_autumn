@@ -23,7 +23,7 @@ public class DateFormatValidatorTest {
 
     @Test
     public void shouldReturnOptionalEmpty() {
-        String date = "17/01/2022 15:00";
+        String date = "17-01-2022 15:00";
         Optional<CoreError> error = dateFormatValidator.validateFormat(date);
         assertTrue(error.isEmpty());
     }

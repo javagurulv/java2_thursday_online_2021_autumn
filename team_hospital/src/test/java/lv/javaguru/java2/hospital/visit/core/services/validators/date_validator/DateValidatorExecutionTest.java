@@ -42,10 +42,10 @@ public class DateValidatorExecutionTest {
         AddVisitRequest request = new AddVisitRequest(
                 "1",
                 "2",
-                "17/01/2022 15:00"
+                "17-01-2022 15:00"
         );
         Mockito.when(formatValidator.validateFormat(request.getVisitDate())).thenReturn(Optional.empty());
-        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(request.getVisitDate()));
+        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(request.getVisitDate()));
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate())).thenReturn(localDateTime);
         List<CoreError> errors = validator.validate(request.getVisitDate());
         assertTrue(errors.isEmpty());
@@ -74,9 +74,9 @@ public class DateValidatorExecutionTest {
         AddVisitRequest request = new AddVisitRequest(
                 "1",
                 "2",
-                "17/01/2020 15:00"
+                "17-01-2020 15:00"
         );
-        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(request.getVisitDate()));
+        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(request.getVisitDate()));
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate())).thenReturn(localDateTime);
         List<CoreError> errors = validator.validate(request.getVisitDate());
         assertFalse(errors.isEmpty());
@@ -90,9 +90,9 @@ public class DateValidatorExecutionTest {
         AddVisitRequest request = new AddVisitRequest(
                 "1",
                 "2",
-                "16/01/2022 15:00"
+                "16-01-2022 15:00"
         );
-        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(request.getVisitDate()));
+        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(request.getVisitDate()));
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate())).thenReturn(localDateTime);
         List<CoreError> errors = validator.validate(request.getVisitDate());
         assertFalse(errors.isEmpty());
@@ -106,9 +106,9 @@ public class DateValidatorExecutionTest {
         AddVisitRequest request = new AddVisitRequest(
                 "1",
                 "2",
-                "17/01/2022 20:00"
+                "17-01-2022 20:00"
         );
-        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(request.getVisitDate()));
+        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(request.getVisitDate()));
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate())).thenReturn(localDateTime);
         List<CoreError> errors = validator.validate(request.getVisitDate());
         assertFalse(errors.isEmpty());
@@ -124,19 +124,19 @@ public class DateValidatorExecutionTest {
         doctor.setId(1L);
         Patient patient = new Patient("name", "surname", "1234");
         patient.setId(2L);
-        String date = "25/12/2025 12:00";
+        String date = "25-12-2025 12:00";
         Visit visit = new Visit(doctor.getId(), patient.getId(), LocalDateTime
-                .from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date)));
+                .from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(date)));
         visits.add(visit);
 
         AddVisitRequest request = new AddVisitRequest(
                 "1",
                 "2",
-                "25/12/2025 12:00"
+                "25-12-2025 12:00"
         );
 
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate()))
-                .thenReturn(LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
+                .thenReturn(LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
                         .parse(request.getVisitDate())));
         Mockito.when(database.getAllVisits()).thenReturn(visits);
 

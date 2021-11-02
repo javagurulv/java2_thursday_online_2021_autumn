@@ -24,7 +24,7 @@ public class EditVisitUIAction implements VisitUIAction {
         switch (userInput) {
             case "DOCTOR" -> changes = getUserInput.getUserStringInput("Enter new doctor id: ");
             case "PATIENT" -> changes = getUserInput.getUserStringInput("Enter new patient id: ");
-            case "DATE" -> changes = getUserInput.getUserStringInput("Enter new visit date and time in format dd/MM/yyyy HH:mm: ");
+            case "DATE" -> changes = getUserInput.getUserStringInput("Enter new visit date and time in format dd-MM-yyyy HH:mm: ");
             case "DESCRIPTION" -> changes = getUserInput.getUserStringInput("Enter new visit description: ");
         }
         EditVisitRequest request = new EditVisitRequest(id, userInput, changes);

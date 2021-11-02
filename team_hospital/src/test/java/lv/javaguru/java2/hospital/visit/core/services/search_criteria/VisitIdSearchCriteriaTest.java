@@ -49,8 +49,8 @@ class VisitIdSearchCriteriaTest {
         patient.setId(2L);
 
         List<Visit> visits = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime date = LocalDateTime.parse("18/12/2021 13:00", formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime date = LocalDateTime.parse("18-12-2021 13:00", formatter);
         visits.add(new Visit(doctor.getId(), patient.getId(), date));
         Long visitId = visits.get(0).getVisitID();
 

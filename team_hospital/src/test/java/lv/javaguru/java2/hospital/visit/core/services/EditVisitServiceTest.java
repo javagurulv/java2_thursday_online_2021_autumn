@@ -75,7 +75,7 @@ class EditVisitServiceTest {
         patient.setId(1L);
 
         List<Visit> visits = new ArrayList<>();
-        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("21/12/2021 15:00"));
+        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse("21-12-2021 15:00"));
         visits.add(new Visit(doctor1.getId(), patient.getId(), date));
 
         Mockito.when(database.editVisit(1L, EditVisitEnum.DOCTOR_ID, "2")).thenReturn(true);
@@ -95,8 +95,8 @@ class EditVisitServiceTest {
         patient1.setId(1L);
 
         List<Visit> visits = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime date = LocalDateTime.parse("21/12/2021 15:00", formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime date = LocalDateTime.parse("21-12-2021 15:00", formatter);
         visits.add(new Visit(doctor.getId(), patient1.getId(), date));
 
         Mockito.when(database.editVisit(1L, EditVisitEnum.PATIENT_ID, "2")).thenReturn(true);
@@ -107,7 +107,7 @@ class EditVisitServiceTest {
 
     @Test
     public void shouldChangeVisitDate() {
-        EditVisitRequest request = new EditVisitRequest(1L, "DATE", "23/12/2021 15:00");
+        EditVisitRequest request = new EditVisitRequest(1L, "DATE", "23-12-2021 15:00");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
@@ -116,11 +116,11 @@ class EditVisitServiceTest {
         patient.setId(1L);
 
         List<Visit> visits = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime date = LocalDateTime.parse("21/12/2021 15:00", formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime date = LocalDateTime.parse("21-12-2021 15:00", formatter);
         visits.add(new Visit(doctor.getId(), patient.getId(), date));
 
-        Mockito.when(database.editVisit(1L, EditVisitEnum.DATE, "23/12/2021 15:00")).thenReturn(true);
+        Mockito.when(database.editVisit(1L, EditVisitEnum.DATE, "23-12-2021 15:00")).thenReturn(true);
         EditVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertTrue(response.isVisitEdited());

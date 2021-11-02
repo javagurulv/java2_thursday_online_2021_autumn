@@ -45,7 +45,7 @@ class VisitExistenceByIdValidatorTest {
         patient.setId(2L);
 
         List<Visit> visits = new ArrayList<>();
-        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("20/12/2021 14:00"));
+        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse("20-12-2021 14:00"));
         visits.add(new Visit(doctor.getId(), patient.getId(), date));
         Long visitId = 165L;
         visits.get(0).setVisitID(visitId);

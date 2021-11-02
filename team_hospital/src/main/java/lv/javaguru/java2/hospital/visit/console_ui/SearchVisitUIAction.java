@@ -19,7 +19,7 @@ public class SearchVisitUIAction implements VisitUIAction {
         Long visitId = getUserInput.getUserLongInput("Please enter visit id: ");
         Long doctorId = getUserInput.getUserLongInput("Please enter doctor id: ");
         Long patientId = getUserInput.getUserLongInput("Please enter patient id: ");
-        String dateInput = getUserInput.getUserStringInput("Please enter visit date in format dd/MM/yyyy HH:mm: ");
+        String dateInput = getUserInput.getUserStringInput("Please enter visit date in format dd-MM-yyyy HH:mm: ");
 
         String orderBy = getUserInput.getUserStringInput("Enter orderBy (name||surname||speciality): ");
         String orderDirection = getUserInput.getUserStringInput("Enter orderDirection (ASCENDING||DESCENDING): ");

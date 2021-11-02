@@ -59,13 +59,13 @@ public class AcceptanceTest3 {
         AddVisitRequest request = new AddVisitRequest(
                 searchPatientsResponse.getPatientList().get(0).getId().toString(),
                 searchDoctorsResponse1.getDoctors().get(0).getId().toString(),
-                "10/10/2023 10:00");
+                "10-10-2023 10:00");
         AddVisitResponse addVisitResponse = getAddVisitService().execute(request);
 
         SearchVisitRequest searchVisitRequest1 = new SearchVisitRequest(
                 null,searchDoctorsResponse1.getDoctors().get(0).getId(),
                 searchPatientsResponse.getPatientList().get(0).getId(),
-                "10/10/2023 10:00");
+                "10-10-2023 10:00");
         SearchVisitResponse searchVisitResponse1 = getSearchVisitService().execute(searchVisitRequest1);
 
         EditVisitRequest editVisitRequest = new EditVisitRequest(
@@ -77,7 +77,7 @@ public class AcceptanceTest3 {
         SearchVisitRequest searchVisitRequest2 = new SearchVisitRequest(
                 null,searchDoctorsResponse2.getDoctors().get(0).getId(),
                 searchPatientsResponse.getPatientList().get(0).getId(),
-                "10/10/2023 10:00");
+                "10-10-2023 10:00");
 
         SearchVisitResponse searchVisitResponse2 = getSearchVisitService().execute(searchVisitRequest2);
 

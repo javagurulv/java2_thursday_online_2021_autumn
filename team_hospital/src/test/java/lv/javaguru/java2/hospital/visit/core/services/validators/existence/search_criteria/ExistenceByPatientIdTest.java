@@ -59,7 +59,7 @@ class ExistenceByPatientIdTest {
         Patient patient = new Patient("PatientsName1", "PatientsSurname1", "150254-12636");
         patient.setId(5456L);
         List<Visit> visits = new ArrayList<>();
-        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("27/12/2021 16:00"));
+        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse("27-12-2021 16:00"));
         visits.add(new Visit(doctor.getId(), patient.getId(), date));
 
         SearchVisitRequest request = new SearchVisitRequest(null, null, patient.getId(), "");

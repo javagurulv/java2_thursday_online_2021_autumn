@@ -25,7 +25,7 @@ public class AddVisitService {
             return new AddVisitResponse(errors);
         }
 
-        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(request.getVisitDate()));
+        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(request.getVisitDate()));
         Visit visit = new Visit(Long.parseLong(request.getDoctorsID()),
                 Long.parseLong(request.getPatientID()), date, request.getDescription());
 
