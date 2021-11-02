@@ -7,8 +7,10 @@ import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.responses.CoreResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.ImportSecuritiesService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
@@ -27,6 +29,8 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 @Component
 public class UtilityMethods {
+
+    @Autowired private JdbcTemplate jdbcTemplate;
 
     @Value("${importData.enabled}")
     private boolean importDataEnabled;
@@ -77,12 +81,11 @@ public class UtilityMethods {
     }*/
 
     private void simulateMarketPrices(List<Security> list) {
-        if (list.size() > 1) {
+        if (list.size() > 0) {
             IntStream.rangeClosed(0, list.size() - 1)
-                    .filter(i -> !list.get(i).getClass().getSimpleName().equals("Cash"))
-                    .forEach(i -> list.get(i).setMarketPrice(generateNextPrice(
+                    .forEach(i -> updateMarketPriceSQL(generateNextPrice(
                             list.get(i).getMarketPrice(), evenIsPositive(i)
-                    )));
+                    ), list.get(i)));
         }
     }
 
@@ -155,6 +158,11 @@ public class UtilityMethods {
 
     private boolean evenIsPositive(int number) {
         return number % 2 == 0;
+    }
+
+    private void updateMarketPriceSQL(double newPrice, Security security) {
+        jdbcTemplate.update("UPDATE stocks SET market_price = ? WHERE ticker = ?",
+                newPrice, security.getTicker());
     }
 
     public void importData() {
