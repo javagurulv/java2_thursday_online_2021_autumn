@@ -2,10 +2,12 @@ package lv.javaguru.java2.hospital.database;
 
 import lv.javaguru.java2.hospital.domain.Patient;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Component
 public class PatientRowMapper implements RowMapper<Patient> {
 
     @Override

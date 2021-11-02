@@ -12,8 +12,8 @@ import java.util.Locale;
 @Component
 public class JDBCPatientDatabaseImpl implements PatientDatabase {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    @Autowired private JdbcTemplate jdbcTemplate;
+    @Autowired private PatientRowMapper patientRowMapper;
 
     @Override
     public void add(Patient patient) {
@@ -28,7 +28,7 @@ public class JDBCPatientDatabaseImpl implements PatientDatabase {
     public List<Patient> findById(Long id) {
         String sql = "SELECT * FROM patients WHERE id = ?";
         Object[] args = new Object[]{id};
-        return jdbcTemplate.query(sql, args, new PatientRowMapper());
+        return jdbcTemplate.query(sql, args, patientRowMapper);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class JDBCPatientDatabaseImpl implements PatientDatabase {
     @Override
     public List<Patient> getAllPatients() {
         String sql = "SELECT * FROM patients";
-        return jdbcTemplate.query(sql, new PatientRowMapper());
+        return jdbcTemplate.query(sql, patientRowMapper);
     }
 
     @Override
@@ -54,48 +54,48 @@ public class JDBCPatientDatabaseImpl implements PatientDatabase {
     public List<Patient> findPatientsByName(String name) {
         String sql = "SELECT * FROM patients WHERE name = ?";
         Object[] args = new Object[]{name};
-        return jdbcTemplate.query(sql, args, new PatientRowMapper());
+        return jdbcTemplate.query(sql, args, patientRowMapper);
     }
 
     @Override
     public List<Patient> findPatientsBySurname(String surname) {
         String sql = "SELECT * FROM patients WHERE surname = ?";
         Object[] args = new Object[]{surname};
-        return jdbcTemplate.query(sql, args, new PatientRowMapper());
+        return jdbcTemplate.query(sql, args, patientRowMapper);
     }
 
     @Override
     public List<Patient> findPatientsByPersonalCode(String personal_code) {
         String sql = "SELECT * FROM patients WHERE personal_code = ?";
         Object[] args = new Object[]{personal_code};
-        return jdbcTemplate.query(sql, args, new PatientRowMapper());
+        return jdbcTemplate.query(sql, args, patientRowMapper);
     }
 
     @Override
     public List<Patient> findPatientsByNameAndSurname(String name, String surname) {
         String sql = "SELECT * FROM patients WHERE name = ? AND surname = ?";
         Object[] args = new Object[]{name, surname};
-        return jdbcTemplate.query(sql, args, new PatientRowMapper());
+        return jdbcTemplate.query(sql, args, patientRowMapper);
     }
 
     @Override
     public List<Patient> findPatientsByNameAndPersonalCode(String name, String personal_code) {
         String sql = "SELECT * FROM patients WHERE name = ? AND personal_code = ?";
         Object[] args = new Object[]{name, personal_code};
-        return jdbcTemplate.query(sql, args, new PatientRowMapper());
+        return jdbcTemplate.query(sql, args, patientRowMapper);
     }
 
     @Override
     public List<Patient> findPatientsBySurnameAndPersonalCode(String surname, String personal_code) {
         String sql = "SELECT * FROM patients WHERE surname = ? AND personal_code = ?";
         Object[] args = new Object[]{surname, personal_code};
-        return jdbcTemplate.query(sql, args, new PatientRowMapper());
+        return jdbcTemplate.query(sql, args, patientRowMapper);
     }
 
     @Override
     public List<Patient> findPatientByNameSurnamePersonalCode(String name, String surname, String personal_code) {
         String sql = "SELECT * FROM patients WHERE name = ? AND surname = ? AND personal_code = ?";
         Object[] args = new Object[]{name, surname, personal_code};
-        return jdbcTemplate.query(sql, args, new PatientRowMapper());
+        return jdbcTemplate.query(sql, args, patientRowMapper);
     }
 }

@@ -26,7 +26,7 @@ public class ExistenceByPatientId implements VisitExistenceBySearchCriteria {
     @Override
     public Optional<CoreError> validateExistence(SearchVisitRequest request) {
         for (Visit visit : database.getAllVisits()) {
-            if (visit.getPatientID().equals(request.getPatientId())) {
+            if (visit.getPatient().getId().equals(request.getPatientId())) {
                 return Optional.empty();
             }
         }

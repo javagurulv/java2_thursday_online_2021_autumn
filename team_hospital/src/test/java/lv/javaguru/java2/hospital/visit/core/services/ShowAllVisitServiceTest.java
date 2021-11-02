@@ -40,14 +40,14 @@ class ShowAllVisitServiceTest {
         Patient patient = new Patient("Name", "Surname", "120593-15634");
         patient.setId(2L);
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse("21-12-2021 15:00"));
-        visits.add(new Visit(doctor.getId(), patient.getId(), date));
+        visits.add(new Visit(doctor, patient, date));
         Mockito.when(database.getAllVisits()).thenReturn(visits);
         ShowAllVisitRequest request = new ShowAllVisitRequest();
         ShowAllVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getPatientVisits().size(), 1);
-        assertEquals(response.getPatientVisits().get(0).getPatientID(), patient.getId());
-        assertEquals(response.getPatientVisits().get(0).getDoctorID(), doctor.getId());
+        assertEquals(response.getPatientVisits().get(0).getPatient(), patient);
+        assertEquals(response.getPatientVisits().get(0).getDoctor(), doctor);
         assertEquals(response.getPatientVisits().get(0).getVisitDate(), date);
     }
 

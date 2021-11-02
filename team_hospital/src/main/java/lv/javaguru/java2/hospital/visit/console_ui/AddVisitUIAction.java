@@ -28,9 +28,9 @@ public class AddVisitUIAction implements VisitUIAction{
         } else {
             System.out.println(
                     "Visit registered for the patient: "
-                            + response.getPatientVisit().getPatientID() + " "
+                            + response.getPatientVisit().getPatient() + " "
                             + ", to the doctor: "
-                            + response.getPatientVisit().getDoctorID()+ ".");
+                            + response.getPatientVisit().getDoctor() + ".");
             System.out.println("Visit date: " + response.getPatientVisit().getVisitDate()
                     + ", visit id: " + response.getPatientVisit().getVisitID() + ".");
         }

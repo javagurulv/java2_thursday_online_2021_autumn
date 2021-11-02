@@ -62,7 +62,7 @@ class ExistenceByPatientIdAndDateTest {
         patient.setId(2L);
         List<Visit> visits = new ArrayList<>();
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse("27-12-2021 16:00"));
-        visits.add(new Visit(doctor.getId(), patient.getId(), date));
+        visits.add(new Visit(doctor, patient, date));
 
         SearchVisitRequest request = new SearchVisitRequest(null, null, patient.getId(), "27-12-2021 16:00");
         LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(request.getVisitDate()));
@@ -71,5 +71,4 @@ class ExistenceByPatientIdAndDateTest {
         Optional<CoreError> error = existence.validateExistence(request);
         assertTrue(error.isEmpty());
     }
-
 }
