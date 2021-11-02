@@ -52,7 +52,7 @@ class EditVisitServiceTest {
 
     @Test
     public void shouldReturnErrorWhenChangesNotProvided() {
-        EditVisitRequest request = new EditVisitRequest(1L, "DOCTOR_ID", "");
+        EditVisitRequest request = new EditVisitRequest("1", "DOCTOR_ID", "");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("changes", "Must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -66,7 +66,7 @@ class EditVisitServiceTest {
 
     @Test
     public void shouldChangeDoctor() {
-        EditVisitRequest request = new EditVisitRequest(1L, "DOCTOR_ID", "2");
+        EditVisitRequest request = new EditVisitRequest("1", "DOCTOR_ID", "2");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         Doctor doctor1 = new Doctor("DoctorsName1", "DoctorsSurname1", "Speciality1");
@@ -86,7 +86,7 @@ class EditVisitServiceTest {
 
     @Test
     public void shouldChangePatient() {
-        EditVisitRequest request = new EditVisitRequest(1L, "PATIENT_ID", "2");
+        EditVisitRequest request = new EditVisitRequest("1", "PATIENT_ID", "2");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
@@ -107,7 +107,7 @@ class EditVisitServiceTest {
 
     @Test
     public void shouldChangeVisitDate() {
-        EditVisitRequest request = new EditVisitRequest(1L, "DATE", "23-12-2021 15:00");
+        EditVisitRequest request = new EditVisitRequest("1", "DATE", "23-12-2021 15:00");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
@@ -128,7 +128,7 @@ class EditVisitServiceTest {
 
     @Test
     public void shouldReturnErrorWhenEnumIncorrect() {
-        EditVisitRequest request = new EditVisitRequest(1L, "INPUT", "changes");
+        EditVisitRequest request = new EditVisitRequest("1", "INPUT", "changes");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("edit option", "must be DOCTOR_ID, PATIENT_ID, DATE OR DESCRIPTION!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);

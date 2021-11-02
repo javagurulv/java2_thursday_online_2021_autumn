@@ -29,13 +29,18 @@ public class EditVisitValidator {
     }
 
     private Optional<CoreError> validateId(EditVisitRequest request) {
-        return (request.getVisitID() == null)
+        return (request.getVisitID() == null || request.getVisitID().isEmpty())
                 ? Optional.of(new CoreError("id", "Must not be empty!"))
                 : Optional.empty();
     }
+    /*
+    private Optional<CoreError> validateParse(EditVisitRequest request){
+        return (request.getVisitID() == null || request.getVisitID().isEmpty())
+                ? Optional.empty() : longNumChecker.validate(request.getVisitID(), "ID")
+    }*/
 
-    private Optional<CoreError> validateVisitExistence(Long id)  {
-        return id == null ? Optional.empty() : validator.validateExistenceById(id);
+    private Optional<CoreError> validateVisitExistence(String id)  {
+        return id == null ? Optional.empty() : validator.validateExistenceById(Long.valueOf(id));
     }
 
     private Optional<CoreError> validateChanges(EditVisitRequest request) {

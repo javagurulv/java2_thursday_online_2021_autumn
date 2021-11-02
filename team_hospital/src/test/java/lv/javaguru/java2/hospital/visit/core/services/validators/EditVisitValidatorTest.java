@@ -30,7 +30,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnEmptyList() {
-        EditVisitRequest request = new EditVisitRequest(1L, "DOCTOR", "changes");
+        EditVisitRequest request = new EditVisitRequest("1", "DOCTOR", "changes");
         Mockito.when(existence.validateExistenceById(1L)).thenReturn(Optional.empty());
         Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.empty());
         List<CoreError> errorList = validator.validate(request);
@@ -49,7 +49,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnChangesError() {
-        EditVisitRequest request = new EditVisitRequest(1L, "DOCTOR", "");
+        EditVisitRequest request = new EditVisitRequest("1", "DOCTOR", "");
         Mockito.when(existence.validateExistenceById(1L)).thenReturn(Optional.empty());
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
@@ -74,7 +74,7 @@ class EditVisitValidatorTest {
     public void shouldReturnVisitError() {
         Mockito.when(existence.validateExistenceById(12L)).thenReturn
                 (Optional.of(new CoreError("Visit", "Does not exist!")));
-        EditVisitRequest request = new EditVisitRequest(12L, "DOCTOR", "changes");
+        EditVisitRequest request = new EditVisitRequest("12", "DOCTOR", "changes");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
@@ -84,7 +84,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnEnumErrorIsEmpty() {
-        EditVisitRequest request = new EditVisitRequest(11L, "", "changes");
+        EditVisitRequest request = new EditVisitRequest("11", "", "changes");
         Mockito.when(existence.validateExistenceById(11L)).thenReturn(Optional.empty());
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
@@ -95,7 +95,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnEnumErrorInvalidInput() {
-        EditVisitRequest request = new EditVisitRequest(11L, "ENUM", "changes");
+        EditVisitRequest request = new EditVisitRequest("11", "ENUM", "changes");
         Mockito.when(existence.validateExistenceById(11L)).thenReturn(Optional.empty());
         Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.of(
                 new CoreError("edit option", "must be DOCTOR, PATIENT, DATE OR DESCRIPTION!")
@@ -109,7 +109,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnDateInputErrorError() {
-        EditVisitRequest request = new EditVisitRequest(11L, "DATE", "changes");
+        EditVisitRequest request = new EditVisitRequest("11", "DATE", "changes");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "input is incorrect!"));
 
@@ -126,7 +126,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnDateTimeIsNotInTheFutureError() {
-        EditVisitRequest request = new EditVisitRequest(11L, "DATE", "13-10-2021 10:00");
+        EditVisitRequest request = new EditVisitRequest("11", "DATE", "13-10-2021 10:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not in the future!"));
 
@@ -143,7 +143,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnDateTimeIsNotWorkingDayError() {
-        EditVisitRequest request = new EditVisitRequest(11L, "DATE", "2-12-2023 10:00");
+        EditVisitRequest request = new EditVisitRequest("11", "DATE", "2-12-2023 10:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not working day!"));
 
@@ -160,7 +160,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnDateTimeIsNotWorkingHoursError() {
-        EditVisitRequest request = new EditVisitRequest(11L, "DATE", "1-12-2023 06:00");
+        EditVisitRequest request = new EditVisitRequest("11", "DATE", "1-12-2023 06:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not working hour!"));
 
@@ -177,7 +177,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturn3DateTimeError() {
-        EditVisitRequest request = new EditVisitRequest(11L, "DATE", "2-10-2021 06:00");
+        EditVisitRequest request = new EditVisitRequest("11", "DATE", "2-10-2021 06:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not in the future!"));
         errors.add(new CoreError("Date", "is not working day!"));

@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators;
 
-import lv.javaguru.java2.hospital.checkers.LongNumChecker;
+import lv.javaguru.java2.hospital.prescription.core.checkers.LongNumChecker;
 import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionRequest;

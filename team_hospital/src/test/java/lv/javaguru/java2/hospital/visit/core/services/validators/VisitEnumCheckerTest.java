@@ -21,14 +21,14 @@ class VisitEnumCheckerTest {
 
     @Test
     public void shouldReturnEmptyList() {
-        EditVisitRequest request = new EditVisitRequest(12L, "DESCRIPTION", "changes");
+        EditVisitRequest request = new EditVisitRequest("12", "DESCRIPTION", "changes");
         Optional<CoreError> error = checker.validateEnum(request.getEditEnums());
         assertTrue(error.isEmpty());
     }
 
     @Test
     public void shouldReturnEditErrorList() {
-        EditVisitRequest request = new EditVisitRequest(12L, "blabla", "changes");
+        EditVisitRequest request = new EditVisitRequest("12", "blabla", "changes");
         Optional<CoreError> error = checker.validateEnum(request.getEditEnums());
         assertTrue(error.isPresent());
         assertEquals(error.get().getField(), "Edit option");

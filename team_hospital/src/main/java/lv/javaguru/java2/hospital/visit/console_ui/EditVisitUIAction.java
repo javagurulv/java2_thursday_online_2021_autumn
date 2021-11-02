@@ -17,7 +17,7 @@ public class EditVisitUIAction implements VisitUIAction {
     @Override
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
-        Long id = getUserInput.getUserLongInput("Please, enter the patient visit's id: ");
+        String id = getUserInput.getUserStringInput("Please, enter the patient visit's id: ");
         String userInput = getUserInput.getUserStringInput("What information you would like to edit " +
                 "(DOCTOR||PATIENT||DATE||DESCRIPTION)? ").toUpperCase(Locale.ROOT);
         String changes = "";

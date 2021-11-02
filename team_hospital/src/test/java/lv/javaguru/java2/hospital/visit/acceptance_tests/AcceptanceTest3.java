@@ -69,7 +69,7 @@ public class AcceptanceTest3 {
         SearchVisitResponse searchVisitResponse1 = getSearchVisitService().execute(searchVisitRequest1);
 
         EditVisitRequest editVisitRequest = new EditVisitRequest(
-                searchVisitResponse1.getVisits().get(0).getVisitID(), "DOCTOR_ID",
+                searchVisitResponse1.getVisits().get(0).getVisitID().toString(), "DOCTOR_ID",
                 searchDoctorsResponse2.getDoctors().get(0).getId().toString());
 
         EditVisitResponse editVisitResponse = getEditVisitService().execute(editVisitRequest);
