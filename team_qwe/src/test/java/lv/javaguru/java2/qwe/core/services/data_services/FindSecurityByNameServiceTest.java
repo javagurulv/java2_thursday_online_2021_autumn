@@ -56,7 +56,6 @@ public class FindSecurityByNameServiceTest {
                         175.32, 0, 1.32)
         );
         Mockito.when(database.findSecurityByTickerOrName("Alibaba")).thenReturn(security);
-
         FindSecurityByTickerOrNameResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         Assert.assertEquals(response.getSecurity(), new Stock("BABA US", "Alibaba", "Technology", "USD",

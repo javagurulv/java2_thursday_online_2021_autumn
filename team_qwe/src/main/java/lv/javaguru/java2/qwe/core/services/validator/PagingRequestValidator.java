@@ -15,9 +15,9 @@ public class PagingRequestValidator {
 
     private final Map<Predicate<PagingRequest>, CoreError> validator = Map.ofEntries(
             entry(request -> request.getPageNumber().isEmpty() && !request.getPageSize().isEmpty(),
-                    new CoreError("Ordering", "both fields must be empty or filled!")),
+                    new CoreError("Paging", "both fields must be empty or filled!")),
             entry(request -> !request.getPageNumber().isEmpty() && request.getPageSize().isEmpty(),
-                    new CoreError("Ordering", "both fields must be empty or filled!"))
+                    new CoreError("Paging", "both fields must be empty or filled!"))
     );
 
     public List<CoreError> validate(CoreRequest request) {
