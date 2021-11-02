@@ -1,12 +1,12 @@
-package lv.javaguru.java2.hospital.prescription.core.checkers;
+package lv.javaguru.java2.hospital.visit.core.checkers;
 
-import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
+import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
-public class IntegerNumChecker {
+public class VisitIntegerNumChecker {
 
     public Optional<CoreError> validate(String input, String field) {
 

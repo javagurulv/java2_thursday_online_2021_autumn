@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
+import lv.javaguru.java2.hospital.visit.core.checkers.VisitLongNumChecker;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.services.validators.date_validator.DateValidatorExecution;
@@ -26,20 +27,22 @@ class EditVisitValidatorTest {
     @Mock private DateValidatorExecution dateValidator;
     @Mock private VisitEnumChecker checker;
     @Mock private VisitExistenceByIdValidator existence;
+    @Mock private VisitLongNumChecker longNumChecker;
     @InjectMocks private EditVisitValidator validator;
 
     @Test
     public void shouldReturnEmptyList() {
-        EditVisitRequest request = new EditVisitRequest("1", "DOCTOR", "changes");
-        Mockito.when(existence.validateExistenceById(1L)).thenReturn(Optional.empty());
+        EditVisitRequest request = new EditVisitRequest("1", "DOCTOR_ID", "changes");
+        Mockito.when(longNumChecker.validate(request.getVisitID(), "ID")).thenReturn(Optional.empty());
         Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.empty());
+        Mockito.when(existence.validateExistenceById(1L)).thenReturn(Optional.empty());
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
-    public void shouldReturnIdError() {
-        EditVisitRequest request = new EditVisitRequest(null, "DOCTOR", "changes");
+    public void shouldReturnIDError() {
+        EditVisitRequest request = new EditVisitRequest(null, "DOCTOR_ID", "changes");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
@@ -48,9 +51,20 @@ class EditVisitValidatorTest {
     }
 
     @Test
+    public void shouldReturnIDParseError() {
+        EditVisitRequest request = new EditVisitRequest("qwe", "DOCTOR_ID", "changes");
+        Mockito.when(longNumChecker.validate(request.getVisitID(), "ID"))
+                .thenReturn(Optional.of(new CoreError("ID in changes", "must be a number!")));
+        List<CoreError> errorList = validator.validate(request);
+        assertFalse(errorList.isEmpty());
+        assertEquals(errorList.size(), 1);
+        assertEquals(errorList.get(0).getField(), "ID in changes");
+        assertEquals(errorList.get(0).getDescription(), "must be a number!");
+    }
+
+    @Test
     public void shouldReturnChangesError() {
-        EditVisitRequest request = new EditVisitRequest("1", "DOCTOR", "");
-        Mockito.when(existence.validateExistenceById(1L)).thenReturn(Optional.empty());
+        EditVisitRequest request = new EditVisitRequest("1", "DOCTOR_ID", "");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
@@ -60,7 +74,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnIdAndChangesErrors() {
-        EditVisitRequest request = new EditVisitRequest(null, "DOCTOR", "");
+        EditVisitRequest request = new EditVisitRequest(null, "DOCTOR_ID", "");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 2);
@@ -74,7 +88,7 @@ class EditVisitValidatorTest {
     public void shouldReturnVisitError() {
         Mockito.when(existence.validateExistenceById(12L)).thenReturn
                 (Optional.of(new CoreError("Visit", "Does not exist!")));
-        EditVisitRequest request = new EditVisitRequest("12", "DOCTOR", "changes");
+        EditVisitRequest request = new EditVisitRequest("12", "DOCTOR_ID", "changes");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
@@ -85,7 +99,6 @@ class EditVisitValidatorTest {
     @Test
     public void shouldReturnEnumErrorIsEmpty() {
         EditVisitRequest request = new EditVisitRequest("11", "", "changes");
-        Mockito.when(existence.validateExistenceById(11L)).thenReturn(Optional.empty());
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
@@ -96,15 +109,14 @@ class EditVisitValidatorTest {
     @Test
     public void shouldReturnEnumErrorInvalidInput() {
         EditVisitRequest request = new EditVisitRequest("11", "ENUM", "changes");
-        Mockito.when(existence.validateExistenceById(11L)).thenReturn(Optional.empty());
         Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.of(
-                new CoreError("edit option", "must be DOCTOR, PATIENT, DATE OR DESCRIPTION!")
+                new CoreError("edit option", "must be DOCTOR_ID, PATIENT_ID, DATE OR DESCRIPTION!")
         ));
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "edit option");
-        assertEquals(errorList.get(0).getDescription(), "must be DOCTOR, PATIENT, DATE OR DESCRIPTION!");
+        assertEquals(errorList.get(0).getDescription(), "must be DOCTOR_ID, PATIENT_ID, DATE OR DESCRIPTION!");
     }
 
     @Test
@@ -113,7 +125,6 @@ class EditVisitValidatorTest {
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "input is incorrect!"));
 
-        Mockito.when(existence.validateExistenceById(11L)).thenReturn(Optional.empty());
         Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.empty());
         Mockito.when(dateValidator.validate(request.getChanges())).thenReturn(errors);
 
@@ -130,7 +141,6 @@ class EditVisitValidatorTest {
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not in the future!"));
 
-        Mockito.when(existence.validateExistenceById(11L)).thenReturn(Optional.empty());
         Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.empty());
         Mockito.when(dateValidator.validate(request.getChanges())).thenReturn(errors);
 
@@ -147,7 +157,6 @@ class EditVisitValidatorTest {
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not working day!"));
 
-        Mockito.when(existence.validateExistenceById(11L)).thenReturn(Optional.empty());
         Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.empty());
         Mockito.when(dateValidator.validate(request.getChanges())).thenReturn(errors);
 
@@ -164,7 +173,6 @@ class EditVisitValidatorTest {
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not working hour!"));
 
-        Mockito.when(existence.validateExistenceById(11L)).thenReturn(Optional.empty());
         Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.empty());
         Mockito.when(dateValidator.validate(request.getChanges())).thenReturn(errors);
 
@@ -183,7 +191,6 @@ class EditVisitValidatorTest {
         errors.add(new CoreError("Date", "is not working day!"));
         errors.add(new CoreError("Date", "is not working hour!"));
 
-        Mockito.when(existence.validateExistenceById(11L)).thenReturn(Optional.empty());
         Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.empty());
         Mockito.when(dateValidator.validate(request.getChanges())).thenReturn(errors);
 

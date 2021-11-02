@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
+import lv.javaguru.java2.hospital.visit.core.checkers.VisitLongNumChecker;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.services.validators.date_validator.DateValidatorExecution;
@@ -17,14 +18,19 @@ public class EditVisitValidator {
     @Autowired private VisitExistenceByIdValidator validator;
     @Autowired private VisitEnumChecker checker;
     @Autowired private DateValidatorExecution dateValidator;
+    @Autowired private VisitLongNumChecker longNumChecker;
 
     public List<CoreError> validate(EditVisitRequest request) {
         List<CoreError> errors = new ArrayList<>();
         validateId(request).ifPresent(errors::add);
-        validateVisitExistence(request.getVisitID()).ifPresent(errors::add);
+        validateVisitIDParse(request).ifPresent(errors::add);
         validateChanges(request).ifPresent(errors::add);
+        validateChangesIDParse(request).ifPresent(errors::add);
         validateEnum(request).ifPresent(errors::add);
         errors.addAll(validateDate(request));
+        if(errors.isEmpty()){
+            validateVisitExistence(request).ifPresent(errors::add);
+        }
         return errors;
     }
 
@@ -33,14 +39,21 @@ public class EditVisitValidator {
                 ? Optional.of(new CoreError("id", "Must not be empty!"))
                 : Optional.empty();
     }
-    /*
-    private Optional<CoreError> validateParse(EditVisitRequest request){
-        return (request.getVisitID() == null || request.getVisitID().isEmpty())
-                ? Optional.empty() : longNumChecker.validate(request.getVisitID(), "ID")
-    }*/
 
-    private Optional<CoreError> validateVisitExistence(String id)  {
-        return id == null ? Optional.empty() : validator.validateExistenceById(Long.valueOf(id));
+    private Optional<CoreError> validateVisitIDParse(EditVisitRequest request){
+        return (request.getVisitID() == null || request.getVisitID().isEmpty())
+                ? Optional.empty() : longNumChecker.validate(request.getVisitID(), "ID");
+    }
+
+    private Optional<CoreError> validateChangesIDParse(EditVisitRequest request){
+        return (request.getEditEnums() == null || request.getEditEnums().isEmpty())
+                ? Optional.empty() : request.getEditEnums().equals("DOCTOR_ID") || request.getEditEnums().equals("PATIENT_ID")
+                ? longNumChecker.validate(request.getChanges(), "ID in changes") : Optional.empty();
+    }
+
+    private Optional<CoreError> validateVisitExistence(EditVisitRequest request)  {
+        return (request.getVisitID() == null || request.getVisitID().isEmpty())
+                ? Optional.empty() : validator.validateExistenceById(Long.valueOf(request.getVisitID()));
     }
 
     private Optional<CoreError> validateChanges(EditVisitRequest request) {
