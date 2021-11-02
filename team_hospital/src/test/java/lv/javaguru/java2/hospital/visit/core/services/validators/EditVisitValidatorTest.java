@@ -126,7 +126,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnDateTimeIsNotInTheFutureError() {
-        EditVisitRequest request = new EditVisitRequest(11L, "DATE", "13/10/2021 10:00");
+        EditVisitRequest request = new EditVisitRequest(11L, "DATE", "13-10-2021 10:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not in the future!"));
 
@@ -143,7 +143,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnDateTimeIsNotWorkingDayError() {
-        EditVisitRequest request = new EditVisitRequest(11L, "DATE", "2/12/2023 10:00");
+        EditVisitRequest request = new EditVisitRequest(11L, "DATE", "2-12-2023 10:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not working day!"));
 
@@ -160,7 +160,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnDateTimeIsNotWorkingHoursError() {
-        EditVisitRequest request = new EditVisitRequest(11L, "DATE", "1/12/2023 06:00");
+        EditVisitRequest request = new EditVisitRequest(11L, "DATE", "1-12-2023 06:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not working hour!"));
 
@@ -177,7 +177,7 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturn3DateTimeError() {
-        EditVisitRequest request = new EditVisitRequest(11L, "DATE", "2/10/2021 06:00");
+        EditVisitRequest request = new EditVisitRequest(11L, "DATE", "2-10-2021 06:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not in the future!"));
         errors.add(new CoreError("Date", "is not working day!"));

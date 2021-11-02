@@ -25,8 +25,8 @@ class DateIsWorkingDayValidatorTest {
 
     @Test
     public void shouldReturnDateWorkingDayErrorSunday() {
-        String date = "16/01/2022 15:00";
-        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date));
+        String date = "16-01-2022 15:00";
+        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(date));
         Mockito.when(getVisitDate.getVisitDateFromString(date)).thenReturn(localDateTime);
         Optional<CoreError> error = workingDayValidator.validate(date);
         assertTrue(error.isPresent());
@@ -36,8 +36,8 @@ class DateIsWorkingDayValidatorTest {
 
     @Test
     public void shouldReturnDateWorkingDayErrorSaturday() {
-        String date = "15/01/2022 15:00";
-        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date));
+        String date = "15-01-2022 15:00";
+        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(date));
         Mockito.when(getVisitDate.getVisitDateFromString(date)).thenReturn(localDateTime);
         Optional<CoreError> error = workingDayValidator.validate(date);
         assertTrue(error.isPresent());
@@ -47,8 +47,8 @@ class DateIsWorkingDayValidatorTest {
 
     @Test
     public void shouldReturnEmptyListMonday() {
-        String date = "10/01/2022 15:00";
-        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date));
+        String date = "10-01-2022 15:00";
+        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(date));
         Mockito.when(getVisitDate.getVisitDateFromString(date)).thenReturn(localDateTime);
         Optional<CoreError> error = workingDayValidator.validate(date);
         assertTrue(error.isEmpty());
@@ -56,8 +56,8 @@ class DateIsWorkingDayValidatorTest {
 
     @Test
     public void shouldReturnEmptyListTuesday() {
-        String date = "11/01/2022 15:00";
-        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date));
+        String date = "11-01-2022 15:00";
+        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(date));
         Mockito.when(getVisitDate.getVisitDateFromString(date)).thenReturn(localDateTime);
         Optional<CoreError> error = workingDayValidator.validate(date);
         assertTrue(error.isEmpty());
@@ -65,8 +65,8 @@ class DateIsWorkingDayValidatorTest {
 
     @Test
     public void shouldReturnEmptyListWednesday() {
-        String date = "12/01/2022 15:00";
-        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date));
+        String date = "12-01-2022 15:00";
+        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(date));
         Mockito.when(getVisitDate.getVisitDateFromString(date)).thenReturn(localDateTime);
         Optional<CoreError> error = workingDayValidator.validate(date);
         assertTrue(error.isEmpty());
@@ -74,8 +74,8 @@ class DateIsWorkingDayValidatorTest {
 
     @Test
     public void shouldReturnEmptyListThursday() {
-        String date = "13/01/2022 15:00";
-        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date));
+        String date = "13-01-2022 15:00";
+        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(date));
         Mockito.when(getVisitDate.getVisitDateFromString(date)).thenReturn(localDateTime);
         Optional<CoreError> error = workingDayValidator.validate(date);
         assertTrue(error.isEmpty());
@@ -83,8 +83,8 @@ class DateIsWorkingDayValidatorTest {
 
     @Test
     public void shouldReturnEmptyListFriday() {
-        String date = "14/01/2022 15:00";
-        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date));
+        String date = "14-01-2022 15:00";
+        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(date));
         Mockito.when(getVisitDate.getVisitDateFromString(date)).thenReturn(localDateTime);
         Optional<CoreError> error = workingDayValidator.validate(date);
         assertTrue(error.isEmpty());

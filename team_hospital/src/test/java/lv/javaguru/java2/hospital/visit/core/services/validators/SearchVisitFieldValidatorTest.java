@@ -35,7 +35,7 @@ class SearchVisitFieldValidatorTest {
 
     @Test
     public void shouldNotReturnErrorsWhenDateIsProvided() {
-        SearchVisitRequest request = new SearchVisitRequest(null, null, null, "12/12/21 12:00");
+        SearchVisitRequest request = new SearchVisitRequest(null, null, null, "12-12-21 12:00");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
@@ -56,7 +56,7 @@ class SearchVisitFieldValidatorTest {
 
     @Test
     public void shouldNotReturnErrorsWhenVisitIdAndDateAreProvided() {
-        SearchVisitRequest request = new SearchVisitRequest(1L, null, null, "12/12/21 12:00");
+        SearchVisitRequest request = new SearchVisitRequest(1L, null, null, "12-12-21 12:00");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
@@ -70,14 +70,14 @@ class SearchVisitFieldValidatorTest {
 
     @Test
     public void shouldNotReturnErrorsWhenDoctorIdAndDateAreProvided() {
-        SearchVisitRequest request = new SearchVisitRequest(null, 1L, null, "12/12/21 12:00");
+        SearchVisitRequest request = new SearchVisitRequest(null, 1L, null, "12-12-21 12:00");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorsWhenPatientIdAndDateAreProvided() {
-        SearchVisitRequest request = new SearchVisitRequest(null, null, 1L, "12/12/21 12:00");
+        SearchVisitRequest request = new SearchVisitRequest(null, null, 1L, "12-12-21 12:00");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
@@ -91,21 +91,21 @@ class SearchVisitFieldValidatorTest {
 
     @Test
     public void shouldNotReturnErrorsWhenVisitIdAndPatientIdAndDateAreProvided() {
-        SearchVisitRequest request = new SearchVisitRequest(1L, null, 1L, "12/12/21 12:00");
+        SearchVisitRequest request = new SearchVisitRequest(1L, null, 1L, "12-12-21 12:00");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorsWhenVisitIdAndDoctorIdAndDateAreProvided() {
-        SearchVisitRequest request = new SearchVisitRequest(1L, 1L, null, "12/12/21 12:00");
+        SearchVisitRequest request = new SearchVisitRequest(1L, 1L, null, "12-12-21 12:00");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorsWhenDoctorIdAndPatientIdAndDateAreProvided() {
-        SearchVisitRequest request = new SearchVisitRequest(null, 1L, 1L, "12/12/21 12:00");
+        SearchVisitRequest request = new SearchVisitRequest(null, 1L, 1L, "12-12-21 12:00");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }

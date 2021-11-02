@@ -55,13 +55,13 @@ public class AcceptanceTest1 {
         AddVisitRequest request = new AddVisitRequest(
                 searchPatientsResponse.getPatientList().get(0).getId().toString(),
                 searchDoctorsResponse.getDoctors().get(0).getId().toString(),
-                "12/12/2022 12:00");
+                "12-12-2022 12:00");
         AddVisitResponse addVisitResponse = getAddVisitService().execute(request);
 
         SearchVisitRequest searchVisitRequest = new SearchVisitRequest(
                 null,searchDoctorsResponse.getDoctors().get(0).getId(),
                 searchPatientsResponse.getPatientList().get(0).getId(),
-                "12/12/2022 12:00");
+                "12-12-2022 12:00");
 
         SearchVisitResponse searchVisitResponse = getSearchVisitService().execute(searchVisitRequest);
         ShowAllVisitResponse showAllVisitResponse = getShowAllVisitService().execute(new ShowAllVisitRequest());

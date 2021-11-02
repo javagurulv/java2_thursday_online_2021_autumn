@@ -36,7 +36,7 @@ class AddVisitValidatorTest {
         AddVisitRequest addVisitRequest = new AddVisitRequest(
                 "",
                 "2",
-                "12/12/21 12:00");
+                "12-12-21 12:00");
 
         Mockito.when(doctorDatabase
                 .findById(Long.valueOf(addVisitRequest.getDoctorsID())))
@@ -54,7 +54,7 @@ class AddVisitValidatorTest {
         AddVisitRequest addVisitRequest = new AddVisitRequest(
                 "1",
                 "",
-                "12/12/21 12:00");
+                "12-12-21 12:00");
 
         Mockito.when(patientDatabase.findById(Long.valueOf(addVisitRequest.getPatientID())))
                 .thenReturn(Collections.singletonList(new Patient("name", "surname", "12345678901")));
@@ -91,7 +91,7 @@ class AddVisitValidatorTest {
         AddVisitRequest addVisitRequest = new AddVisitRequest(
                 "1",
                 "2",
-                "12/12/2021 12:00");
+                "12-12-2021 12:00");
 
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("name", "surname", "speciality"));
@@ -113,7 +113,7 @@ class AddVisitValidatorTest {
         AddVisitRequest addVisitRequest = new AddVisitRequest(
                 "1",
                 "2",
-                "12/12/2021 12:00");
+                "12-12-2021 12:00");
 
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
@@ -163,7 +163,7 @@ class AddVisitValidatorTest {
         AddVisitRequest addVisitRequest = new AddVisitRequest(
                 "1",
                 "2",
-                "12/9/2021 12:00");
+                "12-9-2021 12:00");
 
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
@@ -191,7 +191,7 @@ class AddVisitValidatorTest {
         AddVisitRequest addVisitRequest = new AddVisitRequest(
                 "1",
                 "2",
-                "5/1/2025 12:00");
+                "5-1-2025 12:00");
 
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
@@ -219,7 +219,7 @@ class AddVisitValidatorTest {
         AddVisitRequest addVisitRequest = new AddVisitRequest(
                 "1",
                 "2",
-                "1/1/2025 21:00");
+                "1-1-2025 21:00");
 
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
@@ -247,7 +247,7 @@ class AddVisitValidatorTest {
         AddVisitRequest addVisitRequest = new AddVisitRequest(
                 "1",
                 "2",
-                "02/10/2021 06:00");
+                "02-10-2021 06:00");
 
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
@@ -281,7 +281,7 @@ class AddVisitValidatorTest {
         AddVisitRequest addVisitRequest = new AddVisitRequest(
                 "1",
                 "2",
-                "12/12/2021 12:00");
+                "12-12-2021 12:00");
 
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));

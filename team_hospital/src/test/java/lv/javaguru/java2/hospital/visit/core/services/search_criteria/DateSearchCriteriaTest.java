@@ -33,7 +33,7 @@ class DateSearchCriteriaTest {
 
     @Test
     public void shouldReturnTrue() {
-        SearchVisitRequest request = new SearchVisitRequest(null, null, null, "27/12/2021 15:00");
+        SearchVisitRequest request = new SearchVisitRequest(null, null, null, "27-12-2021 15:00");
         assertTrue(searchCriteria.canProcess(request));
     }
 
@@ -51,13 +51,13 @@ class DateSearchCriteriaTest {
         patient.setId(1L);
 
         List<Visit> visits = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime date = LocalDateTime.parse("27/12/2021 15:00", formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime date = LocalDateTime.parse("27-12-2021 15:00", formatter);
         visits.add(new Visit(doctor.getId(), patient.getId(), date));
 
         Mockito.when(database.findByDate(date)).thenReturn(visits);
         SearchVisitRequest request = new SearchVisitRequest
-                (null, null, null, "27/12/2021 15:00");
+                (null, null, null, "27-12-2021 15:00");
         Visit visit = searchCriteria.process(request).get(0);
         assertEquals(searchCriteria.process(request).size(), 1);
         assertEquals(visit.getDoctorID(), doctor.getId());
@@ -78,14 +78,14 @@ class DateSearchCriteriaTest {
         patient2.setId(2L);
 
         List<Visit> visits = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime date = LocalDateTime.parse("27/12/2021 16:00", formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime date = LocalDateTime.parse("27-12-2021 16:00", formatter);
         visits.add(new Visit(doctor1.getId(), patient1.getId(), date));
         visits.add(new Visit(doctor2.getId(), patient2.getId(), date));
 
         Mockito.when(database.findByDate(date)).thenReturn(visits);
         SearchVisitRequest request = new SearchVisitRequest
-                (null, null, null, "27/12/2021 16:00");
+                (null, null, null, "27-12-2021 16:00");
         Visit visit1 = searchCriteria.process(request).get(0);
         Visit visit2 = searchCriteria.process(request).get(1);
         assertEquals(searchCriteria.process(request).size(), 2);

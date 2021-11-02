@@ -27,8 +27,8 @@ class DateIsInFutureValidatorTest {
 
     @Test
     public void shouldReturnDateFutureError() {
-        String date = "17/01/2020 15:00";
-        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(date));
+        String date = "17-01-2020 15:00";
+        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(date));
         Mockito.when(getVisitDate.getVisitDateFromString(date)).thenReturn(localDateTime);
         Optional<CoreError> error = validator.validate(date);
         assertTrue(error.isPresent());

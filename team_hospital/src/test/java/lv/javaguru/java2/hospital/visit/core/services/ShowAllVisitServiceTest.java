@@ -39,7 +39,7 @@ class ShowAllVisitServiceTest {
         doctor.setId(1L);
         Patient patient = new Patient("Name", "Surname", "120593-15634");
         patient.setId(2L);
-        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("21/12/2021 15:00"));
+        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse("21-12-2021 15:00"));
         visits.add(new Visit(doctor.getId(), patient.getId(), date));
         Mockito.when(database.getAllVisits()).thenReturn(visits);
         ShowAllVisitRequest request = new ShowAllVisitRequest();
