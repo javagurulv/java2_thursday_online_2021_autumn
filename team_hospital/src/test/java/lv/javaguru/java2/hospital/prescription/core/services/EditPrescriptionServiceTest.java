@@ -33,7 +33,7 @@ public class EditPrescriptionServiceTest {
         EditPrescriptionRequest request = new EditPrescriptionRequest("1", "PATIENT", "2");
 
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        Mockito.when(database.EditPrescription(
+        Mockito.when(database.editPrescription(
                 Long.valueOf(request.getPrescriptionID()),
                 EditPrescriptionEnum.valueOf(request.getEditPrescriptionEnum()),
                 request.getChanges())).thenReturn(true);

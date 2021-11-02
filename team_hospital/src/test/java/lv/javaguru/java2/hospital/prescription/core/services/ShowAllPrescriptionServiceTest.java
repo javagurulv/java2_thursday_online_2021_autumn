@@ -40,6 +40,7 @@ class ShowAllPrescriptionServiceTest {
         ShowAllPrescriptionRequest request = new ShowAllPrescriptionRequest();
         ShowAllPrescriptionResponse response = service.execute(request);
         assertFalse(response.hasErrors());
+        System.out.println(response.getPrescriptions());
         assertEquals(response.getPrescriptions().size(), 2);
         assertEquals(response.getPrescriptions().get(0).getDoctor(), doctor);
         assertEquals(response.getPrescriptions().get(0).getPatient(), patient);

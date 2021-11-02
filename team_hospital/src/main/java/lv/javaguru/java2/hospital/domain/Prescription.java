@@ -55,6 +55,18 @@ public class Prescription {
         this.patient = patient;
     }
 
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setValidTill(LocalDate validTill) {
+        this.validTill = validTill;
+    }
+
     public void setMedicationName(String medicationName) {
         this.medicationName = medicationName;
     }

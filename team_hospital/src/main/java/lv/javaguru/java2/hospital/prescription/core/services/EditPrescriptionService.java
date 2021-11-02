@@ -25,7 +25,7 @@ public class EditPrescriptionService {
         }
 
         return new EditPrescriptionResponse(
-                database.EditPrescription(Long.valueOf(request.getPrescriptionID()),
+                database.editPrescription(Long.valueOf(request.getPrescriptionID()),
                 EditPrescriptionEnum.valueOf(request.getEditPrescriptionEnum()),
                 request.getChanges()));
     }

@@ -9,7 +9,7 @@ public interface PrescriptionDatabase {
 
     void addPrescription(Prescription prescription);
 
-    boolean EditPrescription(Long prescriptionID, EditPrescriptionEnum prescriptionEnum, String changes);
+    boolean editPrescription(Long prescriptionID, EditPrescriptionEnum prescriptionEnum, String changes);
 
     List<Prescription> getAllPrescriptions();
 

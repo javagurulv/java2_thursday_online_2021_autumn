@@ -21,7 +21,8 @@ public class PrescriptionProgramMenu {
         menuNumberToUIActionMap.put(2, findUIAction(uiActions, EditPrescriptionUIAction.class));
         menuNumberToUIActionMap.put(3, findUIAction(uiActions, ShowAllPrescriptionUIAction.class));
         menuNumberToUIActionMap.put(4, findUIAction(uiActions, DeletePrescriptionUIAction.class));
-        menuNumberToUIActionMap.put(5, findUIAction(uiActions, ExitPrescriptionUIAction.class));
+        menuNumberToUIActionMap.put(5, findUIAction(uiActions, SearchPrescriptionUIAction.class));
+        menuNumberToUIActionMap.put(6, findUIAction(uiActions, ExitPrescriptionUIAction.class));
     }
 
     private PrescriptionUIAction findUIAction(List<PrescriptionUIAction> uiActions, Class uiActionClass) {
@@ -36,12 +37,12 @@ public class PrescriptionProgramMenu {
         System.out.println("2. Edit the prescription's information");
         System.out.println("3. Show all prescriptions");
         System.out.println("4. Delete prescription");
-       // System.out.println("5. Search prescriptions");
-        System.out.println("5. Exit");
+        System.out.println("5. Search prescriptions");
+        System.out.println("6. Exit");
     }
 
     public int getPrescriptionMenuNumberFromUser() {
-        return inputNumChecker.execute(1, 5);
+        return inputNumChecker.execute(1, 6);
     }
 
     public void executeSelectedMenuItem(int selectedMenu) {

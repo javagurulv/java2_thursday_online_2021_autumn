@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.prescription.console_ui;
 
 import lv.javaguru.java2.hospital.prescription.core.requests.SearchPrescriptionRequest;
+import lv.javaguru.java2.hospital.prescription.core.responses.SearchPrescriptionResponse;
 import lv.javaguru.java2.hospital.prescription.core.services.SearchPrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,9 @@ public class SearchPrescriptionUIAction implements PrescriptionUIAction{
         Long patientId = getUserInput.getUserLongInput("Enter patient id: ");
 
         SearchPrescriptionRequest request = new SearchPrescriptionRequest(prescriptionId, doctorId, patientId);
+        SearchPrescriptionResponse response = service.execute(request);
 
+        System.out.println(response.getPrescriptions());
 
     }
 }

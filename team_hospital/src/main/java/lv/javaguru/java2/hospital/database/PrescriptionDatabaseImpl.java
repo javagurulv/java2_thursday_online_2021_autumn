@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class PrescriptionDatabaseImpl implements PrescriptionDatabase {
 
     private Long nextId = 1L;
@@ -27,7 +27,7 @@ public class PrescriptionDatabaseImpl implements PrescriptionDatabase {
     }
 
     @Override
-    public boolean EditPrescription(Long prescriptionID, EditPrescriptionEnum prescriptionEnum, String changes) {
+    public boolean editPrescription(Long prescriptionID, EditPrescriptionEnum prescriptionEnum, String changes) {
         Optional<Prescription> prescriptionToEdit = prescriptions.stream()
                 .filter(prescription -> Objects.equals(prescription.getId(), prescriptionID))
                 .findFirst();
