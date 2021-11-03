@@ -12,9 +12,20 @@ public class SearchPrescriptionValidator {
 
     @Autowired private SearchPrescriptionFieldValidator fieldValidator;
 
+    @Autowired private PrescriptionPagingValidator prescriptionPagingValidator;
+
     public List<CoreError> validate(SearchPrescriptionRequest request) {
         List<CoreError> errors = fieldValidator.validate(request);
+
+        validatePagingIfPresent(request, errors);
         return errors;
+    }
+
+    private void validatePagingIfPresent(SearchPrescriptionRequest request, List<CoreError> errors) {
+        if(request.getPrescriptionPaging() != null) {
+            List<CoreError> pagingErrors = prescriptionPagingValidator.validate(request.getPrescriptionPaging());
+            errors.addAll(pagingErrors);
+        }
     }
 
 }
