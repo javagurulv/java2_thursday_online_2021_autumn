@@ -28,13 +28,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class VisitExistenceByIdValidatorTest {
 
     @Mock private VisitDatabase database;
-    @InjectMocks VisitExistenceByIdValidator validator;
+    @InjectMocks private VisitExistenceByIdValidator validator;
 
     @Test
     public void shouldReturnDoctorsErrorWhenVisitDoesNotExist() {
         Optional<CoreError> errors = validator.validateExistenceById(1231L);
         assertEquals(errors.get().getField(), "Visit");
-        assertEquals(errors.get().getDescription(), "Does not exist!");
+        assertEquals(errors.get().getDescription(), "does not exist!");
     }
 
     @Test

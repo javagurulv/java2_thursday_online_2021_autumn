@@ -20,7 +20,7 @@ public class VisitExistenceByIdValidator {
                 return Optional.empty();
             }
         }
-        return Optional.of(new CoreError("Visit", "Does not exist!"));
+        return Optional.of(new CoreError("Visit", "does not exist!"));
     }
 
 

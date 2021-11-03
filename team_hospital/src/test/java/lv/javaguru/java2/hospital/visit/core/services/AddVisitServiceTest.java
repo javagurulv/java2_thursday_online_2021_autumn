@@ -36,9 +36,9 @@ class AddVisitServiceTest {
     @InjectMocks private AddVisitService service;
 
     @Test
-    public void shouldReturnResponseWithPersonalCodeError() {
+    public void shouldReturnResponseWithPatientIDError() {
         AddVisitRequest request = new AddVisitRequest
-                ("", "doctorsID", "doctorsSurname", "21-12-2021 15:00");
+                ("", "1","21-12-2021 15:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Patient ID", "must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -53,9 +53,26 @@ class AddVisitServiceTest {
     }
 
     @Test
-    public void shouldReturnResponseWithDoctorNameError() {
+    public void shouldReturnResponseWithPatientIDParseError() {
         AddVisitRequest request = new AddVisitRequest
-                ("12345678901", "", "doctorsSurname", "21-12-2021 15:00");
+                ("qwe", "1","21-12-2021 15:00");
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Patient ID", "must be a number!"));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        AddVisitResponse response = service.execute(request);
+        assertTrue(response.hasErrors());
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "Patient ID");
+        assertEquals(response.getErrors().get(0).getDescription(), "must be a number!");
+
+        Mockito.verifyNoMoreInteractions(visitDatabase);
+    }
+
+    @Test
+    public void shouldReturnResponseWithDoctorIDError() {
+        AddVisitRequest request = new AddVisitRequest
+                ("1", "","21-12-2021 15:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Doctor ID", "must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -70,9 +87,26 @@ class AddVisitServiceTest {
     }
 
     @Test
+    public void shouldReturnResponseWithDoctorIDParseError() {
+        AddVisitRequest request = new AddVisitRequest
+                ("1", "qwe","21-12-2021 15:00");
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Doctor ID", "must be a number!"));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        AddVisitResponse response = service.execute(request);
+        assertTrue(response.hasErrors());
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "Doctor ID");
+        assertEquals(response.getErrors().get(0).getDescription(), "must be a number!");
+
+        Mockito.verifyNoMoreInteractions(visitDatabase);
+    }
+
+    @Test
     public void shouldReturnResponseWithDateInputError() {
         AddVisitRequest request = new AddVisitRequest
-                ("1", "2", "surname", "02.12.2025 15:00");
+                ("1", "2","02.12.2025 15:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "input is incorrect!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -89,7 +123,7 @@ class AddVisitServiceTest {
     @Test
     public void shouldReturnResponseWithDateTimeError() {
         AddVisitRequest request = new AddVisitRequest
-                ("1", "2", "surname", "02-12-2025 07:00");
+                ("1", "2","02-12-2025 07:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Time in the date", "is not working hour!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -106,7 +140,7 @@ class AddVisitServiceTest {
     @Test
     public void shouldReturnResponseWithDateDayError() {
         AddVisitRequest request = new AddVisitRequest
-                ("1", "2", "surname", "06-12-2025 12:00");
+                ("1", "2","06-12-2025 12:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not working day!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -123,7 +157,7 @@ class AddVisitServiceTest {
     @Test
     public void shouldReturnResponseWithDateDayIsNotInTheFutureError() {
         AddVisitRequest request = new AddVisitRequest
-                ("1", "2", "surname", "13-10-2021 12:00");
+                ("1", "2","13-10-2021 12:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not in the future!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -140,7 +174,7 @@ class AddVisitServiceTest {
     @Test
     public void shouldReturnResponseWithTimeInTheIncorrectError() {
         AddVisitRequest request = new AddVisitRequest
-                ("1", "2", "surname", "02-12-2025 12:25");
+                ("1", "2","02-12-2025 12:25");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Minutes", "is not hourly visit!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -157,7 +191,7 @@ class AddVisitServiceTest {
     @Test
     public void shouldReturnResponseWithDateExistenceError() {
         AddVisitRequest request = new AddVisitRequest
-                ("1", "2", "surname", "02-12-2025 12:00");
+                ("1", "2", "02-12-2025 12:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "already is busy!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);

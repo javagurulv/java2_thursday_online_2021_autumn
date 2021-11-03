@@ -46,8 +46,8 @@ class EditVisitValidatorTest {
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
-        assertEquals(errorList.get(0).getField(), "id");
-        assertEquals(errorList.get(0).getDescription(), "Must not be empty!");
+        assertEquals(errorList.get(0).getField(), "ID");
+        assertEquals(errorList.get(0).getDescription(), "must not be empty!");
     }
 
     @Test
@@ -68,8 +68,8 @@ class EditVisitValidatorTest {
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
-        assertEquals(errorList.get(0).getField(), "changes");
-        assertEquals(errorList.get(0).getDescription(), "Must not be empty!");
+        assertEquals(errorList.get(0).getField(), "Changes");
+        assertEquals(errorList.get(0).getDescription(), "must not be empty!");
     }
 
     @Test
@@ -78,22 +78,22 @@ class EditVisitValidatorTest {
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 2);
-        assertEquals(errorList.get(0).getField(), "id");
-        assertEquals(errorList.get(0).getDescription(), "Must not be empty!");
-        assertEquals(errorList.get(1).getField(), "changes");
-        assertEquals(errorList.get(1).getDescription(), "Must not be empty!");
+        assertEquals(errorList.get(0).getField(), "ID");
+        assertEquals(errorList.get(0).getDescription(), "must not be empty!");
+        assertEquals(errorList.get(1).getField(), "Changes");
+        assertEquals(errorList.get(1).getDescription(), "must not be empty!");
     }
 
     @Test
     public void shouldReturnVisitError() {
         Mockito.when(existence.validateExistenceById(12L)).thenReturn
-                (Optional.of(new CoreError("Visit", "Does not exist!")));
+                (Optional.of(new CoreError("Visit", "does not exist!")));
         EditVisitRequest request = new EditVisitRequest("12", "DOCTOR_ID", "changes");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Visit");
-        assertEquals(errorList.get(0).getDescription(), "Does not exist!");
+        assertEquals(errorList.get(0).getDescription(), "does not exist!");
     }
 
     @Test
@@ -102,20 +102,20 @@ class EditVisitValidatorTest {
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
-        assertEquals(errorList.get(0).getField(), "edit option");
-        assertEquals(errorList.get(0).getDescription(), "Must not be empty!");
+        assertEquals(errorList.get(0).getField(), "Edit option");
+        assertEquals(errorList.get(0).getDescription(), "must not be empty!");
     }
 
     @Test
     public void shouldReturnEnumErrorInvalidInput() {
         EditVisitRequest request = new EditVisitRequest("11", "ENUM", "changes");
         Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.of(
-                new CoreError("edit option", "must be DOCTOR_ID, PATIENT_ID, DATE OR DESCRIPTION!")
+                new CoreError("Edit option", "must be DOCTOR_ID, PATIENT_ID, DATE OR DESCRIPTION!")
         ));
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
-        assertEquals(errorList.get(0).getField(), "edit option");
+        assertEquals(errorList.get(0).getField(), "Edit option");
         assertEquals(errorList.get(0).getDescription(), "must be DOCTOR_ID, PATIENT_ID, DATE OR DESCRIPTION!");
     }
 

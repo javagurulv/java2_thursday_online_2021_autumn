@@ -36,7 +36,7 @@ public class EditVisitValidator {
 
     private Optional<CoreError> validateId(EditVisitRequest request) {
         return (request.getVisitID() == null || request.getVisitID().isEmpty())
-                ? Optional.of(new CoreError("id", "Must not be empty!"))
+                ? Optional.of(new CoreError("ID", "must not be empty!"))
                 : Optional.empty();
     }
 
@@ -58,13 +58,13 @@ public class EditVisitValidator {
 
     private Optional<CoreError> validateChanges(EditVisitRequest request) {
         return (request.getChanges() == null || request.getChanges().isEmpty())
-                ? Optional.of(new CoreError("changes", "Must not be empty!"))
+                ? Optional.of(new CoreError("Changes", "must not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateEnum(EditVisitRequest request){
         return (request.getEditEnums() == null || request.getEditEnums().isEmpty())
-                ? Optional.of(new CoreError("edit option", "Must not be empty!"))
+                ? Optional.of(new CoreError("Edit option", "must not be empty!"))
                 : checker.validateEnum(request.getEditEnums());
     }
 
