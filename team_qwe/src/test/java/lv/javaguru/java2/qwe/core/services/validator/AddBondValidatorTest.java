@@ -25,7 +25,8 @@ public class AddBondValidatorTest {
 
     @Before
     public void init() {
-        jdbcTemplate.update("DROP TABLE IF EXISTS stocks, bonds, users, users_positions CASCADE");
+        jdbcTemplate.update("RUNSCRIPT FROM 'classpath:schema.sql'");
+/*        jdbcTemplate.update("DROP TABLE IF EXISTS stocks, bonds, users, users_positions CASCADE");
         jdbcTemplate.update("CREATE TABLE IF NOT EXISTS `stocks` (\n" +
                 "  `ticker` VARCHAR(10) NOT NULL,\n" +
                 "  `name` VARCHAR(100) NOT NULL,\n" +
@@ -47,7 +48,7 @@ public class AddBondValidatorTest {
                 "  `nominal` DECIMAL(10,2) NOT NULL,\n" +
                 "  `maturity` DATE NOT NULL,\n" +
                 "  PRIMARY KEY (`ticker`)\n" +
-                ")");
+                ")");*/
     }
 
     @Test
