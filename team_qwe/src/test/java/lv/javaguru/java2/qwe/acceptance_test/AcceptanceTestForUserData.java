@@ -5,6 +5,7 @@ import lv.javaguru.java2.qwe.core.domain.*;
 import lv.javaguru.java2.qwe.core.requests.user_requests.*;
 import lv.javaguru.java2.qwe.core.responses.user_responses.*;
 import lv.javaguru.java2.qwe.core.services.user_services.*;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,9 +24,17 @@ public class AcceptanceTestForUserData {
     @Autowired private ApplicationContext appContext;
     @Autowired private JdbcTemplate jdbcTemplate;
 
+    //;INIT=RUNSCRIPT FROM 'classpath:schema.sql'\\;RUNSCRIPT FROM 'classpath:data.sql';
+
+
     @Before
     public void init() {
-        jdbcTemplate.update("DROP TABLE IF EXISTS stocks, bonds, users, users_positions CASCADE");
+        jdbcTemplate.update("RUNSCRIPT FROM 'classpath:schema.sql'");
+        jdbcTemplate.update("RUNSCRIPT FROM 'classpath:data.sql'");
+
+
+
+/*        jdbcTemplate.update("DROP TABLE IF EXISTS stocks, bonds, users, users_positions CASCADE");
         jdbcTemplate.update("CREATE TABLE IF NOT EXISTS `stocks` (\n" +
                 "  `ticker` VARCHAR(10) NOT NULL,\n" +
                 "  `name` VARCHAR(100) NOT NULL,\n" +
@@ -71,11 +80,15 @@ public class AcceptanceTestForUserData {
                 "      ('Alexander', 25, 'SUPER_RICH', 1000000.00, 1000000.00, NULL, 5),\n" +
                 "      ('Tatyana', 32, 'UPPER_MIDDLE', 125000.00, 125000.00, NULL, 4),\n" +
                 "      ('Vladimir', 78, 'LOWER_MIDDLE', 30000.00, 30000.00, NULL, 1),\n" +
-                "      ('John', 55, 'MIDDLE', 50000.00, 50000.00, NULL, 3);");
+                "      ('John', 55, 'MIDDLE', 50000.00, 50000.00, NULL, 3);");*/
     }
+
 
     @Test
     public void addUserToDatabaseTest1() {
+//        System.out.println("START");
+//        getAllUserListService().getUserData().getAllUserList().forEach(System.out::println);
+//        System.out.println("END");
         AddUserRequest request1 = new AddUserRequest(
                 "Marina", "42", "WEALTHY", "500000"
         );

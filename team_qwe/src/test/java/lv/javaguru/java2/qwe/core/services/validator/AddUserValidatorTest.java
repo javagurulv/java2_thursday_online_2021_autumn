@@ -26,7 +26,8 @@ public class AddUserValidatorTest {
 
     @Before
     public void init() {
-        jdbcTemplate.update("DROP TABLE IF EXISTS stocks, bonds, users, users_positions CASCADE");
+        jdbcTemplate.update("RUNSCRIPT FROM 'classpath:schema.sql'");
+        /*jdbcTemplate.update("DROP TABLE IF EXISTS stocks, bonds, users, users_positions CASCADE");
         jdbcTemplate.update("CREATE TABLE IF NOT EXISTS `stocks` (\n" +
                 "  `ticker` VARCHAR(10) NOT NULL,\n" +
                 "  `name` VARCHAR(100) NOT NULL,\n" +
@@ -67,7 +68,7 @@ public class AddUserValidatorTest {
                 "  `purchase_price` DECIMAL(8,2) NOT NULL,\n" +
                 "  FOREIGN KEY(`user_id`) REFERENCES `users`(`id`),\n" +
                 "  FOREIGN KEY(`security_ticker`) REFERENCES `stocks`(`ticker`)\n" +
-                ")");
+                ")");*/
         jdbcTemplate.update("INSERT INTO users (name, age, type, initial_investment, cash, portfolio_generation_date, risk_tolerance) VALUES\n" +
                 "  ('Alexander', 40, 'SUPER_RICH', 1000000.00, 1000000.00, NULL, 5);");
     }
