@@ -21,7 +21,10 @@ public class SearchPrescriptionUIAction implements PrescriptionUIAction{
         SearchPrescriptionRequest request = new SearchPrescriptionRequest(prescriptionId, doctorId, patientId);
         SearchPrescriptionResponse response = service.execute(request);
 
-        System.out.println(response.getPrescriptions());
-
+        if (response.hasErrors()) {
+            response.getErrors().forEach(coreError -> System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));
+        } else {
+            System.out.println(response.getPrescriptions());
+        }
     }
 }
