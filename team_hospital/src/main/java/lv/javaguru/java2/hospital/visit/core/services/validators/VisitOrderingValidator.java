@@ -22,27 +22,27 @@ public class VisitOrderingValidator {
 
 	private Optional<CoreError> validateOrderBy(VisitOrdering visitOrdering) {
 		return (visitOrdering.getOrderBy() != null)
-				&& !(visitOrdering.getOrderBy().equals("date"))
-				? Optional.of(new CoreError("orderBy", "Must contain 'date' only!"))
+				&& !(visitOrdering.getOrderBy().equals("date") || visitOrdering.getOrderBy().equals("id"))
+				? Optional.of(new CoreError("OrderBy", "must contain 'id' or 'date' only!"))
 				: Optional.empty();
 	}
 
 	private Optional<CoreError> validateOrderDirection(VisitOrdering visitOrdering) {
 		return (visitOrdering.getOrderDirection() != null
 				&& !(visitOrdering.getOrderDirection().equals("ASCENDING") || visitOrdering.getOrderDirection().equals("DESCENDING")))
-				? Optional.of(new CoreError("orderDirection", "Must contain 'ASCENDING' or 'DESCENDING' only!"))
+				? Optional.of(new CoreError("OrderDirection", "must contain 'ASCENDING' or 'DESCENDING' only!"))
 				: Optional.empty();
 	}
 
 	private Optional<CoreError> validateMandatoryOrderBy(VisitOrdering visitOrdering) {
 		return (visitOrdering.getOrderDirection() != null && visitOrdering.getOrderBy() == null)
-				? Optional.of(new CoreError("orderBy", "Must not be empty!"))
+				? Optional.of(new CoreError("OrderBy", "must not be empty!"))
 				: Optional.empty();
 	}
 
 	private Optional<CoreError> validateMandatoryOrderDirection(VisitOrdering visitOrdering) {
 		return (visitOrdering.getOrderBy() != null && visitOrdering.getOrderDirection() == null)
-				? Optional.of(new CoreError("orderDirection", "Must not be empty!"))
+				? Optional.of(new CoreError("OrderDirection", "must not be empty!"))
 				: Optional.empty();
 	}
 

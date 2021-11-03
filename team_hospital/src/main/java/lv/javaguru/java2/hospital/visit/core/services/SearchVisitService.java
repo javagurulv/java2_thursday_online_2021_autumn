@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Component
@@ -70,6 +71,10 @@ public class SearchVisitService {
     private VisitsSearchCriteria[] getVisitsSearchCriteria() {
         return new VisitsSearchCriteria[]{
                 new VisitIdSearchCriteria(visitDatabase),
+                new VisitIDAndPatientSearchCriteria(visitDatabase),
+                new VisitIDAndDoctorIDSearchCriteria(visitDatabase),
+                new VisitIDAndPatientIDAndDoctorIDSearchCriteria(visitDatabase),
+                new VisitIDPatientIDDoctorIDDateSearchCriteria(visitDatabase),
                 new DoctorIdAndPatientIdAndDateSearchCriteria(visitDatabase),
                 new DoctorIdAndPatientIdSearchCriteria(visitDatabase),
                 new DoctorIdAndDateSearchCriteria(visitDatabase),
@@ -83,12 +88,12 @@ public class SearchVisitService {
     private List<Visit> order(List<Visit> visits, VisitOrdering visitOrdering) {
         if (orderingEnabled && visitOrdering != null) {
             Comparator<Visit> comparator = null;
-            if (visitOrdering.getOrderBy().equals("date")) {
+            if (visitOrdering.getOrderBy().toUpperCase(Locale.ROOT).equals("DATE")) {
                 comparator = Comparator.comparing(Visit::getVisitDate);
             } else {
                 comparator = Comparator.comparing(Visit::getVisitID);
             }
-            if (visitOrdering.getOrderDirection().equals("DESCENDING")) {
+            if (visitOrdering.getOrderDirection().toUpperCase(Locale.ROOT).equals("DESCENDING")) {
                 comparator = comparator.reversed();
             }
             return visits.stream().sorted(comparator).collect(Collectors.toList());

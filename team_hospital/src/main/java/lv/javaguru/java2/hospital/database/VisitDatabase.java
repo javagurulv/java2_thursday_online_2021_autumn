@@ -32,4 +32,11 @@ public interface VisitDatabase {
 
     List<Visit> findByDoctorIdAndPatientIdAndDate(Long doctorId, Long patientId, LocalDateTime date);
 
+    List<Visit> findByVisitIdAndPatientId(Long visitID, Long patientID);
+
+    List<Visit> findByVisitIdAndDoctorId(Long visitID, Long doctorID);
+
+    List<Visit> findByVisitIDAndDoctorIDAndPatientID(Long visitID, Long doctorID, Long patientID);
+
+    List<Visit> findByVisitIDDoctorIDPatientIDDate(Long visitID, Long doctorID, Long patientID, LocalDateTime date);
 }

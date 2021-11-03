@@ -101,4 +101,32 @@ public class JDBCVisitDatabaseImpl implements VisitDatabase {
         Object[] args = new Object[]{doctorId, patientId, date};
         return jdbcTemplate.query(sql, args, visitRowMapper);
     }
+
+    @Override
+    public List<Visit> findByVisitIdAndPatientId(Long visitID, Long patientID) {
+        String sql = "SELECT * FROM visits WHERE id = ? AND patient_id = ?";
+        Object[] args = new Object[]{visitID, patientID};
+        return jdbcTemplate.query(sql, args, visitRowMapper);
+    }
+
+    @Override
+    public List<Visit> findByVisitIdAndDoctorId(Long visitID, Long doctorID) {
+        String sql = "SELECT * FROM visits WHERE id = ? AND doctor_id = ?";
+        Object[] args = new Object[]{visitID, doctorID};
+        return jdbcTemplate.query(sql, args, visitRowMapper);
+    }
+
+    @Override
+    public List<Visit> findByVisitIDAndDoctorIDAndPatientID(Long visitID, Long doctorID, Long patientID) {
+        String sql = "SELECT * FROM visits WHERE id = ? AND doctor_id = ? AND patient_id = ?";
+        Object[] args = new Object[]{visitID, doctorID, patientID};
+        return jdbcTemplate.query(sql, args, visitRowMapper);
+    }
+
+    @Override
+    public List<Visit> findByVisitIDDoctorIDPatientIDDate(Long visitID, Long doctorID, Long patientID, LocalDateTime date) {
+        String sql = "SELECT * FROM visits WHERE id = ? AND doctor_id = ? AND patient_id = ? AND date = ?";
+        Object[] args = new Object[]{visitID, doctorID, patientID, date};
+        return jdbcTemplate.query(sql, args, visitRowMapper);
+    }
 }
