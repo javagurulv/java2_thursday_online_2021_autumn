@@ -1,8 +1,8 @@
 package lv.javaguru.java2.hospital.prescription.core.services;
 
 import lv.javaguru.java2.hospital.database.PrescriptionDatabase;
-import lv.javaguru.java2.hospital.doctor.core.services.search_criteria.DoctorsSearchCriteria;
 import lv.javaguru.java2.hospital.domain.Prescription;
+import lv.javaguru.java2.hospital.prescription.core.requests.PrescriptionPaging;
 import lv.javaguru.java2.hospital.prescription.core.requests.SearchPrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
 import lv.javaguru.java2.hospital.prescription.core.responses.SearchPrescriptionResponse;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class SearchPrescriptionService {
@@ -22,6 +23,8 @@ public class SearchPrescriptionService {
         List<CoreError> errors;
 
         List<Prescription> prescriptions = search(request);
+
+        prescriptions = paging(prescriptions, request.getPrescriptionPaging());
         return new SearchPrescriptionResponse(null, prescriptions);
     }
 
@@ -46,5 +49,17 @@ public class SearchPrescriptionService {
                 new DoctorIdSearchCriteria(database),
                 new PatientIdSearchCriteria(database)};
         return prescriptionSearchCriteria;
+    }
+
+    private List<Prescription> paging(List<Prescription> prescriptions, PrescriptionPaging paging) {
+        if(paging != null ) {
+            int skip = (paging.getPageNumber() - 1) * paging.getPageSize();
+            return prescriptions.stream()
+                    .skip(skip)
+                    .limit(paging.getPageSize())
+                    .collect(Collectors.toList());
+        } else {
+            return prescriptions;
+        }
     }
 }

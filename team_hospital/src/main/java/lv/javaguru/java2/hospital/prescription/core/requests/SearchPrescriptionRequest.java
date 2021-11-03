@@ -6,10 +6,19 @@ public class SearchPrescriptionRequest {
     private Long doctorId;
     private Long patientId;
 
+    private PrescriptionPaging prescriptionPaging;
+
     public SearchPrescriptionRequest(Long prescriptionId, Long doctorId, Long patientId) {
         this.prescriptionId = prescriptionId;
         this.doctorId = doctorId;
         this.patientId = patientId;
+    }
+
+    public SearchPrescriptionRequest(Long prescriptionId, Long doctorId, Long patientId, PrescriptionPaging prescriptionPaging) {
+        this.prescriptionId = prescriptionId;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
+        this.prescriptionPaging = prescriptionPaging;
     }
 
     public Long getPrescriptionId() {
@@ -36,4 +45,7 @@ public class SearchPrescriptionRequest {
         return this.patientId != null;
     }
 
+    public PrescriptionPaging getPrescriptionPaging() {
+        return prescriptionPaging;
+    }
 }
