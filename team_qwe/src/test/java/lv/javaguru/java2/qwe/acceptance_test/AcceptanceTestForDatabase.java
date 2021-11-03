@@ -31,34 +31,6 @@ public class AcceptanceTestForDatabase {
     public void init() {
         jdbcTemplate.update("RUNSCRIPT FROM 'classpath:schema.sql'");
         jdbcTemplate.update("RUNSCRIPT FROM 'classpath:data.sql'");
-//        jdbcTemplate.update("DROP TABLE IF EXISTS stocks, bonds, users, users_positions CASCADE");
-//        jdbcTemplate.update("CREATE TABLE IF NOT EXISTS `stocks` (\n" +
-//                "  `ticker` VARCHAR(10) NOT NULL,\n" +
-//                "  `name` VARCHAR(100) NOT NULL,\n" +
-//                "  `industry` VARCHAR(50) NOT NULL,\n" +
-//                "  `currency` CHAR(3) NOT NULL,\n" +
-//                "  `market_price` DECIMAL(8,2) NOT NULL,\n" +
-//                "  `dividend_yield` DECIMAL(4,2) NOT NULL,\n" +
-//                "  `risk_weight` DECIMAL(5,4) NOT NULL,\n" +
-//                "  PRIMARY KEY (`ticker`)\n" +
-//                ")");
-//        jdbcTemplate.update("CREATE TABLE IF NOT EXISTS `bonds` (\n" +
-//                "  `ticker` VARCHAR(10) NOT NULL,\n" +
-//                "  `name` VARCHAR(100) NOT NULL,\n" +
-//                "  `industry` VARCHAR(50) NOT NULL,\n" +
-//                "  `currency` CHAR(3) NOT NULL,\n" +
-//                "  `market_price` DECIMAL(8,2) NOT NULL,\n" +
-//                "  `coupon` DECIMAL(4,2) NOT NULL,\n" +
-//                "  `rating` CHAR(4),\n" +
-//                "  `nominal` DECIMAL(10,2) NOT NULL,\n" +
-//                "  `maturity` DATE NOT NULL,\n" +
-//                "  PRIMARY KEY (`ticker`)\n" +
-//                ")");
-//        jdbcTemplate.update("INSERT INTO stocks VALUES('AAPL US','Apple Inc.','Technology','USD',148.19,0.59,1)");
-//        jdbcTemplate.update("INSERT INTO stocks VALUES('MSFT US','Microsoft Corporation','Technology','USD',304.36,0.74,0.88)");
-//        jdbcTemplate.update("INSERT INTO stocks VALUES('AMZN US','Amazon.com Inc.','Consumer Discretionary','USD',3199.95,0,0.69)");
-//        jdbcTemplate.update("INSERT INTO stocks VALUES('TSLA US','Tesla Inc','Consumer Discretionary','USD',680.26,0,1.63)");
-//        jdbcTemplate.update("INSERT INTO stocks VALUES('JPM US','JPMorgan Chase & Co.','Financials','USD',154.72,2.33,1.15)");
     }
 
     @Test

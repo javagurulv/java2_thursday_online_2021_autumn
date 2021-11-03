@@ -1,12 +1,10 @@
 package lv.javaguru.java2.qwe.utils;
 
-import lv.javaguru.java2.qwe.ApplicationDemo;
 import lv.javaguru.java2.qwe.core.domain.Security;
 import lv.javaguru.java2.qwe.core.domain.User;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.responses.CoreResponse;
-import lv.javaguru.java2.qwe.core.services.data_services.ImportSecuritiesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -14,8 +12,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Executors;
@@ -31,9 +27,6 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class UtilityMethods {
 
     @Autowired private JdbcTemplate jdbcTemplate;
-
-    @Value("${importData.enabled}")
-    private boolean importDataEnabled;
 
     @Value("${simulator.marketPrice.enabled}")
     private boolean marketPriceSimulatorEnabled;
@@ -163,31 +156,6 @@ public class UtilityMethods {
     private void updateMarketPriceSQL(double newPrice, Security security) {
         jdbcTemplate.update("UPDATE stocks SET market_price = ? WHERE ticker = ?",
                 newPrice, security.getTicker());
-    }
-
-    public void importData() {
-        if (importDataEnabled) {
-            File file = new File("./team_qwe/src/main/docs/stocks_list_import.txt");
-            ImportSecuritiesService service =
-                    ApplicationDemo.getApplicationContext().getBean(ImportSecuritiesService.class);
-            try {
-                service.execute(file.getPath());
-                System.out.println("Data imported to database!");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public static void importDataForTests(ApplicationContext context) {
-        File file = new File("./src/test/docs/stocks_list_import.txt");
-        ImportSecuritiesService service =
-                context.getBean(ImportSecuritiesService.class);
-        try {
-            service.execute(file.getPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

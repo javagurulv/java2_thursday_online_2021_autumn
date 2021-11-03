@@ -17,8 +17,6 @@ public class ApplicationDemo {
 
     public static void main(String[] args) {
 
-        //импортирует в базу данных большой список ценных бумаг
-        getUtilityMethods().importData();
         //Симуляция изменения рыночных цен!
         getUtilityMethods().setMarketPriceSimulator(applicationContext);
         //Симуляция изменения текущей даты!

@@ -26,29 +26,6 @@ public class AddBondValidatorTest {
     @Before
     public void init() {
         jdbcTemplate.update("RUNSCRIPT FROM 'classpath:schema.sql'");
-/*        jdbcTemplate.update("DROP TABLE IF EXISTS stocks, bonds, users, users_positions CASCADE");
-        jdbcTemplate.update("CREATE TABLE IF NOT EXISTS `stocks` (\n" +
-                "  `ticker` VARCHAR(10) NOT NULL,\n" +
-                "  `name` VARCHAR(100) NOT NULL,\n" +
-                "  `industry` VARCHAR(50) NOT NULL,\n" +
-                "  `currency` CHAR(3) NOT NULL,\n" +
-                "  `market_price` DECIMAL(8,2) NOT NULL,\n" +
-                "  `dividend_yield` DECIMAL(4,2) NOT NULL,\n" +
-                "  `risk_weight` DECIMAL(5,4) NOT NULL,\n" +
-                "  PRIMARY KEY (`ticker`)\n" +
-                ")");
-        jdbcTemplate.update("CREATE TABLE IF NOT EXISTS `bonds` (\n" +
-                "  `ticker` VARCHAR(10) NOT NULL,\n" +
-                "  `name` VARCHAR(100) NOT NULL,\n" +
-                "  `industry` VARCHAR(50) NOT NULL,\n" +
-                "  `currency` CHAR(3) NOT NULL,\n" +
-                "  `market_price` DECIMAL(8,2) NOT NULL,\n" +
-                "  `coupon` DECIMAL(4,2) NOT NULL,\n" +
-                "  `rating` CHAR(4),\n" +
-                "  `nominal` DECIMAL(10,2) NOT NULL,\n" +
-                "  `maturity` DATE NOT NULL,\n" +
-                "  PRIMARY KEY (`ticker`)\n" +
-                ")");*/
     }
 
     @Test
