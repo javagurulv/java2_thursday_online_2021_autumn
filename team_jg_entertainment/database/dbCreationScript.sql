@@ -21,6 +21,7 @@ ALTER TABLE `visitors`
 ALTER TABLE `visitors`
   ADD `description` VARCHAR(1000);
 
+
 CREATE TABLE IF NOT EXISTS `tables` (
   `table_id` BIGINT NOT NULL AUTO_INCREMENT,
   `table_title` VARCHAR(100) NOT NULL,
@@ -31,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `tables` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 1001;
 
+
 CREATE TABLE IF NOT EXISTS `menu` (
   `menu_id` BIGINT NOT NULL AUTO_INCREMENT,
   `menu_title` VARCHAR(100) NOT NULL,
@@ -40,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
 )
 ENGINE = InnoDB
 AUTO_INCREMENT = 1001;
+
 
 CREATE TABLE IF NOT EXISTS `reservation` (
     `reservation_id` BIGINT NOT NULL AUTO_INCREMENT,
