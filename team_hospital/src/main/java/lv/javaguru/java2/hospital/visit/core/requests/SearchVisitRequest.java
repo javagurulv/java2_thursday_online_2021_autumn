@@ -2,22 +2,22 @@ package lv.javaguru.java2.hospital.visit.core.requests;
 
 public class SearchVisitRequest {
 
-    private Long visitId;
-    private Long doctorId;
-    private Long patientId;
+    private String visitId;
+    private String doctorId;
+    private String patientId;
     private String visitDate;
 
     private VisitOrdering visitOrdering;
     private VisitPaging visitPaging;
 
-    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, String visitDate) {
+    public SearchVisitRequest(String visitId, String doctorId, String patientId, String visitDate) {
         this.visitId = visitId;
         this.doctorId = doctorId;
         this.patientId = patientId;
         this.visitDate = visitDate;
     }
 
-    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, String visitDate, VisitOrdering visitOrdering) {
+    public SearchVisitRequest(String visitId, String doctorId, String patientId, String visitDate, VisitOrdering visitOrdering) {
         this.visitId = visitId;
         this.doctorId = doctorId;
         this.patientId = patientId;
@@ -25,7 +25,7 @@ public class SearchVisitRequest {
         this.visitOrdering = visitOrdering;
     }
 
-    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, String visitDate, VisitPaging visitPaging) {
+    public SearchVisitRequest(String visitId, String doctorId, String patientId, String visitDate, VisitPaging visitPaging) {
         this.visitId = visitId;
         this.doctorId = doctorId;
         this.patientId = patientId;
@@ -33,7 +33,7 @@ public class SearchVisitRequest {
         this.visitPaging = visitPaging;
     }
 
-    public SearchVisitRequest(Long visitId, Long doctorId, Long patientId, String visitDate, VisitOrdering visitOrdering, VisitPaging visitPaging) {
+    public SearchVisitRequest(String visitId, String doctorId, String patientId, String visitDate, VisitOrdering visitOrdering, VisitPaging visitPaging) {
         this.visitId = visitId;
         this.doctorId = doctorId;
         this.patientId = patientId;
@@ -43,30 +43,30 @@ public class SearchVisitRequest {
     }
 
     public boolean isVisitIdProvided() {
-        return this.visitId != null;
+        return this.visitId != null && !this.visitId.isEmpty();
     }
 
     public boolean isDoctorIdProvided() {
-        return this.doctorId != null;
+        return this.doctorId != null && !this.doctorId.isEmpty();
     }
 
     public boolean isPatientIdProvided() {
-        return this.patientId != null;
+        return this.patientId != null && !this.patientId.isEmpty();
     }
 
     public boolean isDateProvided() {
         return this.visitDate != null && !this.visitDate.isEmpty();
     }
 
-    public Long getVisitId() {
+    public String getVisitId() {
         return visitId;
     }
 
-    public Long getDoctorId() {
+    public String getDoctorId() {
         return doctorId;
     }
 
-    public Long getPatientId() {
+    public String getPatientId() {
         return patientId;
     }
 
@@ -74,11 +74,11 @@ public class SearchVisitRequest {
         return visitDate;
     }
 
-    public VisitOrdering getOrdering() {
+    public VisitOrdering getVisitOrdering() {
         return visitOrdering;
     }
 
-    public VisitPaging getPaging() {
+    public VisitPaging getVisitPaging() {
         return visitPaging;
     }
 }

@@ -31,13 +31,13 @@ class PatientIdAndDateSearchCriteriaTest {
 
     @Test
     public void shouldReturnTrue() {
-        SearchVisitRequest request = new SearchVisitRequest(null, null, 16L, "29-12-2021 15:00");
+        SearchVisitRequest request = new SearchVisitRequest(null, null, "16", "29-12-2021 15:00");
         assertTrue(searchCriteria.canProcess(request));
     }
 
     @Test
     public void shouldReturnFalse() {
-        SearchVisitRequest request = new SearchVisitRequest(null, null, 2L, null);
+        SearchVisitRequest request = new SearchVisitRequest(null, null, "2", null);
         assertFalse(searchCriteria.canProcess(request));
     }
 
@@ -56,7 +56,7 @@ class PatientIdAndDateSearchCriteriaTest {
 
         Mockito.when(database.findByPatientIdAndDate(patientId, date)).thenReturn(visits);
         SearchVisitRequest request = new SearchVisitRequest
-                (null, null, patientId, "05-12-2021 13:00");
+                (null, null, patientId.toString(), "05-12-2021 13:00");
         Visit visit = searchCriteria.process(request).get(0);
         assertEquals(searchCriteria.process(request).size(), 1);
         assertEquals(visit.getDoctor(), doctor);

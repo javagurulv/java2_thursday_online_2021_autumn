@@ -24,6 +24,6 @@ public class DoctorIdSearchCriteria implements VisitsSearchCriteria{
 
     @Override
     public List<Visit> process(SearchVisitRequest request) {
-        return database.findByDoctorId(request.getDoctorId());
+        return database.findByDoctorId(Long.valueOf(request.getDoctorId()));
     }
 }

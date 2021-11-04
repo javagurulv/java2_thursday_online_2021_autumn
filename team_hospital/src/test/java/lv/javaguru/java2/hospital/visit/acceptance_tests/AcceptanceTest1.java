@@ -21,7 +21,7 @@ import lv.javaguru.java2.hospital.visit.core.responses.AddVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.responses.SearchVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.responses.ShowAllVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.AddVisitService;
-import lv.javaguru.java2.hospital.visit.core.services.SearchVisitService;
+import lv.javaguru.java2.hospital.visit.core.services.search_visit_service.SearchVisitService;
 import lv.javaguru.java2.hospital.visit.core.services.ShowAllVisitService;
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
@@ -59,8 +59,8 @@ public class AcceptanceTest1 {
         AddVisitResponse addVisitResponse = getAddVisitService().execute(request);
 
         SearchVisitRequest searchVisitRequest = new SearchVisitRequest(
-                null,searchDoctorsResponse.getDoctors().get(0).getId(),
-                searchPatientsResponse.getPatientList().get(0).getId(),
+                null,searchDoctorsResponse.getDoctors().get(0).getId().toString(),
+                searchPatientsResponse.getPatientList().get(0).getId().toString(),
                 "12-12-2022 12:00");
 
         SearchVisitResponse searchVisitResponse = getSearchVisitService().execute(searchVisitRequest);

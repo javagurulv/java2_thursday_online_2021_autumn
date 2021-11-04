@@ -18,7 +18,7 @@ import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.AddVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.responses.SearchVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.AddVisitService;
-import lv.javaguru.java2.hospital.visit.core.services.SearchVisitService;
+import lv.javaguru.java2.hospital.visit.core.services.search_visit_service.SearchVisitService;
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.context.ApplicationContext;
@@ -54,13 +54,13 @@ public class AcceptanceTest4 {
         AddVisitResponse addVisitResponse = getAddVisitService().execute(request);
 
         SearchVisitRequest request1 = new SearchVisitRequest(
-                null, searchDoctorsResponse.getDoctors().get(0).getId(),
-                searchPatientsResponse.getPatientList().get(0).getId(),
+                null, searchDoctorsResponse.getDoctors().get(0).getId().toString(),
+                searchPatientsResponse.getPatientList().get(0).getId().toString(),
                 "12-12-2022 12:00");
         SearchVisitResponse searchVisitResponse1 = getSearchVisitService().execute(request1);
 
         SearchVisitRequest searchVisitRequest2 = new SearchVisitRequest(
-                searchVisitResponse1.getVisits().get(0).getVisitID(),
+                searchVisitResponse1.getVisits().get(0).getVisitID().toString(),
                 null,
                 null,
                 "");

@@ -33,13 +33,13 @@ class PatientIdSearchCriteriaTest {
 
     @Test
     public void shouldReturnTrue() {
-        SearchVisitRequest request = new SearchVisitRequest(null, null, 5L, "");
+        SearchVisitRequest request = new SearchVisitRequest(null, null, "5", "");
         assertTrue(searchCriteria.canProcess(request));
     }
 
     @Test
     public void shouldReturnFalse() {
-        SearchVisitRequest request = new SearchVisitRequest(5L, null, null, null);
+        SearchVisitRequest request = new SearchVisitRequest("5", null, null, null);
         assertFalse(searchCriteria.canProcess(request));
     }
 
@@ -58,7 +58,7 @@ class PatientIdSearchCriteriaTest {
 
         Mockito.when(database.findByPatientId(patientId)).thenReturn(visits);
         SearchVisitRequest request = new SearchVisitRequest
-                (null, null, patientId, "");
+                (null, null, patientId.toString(), "");
         Visit visit = searchCriteria.process(request).get(0);
         assertEquals(searchCriteria.process(request).size(), 1);
         assertEquals(visit.getDoctor(), doctor);
@@ -84,7 +84,7 @@ class PatientIdSearchCriteriaTest {
 
         Mockito.when(database.findByPatientId(patientId)).thenReturn(visits);
         SearchVisitRequest request = new SearchVisitRequest
-                (null, null, patientId, "");
+                (null, null, patientId.toString(), "");
         Visit visit1 = searchCriteria.process(request).get(0);
         Visit visit2 = searchCriteria.process(request).get(1);
         assertEquals(searchCriteria.process(request).size(), 2);

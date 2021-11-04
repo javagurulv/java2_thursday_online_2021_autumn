@@ -36,7 +36,7 @@ class ExistenceByVisitIdTest {
 
     @Test
     public void shouldReturnTrue() {
-        SearchVisitRequest request = new SearchVisitRequest(211L, null,null, "");
+        SearchVisitRequest request = new SearchVisitRequest("211", null,null, "");
         assertTrue(existence.canValidate(request));
     }
 
@@ -48,7 +48,7 @@ class ExistenceByVisitIdTest {
 
     @Test
     public void shouldReturnVisitError() {
-        SearchVisitRequest request = new SearchVisitRequest(425L, null,null, "");
+        SearchVisitRequest request = new SearchVisitRequest("425", null,null, "");
         Optional<CoreError> error = existence.validateExistence(request);
         assertFalse(error.isEmpty());
         assertEquals(error.get().getField(),"Visit", "Does not exist!");
@@ -66,7 +66,7 @@ class ExistenceByVisitIdTest {
         Long visitId = 158L;
         visits.get(0).setVisitID(visitId);
 
-        SearchVisitRequest request = new SearchVisitRequest(visitId, null, null, "");
+        SearchVisitRequest request = new SearchVisitRequest(visitId.toString(), null, null, "");
         Mockito.when(database.getAllVisits()).thenReturn(visits);
         Optional<CoreError> error = existence.validateExistence(request);
         assertTrue(error.isEmpty());

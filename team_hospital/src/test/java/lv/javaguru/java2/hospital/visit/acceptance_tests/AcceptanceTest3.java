@@ -22,7 +22,7 @@ import lv.javaguru.java2.hospital.visit.core.responses.EditVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.responses.SearchVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.AddVisitService;
 import lv.javaguru.java2.hospital.visit.core.services.EditVisitService;
-import lv.javaguru.java2.hospital.visit.core.services.SearchVisitService;
+import lv.javaguru.java2.hospital.visit.core.services.search_visit_service.SearchVisitService;
 import lv.javaguru.java2.hospital.visit.core.services.ShowAllVisitService;
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
@@ -63,8 +63,8 @@ public class AcceptanceTest3 {
         AddVisitResponse addVisitResponse = getAddVisitService().execute(request);
 
         SearchVisitRequest searchVisitRequest1 = new SearchVisitRequest(
-                null,searchDoctorsResponse1.getDoctors().get(0).getId(),
-                searchPatientsResponse.getPatientList().get(0).getId(),
+                null,searchDoctorsResponse1.getDoctors().get(0).getId().toString(),
+                searchPatientsResponse.getPatientList().get(0).getId().toString(),
                 "10-10-2023 10:00");
         SearchVisitResponse searchVisitResponse1 = getSearchVisitService().execute(searchVisitRequest1);
 
@@ -75,8 +75,8 @@ public class AcceptanceTest3 {
         EditVisitResponse editVisitResponse = getEditVisitService().execute(editVisitRequest);
 
         SearchVisitRequest searchVisitRequest2 = new SearchVisitRequest(
-                null,searchDoctorsResponse2.getDoctors().get(0).getId(),
-                searchPatientsResponse.getPatientList().get(0).getId(),
+                null,searchDoctorsResponse2.getDoctors().get(0).getId().toString(),
+                searchPatientsResponse.getPatientList().get(0).getId().toString(),
                 "10-10-2023 10:00");
 
         SearchVisitResponse searchVisitResponse2 = getSearchVisitService().execute(searchVisitRequest2);

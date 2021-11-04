@@ -35,7 +35,7 @@ class ExistenceByDoctorIdTest {
 
     @Test
     public void shouldReturnTrue() {
-        SearchVisitRequest request = new SearchVisitRequest(null, 122L, null, "");
+        SearchVisitRequest request = new SearchVisitRequest(null, "122", null, "");
         assertTrue(existence.canValidate(request));
     }
 
@@ -47,7 +47,7 @@ class ExistenceByDoctorIdTest {
 
     @Test
     public void shouldReturnVisitError() {
-        SearchVisitRequest request = new SearchVisitRequest(null, 13L, null, "");
+        SearchVisitRequest request = new SearchVisitRequest(null, "13", null, "");
         Optional<CoreError> error = existence.validateExistence(request);
         assertFalse(error.isEmpty());
         assertEquals(error.get().getField(), "Visit", "Does not exist!");
@@ -63,7 +63,7 @@ class ExistenceByDoctorIdTest {
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse("27-12-2021 16:00"));
         visits.add(new Visit(doctor, patient, date));
 
-        SearchVisitRequest request = new SearchVisitRequest(null, doctor.getId(), null, "");
+        SearchVisitRequest request = new SearchVisitRequest(null, doctor.getId().toString(), null, "");
         Mockito.when(database.getAllVisits()).thenReturn(visits);
         Optional<CoreError> error = existence.validateExistence(request);
         assertTrue(error.isEmpty());
