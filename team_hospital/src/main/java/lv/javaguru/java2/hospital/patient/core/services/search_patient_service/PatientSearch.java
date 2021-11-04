@@ -4,16 +4,15 @@ import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.services.search_patient_service.search_criteria.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class PatientSearch {
 
-    private PatientDatabase database;
-
-    public PatientSearch(PatientDatabase database) {
-        this.database = database;
-    }
+    @Autowired private PatientDatabase database;
 
     public List<Patient> execute(SearchPatientsRequest request) {
         PatientsSearchCriteria[] patientsSearchCriteria = getPatientsSearchCriteria();

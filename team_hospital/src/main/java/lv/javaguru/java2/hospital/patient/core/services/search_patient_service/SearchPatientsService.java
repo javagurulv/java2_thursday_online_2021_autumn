@@ -21,15 +21,13 @@ public class SearchPatientsService {
     @Value("${search.paging.enabled}")
     private boolean pagingEnabled;
 
-    @Autowired
-    private PatientDatabase patientDatabase;
-    @Autowired
-    private SearchPatientsValidator validator;
+    @Autowired private PatientDatabase patientDatabase;
+    @Autowired private SearchPatientsValidator validator;
+    @Autowired private PatientSearch search;
+    @Autowired private Ordering ordering;
+    @Autowired private Paging paging;
 
     public SearchPatientsResponse execute(SearchPatientsRequest request) {
-        PatientSearch search = new PatientSearch(patientDatabase);
-        Ordering ordering = new Ordering();
-        Paging paging = new Paging();
         List<CoreError> errors = validator.validate(request);
         if (!errors.isEmpty()) {
             return new SearchPatientsResponse(errors, null);
