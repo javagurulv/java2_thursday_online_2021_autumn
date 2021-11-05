@@ -4,8 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import lv.javaguru.java2.library.DatabaseCleaner;
 import lv.javaguru.java2.library.config.BookListConfiguration;
@@ -15,38 +18,30 @@ import lv.javaguru.java2.library.core.responses.GetAllBooksResponse;
 import lv.javaguru.java2.library.core.services.AddBookService;
 import lv.javaguru.java2.library.core.services.GetAllBooksService;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {BookListConfiguration.class})
+@Sql({"/schema.sql"})
 public class AcceptanceTest1 {
 
-	private ApplicationContext appContext;
+	@Autowired private AddBookService addBookService;
+	@Autowired private GetAllBooksService getAllBooksService;
+	@Autowired private DatabaseCleaner databaseCleaner;
 
 	@Before
 	public void setup() {
-		appContext = new AnnotationConfigApplicationContext(BookListConfiguration.class);
-		getDatabaseCleaner().clean();
+		databaseCleaner.clean();
 	}
 
 	@Test
 	public void shouldReturnCorrectBookList() {
 		AddBookRequest addBookRequest1 = new AddBookRequest("TitleA", "AuthorA");
-		getAddBookService().execute(addBookRequest1);
+		addBookService.execute(addBookRequest1);
 
 		AddBookRequest addBookRequest2 = new AddBookRequest("TitleA", "AuthorA");
-		getAddBookService().execute(addBookRequest2);
+		addBookService.execute(addBookRequest2);
 
-		GetAllBooksResponse response = getAllBooksService().execute(new GetAllBooksRequest());
+		GetAllBooksResponse response = getAllBooksService.execute(new GetAllBooksRequest());
 		assertEquals(response.getBooks().size(), 2);
-	}
-
-	private AddBookService getAddBookService() {
-		return appContext.getBean(AddBookService.class);
-	}
-
-	private GetAllBooksService getAllBooksService() {
-		return appContext.getBean(GetAllBooksService.class);
-	}
-
-	private DatabaseCleaner getDatabaseCleaner() {
-		return appContext.getBean(DatabaseCleaner.class);
 	}
 
 }
