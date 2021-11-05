@@ -16,10 +16,6 @@ public class SearchMenusUIAction implements UIAction {
 
    @Autowired private SearchMenusService searchMenusService;
 
-//    public SearchMenusUIAction(SearchMenusService searchMenusService) {
-//        this.searchMenusService = searchMenusService;
-//    }
-
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);

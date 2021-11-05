@@ -20,7 +20,7 @@ public class ProgramMenuRestaurant {
         menuNumberToUIActionMap.put(1, findUIAction(uiAction, AddMenuUIAction.class));
         menuNumberToUIActionMap.put(2, findUIAction(uiAction, RemoveMenuUIAction.class));
         menuNumberToUIActionMap.put(3, findUIAction(uiAction, GetAllMenusUIAction.class));
-        menuNumberToUIActionMap.put(4, findUIAction(uiAction, ExitProgramListMenuUIAction.class));//return in main menu(RestaurantProgramList ->mainAction)
+        menuNumberToUIActionMap.put(4, findUIAction(uiAction, ExitToMainProgramListUIAction.class));//return in main menu(RestaurantProgramList ->mainAction)
         menuNumberToUIActionMap.put(5, findUIAction(uiAction, ExitMenuUIAction.class));
 
     }

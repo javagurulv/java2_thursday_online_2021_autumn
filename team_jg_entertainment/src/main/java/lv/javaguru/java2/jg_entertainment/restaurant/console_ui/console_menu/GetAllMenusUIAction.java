@@ -11,10 +11,6 @@ public class GetAllMenusUIAction implements UIAction {
 
     @Autowired private GetAllMenusService getAllMenusService;
 
-//    public GetAllMenusUIAction(GetAllMenusService getAllMenusService) {
-//        this.getAllMenusService = getAllMenusService;
-//    }
-
     @Override
     public void execute() {
         System.out.println("Menu list: ");
