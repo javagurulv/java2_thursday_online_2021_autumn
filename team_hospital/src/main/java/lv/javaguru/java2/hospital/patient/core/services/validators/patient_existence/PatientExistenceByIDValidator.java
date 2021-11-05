@@ -13,9 +13,9 @@ public class PatientExistenceByIDValidator {
 
     @Autowired private PatientDatabase patientDatabase;
 
-    public Optional<CoreError> existenceByID(Long id) {
+    public Optional<CoreError> existenceByID(String id) {
         for (Patient p : patientDatabase.getAllPatients()) {
-            if (p.getId().equals(id)) {
+            if (p.getId().equals(Long.parseLong(id))) {
                 return Optional.empty();
             }
         }

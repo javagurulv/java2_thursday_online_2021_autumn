@@ -1,13 +1,13 @@
 package lv.javaguru.java2.hospital.patient.core.requests;
 
 public class FindPatientByIdRequest {
-    private Long IDRequest;
+    private String  IDRequest;
 
-    public FindPatientByIdRequest(Long idRequest) {
-        this.IDRequest = idRequest;
+    public FindPatientByIdRequest(String IDRequest) {
+        this.IDRequest = IDRequest;
     }
 
-    public Long getIDRequest() {
+    public String getIDRequest() {
         return IDRequest;
     }
 }

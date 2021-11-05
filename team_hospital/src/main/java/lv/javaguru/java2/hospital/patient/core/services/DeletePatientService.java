@@ -21,7 +21,7 @@ public class DeletePatientService {
         if (!errors.isEmpty()) {
             return new DeletePatientResponse(errors);
         }
-        database.deleteById(request.getIdRequest());
-        return new DeletePatientResponse(request.getIdRequest());
+        database.deleteById(Long.valueOf(request.getIdRequest()));
+        return new DeletePatientResponse(Long.parseLong(request.getIdRequest()));
     }
 }

@@ -36,7 +36,7 @@ public class AcceptanceTest3 {
         SearchPatientsRequest searchPatientsRequest1 = new SearchPatientsRequest("name9", "surname", "11223344556");
         SearchPatientsResponse searchPatientsResponse1 = getSearchPatientsService().execute(searchPatientsRequest1);
 
-        EditPatientRequest editPatientRequest = new EditPatientRequest(searchPatientsResponse1.getPatientList().get(0).getId(),
+        EditPatientRequest editPatientRequest = new EditPatientRequest(searchPatientsResponse1.getPatientList().get(0).getId().toString(),
                 "NAME", "NewName");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
 
@@ -56,7 +56,7 @@ public class AcceptanceTest3 {
         SearchPatientsRequest searchPatientsRequest1 = new SearchPatientsRequest("name10", "surname", "22334455667");
         SearchPatientsResponse searchPatientsResponse1 = getSearchPatientsService().execute(searchPatientsRequest1);
 
-        EditPatientRequest editPatientRequest = new EditPatientRequest(searchPatientsResponse1.getPatientList().get(0).getId(),
+        EditPatientRequest editPatientRequest = new EditPatientRequest(searchPatientsResponse1.getPatientList().get(0).getId().toString(),
                 "SURNAME", "NewSurname");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
 
@@ -76,7 +76,7 @@ public class AcceptanceTest3 {
         SearchPatientsRequest searchPatientsRequest = new SearchPatientsRequest("name11", "surname", "33445566778");
         SearchPatientsResponse searchPatientsResponse = getSearchPatientsService().execute(searchPatientsRequest);
 
-        EditPatientRequest editPatientRequest = new EditPatientRequest(searchPatientsResponse.getPatientList().get(0).getId(),
+        EditPatientRequest editPatientRequest = new EditPatientRequest(searchPatientsResponse.getPatientList().get(0).getId().toString(),
                 "PERSONAL_CODE", "44556677889");
         EditPatientResponse editPatientResponse = getEditPatientService().execute(editPatientRequest);
 

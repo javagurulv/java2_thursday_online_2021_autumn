@@ -49,7 +49,7 @@ public class AcceptanceTest5 {
         SearchPatientsResponse searchPatientsResponse = getSearchPatientsService().execute(searchPatientsRequest);
 
         FindPatientByIDResponse findPatientByIDResponse = getFindPatientByIdService().execute(
-                new FindPatientByIdRequest(searchPatientsResponse.getPatientList().get(0).getId()));
+                new FindPatientByIdRequest(searchPatientsResponse.getPatientList().get(0).getId().toString()));
         ShowAllPatientsResponse showAllPatientsResponse = getShowAllPatientsService().execute(new ShowAllPatientsRequest());
         List<Patient> patients = new ArrayList<>();
         patients.add(showAllPatientsResponse.getPatients().get(1));

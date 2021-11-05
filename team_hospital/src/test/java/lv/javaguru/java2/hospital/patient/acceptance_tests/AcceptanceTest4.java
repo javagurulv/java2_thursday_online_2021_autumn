@@ -42,7 +42,8 @@ class AcceptanceTest4 {
         SearchPatientsRequest searchPatientsRequest = new SearchPatientsRequest("name1", "surname1", "11223344556");
         SearchPatientsResponse searchPatientsResponse = getSearchPatientsService().execute(searchPatientsRequest);
 
-        DeletePatientRequest deletePatientRequest = new DeletePatientRequest(searchPatientsResponse.getPatientList().get(0).getId());
+        DeletePatientRequest deletePatientRequest =
+                new DeletePatientRequest(searchPatientsResponse.getPatientList().get(0).getId().toString());
         DeletePatientResponse deletePatientResponse = getDeletePatientService().execute(deletePatientRequest);
 
         ShowAllPatientsResponse response = getShowAllPatientsService().execute(new ShowAllPatientsRequest());
