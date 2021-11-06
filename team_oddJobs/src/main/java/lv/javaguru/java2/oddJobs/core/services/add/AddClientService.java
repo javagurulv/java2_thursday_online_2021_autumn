@@ -5,7 +5,6 @@ import lv.javaguru.java2.oddJobs.core.responce.add.AddClientResponse;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.validations.add.AddClientValidator;
 import lv.javaguru.java2.oddJobs.database.ClientRepository;
-import lv.javaguru.java2.oddJobs.database.Database;
 import lv.javaguru.java2.oddJobs.domain.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

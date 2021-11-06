@@ -7,7 +7,6 @@ import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.find.FindClientsResponse;
 import lv.javaguru.java2.oddJobs.core.validations.find.FindClientsValidator;
 import lv.javaguru.java2.oddJobs.database.ClientRepository;
-import lv.javaguru.java2.oddJobs.database.Database;
 import lv.javaguru.java2.oddJobs.domain.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

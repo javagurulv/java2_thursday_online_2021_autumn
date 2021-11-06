@@ -5,7 +5,6 @@ import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.remove.RemoveAdvertismentResponse;
 import lv.javaguru.java2.oddJobs.core.validations.remove.RemoveAdvertismentValidator;
 import lv.javaguru.java2.oddJobs.database.AdvertisementRepository;
-import lv.javaguru.java2.oddJobs.database.Database;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

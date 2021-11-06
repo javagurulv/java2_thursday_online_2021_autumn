@@ -25,7 +25,7 @@ public class OrmClientRepositoryImpl implements ClientRepository {
     @Override
     public boolean removeClientById(Long clientId) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "delete Clients where clientId = :clientId");
+                "delete Client where clientId = :clientId");
         query.setParameter("clientId", clientId);
         int result = query.executeUpdate();
         return result == 1;
@@ -34,7 +34,7 @@ public class OrmClientRepositoryImpl implements ClientRepository {
     @Override
     public boolean removeClient(Long clientId, String clientName, String clientSurname) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "delete Clients where clientId = :clientId AND clientName = :clientName AND clientSurname = :clientSurname");
+                "delete Client where clientId = :clientId AND clientName = :clientName AND clientSurname = :clientSurname");
         query.setParameter("clientId", clientId);
         query.setParameter("clientName", clientName);
         query.setParameter("clientSurname", clientSurname);
@@ -45,7 +45,7 @@ public class OrmClientRepositoryImpl implements ClientRepository {
     @Override
     public List<Client> findClientsById(Long clientId) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "select b FROM Clients b where clientId = :clientId");
+                "select b FROM Client b where clientId = :clientId");
         query.setParameter("clientId", clientId);
         return query.getResultList();
     }
@@ -53,7 +53,7 @@ public class OrmClientRepositoryImpl implements ClientRepository {
     @Override
     public List<Client> findClientsByName(String clientName) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "select b FROM Clients b where clientName = :clientName");
+                "select b FROM Client b where clientName = :clientName");
         query.setParameter("clientName", clientName);
         return query.getResultList();
     }
@@ -61,7 +61,7 @@ public class OrmClientRepositoryImpl implements ClientRepository {
     @Override
     public List<Client> findClientBySurname(String clientSurname) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "select b FROM Clients b where clientSurname = :clientSurname");
+                "select b FROM Client b where clientSurname = :clientSurname");
         query.setParameter("clientSurname", clientSurname);
         return query.getResultList();
     }
@@ -69,7 +69,7 @@ public class OrmClientRepositoryImpl implements ClientRepository {
     @Override
     public List<Client> findClientByIdAndNameAndSurname(Long clientId, String clientName, String clientSurname) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "select b FROM Clients b where clientId = :clientId AND clientName = :clientName AND clientSurname = :clientSurname");
+                "select b FROM Client b where clientId = :clientId AND clientName = :clientName AND clientSurname = :clientSurname");
         query.setParameter("clientId", clientId);
         query.setParameter("clientName", clientName);
         query.setParameter("clientSurname", clientSurname);
@@ -79,7 +79,7 @@ public class OrmClientRepositoryImpl implements ClientRepository {
     @Override
     public List<Client> getAllClients() {
         return sessionFactory.getCurrentSession()
-                .createQuery("SELECT b FROM Clients b", Client.class)
+                .createQuery("SELECT b FROM Client b", Client.class)
                 .getResultList();
     }
 }

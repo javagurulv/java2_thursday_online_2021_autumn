@@ -9,9 +9,10 @@ dependencies {
     compile('org.springframework:spring-orm:5.2.6.RELEASE')
     compile('org.springframework:spring-tx:5.2.6.RELEASE')
 
-    implementation ('com.h2database:h2:1.4.200')
+
     testCompile('junit:junit:4.13.1')
     testCompile('org.mockito:mockito-core:3.6.0')
     testCompile('org.springframework:spring-test:5.2.6.RELEASE')
+    testCompile('com.h2database:h2:1.4.200')
 }
 

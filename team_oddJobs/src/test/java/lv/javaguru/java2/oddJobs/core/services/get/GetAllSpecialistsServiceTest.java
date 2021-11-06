@@ -10,7 +10,6 @@ import lv.javaguru.java2.oddJobs.database.SpecialistRepository;
 import lv.javaguru.java2.oddJobs.domain.Specialist;
 import lv.javaguru.java2.oddJobs.core.requests.get.GetAllSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.responce.get.GetAllSpecialistsResponse;
-import lv.javaguru.java2.oddJobs.database.Database;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

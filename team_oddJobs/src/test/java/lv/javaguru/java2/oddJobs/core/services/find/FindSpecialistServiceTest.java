@@ -8,7 +8,6 @@ import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.find.FindSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.validations.find.FindSpecialistValidator;
-import lv.javaguru.java2.oddJobs.database.Database;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

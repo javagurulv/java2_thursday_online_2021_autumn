@@ -5,7 +5,6 @@ import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.add.AddClientResponse;
 import lv.javaguru.java2.oddJobs.core.validations.add.AddClientValidator;
 import lv.javaguru.java2.oddJobs.database.ClientRepository;
-import lv.javaguru.java2.oddJobs.database.Database;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

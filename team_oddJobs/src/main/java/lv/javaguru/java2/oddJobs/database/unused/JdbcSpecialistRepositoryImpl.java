@@ -1,5 +1,6 @@
-package lv.javaguru.java2.oddJobs.database;
+package lv.javaguru.java2.oddJobs.database.unused;
 
+import lv.javaguru.java2.oddJobs.database.SpecialistRepository;
 import lv.javaguru.java2.oddJobs.database.rowMapper.SpecialistRowMapper;
 import lv.javaguru.java2.oddJobs.domain.Specialist;
 import org.springframework.beans.factory.annotation.Autowired;
