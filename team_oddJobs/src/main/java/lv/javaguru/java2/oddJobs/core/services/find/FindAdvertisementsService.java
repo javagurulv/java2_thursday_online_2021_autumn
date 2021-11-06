@@ -6,7 +6,7 @@ import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.find.FindAdvertisementResponse;
 import lv.javaguru.java2.oddJobs.core.validations.find.FindAdvertisementValidator;
-import lv.javaguru.java2.oddJobs.database.Database;
+import lv.javaguru.java2.oddJobs.database.AdvertisementRepository;
 import lv.javaguru.java2.oddJobs.domain.Advertisement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +27,7 @@ public class FindAdvertisementsService {
     private boolean pagingEnabled;
 
     @Autowired
-    private Database database;
+    private AdvertisementRepository advertisementRepository;
     @Autowired
     private FindAdvertisementValidator findAdvertisementsValidator;
 
@@ -77,10 +77,10 @@ public class FindAdvertisementsService {
     private List<Advertisement> find(FindAdvertisementRequest request) {
         List<Advertisement> advertisements = new ArrayList<>();
         if (request.isIdProvided() && !request.isTitleProvided()) {
-            advertisements = database.findAdvertisementById(request.getAdvId());
+            advertisements = advertisementRepository.findAdvertisementById(request.getAdvId());
         }
         if (!request.isIdProvided() && request.isTitleProvided()) {
-            advertisements = database.findAdvertisementByTitle(request.getAdvTitle());
+            advertisements = advertisementRepository.findAdvertisementByTitle(request.getAdvTitle());
         }
 
 

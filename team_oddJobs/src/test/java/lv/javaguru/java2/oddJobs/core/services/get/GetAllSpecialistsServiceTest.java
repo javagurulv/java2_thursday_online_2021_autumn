@@ -6,10 +6,10 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import lv.javaguru.java2.oddJobs.database.SpecialistRepository;
 import lv.javaguru.java2.oddJobs.domain.Specialist;
 import lv.javaguru.java2.oddJobs.core.requests.get.GetAllSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.responce.get.GetAllSpecialistsResponse;
-import lv.javaguru.java2.oddJobs.database.Database;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -21,7 +21,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 public class GetAllSpecialistsServiceTest {
 
     @Mock
-    private Database database;
+    private SpecialistRepository specialistRepository;
     @InjectMocks
     private GetAllSpecialistsService service;
 
@@ -30,7 +30,7 @@ public class GetAllSpecialistsServiceTest {
     public void shouldGetSpecialistsFromDb() {
         List<Specialist> specialists = new ArrayList<>();
         specialists.add(new Specialist("Name", "Surname", "Profession"));
-        Mockito.when(database.getAllSpecialist()).thenReturn(specialists);
+        Mockito.when(specialistRepository.getAllSpecialist()).thenReturn(specialists);
 
         GetAllSpecialistRequest request = new GetAllSpecialistRequest();
         GetAllSpecialistsResponse response = service.execute(request);

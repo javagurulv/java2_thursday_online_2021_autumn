@@ -1,5 +1,10 @@
 package lv.javaguru.java2.oddJobs.console_ui;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
 import lv.javaguru.java2.oddJobs.console_ui.add.AddAdvertismentUIAction;
 import lv.javaguru.java2.oddJobs.console_ui.add.AddClientUIAction;
 import lv.javaguru.java2.oddJobs.console_ui.add.AddSpecialistUIAction;
@@ -13,11 +18,6 @@ import lv.javaguru.java2.oddJobs.console_ui.remove.RemoveClientUIAction;
 import lv.javaguru.java2.oddJobs.console_ui.remove.RemoveSpecialistUIAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
 @Component
 public class ProgramMenu {
