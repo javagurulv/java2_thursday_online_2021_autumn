@@ -2,6 +2,7 @@ package lv.javaguru.java2.qwe.core.requests.data_requests;
 
 public class AddBondRequest extends CoreRequest {
 
+    private final String ticker;
     private final String name;
     private final String industry;
     private final String currency;
@@ -11,8 +12,9 @@ public class AddBondRequest extends CoreRequest {
     private final String nominal;
     private final String maturity;
 
-    public AddBondRequest(String name, String industry, String currency, String marketPrice,
+    public AddBondRequest(String ticker, String name, String industry, String currency, String marketPrice,
                           String coupon, String rating, String nominal, String maturity) {
+        this.ticker = ticker;
         this.name = name;
         this.industry = industry;
         this.currency = currency;
@@ -21,6 +23,10 @@ public class AddBondRequest extends CoreRequest {
         this.rating = rating;
         this.nominal = nominal;
         this.maturity = maturity;
+    }
+
+    public String getTicker() {
+        return ticker;
     }
 
     public String getName() {

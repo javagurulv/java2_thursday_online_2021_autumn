@@ -22,10 +22,8 @@ public class AddVisitorsUIAction implements VisitorUIAction {
 
         System.out.println("Please, enter visitor's surname: ");
         String visitorsSurname = scanner.nextLine();
-///        System.out.println("Please, point visitor's age:");
-//        int ageVisitor = scanner.nextInt();
         System.out.println("Enter visitor's telephone number: ");
-        Long telephoneNumber = scanner.nextLong();
+        String telephoneNumber = scanner.nextLine();
 
         AddVisitorRequest request = new AddVisitorRequest(visitorsName, visitorsSurname, telephoneNumber);
         AddVisitorResponse response = addAllVisitorsService.execute(request);
@@ -35,7 +33,7 @@ public class AddVisitorsUIAction implements VisitorUIAction {
                     System.out.println("Error: " + coreError.getField() + " " + coreError.getMessageError()));
         } else {
             System.out.println("Visitors ID = " + response.getNewVisitor().getIdClient());
-            System.out.println("Visitor: " + visitorsName + " " + visitorsSurname + //" is age " + ageVisitor +
+            System.out.println("Visitor: " + visitorsName + " " + visitorsSurname +
                     ", telephone " + telephoneNumber + "-> was added in restaurant !");
         }
     }

@@ -36,10 +36,12 @@ class ShowAllVisitServiceTest {
     public void shouldGetPatientDoctorVisitFromDb() {
         List<Visit> visits = new ArrayList<>();
         Doctor doctor = new Doctor("Name", "Surname", "Speciality");
+        doctor.setId(1L);
         Patient patient = new Patient("Name", "Surname", "120593-15634");
-        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("21/12/2021 15:00"));
+        patient.setId(2L);
+        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse("21-12-2021 15:00"));
         visits.add(new Visit(doctor, patient, date));
-        Mockito.when(database.showAllVisits()).thenReturn(visits);
+        Mockito.when(database.getAllVisits()).thenReturn(visits);
         ShowAllVisitRequest request = new ShowAllVisitRequest();
         ShowAllVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());

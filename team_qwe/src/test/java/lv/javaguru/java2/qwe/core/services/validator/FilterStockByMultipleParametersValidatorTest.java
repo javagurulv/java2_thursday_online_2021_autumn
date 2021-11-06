@@ -1,6 +1,5 @@
 package lv.javaguru.java2.qwe.core.services.validator;
 
-import lv.javaguru.java2.qwe.acceptance_test.AcceptanceTestForDatabase;
 import lv.javaguru.java2.qwe.core.requests.data_requests.*;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import org.junit.Test;
@@ -9,10 +8,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class FilterStockByMultipleParametersValidatorTest extends AcceptanceTestForDatabase {
+public class FilterStockByMultipleParametersValidatorTest {
 
-    private final FilterStocksByMultipleParametersValidator validator =
-            super.getAppContext().getBean(FilterStocksByMultipleParametersValidator.class);
+    private final FilterStocksByMultipleParametersValidator validator = new FilterStocksByMultipleParametersValidator();
 
     @Test
     public void shouldReturnEmptyList1() {
@@ -102,7 +100,7 @@ public class FilterStockByMultipleParametersValidatorTest extends AcceptanceTest
         FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
-        assertEquals(errorList.get(0).getField(), "Market price target");
+        assertEquals(errorList.get(0).getField(), "parameter target");
         assertEquals(errorList.get(0).getMessage(), "cannot be negative!");
     }
 
@@ -117,7 +115,7 @@ public class FilterStockByMultipleParametersValidatorTest extends AcceptanceTest
         FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
-        assertEquals(errorList.get(0).getField(), "Dividend target");
+        assertEquals(errorList.get(0).getField(), "parameter target");
         assertEquals(errorList.get(0).getMessage(), "cannot be negative!");
     }
 
@@ -132,7 +130,7 @@ public class FilterStockByMultipleParametersValidatorTest extends AcceptanceTest
         FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
-        assertEquals(errorList.get(0).getField(), "Risk weight target");
+        assertEquals(errorList.get(0).getField(), "parameter target");
         assertEquals(errorList.get(0).getMessage(), "cannot be negative!");
     }
 
@@ -252,6 +250,23 @@ public class FilterStockByMultipleParametersValidatorTest extends AcceptanceTest
     }
 
     @Test
+    public void shouldReturnPagingError5() {
+        List<CoreRequest> list = List.of(
+                new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "30.10"),
+                new FilterStocksByAnyDoubleParameterRequest("Risk weight", "<=", "1.0"),
+                new FilterStocksByAnyDoubleParameterRequest("Dividend", ">=", "2.05"),
+                new FilterStocksByIndustryRequest("Technology"),
+                new OrderingRequest("Risk weight", "ASCENDING"),
+                new PagingRequest("o", "3")
+        );
+        FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
+        List<CoreError> errorList = validator.validate(request);
+        assertEquals(errorList.size(), 1);
+        assertEquals(errorList.get(0).getField(), "Paging");
+        assertEquals(errorList.get(0).getMessage(), "wrong format!");
+    }
+
+    @Test
     public void shouldReturnMultipleErrors() {
         List<CoreRequest> list = List.of(
                 new FilterStocksByAnyDoubleParameterRequest("Market price", ">", "-30.10"),
@@ -263,7 +278,7 @@ public class FilterStockByMultipleParametersValidatorTest extends AcceptanceTest
         FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 3);
-        assertTrue(errorList.contains(new CoreError("Market price target", "cannot be negative!")));
+        assertTrue(errorList.contains(new CoreError("parameter target", "cannot be negative!")));
         assertTrue(errorList.contains(new CoreError("Industry target", "must not be empty!")));
         assertTrue(errorList.contains(new CoreError("Paging", "cannot be negative!")));
     }
@@ -281,10 +296,10 @@ public class FilterStockByMultipleParametersValidatorTest extends AcceptanceTest
         FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(list);
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 7);
-        assertTrue(errorList.contains(new CoreError("Market price target", "cannot be negative!")));
+        assertTrue(errorList.contains(new CoreError("parameter target", "cannot be negative!")));
         assertTrue(errorList.contains(new CoreError("Industry target", "must not be empty!")));
-        assertTrue(errorList.contains(new CoreError("Dividend target", "cannot be negative!")));
-        assertTrue(errorList.contains(new CoreError("Risk weight target", "cannot be negative!")));
+        assertTrue(errorList.contains(new CoreError("parameter target", "cannot be negative!")));
+        assertTrue(errorList.contains(new CoreError("parameter target", "cannot be negative!")));
         assertTrue(errorList.contains(new CoreError("Ordering", "both fields must be empty or filled!")));
         assertTrue(errorList.contains(new CoreError("Paging", "both fields must be empty or filled!")));
         assertTrue(errorList.contains(new CoreError("Paging", "cannot be negative!")));

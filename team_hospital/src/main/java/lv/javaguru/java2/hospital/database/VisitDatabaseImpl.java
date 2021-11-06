@@ -3,20 +3,22 @@ package lv.javaguru.java2.hospital.database;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class VisitDatabaseImpl implements VisitDatabase {
     private Long nextId = 1L;
     private final List<Visit> visits = new ArrayList<>();
     @Autowired
-    PatientDatabase patientDatabase;
+    private PatientDatabase patientDatabase;
     @Autowired
-    DoctorDatabase doctorDatabase;
+    private DoctorDatabase doctorDatabase;
 
     @Override
     public void recordVisit(Visit visit) {
@@ -31,7 +33,7 @@ public class VisitDatabaseImpl implements VisitDatabase {
     }
 
     @Override
-    public List<Visit> showAllVisits() {
+    public List<Visit> getAllVisits() {
         return visits;
     }
 
@@ -43,14 +45,17 @@ public class VisitDatabaseImpl implements VisitDatabase {
                 .findFirst();
         if (visitToEditOpt.isPresent()) {
             Visit visitToEdit = visitToEditOpt.get();
-            if (userInput.equals(EditVisitEnum.DOCTOR)) {
+            if (userInput.equals(EditVisitEnum.DOCTOR_ID)) {
                 visitToEdit.setDoctor(doctorDatabase.findById(Long.parseLong(changes)).get(0));
                 isVisitEdited = true;
-            } else if (userInput.equals(EditVisitEnum.PATIENT)) {
-                visitToEdit.setPatient(patientDatabase.findById(Long.parseLong(changes)).get());
+            } else if (userInput.equals(EditVisitEnum.PATIENT_ID)) {
+                visitToEdit.setPatient(patientDatabase.findById(Long.parseLong(changes)).get(0));
                 isVisitEdited = true;
-            } else {
+            } else if (userInput.equals(EditVisitEnum.DATE)){
                 visitToEdit.setVisitDate(LocalDateTime.parse(changes));
+                isVisitEdited = true;
+            } else if (userInput.equals(EditVisitEnum.DESCRIPTION)) {
+                visitToEdit.setDescription(changes);
                 isVisitEdited = true;
             }
         }
@@ -74,7 +79,7 @@ public class VisitDatabaseImpl implements VisitDatabase {
     @Override
     public List<Visit> findByPatientId(Long id) {
         return visits.stream()
-                .filter(visit -> Objects.equals(visit.getPatient().getId(), id))
+                .filter(visit -> Objects.equals(visit.getDoctor().getId(), id))
                 .collect(Collectors.toList());
     }
 
@@ -118,4 +123,38 @@ public class VisitDatabaseImpl implements VisitDatabase {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Visit> findByVisitIdAndPatientId(Long visitID, Long patientID) {
+        return visits.stream()
+                .filter(visit -> Objects.equals(visit.getVisitID(), visitID))
+                .filter(visit -> Objects.equals(visit.getPatient().getId(), patientID))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visit> findByVisitIdAndDoctorId(Long visitID, Long doctorID) {
+        return visits.stream()
+                .filter(visit -> Objects.equals(visit.getVisitID(), visitID))
+                .filter(visit -> Objects.equals(visit.getDoctor().getId(), doctorID))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visit> findByVisitIDAndDoctorIDAndPatientID(Long visitID, Long doctorID, Long patientID) {
+        return visits.stream()
+                .filter(visit -> Objects.equals(visit.getVisitID(), visitID))
+                .filter(visit -> Objects.equals(visit.getDoctor().getId(), doctorID))
+                .filter(visit -> Objects.equals(visit.getPatient().getId(), patientID))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Visit> findByVisitIDDoctorIDPatientIDDate(Long visitID, Long doctorID, Long patientID, LocalDateTime date) {
+        return visits.stream()
+                .filter(visit -> Objects.equals(visit.getVisitID(), visitID))
+                .filter(visit -> Objects.equals(visit.getDoctor().getId(), doctorID))
+                .filter(visit -> Objects.equals(visit.getPatient().getId(), patientID))
+                .filter(visit -> Objects.equals(visit.getVisitDate(), date))
+                .collect(Collectors.toList());
+    }
 }

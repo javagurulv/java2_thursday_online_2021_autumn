@@ -25,15 +25,15 @@ public class SearchVisitValidator {
     }
 
     private void validatePagingIfPresent(SearchVisitRequest request, List<CoreError> errors) {
-        if (request.getPaging() != null) {
-            List<CoreError> pagingErrors = visitPagingValidator.validate(request.getPaging());
+        if (request.getVisitPaging() != null) {
+            List<CoreError> pagingErrors = visitPagingValidator.validate(request.getVisitPaging());
             errors.addAll(pagingErrors);
         }
     }
 
     private void validateOrderingIfPresent(SearchVisitRequest request, List<CoreError> errors) {
-        if (request.getOrdering() != null) {
-            List<CoreError> orderingErrors = visitOrderingValidator.validate(request.getOrdering());
+        if (request.getVisitOrdering() != null) {
+            List<CoreError> orderingErrors = visitOrderingValidator.validate(request.getVisitOrdering());
             errors.addAll(orderingErrors);
         }
     }

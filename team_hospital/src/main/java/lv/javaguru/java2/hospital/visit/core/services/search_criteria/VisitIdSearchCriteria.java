@@ -16,11 +16,14 @@ public class VisitIdSearchCriteria implements VisitsSearchCriteria{
 
     @Override
     public boolean canProcess(SearchVisitRequest request) {
-        return request.isVisitIdProvided();
+        return request.isVisitIdProvided()
+                && !request.isPatientIdProvided()
+                && !request.isDoctorIdProvided()
+                && !request.isDateProvided();
     }
 
     @Override
     public List<Visit> process(SearchVisitRequest request) {
-        return database.findByVisitId(request.getVisitId());
+        return database.findByVisitId(Long.valueOf(request.getVisitId()));
     }
 }

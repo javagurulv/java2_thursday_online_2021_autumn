@@ -24,13 +24,14 @@ class EditDoctorRequestValidatorTest {
 
     @Mock
     private DoctorExistenceByIdValidator existence;
+    @Mock private DoctorEnumChecker checker;
     @InjectMocks private EditDoctorRequestValidator validator;
 
     @Test
     public void shouldReturnEmptyListName() {
         EditDoctorRequest request = new EditDoctorRequest(123L, "NAME", "changes");
         Mockito.when(existence.validateExistenceById(123L)).thenReturn(Optional.empty());
-        List<CoreError> errorList = validator.validate(request);;
+        List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
@@ -38,11 +39,12 @@ class EditDoctorRequestValidatorTest {
     public void shouldReturnEditOptionError1() {
         EditDoctorRequest request = new EditDoctorRequest(123L, "blabla", "changes");
         Mockito.when(existence.validateExistenceById(123L)).thenReturn(Optional.empty());
+        Mockito.when(checker.validateEnum(request.getUserInputEnum())).thenReturn(Optional.of
+                (new CoreError("User choice", "Must contain 'NAME', 'SURNAME' or 'SPECIALITY' only!")));
         List<CoreError> errorList = validator.validate(request);
-        System.out.println(errorList);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
-        assertEquals(errorList.get(0).getField(), "edit option");
+        assertEquals(errorList.get(0).getField(), "User choice");
         assertEquals(errorList.get(0).getMessage(), "Must contain 'NAME', 'SURNAME' or 'SPECIALITY' only!");
     }
 
@@ -54,7 +56,7 @@ class EditDoctorRequestValidatorTest {
         System.out.println(errorList);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
-        assertEquals(errorList.get(0).getField(), "edit option");
+        assertEquals(errorList.get(0).getField(), "User choice");
         assertEquals(errorList.get(0).getMessage(), "Must not be empty!");
     }
 

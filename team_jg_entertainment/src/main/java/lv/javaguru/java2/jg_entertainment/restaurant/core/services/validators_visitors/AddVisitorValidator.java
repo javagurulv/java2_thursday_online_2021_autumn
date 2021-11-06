@@ -13,7 +13,8 @@ public class AddVisitorValidator {
         List<CoreError> coreErrors = new ArrayList<>();
         validatorName(request).ifPresent(coreErrors::add);
         validatorSurname(request).ifPresent(coreErrors::add);
-        validatorTelephone(request).ifPresent(coreErrors::add);
+        validatorPhoneNumberEmpty(request).ifPresent(coreErrors::add);
+        validatorPhoneNumber(request).ifPresent(coreErrors::add);
         return coreErrors;
     }
 
@@ -29,10 +30,16 @@ public class AddVisitorValidator {
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validatorTelephone(AddVisitorRequest requestVisitor) {
-        return (requestVisitor.getTelephone() == null)
-                ? Optional.of(new CoreError("telephone", "not correct, telephone can't be null"))
+    private Optional<CoreError> validatorPhoneNumberEmpty(AddVisitorRequest requestVisitor) {
+        return (requestVisitor.getTelephone().isEmpty())
+                ? Optional.of(new CoreError("telephoneNumber", "not correct, telephone can't be null"))
                 : Optional.empty();
+    }
 
+    private Optional<CoreError> validatorPhoneNumber(AddVisitorRequest requestVisitor) {
+        return (requestVisitor.getTelephone().length() < 3
+                || requestVisitor.getTelephone().length() > 15)
+                ? Optional.of(new CoreError("telephoneNumber", "length must have figures from 3 to 15!"))
+                : Optional.empty();
     }
 }

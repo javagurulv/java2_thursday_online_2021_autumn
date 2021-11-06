@@ -17,21 +17,24 @@ public class EditVisitUIAction implements VisitUIAction {
     @Override
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
-        Long id = getUserInput.getUserLongInput("Please, enter the patient visit's id: ");
+        String id = getUserInput.getUserStringInput("Please, enter the patient visit's id: ");
         String userInput = getUserInput.getUserStringInput("What information you would like to edit " +
-                "(DOCTOR||PATIENT||DATE)? ").toUpperCase(Locale.ROOT);
+                "(DOCTOR_ID||PATIENT_ID||DATE||DESCRIPTION)? ").toUpperCase(Locale.ROOT);
         String changes = "";
         switch (userInput) {
-            case "DOCTOR" -> changes = getUserInput.getUserStringInput("Enter new doctor id: ");
-            case "PATIENT" -> changes = getUserInput.getUserStringInput("Enter new patient id: ");
-            case "DATE" -> changes = getUserInput.getUserStringInput("Enter new visit date and time in format dd/MM/yyyy HH:mm: ");
+            case "DOCTOR_ID" -> changes = getUserInput.getUserStringInput("Enter new doctor id: ");
+            case "PATIENT_ID" -> changes = getUserInput.getUserStringInput("Enter new patient id: ");
+            case "DATE" -> changes = getUserInput.getUserStringInput("Enter new visit date and time in format dd-MM-yyyy HH:mm: ");
+            case "DESCRIPTION" -> changes = getUserInput.getUserStringInput("Enter new visit description: ");
         }
         EditVisitRequest request = new EditVisitRequest(id, userInput, changes);
         EditVisitResponse response = editPatientVisit.execute(request);
-        if (response.isVisitEdited()) {
-            System.out.println("The patient visit with id " + id + " was successfully edited.");
+        if (response.hasErrors()) {
+            response.getErrors().forEach(coreError
+                    -> System.out.println("Error: " + coreError.getField() + " " + coreError.getDescription()));
+            System.out.println();
         } else {
-            System.out.println("The patient visit with id " + id + " was not edited.");
+            System.out.println("The patient visit with id " + id + " was edited.");
         }
     }
 }

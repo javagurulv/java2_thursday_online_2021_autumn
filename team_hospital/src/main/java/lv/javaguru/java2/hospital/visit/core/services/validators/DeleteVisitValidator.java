@@ -18,7 +18,7 @@ public class DeleteVisitValidator {
     public List<CoreError> validate(DeleteVisitRequest request){
         List<CoreError> errors = new ArrayList<>();
         validateIDField(request).ifPresent(errors::add);
-        validateVisitExistence(request.getId()).ifPresent(errors::add);
+        validateVisitExistence(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -27,10 +27,7 @@ public class DeleteVisitValidator {
                 ? Optional.of(new CoreError("ID", "Must not be empty!")) : Optional.empty();
     }
 
-    private Optional<CoreError> validateVisitExistence(Long id)  {
-        if(id == null) {
-            return Optional.empty();
-        }
-        return validator.validateExistenceById(id);
+    private Optional<CoreError> validateVisitExistence(DeleteVisitRequest request)  {
+        return request.getId() == null ? Optional.empty() : validator.validateExistenceById(request.getId());
     }
 }

@@ -24,7 +24,7 @@ public class AddBondValidator extends AddSecurityValidator {
     private final Map<Predicate<AddBondRequest>, CoreError> validator = Map.ofEntries(
             entry(request -> request.getName().length() < 3 || request.getName().length() > 100,
                     new CoreError("Name", "3 to 100 symbols required!")),
-            entry(request -> database.findSecurityByName(request.getName()).isPresent(),
+            entry(request -> database.findSecurityByTickerOrName(request.getName()).isPresent(),
                     new CoreError("Name", "security with such name already exists in the database!")),
             entry(request -> request.getIndustry().isEmpty(),
                     new CoreError("Industry", "is empty!")),

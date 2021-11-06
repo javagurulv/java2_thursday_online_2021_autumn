@@ -3,7 +3,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation;
 public class AddReservationRequest {
 
     private String visitorName;
-    private Long telephoneNumber;
+    private String telephoneNumber;
     private String menuTitle;
     private String tableTitle;
     private String reservationDate;
@@ -20,7 +20,7 @@ public class AddReservationRequest {
     }
 
     public AddReservationRequest(String visitorName,
-                                 Long telephoneNumber,
+                                 String telephoneNumber,
                                  String menuTitle,
                                  String tableTitle,
                                  String reservationDate) {
@@ -47,7 +47,7 @@ public class AddReservationRequest {
         return reservationDate;
     }
 
-    public Long getTelephoneNumber() {
+    public String getTelephoneNumber() {
         return telephoneNumber;
     }
 }

@@ -13,8 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static org.junit.Assert.assertEquals;
-
 public class AcceptanceTest2 {
 
     private ApplicationContext appContext =
@@ -22,9 +20,9 @@ public class AcceptanceTest2 {
 
     @Test
     public void searchVisitor() {
-        AddVisitorRequest request1 = new AddVisitorRequest("name", "surname1", 252525L);
+        AddVisitorRequest request1 = new AddVisitorRequest("name", "surname1", "252525");
         getAddVisitorService().execute(request1);
-        AddVisitorRequest request2 = new AddVisitorRequest("name", "surname2", 252525L);
+        AddVisitorRequest request2 = new AddVisitorRequest("name", "surname2", "252525");
         getAddVisitorService().execute(request2);
 
         SearchVisitorsRequest request3 = new SearchVisitorsRequest("name", null);
@@ -39,9 +37,9 @@ public class AcceptanceTest2 {
 
     @Test
     public void searchVisitorsOrderingDescending() {
-        AddVisitorRequest request1 = new AddVisitorRequest("name", "surname1", 252525L);
+        AddVisitorRequest request1 = new AddVisitorRequest("name", "surname1", "252525");
         getAddVisitorService().execute(request1);
-        AddVisitorRequest request2 = new AddVisitorRequest("name", "surname2", 252525L);
+        AddVisitorRequest request2 = new AddVisitorRequest("name", "surname2", "252525");
         getAddVisitorService().execute(request2);
 
         Ordering ordering = new Ordering("surname", "DESCENDING");
@@ -57,9 +55,9 @@ public class AcceptanceTest2 {
 
     @Test
     public void searchVisitorsOrderingAscending() {
-        AddVisitorRequest addVisitorRequest = new AddVisitorRequest("name", "surname1", 252525L);
+        AddVisitorRequest addVisitorRequest = new AddVisitorRequest("name", "surname1", "252525");
         getAddVisitorService().execute(addVisitorRequest);
-        AddVisitorRequest addVisitorRequest1 = new AddVisitorRequest("name", "surname2", 252525L);
+        AddVisitorRequest addVisitorRequest1 = new AddVisitorRequest("name", "surname2", "252525");
         getAddVisitorService().execute(addVisitorRequest1);
 
         Ordering ordering = new Ordering("surname", "ASCENDING");
@@ -75,9 +73,9 @@ public class AcceptanceTest2 {
 
     @Test
     public void searchVisitorsOrderingPaging() {
-        AddVisitorRequest addVisitorRequest = new AddVisitorRequest("name", "surname1", 252525L);
+        AddVisitorRequest addVisitorRequest = new AddVisitorRequest("name", "surname1", "252525");
         getAddVisitorService().execute(addVisitorRequest);
-        AddVisitorRequest addVisitorRequest1 = new AddVisitorRequest("name", "surname2", 252525L);
+        AddVisitorRequest addVisitorRequest1 = new AddVisitorRequest("name", "surname2", "252525");
         getAddVisitorService().execute(addVisitorRequest1);
         Ordering ordering = new Ordering("surname", "ASCENDING");
         Paging paging = new Paging(1, 1);

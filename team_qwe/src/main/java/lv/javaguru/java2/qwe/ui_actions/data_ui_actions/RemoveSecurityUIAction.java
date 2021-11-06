@@ -8,8 +8,6 @@ import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static lv.javaguru.java2.qwe.utils.UtilityMethods.*;
-
 @Component
 public class RemoveSecurityUIAction implements UIAction {
 
@@ -19,11 +17,11 @@ public class RemoveSecurityUIAction implements UIAction {
     @Override
     public void execute() {
         RemoveSecurityRequest request =
-                new RemoveSecurityRequest(utils.inputDialog("Enter name:"));
+                new RemoveSecurityRequest(utils.inputDialog("Enter ticker:"));
         RemoveSecurityResponse response =
                 removeSecurityService.execute(request);
-        String info = response.isRemoved() ? "Security " + request.getName() + " has been removed!" :
-                "No security with such name!";
+        String info = response.isRemoved() ? "Security " + request.getTicker() + " has been removed!" :
+                "No security with such ticker!";
         utils.messageDialog(info);
     }
 

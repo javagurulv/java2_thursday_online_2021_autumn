@@ -2,6 +2,7 @@ package lv.javaguru.java2.qwe.core.requests.data_requests;
 
 public class AddStockRequest extends CoreRequest {
 
+    private final String ticker;
     private final String name;
     private final String industry;
     private final String currency;
@@ -9,14 +10,19 @@ public class AddStockRequest extends CoreRequest {
     private final String dividends;
     private final String riskWeight;
 
-    public AddStockRequest(String name, String industry, String currency,
+    public AddStockRequest(String ticker, String name, String industry, String currency,
                            String marketPrice, String dividends, String riskWeight) {
+        this.ticker = ticker;
         this.name = name;
         this.industry = industry;
         this.currency = currency;
         this.marketPrice = marketPrice;
         this.dividends = dividends;
         this.riskWeight = riskWeight;
+    }
+
+    public String getTicker() {
+        return ticker;
     }
 
     public String getName() {

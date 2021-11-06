@@ -13,7 +13,6 @@ public class GetUserPortfolioUIAction implements UIAction {
 
     @Autowired private GetUserPortfolioService portfolioService;
     @Autowired private UtilityMethods utils;
-    private String userName;
 
     @Override
     public void execute() {
@@ -23,25 +22,25 @@ public class GetUserPortfolioUIAction implements UIAction {
                         "SHOW PORTFOLIO",
                         utils.convertToStringArray(portfolioService.getUserData())
                 ));
-        userName = request.getUserName();
         GetUserPortfolioResponse response = portfolioService.execute(request);
         printResponse(response);
     }
 
     public void printResponse(GetUserPortfolioResponse response) {
         if (!response.hasErrors()) {
+            String userName = response.getUser().getName() + "(ID: " + response.getUser().getId() + ")";
             System.out.println("==============" + userName + "===============");
-            response.getPortfolio().forEach(position -> System.out.println("company=" + position.getSecurity().getName() + ", amount=" +
+            response.getUser().getPortfolio().forEach(position -> System.out.println("company=" + position.getSecurity().getName() + ", amount=" +
                     position.getAmount() + ", purchase price=" + position.getPurchasePrice() + ", last market price=" +
                     position.getSecurity().getMarketPrice() + ", profit&loss=" +
                     utils.round((position.getAmount() * position.getSecurity().getMarketPrice()) -
                             (position.getAmount() * position.getPurchasePrice()))));
+            System.out.println("CASH: " + response.getUser().getCash());
             System.out.print("\n");
         } else {
             utils.messageDialog("WRONG INPUT!\n" +
                     utils.printErrorList(response));
         }
-
     }
 
 }

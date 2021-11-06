@@ -11,8 +11,6 @@ import java.util.Optional;
 
 public interface Database {
 
-    ArrayList<Security> getSecurityList();
-
     void addStock(Stock stock);
 
     void addBond(Bond bond);
@@ -21,9 +19,8 @@ public interface Database {
 
     List<Security> getAllSecurityList();
 
-    Optional<Security> findSecurityByName(String name);
+    Optional<Security> findSecurityByTickerOrName(String name);
 
-    List<Security> filterStocksByMultipleParameters(List<Security> list,
-                                                    FilterStocksByMultipleParametersRequest request, int i);
+    List<Security> filterStocksByMultipleParameters(String sql);
 
 }

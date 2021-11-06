@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -25,13 +24,12 @@ public class GetAllUserListServiceTest {
 
     @Test
     public void shouldGetAllUsersFromUserData() {
-        List<User> userList = new ArrayList<>();
-        userList.add(new User("Alexander", 25, Type.SUPER_RICH, 1_000_000));
-        userList.add(new User("Marina", 42, Type.WEALTHY, 500_000));
-        userList.add(new User("Vladimir", 65, Type.LOWER_MIDDLE, 30_000));
-
+        List<User> userList = List.of(
+                new User("Alexander", 25, Type.SUPER_RICH, 1_000_000),
+                new User("Marina", 42, Type.WEALTHY, 500_000),
+                new User("Vladimir", 65, Type.LOWER_MIDDLE, 30_000)
+        );
         Mockito.when(userData.getAllUserList()).thenReturn(userList);
-
         GetAllUserListRequest request = new GetAllUserListRequest();
         GetAllUserListResponse response = service.execute(request);
         assertEquals(response.getList().size(), 3);

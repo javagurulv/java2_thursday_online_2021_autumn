@@ -23,7 +23,7 @@ public class AddUserValidator {
     private final Map<Predicate<AddUserRequest>, CoreError> validator = Map.ofEntries(
             entry(request -> request.getName().length() < 3 || request.getName().length() > 100,
                     new CoreError("Name", "3 to 100 symbols required!")),
-            entry(request -> userData.findUserByName(request.getName()).isPresent(),
+            entry(request -> userData.findUserByIdOrName(request.getName()).isPresent(),
                     new CoreError("Name", "user with such name already exists in database!")),
             entry(request -> utils.isNotInteger(request.getAge()),
                     new CoreError("Age", "wrong format! Must be integer!")),

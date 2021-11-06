@@ -2,12 +2,14 @@ package lv.javaguru.java2.hospital.patient.core.services.search_patient_service;
 
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.PatientOrdering;
+import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+@Component
 public class Ordering {
     public List<Patient> execute(List<Patient> patients, PatientOrdering patientOrdering, boolean orderingEnabled) {
         if (orderingEnabled && patientOrdering != null) {

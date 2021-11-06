@@ -39,7 +39,8 @@ public class AddUserUIAction implements UIAction {
             utils.messageDialog("FAILED TO ADD USER!\n" +
                     utils.printErrorList(response));
         } else {
-            utils.messageDialog("User " + response.getNewUser().getName() + " has been added!");
+            utils.messageDialog("User " + response.getNewUser().getName() +
+                    "(ID: " + response.getNewUser().getId() + ")" + " has been added!");
         }
     }
 

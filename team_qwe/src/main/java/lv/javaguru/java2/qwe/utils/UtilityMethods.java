@@ -1,19 +1,17 @@
 package lv.javaguru.java2.qwe.utils;
 
-import lv.javaguru.java2.qwe.ApplicationDemo;
 import lv.javaguru.java2.qwe.core.domain.Security;
 import lv.javaguru.java2.qwe.core.domain.User;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.responses.CoreResponse;
-import lv.javaguru.java2.qwe.core.services.data_services.ImportSecuritiesService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Executors;
@@ -28,8 +26,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 @Component
 public class UtilityMethods {
 
-    @Value("${importData.enabled}")
-    private boolean importDataEnabled;
+    @Autowired private JdbcTemplate jdbcTemplate;
 
     @Value("${simulator.marketPrice.enabled}")
     private boolean marketPriceSimulatorEnabled;
@@ -50,7 +47,7 @@ public class UtilityMethods {
     private int dateSimulatorPeriod;
 
     public String[] convertToStringArray(UserData userData) {
-        return userData.getUserList().stream()
+        return userData.getAllUserList().stream()
                 .map(User::getName)
                 .toArray(String[]::new);
     }
@@ -59,14 +56,14 @@ public class UtilityMethods {
         if (marketPriceSimulatorEnabled && marketPriceSimulatorPeriod > 0) {
             ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
             Database database = context.getBean(Database.class);
-            Runnable simulator = () -> simulateMarketPrices(database.getSecurityList());
+            Runnable simulator = () -> simulateMarketPrices(database.getAllSecurityList());
             scheduledExecutorService.scheduleAtFixedRate(
                     simulator, marketPriceSimulatorInitDelay, marketPriceSimulatorPeriod, TimeUnit.SECONDS
             );
         }
     }
 
-    public void setDateSimulator(ApplicationContext context) {
+/*    public void setDateSimulator(ApplicationContext context) {
         if (dateSimulatorEnabled && dateSimulatorPeriod > 0) {
             ScheduledExecutorService scheduledExecutorService1 = Executors.newScheduledThreadPool(1);
             UserData userData = context.getBean(UserData.class);
@@ -74,15 +71,14 @@ public class UtilityMethods {
             scheduledExecutorService1.scheduleAtFixedRate(
                     simulator1, dateSimulatorInitDelay, dateSimulatorPeriod, TimeUnit.SECONDS);
         }
-    }
+    }*/
 
     private void simulateMarketPrices(List<Security> list) {
-        if (list.size() > 1) {
+        if (list.size() > 0) {
             IntStream.rangeClosed(0, list.size() - 1)
-                    .filter(i -> !list.get(i).getClass().getSimpleName().equals("Cash"))
-                    .forEach(i -> list.get(i).setMarketPrice(generateNextPrice(
+                    .forEach(i -> updateMarketPriceSQL(generateNextPrice(
                             list.get(i).getMarketPrice(), evenIsPositive(i)
-                    )));
+                    ), list.get(i)));
         }
     }
 
@@ -127,6 +123,15 @@ public class UtilityMethods {
         }
     }
 
+    public boolean isLong(String text) {
+        try {
+            Long.parseLong(text);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     public void messageDialog(String text) {
         showMessageDialog(null, text);
     }
@@ -148,29 +153,9 @@ public class UtilityMethods {
         return number % 2 == 0;
     }
 
-    public void importData() {
-        if (importDataEnabled) {
-            File file = new File("./team_qwe/src/main/docs/stocks_list_import.txt");
-            ImportSecuritiesService service =
-                    ApplicationDemo.getApplicationContext().getBean(ImportSecuritiesService.class);
-            try {
-                service.execute(file.getPath());
-                System.out.println("Data imported to database!");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public static void importDataForTests(ApplicationContext context) {
-        File file = new File("./src/test/docs/stocks_list_import.txt");
-        ImportSecuritiesService service =
-                context.getBean(ImportSecuritiesService.class);
-        try {
-            service.execute(file.getPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void updateMarketPriceSQL(double newPrice, Security security) {
+        jdbcTemplate.update("UPDATE stocks SET market_price = ? WHERE ticker = ?",
+                newPrice, security.getTicker());
     }
 
 }

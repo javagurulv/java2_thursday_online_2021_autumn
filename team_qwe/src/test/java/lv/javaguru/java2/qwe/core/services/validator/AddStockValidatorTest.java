@@ -1,24 +1,38 @@
 package lv.javaguru.java2.qwe.core.services.validator;
 
-import lv.javaguru.java2.qwe.core.domain.Stock;
-import lv.javaguru.java2.qwe.acceptance_test.AcceptanceTestForDatabase;
-import lv.javaguru.java2.qwe.core.database.Database;
+import lv.javaguru.java2.qwe.config.AppConfiguration;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AddStockValidatorTest extends AcceptanceTestForDatabase {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {AppConfiguration.class})
+public class AddStockValidatorTest {
 
-    private final Database database = super.getAppContext().getBean(Database.class);
-    private final AddStockValidator validator = super.getAppContext().getBean(AddStockValidator.class);
+    @Autowired private ApplicationContext appContext;
+    @Autowired private JdbcTemplate jdbcTemplate;
+
+    @Before
+    public void init() {
+        jdbcTemplate.update("RUNSCRIPT FROM 'classpath:schema.sql'");
+        jdbcTemplate.update("INSERT INTO stocks VALUES('BABA US','Alibaba','Technology','USD',170.13,0,1.32)");
+    }
 
     @Test
     public void shouldReturnEmptyList() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -26,13 +40,14 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
                 "1.15",
                 "1.09"
         );
-        List<CoreError> errorList = validator.validate(request);
+        List<CoreError> errorList = getValidator().validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnNameError1() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "In",
                 "Technology",
                 "USD",
@@ -40,7 +55,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
                 "1.15",
                 "1.09"
         );
-        List<CoreError> errorList = validator.validate(request);
+        List<CoreError> errorList = getValidator().validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Name");
         assertEquals(errorList.get(0).getMessage(), "3 to 100 symbols required!");
@@ -48,17 +63,16 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
 
     @Test
     public void shouldReturnNameError2() {
-        database.addStock(new Stock("Alibaba", "Technology", "USD", 165.23,
-                0, 1.32));
         AddStockRequest request = new AddStockRequest(
+                "BABA US",
                 "Alibaba",
                 "Technology",
                 "USD",
-                "54.23",
-                "1.15",
-                "1.09"
+                "170.13",
+                "0",
+                "1.32"
         );
-        List<CoreError> errorList = validator.validate(request);
+        List<CoreError> errorList = getValidator().validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Name");
         assertEquals(errorList.get(0).getMessage(), "security with such name already exists in the database!");
@@ -67,6 +81,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnIndustryError() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "",
                 "USD",
@@ -74,7 +89,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
                 "1.15",
                 "1.09"
         );
-        List<CoreError> errorList = validator.validate(request);
+        List<CoreError> errorList = getValidator().validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Industry");
         assertEquals(errorList.get(0).getMessage(), "is empty!");
@@ -83,6 +98,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnCurrencyError() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "",
@@ -90,7 +106,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
                 "1.15",
                 "1.09"
         );
-        List<CoreError> errorList = validator.validate(request);
+        List<CoreError> errorList = getValidator().validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Currency");
         assertEquals(errorList.get(0).getMessage(), "is empty!");
@@ -99,6 +115,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnMarketPriceError1() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -106,7 +123,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
                 "1.15",
                 "1.09"
         );
-        List<CoreError> errorList = validator.validate(request);
+        List<CoreError> errorList = getValidator().validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Market price");
         assertEquals(errorList.get(0).getMessage(), "wrong format! Must be double!");
@@ -115,6 +132,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnMarketPriceError2() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -122,7 +140,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
                 "1.15",
                 "1.09"
         );
-        List<CoreError> errorList = validator.validate(request);
+        List<CoreError> errorList = getValidator().validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Market price");
         assertEquals(errorList.get(0).getMessage(), "cannot be negative!");
@@ -131,6 +149,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnDividendError1() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -138,7 +157,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
                 "",
                 "1.09"
         );
-        List<CoreError> errorList = validator.validate(request);
+        List<CoreError> errorList = getValidator().validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Dividend");
         assertEquals(errorList.get(0).getMessage(), "wrong format! Must be double!");
@@ -147,6 +166,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnDividendError2() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -154,7 +174,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
                 "-1.15",
                 "1.09"
         );
-        List<CoreError> errorList = validator.validate(request);
+        List<CoreError> errorList = getValidator().validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Dividend");
         assertEquals(errorList.get(0).getMessage(), "cannot be negative!");
@@ -163,6 +183,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnRiskWeightError1() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -170,7 +191,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
                 "1.15",
                 "1.a"
         );
-        List<CoreError> errorList = validator.validate(request);
+        List<CoreError> errorList = getValidator().validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Risk weight");
         assertEquals(errorList.get(0).getMessage(), "wrong format! Must be double!");
@@ -179,6 +200,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnRiskWeightError2() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -186,7 +208,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
                 "1.15",
                 "-1.09"
         );
-        List<CoreError> errorList = validator.validate(request);
+        List<CoreError> errorList = getValidator().validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Risk weight");
         assertEquals(errorList.get(0).getMessage(), "cannot be negative!");
@@ -195,6 +217,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnNameCurrencyRiskWeightErrors() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "In",
                 "Technology",
                 "",
@@ -202,7 +225,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
                 "1.15",
                 "-1.09"
         );
-        List<CoreError> errorList = validator.validate(request);
+        List<CoreError> errorList = getValidator().validate(request);
         assertEquals(errorList.size(), 3);
         assertTrue(errorList.contains(new CoreError("Risk weight", "cannot be negative!")));
         assertTrue(errorList.contains(new CoreError("Name", "3 to 100 symbols required!")));
@@ -212,6 +235,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnMarketPriceDividendErrors() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "Intel",
                 "Technology",
                 "USD",
@@ -219,7 +243,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
                 "-1.15",
                 "1.09"
         );
-        List<CoreError> errorList = validator.validate(request);
+        List<CoreError> errorList = getValidator().validate(request);
         assertEquals(errorList.size(), 2);
         assertTrue(errorList.contains(new CoreError("Market price", "wrong format! Must be double!")));
         assertTrue(errorList.contains(new CoreError("Dividend", "cannot be negative!")));
@@ -228,6 +252,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
     @Test
     public void shouldReturnAllErrors() {
         AddStockRequest request = new AddStockRequest(
+                "INTC US",
                 "",
                 "",
                 "",
@@ -235,7 +260,7 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
                 "",
                 ""
         );
-        List<CoreError> errorList = validator.validate(request);
+        List<CoreError> errorList = getValidator().validate(request);
         assertEquals(errorList.size(), 6);
         assertTrue(errorList.contains(new CoreError("Name", "3 to 100 symbols required!")));
         assertTrue(errorList.contains(new CoreError("Industry", "is empty!")));
@@ -243,6 +268,10 @@ public class AddStockValidatorTest extends AcceptanceTestForDatabase {
         assertTrue(errorList.contains(new CoreError("Market price", "wrong format! Must be double!")));
         assertTrue(errorList.contains(new CoreError("Dividend", "wrong format! Must be double!")));
         assertTrue(errorList.contains(new CoreError("Risk weight", "wrong format! Must be double!")));
+    }
+
+    private AddStockValidator getValidator() {
+        return appContext.getBean(AddStockValidator.class);
     }
 
 }

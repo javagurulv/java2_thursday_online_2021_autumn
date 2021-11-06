@@ -25,10 +25,10 @@ public class DatabaseVisitorsImpl implements DatabaseVisitors {
     }
 
     @Override
-    public List<Visitors> findVisitorsByNameAndTelephoneNumber(String nameVisitors, Long telephoneNumber) {
+    public List<Visitors> findVisitorsByNameAndTelephoneNumber(String nameVisitors, String telephoneNumber) {
         return clientInRestaurant.stream()
                 .filter(visitors -> visitors.getClientName().equals(nameVisitors))
-                .filter(visitors -> visitors.getTelephoneNumber() == telephoneNumber)
+                .filter(visitors -> visitors.getTelephoneNumber().equals(telephoneNumber))
                 .collect(Collectors.toList());
     }
 

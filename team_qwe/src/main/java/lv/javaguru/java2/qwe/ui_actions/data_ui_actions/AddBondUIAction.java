@@ -17,6 +17,7 @@ public class AddBondUIAction implements UIAction {
 
     @Override
     public void execute() {
+        String ticker = utils.inputDialog("Security ticker");
         String name = utils.inputDialog("Security name");
         String industry = utils.inputDialog("Industry", "CHOOSE INDUSTRY", utils.generateIndustriesArray());
         String currency = utils.inputDialog("Currency", "CHOOSE CURRENCY", new String[]{"USD"});
@@ -25,7 +26,7 @@ public class AddBondUIAction implements UIAction {
         String rating = utils.inputDialog("Rating");
         String nominal = utils.inputDialog("Nominal");
         String maturity = utils.inputDialog("Maturity");
-        CoreRequest bondRequest = new AddBondRequest(name, industry, currency,
+        CoreRequest bondRequest = new AddBondRequest(ticker, name, industry, currency,
                 marketPrice, coupon, rating, nominal, maturity);
         AddBondResponse bondResponse = addBondService.execute(bondRequest);
         printResponse(bondResponse);

@@ -30,6 +30,7 @@ public class AddStockService {
 
     private Stock createStock(AddStockRequest request) {
         return new Stock(
+                request.getTicker(),
                 request.getName(),
                 request.getIndustry(),
                 request.getCurrency(),

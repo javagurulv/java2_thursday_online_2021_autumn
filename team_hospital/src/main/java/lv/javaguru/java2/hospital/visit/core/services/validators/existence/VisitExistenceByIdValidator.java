@@ -15,12 +15,12 @@ public class VisitExistenceByIdValidator {
     private VisitDatabase database;
 
     public Optional<CoreError> validateExistenceById(Long id) {
-        for (Visit visit : database.showAllVisits()) {
-            if (visit.getVisitID().equals(visit.getVisitID())) {
+        for (Visit visit : database.getAllVisits()) {
+            if (visit.getVisitID().equals(id)) {
                 return Optional.empty();
             }
         }
-        return Optional.of(new CoreError("Visit", "Does not exist!"));
+        return Optional.of(new CoreError("Visit", "does not exist!"));
     }
 
 

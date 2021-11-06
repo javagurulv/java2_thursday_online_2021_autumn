@@ -1,13 +1,15 @@
 package lv.javaguru.java2.hospital.domain;
 
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Patient {
     private Long id;
     private String name;
     private String surname;
     private String personalCode;
+
+    public Patient() {
+    }
 
     public Patient(String name, String surname, String personalCode) {
         this.name = name;

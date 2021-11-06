@@ -23,7 +23,7 @@ public class GetUserPortfolioGroupedByIndustryService {
 
     public GetUserPortfolioGroupedByIndustryResponse execute(GetUserPortfolioGroupedByIndustryRequest request) {
         List<CoreError> errors = validator.validate(request);
-        Optional<User> user = userData.findUserByName(request.getUserName());
+        Optional<User> user = userData.findUserByIdOrName(request.getUserName());
         if (errors.isEmpty() && user.isPresent()) {
             return new GetUserPortfolioGroupedByIndustryResponse(
                     userData.getUserPortfolioGroupedByIndustry(user.get()));

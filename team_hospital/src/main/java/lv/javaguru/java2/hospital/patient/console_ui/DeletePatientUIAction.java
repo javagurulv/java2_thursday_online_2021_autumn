@@ -13,7 +13,7 @@ public class DeletePatientUIAction implements PatientUIActions {
 
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
-        DeletePatientRequest request = new DeletePatientRequest(getUserInput.getUserLongInput("Please, enter patient ID: "));
+        DeletePatientRequest request = new DeletePatientRequest(getUserInput.getUserStringInput("Please, enter patient ID: "));
         DeletePatientResponse response = deletePatient.execute(request);
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError ->

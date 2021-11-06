@@ -2,15 +2,13 @@ package lv.javaguru.java2.hospital.database;
 
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class PatientDatabaseImpl implements PatientDatabase {
 
     private Long nextId = 1L;
@@ -24,27 +22,29 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public Optional<Patient> findById(Long id) {
+    public List<Patient> findById(Long id) {
+        List<Patient> patients = new ArrayList<>();
         for (Patient patient : patientsList) {
             if (Objects.equals(id, patient.getId())) {
-                return Optional.of(patient);
+                patients.add(patient);
+                return patients;
             }
         }
-        return Optional.empty();
+        return new ArrayList<>();
     }
 
     @Override
-    public void deleteById(Long id) {
-        patientsList.removeIf(patient -> Objects.equals(patient.getId(), id));
+    public boolean deleteById(Long id) {
+       return patientsList.removeIf(patient -> Objects.equals(patient.getId(), id));
     }
 
     @Override
-    public List<Patient> showAllPatients() {
+    public List<Patient> getAllPatients() {
         return patientsList;
     }
 
     @Override
-    public boolean editActions(Long patientID, Enum userInput, String input) {
+    public boolean editActions(Long patientID, EditPatientEnum userInput, String input) {
         for (Patient patient : patientsList) {
             if (Objects.equals(patient.getId(), patientID)) {
                 if (EditPatientEnum.NAME.equals(userInput)) {
@@ -57,17 +57,6 @@ public class PatientDatabaseImpl implements PatientDatabase {
                     patient.setPersonalCode(input);
                     return true;
                 }
-            }
-        }
-        return false;
-    }
-
-
-    @Override
-    public boolean patientExists(Long id) {
-        for (Patient patient : patientsList) {
-            if (Objects.equals(patient.getId(), id)) {
-                return true;
             }
         }
         return false;
@@ -107,11 +96,11 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public List<Patient> findPatientsByNameAndPersonalCode(String name, String personalCode) {
+    public List<Patient> findPatientsByNameAndPersonalCode(String name, String personal_code) {
         List<Patient> list = new ArrayList<>();
         for (Patient patient : patientsList) {
             if (name.equals(patient.getName())
-                    && personalCode.equals(patient.getPersonalCode())) {
+                    && personal_code.equals(patient.getPersonalCode())) {
                 list.add(patient);
                 break;
             }
@@ -120,11 +109,11 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public List<Patient> findPatientsBySurnameAndPersonalCode(String surname, String personalCode) {
+    public List<Patient> findPatientsBySurnameAndPersonalCode(String surname, String personal_code) {
         List<Patient> list = new ArrayList<>();
         for (Patient patient : patientsList) {
             if (surname.equals(patient.getSurname())
-                    && personalCode.equals(patient.getPersonalCode())) {
+                    && personal_code.equals(patient.getPersonalCode())) {
                 list.add(patient);
                 break;
             }
@@ -133,12 +122,12 @@ public class PatientDatabaseImpl implements PatientDatabase {
     }
 
     @Override
-    public List<Patient> findPatientByNameSurnamePersonalCode(String name, String surname, String personalCode) {
+    public List<Patient> findPatientByNameSurnamePersonalCode(String name, String surname, String personal_code) {
         List<Patient> list = new ArrayList<>();
         for (Patient p : patientsList) {
             if (p.getName().equals(name)
                     && p.getSurname().equals(surname)
-                    && p.getPersonalCode().equals(personalCode)) {
+                    && p.getPersonalCode().equals(personal_code)) {
                 list.add(p);
             }
         }

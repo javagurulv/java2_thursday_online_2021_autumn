@@ -9,10 +9,12 @@ import static lv.javaguru.java2.qwe.core.domain.Type.*;
 
 public class User {
 
+    private long id;
     private final String name;
     private final int age;
     private final Type type; // общий уровень благосостояния клиента
     private final double initialInvestment; //начальная сумма инвестиций
+    private double cash; //денежный остаток на счете
     private LocalDate portfolioGenerationDate;
     private int riskTolerance;
     private List<Position> portfolio = new ArrayList<>();
@@ -23,8 +25,15 @@ public class User {
         this.age = age;
         this.type = type;
         this.initialInvestment = initialInvestment;
-        calculateRiskTolerance();
-        portfolio.add(new Position(new Cash(), initialInvestment, 1));
+        if (riskTolerance == 0) {calculateRiskTolerance();}
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -41,6 +50,14 @@ public class User {
 
     public double getInitialInvestment() {
         return initialInvestment;
+    }
+
+    public double getCash() {
+        return cash;
+    }
+
+    public void setCash(double cash) {
+        this.cash = cash;
     }
 
     public int getRiskTolerance() {
@@ -119,10 +136,12 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", age=" + age +
                 ", type=" + type +
                 ", initialInvestment=" + initialInvestment +
+                ", portfolioGenerationDate=" + portfolioGenerationDate +
                 ", riskTolerance=" + riskTolerance +
                 '}';
     }
@@ -133,7 +152,7 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return age == user.age && Double.compare(user.initialInvestment, initialInvestment) == 0
-                && Objects.equals(name, user.name) && type == user.type;
+                && Objects.equals(name, user.name) && type == user.type && id == user.id;
     }
 
 }

@@ -35,7 +35,7 @@ class ExistenceByDoctorIdAndPatientIdAndDateTest {
 
     @Test
     public void shouldReturnTrue() {
-        SearchVisitRequest request = new SearchVisitRequest(null, 122L, 11L, "27/12/2021 14:00");
+        SearchVisitRequest request = new SearchVisitRequest(null, "122", "11", "27-12-2021 14:00");
         assertTrue(existence.canValidate(request));
     }
 
@@ -47,7 +47,7 @@ class ExistenceByDoctorIdAndPatientIdAndDateTest {
 
     @Test
     public void shouldReturnVisitError() {
-        SearchVisitRequest request = new SearchVisitRequest(null, 1321L,33L, "27/12/2021 16:00");
+        SearchVisitRequest request = new SearchVisitRequest(null, "1321","33", "27-12-2021 16:00");
         Optional<CoreError> error = existence.validateExistence(request);
         assertFalse(error.isEmpty());
         assertEquals(error.get().getField(),"Visit", "Does not exist!");
@@ -62,13 +62,15 @@ class ExistenceByDoctorIdAndPatientIdAndDateTest {
         Long patientId = 15L;
         patient.setId(patientId);
         List<Visit> visits = new ArrayList<>();
-        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse("27/12/2021 16:00"));
+        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse("27-12-2021 16:00"));
         visits.add(new Visit(doctor, patient, date));
 
-        SearchVisitRequest request = new SearchVisitRequest(null, doctorId, patientId, "27/12/2021 16:00");
-        LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(request.getVisitDate()));
+        SearchVisitRequest request =
+                new SearchVisitRequest(null, doctorId.toString(), patientId.toString(), "27-12-2021 16:00");
+        LocalDateTime localDateTime =
+                LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(request.getVisitDate()));
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate())).thenReturn(localDateTime);
-        Mockito.when(database.showAllVisits()).thenReturn(visits);
+        Mockito.when(database.getAllVisits()).thenReturn(visits);
         Optional<CoreError> error = existence.validateExistence(request);
         System.out.println(error);
         assertTrue(error.isEmpty());

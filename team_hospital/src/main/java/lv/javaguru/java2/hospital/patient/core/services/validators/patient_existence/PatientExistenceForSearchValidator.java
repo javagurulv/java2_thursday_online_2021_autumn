@@ -1,8 +1,9 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence;
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
-import lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.validators_for_search_criteria.*;
+import lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.existence_validators_for_search_criteria.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @Component
 public class PatientExistenceForSearchValidator {
 
-    @Autowired private PatientDatabaseImpl database;
+    @Autowired private PatientDatabase database;
 
     public List<CoreError> execute(SearchPatientsRequest request) {
         List<CoreError> errors = new ArrayList<>();

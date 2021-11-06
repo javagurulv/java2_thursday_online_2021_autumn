@@ -57,7 +57,7 @@ class ExistenceByNameAndSurnameTest {
         SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name22", "Surname324", "");
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
-        Mockito.when(database.showAllDoctors()).thenReturn(doctors);
+        Mockito.when(database.getAllDoctors()).thenReturn(doctors);
 
         Optional<CoreError> errorList = existence.validateExistence(request);
         assertTrue(errorList.isEmpty());

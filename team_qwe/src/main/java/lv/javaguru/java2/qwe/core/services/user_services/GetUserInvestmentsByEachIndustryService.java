@@ -24,7 +24,7 @@ public class GetUserInvestmentsByEachIndustryService {
 
     public GetUserInvestmentsByEachIndustryResponse execute(GetUserInvestmentsByEachIndustryRequest request) {
         List<CoreError> errors = validator.validate(request);
-        Optional<User> user = userData.findUserByName(request.getUserName());
+        Optional<User> user = userData.findUserByIdOrName(request.getUserName());
         if (errors.isEmpty() && user.isPresent()) {
             return new GetUserInvestmentsByEachIndustryResponse(
                     userData.getUserInvestmentsByEachIndustry(user.get()));

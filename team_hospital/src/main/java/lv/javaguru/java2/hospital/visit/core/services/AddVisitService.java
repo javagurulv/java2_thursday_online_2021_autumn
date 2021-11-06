@@ -20,10 +20,10 @@ import java.util.List;
 @Component
 public class AddVisitService {
 
-    @Autowired private PatientDatabase patientDatabase;
-    @Autowired private DoctorDatabase doctorDatabase;
     @Autowired private VisitDatabase visitDatabase;
     @Autowired private AddVisitValidator validator;
+    @Autowired private PatientDatabase patientDatabase;
+    @Autowired private DoctorDatabase doctorDatabase;
 
     public AddVisitResponse execute(AddVisitRequest request) {
         List<CoreError> errors = validator.validate(request);
@@ -31,22 +31,13 @@ public class AddVisitService {
             return new AddVisitResponse(errors);
         }
 
-        Patient patient = getPatient(request);
-        Doctor doctor = getDoctor(request);
-        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").parse(request.getVisitDate()));
-        Visit visit = new Visit(doctor, patient, date);
+        Patient patient = patientDatabase.findById(Long.valueOf(request.getPatientID())).get(0);
+        Doctor doctor = doctorDatabase.findById(Long.valueOf(request.getDoctorsID())).get(0);
+
+        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(request.getVisitDate()));
+        Visit visit = new Visit(doctor, patient, date, request.getDescription());
 
         visitDatabase.recordVisit(visit);
         return new AddVisitResponse(visit);
-    }
-
-    private Doctor getDoctor(AddVisitRequest request) {
-        return doctorDatabase
-                .findByNameAndSurname(request.getDoctorsName(), request.getDoctorsSurname()).get(0);
-    }
-
-    private Patient getPatient(AddVisitRequest request) {
-        return patientDatabase
-                .findPatientsByPersonalCode(request.getPatientsPersonalCode()).get(0);
     }
 }

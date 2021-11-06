@@ -6,8 +6,18 @@ public class PagingRequest extends CoreRequest {
     private final String pageSize;
 
     public PagingRequest(String pageNumber, String pageSize) {
-        this.pageNumber = pageNumber;
-        this.pageSize = pageSize;
+        if (!pageNumber.isEmpty() && !pageSize.isEmpty()) {
+            this.pageNumber = pageNumber;
+            this.pageSize = pageSize;
+        }
+        else if (pageNumber.isEmpty() && pageSize.isEmpty()) {
+            this.pageNumber = "0";
+            this.pageSize = "1000";
+        }
+        else {
+            this.pageNumber = pageNumber;
+            this.pageSize = pageSize;
+        }
     }
 
     public String getPageNumber() {

@@ -29,10 +29,10 @@ class ShowAllDoctorsServiceTest {
     private ShowAllDoctorsService service;
 
     @Test
-    public void shouldGetBooksFromDb() {
+    public void shouldGetDoctorsFromDb() {
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("Name", "Surname", "Speciality"));
-        Mockito.when(database.showAllDoctors()).thenReturn(doctors);
+        Mockito.when(database.getAllDoctors()).thenReturn(doctors);
         ShowAllDoctorsRequest request = new ShowAllDoctorsRequest();
         ShowAllDoctorsResponse response = service.execute(request);
         assertFalse(response.hasErrors());

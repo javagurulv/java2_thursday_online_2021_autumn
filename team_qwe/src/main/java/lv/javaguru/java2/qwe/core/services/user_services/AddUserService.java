@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 import static lv.javaguru.java2.qwe.core.domain.Type.*;
 
@@ -27,7 +28,8 @@ public class AddUserService {
         List<CoreError> errors = validator.validate(request);
         if (errors.isEmpty()) {
             User user = createUser(request);
-            userData.addUser(user);
+            Long id = userData.addUser(user);
+            user.setId(id);
             return new AddUserResponse(user);
         }
         return new AddUserResponse(errors);

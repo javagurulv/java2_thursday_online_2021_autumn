@@ -31,17 +31,98 @@ class AddPatientServiceTest {
     @InjectMocks private AddPatientService addPatientService;
 
     @Test
-    public void shouldReturnResponseWithErrorsWhenValidationFails() {
-        AddPatientRequest request = new AddPatientRequest("name", null, "personal code");
+    public void shouldReturnResponseWithErrorsWhenNameValidationFails() {
+        AddPatientRequest request = new AddPatientRequest("", "surname", "12345678901");
         List<CoreError> errors = new ArrayList<>();
-        errors.add(new CoreError("Surname", "Must not be empty!"));
+        errors.add(new CoreError("Name", "must not be empty!"));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        AddPatientResponse response = addPatientService.execute(request);
+        assertTrue(response.hasErrors());
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "Name");
+        assertEquals(response.getErrors().get(0).getDescription(), "must not be empty!");
+
+        Mockito.verifyNoInteractions(patientDatabase);
+    }
+
+    @Test
+    public void shouldReturnResponseWithErrorsWhenSurnameValidationFails() {
+        AddPatientRequest request = new AddPatientRequest("name", null, "12345678901");
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Surname", "must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
 
         AddPatientResponse response = addPatientService.execute(request);
         assertTrue(response.hasErrors());
         assertEquals(response.getErrors().size(), 1);
         assertEquals(response.getErrors().get(0).getField(), "Surname");
-        assertEquals(response.getErrors().get(0).getDescription(), "Must not be empty!");
+        assertEquals(response.getErrors().get(0).getDescription(), "must not be empty!");
+
+        Mockito.verifyNoInteractions(patientDatabase);
+    }
+
+
+    @Test
+    public void shouldReturnResponseWithErrorsWhenPersonalCodeValidationFails() {
+        AddPatientRequest request = new AddPatientRequest("name", "surname", null);
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Personal code", "must not be empty!"));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        AddPatientResponse response = addPatientService.execute(request);
+        assertTrue(response.hasErrors());
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "Personal code");
+        assertEquals(response.getErrors().get(0).getDescription(), "must not be empty!");
+
+        Mockito.verifyNoInteractions(patientDatabase);
+    }
+
+    @Test
+    public void shouldReturnResponseWithErrorsWhenPersonalCodeLengthValidationFails() {
+        AddPatientRequest request = new AddPatientRequest("name", "surname", "1234");
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Personal code", "must consist of 11 symbols!"));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        AddPatientResponse response = addPatientService.execute(request);
+        assertTrue(response.hasErrors());
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "Personal code");
+        assertEquals(response.getErrors().get(0).getDescription(), "must consist of 11 symbols!");
+
+        Mockito.verifyNoInteractions(patientDatabase);
+    }
+
+    @Test
+    public void shouldReturnResponseWithErrorsWhenPersonalCodeNumValidationFails() {
+        AddPatientRequest request = new AddPatientRequest("name", "surname", "1234code567");
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Personal code", "must consist only from numbers!"));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        AddPatientResponse response = addPatientService.execute(request);
+        assertTrue(response.hasErrors());
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "Personal code");
+        assertEquals(response.getErrors().get(0).getDescription(), "must consist only from numbers!");
+
+        Mockito.verifyNoInteractions(patientDatabase);
+    }
+
+    @Test
+    public void shouldReturnResponseWithErrorsWhenPatientExistsValidationFails() {
+        AddPatientRequest request = new AddPatientRequest("name", "surname", "12345678901");
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Patient", "already exist!"));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+
+        AddPatientResponse response = addPatientService.execute(request);
+        assertTrue(response.hasErrors());
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "Patient");
+        assertEquals(response.getErrors().get(0).getDescription(), "already exist!");
 
         Mockito.verifyNoInteractions(patientDatabase);
     }
@@ -49,9 +130,9 @@ class AddPatientServiceTest {
     @Test
     public void shouldAddPatientToDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        AddPatientRequest request = new AddPatientRequest("name", "surname", "personalCode");
+        AddPatientRequest request = new AddPatientRequest("name", "surname", "12345678901");
         AddPatientResponse response = addPatientService.execute(request);
         assertFalse(response.hasErrors());
-        Mockito.verify(patientDatabase).add(argThat(new PatientMatcher("name", "surname", "personalCode")));
+        Mockito.verify(patientDatabase).add(argThat(new PatientMatcher("name", "surname", "12345678901")));
     }
 }

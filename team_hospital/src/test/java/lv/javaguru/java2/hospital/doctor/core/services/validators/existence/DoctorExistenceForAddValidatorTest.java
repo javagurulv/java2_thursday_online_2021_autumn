@@ -34,7 +34,7 @@ class DoctorExistenceForAddValidatorTest {
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
         AddDoctorRequest request = new AddDoctorRequest("Name", "Surname", "Speciality");
-        Mockito.when(database.showAllDoctors()).thenReturn(doctors);
+        Mockito.when(database.getAllDoctors()).thenReturn(doctors);
         Optional<CoreError> errors = existence.validateDoctorExistence(request);
         assertEquals(errors.get().getField(), "Doctor");
         assertEquals(errors.get().getMessage(), "Already exists!");
@@ -43,7 +43,7 @@ class DoctorExistenceForAddValidatorTest {
     @Test
     public void shouldReturnEmptyList() {
         AddDoctorRequest request = new AddDoctorRequest("Name", "Surname", "Speciality");
-        Mockito.when(database.showAllDoctors()).thenReturn(new ArrayList<>());
+        Mockito.when(database.getAllDoctors()).thenReturn(new ArrayList<>());
         Optional<CoreError> errors = existence.validateDoctorExistence(request);
         assertTrue(errors.isEmpty());
     }

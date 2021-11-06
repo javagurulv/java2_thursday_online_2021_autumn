@@ -7,9 +7,9 @@ public class Stock extends Security {
     private final double dividends;
     private final double riskWeight;
 
-    public Stock(String name, String industry, String currency,
+    public Stock(String ticker, String name, String industry, String currency,
                  double marketPrice, double dividends, double riskWeight) {
-        super(name, industry, currency, marketPrice);
+        super(ticker, name, industry, currency, marketPrice);
         this.dividends = dividends;
         this.riskWeight = riskWeight;
     }
@@ -25,7 +25,8 @@ public class Stock extends Security {
     @Override
     public String toString() {
         return "Stock{" +
-                "name=" + this.getName() +
+                "ticker=" + this.getTicker() +
+                ", name=" + this.getName() +
                 ", industry=" + this.getIndustry() +
                 ", currency=" + this.getCurrency() +
                 ", marketPrice=" + this.getMarketPrice() +

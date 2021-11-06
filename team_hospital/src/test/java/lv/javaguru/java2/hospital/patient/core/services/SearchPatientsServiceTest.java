@@ -1,12 +1,15 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.PatientOrdering;
 import lv.javaguru.java2.hospital.patient.core.requests.PatientPaging;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
+import lv.javaguru.java2.hospital.patient.core.services.search_patient_service.Ordering;
+import lv.javaguru.java2.hospital.patient.core.services.search_patient_service.Paging;
+import lv.javaguru.java2.hospital.patient.core.services.search_patient_service.PatientSearch;
 import lv.javaguru.java2.hospital.patient.core.services.search_patient_service.SearchPatientsService;
 import lv.javaguru.java2.hospital.patient.core.services.validators.SearchPatientsValidator;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,12 +33,12 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(JUnitPlatform.class)
 class SearchPatientsServiceTest {
 
-    @Mock
-    private PatientDatabaseImpl database;
-    @Mock
-    private SearchPatientsValidator validator;
-    @InjectMocks
-    private SearchPatientsService service;
+    @Mock private PatientDatabase database;
+    @Mock private SearchPatientsValidator validator;
+    @Mock private PatientSearch search;
+    @Mock private Paging paging;
+    @Mock private Ordering ordering;
+    @InjectMocks private SearchPatientsService service;
 
     @BeforeEach
     public void setup() {
@@ -68,7 +71,9 @@ class SearchPatientsServiceTest {
 
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
-        Mockito.when(database.findPatientsByName("name")).thenReturn(patients);
+        Mockito.when(search.execute(request)).thenReturn(patients);
+        Mockito.when(ordering.execute(patients, null, true)).thenReturn(patients);
+        Mockito.when(paging.execute(patients, null, true)).thenReturn(patients);
 
         SearchPatientsResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -85,7 +90,9 @@ class SearchPatientsServiceTest {
 
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
-        Mockito.when(database.findPatientsBySurname("surname")).thenReturn(patients);
+        Mockito.when(search.execute(request)).thenReturn(patients);
+        Mockito.when(ordering.execute(patients, null, true)).thenReturn(patients);
+        Mockito.when(paging.execute(patients, null, true)).thenReturn(patients);
 
         SearchPatientsResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -102,7 +109,9 @@ class SearchPatientsServiceTest {
 
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
-        Mockito.when(database.findPatientsByPersonalCode("1234")).thenReturn(patients);
+        Mockito.when(search.execute(request)).thenReturn(patients);
+        Mockito.when(ordering.execute(patients, null, true)).thenReturn(patients);
+        Mockito.when(paging.execute(patients, null, true)).thenReturn(patients);
 
         SearchPatientsResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -119,7 +128,9 @@ class SearchPatientsServiceTest {
 
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
-        Mockito.when(database.findPatientsByNameAndSurname("name", "surname")).thenReturn(patients);
+        Mockito.when(search.execute(request)).thenReturn(patients);
+        Mockito.when(ordering.execute(patients, null, true)).thenReturn(patients);
+        Mockito.when(paging.execute(patients, null, true)).thenReturn(patients);
 
         SearchPatientsResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -136,7 +147,9 @@ class SearchPatientsServiceTest {
 
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
-        Mockito.when(database.findPatientsByNameAndPersonalCode("name", "1234")).thenReturn(patients);
+        Mockito.when(search.execute(request)).thenReturn(patients);
+        Mockito.when(ordering.execute(patients, null, true)).thenReturn(patients);
+        Mockito.when(paging.execute(patients, null, true)).thenReturn(patients);
 
         SearchPatientsResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -153,7 +166,9 @@ class SearchPatientsServiceTest {
 
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
-        Mockito.when(database.findPatientsBySurnameAndPersonalCode("surname", "1234")).thenReturn(patients);
+        Mockito.when(search.execute(request)).thenReturn(patients);
+        Mockito.when(ordering.execute(patients, null, true)).thenReturn(patients);
+        Mockito.when(paging.execute(patients, null, true)).thenReturn(patients);
 
         SearchPatientsResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -172,7 +187,15 @@ class SearchPatientsServiceTest {
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname2", "1235"));
         patients.add(new Patient("name", "surname1", "1234"));
-        Mockito.when(database.findPatientsByName("name")).thenReturn(patients);
+        Mockito.when(search.execute(request)).thenReturn(patients);
+
+        List<Patient> patients2 = new ArrayList<>();
+        patients2.add(new Patient("name", "surname1", "1234"));
+        patients2.add(new Patient("name", "surname2", "1235"));
+        Mockito.when(ordering.execute(patients, patientOrdering, true))
+                .thenReturn(patients2);
+        Mockito.when(paging.execute(patients2, null, true))
+                .thenReturn(patients2);
 
         SearchPatientsResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -192,7 +215,15 @@ class SearchPatientsServiceTest {
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname1", "1234"));
         patients.add(new Patient("name", "surname2", "1235"));
-        Mockito.when(database.findPatientsByName("name")).thenReturn(patients);
+        Mockito.when(search.execute(request)).thenReturn(patients);
+
+        List<Patient> patients2 = new ArrayList<>();
+        patients2.add(new Patient("name", "surname2", "1235"));
+        patients2.add(new Patient("name", "surname1", "1234"));
+        Mockito.when(ordering.execute(patients, patientOrdering, true))
+                .thenReturn(patients2);
+        Mockito.when(paging.execute(patients2, null, true))
+                .thenReturn(patients2);
 
         SearchPatientsResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -204,7 +235,7 @@ class SearchPatientsServiceTest {
     }
 
     @Test
-    public void shouldSearchByTitleWithPagingFirstPage() {
+    public void shouldSearchByNameWithPagingFirstPage() {
         PatientPaging patientPaging = new PatientPaging(1, 1);
         SearchPatientsRequest request = new SearchPatientsRequest("name", null, null, patientPaging);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
@@ -212,7 +243,14 @@ class SearchPatientsServiceTest {
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname1", "1234"));
         patients.add(new Patient("name", "surname2", "1235"));
-        Mockito.when(database.findPatientsByName("name")).thenReturn(patients);
+        Mockito.when(search.execute(request)).thenReturn(patients);
+
+        List<Patient> patients2 = new ArrayList<>();
+        patients2.add(new Patient("name", "surname1", "1234"));
+        Mockito.when(ordering.execute(patients, null, true))
+                .thenReturn(patients);
+        Mockito.when(paging.execute(patients, patientPaging, true))
+                .thenReturn(patients2);
 
         SearchPatientsResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -231,7 +269,14 @@ class SearchPatientsServiceTest {
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname1", "1234"));
         patients.add(new Patient("name", "surname2", "1235"));
-        Mockito.when(database.findPatientsByName("name")).thenReturn(patients);
+        Mockito.when(search.execute(request)).thenReturn(patients);
+
+        List<Patient> patients2 = new ArrayList<>();
+        patients2.add(new Patient("name", "surname2", "1235"));
+        Mockito.when(ordering.execute(patients, null, true))
+                .thenReturn(patients);
+        Mockito.when(paging.execute(patients, patientPaging, true))
+                .thenReturn(patients2);
 
         SearchPatientsResponse response = service.execute(request);
         assertFalse(response.hasErrors());

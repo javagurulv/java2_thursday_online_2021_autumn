@@ -1,21 +1,17 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu;
 
-import java.util.Scanner;
-
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.AddMenuService;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.AddMenuResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.AddMenuRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.AddMenuResponse;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.AddMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Scanner;
 
 @Component
 public class AddMenuUIAction implements UIAction {
 
     @Autowired private AddMenuService addMenuService;
-
-//    public AddMenuUIAction(AddMenuService addMenuService) {
-//        this.addMenuService = addMenuService;
-//    }
 
     @Override
     public void execute() {

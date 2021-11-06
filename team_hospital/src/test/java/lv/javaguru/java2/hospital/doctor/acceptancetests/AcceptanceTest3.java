@@ -1,16 +1,20 @@
 package lv.javaguru.java2.hospital.doctor.acceptancetests;
 
 import lv.javaguru.java2.hospital.config.HospitalConfiguration;
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.context.ApplicationContext;
-import lv.javaguru.java2.hospital.doctor.core.requests.*;
+import lv.javaguru.java2.hospital.database_cleaner.DatabaseCleaner;
+import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
+import lv.javaguru.java2.hospital.doctor.core.requests.DeleteDoctorRequest;
+import lv.javaguru.java2.hospital.doctor.core.requests.ShowAllDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.AddDoctorResponse;
 import lv.javaguru.java2.hospital.doctor.core.responses.DeleteDoctorResponse;
 import lv.javaguru.java2.hospital.doctor.core.responses.ShowAllDoctorsResponse;
 import lv.javaguru.java2.hospital.doctor.core.services.AddDoctorService;
 import lv.javaguru.java2.hospital.doctor.core.services.DeleteDoctorService;
 import lv.javaguru.java2.hospital.doctor.core.services.ShowAllDoctorsService;
+import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,13 +23,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class AcceptanceTest3 {
 
     private ApplicationContext appContext;
+    //@Autowired    private JdbcTemplate jdbcTemplate;
+
 
     @BeforeEach
     public void setup() {
         appContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
+        getDatabaseCleaner().clean();
     }
 
-    @Test
+    @Ignore
     public void shouldDeleteCorrectDoctor() {
         AddDoctorRequest request1 = new AddDoctorRequest("Name1", "Surname1", "Speciality1");
         AddDoctorResponse response1 = getAddDoctorService().execute(request1);
@@ -61,4 +68,7 @@ public class AcceptanceTest3 {
         return appContext.getBean(DeleteDoctorService.class);
     }
 
+    private DatabaseCleaner getDatabaseCleaner() {
+        return appContext.getBean(DatabaseCleaner.class);
+    }
 }

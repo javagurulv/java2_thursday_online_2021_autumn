@@ -13,7 +13,7 @@ public class DateFormatValidator {
 
     public Optional<CoreError> validateFormat(String date) {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
             LocalDateTime.parse(date, formatter);
             return Optional.empty();
         } catch (DateTimeParseException e) {

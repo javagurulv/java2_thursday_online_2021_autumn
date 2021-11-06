@@ -1,80 +1,84 @@
 package lv.javaguru.java2.hospital.database;
 
+import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorEnum;
 import lv.javaguru.java2.hospital.domain.Doctor;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class DoctorDatabaseImpl implements DoctorDatabase {
 
     private Long nextId = 1L;
-    private List<Doctor> doctorsList = new ArrayList<>();
+    private List<Doctor> doctors = new ArrayList<>();
 
     @Override
     public void addDoctor(Doctor doctor) {
         doctor.setId(nextId);
         nextId++;
-        doctorsList.add(doctor);
+        doctors.add(doctor);
     }
 
 
     @Override
     public boolean deleteDoctorById(Long id) {
         boolean isDoctorDeleted = false;
-        Optional<Doctor> doctorToDeleteOpt = doctorsList.stream()
+        Optional<Doctor> doctorToDeleteOpt = doctors.stream()
                 .filter(doctor -> doctor.getId() == id)
                 .findFirst();
         if (doctorToDeleteOpt.isPresent()) {
             Doctor doctorToDelete = doctorToDeleteOpt.get();
-            isDoctorDeleted = doctorsList.remove(doctorToDelete);
+            isDoctorDeleted = doctors.remove(doctorToDelete);
         }
         return isDoctorDeleted;
     }
 
     @Override
-    public List<Doctor> showAllDoctors() {
-        return doctorsList;
+    public List<Doctor> getAllDoctors() {
+        return doctors;
     }
 
     @Override
-    public boolean editDoctor(Long doctorId, String infoToEdit, String changes) {
+    public boolean editDoctor(Long doctorId, Enum infoToEdit, String changes) {
         boolean isDoctorEdited = false;
-        Optional<Doctor> doctorToEditOpt = doctorsList.stream()
+        Optional<Doctor> doctorToEditOpt = doctors.stream()
                 .filter(doctor -> doctor.getId() == doctorId)
                 .findFirst();
         if (doctorToEditOpt.isPresent()) {
             Doctor doctorToEdit = doctorToEditOpt.get();
-            switch (infoToEdit) {
-                case "NAME" -> doctorToEdit.setName(changes);
-                case "SURNAME" -> doctorToEdit.setSurname(changes);
-                case "SPECIALITY" -> doctorToEdit.setSpeciality(changes);
+            if (EditDoctorEnum.NAME.equals(infoToEdit)) {
+                doctorToEdit.setName(changes);
+                isDoctorEdited = true;
+            } else if (EditDoctorEnum.SURNAME.equals(infoToEdit)) {
+                doctorToEdit.setSurname(changes);
+                isDoctorEdited = true;
+            } else if (EditDoctorEnum.SPECIALITY.equals(infoToEdit)) {
+                doctorToEdit.setSpeciality(changes);
+                isDoctorEdited = true;
             }
-            isDoctorEdited = true;
         }
         return isDoctorEdited;
     }
 
     @Override
     public List<Doctor> findByName(String name) {
-        return doctorsList.stream()
+        return doctors.stream()
                 .filter(doctor -> doctor.getName().equals(name))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Doctor> findBySurname(String surname) {
-        return doctorsList.stream()
+        return doctors.stream()
                 .filter(doctor -> doctor.getSurname().equals(surname))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Doctor> findByNameAndSurname(String name, String surname) {
-        return doctorsList.stream()
+        return doctors.stream()
                 .filter(doctor -> doctor.getName().equals(name))
                 .filter(doctor -> doctor.getSurname().equals(surname))
                 .collect(Collectors.toList());
@@ -82,21 +86,21 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
 
     @Override
     public List<Doctor> findById(Long id) {
-        return doctorsList.stream()
+        return doctors.stream()
                 .filter(doctor -> doctor.getId() == id)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Doctor> findBySpeciality(String speciality) {
-        return doctorsList.stream()
+        return doctors.stream()
                 .filter(doctor -> doctor.getSpeciality().equals(speciality))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Doctor> findByNameAndSpeciality(String name, String speciality) {
-        return doctorsList.stream()
+        return doctors.stream()
                 .filter(doctor -> doctor.getName().equals(name))
                 .filter(doctor -> doctor.getSpeciality().equals(speciality))
                 .collect(Collectors.toList());
@@ -104,7 +108,7 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
 
     @Override
     public List<Doctor> findBySurnameAndSpeciality(String surname, String speciality) {
-        return doctorsList.stream()
+        return doctors.stream()
                 .filter(doctor -> doctor.getSurname().equals(surname))
                 .filter(doctor -> doctor.getSpeciality().equals(speciality))
                 .collect(Collectors.toList());
@@ -112,10 +116,11 @@ public class DoctorDatabaseImpl implements DoctorDatabase {
 
     @Override
     public List<Doctor> findByNameAndSurnameAndSpeciality(String name, String surname, String speciality) {
-        return doctorsList.stream()
+        return doctors.stream()
                 .filter(doctor -> doctor.getName().equals(name))
                 .filter(doctor -> doctor.getSurname().equals(surname))
                 .filter(doctor -> doctor.getSpeciality().equals(speciality))
                 .collect(Collectors.toList());
     }
+
 }

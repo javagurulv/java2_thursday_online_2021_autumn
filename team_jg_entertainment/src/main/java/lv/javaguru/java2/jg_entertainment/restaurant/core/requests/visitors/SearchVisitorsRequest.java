@@ -5,7 +5,7 @@ public class SearchVisitorsRequest {
     private String nameVisitors;
     private String surnameVisitors;
     private Long idVisitors;
-    private Long telephoneNumber;
+    private String telephoneNumber;
 
     private Ordering ordering;
     private Paging paging;
@@ -54,7 +54,7 @@ public class SearchVisitorsRequest {
         return idVisitors;
     }
 
-    public Long getTelephoneNumber() {
+    public String getTelephoneNumber() {
         return telephoneNumber;
     }
 
@@ -75,7 +75,7 @@ public class SearchVisitorsRequest {
 
     public boolean isTelephoneNumberProvided() {
         return this.telephoneNumber != null
-                && this.telephoneNumber != 0;
+                && this.telephoneNumber.isEmpty();
     }
 
     public Ordering getOrdering() {

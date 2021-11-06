@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.database;
 
 import lv.javaguru.java2.hospital.domain.Doctor;
+import lv.javaguru.java2.hospital.domain.Visit;
 
 import java.util.List;
 
@@ -10,9 +11,9 @@ public interface DoctorDatabase {
 
     boolean deleteDoctorById(Long id);
 
-    List<Doctor> showAllDoctors();
+    List<Doctor> getAllDoctors();
 
-    boolean editDoctor(Long doctorId, String infoToEdit, String input);
+    boolean editDoctor(Long doctorId, Enum infoToEdit, String input);
 
     List<Doctor> findByName(String name);
 
