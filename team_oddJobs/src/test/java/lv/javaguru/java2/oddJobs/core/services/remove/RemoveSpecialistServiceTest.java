@@ -5,6 +5,7 @@ import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.remove.RemoveSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.validations.remove.RemoveSpecialistValidator;
 import lv.javaguru.java2.oddJobs.database.Database;
+import lv.javaguru.java2.oddJobs.database.SpecialistRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -21,7 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(MockitoJUnitRunner.class)
 public class RemoveSpecialistServiceTest {
     @Mock
-    private Database database;
+    private SpecialistRepository specialistRepository;
     @Mock
     private RemoveSpecialistValidator validator;
     @InjectMocks
@@ -43,7 +44,7 @@ public class RemoveSpecialistServiceTest {
     @Test
     public void shouldDeleteSpecialistWithIdFromDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        Mockito.when(database.removeSpecialist(1L, "Name", "Surname")).thenReturn(true);
+        Mockito.when(specialistRepository.removeSpecialist(1L, "Name", "Surname")).thenReturn(true);
         RemoveSpecialistRequest request = new RemoveSpecialistRequest(1L, "Name", "Surname");
         RemoveSpecialistResponse response = service.execute(request);
         assertFalse(response.hasErrors());

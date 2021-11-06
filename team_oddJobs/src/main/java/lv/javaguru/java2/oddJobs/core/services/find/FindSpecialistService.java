@@ -7,6 +7,7 @@ import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.find.FindSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.validations.find.FindSpecialistValidator;
 import lv.javaguru.java2.oddJobs.database.Database;
+import lv.javaguru.java2.oddJobs.database.SpecialistRepository;
 import lv.javaguru.java2.oddJobs.domain.Specialist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +28,7 @@ public class FindSpecialistService {
     private boolean pagingEnabled;
 
     @Autowired
-    private Database database;
+    private SpecialistRepository specialistRepository;
     @Autowired
     private FindSpecialistValidator specialistValidator;
 
@@ -76,19 +77,19 @@ public class FindSpecialistService {
     private List<Specialist> find(FindSpecialistRequest request) {
         List<Specialist> specialists = new ArrayList<>();
         if (!request.isNameProvided() && !request.isSurnameProvided() && !request.isProfessionProvided()) {
-            specialists = database.findSpecialistById(request.getSpecialistId());
+            specialists = specialistRepository.findSpecialistById(request.getSpecialistId());
         }
         if (request.isNameProvided() && !request.isSurnameProvided() && !request.isProfessionProvided()) {
-            specialists = database.findSpecialistByName(request.getSpecialistName());
+            specialists = specialistRepository.findSpecialistByName(request.getSpecialistName());
         }
         if (!request.isNameProvided() && request.isSurnameProvided() && !request.isProfessionProvided()) {
-            specialists = database.findSpecialistBySurname(request.getSpecialistSurname());
+            specialists = specialistRepository.findSpecialistBySurname(request.getSpecialistSurname());
         }
         if (!request.isNameProvided() && !request.isSurnameProvided() && request.isProfessionProvided()) {
-            specialists = database.findSpecialistByProfession(request.getSpecialistProfession());
+            specialists = specialistRepository.findSpecialistByProfession(request.getSpecialistProfession());
         }
         if (request.isNameProvided() && request.isSurnameProvided() && request.isProfessionProvided()) {
-            specialists = database.findSpecialistByNameAndSurnameAndProfession(request.getSpecialistName(), request.getSpecialistSurname(), request.getSpecialistProfession());
+            specialists = specialistRepository.findSpecialistByNameAndSurnameAndProfession(request.getSpecialistName(), request.getSpecialistSurname(), request.getSpecialistProfession());
         }
 
         return specialists;

@@ -13,64 +13,65 @@ import lv.javaguru.java2.oddJobs.core.responce.remove.RemoveSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.services.add.AddSpecialistService;
 import lv.javaguru.java2.oddJobs.core.services.get.GetAllSpecialistsService;
 import lv.javaguru.java2.oddJobs.core.services.remove.RemoveSpecialistService;
+import lv.javaguru.java2.oddJobs.database.ClientRepository;
+import lv.javaguru.java2.oddJobs.database.SpecialistRepository;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@Ignore
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {ApplicationConfiguration.class})
+@Sql({"/CreateTable.sql"})
 public class AcceptanceTestForSpecialist {
-    private ApplicationContext appContext;
+   @Autowired
+   private AddSpecialistService addSpecialistService;
+    @Autowired private  GetAllSpecialistsService getAllSpecialistsService;
+    @Autowired private RemoveSpecialistService removeSpecialistService;
+    @Autowired private DatabaseCleaner databaseCleaner;
 
     @Before
     public void setup() {
-        appContext = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
-        getDatabaseCleaner().clean();
-    }
+//        appContext = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
+        databaseCleaner.clean();
+//     jdbcTemplate.update("RUNSCRIPT FROM 'classpath:CreateTable.sql'");
+//     jdbcTemplate.update("RUNSCRIPT FROM 'classpath:insertData.sql'");
+//
+   }
 
 
     @Test
     public void shouldReturnCorrectSpecialistList() {
         AddSpecialistRequest addSpecialistRequest1 = new AddSpecialistRequest("Name", "Surname", "Profession");
-        getAddSpecialistService().execute(addSpecialistRequest1);
+        addSpecialistService.execute(addSpecialistRequest1);
 
         AddSpecialistRequest addSpecialistRequest2 = new AddSpecialistRequest("Name1", "Surname1", "Profession1");
-        getAddSpecialistService().execute(addSpecialistRequest2);
+        addSpecialistService.execute(addSpecialistRequest2);
 
-        GetAllSpecialistsResponse response = getAllSpecialistsService().execute(new GetAllSpecialistRequest());
+        GetAllSpecialistsResponse response = getAllSpecialistsService.execute(new GetAllSpecialistRequest());
         assertEquals(response.getSpecialists().size(), 2);
     }
 
-    @Test
+//    @Test
+//
+//    public void shouldRemoveSpecialistFromList() {
+//        AddSpecialistRequest addSpecialistRequest1 = new AddSpecialistRequest("Name", "Surname", "Profession");
+//        getAllSpecialistsService.execute(addSpecialistRequest1);
+//
+//        AddSpecialistRequest addSpecialistRequest2 = new AddSpecialistRequest("Name1", "Surname1", "Profession1");
+//        addSpecialistService.execute(addSpecialistRequest2);
+//
+//        RemoveSpecialistResponse response = getAllSpecialistsService.execute(new RemoveSpecialistRequest(2L, "Name1", "Surname1"));
+//        assertTrue(response.isSpecialistRemoved());
+//
+//    }
 
-    public void shouldRemoveSpecialistFromList() {
-        AddSpecialistRequest addSpecialistRequest1 = new AddSpecialistRequest("Name", "Surname", "Profession");
-        getAddSpecialistService().execute(addSpecialistRequest1);
-
-        AddSpecialistRequest addSpecialistRequest2 = new AddSpecialistRequest("Name1", "Surname1", "Profession1");
-        getAddSpecialistService().execute(addSpecialistRequest2);
-
-        RemoveSpecialistResponse response = gerRemoveSpecialistService().execute(new RemoveSpecialistRequest(2L, "Name1", "Surname1"));
-        assertTrue(response.isSpecialistRemoved());
-
-    }
-
-
-    private AddSpecialistService getAddSpecialistService() {
-        return appContext.getBean(AddSpecialistService.class);
-    }
-
-    private GetAllSpecialistsService getAllSpecialistsService() {
-        return appContext.getBean(GetAllSpecialistsService.class);
-
-    }
-
-    private RemoveSpecialistService gerRemoveSpecialistService() {
-        return appContext.getBean(RemoveSpecialistService.class);
-    }
-
-    private DatabaseCleaner getDatabaseCleaner() {
-        return appContext.getBean(DatabaseCleaner.class);
-    }
 }

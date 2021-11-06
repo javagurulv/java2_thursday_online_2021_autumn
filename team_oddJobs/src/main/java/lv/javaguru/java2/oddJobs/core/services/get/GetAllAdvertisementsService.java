@@ -1,5 +1,6 @@
 package lv.javaguru.java2.oddJobs.core.services.get;
 
+import lv.javaguru.java2.oddJobs.database.AdvertisementRepository;
 import lv.javaguru.java2.oddJobs.domain.Advertisement;
 import lv.javaguru.java2.oddJobs.database.Database;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,9 @@ import java.util.List;
 @Component
 public class GetAllAdvertisementsService {
     @Autowired
-    private Database database;
+    private AdvertisementRepository advertisementRepository;
 
     public List<Advertisement> execute() {
-        return database.getAllAdvertisement();
+        return advertisementRepository.getAllAdvertisement();
     }
 }

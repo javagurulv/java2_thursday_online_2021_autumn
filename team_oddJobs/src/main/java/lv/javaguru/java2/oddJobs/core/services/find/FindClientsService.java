@@ -6,6 +6,7 @@ import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.find.FindClientsResponse;
 import lv.javaguru.java2.oddJobs.core.validations.find.FindClientsValidator;
+import lv.javaguru.java2.oddJobs.database.ClientRepository;
 import lv.javaguru.java2.oddJobs.database.Database;
 import lv.javaguru.java2.oddJobs.domain.Client;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class FindClientsService {
     @Value("${search.paging.enabled}")
     private boolean pagingEnabled;
 
-    @Autowired private Database database;
+    @Autowired private ClientRepository clientRepository;
     @Autowired private FindClientsValidator clientValidator;
 
 
@@ -74,17 +75,17 @@ public class FindClientsService {
 
         List<Client> clients = new ArrayList<>();
         if (request.isIdProvided() && !request.isNameProvided() && !request.isSurnameProvide()) {
-            clients = database.findClientsById(request.getClientId());
+            clients = clientRepository.findClientsById(request.getClientId());
         }
         if (!request.isIdProvided() && request.isNameProvided() && !request.isSurnameProvide()) {
-            clients = database.findClientsByName(request.getClientName());
+            clients = clientRepository.findClientsByName(request.getClientName());
         }
         if (!request.isIdProvided() && !request.isNameProvided() && request.isSurnameProvide()) {
-            clients = database.findClientBySurname(request.getClientSurname());
+            clients = clientRepository.findClientBySurname(request.getClientSurname());
         }
 
         if (request.isIdProvided() && request.isNameProvided() && request.isSurnameProvide()) {
-            clients = database.findClientByIdAndNameAndSurname(request.getClientId(), request.getClientName(), request.getClientSurname());
+            clients = clientRepository.findClientByIdAndNameAndSurname(request.getClientId(), request.getClientName(), request.getClientSurname());
         }
         return clients;
     }

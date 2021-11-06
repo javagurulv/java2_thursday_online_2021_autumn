@@ -4,6 +4,7 @@ import lv.javaguru.java2.oddJobs.core.requests.add.AddClientRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.add.AddClientResponse;
 import lv.javaguru.java2.oddJobs.core.validations.add.AddClientValidator;
+import lv.javaguru.java2.oddJobs.database.ClientRepository;
 import lv.javaguru.java2.oddJobs.database.Database;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +24,7 @@ import static org.mockito.Mockito.*;
 public class AddClientServiceTest {
 
     @Mock
-    private Database database;
+    private ClientRepository clientRepository;
     @Mock
     private AddClientValidator validator;
     @InjectMocks
@@ -47,7 +48,7 @@ public class AddClientServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Name");
         assertEquals(response.getErrors().get(0).getMessage(), "Must not be empty!");
 
-        verifyNoInteractions(database);
+        verifyNoInteractions(clientRepository);
 
     }    @Test
     public void shouldReturnErrorsWhenSurnameValidationFails() {
@@ -66,7 +67,7 @@ public class AddClientServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Surname");
         assertEquals(response.getErrors().get(0).getMessage(), "Must not be empty!");
 
-        verifyNoInteractions(database);
+        verifyNoInteractions(clientRepository);
 
     }    public void shouldNotInvokeDatabaseWhenValidationFails() {
 
@@ -84,7 +85,7 @@ public class AddClientServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Surname");
         assertEquals(response.getErrors().get(0).getMessage(), "Must not be empty!");
 
-        verifyNoInteractions(database);
+        verifyNoInteractions(clientRepository);
 
     }
 
@@ -103,7 +104,7 @@ public class AddClientServiceTest {
 
         //then
         assertFalse(response.hasErrors());
-        verify(database).addClient(
+        verify(clientRepository).addClient(
                 argThat(new ClientMatcher("Name", "Surname")));
     }
 

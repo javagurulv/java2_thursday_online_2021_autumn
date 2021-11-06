@@ -7,6 +7,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 import java.util.ArrayList;
 import java.util.List;
 
+import lv.javaguru.java2.oddJobs.database.SpecialistRepository;
 import org.junit.runner.RunWith;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -24,7 +25,7 @@ import lv.javaguru.java2.oddJobs.database.Database;
 public class AddSpecialistServiceTest {
 
     @Mock
-    private Database database;
+    private SpecialistRepository specialistRepository;
     @Mock
     private AddSpecialistValidator validator;
     @InjectMocks
@@ -43,7 +44,7 @@ public class AddSpecialistServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Name");
         assertEquals(response.getErrors().get(0).getMessage(), "Must not be empty!");
 
-        Mockito.verifyNoInteractions(database);
+        Mockito.verifyNoInteractions(specialistRepository);
     }
 
     @Test
@@ -52,7 +53,7 @@ public class AddSpecialistServiceTest {
         AddSpecialistRequest request = new AddSpecialistRequest("Name", "Surname", "Profession");
         AddSpecialistResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        Mockito.verify(database).addSpecialist(
+        Mockito.verify(specialistRepository).addSpecialist(
                 argThat(new SpecialistMatcher("Name", "Surname", "Profession")));
     }
 }

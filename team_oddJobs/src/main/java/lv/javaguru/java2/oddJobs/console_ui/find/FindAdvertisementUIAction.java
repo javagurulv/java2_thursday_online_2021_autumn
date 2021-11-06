@@ -21,7 +21,7 @@ public class FindAdvertisementUIAction implements UIAction {
     private FindAdvertisementsService findAdvertisementsService;
 
     @Autowired
-    ExitMenuUIAction exitMenuUIAction;
+    private ExitMenuUIAction exitMenuUIAction;
 
     @Override
     public void execute() {

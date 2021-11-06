@@ -5,6 +5,7 @@ import lv.javaguru.java2.oddJobs.core.requests.find.FindClientsRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.find.FindClientsResponse;
 import lv.javaguru.java2.oddJobs.core.validations.find.FindClientsValidator;
+import lv.javaguru.java2.oddJobs.database.ClientRepository;
 import lv.javaguru.java2.oddJobs.database.Database;
 import lv.javaguru.java2.oddJobs.domain.Client;
 import org.junit.Before;
@@ -25,7 +26,7 @@ import static org.mockito.Mockito.*;
 public class FindClientServiceTest {
 
     @Mock
-    private Database database;
+    private ClientRepository clientRepository;
     @Mock
     private FindClientsValidator validator;
     @InjectMocks
@@ -61,7 +62,7 @@ public class FindClientServiceTest {
         assertEquals(response.getErrors().get(1).getField(), "Surname");
         assertEquals(response.getErrors().get(1).getMessage(), "Must not be empty!");
         verify(validator).validate(request);
-        verifyNoInteractions(database);
+        verifyNoInteractions(clientRepository);
 
     }
 
@@ -72,7 +73,7 @@ public class FindClientServiceTest {
         FindClientsRequest request = new FindClientsRequest("Name", null);
         List<Client> clients = new ArrayList<>();
         clients.add(new Client("Name", "Surname"));
-        when(database.findClientsByName("Name")).thenReturn(clients);
+        when(clientRepository.findClientsByName("Name")).thenReturn(clients);
 
 
         //when
@@ -90,7 +91,7 @@ public class FindClientServiceTest {
         FindClientsRequest request = new FindClientsRequest(null, "Surname");
         List<Client> clients = new ArrayList<>();
         clients.add(new Client("Name", "Surname"));
-        when(database.findClientBySurname("Surname")).thenReturn(clients);
+        when(clientRepository.findClientBySurname("Surname")).thenReturn(clients);
 
 
         //when

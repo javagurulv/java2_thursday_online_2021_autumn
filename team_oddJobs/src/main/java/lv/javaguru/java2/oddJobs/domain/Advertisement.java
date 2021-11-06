@@ -1,17 +1,28 @@
 package lv.javaguru.java2.oddJobs.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "Advertisements")
 public class Advertisement {
-
+    @Id
+    @Column(name = "advId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long advId;
-    private String advTitle;
-    private String advDescription;
-    private boolean statusIsActive = false;
 
-    public Advertisement(String aBoardTitle, String aBoardDescription) {
-        this.advTitle = aBoardTitle;
-        this.advDescription = aBoardDescription;
+    @Column(name = "advTitle", nullable = false)
+    private String advTitle;
+
+    @Column(name = "advDescription", nullable = false)
+    private String advDescription;
+
+    //private boolean statusIsActive = false;
+
+
+    public Advertisement(String advTitle, String advDescription) {
+        this.advTitle = advTitle;
+        this.advDescription = advDescription;
     }
 
     public Advertisement() {

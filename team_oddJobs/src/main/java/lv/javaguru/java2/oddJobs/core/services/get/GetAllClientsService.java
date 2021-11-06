@@ -2,6 +2,7 @@ package lv.javaguru.java2.oddJobs.core.services.get;
 
 import lv.javaguru.java2.oddJobs.core.requests.get.GetAllClientsRequest;
 import lv.javaguru.java2.oddJobs.core.responce.get.GetAllClientsResponse;
+import lv.javaguru.java2.oddJobs.database.ClientRepository;
 import lv.javaguru.java2.oddJobs.database.Database;
 import lv.javaguru.java2.oddJobs.domain.Client;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,10 @@ import java.util.List;
 public class GetAllClientsService {
 
     @Autowired
-    private Database database;
+    private ClientRepository clientRepository;
 
     public GetAllClientsResponse execute (GetAllClientsRequest request) {
-        List<Client> clients = database.getAllClients();
+        List<Client> clients = clientRepository.getAllClients();
         return new GetAllClientsResponse(clients);
     }
 }
