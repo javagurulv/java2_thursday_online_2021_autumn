@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabase;
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.AddDoctorResponse;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 public class AddDoctorService {
 
-    @Autowired private DoctorDatabase database;
+    @Autowired private DoctorRepository database;
     @Autowired private AddDoctorRequestValidator validator;
 
     public AddDoctorResponse execute(AddDoctorRequest request) {

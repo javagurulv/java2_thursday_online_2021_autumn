@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services;
 
-import lv.javaguru.java2.hospital.database.PrescriptionDatabase;
+import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Prescription;
 import lv.javaguru.java2.hospital.prescription.core.requests.PrescriptionPaging;
 import lv.javaguru.java2.hospital.prescription.core.requests.SearchPrescriptionRequest;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Component
 public class SearchPrescriptionService {
 
-    @Autowired private PrescriptionDatabase database;
+    @Autowired private PrescriptionRepository database;
 
     public SearchPrescriptionResponse execute(SearchPrescriptionRequest request) {
         List<CoreError> errors;

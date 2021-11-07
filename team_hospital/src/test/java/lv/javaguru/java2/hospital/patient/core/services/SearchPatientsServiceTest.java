@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.PatientOrdering;
 import lv.javaguru.java2.hospital.patient.core.requests.PatientPaging;
@@ -33,7 +33,7 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(JUnitPlatform.class)
 class SearchPatientsServiceTest {
 
-    @Mock private PatientDatabase database;
+    @Mock private PatientRepository database;
     @Mock private SearchPatientsValidator validator;
     @Mock private PatientSearch search;
     @Mock private Paging paging;
@@ -50,14 +50,12 @@ class SearchPatientsServiceTest {
     public void shouldReturnResponseWithErrorsWhenValidatorFails() {
         SearchPatientsRequest request = new SearchPatientsRequest(null, null, null);
         List<CoreError> errors = new ArrayList<>();
-        errors.add(new CoreError("Name", "must not be empty!"));
-        errors.add(new CoreError("Surname", "must not be empty!"));
-        errors.add(new CoreError("Personal code", "must not be empty!"));
+        errors.add(new CoreError("At least one field", "must be filled!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
 
         SearchPatientsResponse response = service.execute(request);
         assertTrue(response.hasErrors());
-        assertEquals(response.getErrors().size(), 3);
+        assertEquals(response.getErrors().size(), 1);
 
         Mockito.verify(validator).validate(request);
         Mockito.verify(validator).validate(any());

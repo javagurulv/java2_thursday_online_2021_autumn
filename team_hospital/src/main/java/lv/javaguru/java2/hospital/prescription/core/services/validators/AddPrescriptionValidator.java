@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabase;
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.prescription.core.requests.AddPrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,9 @@ import java.util.Optional;
 public class AddPrescriptionValidator {
 
     @Autowired
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Autowired
-    private DoctorDatabase doctorDatabase;
+    private DoctorRepository doctorRepository;
 
     public List<CoreError> validate(AddPrescriptionRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -56,13 +56,13 @@ public class AddPrescriptionValidator {
 
     private Optional<CoreError> validateDoctorExistence(AddPrescriptionRequest request) {
         return request.getDoctorId() == null ? Optional.empty() :
-                doctorDatabase.findById(request.getDoctorId()).isEmpty() ?
+                doctorRepository.findById(request.getDoctorId()).isEmpty() ?
                         Optional.of(new CoreError("Doctor", "does not exist!")) : Optional.empty();
     }
 
     private Optional<CoreError> validatePatientExistence(AddPrescriptionRequest request) {
         return request.getPatientId() == null ? Optional.empty() :
-                patientDatabase.findById(request.getPatientId()).isEmpty() ?
+                patientRepository.findById(request.getPatientId()).isEmpty() ?
                         Optional.of(new CoreError("Patient", "does not exist!")) : Optional.empty();
     }
 }

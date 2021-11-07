@@ -1,8 +1,8 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabase;
-import lv.javaguru.java2.hospital.database.PatientDatabase;
-import lv.javaguru.java2.hospital.database.VisitDatabase;
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
+import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
@@ -29,10 +29,10 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(JUnitPlatform.class)
 class AddVisitServiceTest {
 
-    @Mock private PatientDatabase patientDatabase;
-    @Mock private DoctorDatabase doctorDatabase;
+    @Mock private PatientRepository patientRepository;
+    @Mock private DoctorRepository doctorRepository;
     @Mock private AddVisitValidator validator;
-    @Mock private VisitDatabase visitDatabase;
+    @Mock private VisitRepository visitRepository;
     @InjectMocks private AddVisitService service;
 
     @Test
@@ -49,7 +49,7 @@ class AddVisitServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Patient ID");
         assertEquals(response.getErrors().get(0).getDescription(), "must not be empty!");
 
-        Mockito.verifyNoMoreInteractions(visitDatabase);
+        Mockito.verifyNoMoreInteractions(visitRepository);
     }
 
     @Test
@@ -66,7 +66,7 @@ class AddVisitServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Patient ID");
         assertEquals(response.getErrors().get(0).getDescription(), "must be a number!");
 
-        Mockito.verifyNoMoreInteractions(visitDatabase);
+        Mockito.verifyNoMoreInteractions(visitRepository);
     }
 
     @Test
@@ -83,7 +83,7 @@ class AddVisitServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Doctor ID");
         assertEquals(response.getErrors().get(0).getDescription(), "must not be empty!");
 
-        Mockito.verifyNoMoreInteractions(visitDatabase);
+        Mockito.verifyNoMoreInteractions(visitRepository);
     }
 
     @Test
@@ -100,7 +100,7 @@ class AddVisitServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Doctor ID");
         assertEquals(response.getErrors().get(0).getDescription(), "must be a number!");
 
-        Mockito.verifyNoMoreInteractions(visitDatabase);
+        Mockito.verifyNoMoreInteractions(visitRepository);
     }
 
     @Test
@@ -117,7 +117,7 @@ class AddVisitServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Date");
         assertEquals(response.getErrors().get(0).getDescription(), "input is incorrect!");
 
-        Mockito.verifyNoMoreInteractions(visitDatabase);
+        Mockito.verifyNoMoreInteractions(visitRepository);
     }
 
     @Test
@@ -134,7 +134,7 @@ class AddVisitServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Time in the date");
         assertEquals(response.getErrors().get(0).getDescription(), "is not working hour!");
 
-        Mockito.verifyNoMoreInteractions(visitDatabase);
+        Mockito.verifyNoMoreInteractions(visitRepository);
     }
 
     @Test
@@ -151,7 +151,7 @@ class AddVisitServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Date");
         assertEquals(response.getErrors().get(0).getDescription(), "is not working day!");
 
-        Mockito.verifyNoMoreInteractions(visitDatabase);
+        Mockito.verifyNoMoreInteractions(visitRepository);
     }
 
     @Test
@@ -168,7 +168,7 @@ class AddVisitServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Date");
         assertEquals(response.getErrors().get(0).getDescription(), "is not in the future!");
 
-        Mockito.verifyNoMoreInteractions(visitDatabase);
+        Mockito.verifyNoMoreInteractions(visitRepository);
     }
 
     @Test
@@ -185,7 +185,7 @@ class AddVisitServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Minutes");
         assertEquals(response.getErrors().get(0).getDescription(), "is not hourly visit!");
 
-        Mockito.verifyNoMoreInteractions(visitDatabase);
+        Mockito.verifyNoMoreInteractions(visitRepository);
     }
 
     @Test
@@ -202,7 +202,7 @@ class AddVisitServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Date");
         assertEquals(response.getErrors().get(0).getDescription(), "already is busy!");
 
-        Mockito.verifyNoMoreInteractions(visitDatabase);
+        Mockito.verifyNoMoreInteractions(visitRepository);
     }
 
     @Test
@@ -216,16 +216,16 @@ class AddVisitServiceTest {
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
 
-        Mockito.when(doctorDatabase.findById(1L))
+        Mockito.when(doctorRepository.findById(1L))
                 .thenReturn((doctors));
-        Mockito.when(patientDatabase.findById(2L))
+        Mockito.when(patientRepository.findById(2L))
                 .thenReturn((patients));
 
         AddVisitRequest request = new AddVisitRequest(patient.getId().toString(), doctor.getId().toString(),
                 "21-12-2021 15:00");
         AddVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        Mockito.verify(visitDatabase).recordVisit(argThat(
+        Mockito.verify(visitRepository).recordVisit(argThat(
                 new VisitMatcher(response.getPatientVisit().getDoctor(),
                         response.getPatientVisit().getPatient(),
                         response.getPatientVisit().getVisitDate())));

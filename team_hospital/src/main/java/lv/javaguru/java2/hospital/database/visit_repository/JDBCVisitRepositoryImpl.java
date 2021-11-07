@@ -1,17 +1,16 @@
-package lv.javaguru.java2.hospital.database;
+package lv.javaguru.java2.hospital.database.visit_repository;
 
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
 
-@Component
-public class JDBCVisitDatabaseImpl implements VisitDatabase {
+//@Component
+public class JDBCVisitRepositoryImpl implements VisitRepository {
 
     @Autowired private JdbcTemplate jdbcTemplate;
     @Autowired private VisitRowMapper visitRowMapper;

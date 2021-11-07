@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria;
 
-import lv.javaguru.java2.hospital.database.VisitDatabase;
+import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
@@ -12,7 +12,7 @@ import java.util.Optional;
 @Component
 public class ExistenceByDate implements VisitExistenceBySearchCriteria {
 
-    @Autowired private VisitDatabase database;
+    @Autowired private VisitRepository database;
     @Autowired private GetVisitDate getVisitDate;
 
     @Override

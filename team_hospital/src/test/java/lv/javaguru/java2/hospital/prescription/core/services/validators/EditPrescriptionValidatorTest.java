@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators;
 
 import lv.javaguru.java2.hospital.prescription.core.checkers.PrescriptionLongNumChecker;
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class EditPrescriptionValidatorTest {
 
-    @Mock private PatientDatabase patientDatabase;
+    @Mock private PatientRepository patientRepository;
     @Mock private PrescriptionExistenceByIDValidator prescriptionExistenceIDValidator;
     @Mock private PrescriptionLongNumChecker prescriptionLongNumChecker;
     @Mock private PrescriptionEnumChecker enumChecker;
@@ -85,7 +85,7 @@ class EditPrescriptionValidatorTest {
         EditPrescriptionRequest request = new EditPrescriptionRequest("1", "PATIENT", "2");
         Mockito.when(prescriptionExistenceIDValidator.execute(Long.valueOf(request.getPrescriptionID())))
                 .thenReturn(Optional.of(new CoreError("Prescription", "does not exist!")));
-        Mockito.when(patientDatabase.findById(Long.valueOf(request.getChanges())))
+        Mockito.when(patientRepository.findById(Long.valueOf(request.getChanges())))
                 .thenReturn(Collections.singletonList(new Patient("name", "surname", "speciality")));
 
         List<CoreError> errors = validator.validate(request);
@@ -128,7 +128,7 @@ class EditPrescriptionValidatorTest {
         EditPrescriptionRequest request = new EditPrescriptionRequest("1", "PATIENT", "2");
         Mockito.when(prescriptionExistenceIDValidator.execute(Long.valueOf(request.getPrescriptionID())))
                 .thenReturn(Optional.empty());
-        Mockito.when(patientDatabase.findById(Long.valueOf(request.getChanges())))
+        Mockito.when(patientRepository.findById(Long.valueOf(request.getChanges())))
                 .thenReturn(new ArrayList<>());
 
         List<CoreError> errors = validator.validate(request);
@@ -143,7 +143,7 @@ class EditPrescriptionValidatorTest {
         EditPrescriptionRequest request = new EditPrescriptionRequest("1", "PATIENT", "2");
         Mockito.when(prescriptionExistenceIDValidator.execute(Long.valueOf(request.getPrescriptionID())))
               .thenReturn(Optional.empty());
-        Mockito.when(patientDatabase.findById(Long.valueOf(request.getChanges())))
+        Mockito.when(patientRepository.findById(Long.valueOf(request.getChanges())))
                 .thenReturn(Collections.singletonList(new Patient("name", "surname", "12345678901")));
 
         List<CoreError> errors = validator.validate(request);

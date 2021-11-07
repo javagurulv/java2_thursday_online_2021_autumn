@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services;
 
-import lv.javaguru.java2.hospital.database.PrescriptionDatabase;
+import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.prescription.core.requests.DeletePrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.DeletePrescriptionResponse;
 import lv.javaguru.java2.hospital.prescription.core.services.validators.DeletePrescriptionValidator;
@@ -24,7 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(JUnitPlatform.class)
 class DeletePrescriptionServiceTest {
 
-    @Mock private PrescriptionDatabase database;
+    @Mock private PrescriptionRepository database;
     @Mock private DeletePrescriptionValidator validator;
     @InjectMocks private DeletePrescriptionService service;
 

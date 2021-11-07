@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabase;
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.AddDoctorResponse;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
@@ -26,7 +26,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(JUnitPlatform.class)
 class AddDoctorServiceTest {
 
-    @Mock private DoctorDatabase database;
+    @Mock private DoctorRepository database;
     @Mock private AddDoctorRequestValidator validator;
     @InjectMocks private AddDoctorService service;
 

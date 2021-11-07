@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabase;
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.DeleteDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.doctor.core.responses.DeleteDoctorResponse;
@@ -24,7 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(JUnitPlatform.class)
 class DeleteDoctorServiceTest {
 
-    @Mock private DoctorDatabase database;
+    @Mock private DoctorRepository database;
     @Mock private DeleteDoctorRequestValidator validator;
     @InjectMocks private DeleteDoctorService service;
 

@@ -1,16 +1,41 @@
 package lv.javaguru.java2.hospital.domain;
 
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
+@Table(name = "prescriptions")
 public class Prescription {
 
+    @Autowired @Transient private DoctorRepository doctorRepository;
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name="doctor_id")
     private Doctor doctor;
+
+    @ManyToOne
+    @JoinColumn(name="patient_id")
     private Patient patient;
+
+    @Column(name = "medication_name", nullable = false)
     private String medicationName;
+
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
+
+    @Column(name = "date", nullable = false)
     private LocalDate date = LocalDate.now();
+
+    @Column(name = "valid_till", nullable = false)
     private LocalDate validTill = date.plusMonths(2);
 
     public Prescription() {

@@ -1,8 +1,8 @@
 package lv.javaguru.java2.hospital.prescription.core.services;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabase;
-import lv.javaguru.java2.hospital.database.PatientDatabase;
-import lv.javaguru.java2.hospital.database.PrescriptionDatabase;
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
+import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Prescription;
@@ -18,9 +18,9 @@ import java.util.List;
 @Component
 public class AddPrescriptionService {
 
-    @Autowired private PrescriptionDatabase database;
-    @Autowired private PatientDatabase patientDatabase;
-    @Autowired private DoctorDatabase doctorDatabase;
+    @Autowired private PrescriptionRepository database;
+    @Autowired private PatientRepository patientRepository;
+    @Autowired private DoctorRepository doctorRepository;
     @Autowired private AddPrescriptionValidator validator;
 
     public AddPrescriptionResponse execute(AddPrescriptionRequest request) {
@@ -36,12 +36,12 @@ public class AddPrescriptionService {
     }
 
     private Doctor getDoctor(AddPrescriptionRequest request) {
-        return doctorDatabase.findById(request.getDoctorId()).get(0);
+        return doctorRepository.findById(request.getDoctorId()).get(0);
     }
 
     private Patient getPatient(AddPrescriptionRequest request) {
-        if (!patientDatabase.findById(request.getPatientId()).isEmpty()) {
-            return patientDatabase.findById(request.getPatientId()).get(0);
+        if (!patientRepository.findById(request.getPatientId()).isEmpty()) {
+            return patientRepository.findById(request.getPatientId()).get(0);
         }
         else return null;
     }

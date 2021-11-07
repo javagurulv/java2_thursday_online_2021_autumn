@@ -1,12 +1,24 @@
 package lv.javaguru.java2.hospital.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicLong;
 
+@Entity
+@Table(name = "doctors")
 public class Doctor {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "surname", nullable = false)
     private String surname;
+
+    @Column(name = "speciality", nullable = false)
     private String speciality;
 
     public Doctor() {

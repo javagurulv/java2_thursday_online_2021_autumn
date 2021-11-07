@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators.existence;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabase;
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.domain.Doctor;
@@ -13,7 +13,7 @@ import java.util.Optional;
 public class DoctorExistenceForAddValidator {
 
     @Autowired
-    private DoctorDatabase database;
+    private DoctorRepository database;
 
     public Optional<CoreError> validateDoctorExistence(AddDoctorRequest request) {
         for (Doctor doctor : database.getAllDoctors()) {

@@ -1,5 +1,7 @@
-package lv.javaguru.java2.hospital.database;
+package lv.javaguru.java2.hospital.database.visit_repository;
 
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +14,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 //@Component
-public class VisitDatabaseImpl implements VisitDatabase {
+public class InMemoryVisitRepositoryImpl implements VisitRepository {
     private Long nextId = 1L;
     private final List<Visit> visits = new ArrayList<>();
     @Autowired
-    private PatientDatabase patientDatabase;
+    private PatientRepository patientRepository;
     @Autowired
-    private DoctorDatabase doctorDatabase;
+    private DoctorRepository doctorRepository;
 
     @Override
     public void recordVisit(Visit visit) {
@@ -46,10 +48,10 @@ public class VisitDatabaseImpl implements VisitDatabase {
         if (visitToEditOpt.isPresent()) {
             Visit visitToEdit = visitToEditOpt.get();
             if (userInput.equals(EditVisitEnum.DOCTOR_ID)) {
-                visitToEdit.setDoctor(doctorDatabase.findById(Long.parseLong(changes)).get(0));
+                visitToEdit.setDoctor(doctorRepository.findById(Long.parseLong(changes)).get(0));
                 isVisitEdited = true;
             } else if (userInput.equals(EditVisitEnum.PATIENT_ID)) {
-                visitToEdit.setPatient(patientDatabase.findById(Long.parseLong(changes)).get(0));
+                visitToEdit.setPatient(patientRepository.findById(Long.parseLong(changes)).get(0));
                 isVisitEdited = true;
             } else if (userInput.equals(EditVisitEnum.DATE)){
                 visitToEdit.setVisitDate(LocalDateTime.parse(changes));

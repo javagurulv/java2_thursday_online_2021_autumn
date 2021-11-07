@@ -1,16 +1,15 @@
-package lv.javaguru.java2.hospital.database;
+package lv.javaguru.java2.hospital.database.patient_repository;
 
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Locale;
 
-@Component
-public class JDBCPatientDatabaseImpl implements PatientDatabase {
+//@Component
+public class JDBCPatientRepositoryImpl implements PatientRepository {
 
     @Autowired private JdbcTemplate jdbcTemplate;
     @Autowired private PatientRowMapper patientRowMapper;

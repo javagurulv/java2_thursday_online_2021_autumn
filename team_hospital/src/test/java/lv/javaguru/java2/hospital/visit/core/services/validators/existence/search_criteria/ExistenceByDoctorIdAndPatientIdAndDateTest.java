@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria;
 
-import lv.javaguru.java2.hospital.database.VisitDatabase;
+import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Visit;
@@ -29,7 +29,7 @@ class ExistenceByDoctorIdAndPatientIdAndDateTest {
 
     @Mock private GetVisitDate getVisitDate;
     @Mock
-    private VisitDatabase database;
+    private VisitRepository database;
     @InjectMocks
     private ExistenceByDoctorIdAndPatientIdAndDate existence;
 

@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.existence;
 
-import lv.javaguru.java2.hospital.database.VisitDatabase;
+import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Visit;
@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @RunWith(JUnitPlatform.class)
 class VisitExistenceByIdValidatorTest {
 
-    @Mock private VisitDatabase database;
+    @Mock private VisitRepository database;
     @InjectMocks private VisitExistenceByIdValidator validator;
 
     @Test

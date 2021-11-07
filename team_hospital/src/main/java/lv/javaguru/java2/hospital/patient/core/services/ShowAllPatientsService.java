@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.ShowAllPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.ShowAllPatientsResponse;
@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class ShowAllPatientsService {
 
-   @Autowired private PatientDatabase database;
+   @Autowired private PatientRepository database;
 
     public ShowAllPatientsResponse execute(ShowAllPatientsRequest request) {
         List<Patient> patients = database.getAllPatients();

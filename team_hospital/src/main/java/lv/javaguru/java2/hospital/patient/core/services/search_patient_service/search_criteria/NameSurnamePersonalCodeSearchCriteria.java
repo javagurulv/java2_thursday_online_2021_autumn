@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.search_patient_service.search_criteria;
 
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 
@@ -8,9 +8,9 @@ import java.util.List;
 
 public class NameSurnamePersonalCodeSearchCriteria implements PatientsSearchCriteria{
 
-    private final PatientDatabase database;
+    private final PatientRepository database;
 
-    public NameSurnamePersonalCodeSearchCriteria(PatientDatabase database) {
+    public NameSurnamePersonalCodeSearchCriteria(PatientRepository database) {
         this.database = database;
     }
 

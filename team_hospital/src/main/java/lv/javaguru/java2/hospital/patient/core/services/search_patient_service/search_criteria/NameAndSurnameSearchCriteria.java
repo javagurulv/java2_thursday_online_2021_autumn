@@ -1,16 +1,16 @@
 package lv.javaguru.java2.hospital.patient.core.services.search_patient_service.search_criteria;
 
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 
 import java.util.List;
 
 public class NameAndSurnameSearchCriteria implements PatientsSearchCriteria {
-    private final PatientDatabase patientDatabase;
+    private final PatientRepository patientRepository;
 
-    public NameAndSurnameSearchCriteria(PatientDatabase patientDatabase) {
-        this.patientDatabase = patientDatabase;
+    public NameAndSurnameSearchCriteria(PatientRepository patientRepository) {
+        this.patientRepository = patientRepository;
     }
 
     @Override
@@ -22,7 +22,7 @@ public class NameAndSurnameSearchCriteria implements PatientsSearchCriteria {
 
     @Override
     public List<Patient> process(SearchPatientsRequest request) {
-        return patientDatabase
+        return patientRepository
                 .findPatientsByNameAndSurname
                         (request.getName(), request.getSurname());
     }

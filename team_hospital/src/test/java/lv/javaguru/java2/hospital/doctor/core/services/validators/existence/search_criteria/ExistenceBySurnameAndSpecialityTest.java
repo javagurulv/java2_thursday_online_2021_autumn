@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators.existence.search_criteria;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabase;
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.domain.Doctor;
@@ -26,7 +26,7 @@ class ExistenceBySurnameAndSpecialityTest {
 
 
     @Mock
-    private DoctorDatabase database;
+    private DoctorRepository database;
     @InjectMocks
     private ExistenceBySurnameAndSpeciality existence;
 

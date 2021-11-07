@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services;
 
-import lv.javaguru.java2.hospital.database.PrescriptionDatabase;
+import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.prescription.core.requests.DeletePrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
 import lv.javaguru.java2.hospital.prescription.core.responses.DeletePrescriptionResponse;
@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class DeletePrescriptionService {
 
-    @Autowired private PrescriptionDatabase database;
+    @Autowired private PrescriptionRepository database;
     @Autowired private DeletePrescriptionValidator validator;
 
     public DeletePrescriptionResponse execute(DeletePrescriptionRequest request) {
