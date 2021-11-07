@@ -3,6 +3,8 @@ package lv.javaguru.java2.qwe;
 import lv.javaguru.java2.qwe.config.AppConfiguration;
 import lv.javaguru.java2.qwe.ui_actions.AppMenu;
 import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

@@ -10,10 +10,10 @@ CREATE TABLE IF NOT EXISTS `stocks` (
   `ticker` VARCHAR(10) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `industry` VARCHAR(50) NOT NULL,
-  `currency` CHAR(3) NOT NULL,
-  `market_price` DECIMAL(8,2) NOT NULL,
-  `dividend_yield` DECIMAL(4,2) NOT NULL,
-  `risk_weight` DECIMAL(5,4) NOT NULL,
+  `currency` VARCHAR(3) NOT NULL,
+  `market_price` DOUBLE(8,2) NOT NULL,
+  `dividend_yield` DOUBLE(4,2) NOT NULL,
+  `risk_weight` DOUBLE(5,4) NOT NULL,
   PRIMARY KEY (`ticker`)
 )
 ENGINE = InnoDB;
@@ -22,11 +22,11 @@ CREATE TABLE IF NOT EXISTS `bonds` (
   `ticker` VARCHAR(10) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `industry` VARCHAR(50) NOT NULL,
-  `currency` CHAR(3) NOT NULL,
-  `market_price` DECIMAL(8,2) NOT NULL,
-  `coupon` DECIMAL(4,2) NOT NULL,
-  `rating` CHAR(4),
-  `nominal` DECIMAL(10,2) NOT NULL,
+  `currency` VARCHAR(3) NOT NULL,
+  `market_price` DOUBLE(8,2) NOT NULL,
+  `coupon` DOUBLE(4,2) NOT NULL,
+  `rating` VARCHAR(4),
+  `nominal` INTEGER NOT NULL,
   `maturity` DATE NOT NULL,
   PRIMARY KEY (`ticker`)
 )
@@ -36,9 +36,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
   `age` INTEGER NOT NULL,
-  `type` VARCHAR(50) NOT NULL,
-  `initial_investment` DECIMAL(11,2),
-  `cash` DECIMAL(11,2),
+  `type` INTEGER NOT NULL,
+  `initial_investment` DOUBLE(11,2),
+  `cash` DOUBLE(11,2),
   `portfolio_generation_date` DATE,
   `risk_tolerance` INTEGER,
   PRIMARY KEY(`id`)
@@ -47,13 +47,28 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1;
 
 CREATE TABLE IF NOT EXISTS `users_positions` (
+  `position_id` BIGINT NOT NULL AUTO_INCREMENT,
   `user_id` BIGINT NOT NULL,
   `security_ticker` VARCHAR(10) NOT NULL,
-  `amount` INTEGER NOT NULL,
-  `purchase_price` DECIMAL(8,2) NOT NULL,
+  `amount` DOUBLE(11, 2) NOT NULL,
+  `purchase_price` DOUBLE(8,2) NOT NULL,
+  PRIMARY KEY (`position_id`),
   FOREIGN KEY(`user_id`) REFERENCES `users`(`id`),
   FOREIGN KEY(`security_ticker`) REFERENCES `stocks`(`ticker`)
 )
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+
+delimiter |
+
+CREATE TRIGGER ins_sec AFTER INSERT ON users_positions
+  FOR EACH ROW
+  BEGIN
+    UPDATE users, users_positions SET cash = cash - NEW.amount * NEW.purchase_price
+    WHERE users.id = NEW.user_id;
+  END;
+
+|
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

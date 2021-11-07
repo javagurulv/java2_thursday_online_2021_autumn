@@ -34,7 +34,7 @@ public class FilterStocksByMultipleParametersService {
 
     private String constructQuery(FilterStocksByMultipleParametersRequest request) {
 
-        StringBuilder query = new StringBuilder("SELECT * FROM stocks");
+        StringBuilder query = new StringBuilder("FROM Stock");
         List<CoreRequest> requestList = request.getRequestList();
 
         if (requestList.size() > 0) {
@@ -66,7 +66,7 @@ public class FilterStocksByMultipleParametersService {
                 }
             }
         }
-//        System.out.println("====================================\n" + query + "\n====================================");
+        System.out.println("====================================\n" + query + "\n====================================");
         return query.toString();
     }
 

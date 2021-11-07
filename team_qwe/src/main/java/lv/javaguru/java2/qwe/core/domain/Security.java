@@ -1,14 +1,30 @@
 package lv.javaguru.java2.qwe.core.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Security {
 
-    private final String ticker;
-    private final String name;
-    private final String industry;
-    private final String currency;
+    @Id
+    @Column(name = "ticker", nullable = false)
+    private String ticker;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "industry", nullable = false)
+    private String industry;
+
+    @Column(name = "currency", nullable = false)
+    private String currency;
+
+    @Column(name = "market_price", nullable = false)
     private double marketPrice;
+
+    public Security() {
+    }
 
     public Security(String ticker, String name, String industry, String currency, double marketPrice) {
         this.ticker = ticker;
@@ -16,6 +32,22 @@ public abstract class Security {
         this.industry = industry;
         this.currency = currency;
         this.marketPrice = marketPrice;
+    }
+
+    public void setTicker(String ticker) {
+        this.ticker = ticker;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setIndustry(String industry) {
+        this.industry = industry;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public String getTicker() {

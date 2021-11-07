@@ -28,7 +28,7 @@ public class AddUserValidatorTest {
     public void init() {
         jdbcTemplate.update("RUNSCRIPT FROM 'classpath:schema.sql'");
         jdbcTemplate.update("INSERT INTO users (name, age, type, initial_investment, cash, portfolio_generation_date, risk_tolerance) VALUES\n" +
-                "  ('Alexander', 40, 'SUPER_RICH', 1000000.00, 1000000.00, NULL, 5);");
+                "  ('Alexander', 40, 4, 1000000.00, 1000000.00, NULL, 5);");
     }
 
     @Test

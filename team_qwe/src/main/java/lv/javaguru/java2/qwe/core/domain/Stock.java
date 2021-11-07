@@ -1,16 +1,35 @@
 package lv.javaguru.java2.qwe.core.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name = "stocks")
 public class Stock extends Security {
 
-    private final double dividends;
-    private final double riskWeight;
+    @Column(name = "dividend_yield", nullable = false)
+    private double dividends;
+
+    @Column(name = "risk_weight", nullable = false)
+    private double riskWeight;
+
+    public Stock() {
+    }
 
     public Stock(String ticker, String name, String industry, String currency,
                  double marketPrice, double dividends, double riskWeight) {
         super(ticker, name, industry, currency, marketPrice);
         this.dividends = dividends;
+        this.riskWeight = riskWeight;
+    }
+
+    public void setDividends(double dividends) {
+        this.dividends = dividends;
+    }
+
+    public void setRiskWeight(double riskWeight) {
         this.riskWeight = riskWeight;
     }
 

@@ -11,9 +11,9 @@ import java.util.Optional;
 
 public interface Database {
 
-    void addStock(Stock stock);
+    String addStock(Stock stock);
 
-    void addBond(Bond bond);
+    String addBond(Bond bond);
 
     boolean removeSecurity(String name);
 

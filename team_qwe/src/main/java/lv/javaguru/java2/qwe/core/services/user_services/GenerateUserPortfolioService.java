@@ -54,7 +54,7 @@ public class GenerateUserPortfolioService {
     }
 
     private Map<String, Double> calculateInvestmentPolicy(User user) {
-        return user.getDistribution().entrySet().stream()
+        return getDistribution().entrySet().stream()
                 .collect(toMap(Entry::getKey,
                         doubles -> doubles.getValue()[user.getRiskTolerance() - 1]));
     }
@@ -92,19 +92,19 @@ public class GenerateUserPortfolioService {
 
     private Map<Integer, List<Security>> securitiesForRiskGroups() {
         return ofEntries(
-                entry(1, database.filterStocksByMultipleParameters("SELECT * FROM stocks\n" +
+                entry(1, database.filterStocksByMultipleParameters("FROM Stock\n" +
                         "  WHERE dividend_yield > 3\n" +
                         "    AND risk_weight < 1.2\n" + "  ORDER BY risk_weight")),
-                entry(2, database.filterStocksByMultipleParameters("SELECT * FROM stocks\n" +
+                entry(2, database.filterStocksByMultipleParameters("FROM Stock\n" +
                         "  WHERE dividend_yield > 2\n" +
                         "    AND risk_weight < 1.2\n" + "  ORDER BY risk_weight DESC")),
-                entry(3, database.filterStocksByMultipleParameters("SELECT * FROM stocks\n" +
+                entry(3, database.filterStocksByMultipleParameters("FROM Stock\n" +
                         "  WHERE dividend_yield > 1\n" +
                         "    AND risk_weight < 1")),
-                entry(4, database.filterStocksByMultipleParameters("SELECT * FROM stocks\n" +
+                entry(4, database.filterStocksByMultipleParameters("FROM Stock\n" +
                         "  WHERE dividend_yield < 1.5\n" +
                         "    AND risk_weight > 1.1\n" + "  ORDER BY risk_weight DESC")),
-                entry(5, database.filterStocksByMultipleParameters("SELECT * FROM stocks\n" +
+                entry(5, database.filterStocksByMultipleParameters("FROM Stock\n" +
                         "  ORDER BY risk_weight DESC"))
         );
     }
@@ -112,6 +112,22 @@ public class GenerateUserPortfolioService {
     private void addPortfolioToDatabaseSQL(List<Position> portfolio, User user) {
         IntStream.rangeClosed(0, portfolio.size() - 1)
                 .forEach(i -> userData.savePosition(portfolio.get(i), user.getId()));
+    }
+
+    private Map<String, Double[]> getDistribution() {
+        return Map.ofEntries(
+                entry("Consumer Staples", new Double[]{17.50, 13.50, 9.50, 05.50, 01.50}),
+                entry("Utilities", new Double[]{15.00, 12.00, 9.00, 06.00, 03.00}),
+                entry("Communications", new Double[]{13.50, 11.25, 9.00, 06.75, 04.50}),
+                entry("Health Care", new Double[]{12.00, 10.50, 9.00, 07.50, 06.00}),
+                entry("Technology", new Double[]{10.50, 09.75, 9.00, 08.25, 07.50}),
+                entry("Materials", new Double[]{09.00, 09.00, 9.00, 09.00, 09.00}),
+                entry("Energy", new Double[]{07.50, 08.25, 9.00, 09.75, 10.50}),
+                entry("Financials", new Double[]{06.00, 07.50, 9.00, 10.50, 12.00}),
+                entry("Real Estate", new Double[]{04.50, 06.75, 9.00, 11.25, 13.50}),
+                entry("Industrials", new Double[]{03.00, 06.00, 9.00, 12.00, 15.00}),
+                entry("Consumer Discretionary", new Double[]{01.50, 05.50, 9.50, 13.50, 17.50})
+        );
     }
 
 }

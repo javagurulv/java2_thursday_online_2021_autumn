@@ -1,5 +1,6 @@
 package lv.javaguru.java2.qwe.core.domain;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Predicate;
@@ -7,18 +8,46 @@ import java.util.function.Predicate;
 import static java.util.Map.entry;
 import static lv.javaguru.java2.qwe.core.domain.Type.*;
 
+@Entity
+@Table(name = "users")
 public class User {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private final String name;
-    private final int age;
-    private final Type type; // общий уровень благосостояния клиента
-    private final double initialInvestment; //начальная сумма инвестиций
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "age", nullable = false)
+    private int age;
+
+    @Column(name = "type", nullable = false)
+    private Type type; // общий уровень благосостояния клиента
+
+    @Column(name = "initial_investment", nullable = false)
+    private double initialInvestment; //начальная сумма инвестиций
+
+    @Column(name = "cash", nullable = false)
     private double cash; //денежный остаток на счете
+
+    @Column(name = "portfolio_generation_date")
     private LocalDate portfolioGenerationDate;
+
+    @Column(name = "risk_tolerance")
     private int riskTolerance;
+
+    @ElementCollection
+    @CollectionTable(
+            name = "users_positions",
+            joinColumns = @JoinColumn(name = "user_id")
+    )
     private List<Position> portfolio = new ArrayList<>();
-    private final Map<String, Double[]> distribution = createDistributionMatrix();
+//    private final Map<String, Double[]> distribution = createDistributionMatrix();
+
+    public User() {
+    }
 
     public User(String name, int age, Type type, double initialInvestment) {
         this.name = name;
@@ -26,6 +55,26 @@ public class User {
         this.type = type;
         this.initialInvestment = initialInvestment;
         if (riskTolerance == 0) {calculateRiskTolerance();}
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public void setInitialInvestment(double initialInvestment) {
+        this.initialInvestment = initialInvestment;
+    }
+
+    public void setRiskTolerance(int riskTolerance) {
+        this.riskTolerance = riskTolerance;
     }
 
     public long getId() {
@@ -68,9 +117,9 @@ public class User {
         return portfolio;
     }
 
-    public Map<String, Double[]> getDistribution() {
+/*    public Map<String, Double[]> getDistribution() {
         return distribution;
-    }
+    }*/
 
     public void setPortfolio(List<Position> portfolio) {
         this.portfolio = portfolio;
@@ -141,6 +190,7 @@ public class User {
                 ", age=" + age +
                 ", type=" + type +
                 ", initialInvestment=" + initialInvestment +
+                ", cash=" + cash +
                 ", portfolioGenerationDate=" + portfolioGenerationDate +
                 ", riskTolerance=" + riskTolerance +
                 '}';

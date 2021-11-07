@@ -8,6 +8,7 @@ import lv.javaguru.java2.qwe.core.responses.data_responses.FindSecurityByTickerO
 import lv.javaguru.java2.qwe.core.responses.data_responses.GetAllSecurityListResponse;
 import lv.javaguru.java2.qwe.core.responses.data_responses.RemoveSecurityResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.*;
+import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +16,27 @@ import org.springframework.context.ApplicationContext;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.transaction.Transactional;
 
 import static org.junit.Assert.*;
 import static java.util.List.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {AppConfiguration.class})
+@Sql({"/schema.sql"})
+@Sql("/data.sql")
 public class AcceptanceTestForDatabase {
 
     @Autowired private ApplicationContext appContext;
-    @Autowired private JdbcTemplate jdbcTemplate;
 
-    @Before
+/*    @Before
     public void init() {
-        jdbcTemplate.update("RUNSCRIPT FROM 'classpath:schema.sql'");
-        jdbcTemplate.update("RUNSCRIPT FROM 'classpath:data.sql'");
-    }
+        sessionFactory.getCurrentSession().update("RUNSCRIPT FROM 'classpath:schema.sql'");
+        sessionFactory.getCurrentSession().update("RUNSCRIPT FROM 'classpath:data.sql'");
+    }*/
 
     @Test
     public void addSecuritiesToDatabaseTest1() {
