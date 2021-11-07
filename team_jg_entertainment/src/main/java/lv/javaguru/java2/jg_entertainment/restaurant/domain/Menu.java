@@ -3,10 +3,14 @@ package lv.javaguru.java2.jg_entertainment.restaurant.domain;
 import java.util.Objects;
 
 public class Menu {
+
     private String title;
     private Long number;
     private String description;
     private double price;
+
+    public Menu() {
+    }
 
     public Menu(String title, String description, double price) {
         this.title = title;

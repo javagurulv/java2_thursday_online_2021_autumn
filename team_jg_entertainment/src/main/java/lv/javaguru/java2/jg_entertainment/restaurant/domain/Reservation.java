@@ -15,6 +15,9 @@ public class Reservation {
     private Long idTable;
     private Long idMenu;
 
+    public Reservation() {
+    }
+
     public Reservation(Visitors visitor,
                        Menu menu,
                        Table table,
@@ -35,10 +38,6 @@ public class Reservation {
         this.menu = menu;
         this.telephoneNumber = telephoneNumber;
         this.reservationDate = reservationDate;
-    }
-
-    public Reservation(Visitors visitor) {
-        this.visitor = visitor;
     }
 
     public Reservation(Long idVisitor, Long idTable, Long idMenu, Long telephoneNumber) {
@@ -133,5 +132,9 @@ public class Reservation {
 
     public void setIdReservation(Long idReservation) {
         this.idReservation = idReservation;
+    }
+
+    public void setReservationDate(Date reservationDate) {
+        this.reservationDate = reservationDate;
     }
 }
