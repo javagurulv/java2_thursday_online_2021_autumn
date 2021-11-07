@@ -4,6 +4,7 @@ import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
+import lv.javaguru.java2.hospital.patient.core.services.checkers.PersonalCodeChecker;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -15,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,10 +24,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class AddPatientValidatorTest {
 
-    @Mock
-    private PatientDatabase database;
-    @InjectMocks
-    private AddPatientValidator validator;
+    @Mock private PersonalCodeChecker personalCodeChecker;
+    @Mock private PatientDatabase database;
+    @InjectMocks private AddPatientValidator validator;
 
     @Test
     public void shouldReturnEmptyList() {
@@ -115,6 +116,8 @@ class AddPatientValidatorTest {
     public void shouldReturnNumFormatExceptionError() {
         AddPatientRequest request =
                 new AddPatientRequest("Name", "Surname", "1234code567");
+        Mockito.when(personalCodeChecker.execute(request.getPersonalCode()))
+                .thenReturn(Optional.of(new CoreError("Personal code", "must consist from numbers only!")));
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
         assertEquals(errors.size(), 1);

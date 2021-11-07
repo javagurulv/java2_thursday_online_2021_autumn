@@ -1,11 +1,9 @@
-package lv.javaguru.java2.oddJobs.database;
+package lv.javaguru.java2.oddJobs.database.unused;
 
 
 import lv.javaguru.java2.oddJobs.domain.Advertisement;
 import lv.javaguru.java2.oddJobs.domain.Client;
 import lv.javaguru.java2.oddJobs.domain.Specialist;
-import lv.javaguru.java2.oddJobs.dependency_injection.DIComponent;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;

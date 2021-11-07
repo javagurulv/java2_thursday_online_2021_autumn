@@ -2,7 +2,7 @@ package lv.javaguru.java2.oddJobs.core.services.get;
 
 import lv.javaguru.java2.oddJobs.core.requests.get.GetAllClientsRequest;
 import lv.javaguru.java2.oddJobs.core.responce.get.GetAllClientsResponse;
-import lv.javaguru.java2.oddJobs.database.Database;
+import lv.javaguru.java2.oddJobs.database.ClientRepository;
 import lv.javaguru.java2.oddJobs.domain.Client;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 public class GetAllClientServiceTest {
 
     @Mock
-    private Database database;
+    private ClientRepository clientRepository;
     @InjectMocks
     public GetAllClientsService getAllClientsService;
 
@@ -33,7 +33,7 @@ public class GetAllClientServiceTest {
         List<Client> clientsList = new ArrayList<>();
         clientsList.add(new Client("Name","Surname"));
         clientsList.add(new Client("Name1","Surname1"));
-        when(database.getAllClients()).thenReturn(clientsList);
+        when(clientRepository.getAllClients()).thenReturn(clientsList);
 
         GetAllClientsRequest request = new GetAllClientsRequest();
 

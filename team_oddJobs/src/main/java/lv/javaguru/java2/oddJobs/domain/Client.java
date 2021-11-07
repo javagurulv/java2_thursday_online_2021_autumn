@@ -1,13 +1,22 @@
 package lv.javaguru.java2.oddJobs.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "Clients")
 public class Client {
-
+    @Id
+    @Column(name = "clientId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clientId;
+
+    @Column(name = "clientName", nullable = false)
     private String clientName;
+    @Column(name = "clientSurname", nullable = false)
+
     private String clientSurname;
-    private String service;
+
 
     public Client(String clientName, String clientSurname) {
         this.clientName = clientName;
@@ -53,25 +62,17 @@ public class Client {
     }
 
 
-    public String getService() {
-        return service;
-    }
-
-    public void setService(String service) {
-        this.service = service;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return Objects.equals(clientId, client.clientId) && Objects.equals(clientName, client.clientName) && Objects.equals(clientSurname, client.clientSurname) && Objects.equals(service, client.service);
+        return Objects.equals(clientId, client.clientId) && Objects.equals(clientName, client.clientName) && Objects.equals(clientSurname, client.clientSurname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(clientId, clientName, clientSurname, service);
+        return Objects.hash(clientId, clientName, clientSurname);
     }
 
 
@@ -81,7 +82,6 @@ public class Client {
                 "clientId=" + clientId +
                 ", clientName='" + clientName + '\'' +
                 ", clientSurname='" + clientSurname + '\'' +
-                ", service='" + service + '\'' +
                 '}';
     }
 }

@@ -1,14 +1,13 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class DatabaseMenuImpl implements DatabaseMenu {
 
     private Long nextNr = 1L;
@@ -38,6 +37,15 @@ public class DatabaseMenuImpl implements DatabaseMenu {
     public List<Menu> getAllMenus() {
         return menus;
     }
+
+    // (*new часть ->
+    @Override
+    public List<Menu> findById(Long idNumber) {
+        return menus.stream()
+                .filter(menu -> menu.getNumber().equals(idNumber))
+                .collect(Collectors.toList());
+    }
+    // <- досюда часть новая )
 
     @Override
     public List<Menu> findByTitle(String title) {

@@ -30,7 +30,7 @@ public class PatientExistenceByIDValidatorTest {
 
     @Test
     public void shouldReturnError(){
-        Optional<CoreError> error = validator.existenceByID(123L);
+        Optional<CoreError> error = validator.existenceByID("123");
         assertEquals(error.get().getField(), "Patient");
         assertEquals(error.get().getDescription(), "does not exist!");
     }
@@ -42,7 +42,7 @@ public class PatientExistenceByIDValidatorTest {
         List<Patient> patients = new ArrayList<>();
         patients.add(patient);
         Mockito.when(database.getAllPatients()).thenReturn(patients);
-        Optional<CoreError> error = validator.existenceByID(patient.getId());
+        Optional<CoreError> error = validator.existenceByID(patient.getId().toString());
         assertTrue(error.isEmpty());
     }
 }

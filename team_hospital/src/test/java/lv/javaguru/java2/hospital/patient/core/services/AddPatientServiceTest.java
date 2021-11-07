@@ -32,7 +32,7 @@ class AddPatientServiceTest {
 
     @Test
     public void shouldReturnResponseWithErrorsWhenNameValidationFails() {
-        AddPatientRequest request = new AddPatientRequest("", "surname", "personal code");
+        AddPatientRequest request = new AddPatientRequest("", "surname", "12345678901");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Name", "must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -48,7 +48,7 @@ class AddPatientServiceTest {
 
     @Test
     public void shouldReturnResponseWithErrorsWhenSurnameValidationFails() {
-        AddPatientRequest request = new AddPatientRequest("name", null, "personal code");
+        AddPatientRequest request = new AddPatientRequest("name", null, "12345678901");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Surname", "must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);

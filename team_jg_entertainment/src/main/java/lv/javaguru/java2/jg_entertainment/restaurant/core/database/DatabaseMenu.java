@@ -13,6 +13,11 @@ public interface DatabaseMenu {
 
     List<Menu> getAllMenus();
 
+    // (*new часть ->
+    List<Menu> findById(Long idNumber);
+
+    // <- досюда часть новая )
+
     List<Menu> findByTitle(String title);
 
     List<Menu> findByDescription(String description);

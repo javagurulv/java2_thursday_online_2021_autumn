@@ -8,7 +8,7 @@ public interface DatabaseReservation {
 
     void addReservation(Reservation reservation);
 
-    boolean removeReservation(Long IdReservation);
+    boolean removeReservation(Long idReservation);
 
     List<Reservation> showReservationList();
 

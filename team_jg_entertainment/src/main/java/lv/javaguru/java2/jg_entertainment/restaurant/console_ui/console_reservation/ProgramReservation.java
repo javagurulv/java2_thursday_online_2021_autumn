@@ -17,7 +17,7 @@ public class ProgramReservation {
     @Autowired
     public ProgramReservation(List<ReservationUIAction> uiActions) {
         menuNumberToUIActionMap = new HashMap<>();
-        menuNumberToUIActionMap.put(1, findReservationUIAction(uiActions, AddReservationUIAction.class));
+        //menuNumberToUIActionMap.put(1, findReservationUIAction(uiActions, AddReservationUIAction.class));
         menuNumberToUIActionMap.put(2, findReservationUIAction(uiActions, ExitProgramListReservationUIAction.class));//return in main menu(RestaurantProgramList -> mainAction)
         menuNumberToUIActionMap.put(3, findReservationUIAction(uiActions, ExitReservationUIAction.class));
     }
@@ -33,7 +33,7 @@ public class ProgramReservation {
         System.out.println();
         System.out.println("Hello !");
         System.out.println("Reservation program menu, press number what do you want to do! ");
-        System.out.println("1. Add reservation->");
+        //System.out.println("1. Add reservation->");
         System.out.println("2. Choose that return in MAIN MENU:");//return in main menu(RestaurantProgramList -> mainAction)
         System.out.println("3. Exit!");
         System.out.println();

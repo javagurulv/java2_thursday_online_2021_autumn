@@ -1,12 +1,25 @@
 package lv.javaguru.java2.oddJobs.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
-
+@Entity
+@Table(name = "Specialists")
 public class Specialist {
+    @Id
+    @Column(name = "specialistId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long specialistId;
+
+
+    @Column(name = "specialistName", nullable = false)
     private String specialistName;
+
+
+    @Column(name = "specialistSurname", nullable = false)
     private String specialistSurname;
+    @Column(name = "specialistProfession", nullable = false)
     private String specialistProfession;
+
 
     public Specialist(String specialistName, String specialistSurname, String specialistProfession) {
         this.specialistName = specialistName;

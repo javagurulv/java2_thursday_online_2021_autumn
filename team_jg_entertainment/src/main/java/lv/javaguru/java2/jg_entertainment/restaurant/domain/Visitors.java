@@ -3,22 +3,18 @@ package lv.javaguru.java2.jg_entertainment.restaurant.domain;
 import java.util.Objects;
 
 public class Visitors {
+
     private Long idClient;
     private String clientName;
     private String surname;
-    private int age;
     private String telephoneNumber;
+
+    public Visitors() {
+    }
 
     public Visitors(String clientName, String surname) {
         this.clientName = clientName;
         this.surname = surname;
-    }
-
-    public Visitors(String clientName, String surname, int age, String telephoneNumber) {
-        this.clientName = clientName;
-        this.surname = surname;
-        this.age = age;
-        this.telephoneNumber = telephoneNumber;
     }
 
     public Visitors(String clientName, String surname, String telephoneNumber) {
@@ -51,14 +47,6 @@ public class Visitors {
         this.idClient = idClient;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public String getTelephoneNumber() {
         return telephoneNumber;
     }
@@ -75,14 +63,12 @@ public class Visitors {
         return Objects.equals(clientName, that.clientName)
                 && Objects.equals(idClient, that.idClient)
                 && Objects.equals(surname, that.surname)
-             //   && Objects.equals(age, that.age)
                 && Objects.equals(telephoneNumber, that.telephoneNumber);
-        //   && Objects.equals(emailClient, that.emailClient);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(clientName, surname, age, idClient, telephoneNumber); //, emailClient
+        return Objects.hash(clientName, surname, idClient, telephoneNumber);
     }
 
     @Override
@@ -91,9 +77,8 @@ public class Visitors {
                 " client name ->'" + clientName + '\'' +
                 ", surname ->'" + surname + '\'' +
                 ", ID client ->" + idClient +
-               // ", age client ->" + age +
+                // ", age client ->" + age +
                 ", telephone number ->" + telephoneNumber +
-//                ", email client ->" + emailClient +
                 '}';
     }
 }

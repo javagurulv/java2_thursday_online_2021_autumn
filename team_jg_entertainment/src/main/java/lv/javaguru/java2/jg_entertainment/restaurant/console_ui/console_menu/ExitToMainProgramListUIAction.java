@@ -4,7 +4,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.RestaurantProgramLis
 import org.springframework.stereotype.Component;
 
 @Component
-public class ExitProgramListMenuUIAction implements UIAction {
+public class ExitToMainProgramListUIAction implements UIAction {
 
     @Override
     public void execute() {

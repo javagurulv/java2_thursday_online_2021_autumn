@@ -1,5 +1,6 @@
 package lv.javaguru.java2.oddJobs.core.services.find;
 
+import lv.javaguru.java2.oddJobs.database.SpecialistRepository;
 import lv.javaguru.java2.oddJobs.domain.Specialist;
 import lv.javaguru.java2.oddJobs.core.requests.find.FindSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.requests.find.Ordering;
@@ -7,7 +8,6 @@ import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.find.FindSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.validations.find.FindSpecialistValidator;
-import lv.javaguru.java2.oddJobs.database.Database;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +26,7 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(MockitoJUnitRunner.class)
 public class FindSpecialistServiceTest {
     @Mock
-    private Database database;
+    private SpecialistRepository specialistRepository;
     @Mock
     private FindSpecialistValidator validator;
     @InjectMocks
@@ -53,7 +53,7 @@ public class FindSpecialistServiceTest {
 
         Mockito.verify(validator).validate(request);
         Mockito.verify(validator).validate(any());
-        Mockito.verifyNoInteractions(database);
+        Mockito.verifyNoInteractions(specialistRepository);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class FindSpecialistServiceTest {
 
         List<Specialist> specialists = new ArrayList<>();
         specialists.add(new Specialist("Name", "Surname", "Profession"));
-        Mockito.when(database.findSpecialistByName("Name")).thenReturn(specialists);
+        Mockito.when(specialistRepository.findSpecialistByName("Name")).thenReturn(specialists);
 
         FindSpecialistResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -80,7 +80,7 @@ public class FindSpecialistServiceTest {
 
         List<Specialist> specialists = new ArrayList<>();
         specialists.add(new Specialist("Name", "Surname", "Profession"));
-        Mockito.when(database.findSpecialistBySurname("Surname")).thenReturn(specialists);
+        Mockito.when(specialistRepository.findSpecialistBySurname("Surname")).thenReturn(specialists);
 
         FindSpecialistResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -97,7 +97,7 @@ public class FindSpecialistServiceTest {
 
         List<Specialist> specialists = new ArrayList<>();
         specialists.add(new Specialist("Name", "Surname", "Profession"));
-        Mockito.when(database.findSpecialistByProfession("Profession")).thenReturn(specialists);
+        Mockito.when(specialistRepository.findSpecialistByProfession("Profession")).thenReturn(specialists);
 
         FindSpecialistResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -114,7 +114,7 @@ public class FindSpecialistServiceTest {
 
         List<Specialist> specialists = new ArrayList<>();
         specialists.add(new Specialist("Name", "Surname", "Profession"));
-        Mockito.when(database.findSpecialistByNameAndSurnameAndProfession("Name", "Surname", "Profession")).thenReturn(specialists);
+        Mockito.when(specialistRepository.findSpecialistByNameAndSurnameAndProfession("Name", "Surname", "Profession")).thenReturn(specialists);
 
         FindSpecialistResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -133,7 +133,7 @@ public class FindSpecialistServiceTest {
         List<Specialist> specialists = new ArrayList<>();
         specialists.add(new Specialist("Name", "Surname2", "Profession"));
         specialists.add(new Specialist("Name", "Surname1", "Profession"));
-        Mockito.when(database.findSpecialistByName("Name")).thenReturn(specialists);
+        Mockito.when(specialistRepository.findSpecialistByName("Name")).thenReturn(specialists);
 
         FindSpecialistResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -151,7 +151,7 @@ public class FindSpecialistServiceTest {
         List<Specialist> specialists = new ArrayList<>();
         specialists.add(new Specialist("Name", "Surname1", "Profession"));
         specialists.add(new Specialist("Name", "Surname2", "Profession"));
-        Mockito.when(database.findSpecialistByName("Name")).thenReturn(specialists);
+        Mockito.when(specialistRepository.findSpecialistByName("Name")).thenReturn(specialists);
 
         FindSpecialistResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -169,7 +169,7 @@ public class FindSpecialistServiceTest {
         List<Specialist> specialists = new ArrayList<>();
         specialists.add(new Specialist("Name", "Surname1", "Profession"));
         specialists.add(new Specialist("Name", "Surname2", "Profession"));
-        Mockito.when(database.findSpecialistByName("Name")).thenReturn(specialists);
+        Mockito.when(specialistRepository.findSpecialistByName("Name")).thenReturn(specialists);
 
         FindSpecialistResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -188,7 +188,7 @@ public class FindSpecialistServiceTest {
         List<Specialist> specialists = new ArrayList<>();
         specialists.add(new Specialist("Name", "Surname1", "Profession"));
         specialists.add(new Specialist("Name", "Surname2", "Profession"));
-        Mockito.when(database.findSpecialistByName("Name")).thenReturn(specialists);
+        Mockito.when(specialistRepository.findSpecialistByName("Name")).thenReturn(specialists);
 
         FindSpecialistResponse response = service.execute(request);
         assertFalse(response.hasErrors());

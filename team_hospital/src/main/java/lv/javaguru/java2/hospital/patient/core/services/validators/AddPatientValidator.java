@@ -3,6 +3,7 @@ package lv.javaguru.java2.hospital.patient.core.services.validators;
 import lv.javaguru.java2.hospital.database.PatientDatabase;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
+import lv.javaguru.java2.hospital.patient.core.services.checkers.PersonalCodeChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,8 @@ public class AddPatientValidator {
 
     @Autowired
     private PatientDatabase database;
+    @Autowired
+    private PersonalCodeChecker personalCodeChecker;
 
     public List<CoreError> validate(AddPatientRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -56,23 +59,14 @@ public class AddPatientValidator {
     }
 
     private Optional<CoreError> validatePersonalCodeLength(AddPatientRequest request) {
-        return request.getPersonalCode().length() == 11 || request.getPersonalCode().isEmpty()
-                ? Optional.empty()
-                : Optional.of(new CoreError("Personal code", "must consist of 11 numbers!"));
+        return request.getPersonalCode() == null || request.getPersonalCode().isEmpty()
+                ? Optional.empty() : request.getPersonalCode().length() == 11
+                ? Optional.empty() : Optional.of(new CoreError("Personal code", "must consist of 11 numbers!"));
     }
 
     private Optional<CoreError> validateNumInPersonalCode(AddPatientRequest request) {
-        if (request.getPersonalCode() == null || request.getPersonalCode().isEmpty()) {
-            return Optional.empty();
-        } else {
-            for (String s : request.getPersonalCode().split("")) {
-                try {
-                    Integer.parseInt(s);
-                } catch (NumberFormatException e) {
-                    return Optional.of(new CoreError("Personal code", "must consist from numbers only!"));
-                }
-            }
-        }
-        return Optional.empty();
+       return request.getPersonalCode() == null || request.getPersonalCode().isEmpty()
+        ? Optional.empty() : personalCodeChecker.execute(request.getPersonalCode());
+
     }
 }

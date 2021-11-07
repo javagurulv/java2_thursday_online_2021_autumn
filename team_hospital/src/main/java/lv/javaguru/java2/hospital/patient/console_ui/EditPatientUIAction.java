@@ -15,7 +15,7 @@ public class EditPatientUIAction implements PatientUIActions {
 
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
-        Long id = getUserInput.getUserLongInput("Please enter patient ID: ");
+        String id = getUserInput.getUserStringInput("Please enter patient ID: ");
         String userInputString = getUserInput
                         .getUserStringInput("What information would you like to edit? (NAME||SURNAME||PERSONAL_CODE)?")
                         .toUpperCase(Locale.ROOT);

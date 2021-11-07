@@ -4,75 +4,78 @@ import java.util.Objects;
 
 public class Table {
 
-	private Long id;
-	private String title;
-	private int tableCapacity;
-	private double price;
+    private Long id;
+    private String title;
+    private int tableCapacity;
+    private double price;
 
-	public Table(String title, int tableCapacity,double price) {
-		this.title = title;
-		this.tableCapacity = tableCapacity;
-		this.price = price;
-	}
+    public Table() {
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Table(String title, int tableCapacity, double price) {
+        this.title = title;
+        this.tableCapacity = tableCapacity;
+        this.price = price;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public int getTableCapacity() {
-		return tableCapacity;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setTableCapacity(int tableCapacity) {
-		this.tableCapacity = tableCapacity;
-	}
+    public int getTableCapacity() {
+        return tableCapacity;
+    }
 
-	public double getPrice() {
-		return price;
-	}
+    public void setTableCapacity(int tableCapacity) {
+        this.tableCapacity = tableCapacity;
+    }
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
+    public double getPrice() {
+        return price;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		Table table = (Table) o;
-		return Objects.equals(id, table.id) &&
-				Objects.equals(title, table.title) &&
-				Objects.equals(tableCapacity, table.tableCapacity) &&
-				Objects.equals(price, table.price);
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Table table = (Table) o;
+        return Objects.equals(id, table.id) &&
+                Objects.equals(title, table.title) &&
+                Objects.equals(tableCapacity, table.tableCapacity) &&
+                Objects.equals(price, table.price);
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, title, tableCapacity, price);
-	}
+    }
 
-	@Override
-	public String toString() {
-		return "Table{" +
-				"id=" + id +
-				", title='" + title + '\'' +
-				", tableCapacity='" + tableCapacity + '\'' +
-				", price='" + price + '\'' +
-				'}';
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, tableCapacity, price);
+    }
+
+    @Override
+    public String toString() {
+        return "Table{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", tableCapacity='" + tableCapacity + '\'' +
+                ", price='" + price + '\'' +
+                '}';
+    }
 }

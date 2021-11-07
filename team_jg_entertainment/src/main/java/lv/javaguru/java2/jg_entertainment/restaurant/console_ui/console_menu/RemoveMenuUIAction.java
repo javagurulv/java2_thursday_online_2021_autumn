@@ -13,10 +13,6 @@ public class RemoveMenuUIAction implements UIAction {
 
     @Autowired private RemoveMenuService removeMenuService;
 
-//    public RemoveMenuUIAction(RemoveMenuService removeMenuService) {
-//        this.removeMenuService = removeMenuService;
-//    }
-
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);

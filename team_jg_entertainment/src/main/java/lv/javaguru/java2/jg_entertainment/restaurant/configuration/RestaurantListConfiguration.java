@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan(basePackages = "lv.javaguru.java2.jg_entertainment.restaurant")
+@ComponentScan(basePackages = "lv.javaguru.java2.jg_entertainment")
 @PropertySource(value = "classpath:application.properties")
 public class RestaurantListConfiguration {
 

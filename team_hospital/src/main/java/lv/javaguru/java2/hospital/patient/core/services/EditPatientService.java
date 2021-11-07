@@ -24,11 +24,11 @@ public class EditPatientService {
             return new EditPatientResponse(errors);
         } else {
             database.editActions(
-                    request.getPatientID(),
+                    Long.valueOf(request.getPatientID()),
                     EditPatientEnum.valueOf(request.getUserInputEnum().toUpperCase(Locale.ROOT)),
                     request.getChanges());
             return new EditPatientResponse(
-                    request.getPatientID(),
+                    Long.parseLong(request.getPatientID()),
                     EditPatientEnum.valueOf(request.getUserInputEnum().toUpperCase(Locale.ROOT)),
                     request.getChanges()
                     );

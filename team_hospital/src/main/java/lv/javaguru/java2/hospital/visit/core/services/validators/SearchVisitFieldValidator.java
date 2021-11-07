@@ -5,6 +5,7 @@ import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,25 +18,28 @@ public class SearchVisitFieldValidator {
         validateDoctorID(request).ifPresent(errors::add);
         validatePatientID(request).ifPresent(errors::add);
         validateVisitDate(request).ifPresent(errors::add);
-        return errors;
+        if(errors.size() > 3){
+            return Collections.singletonList(new CoreError("At least one field", "must be filled!"));
+        }
+        return new ArrayList<>();
     }
 
-    private Optional<CoreError> validateVisitID(SearchVisitRequest request){
+    private Optional<CoreError> validateVisitID(SearchVisitRequest request) {
         return request.getVisitId() == null || request.getVisitId().isEmpty()
                 ? Optional.of(new CoreError("visitId", "Must not be empty!")) : Optional.empty();
     }
 
-    private Optional<CoreError> validateDoctorID(SearchVisitRequest request){
+    private Optional<CoreError> validateDoctorID(SearchVisitRequest request) {
         return request.getDoctorId() == null || request.getDoctorId().isEmpty()
                 ? Optional.of(new CoreError("doctorId", "Must not be empty!")) : Optional.empty();
     }
 
-    private Optional<CoreError> validatePatientID(SearchVisitRequest request){
+    private Optional<CoreError> validatePatientID(SearchVisitRequest request) {
         return request.getPatientId() == null || request.getPatientId().isEmpty()
                 ? Optional.of(new CoreError("patientId", "Must not be empty!")) : Optional.empty();
     }
 
-    private Optional<CoreError> validateVisitDate(SearchVisitRequest request){
+    private Optional<CoreError> validateVisitDate(SearchVisitRequest request) {
         return request.getVisitDate() == null || request.getVisitDate().isEmpty()
                 ? Optional.of(new CoreError("visitDate", "Must not be empty!")) : Optional.empty();
     }

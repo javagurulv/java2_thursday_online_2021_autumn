@@ -1,4 +1,4 @@
-package lv.javaguru.java2.oddJobs.database;
+package lv.javaguru.java2.oddJobs.database.unused;
 
 import lv.javaguru.java2.oddJobs.database.rowMapper.AdvertisementRowMapper;
 import lv.javaguru.java2.oddJobs.database.rowMapper.ClientRowMapper;
@@ -8,11 +8,10 @@ import lv.javaguru.java2.oddJobs.domain.Client;
 import lv.javaguru.java2.oddJobs.domain.Specialist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
+//@Component
 public class JdbcDatabaseImpl implements Database {
 
     @Autowired

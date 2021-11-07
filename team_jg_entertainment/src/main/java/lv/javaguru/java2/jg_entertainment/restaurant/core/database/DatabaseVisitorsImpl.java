@@ -1,7 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,7 +10,7 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-@Component
+//@Component
 public class DatabaseVisitorsImpl implements DatabaseVisitors {
 
     List<Visitors> clientInRestaurant = new ArrayList<>();

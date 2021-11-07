@@ -42,8 +42,21 @@ class DeletePatientServiceTest {
     }
 
     @Test
+    public void shouldReturnErrorWhenPatientIdNotNum() {
+        DeletePatientRequest request = new DeletePatientRequest("12qwe123");
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("ID", "must be a number!"));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+        DeletePatientResponse response = service.execute(request);
+        assertTrue(response.hasErrors());
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "ID");
+        assertEquals(response.getErrors().get(0).getDescription(), "must be a number!");
+    }
+
+    @Test
     public void shouldReturnErrorWhenPatientDoesNotExist() {
-        DeletePatientRequest request = new DeletePatientRequest(123L);
+        DeletePatientRequest request = new DeletePatientRequest("123");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Patient", "does not exist!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -57,7 +70,7 @@ class DeletePatientServiceTest {
     @Test
     public void shouldDeletePatientWithIdFromDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        DeletePatientRequest request = new DeletePatientRequest(1L);
+        DeletePatientRequest request = new DeletePatientRequest("1");
         DeletePatientResponse response = service.execute(request);
         assertFalse(response.hasErrors());
     }
