@@ -1,10 +1,5 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.OrderingMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.PagingMenu;
@@ -16,6 +11,11 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class SearchMenusService {
@@ -75,7 +75,10 @@ public class SearchMenusService {
         if (request.isTitleProvided() && request.isDescriptionProvided()) {
             menus = databaseMenu.findByTitleAndDescription(request.getTitle(), request.getDescription());
         }
-
+//->new
+        if (request.isIDProvided() && !request.isTitleProvided() && !request.isDescriptionProvided()) {
+            menus = databaseMenu.findById(request.getIdNumberMenu());
+        } //<- new
         return menus;
     }
 

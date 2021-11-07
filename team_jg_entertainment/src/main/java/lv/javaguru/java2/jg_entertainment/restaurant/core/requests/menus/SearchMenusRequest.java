@@ -5,6 +5,7 @@ public class SearchMenusRequest {
     private String title;
     private String description;
 
+    private Long idNumberMenu;
     private OrderingMenu orderingMenu;
     private PagingMenu pagingMenu;
 
@@ -41,9 +42,19 @@ public class SearchMenusRequest {
         return description;
     }
 
+    public Long getIdNumberMenu() {
+        return idNumberMenu;
+    }
+
     public boolean isTitleProvided() {
         return this.title != null && !this.title.isEmpty();
     }
+
+    //new ->
+    public boolean isIDProvided() {
+        return this.idNumberMenu != null && this.idNumberMenu != 0;
+    }
+    //<- new
 
     public boolean isDescriptionProvided() {
         return this.description != null && !this.description.isEmpty();
@@ -56,5 +67,6 @@ public class SearchMenusRequest {
     public PagingMenu getPagingMenu() {
         return pagingMenu;
     }
+
 
 }
