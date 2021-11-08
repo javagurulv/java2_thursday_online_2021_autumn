@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class ProgramReservation {
+public class ProgramReservationList {
 
     private Map<Integer, ReservationUIAction> menuNumberToUIActionMap;
     private CheckMenuNumberFromConsole checkNumberFromConsole = new CheckMenuNumberFromConsole();
 
     @Autowired
-    public ProgramReservation(List<ReservationUIAction> uiActions) {
+    public ProgramReservationList(List<ReservationUIAction> uiActions) {
         menuNumberToUIActionMap = new HashMap<>();
         //menuNumberToUIActionMap.put(1, findReservationUIAction(uiActions, AddReservationUIAction.class));
         menuNumberToUIActionMap.put(2, findReservationUIAction(uiActions, ExitProgramListReservationUIAction.class));//return in main menu(RestaurantProgramList -> mainAction)

@@ -1,7 +1,10 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Scanner;
 
+@Component
 public class CheckMenuNumberFromConsole {
 
     private static int getNumberMenuFromConsole() {
