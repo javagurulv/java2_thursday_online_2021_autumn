@@ -42,11 +42,11 @@ public class ORMVisitRepositoryImpl implements VisitRepository {
     @Override
     public boolean editVisit(Long visitId, EditVisitEnum userInput, String changes) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "UPDATE Visit v SET "
+                "UPDATE Visit SET "
                         + userInput.toString().toLowerCase(Locale.ROOT)
-                        + " = :" + changes +" WHERE id = :id");
+                        + " = :changes WHERE id = :id");
         query.setParameter("id", visitId);
-        query.setParameter(changes, changes);
+        query.setParameter("changes", changes);
         int result = query.executeUpdate();
         return result == 1;
     }
