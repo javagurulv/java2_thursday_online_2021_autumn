@@ -5,8 +5,10 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.hibernate.query.Query;
 
 import java.util.List;
+import java.util.Locale;
 
 @Component
 @Transactional
@@ -21,7 +23,11 @@ public class ORMDoctorRepositoryImpl implements DoctorRepository {
 
     @Override
     public boolean deleteDoctorById(Long id) {
-        return false;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "DELETE Doctor where id = :id");
+        query.setParameter("id", id);
+        int result = query.executeUpdate();
+        return result == 1;
     }
 
     @Override
@@ -33,46 +39,84 @@ public class ORMDoctorRepositoryImpl implements DoctorRepository {
 
     @Override
     public boolean editDoctor(Long doctorId, Enum infoToEdit, String input) {
-        return false;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "UPDATE Doctor d SET "
+                        + infoToEdit.toString().toLowerCase(Locale.ROOT)
+                        + " = :" + input +" WHERE id = :id");
+        query.setParameter("id", doctorId);
+        query.setParameter(input, input);
+        int result = query.executeUpdate();
+        return result == 1;
     }
 
     @Override
     public List<Doctor> findByName(String name) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT d FROM Doctor d WHERE name = :name");
+        query.setParameter("name", name);
+        return query.getResultList();
     }
 
     @Override
     public List<Doctor> findBySurname(String surname) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT d FROM Doctor d WHERE surname = :surname");
+        query.setParameter("surname", surname);
+        return query.getResultList();
     }
 
     @Override
     public List<Doctor> findByNameAndSurname(String name, String surname) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT d FROM Doctor d WHERE name = :name AND surname = :surname");
+        query.setParameter("name", name);
+        query.setParameter("surname", surname);
+        return query.getResultList();
     }
 
     @Override
     public List<Doctor> findById(Long id) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT d FROM Doctor d WHERE id = :id");
+        query.setParameter("id", id);
+        return query.getResultList();
     }
 
     @Override
     public List<Doctor> findBySpeciality(String speciality) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT d FROM Doctor d WHERE speciality = :speciality");
+        query.setParameter("speciality", speciality);
+        return query.getResultList();
     }
 
     @Override
     public List<Doctor> findByNameAndSpeciality(String name, String speciality) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT d FROM Doctor d WHERE name = :name AND speciality = :speciality");
+        query.setParameter("name", name);
+        query.setParameter("speciality", speciality);
+        return query.getResultList();
     }
 
     @Override
     public List<Doctor> findBySurnameAndSpeciality(String surname, String speciality) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT d FROM Doctor d WHERE surname = :surname AND speciality = :speciality");
+        query.setParameter("surname", surname);
+        query.setParameter("speciality", speciality);
+        return query.getResultList();
     }
 
     @Override
     public List<Doctor> findByNameAndSurnameAndSpeciality(String name, String surname, String speciality) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT d FROM Doctor d WHERE name = :name AND " +
+                        "surname = :surname AND " +
+                        "speciality = :speciality");
+        query.setParameter("name", name);
+        query.setParameter("surname", surname);
+        query.setParameter("speciality", speciality);
+        return query.getResultList();
     }
 }

@@ -6,8 +6,10 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.hibernate.query.Query;
 
 import java.util.List;
+import java.util.Locale;
 
 @Component
 @Transactional
@@ -22,7 +24,14 @@ public class ORMPrescriptionRepositoryImpl implements PrescriptionRepository {
 
     @Override
     public boolean editPrescription(Long prescriptionID, EditPrescriptionEnum prescriptionEnum, String changes) {
-        return false;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "UPDATE Prescription p SET "
+                        + prescriptionEnum.toString().toLowerCase(Locale.ROOT)
+                        + " = :" + changes +" WHERE id = :id");
+        query.setParameter("id", prescriptionID);
+        query.setParameter(changes, changes);
+        int result = query.executeUpdate();
+        return result == 1;
     }
 
     @Override
@@ -34,26 +43,44 @@ public class ORMPrescriptionRepositoryImpl implements PrescriptionRepository {
 
     @Override
     public boolean deletePrescriptionById(Long id) {
-        return false;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "DELETE Prescription where id = :id");
+        query.setParameter("id", id);
+        int result = query.executeUpdate();
+        return result == 1;
     }
 
     @Override
     public List<Prescription> findByPrescriptionId(Long prescriptionId) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT p FROM Prescription p WHERE id = :id");
+        query.setParameter("id", prescriptionId);
+        return query.getResultList();
     }
 
     @Override
     public List<Prescription> findByDoctorId(Long doctorId) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT p FROM Prescription p WHERE doctor_id = :doctor_id");
+        query.setParameter("doctor_id", doctorId);
+        return query.getResultList();
     }
 
     @Override
     public List<Prescription> findByPatientId(Long patientId) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT p FROM Prescription p WHERE patient_id = :patient_id");
+        query.setParameter("patient_id", patientId);
+        return query.getResultList();
     }
 
     @Override
     public List<Prescription> findByDoctorAndPatientId(Long doctorId, Long patientId) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT p FROM Prescription p WHERE doctor_id = :doctor_id AND " +
+                        "patient_id = :patient_id");
+        query.setParameter("doctor_id", doctorId);
+        query.setParameter("patient_id", patientId);
+        return query.getResultList();
     }
 }
