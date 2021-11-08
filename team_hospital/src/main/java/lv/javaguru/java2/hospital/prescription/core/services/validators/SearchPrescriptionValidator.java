@@ -11,12 +11,12 @@ import java.util.List;
 public class SearchPrescriptionValidator {
 
     @Autowired private SearchPrescriptionFieldValidator fieldValidator;
-
+    @Autowired private PrescriptionOrderingValidator prescriptionOrderingValidator;
     @Autowired private PrescriptionPagingValidator prescriptionPagingValidator;
 
     public List<CoreError> validate(SearchPrescriptionRequest request) {
         List<CoreError> errors = fieldValidator.validate(request);
-
+        validateOrderingIfPresent(request, errors);
         validatePagingIfPresent(request, errors);
         return errors;
     }
@@ -25,6 +25,13 @@ public class SearchPrescriptionValidator {
         if(request.getPrescriptionPaging() != null) {
             List<CoreError> pagingErrors = prescriptionPagingValidator.validate(request.getPrescriptionPaging());
             errors.addAll(pagingErrors);
+        }
+    }
+
+    private void validateOrderingIfPresent(SearchPrescriptionRequest request, List<CoreError> errors) {
+        if (request.getPrescriptionOrdering() != null) {
+            List<CoreError> orderingErrors = prescriptionOrderingValidator.validate(request.getPrescriptionOrdering());
+            errors.addAll(orderingErrors);
         }
     }
 
