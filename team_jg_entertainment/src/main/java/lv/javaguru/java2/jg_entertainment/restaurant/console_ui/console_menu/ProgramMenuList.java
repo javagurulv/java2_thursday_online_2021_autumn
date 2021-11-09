@@ -9,18 +9,18 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class ProgramMenuRestaurant {
+public class ProgramMenuList {
 
     private Map<Integer, UIAction> menuNumberToUIActionMap;
     private CheckMenuNumberFromConsole checkNumberFromConsole = new CheckMenuNumberFromConsole();
 
     @Autowired
-    public ProgramMenuRestaurant(List<UIAction> uiAction) {
+    public ProgramMenuList(List<UIAction> uiAction) {
         menuNumberToUIActionMap = new HashMap<>();
         menuNumberToUIActionMap.put(1, findUIAction(uiAction, AddMenuUIAction.class));
         menuNumberToUIActionMap.put(2, findUIAction(uiAction, RemoveMenuUIAction.class));
         menuNumberToUIActionMap.put(3, findUIAction(uiAction, GetAllMenusUIAction.class));
-        menuNumberToUIActionMap.put(4, findUIAction(uiAction, ExitToMainProgramListUIAction.class));//return in main menu(RestaurantProgramList ->mainAction)
+        menuNumberToUIActionMap.put(4, findUIAction(uiAction, ExitToMainProgramListUIAction.class));
         menuNumberToUIActionMap.put(5, findUIAction(uiAction, ExitMenuUIAction.class));
 
     }
@@ -37,7 +37,7 @@ public class ProgramMenuRestaurant {
         System.out.println("1. Add menu to list: ");
         System.out.println("2. Delete menu from list: ");
         System.out.println("3. Show all menus in the list: ");
-        System.out.println("4. Choose that return in MAIN MENU:");//return in main menu(RestaurantProgramList -> mainAction)
+        System.out.println("4. Choose that return in MAIN MENU:");
         System.out.println("5. Exit!");
         System.out.println("");
     }
