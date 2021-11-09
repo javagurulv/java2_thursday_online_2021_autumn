@@ -80,12 +80,12 @@ public class AcceptanceTestForUserPortfolio {
         assertEquals(portfolio.size(), response1.getUser().getPortfolio().size());
         IntStream.rangeClosed(0, portfolio.size() - 1)
                 .forEach(i -> assertTrue(portfolio.contains(response1.getUser().getPortfolio().get(i))));
-//        assertEquals(872.1, response1.getUser().getCash(), 0.01);
+        assertEquals(872.1, response1.getUser().getCash(), 0.01);
 
-//        assertEquals(portfolio.size(), response2.getUser().getPortfolio().size());
-//        IntStream.rangeClosed(0, portfolio.size() - 1)
-//                .forEach(i -> assertTrue(portfolio.contains(response2.getUser().getPortfolio().get(i))));
-//        assertEquals(872.1, response2.getUser().getCash(), 0.01);
+        assertEquals(portfolio.size(), response2.getUser().getPortfolio().size());
+        IntStream.rangeClosed(0, portfolio.size() - 1)
+                .forEach(i -> assertTrue(portfolio.contains(response2.getUser().getPortfolio().get(i))));
+        assertEquals(872.1, response2.getUser().getCash(), 0.01);
     }
 
     public static class MyTrigger implements Trigger {

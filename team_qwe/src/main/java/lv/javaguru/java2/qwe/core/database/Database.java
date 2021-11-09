@@ -15,6 +15,8 @@ public interface Database {
 
     String addBond(Bond bond);
 
+    void editStock(Stock stock);
+
     boolean removeSecurity(String name);
 
     List<Security> getAllSecurityList();

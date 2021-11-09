@@ -8,6 +8,7 @@ import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.NoResultException;
@@ -23,6 +24,7 @@ import java.util.Optional;
 public class OrmUserDataImpl implements UserData {
 
     @Autowired private SessionFactory sessionFactory;
+    @Autowired private JdbcTemplate jdbcTemplate;
     @Autowired private Database database;
     @Autowired private UtilityMethods utils;
 
@@ -79,9 +81,8 @@ public class OrmUserDataImpl implements UserData {
             Query query = sessionFactory.getCurrentSession().createQuery(
                     "SELECT u.cash FROM User u WHERE id = :id");
             query.setParameter("id", userID);
-            Optional<Double> cash = Optional.ofNullable((Double) query.getSingleResult());
-//            System.out.println("WTF?: " + user.get().getPortfolio()); //??????????????????????????
-            return cash;
+            //            System.out.println("WTF?: " + user.get().getPortfolio()); //??????????????????????????
+            return Optional.ofNullable((Double) query.getSingleResult());
         }
         catch (NoResultException e) {
             return Optional.empty();
@@ -90,8 +91,8 @@ public class OrmUserDataImpl implements UserData {
 
     @Override
     public void savePosition(Position position, Long userId) {
-
-
+        jdbcTemplate.update("INSERT INTO users_positions (user_id, security_ticker, amount, purchase_price) VALUES\n" +
+                "(?, ?, ?, ?)", userId, position.getSecurity().getTicker(), position.getAmount(), position.getPurchasePrice());
     }
 
     @Override

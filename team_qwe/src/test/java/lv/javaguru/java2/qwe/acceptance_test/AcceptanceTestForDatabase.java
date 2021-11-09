@@ -21,13 +21,22 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.transaction.Transactional;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.function.Consumer;
+
 import static org.junit.Assert.*;
 import static java.util.List.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {AppConfiguration.class})
 @Sql({"/schema.sql"})
-@Sql("/data.sql")
+@Sql({"/data.sql"})
 public class AcceptanceTestForDatabase {
 
     @Autowired private ApplicationContext appContext;
@@ -36,6 +45,30 @@ public class AcceptanceTestForDatabase {
     public void init() {
         sessionFactory.getCurrentSession().update("RUNSCRIPT FROM 'classpath:schema.sql'");
         sessionFactory.getCurrentSession().update("RUNSCRIPT FROM 'classpath:data.sql'");
+    }*/
+
+/*    @Test
+    public void runAllTestsInParallel() throws ExecutionException, InterruptedException {
+        ExecutorService executorService = Executors.newFixedThreadPool(9);
+        Future<Void> t1 = (Future<Void>) executorService.submit(this::addSecuritiesToDatabaseTest1);
+        Future<Void> t2 = (Future<Void>) executorService.submit(this::addSecuritiesToDatabaseTest2);
+        Future<Void> t3 = (Future<Void>) executorService.submit(this::removeSecuritiesFromDatabaseTest1);
+        Future<Void> t4 = (Future<Void>) executorService.submit(this::removeSecuritiesFromDatabaseTest2);
+        Future<Void> t5 = (Future<Void>) executorService.submit(this::findSecurityByNameInDatabaseTest1);
+        Future<Void> t6 = (Future<Void>) executorService.submit(this::findSecurityByNameInDatabaseTest2);
+        Future<Void> t7 = (Future<Void>) executorService.submit(this::findSecurityByNameInDatabaseTest3);
+        Future<Void> t8 = (Future<Void>) executorService.submit(this::filterStocksByMultipleParametersTest1);
+        Future<Void> t9 = (Future<Void>) executorService.submit(this::filterStocksByMultipleParametersTest2);
+        t1.get();
+        t2.get();
+        t3.get();
+        t4.get();
+        t5.get();
+        t6.get();
+        t7.get();
+        t8.get();
+        t9.get();
+        executorService.shutdown();
     }*/
 
     @Test
@@ -48,6 +81,7 @@ public class AcceptanceTestForDatabase {
         GetAllSecurityListResponse response = getAllSecurityListService().execute(new GetAllSecurityListRequest());
         assertEquals(6, response.getList().size());
         assertEquals("Alibaba", response.getList().get(5).getName());
+
     }
 
     @Test

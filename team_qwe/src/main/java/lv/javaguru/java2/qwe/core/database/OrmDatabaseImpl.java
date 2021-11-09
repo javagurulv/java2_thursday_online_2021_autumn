@@ -30,6 +30,11 @@ public class OrmDatabaseImpl implements Database{
     }
 
     @Override
+    public void editStock(Stock stock) {
+        sessionFactory.getCurrentSession().update(stock);
+    }
+
+    @Override
     public boolean removeSecurity(String ticker) {
         String sql = (ticker.contains(" ")) ? "DELETE Stock WHERE ticker = :ticker" :
                 "DELETE Bond WHERE ticker = :ticker";
