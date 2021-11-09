@@ -1,8 +1,6 @@
 package lv.javaguru.java2.qwe.core.database;
 
 import lv.javaguru.java2.qwe.core.domain.Position;
-import lv.javaguru.java2.qwe.core.domain.Security;
-import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.domain.User;
 import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.hibernate.SessionFactory;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Component;
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;

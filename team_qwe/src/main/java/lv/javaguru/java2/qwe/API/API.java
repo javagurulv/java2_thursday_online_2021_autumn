@@ -23,7 +23,8 @@ import java.util.concurrent.TimeUnit;
 @Transactional
 public class API {
 
-    @Autowired private Database database;
+    @Autowired
+    private Database database;
 
     @Value("${realTime.marketPrice.enabled}")
     private boolean realMarketPriceDataEnabled;
@@ -46,37 +47,41 @@ public class API {
 
     private void updateMarketPrice(String ticker) {
         Double realTimePrice = getQuote(ticker);
-        Optional<Security> stock = database.findSecurityByTickerOrName(ticker + " US");
-        System.out.println("REAL-TIME PRICE IS: " + realTimePrice);
-        if (stock.isPresent() && realTimePrice != null ) {
-            Stock stock1 = (Stock) stock.get();
-            stock1.setMarketPrice(realTimePrice);
-            System.out.println("NEW PRICE IS SET!");
+        Optional<Security> security = database.findSecurityByTickerOrName(ticker + " US");
+        if (security.isPresent() && realTimePrice != null) {
+            Stock stock = (Stock) security.get();
+            stock.setMarketPrice(realTimePrice);
             try {
-                database.editStock(stock1);
+                database.updateStock(stock);
             } catch (Exception e) {
-                System.out.println("ERROR!");
                 e.printStackTrace();
             }
-            System.out.println("PRICE UPDATED!");
         }
     }
 
-    private static Double getQuote(String ticker) {
-        try {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://yfapi.net/v6/finance/quote?region=US&lang=en&symbols=" + ticker))
-                    .header("x-api-key", "") // <== ввести свой API key!
-                    .method("GET", HttpRequest.BodyPublishers.noBody())
-                    .build();
-            HttpResponse<String> response = HttpClient.newHttpClient()
-                    .send(request, HttpResponse.BodyHandlers.ofString());
+    private Double getQuote(String ticker) throws NumberFormatException {
+        HttpResponse<String> response = sendHttpRequest(ticker);
+        if (response != null) {
             String[] lines = response.body().split(",");
             Optional<String> target = Arrays.stream(lines)
                     .filter(line -> line.contains("regularMarketPrice"))
                     .findAny();
             String lastPrice = target.map(s -> s.substring(21)).orElse("-1");
             return Double.parseDouble(lastPrice);
+        } else {
+            return null;
+        }
+    }
+
+    private HttpResponse<String> sendHttpRequest(String ticker) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://yfapi.net/v6/finance/quote?region=US&lang=en&symbols=" + ticker))
+                    .header("x-api-key", "") // <== ввести свой API key!
+                    .method("GET", HttpRequest.BodyPublishers.noBody())
+                    .build();
+            return HttpClient.newHttpClient()
+                    .send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             return null;
