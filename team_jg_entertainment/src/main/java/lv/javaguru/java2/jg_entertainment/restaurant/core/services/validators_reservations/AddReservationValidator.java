@@ -105,7 +105,7 @@ public class AddReservationValidator {
 
     private Optional<CoreError> validateTableIfPresent(AddReservationRequest request) {
         return request.getTableID() == null || request.getTableID().isEmpty()
-                ? Optional.empty() : tableDatabase.findTabletById(Long.valueOf(request.getTableID())).isEmpty()
+                ? Optional.empty() : tableDatabase.findTableById(Long.valueOf(request.getTableID())).isEmpty()
                 ? Optional.of(new CoreError("info about table", "was not found")) : Optional.empty();
 
     }

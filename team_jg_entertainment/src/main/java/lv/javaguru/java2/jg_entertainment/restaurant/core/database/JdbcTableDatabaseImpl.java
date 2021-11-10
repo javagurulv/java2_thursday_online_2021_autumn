@@ -26,7 +26,7 @@ public class JdbcTableDatabaseImpl implements DatabaseTable {
     }
 
     @Override
-    public List<Table> findTabletById(Long idTable) {
+    public List<Table> findTableById(Long idTable) {
         String sql = "SELECT * FROM tables WHERE table_id = ?";
         Object[] args = new Object[] {idTable};
         return jdbcTemplate.query(sql, args, new TableRowMapper());

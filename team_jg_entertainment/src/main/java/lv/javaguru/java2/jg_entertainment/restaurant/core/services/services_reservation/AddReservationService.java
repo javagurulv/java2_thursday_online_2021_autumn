@@ -15,11 +15,8 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -38,7 +35,7 @@ public class AddReservationService {
         }
         Visitors visitors = databaseVisitors.findClientById(Long.valueOf(request.getVisitorID())).get(0);
         Menu menu = databaseMenu.findById(Long.valueOf(request.getMenuID())).get(0);
-        Table table = databaseTable.findTabletById(Long.valueOf(request.getTableID())).get(0);
+        Table table = databaseTable.findTableById(Long.valueOf(request.getTableID())).get(0);
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(request.getReservationDate()));
 
 

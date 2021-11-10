@@ -63,7 +63,7 @@ public class DatabaseReservationImpl implements DatabaseReservation {
         if (reservationToEditOpt.isPresent()) {
             Reservation reservationToEdit = reservationToEditOpt.get();
             if (userInput.equals(EditReservationEnum.TABLE_ID)) {
-                reservationToEdit.setTable(databaseTable.findTabletById(Long.parseLong(changes)).get(0));
+                reservationToEdit.setTable(databaseTable.findTableById(Long.parseLong(changes)).get(0));
                 isReservationEdited = true;
             } else if (userInput.equals(EditReservationEnum.CLIENT_ID)) {
                 reservationToEdit.setVisitor(databaseVisitors.findClientById(Long.parseLong(changes)).get(0));
