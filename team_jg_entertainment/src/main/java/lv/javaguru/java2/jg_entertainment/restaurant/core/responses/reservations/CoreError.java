@@ -1,5 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations;
 
+import java.util.StringJoiner;
+
 public class CoreError {
 
     private String field;
@@ -18,5 +20,11 @@ public class CoreError {
         return messageError;
     }
 
-
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", CoreError.class.getSimpleName() + "[", "]")
+                .add("field='" + field + "'")
+                .add("messageError='" + messageError + "'")
+                .toString();
+    }
 }

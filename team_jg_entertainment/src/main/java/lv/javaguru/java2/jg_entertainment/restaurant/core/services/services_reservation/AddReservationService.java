@@ -15,44 +15,38 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Component
 public class AddReservationService {
 
-    @Autowired
-    private DatabaseVisitorsImpl databaseVisitors;
-    @Autowired
-    private DatabaseMenuImpl databaseMenu;
-    @Autowired
-    private DatabaseTableImpl databaseTable;
-    @Autowired
-    private DatabaseReservationImpl databaseReservation;
-    @Autowired
-    private AddReservationValidator validator;
+    @Autowired    private DatabaseVisitorsImpl databaseVisitors;
+    @Autowired    private DatabaseMenuImpl databaseMenu;
+    @Autowired    private DatabaseTableImpl databaseTable;
+    @Autowired    private DatabaseReservationImpl databaseReservation;
+    @Autowired    private AddReservationValidator validator;
 
     public AddReservationResponse execute(AddReservationRequest request) {
-
         List<CoreError> errors = validator.validate(request);
         if (!errors.isEmpty()) {
             return new AddReservationResponse(errors);
         }
-        Visitors visitors = visitorInformation(request);
-        Menu menu = menuInformation(request);
-        Table table = tableInformation(request);
-        Date date = dateInformation(request);
+        Visitors visitors = databaseVisitors.findClientById(Long.valueOf(request.getVisitorID())).get(0);
+        Menu menu = databaseMenu.findById(Long.valueOf(request.getMenuID())).get(0);
+        Table table = databaseTable.findTableById(Long.valueOf(request.getTableID())).get(0);
+        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(request.getReservationDate()));
+
 
         Reservation reservation = new Reservation(visitors, menu, table, date);
         databaseReservation.addReservation(reservation);
         return new AddReservationResponse(reservation);
     }
-
+/*
     private Visitors visitorInformation(AddReservationRequest request) {
         Visitors visitors =
-                databaseVisitors.findVisitorsByNameAndTelephoneNumber(request.getVisitorName(), request.getTelephoneNumber()).get(0);
+                databaseVisitors.findByNameVisitor(request.getVisitorName()).get(0);
         return visitors;
     }
 
@@ -75,4 +69,6 @@ public class AddReservationService {
         }
         return dateReservation;
     }
+
+ */
 }

@@ -8,7 +8,7 @@ public interface DatabaseTable {
 
     void save(Table table);
 
-    List<Table> findTabletById(Long idTable);//*
+    List<Table> findTableById(Long idTable);//*
 
     List<Table> findByTitleTable(String titleTable);//*
 
