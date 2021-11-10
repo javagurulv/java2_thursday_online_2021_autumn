@@ -77,7 +77,7 @@ public class API {
         try {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("https://yfapi.net/v6/finance/quote?region=US&lang=en&symbols=" + ticker))
-                    .header("x-api-key", "69DeXzYODO5uwFXrwj38GxFCu06P98X9vO6PgkI1") // <== ввести свой API key!
+                    .header("x-api-key", "") // <== ввести свой API key!
                     .method("GET", HttpRequest.BodyPublishers.noBody())
                     .build();
             return HttpClient.newHttpClient()

@@ -33,8 +33,6 @@ public class BuyStockMarketOrderUIAction implements UIAction {
                 database.findSecurityByTickerOrName(ticker).get(),
                 quantity,
                 api.getQuote(ticker));
-        System.out.println("CLIENT HAS " + request.getUser().getCash());
-        System.out.println("MARKET PRICE OF " + request.getSecurity().getTicker() + " IS " + request.getRealTimePrice());
         BuyStockMarketOrderResponse response = service.execute(request);
         printResponse(response);
     }

@@ -2,8 +2,6 @@ package lv.javaguru.java2.qwe.core.services.validator;
 
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.database.UserData;
-import lv.javaguru.java2.qwe.core.domain.User;
-import lv.javaguru.java2.qwe.core.requests.user_requests.AddUserRequest;
 import lv.javaguru.java2.qwe.core.requests.user_requests.BuyStockMarketOrderRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.utils.UtilityMethods;
@@ -25,16 +23,18 @@ public class BuyStockMarketOrderValidator {
     @Autowired private UtilityMethods utils;
 
     private final Map<Predicate<BuyStockMarketOrderRequest>, CoreError> validator = Map.ofEntries(
-            entry(request -> request.getSecurity().getTicker().length() < 1 || request.getSecurity().getTicker().length() > 10,
-                    new CoreError("Ticker", "1 to 10 symbols required!")),
             entry(request -> request.getSecurity() == null,
                     new CoreError("Security", "no security with such id in the database!")),
             entry(request -> request.getUser() == null,
                     new CoreError("User", "no user with such name exists in the database!")),
             entry(request -> utils.isNotDouble(request.getQuantity()),
                     new CoreError("Quantity", "must be double!")),
-            entry(request -> request.getUser() != null && (Double.parseDouble(request.getQuantity()) * request.getRealTimePrice()) > request.getUser().getCash(),
-                    new CoreError("Cash", "no enough money to execute this trade!"))
+            entry(request -> !utils.isNotDouble(request.getQuantity()) && Double.parseDouble(request.getQuantity()) <= 0,
+                    new CoreError("Quantity", "must be higher then 0!")),
+            entry(request -> request.getUser() != null &&
+                            !utils.isNotDouble(request.getQuantity()) &&
+                            (Double.parseDouble(request.getQuantity()) * request.getRealTimePrice()) > request.getUser().getCash(),
+                    new CoreError("Cash", "not enough money to execute this trade!"))
     );
 
     public List<CoreError> validate(BuyStockMarketOrderRequest request) {
