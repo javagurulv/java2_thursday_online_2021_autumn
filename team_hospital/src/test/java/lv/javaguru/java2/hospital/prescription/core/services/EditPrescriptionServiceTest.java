@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services;
 
-import lv.javaguru.java2.hospital.database.PrescriptionDatabase;
+import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionEnum;
 import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 public class EditPrescriptionServiceTest {
 
-    @Mock private PrescriptionDatabase database;
+    @Mock private PrescriptionRepository database;
     @Mock private EditPrescriptionValidator validator;
     @InjectMocks EditPrescriptionService service;
 

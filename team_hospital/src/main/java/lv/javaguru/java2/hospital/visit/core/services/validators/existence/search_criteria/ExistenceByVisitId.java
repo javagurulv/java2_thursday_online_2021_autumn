@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria;
 
-import lv.javaguru.java2.hospital.database.VisitDatabase;
+import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
@@ -13,7 +13,7 @@ import java.util.Optional;
 public class ExistenceByVisitId implements VisitExistenceBySearchCriteria {
 
     @Autowired
-    private VisitDatabase database;
+    private VisitRepository database;
 
     @Override
     public boolean canValidate(SearchVisitRequest request) {

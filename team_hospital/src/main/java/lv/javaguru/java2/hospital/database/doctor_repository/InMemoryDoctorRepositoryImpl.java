@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.database;
+package lv.javaguru.java2.hospital.database.doctor_repository;
 
 import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorEnum;
 import lv.javaguru.java2.hospital.domain.Doctor;
@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 //@Component
-public class DoctorDatabaseImpl implements DoctorDatabase {
+public class InMemoryDoctorRepositoryImpl implements DoctorRepository {
 
     private Long nextId = 1L;
     private List<Doctor> doctors = new ArrayList<>();

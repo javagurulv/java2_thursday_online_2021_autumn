@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.database;
+package lv.javaguru.java2.hospital.database.visit_repository;
 
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
@@ -6,7 +6,7 @@ import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface VisitDatabase {
+public interface VisitRepository {
 
     void recordVisit(Visit visit);
 

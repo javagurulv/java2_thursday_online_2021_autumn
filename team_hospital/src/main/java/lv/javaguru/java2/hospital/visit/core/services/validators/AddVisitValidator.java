@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabase;
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.visit.core.checkers.VisitLongNumChecker;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
@@ -16,8 +16,8 @@ import java.util.Optional;
 @Component
 public class AddVisitValidator {
 
-    @Autowired private PatientDatabase patientDatabase;
-    @Autowired private DoctorDatabase doctorDatabase;
+    @Autowired private PatientRepository patientRepository;
+    @Autowired private DoctorRepository doctorRepository;
     @Autowired private DateValidatorExecution dateValidator;
     @Autowired private VisitLongNumChecker longNumChecker;
 
@@ -63,13 +63,13 @@ public class AddVisitValidator {
 
     private Optional<CoreError> validatePatientExistence(AddVisitRequest request) {
         return request.getPatientID() == null || request.getPatientID().isEmpty()
-                ? Optional.empty() : patientDatabase.findById(Long.valueOf(request.getPatientID())).isEmpty()
+                ? Optional.empty() : patientRepository.findById(Long.valueOf(request.getPatientID())).isEmpty()
                 ? Optional.of(new CoreError("Patient", "does not exist!")) : Optional.empty();
     }
 
     private Optional<CoreError> validateDoctorExistence(AddVisitRequest request) {
         return request.getDoctorsID() == null || request.getDoctorsID().isEmpty()
-                ? Optional.empty() : doctorDatabase.findById(Long.valueOf(request.getDoctorsID())).isEmpty()
+                ? Optional.empty() : doctorRepository.findById(Long.valueOf(request.getDoctorsID())).isEmpty()
                 ? Optional.of(new CoreError("Doctor", "does not exist!")) : Optional.empty();
     }
 

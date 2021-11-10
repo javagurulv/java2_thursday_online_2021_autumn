@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services.search_criteria;
 
-import lv.javaguru.java2.hospital.database.PrescriptionDatabase;
+import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Prescription;
 import lv.javaguru.java2.hospital.prescription.core.requests.SearchPrescriptionRequest;
 
@@ -8,9 +8,9 @@ import java.util.List;
 
 public class PrescriptionIdSearchCriteria implements PrescriptionSearchCriteria{
 
-    private final PrescriptionDatabase database;
+    private final PrescriptionRepository database;
 
-    public PrescriptionIdSearchCriteria(PrescriptionDatabase database) {
+    public PrescriptionIdSearchCriteria(PrescriptionRepository database) {
         this.database = database;
     }
 

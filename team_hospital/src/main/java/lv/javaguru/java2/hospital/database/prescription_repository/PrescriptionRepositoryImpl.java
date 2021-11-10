@@ -1,9 +1,10 @@
-package lv.javaguru.java2.hospital.database;
+package lv.javaguru.java2.hospital.database.prescription_repository;
 
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Prescription;
 import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionEnum;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +13,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 //@Component
-public class PrescriptionDatabaseImpl implements PrescriptionDatabase {
+public class PrescriptionRepositoryImpl implements PrescriptionRepository {
 
     private Long nextId = 1L;
     private List<Prescription> prescriptions = new ArrayList<>();
-    @Autowired private PatientDatabase patientDatabase;
-    @Autowired private DoctorDatabase doctorDatabase;
+    @Autowired private PatientRepository patientRepository;
+    @Autowired private DoctorRepository doctorRepository;
 
     @Override
     public void addPrescription(Prescription prescription) {
@@ -34,7 +35,7 @@ public class PrescriptionDatabaseImpl implements PrescriptionDatabase {
         if (prescriptionToEdit.isPresent()) {
             Prescription prescription = prescriptionToEdit.get();
             if (prescriptionEnum.equals(EditPrescriptionEnum.PATIENT)) {
-                prescription.setPatient(patientDatabase.findById(Long.parseLong(changes)).get(0));
+                prescription.setPatient(patientRepository.findById(Long.parseLong(changes)).get(0));
                 return true;
             } else if (prescriptionEnum.equals(EditPrescriptionEnum.QUANTITY)) {
                 prescription.setQuantity(Integer.parseInt(changes));

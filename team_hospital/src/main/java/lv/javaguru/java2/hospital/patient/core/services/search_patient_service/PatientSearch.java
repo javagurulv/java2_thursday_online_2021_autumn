@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.search_patient_service;
 
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.services.search_patient_service.search_criteria.*;
@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class PatientSearch {
 
-    @Autowired private PatientDatabase database;
+    @Autowired private PatientRepository database;
 
     public List<Patient> execute(SearchPatientsRequest request) {
         PatientsSearchCriteria[] patientsSearchCriteria = getPatientsSearchCriteria();

@@ -1,8 +1,8 @@
 package lv.javaguru.java2.hospital.prescription.core.services;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabase;
-import lv.javaguru.java2.hospital.database.PatientDatabase;
-import lv.javaguru.java2.hospital.database.PrescriptionDatabase;
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
+import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.prescription.core.requests.AddPrescriptionRequest;
@@ -30,9 +30,9 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(JUnitPlatform.class)
 class AddPrescriptionServiceTest {
 
-    @Mock private PrescriptionDatabase database;
-    @Mock private PatientDatabase patientDatabase;
-    @Mock private DoctorDatabase doctorDatabase;
+    @Mock private PrescriptionRepository database;
+    @Mock private PatientRepository patientRepository;
+    @Mock private DoctorRepository doctorRepository;
     @Mock private AddPrescriptionValidator validator;
     @InjectMocks private AddPrescriptionService service;
 
@@ -72,8 +72,8 @@ class AddPrescriptionServiceTest {
         List<Patient> patients = new ArrayList<>();
         patients.add(patient);
         patient.setId(patientId);
-        Mockito.when(patientDatabase.findById(patientId)).thenReturn(patients);
-        Mockito.when(doctorDatabase.findById(doctorId)).thenReturn(doctors);
+        Mockito.when(patientRepository.findById(patientId)).thenReturn(patients);
+        Mockito.when(doctorRepository.findById(doctorId)).thenReturn(doctors);
 
         AddPrescriptionResponse response = service.execute(request);
         assertFalse(response.hasErrors());

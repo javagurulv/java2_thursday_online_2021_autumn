@@ -1,11 +1,11 @@
-package lv.javaguru.java2.hospital.database;
+package lv.javaguru.java2.hospital.database.patient_repository;
 
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 
 import java.util.List;
 
-public interface PatientDatabase {
+public interface PatientRepository {
     void add(Patient patient);
 
     List<Patient> findById(Long id);

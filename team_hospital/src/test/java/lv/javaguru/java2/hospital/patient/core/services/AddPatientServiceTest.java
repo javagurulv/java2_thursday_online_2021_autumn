@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.AddPatientResponse;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
@@ -26,7 +26,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(JUnitPlatform.class)
 class AddPatientServiceTest {
 
-    @Mock private PatientDatabase patientDatabase;
+    @Mock private PatientRepository patientRepository;
     @Mock private AddPatientValidator validator;
     @InjectMocks private AddPatientService addPatientService;
 
@@ -43,7 +43,7 @@ class AddPatientServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Name");
         assertEquals(response.getErrors().get(0).getDescription(), "must not be empty!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
     }
 
     @Test
@@ -59,7 +59,7 @@ class AddPatientServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Surname");
         assertEquals(response.getErrors().get(0).getDescription(), "must not be empty!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
     }
 
 
@@ -76,7 +76,7 @@ class AddPatientServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Personal code");
         assertEquals(response.getErrors().get(0).getDescription(), "must not be empty!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
     }
 
     @Test
@@ -92,7 +92,7 @@ class AddPatientServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Personal code");
         assertEquals(response.getErrors().get(0).getDescription(), "must consist of 11 symbols!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
     }
 
     @Test
@@ -108,7 +108,7 @@ class AddPatientServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Personal code");
         assertEquals(response.getErrors().get(0).getDescription(), "must consist only from numbers!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
     }
 
     @Test
@@ -124,7 +124,7 @@ class AddPatientServiceTest {
         assertEquals(response.getErrors().get(0).getField(), "Patient");
         assertEquals(response.getErrors().get(0).getDescription(), "already exist!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
     }
 
     @Test
@@ -133,6 +133,6 @@ class AddPatientServiceTest {
         AddPatientRequest request = new AddPatientRequest("name", "surname", "12345678901");
         AddPatientResponse response = addPatientService.execute(request);
         assertFalse(response.hasErrors());
-        Mockito.verify(patientDatabase).add(argThat(new PatientMatcher("name", "surname", "12345678901")));
+        Mockito.verify(patientRepository).add(argThat(new PatientMatcher("name", "surname", "12345678901")));
     }
 }

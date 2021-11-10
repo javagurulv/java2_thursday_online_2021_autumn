@@ -1,11 +1,10 @@
-package lv.javaguru.java2.hospital.database;
+package lv.javaguru.java2.hospital.database.doctor_repository;
 
 import lv.javaguru.java2.hospital.domain.Doctor;
-import lv.javaguru.java2.hospital.domain.Visit;
 
 import java.util.List;
 
-public interface DoctorDatabase {
+public interface DoctorRepository {
 
     void addDoctor(Doctor doctor);
 

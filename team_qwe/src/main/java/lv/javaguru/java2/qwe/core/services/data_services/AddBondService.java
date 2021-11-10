@@ -10,6 +10,7 @@ import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -38,7 +39,7 @@ public class AddBondService {
                 Double.parseDouble(request.getCoupon()),
                 request.getRating(),
                 Integer.parseInt(request.getNominal()),
-                request.getMaturity()
+                LocalDate.parse(request.getMaturity())
         );
     }
 

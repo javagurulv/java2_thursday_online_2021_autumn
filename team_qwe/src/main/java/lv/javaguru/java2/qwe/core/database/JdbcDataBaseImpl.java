@@ -11,12 +11,12 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
-@Component
-public class JdbcDataBaseImpl implements Database {
+//@Component
+public class JdbcDataBaseImpl /*implements Database*/ {
 
     @Autowired private JdbcTemplate jdbcTemplate;
 
-    @Override
+//    @Override
     public void addStock(Stock stock) {
         jdbcTemplate.update("INSERT INTO stocks (ticker, name, industry, currency, market_price, dividend_yield, risk_weight) VALUES\n" +
                         "(?, ?, ?, ?, ?, ?, ?)",
@@ -24,7 +24,7 @@ public class JdbcDataBaseImpl implements Database {
                 stock.getMarketPrice(), stock.getDividends(), stock.getRiskWeight());
     }
 
-    @Override
+//    @Override
     public void addBond(Bond bond) {
         jdbcTemplate.update("INSERT INTO bonds (ticker, name, industry, currency, market_price, coupon, rating, nominal, maturity) VALUES\n" +
                         "(?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -32,7 +32,7 @@ public class JdbcDataBaseImpl implements Database {
                 bond.getCoupon(), bond.getRating(), bond.getNominal(), bond.getMaturity());
     }
 
-    @Override
+//    @Override
     public boolean removeSecurity(String ticker) {
         return (ticker.contains(" ")) ? jdbcTemplate.update("DELETE FROM stocks\n" +
                 "  WHERE ticker = ?", ticker) == 1
@@ -40,13 +40,13 @@ public class JdbcDataBaseImpl implements Database {
                 "  WHERE ticker = ?", ticker) == 1;
     }
 
-    @Override
+//    @Override
     public List<Security> getAllSecurityList() {
         String sql = "SELECT * FROM stocks";
         return jdbcTemplate.query(sql, new SecurityRowMapper());
     }
 
-    @Override
+//    @Override
     public Optional<Security> findSecurityByTickerOrName(String name) {
         String sql = "SELECT * FROM stocks\n" +
                 "  WHERE ticker = ? OR name = ?";
@@ -58,7 +58,7 @@ public class JdbcDataBaseImpl implements Database {
         }
     }
 
-    @Override
+//    @Override
     public List<Security> filterStocksByMultipleParameters(String sql) {
         return jdbcTemplate.query(sql, new SecurityRowMapper());
     }

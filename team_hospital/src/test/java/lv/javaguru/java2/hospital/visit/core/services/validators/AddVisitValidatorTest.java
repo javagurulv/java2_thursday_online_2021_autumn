@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabase;
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.visit.core.checkers.VisitLongNumChecker;
@@ -27,8 +27,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class AddVisitValidatorTest {
 
-    @Mock PatientDatabase patientDatabase;
-    @Mock DoctorDatabase doctorDatabase;
+    @Mock
+    PatientRepository patientRepository;
+    @Mock
+    DoctorRepository doctorRepository;
     @Mock DateValidatorExecution dateValidator;
     @Mock VisitLongNumChecker longNumChecker;
     @InjectMocks AddVisitValidator addVisitValidator;
@@ -46,8 +48,8 @@ class AddVisitValidatorTest {
         assertEquals(errorList.get(0).getField(), "Patient ID");
         assertEquals(errorList.get(0).getDescription(), "must not be empty!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
-        Mockito.verifyNoInteractions(doctorDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
+        Mockito.verifyNoInteractions(doctorRepository);
     }
 
 
@@ -67,8 +69,8 @@ class AddVisitValidatorTest {
         assertEquals(errorList.get(0).getField(), "Patient ID");
         assertEquals(errorList.get(0).getDescription(), "must be a number!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
-        Mockito.verifyNoInteractions(doctorDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
+        Mockito.verifyNoInteractions(doctorRepository);
     }
 
     @Test
@@ -84,8 +86,8 @@ class AddVisitValidatorTest {
         assertEquals(errorList.get(0).getField(), "Doctor ID");
         assertEquals(errorList.get(0).getDescription(), "must not be empty!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
-        Mockito.verifyNoInteractions(doctorDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
+        Mockito.verifyNoInteractions(doctorRepository);
     }
 
     @Test
@@ -106,8 +108,8 @@ class AddVisitValidatorTest {
         assertEquals(errorList.get(0).getField(), "Doctor ID");
         assertEquals(errorList.get(0).getDescription(), "must be a number!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
-        Mockito.verifyNoInteractions(doctorDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
+        Mockito.verifyNoInteractions(doctorRepository);
     }
 
     @Test
@@ -123,8 +125,8 @@ class AddVisitValidatorTest {
         assertEquals(errorList.get(0).getField(), "Visit date");
         assertEquals(errorList.get(0).getDescription(), "must not be empty!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
-        Mockito.verifyNoInteractions(doctorDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
+        Mockito.verifyNoInteractions(doctorRepository);
     }
 
     @Test
@@ -137,9 +139,9 @@ class AddVisitValidatorTest {
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("name", "surname", "speciality"));
 
-        Mockito.when(patientDatabase.findById(Long.valueOf(addVisitRequest.getPatientID())))
+        Mockito.when(patientRepository.findById(Long.valueOf(addVisitRequest.getPatientID())))
                 .thenReturn(new ArrayList<>());
-        Mockito.when(doctorDatabase.findById(Long.valueOf(addVisitRequest.getDoctorsID())))
+        Mockito.when(doctorRepository.findById(Long.valueOf(addVisitRequest.getDoctorsID())))
                 .thenReturn(doctors);
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
@@ -159,9 +161,9 @@ class AddVisitValidatorTest {
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
 
-        Mockito.when(patientDatabase.findById(Long.valueOf(addVisitRequest.getPatientID())))
+        Mockito.when(patientRepository.findById(Long.valueOf(addVisitRequest.getPatientID())))
                 .thenReturn(patients);
-        Mockito.when(doctorDatabase.findById(Long.valueOf(addVisitRequest.getDoctorsID())))
+        Mockito.when(doctorRepository.findById(Long.valueOf(addVisitRequest.getDoctorsID())))
                 .thenReturn(new ArrayList<>());
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
@@ -190,8 +192,8 @@ class AddVisitValidatorTest {
         assertEquals(errorList.get(0).getField(), "Date");
         assertEquals(errorList.get(0).getDescription(), "input is incorrect!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
-        Mockito.verifyNoInteractions(doctorDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
+        Mockito.verifyNoInteractions(doctorRepository);
     }
 
     @Test
@@ -213,8 +215,8 @@ class AddVisitValidatorTest {
         assertEquals(errorList.get(0).getField(), "Date");
         assertEquals(errorList.get(0).getDescription(), "is not in the future!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
-        Mockito.verifyNoInteractions(doctorDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
+        Mockito.verifyNoInteractions(doctorRepository);
     }
 
     @Test
@@ -236,8 +238,8 @@ class AddVisitValidatorTest {
         assertEquals(errorList.get(0).getField(), "Date");
         assertEquals(errorList.get(0).getDescription(), "is not working day!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
-        Mockito.verifyNoInteractions(doctorDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
+        Mockito.verifyNoInteractions(doctorRepository);
     }
 
     @Test
@@ -259,8 +261,8 @@ class AddVisitValidatorTest {
         assertEquals(errorList.get(0).getField(), "Date");
         assertEquals(errorList.get(0).getDescription(), "is not working hour!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
-        Mockito.verifyNoInteractions(doctorDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
+        Mockito.verifyNoInteractions(doctorRepository);
     }
 
     @Test
@@ -288,8 +290,8 @@ class AddVisitValidatorTest {
         assertEquals(errorList.get(2).getField(), "Date");
         assertEquals(errorList.get(2).getDescription(), "is not working hour!");
 
-        Mockito.verifyNoInteractions(patientDatabase);
-        Mockito.verifyNoInteractions(doctorDatabase);
+        Mockito.verifyNoInteractions(patientRepository);
+        Mockito.verifyNoInteractions(doctorRepository);
     }
 
     @Test
@@ -304,9 +306,9 @@ class AddVisitValidatorTest {
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("name", "surname", "speciality"));
 
-        Mockito.when(patientDatabase.findById(Long.valueOf(addVisitRequest.getPatientID())))
+        Mockito.when(patientRepository.findById(Long.valueOf(addVisitRequest.getPatientID())))
                 .thenReturn(patients);
-        Mockito.when(doctorDatabase.findById(Long.valueOf(addVisitRequest.getDoctorsID())))
+        Mockito.when(doctorRepository.findById(Long.valueOf(addVisitRequest.getDoctorsID())))
                 .thenReturn(doctors);
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);

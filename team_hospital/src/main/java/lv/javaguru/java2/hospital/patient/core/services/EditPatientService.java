@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
@@ -15,7 +15,7 @@ import java.util.Locale;
 @Component
 public class EditPatientService {
 
-    @Autowired private PatientDatabase database;
+    @Autowired private PatientRepository database;
     @Autowired private EditPatientValidator validator;
 
     public EditPatientResponse execute(EditPatientRequest request) {

@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services.search_criteria;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabase;
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @RunWith(JUnitPlatform.class)
 class NameAndSurnameAndSpecialitySearchCriteriaTest {
 
-    @Mock private DoctorDatabase database;
+    @Mock private DoctorRepository database;
     @InjectMocks NameAndSurnameAndSpecialitySearchCriteria searchCriteria;
 
     @Test

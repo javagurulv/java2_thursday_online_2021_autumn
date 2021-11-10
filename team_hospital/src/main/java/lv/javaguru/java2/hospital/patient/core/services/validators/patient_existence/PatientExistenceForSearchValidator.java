@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence;
 
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.existence_validators_for_search_criteria.*;
@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class PatientExistenceForSearchValidator {
 
-    @Autowired private PatientDatabase database;
+    @Autowired private PatientRepository database;
 
     public List<CoreError> execute(SearchPatientsRequest request) {
         List<CoreError> errors = new ArrayList<>();

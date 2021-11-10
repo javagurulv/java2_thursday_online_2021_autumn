@@ -1,15 +1,14 @@
-package lv.javaguru.java2.hospital.database;
+package lv.javaguru.java2.hospital.database.doctor_repository;
 
 import lv.javaguru.java2.hospital.domain.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Locale;
 
-@Component
-public class JdbcDoctorDatabaseImpl implements DoctorDatabase {
+//@Component
+public class JDBCDoctorRepositoryImpl implements DoctorRepository {
 
     @Autowired private JdbcTemplate jdbcTemplate;
     @Autowired private DoctorRowMapper doctorRowMapper;

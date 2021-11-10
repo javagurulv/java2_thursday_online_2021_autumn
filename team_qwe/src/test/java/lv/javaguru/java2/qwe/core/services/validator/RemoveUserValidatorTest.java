@@ -29,9 +29,9 @@ public class RemoveUserValidatorTest {
         jdbcTemplate.update("RUNSCRIPT FROM 'classpath:schema.sql'");
         jdbcTemplate.update("INSERT INTO stocks VALUES('AAPL US','Apple Inc.','Technology','USD',148.19,0.59,1)");
         jdbcTemplate.update("INSERT INTO users (name, age, type, initial_investment, cash, portfolio_generation_date, risk_tolerance) VALUES\n" +
-                "  ('Alexander', 40, 'SUPER_RICH', 1000000.00, 1000000.00, NULL, 5),\n" +
-                "  ('Vladimir', 78, 'LOWER_MIDDLE', 30000, 30000, NULL, 1);");
-        jdbcTemplate.update("INSERT INTO users_positions VALUES\n" +
+                "  ('Alexander', 40, 4, 1000000.00, 1000000.00, NULL, 5),\n" +
+                "  ('Vladimir', 78, 0, 30000, 30000, NULL, 1);");
+        jdbcTemplate.update("INSERT INTO users_positions (user_id, security_ticker, amount, purchase_price) VALUES\n" +
                 "  (1,'AAPL US',1000,148.19);");
     }
 

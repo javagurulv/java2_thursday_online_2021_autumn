@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import lv.javaguru.java2.hospital.patient.core.services.checkers.PersonalCodeChecker;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class AddPatientValidator {
 
     @Autowired
-    private PatientDatabase database;
+    private PatientRepository database;
     @Autowired
     private PersonalCodeChecker personalCodeChecker;
 

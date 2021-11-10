@@ -1,16 +1,15 @@
-package lv.javaguru.java2.hospital.database;
+package lv.javaguru.java2.hospital.database.prescription_repository;
 
 import lv.javaguru.java2.hospital.domain.Prescription;
 import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Locale;
 
-@Component
-public class JdbcPrescriptionDatabaseImpl implements PrescriptionDatabase{
+//@Component
+public class JDBCPrescriptionRepositoryImpl implements PrescriptionRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

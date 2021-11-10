@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.existence;
 
-import lv.javaguru.java2.hospital.database.VisitDatabase;
+import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.util.Optional;
 public class VisitExistenceByIdValidator {
 
     @Autowired
-    private VisitDatabase database;
+    private VisitRepository database;
 
     public Optional<CoreError> validateExistenceById(Long id) {
         for (Visit visit : database.getAllVisits()) {

@@ -7,6 +7,7 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.*;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.data_responses.FilterStocksByMultipleParametersResponse;
 import lv.javaguru.java2.qwe.core.services.validator.FilterStocksByMultipleParametersValidator;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
@@ -51,6 +52,7 @@ public class FilterStocksByMultipleParametersServiceTest {
 
     }
 
+    @Ignore
     @Test
     public void shouldReturnFilteredSecurityList1() {
 
@@ -81,6 +83,7 @@ public class FilterStocksByMultipleParametersServiceTest {
 
     }
 
+    @Ignore
     @Test
     public void shouldReturnFilteredSecurityList2() {
 

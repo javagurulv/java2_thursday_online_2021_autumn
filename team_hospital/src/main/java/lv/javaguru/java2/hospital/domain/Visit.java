@@ -1,14 +1,30 @@
 package lv.javaguru.java2.hospital.domain;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Entity
+@Table(name = "visits")
 public class Visit {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long visitID;
+
+    @ManyToOne
+    @JoinColumn(name="doctor_id")
     private Doctor doctor;
+
+    @ManyToOne
+    @JoinColumn(name="patient_id")
     private Patient patient;
+
+    @Column(name = "date", nullable = false)
     private LocalDateTime visitDate;
-    private String sqlDate;
+
+    @Column(name = "description", nullable = false)
     private String description;
 
     public Visit() {
@@ -59,14 +75,6 @@ public class Visit {
         this.visitDate = visitDate;
     }
 
-    public String getSqlDate() {
-        return sqlDate;
-    }
-
-    public void setSqlDate(String sqlDate) {
-        this.sqlDate = sqlDate;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -81,7 +89,7 @@ public class Visit {
                 "visitID=" + visitID +
                 ", doctor=" + doctor +
                 ", patient=" + patient +
-                ", sqlDate='" + sqlDate + '\'' +
+                ", visitDate=" + visitDate +
                 ", description='" + description + '\'' +
                 '}';
     }

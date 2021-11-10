@@ -1,7 +1,8 @@
 package lv.javaguru.java2.hospital.prescription.core.services;
 
-import lv.javaguru.java2.hospital.database.PrescriptionDatabase;
+import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Prescription;
+import lv.javaguru.java2.hospital.prescription.core.requests.PrescriptionOrdering;
 import lv.javaguru.java2.hospital.prescription.core.requests.PrescriptionPaging;
 import lv.javaguru.java2.hospital.prescription.core.requests.SearchPrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
@@ -11,13 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Component
 public class SearchPrescriptionService {
 
-    @Autowired private PrescriptionDatabase database;
+    @Autowired private PrescriptionRepository database;
 
     public SearchPrescriptionResponse execute(SearchPrescriptionRequest request) {
         List<CoreError> errors;
@@ -61,5 +64,22 @@ public class SearchPrescriptionService {
         } else {
             return prescriptions;
         }
+    }
+    
+    private List<Prescription> order(List<Prescription> prescriptions, PrescriptionOrdering ordering) {
+        if (ordering != null) {
+            Comparator<Prescription> comparator = null;
+            if (ordering.getOrderBy().toUpperCase(Locale.ROOT).equals("DATE")) {
+                comparator = Comparator.comparing(Prescription::getDate);
+            }
+            if (ordering.getOrderDirection().toUpperCase(Locale.ROOT).equals("DESCENDING")) {
+                comparator = comparator.reversed();
+            }
+            return prescriptions.stream().sorted(comparator).collect(Collectors.toList());
+        } else {
+            return prescriptions;
+        }
+        
+        
     }
 }

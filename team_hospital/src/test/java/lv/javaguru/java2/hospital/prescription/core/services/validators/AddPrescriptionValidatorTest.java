@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabase;
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.prescription.core.requests.AddPrescriptionRequest;
@@ -25,8 +25,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class AddPrescriptionValidatorTest {
 
-    @Mock private PatientDatabase patientDatabase;
-    @Mock private DoctorDatabase doctorDatabase;
+    @Mock private PatientRepository patientRepository;
+    @Mock private DoctorRepository doctorRepository;
     @InjectMocks private AddPrescriptionValidator validator;
 
     @Test
@@ -36,7 +36,7 @@ class AddPrescriptionValidatorTest {
         AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId, patientId, "MedicationName", 1);
         Patient patient = new Patient("Patient name", "PatientSurname", "121212-12342");
         patient.setId(patientId);
-        Mockito.when(patientDatabase.findById(patientId)).thenReturn(Collections.singletonList(patient));
+        Mockito.when(patientRepository.findById(patientId)).thenReturn(Collections.singletonList(patient));
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
         assertEquals(errors.size(), 1);
@@ -53,7 +53,7 @@ class AddPrescriptionValidatorTest {
         doctor.setId(doctorId);
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
-        Mockito.when(doctorDatabase.findById(doctorId)).thenReturn(doctors);
+        Mockito.when(doctorRepository.findById(doctorId)).thenReturn(doctors);
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
         assertEquals(errors.size(), 1);
@@ -74,8 +74,8 @@ class AddPrescriptionValidatorTest {
         doctors.add(doctor);
         Patient patient = new Patient("Patient name", "PatientSurname", "121212-12342");
         patient.setId(patientId);
-        Mockito.when(patientDatabase.findById(patientId)).thenReturn(Collections.singletonList(patient));
-        Mockito.when(doctorDatabase.findById(doctorId)).thenReturn(doctors);
+        Mockito.when(patientRepository.findById(patientId)).thenReturn(Collections.singletonList(patient));
+        Mockito.when(doctorRepository.findById(doctorId)).thenReturn(doctors);
 
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -96,8 +96,8 @@ class AddPrescriptionValidatorTest {
         doctors.add(doctor);
         Patient patient = new Patient("Patient name", "PatientSurname", "121212-12342");
         patient.setId(patientId);
-        Mockito.when(patientDatabase.findById(patientId)).thenReturn(Collections.singletonList(patient));
-        Mockito.when(doctorDatabase.findById(doctorId)).thenReturn(doctors);
+        Mockito.when(patientRepository.findById(patientId)).thenReturn(Collections.singletonList(patient));
+        Mockito.when(doctorRepository.findById(doctorId)).thenReturn(doctors);
 
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -118,8 +118,8 @@ class AddPrescriptionValidatorTest {
         doctors.add(doctor);
         Patient patient = new Patient("Patient name", "PatientSurname", "121212-12342");
         patient.setId(patientId);
-        Mockito.when(patientDatabase.findById(patientId)).thenReturn(Collections.singletonList(patient));
-        Mockito.when(doctorDatabase.findById(doctorId)).thenReturn(doctors);
+        Mockito.when(patientRepository.findById(patientId)).thenReturn(Collections.singletonList(patient));
+        Mockito.when(doctorRepository.findById(doctorId)).thenReturn(doctors);
 
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -136,7 +136,7 @@ class AddPrescriptionValidatorTest {
 
         Patient patient = new Patient("Patient name", "PatientSurname", "121212-12342");
         patient.setId(patientId);
-        Mockito.when(patientDatabase.findById(patientId)).thenReturn(Collections.singletonList(patient));
+        Mockito.when(patientRepository.findById(patientId)).thenReturn(Collections.singletonList(patient));
 
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -155,7 +155,7 @@ class AddPrescriptionValidatorTest {
         doctor.setId(doctorId);
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
-        Mockito.when(doctorDatabase.findById(doctorId)).thenReturn(doctors);
+        Mockito.when(doctorRepository.findById(doctorId)).thenReturn(doctors);
 
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -176,8 +176,8 @@ class AddPrescriptionValidatorTest {
         doctors.add(doctor);
         Patient patient = new Patient("Patient name", "PatientSurname", "121212-12342");
         patient.setId(patientId);
-        Mockito.when(patientDatabase.findById(patientId)).thenReturn(Collections.singletonList(patient));
-        Mockito.when(doctorDatabase.findById(doctorId)).thenReturn(doctors);
+        Mockito.when(patientRepository.findById(patientId)).thenReturn(Collections.singletonList(patient));
+        Mockito.when(doctorRepository.findById(doctorId)).thenReturn(doctors);
 
         List<CoreError> errors = validator.validate(request);
         assertTrue(errors.isEmpty());

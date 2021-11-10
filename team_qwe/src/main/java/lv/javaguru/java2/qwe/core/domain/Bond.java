@@ -1,20 +1,52 @@
 package lv.javaguru.java2.qwe.core.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
+@Table(name = "bonds")
 public class Bond extends Security {
 
-    private final Double coupon;
-    private final String rating;
-    private final Integer nominal;
-    private final String maturity;
+    @Column(name = "coupon", nullable = false)
+    private Double coupon;
+
+    @Column(name = "rating", nullable = false)
+    private String rating;
+
+    @Column(name = "nominal", nullable = false)
+    private Integer nominal;
+
+    @Column(name = "maturity", nullable = false)
+    private LocalDate maturity;
+
+    public Bond() {
+    }
 
     public Bond(String ticker, String name, String industry, String currency, Double marketPrice,
-                Double coupon, String rating, Integer nominal, String maturity) {
+                Double coupon, String rating, Integer nominal, LocalDate maturity) {
         super(ticker, name, industry, currency, marketPrice);
         this.coupon = coupon;
         this.rating = rating;
         this.nominal = nominal;
+        this.maturity = maturity;
+    }
+
+    public void setCoupon(Double coupon) {
+        this.coupon = coupon;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public void setNominal(Integer nominal) {
+        this.nominal = nominal;
+    }
+
+    public void setMaturity(LocalDate maturity) {
         this.maturity = maturity;
     }
 
@@ -30,7 +62,7 @@ public class Bond extends Security {
         return nominal;
     }
 
-    public String getMaturity() {
+    public LocalDate getMaturity() {
         return maturity;
     }
 

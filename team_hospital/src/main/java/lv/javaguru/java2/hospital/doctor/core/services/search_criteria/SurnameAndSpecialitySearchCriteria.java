@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.services.search_criteria;
 
-import lv.javaguru.java2.hospital.database.DoctorDatabase;
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.domain.Doctor;
 
@@ -8,9 +8,9 @@ import java.util.List;
 
 public class SurnameAndSpecialitySearchCriteria implements DoctorsSearchCriteria{
 
-    private final DoctorDatabase database;
+    private final DoctorRepository database;
 
-    public SurnameAndSpecialitySearchCriteria(DoctorDatabase database) {
+    public SurnameAndSpecialitySearchCriteria(DoctorRepository database) {
         this.database = database;
     }
 

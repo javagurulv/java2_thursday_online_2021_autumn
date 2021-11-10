@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.existence_validators_for_search_criteria;
 
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
@@ -11,9 +11,9 @@ import java.util.Optional;
 @Component
 public class PersonalCodeSearchValidator implements SearchValidator {
 
-    private PatientDatabase database;
+    private PatientRepository database;
 
-    public PersonalCodeSearchValidator(PatientDatabase database) {
+    public PersonalCodeSearchValidator(PatientRepository database) {
         this.database = database;
     }
 

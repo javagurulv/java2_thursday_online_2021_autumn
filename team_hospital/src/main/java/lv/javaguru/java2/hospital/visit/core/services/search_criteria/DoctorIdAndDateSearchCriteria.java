@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.search_criteria;
 
-import lv.javaguru.java2.hospital.database.VisitDatabase;
+import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 
@@ -10,9 +10,9 @@ import java.util.List;
 
 public class DoctorIdAndDateSearchCriteria implements VisitsSearchCriteria{
 
-    private final VisitDatabase database;
+    private final VisitRepository database;
 
-    public DoctorIdAndDateSearchCriteria(VisitDatabase database) {
+    public DoctorIdAndDateSearchCriteria(VisitRepository database) {
         this.database = database;
     }
 

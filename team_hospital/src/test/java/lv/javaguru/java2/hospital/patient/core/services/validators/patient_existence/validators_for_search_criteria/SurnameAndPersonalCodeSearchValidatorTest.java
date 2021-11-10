@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.validators_for_search_criteria;
 
-import lv.javaguru.java2.hospital.database.PatientDatabase;
-import lv.javaguru.java2.hospital.database.PatientDatabaseImpl;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
+import lv.javaguru.java2.hospital.database.patient_repository.InMemoryPatientRepositoryImpl;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SurnameAndPersonalCodeSearchValidatorTest {
 
-    private PatientDatabase database = new PatientDatabaseImpl();
+    private PatientRepository database = new InMemoryPatientRepositoryImpl();
     private SurnameAndPersonalCodeSearchValidator validator = new SurnameAndPersonalCodeSearchValidator(database);
 
     @Test

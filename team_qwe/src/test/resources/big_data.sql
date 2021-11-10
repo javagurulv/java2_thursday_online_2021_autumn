@@ -503,7 +503,7 @@ INSERT INTO stocks VALUES
   ('UA US','Under Armour Inc. Class C','Consumer Discretionary','USD',19.74,0,1.39),
   ('NWS US','News Corporation Class B','Communications','USD',21.49,0.93,1.1);
 INSERT INTO users (name, age, type, initial_investment, cash, portfolio_generation_date, risk_tolerance) VALUES
-  ('Alexander', 25, 'SUPER_RICH', 1000000.00, 1000000.00, NULL, 5),
-  ('Tatyana', 32, 'UPPER_MIDDLE', 125000.00, 125000.00, NULL, 4),
-  ('Vladimir', 78, 'LOWER_MIDDLE', 30000.00, 30000.00, NULL, 1),
-  ('John', 55, 'MIDDLE', 50000.00, 50000.00, NULL, 3);
+  ('Alexander', 25, 4, 1000000.00, 1000000.00, NULL, 5),
+  ('Tatyana', 32, 2, 125000.00, 125000.00, NULL, 4),
+  ('Vladimir', 78, 0, 30000.00, 30000.00, NULL, 1),
+  ('John', 55, 1, 50000.00, 50000.00, NULL, 3);

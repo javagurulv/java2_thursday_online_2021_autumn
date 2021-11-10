@@ -16,34 +16,34 @@ class SearchPatientsRequestFieldValidatorTest {
     public void shouldNotReturnErrorWhenNameNotProvided(){
         SearchPatientsRequest request = new SearchPatientsRequest(null, "surname", "1212");
         List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 1);
+        assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorWhenSurnameNotProvided(){
         SearchPatientsRequest request = new SearchPatientsRequest("name", null, "1212");
         List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 1);
+        assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorWhenPersonalCodeNotProvided(){
         SearchPatientsRequest request = new SearchPatientsRequest("name", "surname", null);
         List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 1);
+        assertEquals(errors.size(), 0);
     }
     @Test
     public void shouldNotReturnErrorWhenNameAndSurnameNotProvided(){
         SearchPatientsRequest request = new SearchPatientsRequest(null, null, "1212");
         List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 1);
+        assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorWhenSurnameAndPersonalCodeNotProvided(){
         SearchPatientsRequest request = new SearchPatientsRequest("name", null, null);
         List<CoreError> errors = validator.validate(request);
-        assertEquals(errors.size(), 1);
+        assertEquals(errors.size(), 0);
     }
 
     @Test
@@ -51,7 +51,7 @@ class SearchPatientsRequestFieldValidatorTest {
         SearchPatientsRequest request = new SearchPatientsRequest(null, null, null);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "All fields");
+        assertEquals(errors.get(0).getField(), "At least one field");
         assertEquals(errors.get(0).getDescription(), "must be filled!");
     }
 }

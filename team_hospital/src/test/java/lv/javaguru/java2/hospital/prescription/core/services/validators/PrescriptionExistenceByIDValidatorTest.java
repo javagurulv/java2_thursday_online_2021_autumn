@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators;
 
-import lv.javaguru.java2.hospital.database.PrescriptionDatabase;
+import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Prescription;
@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 public class PrescriptionExistenceByIDValidatorTest {
 
-    @Mock private PrescriptionDatabase database;
+    @Mock private PrescriptionRepository database;
     @InjectMocks private PrescriptionExistenceByIDValidator idValidator;
 
     @Test

@@ -6,6 +6,7 @@ public class SearchPrescriptionRequest {
     private Long doctorId;
     private Long patientId;
 
+    private PrescriptionOrdering prescriptionOrdering;
     private PrescriptionPaging prescriptionPaging;
 
     public SearchPrescriptionRequest(Long prescriptionId, Long doctorId, Long patientId) {
@@ -18,6 +19,21 @@ public class SearchPrescriptionRequest {
         this.prescriptionId = prescriptionId;
         this.doctorId = doctorId;
         this.patientId = patientId;
+        this.prescriptionPaging = prescriptionPaging;
+    }
+
+    public SearchPrescriptionRequest(Long prescriptionId, Long doctorId, Long patientId, PrescriptionOrdering prescriptionOrdering) {
+        this.prescriptionId = prescriptionId;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
+        this.prescriptionOrdering = prescriptionOrdering;
+    }
+
+    public SearchPrescriptionRequest(Long prescriptionId, Long doctorId, Long patientId, PrescriptionOrdering prescriptionOrdering, PrescriptionPaging prescriptionPaging) {
+        this.prescriptionId = prescriptionId;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
+        this.prescriptionOrdering = prescriptionOrdering;
         this.prescriptionPaging = prescriptionPaging;
     }
 
@@ -47,5 +63,9 @@ public class SearchPrescriptionRequest {
 
     public PrescriptionPaging getPrescriptionPaging() {
         return prescriptionPaging;
+    }
+
+    public PrescriptionOrdering getPrescriptionOrdering() {
+        return prescriptionOrdering;
     }
 }

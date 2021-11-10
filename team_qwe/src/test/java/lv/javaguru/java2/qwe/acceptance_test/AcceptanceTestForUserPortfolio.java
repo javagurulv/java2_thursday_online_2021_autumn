@@ -1,6 +1,8 @@
 package lv.javaguru.java2.qwe.acceptance_test;
 
 import lv.javaguru.java2.qwe.config.AppConfiguration;
+import lv.javaguru.java2.qwe.core.database.Database;
+import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.domain.Position;
 import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRequest;
@@ -17,12 +19,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -30,16 +34,18 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {AppConfiguration.class})
+@Sql({"/schema.sql"})
+@Sql({"/big_data.sql"})
 public class AcceptanceTestForUserPortfolio {
 
     @Autowired private ApplicationContext appContext;
-    @Autowired private JdbcTemplate jdbcTemplate;
+//    @Autowired private JdbcTemplate jdbcTemplate;
 
-    @Before
-    public void init() {
-        jdbcTemplate.update("RUNSCRIPT FROM 'classpath:schema.sql'");
-        jdbcTemplate.update("RUNSCRIPT FROM 'classpath:big_data.sql'");
-    }
+//    @Before
+//    public void init() {
+//        jdbcTemplate.update("RUNSCRIPT FROM 'classpath:schema.sql'");
+//        jdbcTemplate.update("RUNSCRIPT FROM 'classpath:big_data.sql'");
+//    }
 
     @Test
     public void generateUserPortfolioTest1() {
@@ -83,36 +89,27 @@ public class AcceptanceTestForUserPortfolio {
     }
 
     public static class MyTrigger implements Trigger {
-
         @Override
         public void init(Connection conn, String schemaName, String triggerName,
-                         String tableName, boolean before, int type) {
-        }
-
+                         String tableName, boolean before, int type) {}
         @Override
         public void fire(Connection conn, Object[] oldRow, Object[] newRow) {
-            int quantity = (int) newRow[2];
-            double purchasePrice = ((BigDecimal) newRow[3]).doubleValue();
+            double quantity = (double) newRow[3];
+            double purchasePrice = (double) newRow[4];
             double amount = quantity * purchasePrice;
             try{
                 PreparedStatement ps = conn.prepareStatement("UPDATE users SET cash = cash - ? WHERE id = ?");
                 ps.setDouble(1, amount);
-                ps.setLong(2, (Long) newRow[0]);
+                ps.setLong(2, (Long) newRow[1]);
                 ps.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
         @Override
-        public void close() {
-
-        }
-
+        public void close() {}
         @Override
-        public void remove() {
-
-        }
-
+        public void remove() {}
     }
 
     private GenerateUserPortfolioService getGenerateUserPortfolioService() {

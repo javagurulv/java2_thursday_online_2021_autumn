@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.date_validator;
 
-import lv.javaguru.java2.hospital.database.VisitDatabase;
+import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria.GetVisitDate;
@@ -13,9 +13,9 @@ import java.util.Optional;
 public class DateExistenceValidator implements DateValidator {
 
     private GetVisitDate getVisitDate;
-    private VisitDatabase database;
+    private VisitRepository database;
 
-    public DateExistenceValidator(GetVisitDate getVisitDate, VisitDatabase database) {
+    public DateExistenceValidator(GetVisitDate getVisitDate, VisitRepository database) {
         this.getVisitDate = getVisitDate;
         this.database = database;
     }

@@ -5,7 +5,7 @@ INSERT INTO stocks VALUES
   ('TSLA US','Tesla Inc','Consumer Discretionary','USD',680.26,0,1.63),
   ('JPM US','JPMorgan Chase & Co.','Financials','USD',154.72,2.33,1.15);
 INSERT INTO users (name, age, type, initial_investment, cash, portfolio_generation_date, risk_tolerance) VALUES
-  ('Alexander', 25, 'SUPER_RICH', 1000000.00, 1000000.00, NULL, 5),
-  ('Tatyana', 32, 'UPPER_MIDDLE', 125000.00, 125000.00, NULL, 4),
-  ('Vladimir', 78, 'LOWER_MIDDLE', 30000.00, 30000.00, NULL, 1),
-  ('John', 55, 'MIDDLE', 50000.00, 50000.00, NULL, 3);
+  ('Alexander', 25, 4, 1000000.00, 1000000.00, NULL, 5),
+  ('Tatyana', 32, 2, 125000.00, 125000.00, NULL, 4),
+  ('Vladimir', 78, 0, 30000.00, 30000.00, NULL, 1),
+  ('John', 55, 2, 50000.00, 50000.00, NULL, 3);

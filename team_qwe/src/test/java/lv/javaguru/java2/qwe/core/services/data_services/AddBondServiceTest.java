@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class AddBondServiceTest {
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
         AddBondRequest request = new AddBondRequest(
                 "GAZPRU", "", "Energy", "USD", "108.75",
-                "4.75", "BBB+", "1000", "31/12/2031");
+                "4.75", "BBB+", "1000", "2031-12-31");
         List<CoreError> errors = List.of(
                 new CoreError("Name", "3 to 100 symbols required!")
         );
@@ -49,15 +50,16 @@ public class AddBondServiceTest {
 
     @Test
     public void shouldAddBondToDatabase() {
+        System.out.println(LocalDate.of(2031, 12, 31));
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         AddBondRequest request = new AddBondRequest(
                 "GAZPRU", "Gazprom 4.75 31/12/2031", "Energy", "USD", "108.75",
-                "4.75", "BBB+", "1000", "31/12/2031");
+                "4.75", "BBB+", "1000", "2031-12-31");
         AddBondResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         Mockito.verify(database).addBond(argThat(new BondMatcher(new Bond(
                 "GAZPRU","Gazprom 4.75 31/12/2031", "Energy", "USD", 108.75,
-                4.75, "BBB+", 1000, "31/12/2031"
+                4.75, "BBB+", 1000, LocalDate.of(2031, 12, 31)
         ))));
     }
 

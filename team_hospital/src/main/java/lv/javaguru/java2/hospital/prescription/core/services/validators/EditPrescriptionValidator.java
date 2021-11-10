@@ -1,7 +1,7 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators;
 
 import lv.javaguru.java2.hospital.prescription.core.checkers.PrescriptionLongNumChecker;
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @Component
 public class EditPrescriptionValidator {
 
-    @Autowired private PatientDatabase patientDatabase;
+    @Autowired private PatientRepository patientRepository;
     @Autowired private PrescriptionExistenceByIDValidator prescriptionExistenceByIDValidator;
     @Autowired private PrescriptionEnumChecker enumChecker;
     @Autowired private PrescriptionLongNumChecker longNumChecker;
@@ -72,7 +72,7 @@ public class EditPrescriptionValidator {
 
     private Optional<CoreError> validatePatientExistence(EditPrescriptionRequest request){
         return !request.getEditPrescriptionEnum().equals("PATIENT")
-                ? Optional.empty() : !patientDatabase.findById(Long.valueOf(request.getChanges())).isEmpty()
+                ? Optional.empty() : !patientRepository.findById(Long.valueOf(request.getChanges())).isEmpty()
                 ? Optional.empty() : Optional.of(new CoreError("Patient", "does not exist!"));
     }
 }

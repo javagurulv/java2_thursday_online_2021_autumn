@@ -1,5 +1,6 @@
 package lv.javaguru.java2.qwe;
 
+import lv.javaguru.java2.qwe.API.API;
 import lv.javaguru.java2.qwe.config.AppConfiguration;
 import lv.javaguru.java2.qwe.ui_actions.AppMenu;
 import lv.javaguru.java2.qwe.utils.UtilityMethods;
@@ -17,6 +18,8 @@ public class ApplicationDemo {
 
     public static void main(String[] args) {
 
+        //Изменение цен акций в режиме реального времени!
+        getAPI().setRealMarketPriceUpdate();
         //Симуляция изменения рыночных цен!
         getUtilityMethods().setMarketPriceSimulator(applicationContext);
         //Симуляция изменения текущей даты!
@@ -36,5 +39,7 @@ public class ApplicationDemo {
     private static UtilityMethods getUtilityMethods() {
         return applicationContext.getBean(UtilityMethods.class);
     }
+
+    private static API getAPI() {return applicationContext.getBean(API.class);}
 
 }

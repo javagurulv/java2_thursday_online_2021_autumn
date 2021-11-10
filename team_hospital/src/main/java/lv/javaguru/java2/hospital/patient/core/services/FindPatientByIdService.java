@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
-import lv.javaguru.java2.hospital.database.PatientDatabase;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.patient.core.requests.FindPatientByIdRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
 import lv.javaguru.java2.hospital.patient.core.responses.FindPatientByIDResponse;
@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class FindPatientByIdService {
 
-    @Autowired private PatientDatabase patientDatabase;
+    @Autowired private PatientRepository patientRepository;
     @Autowired private FindPatientByIDValidator validator;
 
     public FindPatientByIDResponse execute(FindPatientByIdRequest request){
@@ -22,7 +22,7 @@ public class FindPatientByIdService {
             return new FindPatientByIDResponse(errors);
         } else {
             return new FindPatientByIDResponse(Long.parseLong(request.getIDRequest()),
-                    patientDatabase.findById(Long.valueOf(request.getIDRequest())));
+                    patientRepository.findById(Long.valueOf(request.getIDRequest())));
         }
     }
 }
