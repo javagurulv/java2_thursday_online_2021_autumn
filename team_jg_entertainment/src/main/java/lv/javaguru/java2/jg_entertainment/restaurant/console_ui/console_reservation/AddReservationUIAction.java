@@ -11,43 +11,27 @@ import java.util.Scanner;
 @Component
 public class AddReservationUIAction implements ReservationUIAction {
 
-    @Autowired private AddReservationService service;
+    @Autowired
+    private AddReservationService service;
 
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
 
-//        System.out.println("Please, enter visitors name: ");
-//        String name = scanner.nextLine();
-//
-//        System.out.println("Please, enter telephone number: ");
-//        String telephone = scanner.next();
-//
-//        System.out.println("Please, enter title menu: ");
-//        String menu = scanner.next();
-//
-//        System.out.println("Please, enter title table: ");
-//        String table = scanner.next();
-//        System.out.println("Please, enter date when you want to reservation (dd/MM/yyyy):");
-//        String date = scanner.next();
+        System.out.println("Please, enter visitors name: ");
+        String visitorID = scanner.nextLine();
 
-        // (*new часть ->
-        System.out.println("Please, enter id visitor: ");
-        String idVisitor = scanner.next();
-        System.out.println("Please, enter id table: ");
-        String idTable = scanner.next();
-        System.out.println("Please, enter id menu: ");
-        String idMenu = scanner.next();
+        System.out.println("Please, enter title menu: ");
+        String menuID = scanner.next();
+
+        System.out.println("Please, enter title table: ");
+        String tableID = scanner.next();
+
         System.out.println("Please, enter date when you want to reservation (dd/MM/yyyy):");
-        String date = scanner.next();
+        String reservationDate = scanner.next();
 
-        AddReservationRequest request = new AddReservationRequest(idVisitor, idTable, idMenu, date);
+        AddReservationRequest request = new AddReservationRequest(visitorID, menuID, tableID, reservationDate);
         AddReservationResponse response = service.execute(request);
-
-        // <- досюда часть новая )
-
-//        AddReservationRequest request = new AddReservationRequest(name, telephone, menu, table, date);
-//        AddReservationResponse response = service.execute(request);
 
         if (response.hasError()) {
             response.getErrorList().forEach(coreError ->
@@ -57,14 +41,12 @@ public class AddReservationUIAction implements ReservationUIAction {
             System.out.println("Successful reservation!");
             System.out.println();
             System.out.println("Info reservation: "
-                    + "idVisitor " + idVisitor
-                    + "idTable  " + idTable
-                    + "idMenu " + idMenu
-//                    + "visitor name-> " + name
-//                    + ", telephone->" + telephone
-//                    + ", menu title-> " + menu
-//                    + ", table-> " + table
-                    + ", date-> " + date);
+                    + "visitor name-> " + response.getReservation().getVisitor()
+                    + ", menu title-> " + response.getReservation().getMenu()
+                    + ", table-> " + response.getReservation().getTable()
+                    + ", date-> " + response.getReservation().getReservationDate()
+                    + ", reservation id-> " + response.getReservation().getIdReservation()
+            );
         }
     }
 }

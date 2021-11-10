@@ -30,7 +30,7 @@ public class OrmDatabaseImpl implements Database{
     }
 
     @Override
-    public void editStock(Stock stock) {
+    public void updateStock(Stock stock) {
         sessionFactory.getCurrentSession().update(stock);
     }
 
