@@ -66,7 +66,7 @@ public class SearchTableService {
         }
         if (!request.isTitleProvided()
                 && request.isIDProvided()) {
-            tables = database.findTabletById(request.getIdTable());
+            tables = database.findTableById(request.getIdTable());
         }
         if (request.isTitleProvided() && request.isIDProvided()) {
             tables = database.findByIdAndTitleTable(request.getIdTable(), request.getTitleTable());

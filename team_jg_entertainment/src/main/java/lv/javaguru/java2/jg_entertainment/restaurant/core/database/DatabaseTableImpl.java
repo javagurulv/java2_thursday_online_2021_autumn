@@ -21,7 +21,7 @@ public class DatabaseTableImpl implements DatabaseTable {
     }
 
     @Override
-    public List<Table> findTabletById(Long idTable) {///*
+    public List<Table> findTableById(Long idTable) {///*
         return tables.stream()
                 .filter(table -> table.getId().equals(idTable))
                 .collect(Collectors.toList());
