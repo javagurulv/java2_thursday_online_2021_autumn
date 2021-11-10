@@ -2,52 +2,31 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation;
 
 public class AddReservationRequest {
 
-    private String visitorName;
-    private String telephoneNumber;
-    private String menuTitle;
-    private String tableTitle;
+    private String visitorID;
+    private String menuID;
+    private String tableID;
     private String reservationDate;
 
-
-    public AddReservationRequest(String visitorName,
-                                 String menuTitle,
-                                 String tableTitle,
-                                 String reservationDate) {
-        this.visitorName = visitorName;
-        this.menuTitle = menuTitle;
-        this.tableTitle = tableTitle;
+    public AddReservationRequest(String visitorID, String menuID, String tableID, String reservationDate) {
+        this.visitorID = visitorID;
+        this.menuID = menuID;
+        this.tableID = tableID;
         this.reservationDate = reservationDate;
     }
 
-    public AddReservationRequest(String visitorName,
-                                 String telephoneNumber,
-                                 String menuTitle,
-                                 String tableTitle,
-                                 String reservationDate) {
-        this.visitorName = visitorName;
-        this.telephoneNumber = telephoneNumber;
-        this.menuTitle = menuTitle;
-        this.tableTitle = tableTitle;
-        this.reservationDate = reservationDate;
+    public String getVisitorID() {
+        return visitorID;
     }
 
-    public String getVisitorName() {
-        return visitorName;
+    public String getMenuID() {
+        return menuID;
     }
 
-    public String getMenuTitle() {
-        return menuTitle;
-    }
-
-    public String getTableTitle() {
-        return tableTitle;
+    public String getTableID() {
+        return tableID;
     }
 
     public String getReservationDate() {
         return reservationDate;
-    }
-
-    public String getTelephoneNumber() {
-        return telephoneNumber;
     }
 }

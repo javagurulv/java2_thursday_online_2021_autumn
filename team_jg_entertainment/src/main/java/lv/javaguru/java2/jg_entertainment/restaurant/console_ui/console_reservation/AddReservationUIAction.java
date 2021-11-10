@@ -19,21 +19,18 @@ public class AddReservationUIAction implements ReservationUIAction {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Please, enter visitors name: ");
-        String name = scanner.nextLine();
-
-        System.out.println("Please, enter telephone number: ");
-        String telephone = scanner.next();
+        String visitorID = scanner.nextLine();
 
         System.out.println("Please, enter title menu: ");
-        String menu = scanner.next();
+        String menuID = scanner.next();
 
         System.out.println("Please, enter title table: ");
-        String table = scanner.next();
+        String tableID = scanner.next();
 
         System.out.println("Please, enter date when you want to reservation (dd/MM/yyyy):");
-        String date = scanner.next();
+        String reservationDate = scanner.next();
 
-        AddReservationRequest request = new AddReservationRequest(name, telephone, menu, table, date);
+        AddReservationRequest request = new AddReservationRequest(visitorID, menuID, tableID, reservationDate);
         AddReservationResponse response = service.execute(request);
 
         if (response.hasError()) {
@@ -44,11 +41,12 @@ public class AddReservationUIAction implements ReservationUIAction {
             System.out.println("Successful reservation!");
             System.out.println();
             System.out.println("Info reservation: "
-                    + "visitor name-> " + name
-                    + ", telephone->" + telephone
-                    + ", menu title-> " + menu
-                    + ", table-> " + table
-                    + ", date-> " + date);
+                    + "visitor name-> " + response.getReservation().getVisitor()
+                    + ", menu title-> " + response.getReservation().getMenu()
+                    + ", table-> " + response.getReservation().getTable()
+                    + ", date-> " + response.getReservation().getReservationDate()
+                    + ", reservation id-> " + response.getReservation().getIdReservation()
+            );
         }
     }
 }
