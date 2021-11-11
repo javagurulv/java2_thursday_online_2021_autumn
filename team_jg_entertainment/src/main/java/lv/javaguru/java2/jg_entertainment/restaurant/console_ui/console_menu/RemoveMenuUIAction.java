@@ -11,7 +11,7 @@ import java.util.Scanner;
 @Component
 public class RemoveMenuUIAction implements UIAction {
 
-    @Autowired private RemoveMenuService removeMenuService;
+    @Autowired private RemoveMenuService deleteMenu;
 
     @Override
     public void execute() {
@@ -19,7 +19,7 @@ public class RemoveMenuUIAction implements UIAction {
         System.out.println("Enter menu number: ");
         Long number = Long.parseLong(scanner.nextLine());
         RemoveMenuRequest request = new RemoveMenuRequest(number);
-        RemoveMenuResponse response = removeMenuService.execute(request);
+        RemoveMenuResponse response = deleteMenu.execute(request);
 
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError -> System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage()));

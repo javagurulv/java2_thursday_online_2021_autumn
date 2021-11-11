@@ -59,7 +59,7 @@ public class API {
         }
     }
 
-    private Double getQuote(String ticker) throws NumberFormatException {
+    public Double getQuote(String ticker) throws NumberFormatException {
         HttpResponse<String> response = sendHttpRequest(ticker);
         if (response != null) {
             String[] lines = response.body().split(",");

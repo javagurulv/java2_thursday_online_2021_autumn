@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class GetAllMenusUIAction implements UIAction {
 
-    @Autowired private GetAllMenusService getAllMenusService;
+        @Autowired private GetAllMenusService getAllMenus;
 
     @Override
     public void execute() {
         System.out.println("Menu list: ");
         GetAllMenusRequest request = new GetAllMenusRequest();
-        GetAllMenusResponse response = getAllMenusService.execute(request);
-        response.getMenus().forEach(System.out::println);
+        GetAllMenusResponse response = getAllMenus.execute(request);
+        System.out.println(response.getMenus());
         System.out.println("Menu list end.");
     }
 }

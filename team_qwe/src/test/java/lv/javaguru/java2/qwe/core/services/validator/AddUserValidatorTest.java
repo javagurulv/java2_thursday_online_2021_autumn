@@ -20,8 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(classes = {AppConfiguration.class})
 public class AddUserValidatorTest {
 
-    @Autowired
-    private ApplicationContext appContext;
+    @Autowired private ApplicationContext appContext;
     @Autowired private JdbcTemplate jdbcTemplate;
 
     @Before
