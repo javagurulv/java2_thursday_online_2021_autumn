@@ -1,8 +1,8 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_reservations;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenuImpl;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseTableImpl;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitorsImpl;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenu;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseTable;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.AddReservationRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.ReservationLongNumChecker;
@@ -18,11 +18,11 @@ import java.util.Optional;
 public class AddReservationValidator {
 
     @Autowired
-    private DatabaseVisitorsImpl visitorDatabase;
+    private DatabaseVisitors visitorDatabase;
     @Autowired
-    private DatabaseMenuImpl menuDatabase;
+    private DatabaseMenu menuDatabase;
     @Autowired
-    private DatabaseTableImpl tableDatabase;
+    private DatabaseTable tableDatabase;
     @Autowired
     private DateValidatorExecution dateValidator;
     @Autowired

@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_reservation;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.RestaurantListApplication;
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.programMenu.ProgramMenu;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,6 +11,6 @@ public class ExitProgramListReservationUIAction implements ReservationUIAction {
 //        RestaurantListApplication list = new RestaurantListApplication();
         System.out.println("You return in main menu!");
         System.out.println("Choose action with MENU: ");
-        RestaurantListApplication.run();
+        ProgramMenu.action();
     }
 }

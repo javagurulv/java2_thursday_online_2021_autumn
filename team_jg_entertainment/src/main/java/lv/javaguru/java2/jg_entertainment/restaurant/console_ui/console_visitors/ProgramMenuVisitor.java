@@ -1,5 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,13 +9,13 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class ProgramVisitorList {
+public class ProgramMenuVisitor {
 
     private Map<Integer, VisitorUIAction> menuNumberToUIActionMap;
     private CheckMenuNumberFromConsole checkNumberFromConsole = new CheckMenuNumberFromConsole();
 
     @Autowired
-    public ProgramVisitorList(List<VisitorUIAction> uiActions) {
+    public ProgramMenuVisitor(List<VisitorUIAction> uiActions) {
         menuNumberToUIActionMap = new HashMap<>();
         menuNumberToUIActionMap.put(1, findUIAction(uiActions, AddVisitorsUIAction.class));
         menuNumberToUIActionMap.put(2, findUIAction(uiActions, DeleteVisitorsUIAction.class));

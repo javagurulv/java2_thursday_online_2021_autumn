@@ -3,11 +3,13 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.programMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.EnteredNumChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class ProgramMenuHelper {
 
     private Map<Integer, Menu> menuNumberToTypeOfMenuMap;

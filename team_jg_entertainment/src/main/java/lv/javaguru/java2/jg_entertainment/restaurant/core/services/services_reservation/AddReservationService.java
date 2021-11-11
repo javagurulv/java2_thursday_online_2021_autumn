@@ -1,9 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_reservation;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenuImpl;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseReservationImpl;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseTableImpl;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitorsImpl;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.*;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.AddReservationRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.AddReservationResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.CoreError;
@@ -22,10 +19,10 @@ import java.util.List;
 @Component
 public class AddReservationService {
 
-    @Autowired    private DatabaseVisitorsImpl databaseVisitors;
-    @Autowired    private DatabaseMenuImpl databaseMenu;
-    @Autowired    private DatabaseTableImpl databaseTable;
-    @Autowired    private DatabaseReservationImpl databaseReservation;
+    @Autowired    private DatabaseVisitors databaseVisitors;
+    @Autowired    private DatabaseMenu databaseMenu;
+    @Autowired    private DatabaseTable databaseTable;
+    @Autowired    private DatabaseReservation databaseReservation;
     @Autowired    private AddReservationValidator validator;
 
     public AddReservationResponse execute(AddReservationRequest request) {
