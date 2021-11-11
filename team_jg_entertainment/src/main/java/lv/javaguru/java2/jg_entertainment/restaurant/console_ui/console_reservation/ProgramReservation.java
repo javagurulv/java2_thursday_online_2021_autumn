@@ -11,6 +11,7 @@ import java.util.Map;
 @Component
 public class ProgramReservation {
 
+
     private Map<Integer, ReservationUIAction> menuNumberToUIActionMap;
     private CheckMenuNumberFromConsole checkNumberFromConsole = new CheckMenuNumberFromConsole();
 
