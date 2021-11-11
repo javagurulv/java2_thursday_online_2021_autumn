@@ -33,12 +33,14 @@ public class ProgramMenuHelper {
     }
 
     public void printMainMenu() {
-        System.out.println("Program menu: ");
-        System.out.println("Press 1 to see visitor actions.");
-        System.out.println("Press 2 to see table actions.");
-        System.out.println("Press 3 to see menu actions.");
-        System.out.println("Press 4 to see reservation menu.");
-        System.out.println("Press 5 for Exit.");
+        System.out.println();
+        System.out.println("Hello ! MENU: ");
+        System.out.println("1--> choose action with VISITORS: ");
+        System.out.println("2--> choose action with TABLES: ");
+        System.out.println("3--> choose action with restaurant MENU: ");
+        System.out.println("4--> choose action with RESERVATION: ");
+        System.out.println("5--> EXIT! ");
+        System.out.println();
     }
 
     public int getMenuNumberFromUser() {
