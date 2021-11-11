@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.programmenu;
+package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.programMenu;
 
 import org.springframework.context.ApplicationContext;
 
