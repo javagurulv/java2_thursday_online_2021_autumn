@@ -38,7 +38,7 @@ public class SearchVisitorsUIAction implements VisitorUIAction {
 
         Paging paging = new Paging(pageNumber, pageSize);
 
-        SearchVisitorsRequest request = new SearchVisitorsRequest(name, surname, ordering, paging);//+telephone or id
+        SearchVisitorsRequest request = new SearchVisitorsRequest(name, surname, ordering, paging);
         SearchVisitorsResponse response = searchVisitorsService.execute(request);
 
         if (response.hasError()) {
@@ -46,7 +46,6 @@ public class SearchVisitorsUIAction implements VisitorUIAction {
                     coreError.getField() + " " + coreError.getMessageError()));
         } else {
             System.out.println(response.getVisitors());
-            ///response.getVisitors().forEach(Visitors::toString);
         }
     }
 }

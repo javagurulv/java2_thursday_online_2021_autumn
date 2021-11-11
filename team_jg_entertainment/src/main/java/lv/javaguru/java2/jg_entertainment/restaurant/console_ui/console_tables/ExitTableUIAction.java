@@ -7,7 +7,7 @@ public class ExitTableUIAction implements UIAction {
 
 	@Override
 	public void execute() {
-		System.out.println("Good by!");
+		System.out.println("Thank a lot, have a good day ! Good by!");
 		System.exit(0);
 	}
 }

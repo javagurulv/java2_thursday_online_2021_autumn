@@ -38,6 +38,3 @@ public class DeleteVisitorsUIAction implements VisitorUIAction {
         }
     }
 }
-// System.out.println("Visitors ID = " + response.getNewVisitor().getIdClient());
-//            System.out.println("Visitor: " + visitorsName + " " + visitorsSurname + " is age " + ageVisitor +
-//                    ", telephone " + telephoneNumber + "-> was added in restaurant !");
