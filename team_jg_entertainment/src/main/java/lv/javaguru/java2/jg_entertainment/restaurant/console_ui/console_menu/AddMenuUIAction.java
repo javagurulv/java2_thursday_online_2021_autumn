@@ -11,7 +11,7 @@ import java.util.Scanner;
 @Component
 public class AddMenuUIAction implements UIAction {
 
-    @Autowired private AddMenuService addMenuService;
+    @Autowired private AddMenuService addMenu;
 
     @Override
     public void execute() {
@@ -23,7 +23,7 @@ public class AddMenuUIAction implements UIAction {
         System.out.println("Enter menu price: ");
         double menuPrice = scanner.nextDouble();
         AddMenuRequest request = new AddMenuRequest(menuTitle, menuDescription, menuPrice);
-        AddMenuResponse response = addMenuService.execute(request);
+        AddMenuResponse response = addMenu.execute(request);
 
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError ->
