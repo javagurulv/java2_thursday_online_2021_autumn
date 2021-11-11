@@ -34,7 +34,7 @@ public class AddVisitService {
         Patient patient = patientRepository.findById(Long.valueOf(request.getPatientID())).get(0);
         Doctor doctor = doctorRepository.findById(Long.valueOf(request.getDoctorsID())).get(0);
 
-        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(request.getVisitDate()));
+        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse(request.getVisitDate()));
         Visit visit = new Visit(doctor, patient, date, request.getDescription());
 
         visitRepository.recordVisit(visit);

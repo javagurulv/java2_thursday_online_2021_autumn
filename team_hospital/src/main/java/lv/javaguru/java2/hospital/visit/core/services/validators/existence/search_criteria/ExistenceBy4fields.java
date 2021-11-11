@@ -10,26 +10,30 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class ExistenceByDate implements VisitExistenceBySearchCriteria {
+public class ExistenceBy4fields implements VisitExistenceBySearchCriteria {
 
     @Autowired private VisitRepository database;
     @Autowired private GetVisitDate getVisitDate;
 
     @Override
     public boolean canValidate(SearchVisitRequest request) {
-        return request.isDateProvided()
-                && !request.isDoctorIdProvided()
-                && !request.isPatientIdProvided()
-                && !request.isVisitIdProvided();
+        return request.isDoctorIdProvided()
+                && request.isPatientIdProvided()
+                && request.isDateProvided()
+                && request.isVisitIdProvided();
     }
 
     @Override
     public Optional<CoreError> validateExistence(SearchVisitRequest request) {
+
         for (Visit visit : database.getAllVisits()) {
-            if (visit.getVisitDate().equals(getVisitDate.getVisitDateFromString(request.getVisitDate()))) {
+            if (visit.getVisitID().equals(Long.parseLong(request.getVisitId()))
+                    && visit.getDoctor().getId().equals(Long.parseLong(request.getDoctorId()))
+                    && visit.getPatient().getId().equals(Long.parseLong(request.getPatientId()))
+                    && visit.getVisitDate().equals(getVisitDate.getVisitDateFromString(request.getVisitDate()))) {
                 return Optional.empty();
             }
         }
-        return Optional.of(new CoreError("Visit", "does not exist!"));
+        return Optional.of(new CoreError("Visit", "Does not exist!"));
     }
 }

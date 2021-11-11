@@ -10,23 +10,24 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class ExistenceByDate implements VisitExistenceBySearchCriteria {
+public class ExistenceByVisitIDDoctorIDPatientID implements VisitExistenceBySearchCriteria {
 
     @Autowired private VisitRepository database;
-    @Autowired private GetVisitDate getVisitDate;
 
     @Override
     public boolean canValidate(SearchVisitRequest request) {
-        return request.isDateProvided()
-                && !request.isDoctorIdProvided()
-                && !request.isPatientIdProvided()
-                && !request.isVisitIdProvided();
+        return request.isVisitIdProvided()
+                && request.isDoctorIdProvided()
+                && request.isPatientIdProvided()
+                && !request.isDateProvided();
     }
 
     @Override
     public Optional<CoreError> validateExistence(SearchVisitRequest request) {
         for (Visit visit : database.getAllVisits()) {
-            if (visit.getVisitDate().equals(getVisitDate.getVisitDateFromString(request.getVisitDate()))) {
+            if (visit.getVisitID().equals(Long.parseLong(request.getVisitId()))
+                    && visit.getDoctor().getId().equals(Long.parseLong(request.getDoctorId()))
+                && visit.getPatient().getId().equals(Long.parseLong(request.getPatientId()))) {
                 return Optional.empty();
             }
         }

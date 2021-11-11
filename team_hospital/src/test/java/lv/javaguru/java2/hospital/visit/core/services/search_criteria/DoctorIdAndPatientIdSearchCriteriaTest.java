@@ -51,8 +51,8 @@ class DoctorIdAndPatientIdSearchCriteriaTest {
         Long patientId = patient.getId();
 
         List<Visit> visits = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        LocalDateTime date = LocalDateTime.parse("11-12-2021 13:00", formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime date = LocalDateTime.parse("2021-12-11 13:00", formatter);
         visits.add(new Visit(doctor, patient, date));
 
         Mockito.when(database.findByDoctorIdAndPatientId(doctorId, patientId)).thenReturn(visits);
@@ -76,9 +76,9 @@ class DoctorIdAndPatientIdSearchCriteriaTest {
         Long patientId = patient.getId();
 
         List<Visit> visits = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        LocalDateTime date1 = LocalDateTime.parse("07-12-2021 13:00", formatter);
-        LocalDateTime date2 = LocalDateTime.parse("17-12-2021 11:00", formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime date1 = LocalDateTime.parse("2021-12-07 13:00", formatter);
+        LocalDateTime date2 = LocalDateTime.parse("2021-12-17 11:00", formatter);
         visits.add(new Visit(doctor, patient, date1));
         visits.add(new Visit(doctor, patient, date2));
 

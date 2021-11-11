@@ -8,27 +8,26 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class VisitIDPatientIDDoctorIDDateSearchCriteria implements VisitsSearchCriteria {
+public class VisitIDAndDateSearchCriteria implements VisitsSearchCriteria {
 
     private final VisitRepository database;
 
-    public VisitIDPatientIDDoctorIDDateSearchCriteria(VisitRepository database) {
+    public VisitIDAndDateSearchCriteria(VisitRepository database) {
         this.database = database;
     }
 
     @Override
     public boolean canProcess(SearchVisitRequest request) {
         return request.isVisitIdProvided()
-                && request.isDoctorIdProvided()
-                && request.isPatientIdProvided()
-                && request.isDateProvided();
+                && request.isDateProvided()
+                && !request.isPatientIdProvided()
+                && !request.isDoctorIdProvided();
     }
 
     @Override
     public List<Visit> process(SearchVisitRequest request) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return database.findByVisitIDDoctorIDPatientIDDate
-                (Long.valueOf(request.getVisitId()), Long.parseLong(request.getDoctorId()),
-                        Long.parseLong(request.getPatientId()), LocalDateTime.parse(request.getVisitDate(), formatter));
+        return database.findByVisitIDAndDate(Long.valueOf(request.getVisitId()),
+                LocalDateTime.parse(request.getVisitDate(), formatter));
     }
 }

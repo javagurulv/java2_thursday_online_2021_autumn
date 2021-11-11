@@ -2,6 +2,7 @@ package lv.javaguru.java2.hospital.database.visit_repository;
 
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
+import lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria.GetVisitDate;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.Locale;
 public class ORMVisitRepositoryImpl implements VisitRepository {
 
     @Autowired private SessionFactory sessionFactory;
+    @Autowired private GetVisitDate getVisitDate;
 
     @Override
     public void recordVisit(Visit visit) {
@@ -78,8 +80,8 @@ public class ORMVisitRepositoryImpl implements VisitRepository {
     @Override
     public List<Visit> findByDate(LocalDateTime date) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "SELECT v FROM Visit v WHERE date = :date");
-        query.setParameter("date", date);
+                "SELECT v FROM Visit v WHERE date = '" +
+                        getVisitDate.getVisitStringFromDate(date) +"'");
         return query.getResultList();
     }
 
@@ -97,9 +99,9 @@ public class ORMVisitRepositoryImpl implements VisitRepository {
     public List<Visit> findByDoctorIdAndDate(Long doctorId, LocalDateTime date) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT v FROM Visit v WHERE doctor_id = :doctor_id AND " +
-                        "date = :date");
+                        "date = '" +
+                        getVisitDate.getVisitStringFromDate(date) +"'");
         query.setParameter("doctor_id", doctorId);
-        query.setParameter("date", date);
         return query.getResultList();
     }
 
@@ -107,9 +109,17 @@ public class ORMVisitRepositoryImpl implements VisitRepository {
     public List<Visit> findByPatientIdAndDate(Long patientId, LocalDateTime date) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT v FROM Visit v WHERE patient_id = :patient_id AND " +
-                        "date = :date");
+                        "date = '" + getVisitDate.getVisitStringFromDate(date) +"'");
         query.setParameter("patient_id", patientId);
-        query.setParameter("date", date);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Visit> findByVisitIDAndDate(Long visitID, LocalDateTime date) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT v FROM Visit v WHERE id = :id AND " +
+                        "date = '" + getVisitDate.getVisitStringFromDate(date) +"'");
+        query.setParameter("id", visitID);
         return query.getResultList();
     }
 
@@ -118,10 +128,9 @@ public class ORMVisitRepositoryImpl implements VisitRepository {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT v FROM Visit v WHERE doctor_id = :doctor_id AND " +
                         "patient_id = :patient_id AND " +
-                        "date = :date");
+                        "date = '" + getVisitDate.getVisitStringFromDate(date) +"'");
         query.setParameter("doctor_id", doctorId);
         query.setParameter("patient_id", patientId);
-        query.setParameter("date", date);
         return query.getResultList();
     }
 
@@ -163,11 +172,10 @@ public class ORMVisitRepositoryImpl implements VisitRepository {
                 "SELECT v FROM Visit v WHERE id = :id AND " +
                         "doctor_id = :doctor_id AND " +
                         "patient_id = :patient_id AND " +
-                        "date = :date");
+                        "date = '" + getVisitDate.getVisitStringFromDate(date) +"'");
         query.setParameter("id", visitID);
         query.setParameter("doctor_id", doctorID);
         query.setParameter("patient_id", patientID);
-        query.setParameter("date", date);
         return query.getResultList();
     }
 }

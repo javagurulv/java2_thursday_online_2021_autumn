@@ -222,7 +222,7 @@ class AddVisitServiceTest {
                 .thenReturn((patients));
 
         AddVisitRequest request = new AddVisitRequest(patient.getId().toString(), doctor.getId().toString(),
-                "21-12-2021 15:00");
+                "2021-12-21 15:00");
         AddVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         Mockito.verify(visitRepository).recordVisit(argThat(

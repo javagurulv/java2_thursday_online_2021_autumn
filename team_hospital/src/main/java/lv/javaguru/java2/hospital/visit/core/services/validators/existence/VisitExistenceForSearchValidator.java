@@ -12,14 +12,19 @@ import java.util.List;
 @Component
 public class VisitExistenceForSearchValidator {
 
-    @Autowired ExistenceByVisitId existenceByVisitId;
-    @Autowired ExistenceByDoctorIdAndPatientIdAndDate existenceByDoctorIdAndPatientIdAndDate;
-    @Autowired ExistenceByDoctorIdAndPatientId existenceByDoctorIdAndPatientId;
-    @Autowired ExistenceByDoctorIdAndDate existenceByDoctorIdAndDate;
-    @Autowired ExistenceByPatientIdAndDate existenceByPatientIdAndDate;
-    @Autowired ExistenceByDoctorId existenceByDoctorId;
-    @Autowired ExistenceByPatientId existenceByPatientId;
-    @Autowired ExistenceByDate existenceByDate;
+    @Autowired private ExistenceByVisitId existenceByVisitId;
+    @Autowired private ExistenceByDoctorIdAndPatientIdAndDate existenceByDoctorIdAndPatientIdAndDate;
+    @Autowired private ExistenceByDate existenceByDate;
+    @Autowired private ExistenceByDoctorIdAndPatientId existenceByDoctorIdAndPatientId;
+    @Autowired private ExistenceByDoctorIdAndDate existenceByDoctorIdAndDate;
+    @Autowired private ExistenceByPatientIdAndDate existenceByPatientIdAndDate;
+    @Autowired private ExistenceByDoctorId existenceByDoctorId;
+    @Autowired private ExistenceByPatientId existenceByPatientId;
+    @Autowired private ExistenceByVisitIDAndDate existenceByVisitIDAndDate;
+    @Autowired private ExistenceByVisitIDAndDoctorID existenceByVisitIDAndDoctorID;
+    @Autowired private ExistenceByVisitIDAndPatientID existenceByVisitIDAndPatientID;
+    @Autowired private ExistenceByVisitIDDoctorIDPatientID existenceByVisitIDDoctorIDPatientID;
+    @Autowired private ExistenceBy4fields existenceBy4fields;
 
     public List<CoreError> validate(SearchVisitRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -28,6 +33,7 @@ public class VisitExistenceForSearchValidator {
         for (VisitExistenceBySearchCriteria processor : visitExistenceBySearchCriteria) {
             if (processor.canValidate(request)) {
                 processor.validateExistence(request).ifPresent(errors::add);
+                break;
             }
         }
         return errors;
@@ -42,6 +48,11 @@ public class VisitExistenceForSearchValidator {
                 existenceByPatientIdAndDate,
                 existenceByDoctorId,
                 existenceByPatientId,
-                existenceByDate};
+                existenceByDate,
+                existenceByVisitIDAndDate,
+                existenceByVisitIDAndDoctorID,
+                existenceByVisitIDAndPatientID,
+                existenceByVisitIDDoctorIDPatientID,
+                existenceBy4fields};
     }
 }
