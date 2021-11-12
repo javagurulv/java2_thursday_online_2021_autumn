@@ -19,11 +19,11 @@ public class Prescription {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="doctor_id")
+    @JoinColumn(name="doctor_id", nullable = false)
     private Doctor doctor;
 
     @ManyToOne
-    @JoinColumn(name="patient_id")
+    @JoinColumn(name="patient_id", nullable = false)
     private Patient patient;
 
     @Column(name = "medication_name", nullable = false)

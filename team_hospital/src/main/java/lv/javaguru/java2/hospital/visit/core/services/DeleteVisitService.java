@@ -7,10 +7,12 @@ import lv.javaguru.java2.hospital.visit.core.responses.DeleteVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.validators.DeleteVisitValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class DeleteVisitService {
 
     @Autowired private VisitRepository visitRepository;

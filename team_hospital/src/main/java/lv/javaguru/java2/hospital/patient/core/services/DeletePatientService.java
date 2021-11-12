@@ -7,10 +7,12 @@ import lv.javaguru.java2.hospital.patient.core.responses.DeletePatientResponse;
 import lv.javaguru.java2.hospital.patient.core.services.validators.DeletePatientValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class DeletePatientService {
 
     @Autowired private PatientRepository database;

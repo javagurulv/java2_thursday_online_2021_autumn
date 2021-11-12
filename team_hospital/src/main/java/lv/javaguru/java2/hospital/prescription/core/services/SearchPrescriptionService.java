@@ -10,6 +10,7 @@ import lv.javaguru.java2.hospital.prescription.core.responses.SearchPrescription
 import lv.javaguru.java2.hospital.prescription.core.services.search_criteria.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,6 +19,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Component
+@Transactional
 public class SearchPrescriptionService {
 
     @Autowired private PrescriptionRepository database;
