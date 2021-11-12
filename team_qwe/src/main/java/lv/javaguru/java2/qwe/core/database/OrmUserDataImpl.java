@@ -58,9 +58,7 @@ public class OrmUserDataImpl implements UserData {
                     "SELECT u FROM User u WHERE id = :id OR name = :name");
             query.setParameter("id", getIdOrDefault(userIdOrName));
             query.setParameter("name", userIdOrName);
-            Optional<User> user = Optional.ofNullable((User) query.getSingleResult());
-            System.out.println("WTF?: " + user.get().getPortfolio()); //??????????????????????????
-            return user;
+            return Optional.ofNullable((User) query.getSingleResult());
         }
         catch (NoResultException e) {
             return Optional.empty();
@@ -69,7 +67,8 @@ public class OrmUserDataImpl implements UserData {
 
     @Override
     public List<Position> getUserPortfolio(Long userId) {
-        return null;
+        return sessionFactory.getCurrentSession().createQuery(
+                "SELECT p FROM Position p WHERE user_id = " + userId, Position.class).getResultList();
     }
 
     @Override

@@ -37,7 +37,7 @@ public class RemoveUserValidator {
 
     private boolean checkUserPortfolioIsPresent(RemoveUserRequest request) {
         Optional<User> user = userData.findUserByIdOrName(request.getName());
-        return user.isPresent() && !user.get().getPortfolio().isEmpty();
+        return user.isPresent() && !userData.getUserPortfolio(user.get().getId()).isEmpty();
     }
 
 }

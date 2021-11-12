@@ -59,12 +59,12 @@ public class GetUserPortfolioServiceTest {
                 new Position(new Stock("OGZD LN", "Gazprom", "Energy", "USD", 9.25, 0.51, 0.95), 2500, 9.25),
                 new Position(new Stock("PFE US", "Pfizer", "Health care", "USD", 78.93, 0.64, 0.98), 1000, 78.93)
         );
-        user.setPortfolio(portfolio);
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         Mockito.when(userData.findUserByIdOrName("Alexander")).thenReturn(Optional.of(user));
+        Mockito.when(userData.getUserPortfolio(user.getId())).thenReturn(portfolio);
         GetUserPortfolioResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        Assert.assertEquals(user.getPortfolio(), response.getUser().getPortfolio());
+        Assert.assertEquals(portfolio, response.getPortfolio());
     }
 
 }

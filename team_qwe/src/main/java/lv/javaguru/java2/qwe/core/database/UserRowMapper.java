@@ -26,7 +26,6 @@ public class UserRowMapper implements RowMapper<User> {
         );
         user.setId(id);
         user.setCash(userData.getUserCash(id).get());
-        user.setPortfolio(userData.getUserPortfolio(id));
         return user;
     }
 
