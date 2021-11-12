@@ -11,6 +11,7 @@ import lv.javaguru.java2.qwe.core.services.validator.BuyStockMarketOrderValidato
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
@@ -20,6 +21,7 @@ public class BuyStockMarketOrderService {
     @Autowired private UserData userData;
     @Autowired private BuyStockMarketOrderValidator validator;
 
+    @Transactional
     public BuyStockMarketOrderResponse execute(BuyStockMarketOrderRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (errors.isEmpty()) {

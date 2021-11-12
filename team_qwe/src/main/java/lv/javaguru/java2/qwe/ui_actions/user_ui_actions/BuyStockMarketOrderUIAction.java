@@ -29,8 +29,8 @@ public class BuyStockMarketOrderUIAction implements UIAction {
         String ticker = utils.inputDialog("Security ticker");
         String quantity = utils.inputDialog("Enter quantity:");
         BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
-                userData.findUserByIdOrName(userName).get(),
-                database.findSecurityByTickerOrName(ticker).get(),
+                userData.findUserByIdOrName(userName).orElse(null),
+                database.findSecurityByTickerOrName(ticker).orElse(null),
                 quantity,
                 api.getQuote(ticker));
         BuyStockMarketOrderResponse response = service.execute(request);

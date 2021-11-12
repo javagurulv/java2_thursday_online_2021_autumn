@@ -89,7 +89,8 @@ public class OrmUserDataImpl implements UserData {
     @Override
     public void savePosition(Position position, Long userId) {
         jdbcTemplate.update("INSERT INTO users_positions (user_id, security_ticker, amount, purchase_price) VALUES\n" +
-                "(?, ?, ?, ?)", userId, position.getSecurity().getTicker(), position.getAmount(), position.getPurchasePrice());
+                "(?, ?, ?, ?)",
+                userId, position.getSecurity().getTicker(), position.getAmount(), position.getPurchasePrice());
     }
 
     @Override
