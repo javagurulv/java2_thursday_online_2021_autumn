@@ -5,11 +5,11 @@ package lv.javaguru.java2.jg_entertainment.restaurant.integrationtest;
 //@ContextConfiguration(classes = {RestaurantListConfiguration.class})
 //public class SpringContextTest {
 //
-//    @Autowired
-//    private ApplicationContext applicationContext;
+//    @Autowired private ApplicationContext applicationContext;
+//    @Autowired private JdbcTemplate jdbcTemplate;
 //
 //    @Test
 //    public void start() {
-//        assertNotNull(applicationContext);
+//        Assertions.assertNotNull(applicationContext);
 //    }
 //}
