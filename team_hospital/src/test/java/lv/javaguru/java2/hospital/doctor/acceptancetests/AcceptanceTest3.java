@@ -23,8 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class AcceptanceTest3 {
 
     private ApplicationContext appContext;
-    //@Autowired    private JdbcTemplate jdbcTemplate;
-
 
     @BeforeEach
     public void setup() {

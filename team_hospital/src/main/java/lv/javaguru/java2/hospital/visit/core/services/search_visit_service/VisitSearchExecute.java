@@ -37,6 +37,7 @@ public class VisitSearchExecute {
                 new VisitIDAndDoctorIDSearchCriteria(visitRepository),
                 new VisitIDAndPatientIDAndDoctorIDSearchCriteria(visitRepository),
                 new VisitIDPatientIDDoctorIDDateSearchCriteria(visitRepository),
+                //new VisitIDAndDateSearchCriteria(visitRepository),
                 new DoctorIdAndPatientIdAndDateSearchCriteria(visitRepository),
                 new DoctorIdAndPatientIdSearchCriteria(visitRepository),
                 new DoctorIdAndDateSearchCriteria(visitRepository),

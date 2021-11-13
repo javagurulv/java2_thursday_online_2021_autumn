@@ -11,6 +11,7 @@ import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -30,24 +31,24 @@ public class GenerateUserPortfolioService {
         return userData;
     }
 
+    @Transactional
     public GenerateUserPortfolioResponse execute(GenerateUserPortfolioRequest request) {
         List<CoreError> errors = validator.validate(request);
         Optional<User> user = userData.findUserByIdOrName(request.getUserName());
-        if (user.isPresent() && user.get().getPortfolio().size() > 0) {
+        if (user.isPresent() && getPortfolio(user.get()).size() > 0) {
             errors.add(new CoreError("", "portfolio has been already generated for this user!"));
             return new GenerateUserPortfolioResponse(errors, user.get());
         }
-        if (user.isPresent() && user.get().getPortfolio().size() == 0) {
+        else if (user.isPresent() && getPortfolio(user.get()).size() == 0) {
             User user1 = user.get();
             Map<String, Double> investmentPolicy = calculateInvestmentPolicy(user1);
             Map<String, Double> investmentPerIndustry = calculateInvestmentPerIndustry(user1, investmentPolicy);
             Map<String, List<Security>> listPerIndustry = calculateListOfSecuritiesPerIndustry(user1, investmentPerIndustry);
             List<Position> userPortfolio = generateUserPortfolio(listPerIndustry, investmentPerIndustry);
             addPortfolioToDatabaseSQL(userPortfolio, user1); // сохраняет сгенерированный портфель в базу данных
-            user1.setPortfolio(userPortfolio);
             user1.setCash(userData.getUserCash(user1.getId()).get());
             user1.setPortfolioGenerationDate(userData.getCurrentDate());
-            return new GenerateUserPortfolioResponse(user1);
+            return new GenerateUserPortfolioResponse(user1, userPortfolio);
         } else {
             return new GenerateUserPortfolioResponse(errors, null);
         }
@@ -128,6 +129,10 @@ public class GenerateUserPortfolioService {
                 entry("Industrials", new Double[]{03.00, 06.00, 9.00, 12.00, 15.00}),
                 entry("Consumer Discretionary", new Double[]{01.50, 05.50, 9.50, 13.50, 17.50})
         );
+    }
+
+    private List<Position> getPortfolio(User user) {
+        return userData.getUserPortfolio(user.getId());
     }
 
 }

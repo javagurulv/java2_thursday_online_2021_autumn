@@ -8,10 +8,12 @@ import lv.javaguru.java2.hospital.doctor.core.services.validators.AddDoctorReque
 import lv.javaguru.java2.hospital.domain.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class AddDoctorService {
 
     @Autowired private DoctorRepository database;

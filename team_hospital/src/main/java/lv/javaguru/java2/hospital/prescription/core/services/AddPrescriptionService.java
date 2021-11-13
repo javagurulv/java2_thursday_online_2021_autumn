@@ -12,10 +12,12 @@ import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
 import lv.javaguru.java2.hospital.prescription.core.services.validators.AddPrescriptionValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class AddPrescriptionService {
 
     @Autowired private PrescriptionRepository database;

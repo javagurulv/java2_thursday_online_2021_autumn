@@ -95,6 +95,11 @@ public class JDBCVisitRepositoryImpl implements VisitRepository {
     }
 
     @Override
+    public List<Visit> findByVisitIDAndDate(Long visitID, LocalDateTime date) {
+        return null;
+    }
+
+    @Override
     public List<Visit> findByDoctorIdAndPatientIdAndDate(Long doctorId, Long patientId, LocalDateTime date) {
         String sql = "SELECT * FROM visits WHERE doctor_id = ? AND patient_id = ? AND date = ?";
         Object[] args = new Object[]{doctorId, patientId, date};

@@ -9,10 +9,12 @@ import lv.javaguru.java2.hospital.visit.core.services.validators.SearchVisitVali
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class SearchVisitService {
 
     @Value("${search.ordering.enabled}")

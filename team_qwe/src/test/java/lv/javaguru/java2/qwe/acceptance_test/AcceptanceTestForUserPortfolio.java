@@ -1,8 +1,6 @@
 package lv.javaguru.java2.qwe.acceptance_test;
 
 import lv.javaguru.java2.qwe.config.AppConfiguration;
-import lv.javaguru.java2.qwe.core.database.Database;
-import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.domain.Position;
 import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRequest;
@@ -12,21 +10,17 @@ import lv.javaguru.java2.qwe.core.responses.user_responses.GetUserPortfolioRespo
 import lv.javaguru.java2.qwe.core.services.user_services.GenerateUserPortfolioService;
 import lv.javaguru.java2.qwe.core.services.user_services.GetUserPortfolioService;
 import org.h2.api.Trigger;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -39,13 +33,6 @@ import static org.junit.Assert.*;
 public class AcceptanceTestForUserPortfolio {
 
     @Autowired private ApplicationContext appContext;
-//    @Autowired private JdbcTemplate jdbcTemplate;
-
-//    @Before
-//    public void init() {
-//        jdbcTemplate.update("RUNSCRIPT FROM 'classpath:schema.sql'");
-//        jdbcTemplate.update("RUNSCRIPT FROM 'classpath:big_data.sql'");
-//    }
 
     @Test
     public void generateUserPortfolioTest1() {
@@ -77,14 +64,15 @@ public class AcceptanceTestForUserPortfolio {
                 new Position(new Stock("CZR US", "Caesars Entertainment Inc", "Consumer Discretionary", "USD", 85.64, 0, 2.93), 1021, 85.64),
                 new Position(new Stock("PENN US", "Penn National Gaming Inc.", "Consumer Discretionary", "USD", 67.65, 0, 2.33), 1293, 67.65)
         );
-        assertEquals(portfolio.size(), response1.getUser().getPortfolio().size());
+        assertEquals(portfolio.size(), response1.getPortfolio().size());
         IntStream.rangeClosed(0, portfolio.size() - 1)
-                .forEach(i -> assertTrue(portfolio.contains(response1.getUser().getPortfolio().get(i))));
+                .forEach(i -> assertTrue(portfolio.contains(response1.getPortfolio().get(i))));
         assertEquals(872.1, response1.getUser().getCash(), 0.01);
 
-        assertEquals(portfolio.size(), response2.getUser().getPortfolio().size());
+        assertEquals(portfolio.size(), response2.getPortfolio().size());
+        response2.getPortfolio().forEach(System.out::println);
         IntStream.rangeClosed(0, portfolio.size() - 1)
-                .forEach(i -> assertTrue(portfolio.contains(response2.getUser().getPortfolio().get(i))));
+                .forEach(i -> assertTrue(portfolio.contains(response2.getPortfolio().get(i))));
         assertEquals(872.1, response2.getUser().getCash(), 0.01);
     }
 

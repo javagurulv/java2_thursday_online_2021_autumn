@@ -3,9 +3,14 @@ package lv.javaguru.java2.qwe.core.domain;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Embeddable
+@Entity
 @Table(name = "users_positions")
 public class Position {
+
+    @Id
+    @Column(name = "position_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "security_ticker", nullable = false)
@@ -64,7 +69,9 @@ public class Position {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Position position = (Position) o;
-        return Objects.equals(security, position.security);
+        return Double.compare(position.amount, amount) == 0
+                && Double.compare(position.purchasePrice, purchasePrice) == 0
+                && Objects.equals(security, position.security);
     }
 
 }

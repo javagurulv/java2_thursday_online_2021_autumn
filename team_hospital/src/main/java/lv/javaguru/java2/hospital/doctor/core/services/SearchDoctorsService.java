@@ -12,6 +12,7 @@ import lv.javaguru.java2.hospital.domain.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -20,6 +21,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Component
+@Transactional
 public class SearchDoctorsService {
 
     @Value("${search.ordering.enabled}")

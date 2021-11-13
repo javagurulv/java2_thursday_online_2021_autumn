@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -57,21 +58,20 @@ public class GetUserPortfolioSummaryServiceTest {
         List<Position> portfolio = List.of(
                 new Position(new Stock("BABA US", "Alibaba", "Technology", "USD", 175.23, 0, 1.32), 525, 175.23),
                 new Position(new Stock("OGZD LN", "Gazprom", "Energy", "USD", 9.25, 5.53, 0.95), 7563, 9.25),
-                new Position(new Stock("PFA US", "Pfizer", "Health care", "USD", 78.93, 2.18, 0.98), 1000, 78.93),
-                new Position(new Cash(), 1055.34, 1)
+                new Position(new Stock("PFA US", "Pfizer", "Health care", "USD", 78.93, 2.18, 0.98), 1000, 78.93)
         );
-        user.setPortfolio(portfolio);
         user.setPortfolioGenerationDate(LocalDate.now());
 
         int userRiskTolerance = 5;
         double userInitialInvestment = 1_000_000;
         LocalDate portfolioGenerationDate = LocalDate.now();
-        double portfolioValue = 241_938.84;
-        int amountOfPositions = 4;
-        double avgWgtDividendYield = 2.3102;
-        double avgWgtRiskWeight = 1.0963;
+        double portfolioValue = 240_883.50;
+        int amountOfPositions = 3;
+        double avgWgtDividendYield = 2.3203;
+        double avgWgtRiskWeight = 1.1011;
 
         Mockito.when(userData.findUserByIdOrName("Alexander")).thenReturn(Optional.of(user));
+        Mockito.when(userData.getUserPortfolio(user.getId())).thenReturn(portfolio);
 
         GetUserPortfolioSummaryResponse response = service.execute(request);
         assertFalse(response.hasErrors());

@@ -38,14 +38,6 @@ public class User {
     @Column(name = "risk_tolerance")
     private int riskTolerance;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "users_positions",
-            joinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<Position> portfolio = new ArrayList<>();
-//    private final Map<String, Double[]> distribution = createDistributionMatrix();
-
     public User() {
     }
 
@@ -111,18 +103,6 @@ public class User {
 
     public int getRiskTolerance() {
         return riskTolerance;
-    }
-
-    public List<Position> getPortfolio() {
-        return portfolio;
-    }
-
-/*    public Map<String, Double[]> getDistribution() {
-        return distribution;
-    }*/
-
-    public void setPortfolio(List<Position> portfolio) {
-        this.portfolio = portfolio;
     }
 
     public LocalDate getPortfolioGenerationDate() {

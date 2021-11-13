@@ -47,7 +47,6 @@ public class GenerateUserPortfolioServiceTest {
                 new CoreError("", "portfolio has been already generated for this user!")
         );
         User user = new User("Alexander", 25, Type.SUPER_RICH, 1_000_000);
-        System.out.println("RESULT: " + user.getPortfolio().size());
         Mockito.when(validator.validate(request)).thenReturn(errors);
         GenerateUserPortfolioResponse response = service.execute(request);
         assertTrue(response.hasErrors());

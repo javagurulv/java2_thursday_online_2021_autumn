@@ -45,3 +45,7 @@ CREATE TABLE IF NOT EXISTS `users_positions` (
 CREATE TRIGGER IF NOT EXISTS ins_sec
   AFTER INSERT ON users_positions
   FOR EACH ROW CALL "lv.javaguru.java2.qwe.acceptance_test.AcceptanceTestForUserPortfolio$MyTrigger";
+
+CREATE TRIGGER IF NOT EXISTS del_pos
+  AFTER DELETE ON users_positions
+  FOR EACH ROW CALL "lv.javaguru.java2.qwe.acceptance_test.AcceptanceTestForBuyStockMarketOrder$MyTrigger2";

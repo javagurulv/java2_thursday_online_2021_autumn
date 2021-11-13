@@ -9,6 +9,10 @@ import java.time.format.DateTimeFormatter;
 public class GetVisitDate {
 
     public LocalDateTime getVisitDateFromString(String date) {
-        return LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(date));
+        return LocalDateTime.from(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse(date));
+    }
+
+    public String getVisitStringFromDate(LocalDateTime date) {
+        return LocalDateTime.from(date).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }

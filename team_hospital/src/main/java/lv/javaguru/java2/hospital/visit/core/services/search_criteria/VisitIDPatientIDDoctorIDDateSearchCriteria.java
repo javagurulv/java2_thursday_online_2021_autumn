@@ -26,7 +26,7 @@ public class VisitIDPatientIDDoctorIDDateSearchCriteria implements VisitsSearchC
 
     @Override
     public List<Visit> process(SearchVisitRequest request) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return database.findByVisitIDDoctorIDPatientIDDate
                 (Long.valueOf(request.getVisitId()), Long.parseLong(request.getDoctorId()),
                         Long.parseLong(request.getPatientId()), LocalDateTime.parse(request.getVisitDate(), formatter));

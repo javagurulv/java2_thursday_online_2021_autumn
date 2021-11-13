@@ -26,9 +26,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class VisitIdSearchCriteriaTest {
 
-    @Mock
-    VisitRepository database;
-    @InjectMocks VisitIdSearchCriteria searchCriteria;
+    @Mock private VisitRepository database;
+    @InjectMocks private VisitIdSearchCriteria searchCriteria;
 
     @Test
     public void shouldReturnTrue() {
