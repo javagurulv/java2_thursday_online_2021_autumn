@@ -10,13 +10,14 @@ import lv.javaguru.java2.qwe.core.services.validator.GetUserPortfolioValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Component
+@Transactional
 public class GetUserPortfolioService {
 
-//    @Autowired private SessionFactory sessionFactory;
     @Autowired private UserData userData;
     @Autowired private GetUserPortfolioValidator validator;
 
@@ -30,7 +31,6 @@ public class GetUserPortfolioService {
         if (errors.isEmpty() && user.isPresent()) {
             User user1 = user.get();
             List<Position> portfolio = userData.getUserPortfolio(user1.getId());
-//            user.get().setPortfolio(userData.getUserPortfolio(user.get().getId()));
             return new GetUserPortfolioResponse(user.get(), portfolio);
         }
         return new GetUserPortfolioResponse(errors, null);

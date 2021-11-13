@@ -9,9 +9,11 @@ import lv.javaguru.java2.qwe.core.services.validator.GetUserPortfolioGroupedByIn
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Component
+@Transactional
 public class GetUserPortfolioGroupedByIndustryService {
 
     @Autowired private UserData userData;

@@ -20,6 +20,7 @@ import static java.util.stream.Collectors.toMap;
 import static java.util.Map.*;
 
 @Component
+@Transactional
 public class GenerateUserPortfolioService {
 
     @Autowired private UserData userData;
@@ -31,7 +32,6 @@ public class GenerateUserPortfolioService {
         return userData;
     }
 
-    @Transactional
     public GenerateUserPortfolioResponse execute(GenerateUserPortfolioRequest request) {
         List<CoreError> errors = validator.validate(request);
         Optional<User> user = userData.findUserByIdOrName(request.getUserName());

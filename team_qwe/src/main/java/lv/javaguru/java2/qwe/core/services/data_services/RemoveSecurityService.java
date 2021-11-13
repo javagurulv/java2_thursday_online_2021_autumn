@@ -6,7 +6,10 @@ import lv.javaguru.java2.qwe.core.responses.data_responses.RemoveSecurityRespons
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
+
 @Component
+@Transactional
 public class RemoveSecurityService {
 
     @Autowired private Database database;

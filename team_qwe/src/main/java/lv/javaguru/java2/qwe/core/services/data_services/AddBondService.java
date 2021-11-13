@@ -10,10 +10,12 @@ import lv.javaguru.java2.qwe.core.services.validator.AddBondValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
 @Component
+@Transactional
 public class AddBondService {
 
     @Autowired private Database database;

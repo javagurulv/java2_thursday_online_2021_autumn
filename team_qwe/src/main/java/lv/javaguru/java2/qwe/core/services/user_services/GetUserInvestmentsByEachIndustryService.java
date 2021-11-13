@@ -9,10 +9,12 @@ import lv.javaguru.java2.qwe.core.services.validator.GetUserInvestmentsByEachInd
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Component
+@Transactional
 public class GetUserInvestmentsByEachIndustryService {
 
     @Autowired private UserData userData;
