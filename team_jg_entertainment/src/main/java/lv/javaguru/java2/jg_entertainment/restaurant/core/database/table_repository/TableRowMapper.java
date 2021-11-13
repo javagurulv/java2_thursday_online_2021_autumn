@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_repository;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
 import org.springframework.jdbc.core.RowMapper;

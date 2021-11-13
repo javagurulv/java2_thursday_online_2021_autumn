@@ -1,5 +1,6 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_repository;
 
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_repository.TableRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;

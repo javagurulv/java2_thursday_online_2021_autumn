@@ -1,7 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_reservations;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.MenuRepository;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.TableRepository;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_repository.TableRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository.VisitorsRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.AddReservationRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.CoreError;

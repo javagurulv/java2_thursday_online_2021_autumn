@@ -1,5 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
 
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_repository.TableRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository.VisitorsRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;
 import org.springframework.jdbc.core.RowMapper;
