@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 import org.hibernate.SessionFactory;

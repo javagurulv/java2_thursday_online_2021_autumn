@@ -2,7 +2,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_r
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.MenuRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.TableRepository;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.VisitorsRepository;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository.VisitorsRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.AddReservationRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.ReservationLongNumChecker;

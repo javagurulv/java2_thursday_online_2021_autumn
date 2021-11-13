@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.VisitorsRepository;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository.VisitorsRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.AddVisitorResponse;
@@ -20,12 +20,9 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class AddAllVisitorsServiceTest {
 
-    @Mock
-    private VisitorsRepository visitorsRepository;
-    @Mock
-    private AddVisitorValidator validator;
-    @InjectMocks
-    private AddAllVisitorsService service;
+    @Mock private VisitorsRepository visitorsRepository;
+    @Mock private AddVisitorValidator validator;
+    @InjectMocks private AddAllVisitorsService service;
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
