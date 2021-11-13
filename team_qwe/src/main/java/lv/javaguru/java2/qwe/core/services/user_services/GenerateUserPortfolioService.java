@@ -47,7 +47,6 @@ public class GenerateUserPortfolioService {
             List<Position> userPortfolio = generateUserPortfolio(listPerIndustry, investmentPerIndustry);
             addPortfolioToDatabaseSQL(userPortfolio, user1); // сохраняет сгенерированный портфель в базу данных
             user1.setCash(userData.getUserCash(user1.getId()).get());
-//            user1.setCash(userData.getUserCash(user1.getId()).get());
             user1.setPortfolioGenerationDate(userData.getCurrentDate());
             return new GenerateUserPortfolioResponse(user1, userPortfolio);
         } else {

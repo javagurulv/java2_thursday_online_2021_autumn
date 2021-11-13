@@ -70,6 +70,7 @@ public class AcceptanceTestForUserPortfolio {
         assertEquals(872.1, response1.getUser().getCash(), 0.01);
 
         assertEquals(portfolio.size(), response2.getPortfolio().size());
+        response2.getPortfolio().forEach(System.out::println);
         IntStream.rangeClosed(0, portfolio.size() - 1)
                 .forEach(i -> assertTrue(portfolio.contains(response2.getPortfolio().get(i))));
         assertEquals(872.1, response2.getUser().getCash(), 0.01);

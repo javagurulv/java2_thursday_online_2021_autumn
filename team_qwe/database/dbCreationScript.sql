@@ -59,6 +59,19 @@ CREATE TABLE IF NOT EXISTS `users_positions` (
 ENGINE = InnoDB
 AUTO_INCREMENT = 1;
 
+CREATE TABLE IF NOT EXISTS `trades` (
+  `trade_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT NOT NULL,
+  `position_id` BIGINT NOT NULL,
+  `trade_date` DATETIME NOT NULL,
+  PRIMARY KEY (`trade_id`),
+    FOREIGN KEY(`user_id`) REFERENCES `users`(`id`),
+    FOREIGN KEY(`security_ticker`) REFERENCES `stocks`(`ticker`),
+    FOREIGN KEY(`position_id`) REFERENCES `users_positions`(position_id)
+)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1000;
+
 delimiter |
 
 CREATE TRIGGER ins_sec AFTER INSERT ON users_positions

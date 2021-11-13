@@ -69,7 +69,9 @@ public class Position {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Position position = (Position) o;
-        return Objects.equals(security, position.security);
+        return Double.compare(position.amount, amount) == 0
+                && Double.compare(position.purchasePrice, purchasePrice) == 0
+                && Objects.equals(security, position.security);
     }
 
 }
