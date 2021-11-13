@@ -89,6 +89,8 @@ public class AcceptanceTestForBuyStockMarketOrder {
         assertEquals(position1, response1.getPosition());
         assertEquals(position2, response2.getPosition());
         assertEquals(portfolio, response3.getPortfolio());
+        assertEquals(292_629.05,
+                getFindUserByNameService().execute(new FindUserByNameRequest("Alexander")).getUser().getCash(), 0.01);
     }
 
     @Test
