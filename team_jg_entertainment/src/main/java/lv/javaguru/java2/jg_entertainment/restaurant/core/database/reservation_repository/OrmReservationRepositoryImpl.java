@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.database.reservation_repository;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.EditReservationEnum;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;

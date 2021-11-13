@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.MenuRepository;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.menu_repository.MenuRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.OrderingMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.PagingMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.SearchMenusRequest;

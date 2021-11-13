@@ -1,5 +1,6 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.core.database;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.database.reservation_repository;
 
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.menu_repository.MenuRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_repository.TableRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository.VisitorsRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;
