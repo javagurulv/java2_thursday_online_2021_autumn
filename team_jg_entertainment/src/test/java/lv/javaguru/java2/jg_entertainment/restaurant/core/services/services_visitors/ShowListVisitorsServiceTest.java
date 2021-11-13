@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.VisitorsRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.ShowAllVisitorsRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ShowAllVisitorsResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 public class ShowListVisitorsServiceTest {
 
     @Mock
-    private DatabaseVisitors databaseVisitors;
+    private VisitorsRepository visitorsRepository;
     @InjectMocks
     private ShowListVisitorsService service;
 
@@ -28,7 +28,7 @@ public class ShowListVisitorsServiceTest {
     public void shouldGetVisitorsFromDb() {
         List<Visitors> visitors = new ArrayList<>();
         visitors.add(new Visitors("name", "surname"));
-        Mockito.when(databaseVisitors.showAllClientsInList()).thenReturn(visitors);
+        Mockito.when(visitorsRepository.showAllClientsInList()).thenReturn(visitors);
         ShowAllVisitorsRequest request = new ShowAllVisitorsRequest();
         ShowAllVisitorsResponse response = service.execute(request);
         assertFalse(response.hasError());

@@ -1,16 +1,34 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.domain;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Entity
+@javax.persistence.Table(name = "reservation")
 public class Reservation {
 
+    @Id
+    @Column(name = "reservation_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReservation;
+
+    @ManyToOne
+    @JoinColumn(name = "id_visitor")
     private Visitors visitor;
+
+    @ManyToOne
+    @JoinColumn(name = "id_menu")
     private Menu menu;
+
+    @ManyToOne
+    @JoinColumn(name = "id_table")
     private Table table;
+
+    @Column(name = "reservation_date", nullable = false)
     private LocalDateTime reservationDate;
-    private String sqlDate;
+
+    private String sqlDate;/// просмотреть
 
     public Reservation() {
     }

@@ -3,7 +3,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tab
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.AddTableValidator;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseTable;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.TableRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.AddTableRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.AddTableResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.List;
 public class AddTableService {
 
     @Autowired
-    private DatabaseTable databaseTable;
+    private TableRepository tableRepository;
     @Autowired
     private AddTableValidator validator;
 
@@ -29,7 +29,7 @@ public class AddTableService {
                         request.getTableCapacity(),
                         request.getPrice());
 
-        databaseTable.save(table);
+        tableRepository.save(table);
         return new AddTableResponse(table);
     }
 

@@ -1,7 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseTable;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.TableRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.GetAllTablesRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.GetAllTablesResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,10 @@ import java.util.List;
 public class GetAllTablesService {
 
 	@Autowired
-	private DatabaseTable databaseTable;
+	private TableRepository tableRepository;
 
 	public GetAllTablesResponse execute(GetAllTablesRequest request) {
-		List<Table> tables = databaseTable.getAllTables();
+		List<Table> tables = tableRepository.getAllTables();
 		return new GetAllTablesResponse(tables);
 	}
 

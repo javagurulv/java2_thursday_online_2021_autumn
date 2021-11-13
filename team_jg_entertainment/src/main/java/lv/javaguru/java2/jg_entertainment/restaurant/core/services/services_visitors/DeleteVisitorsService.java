@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.VisitorsRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.DeleteVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.DeleteVisitorsResponse;
@@ -14,7 +14,7 @@ import java.util.List;
 public class DeleteVisitorsService {
 
     @Autowired
-    private DatabaseVisitors database;
+    private VisitorsRepository database;
     @Autowired
     private DeleteVisitorValidator validator;
 

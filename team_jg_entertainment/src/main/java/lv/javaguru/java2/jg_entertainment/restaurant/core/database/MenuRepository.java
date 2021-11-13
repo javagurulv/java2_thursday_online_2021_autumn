@@ -5,7 +5,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
 import java.util.List;
 
 
-public interface DatabaseMenu {
+public interface MenuRepository {
 
     void save(Menu menu);
 

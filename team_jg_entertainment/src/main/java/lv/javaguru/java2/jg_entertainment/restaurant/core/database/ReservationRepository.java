@@ -6,7 +6,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface DatabaseReservation {
+public interface ReservationRepository {
 
     void addReservation(Reservation reservation);
 

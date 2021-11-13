@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.VisitorsRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.DeleteVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.DeleteVisitorsResponse;
@@ -21,12 +21,9 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(MockitoJUnitRunner.class)
 public class DeleteVisitorsServiceTest {
 
-    @Mock
-    private DatabaseVisitors database;
-    @Mock
-    private DeleteVisitorValidator validator;
-    @InjectMocks
-    private DeleteVisitorsService service;
+    @Mock private VisitorsRepository database;
+    @Mock private DeleteVisitorValidator validator;
+    @InjectMocks private DeleteVisitorsService service;
 
     @Test
     public void shouldReturnErrorWhenVisitorIdNotProvided() {

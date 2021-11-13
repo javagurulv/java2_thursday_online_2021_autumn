@@ -1,12 +1,25 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.domain;
 
+import javax.persistence.*;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name = "menu")
 public class Menu {
 
-    private String title;
+    @Id
+    @Column(name = "menu_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long number;
+
+    @Column(name = "menu_title", nullable = false)
+    private String title;
+
+    @Column(name = "menu_description", nullable = false)
     private String description;
+
+    @Column(name = "menu_price", nullable = false)
     private double price;
 
     public Menu() {

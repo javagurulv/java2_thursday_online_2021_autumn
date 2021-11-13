@@ -19,25 +19,25 @@ import java.util.List;
 @Component
 public class AddReservationService {
 
-    @Autowired    private DatabaseVisitors databaseVisitors;
-    @Autowired    private DatabaseMenu databaseMenu;
-    @Autowired    private DatabaseTable databaseTable;
-    @Autowired    private DatabaseReservation databaseReservation;
-    @Autowired    private AddReservationValidator validator;
+    @Autowired private VisitorsRepository visitorsRepository;
+    @Autowired private MenuRepository menuRepository;
+    @Autowired private TableRepository tableRepository;
+    @Autowired private ReservationRepository reservationRepository;
+    @Autowired private AddReservationValidator validator;
 
     public AddReservationResponse execute(AddReservationRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (!errors.isEmpty()) {
             return new AddReservationResponse(errors);
         }
-        Visitors visitors = databaseVisitors.findClientById(Long.valueOf(request.getVisitorID())).get(0);
-        Menu menu = databaseMenu.findById(Long.valueOf(request.getMenuID())).get(0);
-        Table table = databaseTable.findTableById(Long.valueOf(request.getTableID())).get(0);
+        Visitors visitors = visitorsRepository.findClientById(Long.valueOf(request.getVisitorID())).get(0);
+        Menu menu = menuRepository.findById(Long.valueOf(request.getMenuID())).get(0);
+        Table table = tableRepository.findTableById(Long.valueOf(request.getTableID())).get(0);
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(request.getReservationDate()));
 
 
         Reservation reservation = new Reservation(visitors, menu, table, date);
-        databaseReservation.addReservation(reservation);
+        reservationRepository.addReservation(reservation);
         return new AddReservationResponse(reservation);
     }
 /*

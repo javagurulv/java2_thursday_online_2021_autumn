@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_reservations;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseReservation;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.ReservationRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;
 import org.springframework.stereotype.Component;
@@ -12,9 +12,9 @@ import java.util.Optional;
 public class DateExistenceValidator implements DateValidator {
 
     private GetReservationDate getReservationDate;
-    private DatabaseReservation database;
+    private ReservationRepository database;
 
-    public DateExistenceValidator(GetReservationDate getReservationDate, DatabaseReservation database) {
+    public DateExistenceValidator(GetReservationDate getReservationDate, ReservationRepository database) {
         this.getReservationDate = getReservationDate;
         this.database = database;
     }

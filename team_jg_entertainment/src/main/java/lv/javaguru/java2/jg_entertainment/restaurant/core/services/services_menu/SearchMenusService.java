@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenu;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.MenuRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.OrderingMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.PagingMenu;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.SearchMenusRequest;
@@ -27,7 +27,7 @@ public class SearchMenusService {
     private boolean pagingEnabled;
 
     @Autowired
-    private DatabaseMenu databaseMenu;
+    private MenuRepository menuRepository;
     @Autowired
     private SearchMenusRequestValidator validator;
 
@@ -67,17 +67,17 @@ public class SearchMenusService {
     private List<Menu> search(SearchMenusRequest request) {
         List<Menu> menus = new ArrayList<>();
         if (request.isTitleProvided() && !request.isDescriptionProvided()) {
-            menus = databaseMenu.findByTitle(request.getTitle());
+            menus = menuRepository.findByTitle(request.getTitle());
         }
         if (!request.isTitleProvided() && request.isDescriptionProvided()) {
-            menus = databaseMenu.findByDescription(request.getDescription());
+            menus = menuRepository.findByDescription(request.getDescription());
         }
         if (request.isTitleProvided() && request.isDescriptionProvided()) {
-            menus = databaseMenu.findByTitleAndDescription(request.getTitle(), request.getDescription());
+            menus = menuRepository.findByTitleAndDescription(request.getTitle(), request.getDescription());
         }
 //->new
         if (request.isIDProvided() && !request.isTitleProvided() && !request.isDescriptionProvided()) {
-            menus = databaseMenu.findById(request.getIdNumberMenu());
+            menus = menuRepository.findById(request.getIdNumberMenu());
         } //<- new
         return menus;
     }

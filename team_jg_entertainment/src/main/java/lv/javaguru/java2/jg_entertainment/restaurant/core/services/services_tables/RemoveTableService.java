@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_tables;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseTable;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.TableRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.tables.RemoveTableRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.RemoveTableResponse;
@@ -14,7 +14,7 @@ import java.util.List;
 public class RemoveTableService {
 
     @Autowired
-    private DatabaseTable databaseTable;
+    private TableRepository tableRepository;
     @Autowired
     private RemoveTableValidator validator;
 
@@ -25,7 +25,7 @@ public class RemoveTableService {
             return new RemoveTableResponse(coreErrors);
         }
         boolean isTableRemoved =
-                databaseTable.deleteById(request.getTableIdToRemove());
+                tableRepository.deleteById(request.getTableIdToRemove());
         return new RemoveTableResponse(isTableRemoved);
     }
 }

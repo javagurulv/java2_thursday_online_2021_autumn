@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.VisitorsRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Ordering;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Paging;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
@@ -25,7 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 public class SearchVisitorsServiceTest {
 
     @Mock
-    private DatabaseVisitors database;
+    private VisitorsRepository database;
     @Mock
     private SearchVisitorsRequestValidator validator;
     @InjectMocks

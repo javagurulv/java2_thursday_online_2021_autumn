@@ -5,7 +5,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
 import java.util.List;
 
 
-public interface DatabaseVisitors {
+public interface VisitorsRepository {
 
     void saveClientToRestaurantList(Visitors clientInfo);
 

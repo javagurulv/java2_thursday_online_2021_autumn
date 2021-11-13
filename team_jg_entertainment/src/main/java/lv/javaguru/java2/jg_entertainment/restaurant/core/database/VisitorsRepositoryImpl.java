@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 
 //@Component
-public class DatabaseVisitorsImpl implements DatabaseVisitors {
+public class VisitorsRepositoryImpl implements VisitorsRepository {
 
     List<Visitors> clientInRestaurant = new ArrayList<>();
     private Long idClient = 1L;

@@ -12,9 +12,9 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class ReservationRowMapper implements RowMapper<Reservation> {
 
-    @Autowired    private JdbcVisitorsDatabaseImpl databaseVisitors;
-    @Autowired    private JdbcMenuDatabaseImpl databaseMenu;
-    @Autowired    private JdbcTableDatabaseImpl databaseTable;
+    @Autowired private VisitorsRepository databaseVisitors;
+    @Autowired private MenuRepository databaseMenu;
+    @Autowired private TableRepository databaseTable;
 
     @Override
     public Reservation mapRow(ResultSet rs, int rowNum) throws SQLException {

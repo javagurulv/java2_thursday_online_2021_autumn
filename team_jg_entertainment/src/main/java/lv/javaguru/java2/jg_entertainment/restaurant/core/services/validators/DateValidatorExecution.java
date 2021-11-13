@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseReservation;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.ReservationRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_reservations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Component
 public class DateValidatorExecution {
-    @Autowired private DatabaseReservation database;
+    @Autowired private ReservationRepository database;
     @Autowired private DateFormatValidator dateFormatValidator;
     @Autowired private GetReservationDate getVisitDate;
 

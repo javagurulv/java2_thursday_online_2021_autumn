@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.VisitorsRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Ordering;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Paging;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
@@ -27,7 +27,7 @@ public class SearchVisitorsService {
     private boolean pagingEnabled;
 
     @Autowired
-    private DatabaseVisitors database;
+    private VisitorsRepository database;
     @Autowired private SearchVisitorsRequestValidator validator;
 
     public SearchVisitorsResponse execute(SearchVisitorsRequest request) {

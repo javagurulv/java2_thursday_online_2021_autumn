@@ -1,7 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenu;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.MenuRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.AddMenuRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.AddMenuResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.CoreError;
@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 public class AddMenuService {
 
-    @Autowired private DatabaseMenu databaseMenu;
+    @Autowired private MenuRepository menuRepository;
     @Autowired private AddMenuValidator validator;
 
 //    public AddMenuService(DatabaseMenu databaseMenu,
@@ -30,7 +30,7 @@ public class AddMenuService {
         }
 
         Menu menu = new Menu(request.getTitle(), request.getDescription(), request.getPrice());
-        databaseMenu.save(menu);
+        menuRepository.save(menu);
 
         return new AddMenuResponse(menu);
     }

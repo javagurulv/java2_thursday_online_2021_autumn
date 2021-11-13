@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Component
-public class JdbcReservationDatabaseImpl implements DatabaseReservation {
+public class JdbcReservationRepositoryImpl implements ReservationRepository {
 
     @Autowired private JdbcTemplate jdbcTemplate;
     @Autowired private ReservationRowMapper reservationRowMapper;

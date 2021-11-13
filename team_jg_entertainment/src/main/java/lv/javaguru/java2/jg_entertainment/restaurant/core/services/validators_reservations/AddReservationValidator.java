@@ -1,8 +1,8 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_reservations;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenu;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseTable;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.MenuRepository;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.TableRepository;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.VisitorsRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.AddReservationRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.ReservationLongNumChecker;
@@ -17,16 +17,11 @@ import java.util.Optional;
 @Component
 public class AddReservationValidator {
 
-    @Autowired
-    private DatabaseVisitors visitorDatabase;
-    @Autowired
-    private DatabaseMenu menuDatabase;
-    @Autowired
-    private DatabaseTable tableDatabase;
-    @Autowired
-    private DateValidatorExecution dateValidator;
-    @Autowired
-    private ReservationLongNumChecker longNumChecker;
+    @Autowired private VisitorsRepository visitorDatabase;
+    @Autowired private MenuRepository menuDatabase;
+    @Autowired private TableRepository tableDatabase;
+    @Autowired private DateValidatorExecution dateValidator;
+    @Autowired private ReservationLongNumChecker longNumChecker;
 
     public List<CoreError> validate(AddReservationRequest request) {
         List<CoreError> errors = new ArrayList<>();

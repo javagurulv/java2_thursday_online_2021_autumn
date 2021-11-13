@@ -12,15 +12,15 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 //@Component
-public class DatabaseReservationImpl implements DatabaseReservation {
+public class ReservationRepositoryImpl implements ReservationRepository {
     private Long nextId = 1L;
     private final List<Reservation> reservationList = new ArrayList<>();
     @Autowired
-    private DatabaseVisitors databaseVisitors;
+    private VisitorsRepository visitorsRepository;
     @Autowired
-    private DatabaseTable databaseTable;
+    private TableRepository tableRepository;
     @Autowired
-    private DatabaseMenu databaseMenu;
+    private MenuRepository menuRepository;
 
     @Override
     public void addReservation(Reservation reservation) {
@@ -63,13 +63,13 @@ public class DatabaseReservationImpl implements DatabaseReservation {
         if (reservationToEditOpt.isPresent()) {
             Reservation reservationToEdit = reservationToEditOpt.get();
             if (userInput.equals(EditReservationEnum.TABLE_ID)) {
-                reservationToEdit.setTable(databaseTable.findTableById(Long.parseLong(changes)).get(0));
+                reservationToEdit.setTable(tableRepository.findTableById(Long.parseLong(changes)).get(0));
                 isReservationEdited = true;
             } else if (userInput.equals(EditReservationEnum.CLIENT_ID)) {
-                reservationToEdit.setVisitor(databaseVisitors.findClientById(Long.parseLong(changes)).get(0));
+                reservationToEdit.setVisitor(visitorsRepository.findClientById(Long.parseLong(changes)).get(0));
                 isReservationEdited = true;
             } else if (userInput.equals(EditReservationEnum.MENU_ID)) {
-                reservationToEdit.setMenu(databaseMenu.findById(Long.parseLong(changes)).get(0));
+                reservationToEdit.setMenu(menuRepository.findById(Long.parseLong(changes)).get(0));
                 isReservationEdited = true;
             } else if (userInput.equals(EditReservationEnum.DATE)) {
                 reservationToEdit.setReservationDate(LocalDateTime.parse(changes));

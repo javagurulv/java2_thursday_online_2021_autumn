@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseMenu;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.MenuRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.RemoveMenuRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.RemoveMenuResponse;
@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class RemoveMenuService {
 
-    @Autowired private DatabaseMenu databaseMenu;
+    @Autowired private MenuRepository menuRepository;
     @Autowired private RemoveMenuRequestValidator validator;
 
 //    public RemoveMenuService(DatabaseMenu databaseMenu,
@@ -28,7 +28,7 @@ public class RemoveMenuService {
             return new RemoveMenuResponse(errors);
 
         }
-        boolean isMenuRemoved = databaseMenu.deleteByNr(request.getMenuNumberToRemove());
+        boolean isMenuRemoved = menuRepository.deleteByNr(request.getMenuNumberToRemove());
         return new RemoveMenuResponse(isMenuRemoved);
     }
 

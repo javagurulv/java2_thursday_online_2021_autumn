@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class JdbcTableDatabaseImpl implements DatabaseTable {
+public class JdbcTableRepositoryImpl implements TableRepository {
 
     @Autowired private JdbcTemplate jdbcTemplate;
-    @Autowired private DatabaseTable databaseTable;
+    @Autowired private TableRepository tableRepository;
 
     @Override
     public void save(Table table) {

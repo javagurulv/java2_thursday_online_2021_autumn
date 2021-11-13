@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.DatabaseVisitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.VisitorsRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.AddVisitorResponse;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 public class AddAllVisitorsServiceTest {
 
     @Mock
-    private DatabaseVisitors databaseVisitors;
+    private VisitorsRepository visitorsRepository;
     @Mock
     private AddVisitorValidator validator;
     @InjectMocks
@@ -50,7 +50,7 @@ public class AddAllVisitorsServiceTest {
         AddVisitorRequest notValidRequest = new AddVisitorRequest(null, "surname", "252525");
         when(validator.coreErrors(notValidRequest)).thenReturn(List.of(new CoreError("name", "Shouldn't be empty")));
         service.execute(notValidRequest);
-        verifyNoInteractions(databaseVisitors);
+        verifyNoInteractions(visitorsRepository);
     }
 
     @Test
@@ -58,7 +58,7 @@ public class AddAllVisitorsServiceTest {
         AddVisitorRequest validRequest = new AddVisitorRequest("name", "surname", "252525");
         when(validator.coreErrors(validRequest)).thenReturn(List.of());
         service.execute(validRequest);
-        verify(databaseVisitors).saveClientToRestaurantList(argThat(new Matchers("name", "surname", "252525")));
+        verify(visitorsRepository).saveClientToRestaurantList(argThat(new Matchers("name", "surname", "252525")));
     }
 
     @Test

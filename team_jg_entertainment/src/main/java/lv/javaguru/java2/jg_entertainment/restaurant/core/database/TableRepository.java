@@ -4,7 +4,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
 
 import java.util.List;
 
-public interface DatabaseTable {
+public interface TableRepository {
 
     void save(Table table);
 
