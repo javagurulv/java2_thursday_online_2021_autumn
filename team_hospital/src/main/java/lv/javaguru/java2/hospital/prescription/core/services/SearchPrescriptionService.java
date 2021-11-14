@@ -8,6 +8,7 @@ import lv.javaguru.java2.hospital.prescription.core.requests.SearchPrescriptionR
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
 import lv.javaguru.java2.hospital.prescription.core.responses.SearchPrescriptionResponse;
 import lv.javaguru.java2.hospital.prescription.core.services.search_criteria.*;
+import lv.javaguru.java2.hospital.prescription.core.services.validators.SearchPrescriptionValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,12 +24,16 @@ import java.util.stream.Collectors;
 public class SearchPrescriptionService {
 
     @Autowired private PrescriptionRepository database;
+    @Autowired private SearchPrescriptionValidator validator;
 
     public SearchPrescriptionResponse execute(SearchPrescriptionRequest request) {
-        List<CoreError> errors;
+        List<CoreError> errors = validator.validate(request);
+        if (!errors.isEmpty()) {
+            return new SearchPrescriptionResponse(errors, null);
+        }
 
         List<Prescription> prescriptions = search(request);
-
+        prescriptions = order(prescriptions, request.getPrescriptionOrdering());
         prescriptions = paging(prescriptions, request.getPrescriptionPaging());
         return new SearchPrescriptionResponse(null, prescriptions);
     }
@@ -81,7 +86,5 @@ public class SearchPrescriptionService {
         } else {
             return prescriptions;
         }
-        
-        
     }
 }

@@ -28,8 +28,8 @@ public class PrescriptionOrderingValidator {
     }
 
     private Optional<CoreError> validateOrderDirection(PrescriptionOrdering ordering) {
-        return (ordering.getOrderDirection() != null)
-                && !(ordering.getOrderDirection().equals("ASCENDING")) || ordering.getOrderDirection().equals("DESCENDING")
+        return (ordering.getOrderDirection() != null
+                && !(ordering.getOrderDirection().equals("ASCENDING") || ordering.getOrderDirection().equals("DESCENDING")))
                 ? Optional.of(new CoreError("orderDirection", "Must contain 'ASCENDING' or 'DESCENDING' only!"))
                 : Optional.empty();
     }
