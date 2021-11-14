@@ -4,6 +4,7 @@ import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.prescription.core.requests.AddPrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
+import lv.javaguru.java2.hospital.prescription.core.services.validators.existence.PrescriptionExistenceForAddValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,8 @@ public class AddPrescriptionValidator {
     private PatientRepository patientRepository;
     @Autowired
     private DoctorRepository doctorRepository;
+    @Autowired
+    private PrescriptionExistenceForAddValidator existence;
 
     public List<CoreError> validate(AddPrescriptionRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -27,6 +30,7 @@ public class AddPrescriptionValidator {
         validateQuantity(request).ifPresent(errors::add);
         validateDoctorExistence(request).ifPresent(errors::add);
         validatePatientExistence(request).ifPresent(errors::add);
+        validatePrescriptionExistence(request, errors);
         return errors;
     }
 
@@ -64,5 +68,10 @@ public class AddPrescriptionValidator {
         return request.getPatientId() == null ? Optional.empty() :
                 patientRepository.findById(request.getPatientId()).isEmpty() ?
                         Optional.of(new CoreError("Patient", "does not exist!")) : Optional.empty();
+    }
+
+    private void validatePrescriptionExistence(AddPrescriptionRequest request, List<CoreError> errors) {
+        Optional<CoreError> error = existence.validatePrescriptionExistence(request);
+        error.ifPresent(errors::add);
     }
 }

@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.prescription.core.services.validators;
+package lv.javaguru.java2.hospital.prescription.core.services.validators.existence;
 
 import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Prescription;

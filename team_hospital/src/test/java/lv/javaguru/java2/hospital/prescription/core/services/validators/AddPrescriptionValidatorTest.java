@@ -6,6 +6,7 @@ import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.prescription.core.requests.AddPrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
+import lv.javaguru.java2.hospital.prescription.core.services.validators.existence.PrescriptionExistenceForAddValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -27,6 +28,7 @@ class AddPrescriptionValidatorTest {
 
     @Mock private PatientRepository patientRepository;
     @Mock private DoctorRepository doctorRepository;
+    @Mock private PrescriptionExistenceForAddValidator existence;
     @InjectMocks private AddPrescriptionValidator validator;
 
     @Test
