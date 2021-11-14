@@ -4,6 +4,7 @@ import lv.javaguru.java2.hospital.prescription.core.checkers.PrescriptionLongNum
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
+import lv.javaguru.java2.hospital.prescription.core.services.validators.existence.PrescriptionExistenceByIDValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

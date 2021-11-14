@@ -2,6 +2,7 @@ package lv.javaguru.java2.hospital.prescription.core.services.validators;
 
 import lv.javaguru.java2.hospital.prescription.core.requests.DeletePrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
+import lv.javaguru.java2.hospital.prescription.core.services.validators.existence.PrescriptionExistenceByIDValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

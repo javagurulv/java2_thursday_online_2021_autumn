@@ -5,6 +5,7 @@ import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
+import lv.javaguru.java2.hospital.prescription.core.services.validators.existence.PrescriptionExistenceByIDValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;

@@ -1,10 +1,11 @@
-package lv.javaguru.java2.hospital.prescription.core.services.validators;
+package lv.javaguru.java2.hospital.prescription.core.services.validators.existence;
 
 import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Prescription;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
+import lv.javaguru.java2.hospital.prescription.core.services.validators.existence.PrescriptionExistenceByIDValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
