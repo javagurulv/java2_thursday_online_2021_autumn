@@ -19,11 +19,11 @@ public class JdbcReservationRepositoryImpl implements ReservationRepository {
     @Override
     public void addReservation(Reservation reservation) {
         jdbcTemplate.update(
-                "INSERT INTO reservation (id_visitor, id_table, id_menu, reservation_date) "
+                "INSERT INTO reservation (id_visitor, id_menu, id_table, reservation_date) "
                         + "VALUES (?, ?, ?, ?) ",
                 reservation.getVisitor().getIdClient(),
-                reservation.getTable().getId(),
                 reservation.getMenu().getNumber(),
+                reservation.getTable().getId(),
                 reservation.getReservationDate());
     }
        /* String sql = "SELECT reservation_id FROM reservation WHERE id_visitor = ? AND id_table = ? AND id_menu = ? AND reservation_date = ?";
@@ -46,7 +46,7 @@ public class JdbcReservationRepositoryImpl implements ReservationRepository {
     @Override
     public List<Reservation> getAllReservations() {
         String sql = "SELECT * FROM reservation";
-        return jdbcTemplate.query(sql, new ReservationRowMapper());
+        return jdbcTemplate.query(sql, reservationRowMapper);
     }
 
     @Override

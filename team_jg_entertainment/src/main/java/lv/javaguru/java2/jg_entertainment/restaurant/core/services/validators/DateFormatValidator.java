@@ -12,7 +12,7 @@ import java.util.Optional;
 public class DateFormatValidator {
     public Optional<CoreError> validateFormat(String date) {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             LocalDateTime.parse(date, formatter);
             return Optional.empty();
         } catch (DateTimeParseException exception) {
