@@ -36,39 +36,10 @@ public class AddReservationService {
         Visitors visitors = visitorsRepository.findClientById(Long.valueOf(request.getVisitorID())).get(0);
         Menu menu = menuRepository.findById(Long.valueOf(request.getMenuID())).get(0);
         Table table = tableRepository.findTableById(Long.valueOf(request.getTableID())).get(0);
-        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(request.getReservationDate()));
-
-
+        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+                .parse(request.getReservationDate()));
         Reservation reservation = new Reservation(visitors, menu, table, date);
         reservationRepository.addReservation(reservation);
         return new AddReservationResponse(reservation);
     }
-/*
-    private Visitors visitorInformation(AddReservationRequest request) {
-        Visitors visitors =
-                databaseVisitors.findByNameVisitor(request.getVisitorName()).get(0);
-        return visitors;
-    }
-
-    private Menu menuInformation(AddReservationRequest request) {
-        Menu menu = databaseMenu.findByTitle(request.getMenuTitle()).get(0);
-        return menu;
-    }
-
-    private Table tableInformation(AddReservationRequest request) {
-        Table table = databaseTable.findByTitleTable(request.getTableTitle()).get(0);
-        return table;
-    }
-
-    private Date dateInformation(AddReservationRequest request) {
-        Date dateReservation = null;
-        try {
-            dateReservation = new SimpleDateFormat("dd/MM/yyyy").parse(request.getReservationDate());
-        } catch (ParseException exception) {
-            System.out.println("Date is not correct!");
-        }
-        return dateReservation;
-    }
-
- */
 }

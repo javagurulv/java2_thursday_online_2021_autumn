@@ -17,13 +17,10 @@ public class DateValidatorExecution {
 
     public List<CoreError> validate(String request) {
         List<CoreError> errors = new ArrayList<>();
-
         dateFormatValidator.validateFormat(request).ifPresent(errors::add);
-
         if (errors.isEmpty()) {
             errors = timeValidation(request);
         }
-
         return errors;
     }
 
@@ -33,12 +30,11 @@ public class DateValidatorExecution {
                 new DateIsInFutureValidator(getVisitDate),
                 new DateIsWorkingDayValidator(getVisitDate),
                 new DateTimeValidator(getVisitDate),
+                new DateMinutesValidator(getVisitDate),
                 new DateExistenceValidator(getVisitDate, database)};
-
-        for (DateValidator d : validators) {
-            d.validate(request).ifPresent(errors::add);
+        for (DateValidator dateValidator : validators) {
+            dateValidator.validate(request).ifPresent(errors::add);
         }
-
         return errors;
     }
 }

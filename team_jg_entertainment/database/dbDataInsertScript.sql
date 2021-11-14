@@ -42,15 +42,11 @@ values ("title3", "6", "110");
 insert into jg_entertainment.tables(table_id, table_title, table_capacity, table_price)
 values (1004, "title4", "6", "110");
 
-
-insert into jg_entertainment.reservation(reservation_id, id_visitor, id_table, id_menu, reservation_date)
-values (1001, 1002, 1003, '2024-01-01 19:00:00');
+insert into jg_entertainment.reservation(id_visitor, id_table, id_menu, reservation_date)
+values (1002, 1001, 1001, '2024-01-02 19:00');
 
 insert into jg_entertainment.reservation(id_visitor, id_table, id_menu, reservation_date)
-values (1002, 1001, 1001, '2024-01-02 19:00:00');
+values (1003, 1003, 1002, '2024-01-01 19:00');
 
 insert into jg_entertainment.reservation(id_visitor, id_table, id_menu, reservation_date)
-values (1003, 1003, 1002, '2024-01-01 19:00:00');
-
-insert into jg_entertainment.reservation(id_visitor, id_table, id_menu, reservation_date)
-values (1004, 1001, 1003, '2024-02-01 19:00:00');
+values (1004, 1001, 1003, '2024-02-01 19:00');

@@ -17,7 +17,8 @@ public class DateTimeValidator implements DateValidator {
     @Override
     public Optional<CoreError> validate(String date) {
         LocalDateTime reservationDate = getReservationDate.getReservationDateFromString(date);
-        boolean dateIsWorkingDay = reservationDate.getHour() == 19;
+        boolean dateIsWorkingDay = reservationDate.getHour() >= 12
+                && reservationDate.getHour() <= 21;
         if (dateIsWorkingDay) {
             return Optional.empty();
         } else {

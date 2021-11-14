@@ -7,5 +7,4 @@ import java.util.Optional;
 
 public interface DateValidator {
     Optional<CoreError> validate(String date);
-
 }

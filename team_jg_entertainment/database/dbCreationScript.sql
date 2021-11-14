@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
     `id_visitor` BIGINT NOT NULL,
     `id_table` BIGINT NOT NULL,
     `id_menu` BIGINT NOT NULL,
-    `reservation_date` DATETIME NOT NULL,
+    `reservation_date` TIMESTAMP NOT NULL,
     PRIMARY KEY (reservation_id),
     FOREIGN KEY (`id_visitor`) REFERENCES `visitors`(`visitor_id`),
     FOREIGN KEY (`id_table`) REFERENCES `tables`(`table_id`),

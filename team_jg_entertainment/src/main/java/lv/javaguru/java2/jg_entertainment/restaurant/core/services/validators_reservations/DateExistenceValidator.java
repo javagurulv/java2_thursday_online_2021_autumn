@@ -22,8 +22,8 @@ public class DateExistenceValidator implements DateValidator {
     @Override
     public Optional<CoreError> validate(String date) {
         LocalDateTime dateTime = getReservationDate.getReservationDateFromString(date);
-        for ( Reservation d : database.getAllReservations()) {
-            if (d.getReservationDate().isEqual(dateTime)) {
+        for (Reservation reservation : database.getAllReservations()) {
+            if (reservation.getReservationDate().isEqual(dateTime)) {
                 return Optional.of(new CoreError("Date", "all is reserved"));
             }
         }

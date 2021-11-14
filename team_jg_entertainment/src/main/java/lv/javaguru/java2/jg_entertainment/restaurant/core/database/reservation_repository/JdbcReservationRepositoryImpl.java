@@ -24,7 +24,8 @@ public class JdbcReservationRepositoryImpl implements ReservationRepository {
                 reservation.getVisitor().getIdClient(),
                 reservation.getTable().getId(),
                 reservation.getMenu().getNumber(),
-                reservation.getReservationDate());}
+                reservation.getReservationDate());
+    }
        /* String sql = "SELECT reservation_id FROM reservation WHERE id_visitor = ? AND id_table = ? AND id_menu = ? AND reservation_date = ?";
         Object[] args =
                 new Object[]{reservation.getIdVisitor(),
