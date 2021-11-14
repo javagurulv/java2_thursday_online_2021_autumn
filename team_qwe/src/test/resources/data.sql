@@ -8,4 +8,7 @@ INSERT INTO users (name, age, type, initial_investment, cash, portfolio_generati
   ('Alexander', 25, 4, 1000000.00, 1000000.00, NULL, 5),
   ('Tatyana', 32, 2, 125000.00, 125000.00, NULL, 4),
   ('Vladimir', 78, 0, 30000.00, 30000.00, NULL, 1),
-  ('John', 55, 2, 50000.00, 50000.00, NULL, 3);
+  ('John', 21, 4, 500000.00, 500000.00, NULL, 3);
+INSERT INTO users_positions (user_id, security_ticker, amount, purchase_price) VALUES
+  (4, 'MSFT US', 1000, 304.36);
+--  (4, 'TSLA US', 50, 680.26);

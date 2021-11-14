@@ -19,6 +19,7 @@ public class BuyStockMarketOrderUIAction implements UIAction {
     @Autowired private Database database;
     @Autowired private UserData userData;
     @Autowired private API api;
+    private String type;
 
     @Override
     public void execute() {
@@ -26,12 +27,13 @@ public class BuyStockMarketOrderUIAction implements UIAction {
                 "Choose user:",
                 "BUY SECURITY MARKET ORDER",
                 utils.convertToStringArray(userData));
+        type = utils.inputDialog("Choose trade type:", "MARKET ORDER", new String[]{"BUY", "SELL"});
         String ticker = utils.inputDialog("Security ticker");
         String quantity = utils.inputDialog("Enter quantity:");
         BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
                 userData.findUserByIdOrName(userName).orElse(null),
                 database.findSecurityByTickerOrName(ticker).orElse(null),
-                quantity,
+                (type.equals("BUY")) ? quantity : "-" + quantity,
                 api.getQuote(ticker));
         BuyStockMarketOrderResponse response = service.execute(request);
         printResponse(response);
@@ -41,8 +43,12 @@ public class BuyStockMarketOrderUIAction implements UIAction {
         if (response.hasErrors()) {
             utils.messageDialog("FAILED TO BUY STOCK!\n" +
                     utils.printErrorList(response));
-        } else {
+        } else if (type.equals("BUY")){
             utils.messageDialog("You bought " + response.getPosition().getAmount() + " of " +
+                    response.getPosition().getSecurity().getTicker() + " at " + response.getPosition().getPurchasePrice());
+        }
+        else {
+            utils.messageDialog("You sold " + response.getPosition().getAmount() + " of " +
                     response.getPosition().getSecurity().getTicker() + " at " + response.getPosition().getPurchasePrice());
         }
     }

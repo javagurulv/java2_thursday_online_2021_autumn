@@ -29,8 +29,14 @@ public class BuyStockMarketOrderValidator {
                     new CoreError("User", "no user with such name exists in the database!")),
             entry(request -> utils.isNotDouble(request.getQuantity()),
                     new CoreError("Quantity", "must be double!")),
-            entry(request -> !utils.isNotDouble(request.getQuantity()) && Double.parseDouble(request.getQuantity()) <= 0,
+            entry(request -> !utils.isNotDouble(request.getQuantity()) && Double.parseDouble(request.getQuantity()) == 0,
                     new CoreError("Quantity", "must be higher then 0!")),
+            entry(request -> request.getUser() != null
+                            && request.getSecurity() != null
+                            && !utils.isNotDouble(request.getQuantity())
+                            && Double.parseDouble(request.getQuantity()) < 0
+                            && !checkQuantity(request),
+                    new CoreError("Quantity", "not enough securities to sell!")),
             entry(request -> request.getUser() != null &&
                             !utils.isNotDouble(request.getQuantity()) &&
                             (Double.parseDouble(request.getQuantity()) * request.getRealTimePrice()) > request.getUser().getCash(),
@@ -42,6 +48,12 @@ public class BuyStockMarketOrderValidator {
                 .filter(entry -> entry.getKey().test(request))
                 .map(Map.Entry::getValue)
                 .collect(Collectors.toList());
+    }
+
+    private boolean checkQuantity(BuyStockMarketOrderRequest request) {
+        return userData.getUserPortfolio(request.getUser().getId()).stream()
+                .filter(position -> position.getSecurity().equals(request.getSecurity()))
+                .anyMatch(position -> position.getAmount() >= -(Double.parseDouble(request.getQuantity())));
     }
 
 }

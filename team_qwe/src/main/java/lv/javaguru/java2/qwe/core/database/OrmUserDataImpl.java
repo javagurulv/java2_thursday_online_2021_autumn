@@ -86,7 +86,24 @@ public class OrmUserDataImpl implements UserData {
         Optional<Position> oldPosition = getOldPosition(position.getSecurity(), userId);
         if (oldPosition.isPresent()) {
             Position newPosition = mergePositions(oldPosition.get(), position);
-            sessionFactory.getCurrentSession().save(newPosition);
+            if (newPosition != null && position.getAmount() > 0) {
+                sessionFactory.getCurrentSession().save(newPosition);
+                sessionFactory.getCurrentSession().delete(oldPosition.get());
+            }
+            else if (newPosition != null && position.getAmount() < 0) {
+                double oldPurchasePrice = oldPosition.get().getPurchasePrice();
+                newPosition.setPurchasePrice(position.getPurchasePrice());
+                oldPosition.get().setPurchasePrice(position.getPurchasePrice());
+                sessionFactory.getCurrentSession().createQuery("FROM Position p WHERE user_id = " + userId).getResultList(); //???
+                sessionFactory.getCurrentSession().delete(oldPosition.get());
+                sessionFactory.getCurrentSession().save(newPosition);
+                newPosition.setPurchasePrice(oldPurchasePrice);
+            }
+            else {
+                oldPosition.get().setPurchasePrice(position.getPurchasePrice());
+                sessionFactory.getCurrentSession().createQuery("FROM Position p WHERE user_id = " + userId).getResultList(); //???
+                sessionFactory.getCurrentSession().delete(oldPosition.get());
+            }
         }
         else {
             sessionFactory.getCurrentSession().save(position);
@@ -132,8 +149,15 @@ public class OrmUserDataImpl implements UserData {
             Position mergedPosition = new Position(newPosition.getSecurity(), totalQuantity, newPurchasePrice);
             mergedPosition.setUserId(oldPosition.getUserId());
             return mergedPosition;
-        } else { // если продажа
+        }
+        else if (newPosition.getAmount() < 0 && oldPosition.getAmount() + newPosition.getAmount() == 0) {
             return null;
+        }
+        else {
+            double totalQuantity = oldPosition.getAmount() + newPosition.getAmount();
+            Position mergedPosition = new Position(newPosition.getSecurity(), totalQuantity, oldPosition.getPurchasePrice());
+            mergedPosition.setUserId(oldPosition.getUserId());
+            return mergedPosition;
         }
     }
 

@@ -1,8 +1,10 @@
 package lv.javaguru.java2.qwe.acceptance_test;
 
 import lv.javaguru.java2.qwe.config.AppConfiguration;
+import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.domain.Position;
 import lv.javaguru.java2.qwe.core.domain.Security;
+import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.domain.User;
 import lv.javaguru.java2.qwe.core.requests.data_requests.FindSecurityByTickerOrNameRequest;
 import lv.javaguru.java2.qwe.core.requests.user_requests.BuyStockMarketOrderRequest;
@@ -23,6 +25,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.transaction.Transactional;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -42,6 +45,8 @@ public class AcceptanceTestForBuyStockMarketOrder {
     public void shouldBuyOneStockAtMarketPrice() {
         User user = getFindUserByNameService().execute(new FindUserByNameRequest("Alexander")).getUser();
         Security security = getFindSecurityByTickerOrNameService().execute(new FindSecurityByTickerOrNameRequest("AMZN US")).getSecurity();
+        security.setMarketPrice(3525.15);
+        getDatabase().updateStock((Stock) security);
         BuyStockMarketOrderRequest request1 = new BuyStockMarketOrderRequest(user, security,"150",3525.15);
         BuyStockMarketOrderResponse response1 = getService().execute(request1);
         Position position = new Position(security, 150, 3525.15);
@@ -60,6 +65,10 @@ public class AcceptanceTestForBuyStockMarketOrder {
         Security security2 = getFindSecurityByTickerOrNameService().execute(new FindSecurityByTickerOrNameRequest("JPM US")).getSecurity();
         BuyStockMarketOrderRequest request1 = new BuyStockMarketOrderRequest(user, security1,"150",3525.15);
         BuyStockMarketOrderRequest request2 = new BuyStockMarketOrderRequest(user, security2,"755",166.91);
+        security1.setMarketPrice(3525.15);
+        security2.setMarketPrice(166.91);
+        getDatabase().updateStock((Stock) security1);
+        getDatabase().updateStock((Stock) security2);
         Position position1 = new Position(security1, 150, 3525.15);
         Position position2 = new Position(security2, 755, 166.91);
         List<Position> portfolio = List.of(position1, position2);
@@ -79,6 +88,8 @@ public class AcceptanceTestForBuyStockMarketOrder {
         Security security = getFindSecurityByTickerOrNameService().execute(new FindSecurityByTickerOrNameRequest("AMZN US")).getSecurity();
         BuyStockMarketOrderRequest request1 = new BuyStockMarketOrderRequest(user, security,"150",3525.15);
         BuyStockMarketOrderRequest request2 = new BuyStockMarketOrderRequest(user, security,"55",3247.23);
+        security.setMarketPrice(3247.23);
+        getDatabase().updateStock((Stock) security);
         Position position1 = new Position(security, 150, 3525.15);
         Position position2 = new Position(security, 55, 3247.23);
         Position totalPosition = new Position(security, 205, 3450.59);
@@ -91,6 +102,77 @@ public class AcceptanceTestForBuyStockMarketOrder {
         assertEquals(portfolio, response3.getPortfolio());
         assertEquals(292_629.05,
                 getFindUserByNameService().execute(new FindUserByNameRequest("Alexander")).getUser().getCash(), 0.01);
+    }
+
+    @Test
+    public void shouldSellOneStockAllQuantity() {
+        User user = getFindUserByNameService().execute(new FindUserByNameRequest("John")).getUser();
+        Security security = getFindSecurityByTickerOrNameService().execute(new FindSecurityByTickerOrNameRequest("MSFT US")).getSecurity();
+        BuyStockMarketOrderRequest request1 = new BuyStockMarketOrderRequest(user, security,"-1000",325.12);
+        BuyStockMarketOrderResponse response1 = getService().execute(request1);
+
+        Position position = new Position(security, -1000, 325.12);
+        List<Position> portfolio = List.of();
+        GetUserPortfolioResponse response2 = getGetUserPortfolioService().execute(new GetUserPortfolioRequest("John"));
+        assertEquals(position, response1.getPosition());
+        assertEquals(portfolio, response2.getPortfolio());
+        assertEquals(195_640.00 + 325_120,
+                getFindUserByNameService().execute(new FindUserByNameRequest("John")).getUser().getCash(), 0.01);
+    }
+
+    @Test
+    public void shouldSellOneStockPartly() {
+        User user = getFindUserByNameService().execute(new FindUserByNameRequest("John")).getUser();
+        Security security = getFindSecurityByTickerOrNameService().execute(new FindSecurityByTickerOrNameRequest("MSFT US")).getSecurity();
+        BuyStockMarketOrderRequest request1 = new BuyStockMarketOrderRequest(user, security,"-700",325.12);
+        BuyStockMarketOrderResponse response1 = getService().execute(request1);
+        security.setMarketPrice(325.12);
+        getDatabase().updateStock((Stock) security);
+        Position position = new Position(security, -700, 325.12);
+        Position totalPosition = new Position(security, 300, 304.36);
+        List<Position> portfolio = List.of(totalPosition);
+        GetUserPortfolioResponse response2 = getGetUserPortfolioService().execute(new GetUserPortfolioRequest("John"));
+        assertEquals(position, response1.getPosition());
+        assertEquals(portfolio, response2.getPortfolio());
+        assertEquals(195_640.00 + 227_584,
+                getFindUserByNameService().execute(new FindUserByNameRequest("John")).getUser().getCash(), 0.01);
+    }
+
+    @Test
+    public void shouldBuyAndSellMultipleDifferentStocks() {
+        User user = getFindUserByNameService().execute(new FindUserByNameRequest("Alexander")).getUser();
+        Security security1 = getFindSecurityByTickerOrNameService().execute(new FindSecurityByTickerOrNameRequest("AMZN US")).getSecurity();
+        Security security2 = getFindSecurityByTickerOrNameService().execute(new FindSecurityByTickerOrNameRequest("JPM US")).getSecurity();
+        Security security3 = getFindSecurityByTickerOrNameService().execute(new FindSecurityByTickerOrNameRequest("TSLA US")).getSecurity();
+        BuyStockMarketOrderRequest request1 = new BuyStockMarketOrderRequest(user, security1,"150",3525.15);
+        BuyStockMarketOrderRequest request2 = new BuyStockMarketOrderRequest(user, security2,"755",166.91);
+        BuyStockMarketOrderRequest request3 = new BuyStockMarketOrderRequest(user, security1,"25",3364.91);
+        BuyStockMarketOrderRequest request4 = new BuyStockMarketOrderRequest(user, security1,"-100",3621.48);
+        BuyStockMarketOrderRequest request5 = new BuyStockMarketOrderRequest(user, security2,"1245",175.67);
+        BuyStockMarketOrderRequest request6 = new BuyStockMarketOrderRequest(user, security1,"-75",3382.43);
+        BuyStockMarketOrderRequest request7 = new BuyStockMarketOrderRequest(user, security3,"90",1125.13);
+        getService().execute(request1);
+        getService().execute(request2);
+        getService().execute(request3);
+        security1.setMarketPrice(3364.91);
+        getDatabase().updateStock((Stock) security1);
+        getService().execute(request4);
+        getService().execute(request5);
+        security1.setMarketPrice(3621.48);
+        getDatabase().updateStock((Stock) security1);
+        getService().execute(request6);
+        getService().execute(request7);
+        security2.setMarketPrice(175.67);
+        security3.setMarketPrice(1125.13);
+        getDatabase().updateStock((Stock) security2);
+        getDatabase().updateStock((Stock) security3);
+        Position totalPosition1 = new Position(security2, 2000, 172.36);
+        Position totalPosition2 = new Position(security3, 90, 1125.13);
+        List<Position> portfolio = List.of(totalPosition1, totalPosition2);
+        GetUserPortfolioResponse response8 = getGetUserPortfolioService().execute(new GetUserPortfolioRequest("Alexander"));
+        assertEquals(portfolio, response8.getPortfolio());
+        assertEquals(556947.1,
+                getFindUserByNameService().execute(new FindUserByNameRequest("Alexander")).getUser().getCash(), 10);
     }
 
     @Test
@@ -117,7 +199,7 @@ public class AcceptanceTestForBuyStockMarketOrder {
         GetUserPortfolioResponse response2 = getGetUserPortfolioService().execute(new GetUserPortfolioRequest("Alexander"));
         assertNull(response1.getPosition());
         assertTrue(response1.hasErrors());
-        assertEquals("must be higher then 0!", response1.getErrors().get(0).getMessage());
+        assertEquals("not enough securities to sell!", response1.getErrors().get(0).getMessage());
         assertEquals(portfolio, response2.getPortfolio());
     }
 
@@ -187,6 +269,10 @@ public class AcceptanceTestForBuyStockMarketOrder {
 
     private FindSecurityByTickerOrNameService getFindSecurityByTickerOrNameService() {
         return appContext.getBean(FindSecurityByTickerOrNameService.class);
+    }
+
+    private Database getDatabase() {
+        return appContext.getBean(Database.class);
     }
 
 }

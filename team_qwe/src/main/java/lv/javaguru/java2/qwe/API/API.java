@@ -47,8 +47,21 @@ public class API {
 
     private void updateMarketPrice(String ticker) {
         Double realTimePrice = getQuote(ticker);
-        Optional<Security> security = database.findSecurityByTickerOrName(ticker + " US");
-        if (security.isPresent() && realTimePrice != null) {
+        Optional<Security> security = database.findSecurityByTickerOrName(ticker);
+        if (security.isPresent() && realTimePrice != -1) {
+            Stock stock = (Stock) security.get();
+            stock.setMarketPrice(realTimePrice);
+            try {
+                database.updateStock(stock);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void updatePrice(String ticker, Double realTimePrice) {
+        Optional<Security> security = database.findSecurityByTickerOrName(ticker);
+        if (security.isPresent() && realTimePrice != -1) {
             Stock stock = (Stock) security.get();
             stock.setMarketPrice(realTimePrice);
             try {
@@ -67,6 +80,7 @@ public class API {
                     .filter(line -> line.contains("regularMarketPrice"))
                     .findAny();
             String lastPrice = target.map(s -> s.substring(21)).orElse("-1");
+            updatePrice(ticker, Double.parseDouble(lastPrice));
             return Double.parseDouble(lastPrice);
         } else {
             return null;

@@ -83,6 +83,17 @@ CREATE TRIGGER ins_sec AFTER INSERT ON users_positions
 
 |
 
+delimiter |
+
+CREATE TRIGGER del_pos AFTER DELETE ON users_positions
+  FOR EACH ROW
+  BEGIN
+    UPDATE users, users_positions SET cash = cash + OLD.amount * OLD.purchase_price
+    WHERE users.id = OLD.user_id;
+  END;
+
+|
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

@@ -15,13 +15,13 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
+@Transactional
 public class BuyStockMarketOrderService {
 
     @Autowired private Database database;
     @Autowired private UserData userData;
     @Autowired private BuyStockMarketOrderValidator validator;
 
-    @Transactional
     public BuyStockMarketOrderResponse execute(BuyStockMarketOrderRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (errors.isEmpty()) {
@@ -32,7 +32,7 @@ public class BuyStockMarketOrderService {
                     request.getRealTimePrice()
             );
             position.setUserId(request.getUser().getId());
-            database.updateStock(stock);
+//            database.updateStock(stock);
             userData.savePosition(position, request.getUser().getId());
             return new BuyStockMarketOrderResponse(position);
         }

@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `users_positions` (
   `security_ticker` VARCHAR(10) NOT NULL,
   `amount` DOUBLE NOT NULL,
   `purchase_price` DOUBLE NOT NULL,
+  `is_trade` BOOLEAN DEFAULT TRUE,
   PRIMARY KEY (`position_id`),
   FOREIGN KEY(`user_id`) REFERENCES `users`(`id`),
   FOREIGN KEY(`security_ticker`) REFERENCES `stocks`(`ticker`)

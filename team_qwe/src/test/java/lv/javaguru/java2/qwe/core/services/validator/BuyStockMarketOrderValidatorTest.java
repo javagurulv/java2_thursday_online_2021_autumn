@@ -35,12 +35,24 @@ public class BuyStockMarketOrderValidatorTest {
     }
 
     @Test
-    public void shouldReturnEmptyList() {
+    public void shouldReturnEmptyList1() {
         BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
                 getAllUserListService().execute(new GetAllUserListRequest()).getList().get(0),
                 getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(3),
                 "100",
                 680.26
+        );
+        List<CoreError> errors = getValidator().validate(request);
+        assertTrue(errors.isEmpty());
+    }
+
+    @Test
+    public void shouldReturnEmptyList2() {
+        BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
+                getAllUserListService().execute(new GetAllUserListRequest()).getList().get(3),
+                getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(1),
+                "-500",
+                324.26
         );
         List<CoreError> errors = getValidator().validate(request);
         assertTrue(errors.isEmpty());
@@ -91,19 +103,33 @@ public class BuyStockMarketOrderValidatorTest {
     @Test
     public void shouldReturnQuantityError2() {
         BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
-                getAllUserListService().execute(new GetAllUserListRequest()).getList().get(0),
+                getAllUserListService().execute(new GetAllUserListRequest()).getList().get(3),
                 getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(1),
-                "-1000",
-                163.24
+                "-3000",
+                324.83
         );
         List<CoreError> errorList = getValidator().validate(request);
         assertEquals(1, errorList.size());
         assertEquals(errorList.get(0).getField(), "Quantity");
-        assertEquals(errorList.get(0).getMessage(), "must be higher then 0!");
+        assertEquals(errorList.get(0).getMessage(), "not enough securities to sell!");
     }
 
     @Test
     public void shouldReturnQuantityError3() {
+        BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
+                getAllUserListService().execute(new GetAllUserListRequest()).getList().get(3),
+                getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(3),
+                "-100",
+                324.83
+        );
+        List<CoreError> errorList = getValidator().validate(request);
+        assertEquals(1, errorList.size());
+        assertEquals(errorList.get(0).getField(), "Quantity");
+        assertEquals(errorList.get(0).getMessage(), "not enough securities to sell!");
+    }
+
+    @Test
+    public void shouldReturnQuantityError4() {
         BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
                 getAllUserListService().execute(new GetAllUserListRequest()).getList().get(0),
                 getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(1),
