@@ -31,6 +31,7 @@ public class BuyStockMarketOrderService {
                     Double.parseDouble(request.getQuantity()),
                     request.getRealTimePrice()
             );
+            position.setUserId(request.getUser().getId());
             database.updateStock(stock);
             userData.savePosition(position, request.getUser().getId());
             return new BuyStockMarketOrderResponse(position);

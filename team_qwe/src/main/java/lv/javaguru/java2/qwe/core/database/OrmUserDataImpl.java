@@ -7,7 +7,6 @@ import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.NoResultException;
@@ -22,8 +21,6 @@ import java.util.Optional;
 public class OrmUserDataImpl implements UserData {
 
     @Autowired private SessionFactory sessionFactory;
-    @Autowired private JdbcTemplate jdbcTemplate;
-    @Autowired private Database database;
     @Autowired private UtilityMethods utils;
 
     @Override
@@ -38,8 +35,8 @@ public class OrmUserDataImpl implements UserData {
 
     @Override
     public boolean removeUser(String idOrName) {
-        String sql = "DELETE User WHERE id = :id OR name = :name";
-        Query query = sessionFactory.getCurrentSession().createQuery(sql);
+        Query<?> query = sessionFactory.getCurrentSession().createQuery(
+                "DELETE User WHERE id = :id OR name = :name");
         query.setParameter("id", getIdOrDefault(idOrName));
         query.setParameter("name", idOrName);
         return query.executeUpdate() == 1;
@@ -55,7 +52,7 @@ public class OrmUserDataImpl implements UserData {
     @Override
     public Optional<User> findUserByIdOrName(String userIdOrName) {
         try {
-            Query query = sessionFactory.getCurrentSession().createQuery(
+            Query<?> query = sessionFactory.getCurrentSession().createQuery(
                     "SELECT u FROM User u WHERE id = :id OR name = :name");
             query.setParameter("id", getIdOrDefault(userIdOrName));
             query.setParameter("name", userIdOrName);
@@ -67,16 +64,16 @@ public class OrmUserDataImpl implements UserData {
 
     @Override
     public List<Position> getUserPortfolio(Long userId) {
-        return sessionFactory.getCurrentSession().createQuery(
-                "SELECT p FROM Position p WHERE user_id = " + userId, Position.class).getResultList();
+        return sessionFactory.getCurrentSession()
+                .createQuery("SELECT p FROM Position p WHERE user_id = " + userId, Position.class)
+                .getResultList();
     }
 
     @Override
     public Optional<Double> getUserCash(Long userID) {
         try {
-            Query query = sessionFactory.getCurrentSession().createQuery(
-                    "SELECT u.cash FROM User u WHERE id = :id");
-            query.setParameter("id", userID);
+            Query<?> query = sessionFactory.getCurrentSession().createQuery(
+                    "SELECT u.cash FROM User u WHERE id = " + userID);
             return Optional.ofNullable((Double) query.getSingleResult());
         } catch (NoResultException e) {
             return Optional.empty();
@@ -85,17 +82,14 @@ public class OrmUserDataImpl implements UserData {
 
     @Override
     public void savePosition(Position position, Long userId) {
+        position.setUserId(userId);
         Optional<Position> oldPosition = getOldPosition(position.getSecurity(), userId);
         if (oldPosition.isPresent()) {
             Position newPosition = mergePositions(oldPosition.get(), position);
-            jdbcTemplate.update("INSERT INTO users_positions (user_id, security_ticker, amount, purchase_price) VALUES\n" +
-                            "(?, ?, ?, ?)",
-                    userId, newPosition.getSecurity().getTicker(), newPosition.getAmount(), newPosition.getPurchasePrice());
+            sessionFactory.getCurrentSession().save(newPosition);
         }
         else {
-            jdbcTemplate.update("INSERT INTO users_positions (user_id, security_ticker, amount, purchase_price) VALUES\n" +
-                            "(?, ?, ?, ?)",
-                    userId, position.getSecurity().getTicker(), position.getAmount(), position.getPurchasePrice());
+            sessionFactory.getCurrentSession().save(position);
         }
     }
 
@@ -135,7 +129,9 @@ public class OrmUserDataImpl implements UserData {
             double newPurchasePrice = utils.round(oldPosition.getPurchasePrice() * (oldPosition.getAmount() / totalQuantity) +
                     newPosition.getPurchasePrice() * (newPosition.getAmount() / totalQuantity));
             deleteOldPosition(oldPosition);
-            return new Position(newPosition.getSecurity(), totalQuantity, newPurchasePrice);
+            Position mergedPosition = new Position(newPosition.getSecurity(), totalQuantity, newPurchasePrice);
+            mergedPosition.setUserId(oldPosition.getUserId());
+            return mergedPosition;
         } else { // если продажа
             return null;
         }

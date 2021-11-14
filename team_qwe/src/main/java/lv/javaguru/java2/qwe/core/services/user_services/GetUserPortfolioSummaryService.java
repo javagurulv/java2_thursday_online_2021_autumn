@@ -11,6 +11,7 @@ import lv.javaguru.java2.qwe.core.services.validator.GetUserPortfolioSummaryVali
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -20,6 +21,7 @@ import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.summingDouble;
 
 @Component
+@Transactional
 public class GetUserPortfolioSummaryService {
 
     @Autowired private UserData userData;

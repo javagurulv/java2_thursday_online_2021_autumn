@@ -12,6 +12,9 @@ public class Position {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
     @OneToOne
     @JoinColumn(name = "security_ticker", nullable = false)
     private Security security;
@@ -29,6 +32,14 @@ public class Position {
         this.security = security;
         this.amount = amount;
         this.purchasePrice = purchasePrice;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public void setSecurity(Security security) {
