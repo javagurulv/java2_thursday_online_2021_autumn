@@ -36,7 +36,7 @@ public class AddReservationService {
         Visitor visitor = visitorsRepository.findClientById(Long.valueOf(request.getVisitorID())).get(0);
         Menu menu = menuRepository.findById(Long.valueOf(request.getMenuID())).get(0);
         Table table = tableRepository.findTableById(Long.valueOf(request.getTableID())).get(0);
-        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
                 .parse(request.getReservationDate()));
         Reservation reservation = new Reservation(visitor, menu, table, date);
         reservationRepository.addReservation(reservation);
