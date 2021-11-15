@@ -76,6 +76,11 @@ public class JdbcUserDataImpl implements UserData{
     }
 
     @Override
+    public List<TradeTicket> getUserTrades(Long userId) {
+        return null;
+    }
+
+    @Override
     public Optional<Double> getUserCash(Long userID) {
         return Optional.ofNullable(jdbcTemplate.queryForObject("SELECT cash FROM users\n" +
                 "  WHERE id = ?", Double.class, userID));

@@ -101,4 +101,16 @@ public class TradeTicket {
         this.dateTime = dateTime;
     }
 
+    @Override
+    public String toString() {
+        return "TradeTicket{" +
+                "user=" + user.getName() + "(ID: " + user.getId() + ")" +
+                ", security=" + security.getTicker() +
+                ", tradeType=" + tradeType +
+                ", quantity=" + quantity +
+                ", tradePrice=" + tradePrice +
+                ", dateTime=" + dateTime +
+                '}';
+    }
+
 }

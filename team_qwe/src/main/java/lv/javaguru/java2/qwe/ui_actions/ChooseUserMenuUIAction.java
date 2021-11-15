@@ -20,7 +20,7 @@ public class ChooseUserMenuUIAction implements UIAction {
         String[] userMenu = {"ADD NEW USER", "REMOVE USER", "SHOW USER LIST", "FIND USER BY NAME",
                 "GENERATE PORTFOLIO FOR USER", "TRADE STOCKS (MARKET ORDER)", "SHOW USER PORTFOLIO",
                 "SHOW USER PORTFOLIO GROUPED BY INDUSTRY", "SHOW USER INVESTMENTS BY EACH INDUSTRY",
-                "SHOW PORTFOLIO SUMMARY", "RETURN TO MAIN MENU"};
+                "SHOW USER TRADES", "SHOW PORTFOLIO SUMMARY", "RETURN TO MAIN MENU"};
 
         Map<String, UIAction> userMenuMap = ofEntries(
                 entry("ADD NEW USER",
@@ -41,6 +41,8 @@ public class ChooseUserMenuUIAction implements UIAction {
                         getApplicationContext().getBean(GetUserPortfolioGroupedByIndustryUIAction.class)),
                 entry("SHOW USER INVESTMENTS BY EACH INDUSTRY",
                         getApplicationContext().getBean(GetUserInvestmentsByEachIndustryUIAction.class)),
+                entry("SHOW USER TRADES",
+                        getApplicationContext().getBean(GetUserTradesUIAction.class)),
                 entry("SHOW PORTFOLIO SUMMARY",
                         getApplicationContext().getBean(GetUserPortfolioSummaryUIAction.class))
         );

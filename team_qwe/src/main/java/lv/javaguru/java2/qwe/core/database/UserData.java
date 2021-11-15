@@ -23,6 +23,8 @@ public interface UserData {
 
     List<Position> getUserPortfolio(Long userId);
 
+    List<TradeTicket> getUserTrades(Long userId);
+
     Optional<Double> getUserCash(Long userID);
 
     void savePosition(Position position, Long userId);
