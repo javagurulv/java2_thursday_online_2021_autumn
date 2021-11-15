@@ -141,7 +141,7 @@ public class OrmUserDataImpl implements UserData {
     }
 
     private Position mergePositions(Position oldPosition, Position newPosition) {
-        if (newPosition.getAmount() > 0) { // если покупка
+        if (newPosition.getAmount() > 0) { // если покупка, и позиция в этой акции уже есть
             double totalQuantity = oldPosition.getAmount() + newPosition.getAmount();
             double newPurchasePrice = utils.round(oldPosition.getPurchasePrice() * (oldPosition.getAmount() / totalQuantity) +
                     newPosition.getPurchasePrice() * (newPosition.getAmount() / totalQuantity));
@@ -150,10 +150,10 @@ public class OrmUserDataImpl implements UserData {
             mergedPosition.setUserId(oldPosition.getUserId());
             return mergedPosition;
         }
-        else if (newPosition.getAmount() < 0 && oldPosition.getAmount() + newPosition.getAmount() == 0) {
+        else if (newPosition.getAmount() < 0 && oldPosition.getAmount() + newPosition.getAmount() == 0) { // если после продажи позиция полностью закрывается
             return null;
         }
-        else {
+        else { // частичная продажа
             double totalQuantity = oldPosition.getAmount() + newPosition.getAmount();
             Position mergedPosition = new Position(newPosition.getSecurity(), totalQuantity, oldPosition.getPurchasePrice());
             mergedPosition.setUserId(oldPosition.getUserId());

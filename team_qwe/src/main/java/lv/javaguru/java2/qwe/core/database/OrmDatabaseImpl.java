@@ -6,6 +6,7 @@ import lv.javaguru.java2.qwe.core.domain.Stock;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.NoResultException;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class OrmDatabaseImpl implements Database{
 
     @Autowired private SessionFactory sessionFactory;
+    @Autowired private JdbcTemplate jdbcTemplate;
 
     @Override
     public String addStock(Stock stock) {
@@ -64,11 +66,16 @@ public class OrmDatabaseImpl implements Database{
         }
     }
 
+//    @Override
+//    public List<Security> filterStocksByMultipleParameters(String sql) {
+//        return sessionFactory.getCurrentSession()
+//                .createQuery(sql, Security.class)
+//                .getResultList();
+//    }
+
     @Override
     public List<Security> filterStocksByMultipleParameters(String sql) {
-        return sessionFactory.getCurrentSession()
-                .createQuery(sql, Security.class)
-                .getResultList();
+        return jdbcTemplate.query(sql, new SecurityRowMapper());
     }
 
 }

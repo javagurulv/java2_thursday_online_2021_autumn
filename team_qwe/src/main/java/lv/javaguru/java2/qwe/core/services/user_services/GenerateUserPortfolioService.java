@@ -93,19 +93,19 @@ public class GenerateUserPortfolioService {
 
     private Map<Integer, List<Security>> securitiesForRiskGroups() {
         return ofEntries(
-                entry(1, database.filterStocksByMultipleParameters("FROM Stock\n" +
+                entry(1, database.filterStocksByMultipleParameters("SELECT * FROM stocks\n" +
                         "  WHERE dividend_yield > 3\n" +
                         "    AND risk_weight < 1.2\n" + "  ORDER BY risk_weight")),
-                entry(2, database.filterStocksByMultipleParameters("FROM Stock\n" +
+                entry(2, database.filterStocksByMultipleParameters("SELECT * FROM stocks\n" +
                         "  WHERE dividend_yield > 2\n" +
                         "    AND risk_weight < 1.2\n" + "  ORDER BY risk_weight DESC")),
-                entry(3, database.filterStocksByMultipleParameters("FROM Stock\n" +
+                entry(3, database.filterStocksByMultipleParameters("SELECT * FROM stocks\n" +
                         "  WHERE dividend_yield > 1\n" +
                         "    AND risk_weight < 1")),
-                entry(4, database.filterStocksByMultipleParameters("FROM Stock\n" +
+                entry(4, database.filterStocksByMultipleParameters("SELECT * FROM stocks\n" +
                         "  WHERE dividend_yield < 1.5\n" +
                         "    AND risk_weight > 1.1\n" + "  ORDER BY risk_weight DESC")),
-                entry(5, database.filterStocksByMultipleParameters("FROM Stock\n" +
+                entry(5, database.filterStocksByMultipleParameters("SELECT * FROM stocks\n" +
                         "  ORDER BY risk_weight DESC"))
         );
     }
