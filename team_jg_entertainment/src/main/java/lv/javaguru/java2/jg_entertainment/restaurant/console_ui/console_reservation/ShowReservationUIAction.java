@@ -13,9 +13,10 @@ public class ShowReservationUIAction implements ReservationUIAction {
 
     @Override
     public void execute() {
-        System.out.println("reservation list: ");
+        System.out.println("Reservation list: ");
         ShowReservationRequest request = new ShowReservationRequest();
         ShowReservationResponse response = showReservationService.execute(request);
-        System.out.println(response.getReservations());
+        response.getReservations().forEach(System.out::println);
+        System.out.println("Finished! This all list!");
     }
 }

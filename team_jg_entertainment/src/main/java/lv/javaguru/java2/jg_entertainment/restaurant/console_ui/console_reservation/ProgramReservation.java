@@ -38,8 +38,8 @@ public class ProgramReservation {
         System.out.println();
         System.out.println("Hello !");
         System.out.println("Reservation program menu, press number what do you want to do! ");
-        System.out.println("1. Add reservation->");
-        System.out.println("2. Show!");
+        System.out.println("1. Add reservation to list ->");
+        System.out.println("2. Get all reservation -> ");
 //        System.out.println("3. Delete!");
 //        System.out.println("4. Redact!");
         System.out.println("5. Choose that return in MAIN MENU:");
