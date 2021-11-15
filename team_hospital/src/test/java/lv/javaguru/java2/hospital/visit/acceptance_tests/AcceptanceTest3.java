@@ -22,8 +22,8 @@ import lv.javaguru.java2.hospital.visit.core.responses.EditVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.responses.SearchVisitResponse;
 import lv.javaguru.java2.hospital.visit.core.services.AddVisitService;
 import lv.javaguru.java2.hospital.visit.core.services.EditVisitService;
-import lv.javaguru.java2.hospital.visit.core.services.search_visit_service.SearchVisitService;
 import lv.javaguru.java2.hospital.visit.core.services.ShowAllVisitService;
+import lv.javaguru.java2.hospital.visit.core.services.search_visit_service.SearchVisitService;
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.context.ApplicationContext;
@@ -59,13 +59,13 @@ public class AcceptanceTest3 {
         AddVisitRequest request = new AddVisitRequest(
                 searchPatientsResponse.getPatientList().get(0).getId().toString(),
                 searchDoctorsResponse1.getDoctors().get(0).getId().toString(),
-                "10-10-2023 10:00");
+                "2023-10-10 10:00", "description");
         AddVisitResponse addVisitResponse = getAddVisitService().execute(request);
 
         SearchVisitRequest searchVisitRequest1 = new SearchVisitRequest(
                 null,searchDoctorsResponse1.getDoctors().get(0).getId().toString(),
                 searchPatientsResponse.getPatientList().get(0).getId().toString(),
-                "10-10-2023 10:00");
+                "2023-10-10 10:00");
         SearchVisitResponse searchVisitResponse1 = getSearchVisitService().execute(searchVisitRequest1);
 
         EditVisitRequest editVisitRequest = new EditVisitRequest(
@@ -77,7 +77,7 @@ public class AcceptanceTest3 {
         SearchVisitRequest searchVisitRequest2 = new SearchVisitRequest(
                 null,searchDoctorsResponse2.getDoctors().get(0).getId().toString(),
                 searchPatientsResponse.getPatientList().get(0).getId().toString(),
-                "10-10-2023 10:00");
+                "2023-10-10 10:00");
 
         SearchVisitResponse searchVisitResponse2 = getSearchVisitService().execute(searchVisitRequest2);
 

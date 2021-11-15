@@ -56,7 +56,7 @@ public class ORMVisitRepositoryImpl implements VisitRepository {
     @Override
     public List<Visit> findByVisitId(Long id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "SELECT v FROM Visit d WHERE id = :id");
+                "SELECT v FROM Visit v WHERE id = :id");
         query.setParameter("id", id);
         return query.getResultList();
     }
