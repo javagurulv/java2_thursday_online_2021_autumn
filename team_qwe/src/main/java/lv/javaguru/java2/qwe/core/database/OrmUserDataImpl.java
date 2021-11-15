@@ -71,6 +71,13 @@ public class OrmUserDataImpl implements UserData {
     }
 
     @Override
+    public List<TradeTicket> getUserTrades(Long userId) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM TradeTicket t WHERE user_id = " + userId, TradeTicket.class)
+                .getResultList();
+    }
+
+    @Override
     public Optional<Double> getUserCash(Long userID) {
         try {
             Query<?> query = sessionFactory.getCurrentSession().createQuery(
