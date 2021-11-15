@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitor;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +15,12 @@ public class OrmVisitorRepositoryImpl implements VisitorsRepository {
     @Autowired private SessionFactory sessionFactory;
 
     @Override
-    public void saveClientToRestaurantList(Visitors clientInfo) {
+    public void saveClientToRestaurantList(Visitor clientInfo) {
         sessionFactory.getCurrentSession().save(clientInfo);
     }
 
     @Override
-    public List<Visitors> findVisitorsByNameAndTelephoneNumber(String nameVisitors, String telephoneNumber) {
+    public List<Visitor> findVisitorsByNameAndTelephoneNumber(String nameVisitors, String telephoneNumber) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT v FROM Visitors v WHERE visitor_name = :visitor_name AND visitor_telephone_number = :visitor_telephone_number");
         query.setParameter("visitor_name", nameVisitors);
@@ -29,7 +29,7 @@ public class OrmVisitorRepositoryImpl implements VisitorsRepository {
     }
 
     @Override
-    public List<Visitors> findClientById(Long idVisitors) {
+    public List<Visitor> findClientById(Long idVisitors) {
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("SELECT v FROM Visitors v WHERE visitor_id = :visitor_id");
         query.setParameter("visitor_id", idVisitors);
@@ -37,7 +37,7 @@ public class OrmVisitorRepositoryImpl implements VisitorsRepository {
     }
 
     @Override
-    public List<Visitors> findByNameVisitor(String nameVisitor) {
+    public List<Visitor> findByNameVisitor(String nameVisitor) {
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("SELECT v FROM Visitors v WHERE visitor_name = :visitor_name");
         query.setParameter("visitor_name", nameVisitor);
@@ -45,7 +45,7 @@ public class OrmVisitorRepositoryImpl implements VisitorsRepository {
     }
 
     @Override
-    public List<Visitors> findBySurnameVisitor(String surnameVisitor) {
+    public List<Visitor> findBySurnameVisitor(String surnameVisitor) {
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("SELECT v FROM Visitors v WHERE visitor_surname = :visitor_surname");
         query.setParameter("visitor_name", surnameVisitor);
@@ -53,7 +53,7 @@ public class OrmVisitorRepositoryImpl implements VisitorsRepository {
     }
 
     @Override
-    public List<Visitors> findByNameAndSurname(String nameVisitor, String surnameVisitor) {
+    public List<Visitor> findByNameAndSurname(String nameVisitor, String surnameVisitor) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT v FROM Visitors v WHERE visitor_name = :visitor_name AND visitor_surname = :visitor_surname");
         query.setParameter("visitor_name", nameVisitor);
@@ -72,9 +72,9 @@ public class OrmVisitorRepositoryImpl implements VisitorsRepository {
     }
 
     @Override
-    public List<Visitors> showAllClientsInList() {
+    public List<Visitor> showAllClientsInList() {
         return sessionFactory.getCurrentSession()
-                .createQuery("SELECT v FROM Visitors v", Visitors.class)
+                .createQuery("SELECT v FROM Visitors v", Visitor.class)
                 .getResultList();
     }
 }

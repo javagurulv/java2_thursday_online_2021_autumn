@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DeleteVisitorsServiceTest {
+public class DeleteVisitorServiceTest {
 
     @Mock private VisitorsRepository database;
     @Mock private DeleteVisitorValidator validator;

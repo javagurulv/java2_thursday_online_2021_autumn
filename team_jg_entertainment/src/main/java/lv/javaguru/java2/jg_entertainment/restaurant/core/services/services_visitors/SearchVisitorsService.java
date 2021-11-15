@@ -6,7 +6,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Pagi
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.SearchVisitorsRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.SearchVisitorsResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_visitors.SearchVisitorsRequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,19 +36,19 @@ public class SearchVisitorsService {
         if (!errors.isEmpty()) {
             return new SearchVisitorsResponse(null, errors);
         }
-        List<Visitors> visitorsList = search(request);
-        visitorsList = order(visitorsList, request.getOrdering());
-        visitorsList = paging(visitorsList, request.getPaging());
+        List<Visitor> visitorList = search(request);
+        visitorList = order(visitorList, request.getOrdering());
+        visitorList = paging(visitorList, request.getPaging());
 
-        return new SearchVisitorsResponse(visitorsList, null);
+        return new SearchVisitorsResponse(visitorList, null);
     }
 
-    private List<Visitors> order(List<Visitors> visitors, Ordering ordering) {
+    private List<Visitor> order(List<Visitor> visitors, Ordering ordering) {
 
         if (ordering != null) {
-            Comparator<Visitors> comparator = ordering.getOrderBy().equals("name")
-                    ? Comparator.comparing(Visitors::getClientName)
-                    : Comparator.comparing(Visitors::getSurname);
+            Comparator<Visitor> comparator = ordering.getOrderBy().equals("name")
+                    ? Comparator.comparing(Visitor::getClientName)
+                    : Comparator.comparing(Visitor::getSurname);
             if (ordering.getOrderDirection().equals("DESCENDING")) {
                 comparator = comparator.reversed();
             }
@@ -60,9 +60,9 @@ public class SearchVisitorsService {
         }
     }
 
-    private List<Visitors> search(SearchVisitorsRequest request) {
+    private List<Visitor> search(SearchVisitorsRequest request) {
 
-        List<Visitors> visitors = new ArrayList<>();
+        List<Visitor> visitors = new ArrayList<>();
         if (request.isNameProvided() && !request.isSurnameProvided()) {
             visitors = database.findByNameVisitor(request.getNameVisitors());
         }
@@ -82,7 +82,7 @@ public class SearchVisitorsService {
     }
 
     //paging
-    private List<Visitors> paging(List<Visitors> visitors, Paging paging) {
+    private List<Visitor> paging(List<Visitor> visitors, Paging paging) {
 
         if (paging != null) {
             int skip = (paging.getPageNumber() - 1) * paging.getPageSize();

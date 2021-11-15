@@ -7,7 +7,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.Sear
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.SearchVisitorsResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_visitors.SearchVisitorsRequestValidator;
-import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SearchVisitorsServiceTest {
+public class SearchVisitorServiceTest {
 
     @Mock private VisitorsRepository database;
     @Mock private SearchVisitorsRequestValidator validator;
@@ -47,8 +47,8 @@ public class SearchVisitorsServiceTest {
     public void shouldSearchByName() {
         SearchVisitorsRequest request = new SearchVisitorsRequest("name", null);
         Mockito.when(validator.validator(request)).thenReturn(new ArrayList<>());
-        List<Visitors> visitors = new ArrayList<>();
-        visitors.add(new Visitors("name", "surname"));
+        List<Visitor> visitors = new ArrayList<>();
+        visitors.add(new Visitor("name", "surname"));
         Mockito.when(database.findByNameVisitor("name")).thenReturn(visitors);
 
         SearchVisitorsResponse searchVisitorsResponse = serviceSearch.execute(request);
@@ -62,8 +62,8 @@ public class SearchVisitorsServiceTest {
     public void shouldSearchBySurname() {
         SearchVisitorsRequest request = new SearchVisitorsRequest(null, "surname");
         Mockito.when(validator.validator(request)).thenReturn(new ArrayList<>());
-        List<Visitors> visitors = new ArrayList<>();
-        visitors.add(new Visitors("name", "surname"));
+        List<Visitor> visitors = new ArrayList<>();
+        visitors.add(new Visitor("name", "surname"));
         Mockito.when(database.findBySurnameVisitor("surname")).thenReturn(visitors);
         SearchVisitorsResponse searchVisitorsResponse = serviceSearch.execute(request);
         assertFalse(searchVisitorsResponse.hasError());
@@ -76,8 +76,8 @@ public class SearchVisitorsServiceTest {
     public void shouldSearchByNameAndSurname() {
         SearchVisitorsRequest request = new SearchVisitorsRequest("name", "surname");
         Mockito.when(validator.validator(request)).thenReturn(new ArrayList<>());
-        List<Visitors> visitors = new ArrayList<>();
-        visitors.add(new Visitors("name", "surname"));
+        List<Visitor> visitors = new ArrayList<>();
+        visitors.add(new Visitor("name", "surname"));
         Mockito.when(database.findByNameAndSurname("name", "surname")).thenReturn(visitors);
         SearchVisitorsResponse searchVisitorsResponse = serviceSearch.execute(request);
         assertFalse(searchVisitorsResponse.hasError());
@@ -91,9 +91,9 @@ public class SearchVisitorsServiceTest {
         Ordering ordering = new Ordering("surname", "ASCENDING");
         SearchVisitorsRequest request = new SearchVisitorsRequest("name", null, ordering);
         Mockito.when(validator.validator(request)).thenReturn(new ArrayList<>());
-        List<Visitors> visitors = new ArrayList<>();
-        visitors.add(new Visitors("name", "surname1"));
-        visitors.add(new Visitors("name", "surname2"));
+        List<Visitor> visitors = new ArrayList<>();
+        visitors.add(new Visitor("name", "surname1"));
+        visitors.add(new Visitor("name", "surname2"));
         Mockito.when(database.findByNameVisitor("name")).thenReturn(visitors);
 
         SearchVisitorsResponse searchVisitorsResponse = serviceSearch.execute(request);
@@ -108,9 +108,9 @@ public class SearchVisitorsServiceTest {
         Ordering ordering = new Ordering("surname", "DESCENDING");
         SearchVisitorsRequest request = new SearchVisitorsRequest("name", null, ordering);
         Mockito.when(validator.validator(request)).thenReturn(new ArrayList<>());
-        List<Visitors> visitors = new ArrayList<>();
-        visitors.add(new Visitors("name", "surname1"));
-        visitors.add(new Visitors("name", "surname2"));
+        List<Visitor> visitors = new ArrayList<>();
+        visitors.add(new Visitor("name", "surname1"));
+        visitors.add(new Visitor("name", "surname2"));
         Mockito.when(database.findByNameVisitor("name")).thenReturn(visitors);
 
         SearchVisitorsResponse searchVisitorsResponse = serviceSearch.execute(request);
@@ -125,9 +125,9 @@ public class SearchVisitorsServiceTest {
         Paging paging = new Paging(1, 1);
         SearchVisitorsRequest request = new SearchVisitorsRequest("name", null, null, paging);
         Mockito.when(validator.validator(request)).thenReturn(new ArrayList<>());
-        List<Visitors> visitors = new ArrayList<>();
-        visitors.add(new Visitors("name", "surname1"));
-        visitors.add(new Visitors("name", "surname2"));
+        List<Visitor> visitors = new ArrayList<>();
+        visitors.add(new Visitor("name", "surname1"));
+        visitors.add(new Visitor("name", "surname2"));
         Mockito.when(database.findByNameVisitor("name")).thenReturn(visitors);
 
         SearchVisitorsResponse searchVisitorsResponse = serviceSearch.execute(request);
@@ -142,9 +142,9 @@ public class SearchVisitorsServiceTest {
         Paging paging = new Paging(2, 1);
         SearchVisitorsRequest request = new SearchVisitorsRequest("name", null, null, paging);
         Mockito.when(validator.validator(request)).thenReturn(new ArrayList<>());
-        List<Visitors> visitors = new ArrayList<>();
-        visitors.add(new Visitors("name", "surname1"));
-        visitors.add(new Visitors("name", "surname2"));
+        List<Visitor> visitors = new ArrayList<>();
+        visitors.add(new Visitor("name", "surname1"));
+        visitors.add(new Visitor("name", "surname2"));
         Mockito.when(database.findByNameVisitor("name")).thenReturn(visitors);
 
         SearchVisitorsResponse searchVisitorsResponse = serviceSearch.execute(request);

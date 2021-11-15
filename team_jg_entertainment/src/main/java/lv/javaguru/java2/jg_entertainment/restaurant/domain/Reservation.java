@@ -15,7 +15,7 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "id_visitor")
-    private Visitors visitor;
+    private Visitor visitor;
 
     @ManyToOne
     @JoinColumn(name = "id_menu")
@@ -34,7 +34,7 @@ public class Reservation {
     }
 
 
-    public Reservation(Visitors visitor,
+    public Reservation(Visitor visitor,
                        Menu menu,
                        Table table,
                        LocalDateTime reservationDate) {
@@ -52,11 +52,11 @@ public class Reservation {
         this.idReservation = idReservation;
     }
 
-    public Visitors getVisitor() {
+    public Visitor getVisitor() {
         return visitor;
     }
 
-    public void setVisitor(Visitors visitor) {
+    public void setVisitor(Visitor visitor) {
         this.visitor = visitor;
     }
 

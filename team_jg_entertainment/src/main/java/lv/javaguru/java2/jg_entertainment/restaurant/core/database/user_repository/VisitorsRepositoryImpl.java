@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitor;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,18 +13,18 @@ import static java.util.stream.Collectors.toList;
 //@Component
 public class VisitorsRepositoryImpl implements VisitorsRepository {
 
-    List<Visitors> clientInRestaurant = new ArrayList<>();
+    List<Visitor> clientInRestaurant = new ArrayList<>();
     private Long idClient = 1L;
 
     @Override
-    public void saveClientToRestaurantList(Visitors clientInfo) {
+    public void saveClientToRestaurantList(Visitor clientInfo) {
         clientInfo.setIdClient(idClient);
         idClient++;
         clientInRestaurant.add(clientInfo);
     }
 
     @Override
-    public List<Visitors> findVisitorsByNameAndTelephoneNumber(String nameVisitors, String telephoneNumber) {
+    public List<Visitor> findVisitorsByNameAndTelephoneNumber(String nameVisitors, String telephoneNumber) {
         return clientInRestaurant.stream()
                 .filter(visitors -> visitors.getClientName().equals(nameVisitors))
                 .filter(visitors -> visitors.getTelephoneNumber().equals(telephoneNumber))
@@ -32,28 +32,28 @@ public class VisitorsRepositoryImpl implements VisitorsRepository {
     }
 
     @Override
-    public List<Visitors> findClientById(Long idVisitors) {
+    public List<Visitor> findClientById(Long idVisitors) {
         return clientInRestaurant.stream()
                 .filter(visitors -> visitors.getIdClient().equals(idVisitors))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Visitors> findByNameVisitor(String nameVisitor) {
+    public List<Visitor> findByNameVisitor(String nameVisitor) {
         return clientInRestaurant.stream()
                 .filter(visitors -> visitors.getClientName().equals(nameVisitor))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Visitors> findBySurnameVisitor(String surnameVisitor) {
+    public List<Visitor> findBySurnameVisitor(String surnameVisitor) {
         return clientInRestaurant.stream()
                 .filter(visitors -> visitors.getSurname().equals(surnameVisitor))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Visitors> findByNameAndSurname(String name, String surname) {
+    public List<Visitor> findByNameAndSurname(String name, String surname) {
         return clientInRestaurant.stream()
                 .filter(visitors -> visitors.getClientName().equals(name))
                 .filter(visitors -> visitors.getSurname().equals(surname))
@@ -63,21 +63,21 @@ public class VisitorsRepositoryImpl implements VisitorsRepository {
     @Override
     public boolean deleteClientWithIDAndName(Long id, String nameVisitor) {
         boolean visitorDeleteFromRestaurantList = false;
-        Optional<Visitors> visitorsOptional = clientInRestaurant.stream()
+        Optional<Visitor> visitorsOptional = clientInRestaurant.stream()
                 .filter(visitors -> visitors.getClientName().equals(nameVisitor) &&
                         visitors.getIdClient().equals(id))
                 .findFirst();
         if (visitorsOptional.isPresent()) {
-            Visitors visitors = visitorsOptional.get();
-            visitorDeleteFromRestaurantList = clientInRestaurant.remove(visitors);
+            Visitor visitor = visitorsOptional.get();
+            visitorDeleteFromRestaurantList = clientInRestaurant.remove(visitor);
         }
         return visitorDeleteFromRestaurantList;
     }
 
     @Override
-    public List<Visitors> showAllClientsInList() {
+    public List<Visitor> showAllClientsInList() {
         return clientInRestaurant.stream()
-                .sorted(Comparator.comparing(Visitors::getClientName).thenComparing(Visitors::getSurname))
+                .sorted(Comparator.comparing(Visitor::getClientName).thenComparing(Visitor::getSurname))
                 .collect(toList());
     }
 }
