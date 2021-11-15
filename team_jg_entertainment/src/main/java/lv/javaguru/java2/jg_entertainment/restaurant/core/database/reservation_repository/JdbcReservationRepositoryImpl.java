@@ -19,7 +19,7 @@ public class JdbcReservationRepositoryImpl implements ReservationRepository {
     @Override
     public void addReservation(Reservation reservation) {
         jdbcTemplate.update(
-                "INSERT INTO reservation (id_visitor, id_menu, id_table, reservation_date) "
+                "INSERT INTO reservations (id_visitor, id_menu, id_table, reservation_date) "
                         + "VALUES (?, ?, ?, ?) ",
                 reservation.getVisitor().getIdClient(),
                 reservation.getMenu().getNumber(),
@@ -38,132 +38,132 @@ public class JdbcReservationRepositoryImpl implements ReservationRepository {
 
     @Override
     public boolean removeReservation(Long idReservation) {
-        String sql = "DELETE FROM reservation WHERE reservation_id = ?";
+        String sql = "DELETE FROM reservations WHERE reservation_id = ?";
         Object[] args = new Object[]{idReservation};
         return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
     public List<Reservation> getAllReservations() {
-        String sql = "SELECT * FROM reservation";
+        String sql = "SELECT * FROM reservations";
         return jdbcTemplate.query(sql, reservationRowMapper);
     }
 
     @Override
     public boolean editReservation(Long reservationID, EditReservationEnum userInput, String changes) {
-        String sql = "UPDATE reservation SET " + userInput.toString().toLowerCase(Locale.ROOT)
+        String sql = "UPDATE reservations SET " + userInput.toString().toLowerCase(Locale.ROOT)
                 + " = ? WHERE reservation_id = ?";
         return jdbcTemplate.update(sql, changes, reservationID) == 1;
     }
 
     @Override
     public List<Reservation> findByReservationId(Long id) {
-        String sql = "SELECT * FROM reservation WHERE reservation_id = ?";
+        String sql = "SELECT * FROM reservations WHERE reservation_id = ?";
         Object[] args = new Object[]{id};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
 
     @Override
     public List<Reservation> findByClientId(Long id) {
-        String sql = "SELECT * FROM reservation WHERE id_visitor = ?";
+        String sql = "SELECT * FROM reservations WHERE id_visitor = ?";
         Object[] args = new Object[]{id};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
 
     @Override
     public List<Reservation> findByTableId(Long id) {
-        String sql = "SELECT * FROM reservation WHERE id_table = ?";
+        String sql = "SELECT * FROM reservations WHERE id_table = ?";
         Object[] args = new Object[]{id};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
 
     @Override
     public List<Reservation> findByMenuId(Long id) {
-        String sql = "SELECT * FROM reservation WHERE id_menu = ?";
+        String sql = "SELECT * FROM reservations WHERE id_menu = ?";
         Object[] args = new Object[]{id};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
 
     @Override
     public List<Reservation> findByDate(LocalDateTime date) {
-        String sql = "SELECT * FROM reservation WHERE reservation_date = ?";
+        String sql = "SELECT * FROM reservations WHERE reservation_date = ?";
         Object[] args = new Object[]{date};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
 
     @Override
     public List<Reservation> findByClientIdAndTableId(Long clientId, Long tableId) {
-        String sql = "SELECT * FROM reservation WHERE id_visitor = ? AND id_table = ?";
+        String sql = "SELECT * FROM reservations WHERE id_visitor = ? AND id_table = ?";
         Object[] args = new Object[]{clientId, tableId};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
 
     @Override
     public List<Reservation> findByClientIdAndMenuId(Long clientId, Long menuId) {
-        String sql = "SELECT * FROM reservation WHERE id_visitor = ? AND id_menu = ?";
+        String sql = "SELECT * FROM reservations WHERE id_visitor = ? AND id_menu = ?";
         Object[] args = new Object[]{clientId, menuId};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
 
     @Override
     public List<Reservation> findByClientIdAndDate(Long clientId, LocalDateTime date) {
-        String sql = "SELECT * FROM reservation WHERE id_visitor = ? AND reservation_date = ?";
+        String sql = "SELECT * FROM reservations WHERE id_visitor = ? AND reservation_date = ?";
         Object[] args = new Object[]{clientId, date};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
 
     @Override
     public List<Reservation> findByTableIdAndMenuId(Long tableId, Long menuId) {
-        String sql = "SELECT * FROM reservation WHERE id_table = ? AND id_menu = ?";
+        String sql = "SELECT * FROM reservations WHERE id_table = ? AND id_menu = ?";
         Object[] args = new Object[]{tableId, menuId};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
 
     @Override
     public List<Reservation> findByTableIdAndDate(Long tableId, LocalDateTime date) {
-        String sql = "SELECT * FROM reservation WHERE id_table = ? AND reservation_date = ?";
+        String sql = "SELECT * FROM reservations WHERE id_table = ? AND reservation_date = ?";
         Object[] args = new Object[]{tableId, date};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
 
     @Override
     public List<Reservation> findByMenuIdAndDate(Long menuId, LocalDateTime date) {
-        String sql = "SELECT * FROM reservation WHERE id_menu = ? AND reservation_date = ?";
+        String sql = "SELECT * FROM reservations WHERE id_menu = ? AND reservation_date = ?";
         Object[] args = new Object[]{menuId, date};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
 
     @Override
     public List<Reservation> findByClientIdTableIdAndMenuId(Long clientId, Long tableId, Long menuId) {
-        String sql = "SELECT * FROM reservation WHERE id_visitor = ? AND id_table = ? AND id_menu = ?";
+        String sql = "SELECT * FROM reservations WHERE id_visitor = ? AND id_table = ? AND id_menu = ?";
         Object[] args = new Object[]{clientId, tableId, menuId};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
 
     @Override
     public List<Reservation> findByClientIdMenuIdAndDate(Long clientId, Long menuId, LocalDateTime date) {
-        String sql = "SELECT * FROM reservation WHERE id_visitor = ? AND id_menu = ? AND reservation_date = ?";
+        String sql = "SELECT * FROM reservations WHERE id_visitor = ? AND id_menu = ? AND reservation_date = ?";
         Object[] args = new Object[]{clientId, menuId, date};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
 
     @Override
     public List<Reservation> findByClientIdTableIdAndDate(Long clientId, Long tableId, LocalDateTime date) {
-        String sql = "SELECT * FROM reservation WHERE id_visitor = ? AND id_table = ? AND reservation_date = ?";
+        String sql = "SELECT * FROM reservations WHERE id_visitor = ? AND id_table = ? AND reservation_date = ?";
         Object[] args = new Object[]{clientId, tableId, date};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
 
     @Override
     public List<Reservation> findByTableIdMenuIdAndDate(Long tableId, Long menuId, LocalDateTime date) {
-        String sql = "SELECT * FROM reservation WHERE id_table = ? AND id_menu = ? AND reservation_date = ?";
+        String sql = "SELECT * FROM reservations WHERE id_table = ? AND id_menu = ? AND reservation_date = ?";
         Object[] args = new Object[]{tableId, menuId, date};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
 
     @Override
     public List<Reservation> findByClientIdTableIdMenuIdAndDate(Long clientId, Long tableId, Long menuId, LocalDateTime date) {
-        String sql = "SELECT * FROM reservation WHERE id_visitor = ? AND id_table = ? AND id_menu = ? AND reservation_date = ?";
+        String sql = "SELECT * FROM reservations WHERE id_visitor = ? AND id_table = ? AND id_menu = ? AND reservation_date = ?";
         Object[] args = new Object[]{clientId, tableId, menuId, date};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
     }
