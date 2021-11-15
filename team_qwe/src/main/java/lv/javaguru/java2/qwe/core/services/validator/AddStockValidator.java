@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import static java.util.Map.entry;
 
 @Component
-public class AddStockValidator extends AddSecurityValidator {
+public class AddStockValidator {
 
     @Autowired private Database database;
     @Autowired private UtilityMethods utils;
@@ -44,7 +44,6 @@ public class AddStockValidator extends AddSecurityValidator {
                     new CoreError("Risk weight", "cannot be negative!"))
     );
 
-    @Override
     public List<CoreError> validate(CoreRequest request) {
         return validator.entrySet().stream()
                 .filter(entry -> entry.getKey().test((AddStockRequest) request))

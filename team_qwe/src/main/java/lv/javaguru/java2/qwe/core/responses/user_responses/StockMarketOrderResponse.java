@@ -6,15 +6,15 @@ import lv.javaguru.java2.qwe.core.responses.CoreResponse;
 
 import java.util.List;
 
-public class BuyStockMarketOrderResponse extends CoreResponse {
+public class StockMarketOrderResponse extends CoreResponse {
 
     private Position position;
 
-    public BuyStockMarketOrderResponse(List<CoreError> errors) {
+    public StockMarketOrderResponse(List<CoreError> errors) {
         super(errors);
     }
 
-    public BuyStockMarketOrderResponse(Position position) {
+    public StockMarketOrderResponse(Position position) {
         this.position = position;
     }
 

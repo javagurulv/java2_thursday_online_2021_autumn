@@ -4,10 +4,10 @@ import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.domain.Position;
 import lv.javaguru.java2.qwe.core.domain.Stock;
-import lv.javaguru.java2.qwe.core.requests.user_requests.BuyStockMarketOrderRequest;
+import lv.javaguru.java2.qwe.core.requests.user_requests.StockMarketOrderRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
-import lv.javaguru.java2.qwe.core.responses.user_responses.BuyStockMarketOrderResponse;
-import lv.javaguru.java2.qwe.core.services.validator.BuyStockMarketOrderValidator;
+import lv.javaguru.java2.qwe.core.responses.user_responses.StockMarketOrderResponse;
+import lv.javaguru.java2.qwe.core.services.validator.StockMarketOrderValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,13 +16,13 @@ import java.util.List;
 
 @Component
 @Transactional
-public class BuyStockMarketOrderService {
+public class StockMarketOrderService {
 
     @Autowired private Database database;
     @Autowired private UserData userData;
-    @Autowired private BuyStockMarketOrderValidator validator;
+    @Autowired private StockMarketOrderValidator validator;
 
-    public BuyStockMarketOrderResponse execute(BuyStockMarketOrderRequest request) {
+    public StockMarketOrderResponse execute(StockMarketOrderRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (errors.isEmpty()) {
             Stock stock = (Stock) request.getSecurity();
@@ -32,11 +32,10 @@ public class BuyStockMarketOrderService {
                     request.getRealTimePrice()
             );
             position.setUserId(request.getUser().getId());
-//            database.updateStock(stock);
             userData.savePosition(position, request.getUser().getId());
-            return new BuyStockMarketOrderResponse(position);
+            return new StockMarketOrderResponse(position);
         }
-        return new BuyStockMarketOrderResponse(errors);
+        return new StockMarketOrderResponse(errors);
     }
 
 }

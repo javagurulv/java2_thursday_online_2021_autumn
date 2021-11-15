@@ -49,4 +49,4 @@ CREATE TRIGGER IF NOT EXISTS ins_sec
 
 CREATE TRIGGER IF NOT EXISTS del_pos
   AFTER DELETE ON users_positions
-  FOR EACH ROW CALL "lv.javaguru.java2.qwe.acceptance_test.AcceptanceTestForBuyStockMarketOrder$MyTrigger2";
+  FOR EACH ROW CALL "lv.javaguru.java2.qwe.acceptance_test.AcceptanceTestForStockMarketOrder$MyTrigger2";

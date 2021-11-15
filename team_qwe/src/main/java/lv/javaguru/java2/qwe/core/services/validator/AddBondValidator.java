@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import static java.util.Map.entry;
 
 @Component
-public class AddBondValidator extends AddSecurityValidator {
+public class AddBondValidator {
 
     @Autowired private Database database;
     @Autowired private UtilityMethods utils;
@@ -48,7 +48,6 @@ public class AddBondValidator extends AddSecurityValidator {
                     new CoreError("Maturity", "10 symbols are required!"))
     );
 
-    @Override
     public List<CoreError> validate(CoreRequest request) {
         return validator.entrySet().stream()
                 .filter(entry -> entry.getKey().test((AddBondRequest) request))

@@ -34,7 +34,7 @@ public class ChooseUserMenuUIAction implements UIAction {
                 entry("GENERATE PORTFOLIO FOR USER",
                         getApplicationContext().getBean(GenerateUserPortfolioUIAction.class)),
                 entry("BUY STOCKS (MARKET ORDER)",
-                        getApplicationContext().getBean(BuyStockMarketOrderUIAction.class)),
+                        getApplicationContext().getBean(StockMarketOrderUIAction.class)),
                 entry("SHOW USER PORTFOLIO",
                         getApplicationContext().getBean(GetUserPortfolioUIAction.class)),
                 entry("SHOW USER PORTFOLIO GROUPED BY INDUSTRY",

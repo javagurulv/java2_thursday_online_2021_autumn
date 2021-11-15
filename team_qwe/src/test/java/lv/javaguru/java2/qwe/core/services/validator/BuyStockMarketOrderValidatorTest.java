@@ -2,7 +2,7 @@ package lv.javaguru.java2.qwe.core.services.validator;
 
 import lv.javaguru.java2.qwe.config.AppConfiguration;
 import lv.javaguru.java2.qwe.core.requests.data_requests.GetAllSecurityListRequest;
-import lv.javaguru.java2.qwe.core.requests.user_requests.BuyStockMarketOrderRequest;
+import lv.javaguru.java2.qwe.core.requests.user_requests.StockMarketOrderRequest;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GetAllUserListRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.services.data_services.GetAllSecurityListService;
@@ -36,7 +36,7 @@ public class BuyStockMarketOrderValidatorTest {
 
     @Test
     public void shouldReturnEmptyList1() {
-        BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
+        StockMarketOrderRequest request = new StockMarketOrderRequest(
                 getAllUserListService().execute(new GetAllUserListRequest()).getList().get(0),
                 getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(3),
                 "100",
@@ -48,7 +48,7 @@ public class BuyStockMarketOrderValidatorTest {
 
     @Test
     public void shouldReturnEmptyList2() {
-        BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
+        StockMarketOrderRequest request = new StockMarketOrderRequest(
                 getAllUserListService().execute(new GetAllUserListRequest()).getList().get(3),
                 getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(1),
                 "-500",
@@ -60,7 +60,7 @@ public class BuyStockMarketOrderValidatorTest {
 
     @Test
     public void shouldReturnSecurityError() {
-        BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
+        StockMarketOrderRequest request = new StockMarketOrderRequest(
                 getAllUserListService().execute(new GetAllUserListRequest()).getList().get(0),
                 null,
                 "1000",
@@ -74,7 +74,7 @@ public class BuyStockMarketOrderValidatorTest {
 
     @Test
     public void shouldReturnUserError() {
-        BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
+        StockMarketOrderRequest request = new StockMarketOrderRequest(
                 null,
                 getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(1),
                 "1000",
@@ -88,7 +88,7 @@ public class BuyStockMarketOrderValidatorTest {
 
     @Test
     public void shouldReturnQuantityError1() {
-        BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
+        StockMarketOrderRequest request = new StockMarketOrderRequest(
                 getAllUserListService().execute(new GetAllUserListRequest()).getList().get(0),
                 getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(1),
                 "0",
@@ -102,7 +102,7 @@ public class BuyStockMarketOrderValidatorTest {
 
     @Test
     public void shouldReturnQuantityError2() {
-        BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
+        StockMarketOrderRequest request = new StockMarketOrderRequest(
                 getAllUserListService().execute(new GetAllUserListRequest()).getList().get(3),
                 getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(1),
                 "-3000",
@@ -116,7 +116,7 @@ public class BuyStockMarketOrderValidatorTest {
 
     @Test
     public void shouldReturnQuantityError3() {
-        BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
+        StockMarketOrderRequest request = new StockMarketOrderRequest(
                 getAllUserListService().execute(new GetAllUserListRequest()).getList().get(3),
                 getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(3),
                 "-100",
@@ -130,7 +130,7 @@ public class BuyStockMarketOrderValidatorTest {
 
     @Test
     public void shouldReturnQuantityError4() {
-        BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
+        StockMarketOrderRequest request = new StockMarketOrderRequest(
                 getAllUserListService().execute(new GetAllUserListRequest()).getList().get(0),
                 getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(1),
                 "10o",
@@ -144,7 +144,7 @@ public class BuyStockMarketOrderValidatorTest {
 
     @Test
     public void shouldReturnCashError() {
-        BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
+        StockMarketOrderRequest request = new StockMarketOrderRequest(
                 getAllUserListService().execute(new GetAllUserListRequest()).getList().get(0),
                 getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(1),
                 "10000",
@@ -158,7 +158,7 @@ public class BuyStockMarketOrderValidatorTest {
 
     @Test
     public void shouldReturnMultipleErrors1() {
-        BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
+        StockMarketOrderRequest request = new StockMarketOrderRequest(
                 null,
                 getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(1),
                 "10o",
@@ -172,7 +172,7 @@ public class BuyStockMarketOrderValidatorTest {
 
     @Test
     public void shouldReturnMultipleErrors2() {
-        BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
+        StockMarketOrderRequest request = new StockMarketOrderRequest(
                 getAllUserListService().execute(new GetAllUserListRequest()).getList().get(0),
                 null,
                 "10000",
@@ -186,7 +186,7 @@ public class BuyStockMarketOrderValidatorTest {
 
     @Test
     public void shouldReturnMultipleErrors3() {
-        BuyStockMarketOrderRequest request = new BuyStockMarketOrderRequest(
+        StockMarketOrderRequest request = new StockMarketOrderRequest(
                 null,
                 null,
                 "10000",
@@ -206,7 +206,7 @@ public class BuyStockMarketOrderValidatorTest {
         return appContext.getBean(GetAllUserListService.class);
     }
 
-    private BuyStockMarketOrderValidator getValidator() {
-        return appContext.getBean(BuyStockMarketOrderValidator.class);
+    private StockMarketOrderValidator getValidator() {
+        return appContext.getBean(StockMarketOrderValidator.class);
     }
 }

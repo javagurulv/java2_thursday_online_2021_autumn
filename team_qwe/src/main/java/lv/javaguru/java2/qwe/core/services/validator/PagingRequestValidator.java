@@ -4,6 +4,7 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.requests.data_requests.PagingRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -12,9 +13,10 @@ import java.util.stream.Collectors;
 
 import static java.util.Map.entry;
 
+//@Component
 public class PagingRequestValidator {
 
-    private UtilityMethods utils = new UtilityMethods();
+    private final UtilityMethods utils = new UtilityMethods();
 
     private final Map<Predicate<PagingRequest>, CoreError> validator = Map.ofEntries(
             entry(request -> request.getPageNumber().isEmpty() && !request.getPageSize().isEmpty(),
