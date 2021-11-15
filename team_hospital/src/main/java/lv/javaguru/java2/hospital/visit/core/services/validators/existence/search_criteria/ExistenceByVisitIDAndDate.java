@@ -4,6 +4,7 @@ import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
+import lv.javaguru.java2.hospital.visit.core.services.date_converter.GetVisitDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

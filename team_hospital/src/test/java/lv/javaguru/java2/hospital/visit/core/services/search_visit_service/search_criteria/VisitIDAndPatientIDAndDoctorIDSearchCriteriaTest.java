@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.visit.core.services.search_criteria;
+package lv.javaguru.java2.hospital.visit.core.services.search_visit_service.search_criteria;
 
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
@@ -24,18 +24,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-class VisitIDAndPatientSearchCriteriaTest {
+class VisitIDAndPatientIDAndDoctorIDSearchCriteriaTest {
 
-
-    @Mock
-    private VisitRepository database;
-    @InjectMocks
-    private VisitIDAndPatientSearchCriteria searchCriteria;
+    @Mock private VisitRepository database;
+    @InjectMocks private VisitIDAndPatientIDAndDoctorIDSearchCriteria searchCriteria;
 
     @Test
     public void shouldReturnTrue() {
         String date = "2022-12-12 15:00";
-        SearchVisitRequest request = new SearchVisitRequest("45", null, "2", null);
+        SearchVisitRequest request = new SearchVisitRequest("45", "2L", "2", null);
         assertTrue(searchCriteria.canProcess(request));
     }
 
@@ -58,10 +55,12 @@ class VisitIDAndPatientSearchCriteriaTest {
         visits.add(new Visit(doctor, patient, date));
         visits.get(0).setVisitID(1L);
 
-        Mockito.when(database.findByVisitIdAndPatientId(visits.get(0).getVisitID(), visits.get(0).getPatient().getId()))
+        Mockito.when(database.findByVisitIDAndDoctorIDAndPatientID(visits.get(0).getVisitID(), visits.get(0).getDoctor().getId(),
+                        visits.get(0).getPatient().getId()))
                 .thenReturn(visits);
         SearchVisitRequest request = new SearchVisitRequest
-                (visits.get(0).getVisitID().toString(), null, visits.get(0).getPatient().getId().toString(), null);
+                (visits.get(0).getVisitID().toString(), visits.get(0).getDoctor().getId().toString(),
+                        visits.get(0).getPatient().getId().toString(), null);
         Visit visit = searchCriteria.process(request).get(0);
         assertEquals(searchCriteria.process(request).size(), 1);
         assertEquals(visit.getDoctor(), doctor);
@@ -69,4 +68,6 @@ class VisitIDAndPatientSearchCriteriaTest {
         assertEquals(visit.getVisitID(), visits.get(0).getVisitID());
         assertEquals(visit.getVisitDate(), date);
     }
+
+
 }

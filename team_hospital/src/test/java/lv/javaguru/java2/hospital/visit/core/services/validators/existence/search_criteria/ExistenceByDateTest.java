@@ -6,6 +6,7 @@ import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
+import lv.javaguru.java2.hospital.visit.core.services.date_converter.GetVisitDate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -27,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class ExistenceByDateTest {
 
-    @Mock private  GetVisitDate getVisitDate;
+    @Mock private GetVisitDate getVisitDate;
     @Mock private VisitRepository database;
     @InjectMocks private ExistenceByDate existence;
 

@@ -6,7 +6,7 @@ import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
-import lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria.GetVisitDate;
+import lv.javaguru.java2.hospital.visit.core.services.date_converter.GetVisitDate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
