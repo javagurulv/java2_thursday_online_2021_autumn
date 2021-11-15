@@ -8,6 +8,6 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class GetReservationDate {
     public LocalDateTime getReservationDateFromString(String date) {
-        return LocalDateTime.from(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").parse(date));
+        return LocalDateTime.from(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse(date));
     }
 }
