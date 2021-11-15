@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
+import lv.javaguru.java2.hospital.patient.core.services.checkers.PatientLongNumChecker;
 import lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.PatientExistenceByIDValidator;
 import lv.javaguru.java2.hospital.patient.core.services.checkers.PersonalCodeChecker;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class EditPatientValidatorTest {
 
+    @Mock private PatientLongNumChecker numChecker;
     @Mock private PersonalCodeChecker personalCodeChecker;
     @Mock private PatientEnumChecker checker;
     @Mock private PatientExistenceByIDValidator idValidator;
@@ -114,5 +116,16 @@ class EditPatientValidatorTest {
         assertEquals(errorsList.size(), 1);
         assertEquals(errorsList.get(0).getField(), "Personal code");
         assertEquals(errorsList.get(0).getDescription(), "must consist from numbers only!");
+    }
+
+    @Test
+    public void shouldReturnIDNumError(){
+        EditPatientRequest request = new EditPatientRequest("1asd", "PERSONAL_CODE", "12345678901");
+        Mockito.when(numChecker.validate(request.getPatientID(), "ID"))
+                .thenReturn(Optional.of(new CoreError("ID", "must be a number!")));
+        List<CoreError> errorsList = validator.validate(request);
+        assertEquals(errorsList.size(), 1);
+        assertEquals(errorsList.get(0).getField(), "ID");
+        assertEquals(errorsList.get(0).getDescription(), "must be a number!");
     }
 }

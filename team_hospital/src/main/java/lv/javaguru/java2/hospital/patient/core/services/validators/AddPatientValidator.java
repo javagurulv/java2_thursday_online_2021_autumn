@@ -67,6 +67,5 @@ public class AddPatientValidator {
     private Optional<CoreError> validateNumInPersonalCode(AddPatientRequest request) {
        return request.getPersonalCode() == null || request.getPersonalCode().isEmpty()
         ? Optional.empty() : personalCodeChecker.execute(request.getPersonalCode());
-
     }
 }
