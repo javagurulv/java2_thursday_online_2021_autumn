@@ -2,6 +2,7 @@ package lv.javaguru.java2.qwe.core.database;
 
 import lv.javaguru.java2.qwe.core.domain.Position;
 import lv.javaguru.java2.qwe.core.domain.Security;
+import lv.javaguru.java2.qwe.core.domain.TradeTicket;
 import lv.javaguru.java2.qwe.core.domain.User;
 import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.hibernate.SessionFactory;
@@ -108,6 +109,11 @@ public class OrmUserDataImpl implements UserData {
         else {
             sessionFactory.getCurrentSession().save(position);
         }
+    }
+
+    @Override
+    public void saveTradeTicket(TradeTicket ticket) {
+        sessionFactory.getCurrentSession().save(ticket);
     }
 
     @Override

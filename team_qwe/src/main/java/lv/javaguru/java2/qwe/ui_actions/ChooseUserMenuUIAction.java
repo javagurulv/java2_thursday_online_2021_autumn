@@ -18,7 +18,7 @@ public class ChooseUserMenuUIAction implements UIAction {
     @Override
     public void execute() {
         String[] userMenu = {"ADD NEW USER", "REMOVE USER", "SHOW USER LIST", "FIND USER BY NAME",
-                "GENERATE PORTFOLIO FOR USER", "BUY STOCKS (MARKET ORDER)", "SHOW USER PORTFOLIO",
+                "GENERATE PORTFOLIO FOR USER", "TRADE STOCKS (MARKET ORDER)", "SHOW USER PORTFOLIO",
                 "SHOW USER PORTFOLIO GROUPED BY INDUSTRY", "SHOW USER INVESTMENTS BY EACH INDUSTRY",
                 "SHOW PORTFOLIO SUMMARY", "RETURN TO MAIN MENU"};
 
@@ -33,7 +33,7 @@ public class ChooseUserMenuUIAction implements UIAction {
                         getApplicationContext().getBean(FindUserByNameUIAction.class)),
                 entry("GENERATE PORTFOLIO FOR USER",
                         getApplicationContext().getBean(GenerateUserPortfolioUIAction.class)),
-                entry("BUY STOCKS (MARKET ORDER)",
+                entry("TRADE STOCKS (MARKET ORDER)",
                         getApplicationContext().getBean(StockMarketOrderUIAction.class)),
                 entry("SHOW USER PORTFOLIO",
                         getApplicationContext().getBean(GetUserPortfolioUIAction.class)),

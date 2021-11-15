@@ -41,7 +41,7 @@ public class StockMarketOrderUIAction implements UIAction {
 
     private void printResponse(StockMarketOrderResponse response) {
         if (response.hasErrors()) {
-            utils.messageDialog("FAILED TO BUY STOCK!\n" +
+            utils.messageDialog("FAILED TO EXECUTE TRADE!\n" +
                     utils.printErrorList(response));
         } else if (type.equals("BUY")){
             utils.messageDialog("You bought " + response.getPosition().getAmount() + " of " +

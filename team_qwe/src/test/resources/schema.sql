@@ -43,6 +43,18 @@ CREATE TABLE IF NOT EXISTS `users_positions` (
   FOREIGN KEY(`user_id`) REFERENCES `users`(`id`),
   FOREIGN KEY(`security_ticker`) REFERENCES `stocks`(`ticker`)
 );
+CREATE TABLE IF NOT EXISTS `trades` (
+  `trade_id` BIGINT NOT NULL AUTO_INCREMENT (1000),
+  `user_id` BIGINT NOT NULL,
+  `security_ticker` VARCHAR(10) NOT NULL,
+  `trade_type` INTEGER NOT NULL,
+  `quantity` DOUBLE NOT NULL,
+  `trade_price` DOUBLE NOT NULL,
+  `trade_date` DATETIME NOT NULL,
+  PRIMARY KEY (`trade_id`),
+    FOREIGN KEY(`user_id`) REFERENCES `users`(`id`),
+    FOREIGN KEY(`security_ticker`) REFERENCES `stocks`(`ticker`)
+);
 CREATE TRIGGER IF NOT EXISTS ins_sec
   AFTER INSERT ON users_positions
   FOR EACH ROW CALL "lv.javaguru.java2.qwe.acceptance_test.AcceptanceTestForUserPortfolio$MyTrigger";

@@ -1,6 +1,7 @@
 package lv.javaguru.java2.qwe.core.database;
 
 import lv.javaguru.java2.qwe.core.domain.Position;
+import lv.javaguru.java2.qwe.core.domain.TradeTicket;
 import lv.javaguru.java2.qwe.core.domain.User;
 import lv.javaguru.java2.qwe.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,11 @@ public class JdbcUserDataImpl implements UserData{
         catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public void saveTradeTicket(TradeTicket ticket) {
+
     }
 
     @Override

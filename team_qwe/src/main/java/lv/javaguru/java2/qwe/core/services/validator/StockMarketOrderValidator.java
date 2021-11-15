@@ -55,7 +55,7 @@ public class StockMarketOrderValidator {
 
     private boolean checkQuantity(StockMarketOrderRequest request) {
         return userData.getUserPortfolio(request.getUser().getId()).stream()
-                .filter(position -> position.getSecurity().equals(request.getSecurity()))
+                .filter(position -> position.getSecurity().getTicker().equals(request.getSecurity().getTicker()))
                 .anyMatch(position -> position.getAmount() >= -(Double.parseDouble(request.getQuantity())));
     }
 

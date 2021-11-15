@@ -1,6 +1,7 @@
 package lv.javaguru.java2.qwe.core.database;
 
 import lv.javaguru.java2.qwe.core.domain.Position;
+import lv.javaguru.java2.qwe.core.domain.TradeTicket;
 import lv.javaguru.java2.qwe.core.domain.User;
 
 import java.time.LocalDate;
@@ -25,6 +26,8 @@ public interface UserData {
     Optional<Double> getUserCash(Long userID);
 
     void savePosition(Position position, Long userId);
+
+    void saveTradeTicket(TradeTicket ticket);
 
     Map<String, List<String>> getUserPortfolioGroupedByIndustry(User user);
 
