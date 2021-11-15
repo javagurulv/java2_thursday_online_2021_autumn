@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AddAllVisitorsServiceTest {
+public class AddAllVisitorServiceTest {
 
     @Mock private VisitorsRepository visitorsRepository;
     @Mock private AddVisitorValidator validator;

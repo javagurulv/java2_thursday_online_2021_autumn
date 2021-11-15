@@ -1,20 +1,20 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitor;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class VisitorRowMapper implements RowMapper<Visitors> {
+public class VisitorRowMapper implements RowMapper<Visitor> {
 
     @Override
-    public Visitors mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Visitors visitors = new Visitors();
-        visitors.setIdClient(rs.getLong("visitor_id"));
-        visitors.setClientName(rs.getString("visitor_name"));
-        visitors.setSurname(rs.getString("visitor_surname"));
-        visitors.setTelephoneNumber(rs.getString("visitor_telephone_number"));
-        return visitors;
+    public Visitor mapRow(ResultSet rs, int rowNum) throws SQLException {
+        Visitor visitor = new Visitor();
+        visitor.setIdClient(rs.getLong("visitor_id"));
+        visitor.setClientName(rs.getString("visitor_name"));
+        visitor.setSurname(rs.getString("visitor_surname"));
+        visitor.setTelephoneNumber(rs.getString("visitor_telephone_number"));
+        return visitor;
     }
 }

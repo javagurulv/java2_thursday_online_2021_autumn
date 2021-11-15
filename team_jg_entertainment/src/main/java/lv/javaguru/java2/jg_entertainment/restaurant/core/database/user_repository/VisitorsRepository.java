@@ -1,26 +1,26 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitor;
 
 import java.util.List;
 
 
 public interface VisitorsRepository {
 
-    void saveClientToRestaurantList(Visitors clientInfo);
+    void saveClientToRestaurantList(Visitor clientInfo);
 
-    List<Visitors> findVisitorsByNameAndTelephoneNumber(String nameVisitors, String telephoneNumber);
+    List<Visitor> findVisitorsByNameAndTelephoneNumber(String nameVisitors, String telephoneNumber);
 
-    List<Visitors> findClientById(Long idVisitors);
+    List<Visitor> findClientById(Long idVisitors);
 
-    List<Visitors> findByNameVisitor(String nameVisitor);
+    List<Visitor> findByNameVisitor(String nameVisitor);
 
-    List<Visitors> findBySurnameVisitor(String surnameVisitor);
+    List<Visitor> findBySurnameVisitor(String surnameVisitor);
 
-    List<Visitors> findByNameAndSurname (String nameVisitor, String surnameVisitor);
+    List<Visitor> findByNameAndSurname (String nameVisitor, String surnameVisitor);
 
     boolean deleteClientWithIDAndName(Long id, String nameVisitors);
 
-    List<Visitors> showAllClientsInList();
+    List<Visitor> showAllClientsInList();
 
 }

@@ -1,9 +1,9 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.matchers_visitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitor;
 import org.mockito.ArgumentMatcher;
 
-public class Matchers implements ArgumentMatcher<Visitors> {
+public class Matchers implements ArgumentMatcher<Visitor> {
 
     private String nameVisitor;
     private String surnameVisitor;
@@ -16,9 +16,9 @@ public class Matchers implements ArgumentMatcher<Visitors> {
     }
 
     @Override
-    public boolean matches(Visitors visitors) {
-        return visitors.getClientName().equals(nameVisitor)
-                && visitors.getSurname().equals(surnameVisitor)
-                && visitors.getTelephoneNumber().equals(telephoneNumber);
+    public boolean matches(Visitor visitor) {
+        return visitor.getClientName().equals(nameVisitor)
+                && visitor.getSurname().equals(surnameVisitor)
+                && visitor.getTelephoneNumber().equals(telephoneNumber);
     }
 }

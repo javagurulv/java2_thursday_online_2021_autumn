@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "visitors")
-public class Visitors {
+public class Visitor {
 
     @Id
     @Column(name = "visitor_id")
@@ -26,15 +26,15 @@ public class Visitors {
     @Column(name = "visitor_telephone_number", nullable = false)
     private String telephoneNumber;
 
-    public Visitors() {
+    public Visitor() {
     }
 
-    public Visitors(String clientName, String surname) {
+    public Visitor(String clientName, String surname) {
         this.clientName = clientName;
         this.surname = surname;
     }
 
-    public Visitors(String clientName, String surname, String telephoneNumber) {
+    public Visitor(String clientName, String surname, String telephoneNumber) {
         this.clientName = clientName;
         this.surname = surname;
         this.telephoneNumber = telephoneNumber;
@@ -76,7 +76,7 @@ public class Visitors {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Visitors that = (Visitors) o;
+        Visitor that = (Visitor) o;
         return Objects.equals(clientName, that.clientName)
                 && Objects.equals(idClient, that.idClient)
                 && Objects.equals(surname, that.surname)

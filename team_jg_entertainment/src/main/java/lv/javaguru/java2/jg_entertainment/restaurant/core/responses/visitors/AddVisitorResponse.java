@@ -1,22 +1,22 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitors;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitor;
 
 import java.util.List;
 
 public class AddVisitorResponse extends CoreResponse {
 
-    private Visitors newVisitor;
+    private Visitor newVisitor;
 
     public AddVisitorResponse(List<CoreError> errorsList) {
         super(errorsList);
     }
 
-    public AddVisitorResponse(Visitors newVisitor){
+    public AddVisitorResponse(Visitor newVisitor){
         this.newVisitor = newVisitor;
     }
 
-    public Visitors getNewVisitor() {
+    public Visitor getNewVisitor() {
         return newVisitor;
     }
 }
