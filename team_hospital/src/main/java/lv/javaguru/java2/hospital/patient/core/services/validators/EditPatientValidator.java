@@ -2,6 +2,7 @@ package lv.javaguru.java2.hospital.patient.core.services.validators;
 
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
+import lv.javaguru.java2.hospital.patient.core.services.checkers.PatientLongNumChecker;
 import lv.javaguru.java2.hospital.patient.core.services.checkers.PersonalCodeChecker;
 import lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.PatientExistenceByIDValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class EditPatientValidator {
     private PatientEnumChecker checker;
     @Autowired
     private PersonalCodeChecker personalCodeChecker;
+    @Autowired
+    private PatientLongNumChecker numChecker;
 
     public List<CoreError> validate(EditPatientRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -30,6 +33,7 @@ public class EditPatientValidator {
         validateEnum(request).ifPresent(errors::add);
         validateNumInPersonalCode(request).ifPresent(errors::add);
         validatePersonalCodeLength(request).ifPresent(errors::add);
+        validateIDForNum(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -68,5 +72,10 @@ public class EditPatientValidator {
                 ? Optional.empty() : !request.getUserInputEnum().equals("PERSONAL_CODE")
                 ? Optional.empty() : request.getChanges().length() == 11
                 ? Optional.empty() : Optional.of(new CoreError("Personal code", "must consist of 11 numbers!"));
+    }
+
+    private Optional<CoreError> validateIDForNum(EditPatientRequest request){
+        return request.getPatientID() == null || request.getPatientID().isEmpty()
+                ? Optional.empty() : numChecker.validate(request.getPatientID(), "ID");
     }
 }

@@ -3,7 +3,7 @@ package lv.javaguru.java2.hospital.visit.core.services.validators.date_validator
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
-import lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria.GetVisitDate;
+import lv.javaguru.java2.hospital.visit.core.services.date_converter.GetVisitDate;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

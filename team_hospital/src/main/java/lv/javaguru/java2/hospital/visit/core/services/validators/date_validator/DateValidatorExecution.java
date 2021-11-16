@@ -2,7 +2,7 @@ package lv.javaguru.java2.hospital.visit.core.services.validators.date_validator
 
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
-import lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria.GetVisitDate;
+import lv.javaguru.java2.hospital.visit.core.services.date_converter.GetVisitDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,19 +1,20 @@
-package lv.javaguru.java2.hospital.visit.core.services.search_criteria;
+package lv.javaguru.java2.hospital.visit.core.services.search_visit_service.search_criteria;
 
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
+import lv.javaguru.java2.hospital.visit.core.services.date_converter.GetVisitDate;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class VisitIDAndDateSearchCriteria implements VisitsSearchCriteria {
 
     private final VisitRepository database;
+    private final GetVisitDate getVisitDate;
 
-    public VisitIDAndDateSearchCriteria(VisitRepository database) {
+    public VisitIDAndDateSearchCriteria(VisitRepository database, GetVisitDate getVisitDate) {
         this.database = database;
+        this.getVisitDate = getVisitDate;
     }
 
     @Override
@@ -26,8 +27,7 @@ public class VisitIDAndDateSearchCriteria implements VisitsSearchCriteria {
 
     @Override
     public List<Visit> process(SearchVisitRequest request) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return database.findByVisitIDAndDate(Long.valueOf(request.getVisitId()),
-                LocalDateTime.parse(request.getVisitDate(), formatter));
+                getVisitDate.getVisitDateFromString(request.getVisitDate()));
     }
 }

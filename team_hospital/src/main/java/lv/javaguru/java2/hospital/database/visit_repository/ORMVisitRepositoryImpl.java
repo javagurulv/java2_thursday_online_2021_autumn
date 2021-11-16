@@ -2,7 +2,7 @@ package lv.javaguru.java2.hospital.database.visit_repository;
 
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
-import lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria.GetVisitDate;
+import lv.javaguru.java2.hospital.visit.core.services.date_converter.GetVisitDate;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
