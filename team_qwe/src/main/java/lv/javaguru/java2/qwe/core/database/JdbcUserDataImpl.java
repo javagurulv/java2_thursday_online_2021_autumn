@@ -25,19 +25,19 @@ public class JdbcUserDataImpl implements UserData{
     @Autowired private Database database;
     @Autowired private UtilityMethods utils;
 
-    @Override
+//    @Override
     public LocalDate getCurrentDate() {
         return LocalDate.now();
     }
 
-    @Override
+//    @Override
     public Long addUser(User user) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> Objects.requireNonNull(getStatement(user)), keyHolder);
         return Objects.requireNonNull(keyHolder.getKey()).longValue();
     }
 
-    @Override
+//    @Override
     public boolean removeUser(String idOrName) {
         return (utils.isLong(idOrName)) ? jdbcTemplate.update("DELETE FROM users\n" +
                 "  WHERE id = ?", Long.parseLong(idOrName)) == 1
@@ -45,13 +45,13 @@ public class JdbcUserDataImpl implements UserData{
                 "  WHERE name = ?", idOrName) == 1;
     }
 
-    @Override
+//    @Override
     public List<User> getAllUserList() {
         String sql = "SELECT * FROM users";
         return jdbcTemplate.query(sql, new UserRowMapper(this));
     }
 
-    @Override
+//    @Override
     public Optional<User> findUserByIdOrName(String userIdOrName) {
         String sql = "SELECT * FROM users\n" +
                 "  WHERE id = ? OR name = ?";
@@ -64,40 +64,40 @@ public class JdbcUserDataImpl implements UserData{
         }
     }
 
-    @Override
+//    @Override
     public void saveTradeTicket(TradeTicket ticket) {
 
     }
 
-    @Override
+//    @Override
     public List<Position> getUserPortfolio(Long userId) {
         return jdbcTemplate.query("SELECT * FROM users_positions\n" +
                 "  WHERE user_id = ?", new PositionRowMapper(database), userId);
     }
 
-    @Override
+//    @Override
     public List<TradeTicket> getUserTrades(Long userId) {
         return null;
     }
 
-    @Override
+//    @Override
     public Optional<Double> getUserCash(Long userID) {
         return Optional.ofNullable(jdbcTemplate.queryForObject("SELECT cash FROM users\n" +
                 "  WHERE id = ?", Double.class, userID));
     }
 
-    @Override
+//    @Override
     public void savePosition(Position position, Long userId) {
         jdbcTemplate.update("INSERT INTO users_positions (user_id, security_ticker, amount, purchase_price) VALUES\n" +
                 "(?, ?, ?, ?)", userId, position.getSecurity().getTicker(), position.getAmount(), position.getPurchasePrice());
     }
 
-    @Override
+//    @Override
     public Map<String, List<String>> getUserPortfolioGroupedByIndustry(User user) {
         return null;
     }
 
-    @Override
+//    @Override
     public Map<String, Double> getUserInvestmentsByEachIndustry(User user) {
         return null;
     }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -38,14 +39,14 @@ public class GenerateUserPortfolioService {
         if (user.isPresent() && getPortfolio(user.get()).size() > 0) {
             errors.add(new CoreError("", "portfolio has been already generated for this user!"));
             return new GenerateUserPortfolioResponse(errors, user.get());
-        }
-        else if (user.isPresent() && getPortfolio(user.get()).size() == 0) {
+        } else if (user.isPresent() && getPortfolio(user.get()).size() == 0) {
             User user1 = user.get();
             Map<String, Double> investmentPolicy = calculateInvestmentPolicy(user1);
             Map<String, Double> investmentPerIndustry = calculateInvestmentPerIndustry(user1, investmentPolicy);
             Map<String, List<Security>> listPerIndustry = calculateListOfSecuritiesPerIndustry(user1, investmentPerIndustry);
             List<Position> userPortfolio = generateUserPortfolio(listPerIndustry, investmentPerIndustry);
             addPortfolioToDatabaseSQL(userPortfolio, user1); // сохраняет сгенерированный портфель в базу данных
+            addTradeTicketsToDatabaseSQL(userPortfolio, user1);
             user1.setCash(userData.getUserCash(user1.getId()).get());
             user1.setPortfolioGenerationDate(userData.getCurrentDate());
             return new GenerateUserPortfolioResponse(user1, userPortfolio);
@@ -113,6 +114,15 @@ public class GenerateUserPortfolioService {
     private void addPortfolioToDatabaseSQL(List<Position> portfolio, User user) {
         IntStream.rangeClosed(0, portfolio.size() - 1)
                 .forEach(i -> userData.savePosition(portfolio.get(i), user.getId()));
+    }
+
+    private void addTradeTicketsToDatabaseSQL(List<Position> portfolio, User user) {
+        IntStream.rangeClosed(0, portfolio.size() - 1)
+                .forEach(i -> userData.saveTradeTicket(new TradeTicket(
+                        user, portfolio.get(i).getSecurity(), TradeType.BUY,
+                        portfolio.get(i).getAmount(), portfolio.get(i).getPurchasePrice(),
+                        LocalDateTime.now())
+                ));
     }
 
     private Map<String, Double[]> getDistribution() {
