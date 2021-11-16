@@ -2,6 +2,7 @@ package lv.javaguru.java2.qwe.core.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "trades")
@@ -111,6 +112,16 @@ public class TradeTicket {
                 ", tradePrice=" + tradePrice +
                 ", dateTime=" + dateTime +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TradeTicket ticket = (TradeTicket) o;
+        return Objects.equals(user, ticket.user)
+                && Objects.equals(security, ticket.security) && tradeType == ticket.tradeType
+                && Objects.equals(quantity, ticket.quantity) && Objects.equals(tradePrice, ticket.tradePrice);
     }
 
 }

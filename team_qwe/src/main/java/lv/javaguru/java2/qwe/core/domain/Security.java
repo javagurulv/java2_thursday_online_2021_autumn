@@ -79,8 +79,8 @@ public abstract class Security {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Security security = (Security) o;
-        return Double.compare(security.marketPrice, marketPrice) == 0
-                && Objects.equals(ticker, security.ticker)
+        return /*Double.compare(security.marketPrice, marketPrice) == 0
+                && */Objects.equals(ticker, security.ticker)
                 && Objects.equals(name, security.name)
                 && Objects.equals(industry, security.industry)
                 && Objects.equals(currency, security.currency);

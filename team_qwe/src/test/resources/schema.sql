@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS stocks, bonds, users, users_positions CASCADE;
+DROP TABLE IF EXISTS stocks, bonds, users, users_positions, trades CASCADE;
 CREATE TABLE IF NOT EXISTS `stocks` (
   `ticker` VARCHAR(10) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
