@@ -17,7 +17,7 @@ public class UserRowMapper implements RowMapper<User> {
 
     @Override
     public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Long id = rs.getLong("id");
+        long id = rs.getLong("id");
         User user = new User(
                 rs.getString("name"),
                 rs.getInt("age"),

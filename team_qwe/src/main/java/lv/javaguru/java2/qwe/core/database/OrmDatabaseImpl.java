@@ -48,7 +48,7 @@ public class OrmDatabaseImpl implements Database{
     @Override
     public List<Security> getAllSecurityList() {
         return sessionFactory.getCurrentSession()
-                .createQuery("SELECT s FROM Stock s", Security.class)
+                .createQuery("FROM Security s", Security.class)
                 .getResultList();
     }
 
@@ -56,7 +56,7 @@ public class OrmDatabaseImpl implements Database{
     public Optional<Security> findSecurityByTickerOrName(String tickerOrName) {
         try {
             Query<?> query = sessionFactory.getCurrentSession().createQuery(
-                    "select s FROM Stock s WHERE ticker = :ticker OR name = :name");
+                    "FROM Stock s WHERE ticker = :ticker OR name = :name");
             query.setParameter("ticker", tickerOrName);
             query.setParameter("name", tickerOrName);
             return Optional.ofNullable((Security) query.getSingleResult());

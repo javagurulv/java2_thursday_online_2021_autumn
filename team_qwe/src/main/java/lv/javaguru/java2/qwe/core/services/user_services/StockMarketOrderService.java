@@ -34,7 +34,6 @@ public class StockMarketOrderService {
                     Double.parseDouble(request.getQuantity()),
                     request.getRealTimePrice()
             );
-            position.setUserId(request.getUser().getId());
             userData.savePosition(position, request.getUser().getId());
             TradeTicket ticket = new TradeTicket(
                     request.getUser(), request.getSecurity(), getTradeType(request),

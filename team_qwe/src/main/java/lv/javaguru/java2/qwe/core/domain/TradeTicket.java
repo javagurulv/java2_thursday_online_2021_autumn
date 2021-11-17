@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
+@org.hibernate.annotations.Immutable
 @Table(name = "trades")
 public class TradeTicket {
 
@@ -50,16 +51,8 @@ public class TradeTicket {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public User getUser() {
         return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Security getSecurity() {
@@ -70,36 +63,16 @@ public class TradeTicket {
         return tradeType;
     }
 
-    public void setTradeType(TradeType tradeType) {
-        this.tradeType = tradeType;
-    }
-
     public Double getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
     }
 
     public Double getTradePrice() {
         return tradePrice;
     }
 
-    public void setTradePrice(Double tradePrice) {
-        this.tradePrice = tradePrice;
-    }
-
-    public void setSecurity(Security security) {
-        this.security = security;
-    }
-
     public LocalDateTime getDateTime() {
         return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
     }
 
     @Override

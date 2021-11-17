@@ -34,9 +34,9 @@ public abstract class Security {
         this.marketPrice = marketPrice;
     }
 
-    public void setTicker(String ticker) {
-        this.ticker = ticker;
-    }
+//    public void setTicker(String ticker) {
+//        this.ticker = ticker;
+//    }
 
     public void setName(String name) {
         this.name = name;
