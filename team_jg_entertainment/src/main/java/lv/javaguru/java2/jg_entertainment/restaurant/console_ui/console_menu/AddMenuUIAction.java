@@ -30,8 +30,8 @@ public class AddMenuUIAction implements UIAction {
                     System.out.println("Error: " + coreError.getField() + " " + coreError.getMessage())
             );
         } else {
-            System.out.println("New book id was: " + response.getNewMenu().getNumber());
-            System.out.println("Your book was added to list.");
+            System.out.println("New menu id was: " + response.getNewMenu().getNumber());
+            System.out.println("Your menu was added to list.");
         }
      }
 }
