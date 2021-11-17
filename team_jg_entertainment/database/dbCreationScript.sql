@@ -68,4 +68,4 @@ ALTER TABLE tables
 DROP table_capacity;
 
 ALTER TABLE tables
-ADD column table_capacity FLOAT INTEGER(50) NOT NULL;
+ADD column table_capacity INTEGER(50) NOT NULL;
