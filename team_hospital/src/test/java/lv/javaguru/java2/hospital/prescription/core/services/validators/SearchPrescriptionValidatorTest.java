@@ -3,6 +3,7 @@ package lv.javaguru.java2.hospital.prescription.core.services.validators;
 import lv.javaguru.java2.hospital.prescription.core.requests.PrescriptionPaging;
 import lv.javaguru.java2.hospital.prescription.core.requests.SearchPrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
+import lv.javaguru.java2.hospital.prescription.core.services.validators.existence.PrescriptionExistenceForSearchValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -23,6 +24,7 @@ class SearchPrescriptionValidatorTest {
 
     @Mock private SearchPrescriptionFieldValidator fieldValidator;
     @Mock private PrescriptionPagingValidator prescriptionPagingValidator;
+    @Mock private PrescriptionExistenceForSearchValidator prescriptionExistenceForSearchValidator;
     @InjectMocks private SearchPrescriptionValidator validator;
 
     @Test
