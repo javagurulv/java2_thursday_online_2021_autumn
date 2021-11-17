@@ -33,7 +33,7 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1001;
 
 
-CREATE TABLE IF NOT EXISTS `menus` (
+CREATE TABLE IF NOT EXISTS `menu` (
   `menu_id` BIGINT NOT NULL AUTO_INCREMENT,
   `menu_title` VARCHAR(100) NOT NULL,
   `menu_description` VARCHAR(200) NOT NULL,
@@ -44,7 +44,7 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1001;
 
 
-CREATE TABLE IF NOT EXISTS `reservations` (
+CREATE TABLE IF NOT EXISTS `reservation` (
     `reservation_id` BIGINT NOT NULL AUTO_INCREMENT,
     `id_visitor` BIGINT NOT NULL,
     `id_table` BIGINT NOT NULL,
