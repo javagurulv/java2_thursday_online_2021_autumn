@@ -5,6 +5,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 CREATE SCHEMA IF NOT EXISTS `jg_entertainment` DEFAULT CHARACTER SET utf8 ;
 USE `jg_entertainment` ;
 
+
 CREATE TABLE IF NOT EXISTS `visitors` (
   `visitor_id` BIGINT NOT NULL AUTO_INCREMENT,
   `visitor_name` VARCHAR(100) NOT NULL,
@@ -53,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
     PRIMARY KEY (reservation_id),
     FOREIGN KEY (`id_visitor`) REFERENCES `visitors`(`visitor_id`),
     FOREIGN KEY (`id_table`) REFERENCES `tables`(`table_id`),
-    FOREIGN KEY (`id_menu`) REFERENCES `menus`(`menu_id`)
+    FOREIGN KEY (`id_menu`) REFERENCES `menu`(`menu_id`)
   )
 ENGINE = InnoDB
 AUTO_INCREMENT = 1001;
@@ -61,7 +62,6 @@ AUTO_INCREMENT = 1001;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
 
 ALTER TABLE tables
 DROP table_capacity;
