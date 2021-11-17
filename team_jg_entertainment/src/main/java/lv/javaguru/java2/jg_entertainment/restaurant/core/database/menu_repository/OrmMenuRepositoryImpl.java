@@ -65,6 +65,8 @@ public class OrmMenuRepositoryImpl implements MenuRepository {
     public List<Menu> findByTitleAndDescription(String title, String description) {
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("SELECT m FROM Menu m WHERE menu_title = :menu_title AND menu_description = :menu_description");
+        query.setParameter("menu_title", title);
+        query.setParameter("menu_description", description);
         return query.getResultList();
     }
 }
