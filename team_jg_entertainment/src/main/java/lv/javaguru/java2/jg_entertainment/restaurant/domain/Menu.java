@@ -35,32 +35,32 @@ public class Menu {
         this.price = price;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
     public Long getNumber() {
         return number;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public void setNumber(Long number) {
         this.number = number;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public void setPrice(double price) {

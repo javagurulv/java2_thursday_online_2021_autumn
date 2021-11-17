@@ -4,11 +4,12 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitor;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-//@Component
+@Component
 @Transactional
 public class OrmVisitorRepositoryImpl implements VisitorsRepository {
 

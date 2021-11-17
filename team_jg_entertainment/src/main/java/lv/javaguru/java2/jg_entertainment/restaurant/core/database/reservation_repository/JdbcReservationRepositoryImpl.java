@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
 
-@Component
+//@Component
 public class JdbcReservationRepositoryImpl implements ReservationRepository {
 
     @Autowired private JdbcTemplate jdbcTemplate;
