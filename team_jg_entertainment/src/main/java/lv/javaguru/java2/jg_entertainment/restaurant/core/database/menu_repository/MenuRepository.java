@@ -14,7 +14,7 @@ public interface MenuRepository {
     List<Menu> getAllMenus();
 
     // (*new часть ->
-    List<Menu> findById(Long idNumber);
+    List<Menu> findById(Long number);
 
     // <- досюда часть новая )
 
