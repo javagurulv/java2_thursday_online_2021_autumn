@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@javax.persistence.Table(name = "reservations")
+@javax.persistence.Table(name = "reservation")
 public class Reservation {
 
     @Id
