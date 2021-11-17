@@ -8,10 +8,12 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.CoreEr
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_menus.AddMenuValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class AddMenuService {
 
     @Autowired private MenuRepository menuRepository;
