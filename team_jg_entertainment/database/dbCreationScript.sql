@@ -68,3 +68,31 @@ DROP table_capacity;
 
 ALTER TABLE tables
 ADD column table_capacity INTEGER(50) NOT NULL;
+
+UPDATE `jg_entertainment`.`tables` SET `table_capacity` = '4' WHERE (`table_id` = '1001');
+UPDATE `jg_entertainment`.`tables` SET `table_capacity` = '4' WHERE (`table_id` = '1002');
+UPDATE `jg_entertainment`.`tables` SET `table_capacity` = '4' WHERE (`table_id` = '1003');
+UPDATE `jg_entertainment`.`tables` SET `table_capacity` = '6' WHERE (`table_id` = '1004');
+
+ALTER TABLE visitors
+DROP visitor_telephone_number;
+
+ALTER TABLE visitors
+ADD column visitor_telephone_number VARCHAR(50) NOT NULL;
+
+UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3711' WHERE (`visitor_id` = '1001');
+UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3712' WHERE (`visitor_id` = '1002');
+UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3713' WHERE (`visitor_id` = '1003');
+UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3714' WHERE (`visitor_id` = '1004');
+UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3715' WHERE (`visitor_id` = '1005');
+UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3716' WHERE (`visitor_id` = '1006');
+UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3717' WHERE (`visitor_id` = '1007');
+UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3718' WHERE (`visitor_id` = '1008');
+UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3719' WHERE (`visitor_id` = '1009');
+UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3720' WHERE (`visitor_id` = '1010');
+UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3721' WHERE (`visitor_id` = '1011');
+UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3722' WHERE (`visitor_id` = '1012');
+UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3723' WHERE (`visitor_id` = '1013');
+UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3724' WHERE (`visitor_id` = '1014');
+UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3725' WHERE (`visitor_id` = '1015');
+
