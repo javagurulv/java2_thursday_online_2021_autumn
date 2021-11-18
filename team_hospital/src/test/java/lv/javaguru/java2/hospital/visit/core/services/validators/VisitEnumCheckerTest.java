@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
+import lv.javaguru.java2.hospital.visit.core.checkers.VisitEnumChecker;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import org.junit.jupiter.api.Test;

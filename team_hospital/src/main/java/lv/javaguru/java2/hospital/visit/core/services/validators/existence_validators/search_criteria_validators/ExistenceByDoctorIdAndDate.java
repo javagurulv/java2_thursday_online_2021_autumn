@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria;
+package lv.javaguru.java2.hospital.visit.core.services.validators.existence_validators.search_criteria_validators;
 
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class ExistenceBy4fields implements VisitExistenceBySearchCriteria {
+public class ExistenceByDoctorIdAndDate implements VisitExistenceBySearchCriteria{
 
     @Autowired private VisitRepository database;
     @Autowired private GetVisitDate getVisitDate;
@@ -19,22 +19,19 @@ public class ExistenceBy4fields implements VisitExistenceBySearchCriteria {
     @Override
     public boolean canValidate(SearchVisitRequest request) {
         return request.isDoctorIdProvided()
-                && request.isPatientIdProvided()
                 && request.isDateProvided()
-                && request.isVisitIdProvided();
+                && !request.isVisitIdProvided()
+                && !request.isPatientIdProvided();
     }
 
     @Override
     public Optional<CoreError> validateExistence(SearchVisitRequest request) {
-
         for (Visit visit : database.getAllVisits()) {
-            if (visit.getVisitID().equals(Long.parseLong(request.getVisitId()))
-                    && visit.getDoctor().getId().equals(Long.parseLong(request.getDoctorId()))
-                    && visit.getPatient().getId().equals(Long.parseLong(request.getPatientId()))
+            if (visit.getDoctor().getId().equals(Long.parseLong(request.getDoctorId()))
                     && visit.getVisitDate().equals(getVisitDate.getVisitDateFromString(request.getVisitDate()))) {
                 return Optional.empty();
             }
         }
-        return Optional.of(new CoreError("Visit", "Does not exist!"));
+        return Optional.of(new CoreError("Visit", "does not exist!"));
     }
 }

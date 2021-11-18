@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.visit.core.services.validators.existence;
+package lv.javaguru.java2.hospital.visit.core.services.validators.existence_validators;
 
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;

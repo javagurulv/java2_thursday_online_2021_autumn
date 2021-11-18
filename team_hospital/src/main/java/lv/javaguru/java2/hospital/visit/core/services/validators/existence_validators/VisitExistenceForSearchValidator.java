@@ -1,8 +1,8 @@
-package lv.javaguru.java2.hospital.visit.core.services.validators.existence;
+package lv.javaguru.java2.hospital.visit.core.services.validators.existence_validators;
 
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
-import lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria.*;
+import lv.javaguru.java2.hospital.visit.core.services.validators.existence_validators.search_criteria_validators.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class VisitExistenceForSearchValidator {
 
     @Autowired private ExistenceByVisitId existenceByVisitId;
-    @Autowired private ExistenceByDoctorIdAndPatientIdAndDate existenceByDoctorIdAndPatientIdAndDate;
+    @Autowired private ExistenceByDoctorIdPatientIdDate existenceByDoctorIdPatientIdDate;
     @Autowired private ExistenceByDate existenceByDate;
     @Autowired private ExistenceByDoctorIdAndPatientId existenceByDoctorIdAndPatientId;
     @Autowired private ExistenceByDoctorIdAndDate existenceByDoctorIdAndDate;
@@ -42,7 +42,7 @@ public class VisitExistenceForSearchValidator {
     private VisitExistenceBySearchCriteria[] getVisitExistenceBySearchCriteria() {
         return new VisitExistenceBySearchCriteria[]{
                 existenceByVisitId,
-                existenceByDoctorIdAndPatientIdAndDate,
+                existenceByDoctorIdPatientIdDate,
                 existenceByDoctorIdAndPatientId,
                 existenceByDoctorIdAndDate,
                 existenceByPatientIdAndDate,

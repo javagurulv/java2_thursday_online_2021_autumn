@@ -1,10 +1,11 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
+import lv.javaguru.java2.hospital.visit.core.checkers.VisitEnumChecker;
 import lv.javaguru.java2.hospital.visit.core.checkers.VisitLongNumChecker;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.services.validators.date_validator.DateValidatorExecution;
-import lv.javaguru.java2.hospital.visit.core.services.validators.existence.VisitExistenceByIdValidator;
+import lv.javaguru.java2.hospital.visit.core.services.validators.existence_validators.VisitExistenceByIdValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
