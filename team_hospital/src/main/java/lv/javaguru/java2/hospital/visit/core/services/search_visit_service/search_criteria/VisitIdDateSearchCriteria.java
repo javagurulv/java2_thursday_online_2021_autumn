@@ -7,28 +7,27 @@ import lv.javaguru.java2.hospital.visit.core.services.date_converter.GetVisitDat
 
 import java.util.List;
 
-public class DoctorIdAndPatientIdAndDateSearchCriteria implements VisitsSearchCriteria{
+public class VisitIdDateSearchCriteria implements VisitsSearchCriteria {
 
     private final VisitRepository database;
     private final GetVisitDate getVisitDate;
 
-    public DoctorIdAndPatientIdAndDateSearchCriteria(VisitRepository database, GetVisitDate getVisitDate) {
+    public VisitIdDateSearchCriteria(VisitRepository database, GetVisitDate getVisitDate) {
         this.database = database;
         this.getVisitDate = getVisitDate;
     }
 
     @Override
     public boolean canProcess(SearchVisitRequest request) {
-        return request.isDoctorIdProvided()
-                && request.isPatientIdProvided()
+        return request.isVisitIdProvided()
                 && request.isDateProvided()
-                && !request.isVisitIdProvided();
+                && !request.isPatientIdProvided()
+                && !request.isDoctorIdProvided();
     }
 
     @Override
     public List<Visit> process(SearchVisitRequest request) {
-        return database.findByDoctorIdAndPatientIdAndDate
-                (Long.parseLong(request.getDoctorId()), Long.valueOf(request.getPatientId()),
-                        getVisitDate.getVisitDateFromString(request.getVisitDate()));
+        return database.findByVisitIDAndDate(Long.valueOf(request.getVisitId()),
+                getVisitDate.getVisitDateFromString(request.getVisitDate()));
     }
 }

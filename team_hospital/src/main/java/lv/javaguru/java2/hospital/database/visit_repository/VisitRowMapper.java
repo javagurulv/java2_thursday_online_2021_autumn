@@ -21,7 +21,6 @@ public class VisitRowMapper implements RowMapper<Visit> {
         visit.setDoctor(doctorRepository.findById(rs.getLong("doctor_id")).get(0));
         visit.setPatient(patientRepository.findById(rs.getLong("patient_id")).get(0));
         visit.setVisitDate(rs.getTimestamp("date").toLocalDateTime());
-        //visit.setSqlDate(rs.getTimestamp("date").toLocalDateTime().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
         visit.setDescription(rs.getString("description"));
         return visit;
     }

@@ -21,23 +21,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-class VisitIDPatientIDDoctorIDDateSearchCriteriaTest {
+class VisitIdDateSearchCriteriaTest {
 
-    @Mock
-    GetVisitDate getVisitDate;
-    @Mock
-    private VisitRepository database;
-    @InjectMocks
-    private VisitIDPatientIDDoctorIDDateSearchCriteria searchCriteria;
-
+    @Mock private GetVisitDate getVisitDate;
+    @Mock private VisitRepository database;
+    @InjectMocks private VisitIdDateSearchCriteria searchCriteria;
 
     @Test
     public void shouldReturnTrue() {
         String date = "2022-12-12 15:00";
-        SearchVisitRequest request = new SearchVisitRequest("45", "2", "2", date);
+        SearchVisitRequest request = new SearchVisitRequest("45", null, null, date);
         assertTrue(searchCriteria.canProcess(request));
     }
 
@@ -61,10 +58,8 @@ class VisitIDPatientIDDoctorIDDateSearchCriteriaTest {
         visits.get(0).setVisitID(1L);
 
         SearchVisitRequest request = new SearchVisitRequest
-                (visits.get(0).getVisitID().toString(), visits.get(0).getDoctor().getId().toString(),
-                        visits.get(0).getPatient().getId().toString(), "2021-12-27 15:00");
-        Mockito.when(database.findByVisitIDDoctorIDPatientIDDate(visits.get(0).getVisitID(), visits.get(0).getDoctor().getId(),
-                visits.get(0).getPatient().getId(), visits.get(0).getVisitDate())).thenReturn(visits);
+                (visits.get(0).getVisitID().toString(), null, null, "2021-12-27 15:00");
+        Mockito.when(database.findByVisitIDAndDate(visits.get(0).getVisitID(), date)).thenReturn(visits);
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate()))
                 .thenReturn(date);
 

@@ -15,51 +15,53 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-class VisitIDAndDateSearchCriteriaTest {
+class PatientIdDateSearchCriteriaTest {
 
-    @Mock private GetVisitDate getVisitDate;
-    @Mock private VisitRepository database;
-    @InjectMocks private VisitIDAndDateSearchCriteria searchCriteria;
+    @Mock
+    GetVisitDate getVisitDate;
+    @Mock
+    VisitRepository database;
+    @InjectMocks
+    PatientIdDateSearchCriteria searchCriteria;
 
     @Test
     public void shouldReturnTrue() {
-        String date = "2022-12-12 15:00";
-        SearchVisitRequest request = new SearchVisitRequest("45", null, null, date);
+        SearchVisitRequest request = new SearchVisitRequest(null, null, "16", "2021-12-29 15:00");
         assertTrue(searchCriteria.canProcess(request));
     }
 
     @Test
     public void shouldReturnFalse() {
-        SearchVisitRequest request = new SearchVisitRequest(null, null, null, null);
+        SearchVisitRequest request = new SearchVisitRequest(null, null, "2", null);
         assertFalse(searchCriteria.canProcess(request));
     }
 
     @Test
-    public void shouldReturnCorrectVisit() {
+    public void shouldReturnCorrectVisit() throws ParseException {
         Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
         doctor.setId(1L);
-        Patient patient = new Patient("PatientsName", "PatientsSurname", "150254-12636");
-        patient.setId(1L);
+        Patient patient = new Patient("PatientsName", "PatientsSurname", "200254-12636");
+        patient.setId(2L);
+        Long patientId = patient.getId();
 
         List<Visit> visits = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime date = LocalDateTime.parse("2021-12-27 15:00", formatter);
+        LocalDateTime date = LocalDateTime.parse("2021-12-05 13:00", formatter);
         visits.add(new Visit(doctor, patient, date));
-        visits.get(0).setVisitID(1L);
 
         SearchVisitRequest request = new SearchVisitRequest
-                (visits.get(0).getVisitID().toString(), null, null, "2021-12-27 15:00");
-        Mockito.when(database.findByVisitIDAndDate(visits.get(0).getVisitID(), date)).thenReturn(visits);
+                (null, null, patientId.toString(), "2021-12-05 13:00");
+        Mockito.when(database.findByPatientIdAndDate(patientId, date)).thenReturn(visits);
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate()))
                 .thenReturn(date);
 

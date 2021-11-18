@@ -150,6 +150,15 @@ public class InMemoryVisitRepositoryImpl implements VisitRepository {
     }
 
     @Override
+    public List<Visit> findByVisitIdDoctorIdDate(Long visitID, Long doctorID, LocalDateTime date) {
+        return visits.stream()
+                .filter(visit -> Objects.equals(visit.getVisitID(), visitID))
+                .filter(visit -> Objects.equals(visit.getDoctor().getId(), doctorID))
+                .filter(visit -> visit.getVisitDate().equals(date))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Visit> findByVisitIDAndDoctorIDAndPatientID(Long visitID, Long doctorID, Long patientID) {
         return visits.stream()
                 .filter(visit -> Objects.equals(visit.getVisitID(), visitID))

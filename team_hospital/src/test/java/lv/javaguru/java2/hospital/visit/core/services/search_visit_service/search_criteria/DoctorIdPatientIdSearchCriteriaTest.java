@@ -23,11 +23,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-class DoctorIdAndPatientIdSearchCriteriaTest {
+class DoctorIdPatientIdSearchCriteriaTest {
 
     @Mock
     VisitRepository database;
-    @InjectMocks DoctorIdAndPatientIdSearchCriteria searchCriteria;
+    @InjectMocks
+    DoctorIdPatientIdSearchCriteria searchCriteria;
 
     @Test
     public void shouldReturnTrue() {

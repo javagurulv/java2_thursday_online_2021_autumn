@@ -6,11 +6,11 @@ import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 
 import java.util.List;
 
-public class VisitIDAndDoctorIDSearchCriteria implements VisitsSearchCriteria {
+public class VisitIdDoctorIdSearchCriteria implements VisitsSearchCriteria {
 
     private final VisitRepository database;
 
-    public VisitIDAndDoctorIDSearchCriteria(VisitRepository database) {
+    public VisitIdDoctorIdSearchCriteria(VisitRepository database) {
         this.database = database;
     }
 

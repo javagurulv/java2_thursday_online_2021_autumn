@@ -24,15 +24,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-class VisitIDAndPatientIDAndDoctorIDSearchCriteriaTest {
+class VisitIdDoctorIdSearchCriteriaTest {
 
-    @Mock private VisitRepository database;
-    @InjectMocks private VisitIDAndPatientIDAndDoctorIDSearchCriteria searchCriteria;
+    @Mock
+    private VisitRepository database;
+    @InjectMocks
+    private VisitIdDoctorIdSearchCriteria searchCriteria;
 
     @Test
     public void shouldReturnTrue() {
         String date = "2022-12-12 15:00";
-        SearchVisitRequest request = new SearchVisitRequest("45", "2L", "2", null);
+        SearchVisitRequest request = new SearchVisitRequest("45", "2L", null, null);
         assertTrue(searchCriteria.canProcess(request));
     }
 
@@ -55,12 +57,10 @@ class VisitIDAndPatientIDAndDoctorIDSearchCriteriaTest {
         visits.add(new Visit(doctor, patient, date));
         visits.get(0).setVisitID(1L);
 
-        Mockito.when(database.findByVisitIDAndDoctorIDAndPatientID(visits.get(0).getVisitID(), visits.get(0).getDoctor().getId(),
-                        visits.get(0).getPatient().getId()))
+        Mockito.when(database.findByVisitIdAndDoctorId(visits.get(0).getVisitID(), visits.get(0).getDoctor().getId()))
                 .thenReturn(visits);
         SearchVisitRequest request = new SearchVisitRequest
-                (visits.get(0).getVisitID().toString(), visits.get(0).getDoctor().getId().toString(),
-                        visits.get(0).getPatient().getId().toString(), null);
+                (visits.get(0).getVisitID().toString(), visits.get(0).getDoctor().getId().toString(), null, null);
         Visit visit = searchCriteria.process(request).get(0);
         assertEquals(searchCriteria.process(request).size(), 1);
         assertEquals(visit.getDoctor(), doctor);
@@ -68,6 +68,4 @@ class VisitIDAndPatientIDAndDoctorIDSearchCriteriaTest {
         assertEquals(visit.getVisitID(), visits.get(0).getVisitID());
         assertEquals(visit.getVisitDate(), date);
     }
-
-
 }

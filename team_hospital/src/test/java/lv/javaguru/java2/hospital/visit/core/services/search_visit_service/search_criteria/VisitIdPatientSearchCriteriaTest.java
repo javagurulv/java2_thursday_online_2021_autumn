@@ -24,13 +24,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-class VisitIDAndPatientSearchCriteriaTest {
+class VisitIdPatientSearchCriteriaTest {
 
 
     @Mock
     private VisitRepository database;
     @InjectMocks
-    private VisitIDAndPatientSearchCriteria searchCriteria;
+    private VisitIdPatientSearchCriteria searchCriteria;
 
     @Test
     public void shouldReturnTrue() {

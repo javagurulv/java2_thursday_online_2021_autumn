@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-class DoctorIdAndPatientIdSearchCriteriaTest {
+class DoctorIdPatientIdSearchCriteriaTest {
 
     @Mock
     private PrescriptionRepository database;

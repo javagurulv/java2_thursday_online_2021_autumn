@@ -38,6 +38,8 @@ public interface VisitRepository {
 
     List<Visit> findByVisitIdAndDoctorId(Long visitID, Long doctorID);
 
+    List<Visit> findByVisitIdDoctorIdDate(Long visitID, Long doctorID, LocalDateTime date);
+
     List<Visit> findByVisitIDAndDoctorIDAndPatientID(Long visitID, Long doctorID, Long patientID);
 
     List<Visit> findByVisitIDDoctorIDPatientIDDate(Long visitID, Long doctorID, Long patientID, LocalDateTime date);
