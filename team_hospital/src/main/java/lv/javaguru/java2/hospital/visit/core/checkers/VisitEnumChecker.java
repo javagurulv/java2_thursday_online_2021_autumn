@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.visit.core.services.validators;
+package lv.javaguru.java2.hospital.visit.core.checkers;
 
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;

@@ -2,7 +2,7 @@ package lv.javaguru.java2.hospital.visit.core.services.validators;
 
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
-import lv.javaguru.java2.hospital.visit.core.services.validators.existence.VisitExistenceForSearchValidator;
+import lv.javaguru.java2.hospital.visit.core.services.validators.existence_validators.VisitExistenceForSearchValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

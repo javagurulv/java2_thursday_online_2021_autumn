@@ -1,10 +1,11 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
+import lv.javaguru.java2.hospital.visit.core.checkers.VisitEnumChecker;
 import lv.javaguru.java2.hospital.visit.core.checkers.VisitLongNumChecker;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.services.validators.date_validator.DateValidatorExecution;
-import lv.javaguru.java2.hospital.visit.core.services.validators.existence.VisitExistenceByIdValidator;
+import lv.javaguru.java2.hospital.visit.core.services.validators.existence_validators.VisitExistenceByIdValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ import java.util.Optional;
 public class EditVisitValidator {
 
     @Autowired private VisitExistenceByIdValidator validator;
-    @Autowired private VisitEnumChecker checker;
+    @Autowired private VisitEnumChecker visitEnumChecker;
     @Autowired private DateValidatorExecution dateValidator;
     @Autowired private VisitLongNumChecker longNumChecker;
 
@@ -65,7 +66,7 @@ public class EditVisitValidator {
     private Optional<CoreError> validateEnum(EditVisitRequest request){
         return (request.getEditEnums() == null || request.getEditEnums().isEmpty())
                 ? Optional.of(new CoreError("Edit option", "must not be empty!"))
-                : checker.validateEnum(request.getEditEnums());
+                : visitEnumChecker.validateEnum(request.getEditEnums());
     }
 
     private List<CoreError> validateDate(EditVisitRequest request){
