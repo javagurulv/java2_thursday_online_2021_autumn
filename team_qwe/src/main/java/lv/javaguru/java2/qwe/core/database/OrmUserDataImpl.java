@@ -5,6 +5,7 @@ import lv.javaguru.java2.qwe.core.domain.Security;
 import lv.javaguru.java2.qwe.core.domain.TradeTicket;
 import lv.javaguru.java2.qwe.core.domain.User;
 import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,7 +95,7 @@ public class OrmUserDataImpl implements UserData {
         position.setUserId(userId);
         Optional<Position> oldPosition = getOldPosition(position.getSecurity(), userId);
         if (oldPosition.isPresent()) {
-            replacePosition(position, oldPosition.get(), userId);
+            replacePosition(position, oldPosition.get());
         }
         else {
             sessionFactory.getCurrentSession().save(position);
@@ -106,25 +107,26 @@ public class OrmUserDataImpl implements UserData {
         sessionFactory.getCurrentSession().save(ticket);
     }
 
-    private void replacePosition(Position position, Position oldPosition, Long userId) {
+    private void replacePosition(Position position, Position oldPosition) {
         Position newPosition = mergePositions(oldPosition, position);
+        Session cs = getSession();
         if (newPosition != null && position.getAmount() > 0) {
-            sessionFactory.getCurrentSession().save(newPosition);
-            sessionFactory.getCurrentSession().delete(oldPosition);
+            cs.save(newPosition);
+            cs.delete(oldPosition);
         }
         else if (newPosition != null && position.getAmount() < 0) {
             double oldPurchasePrice = oldPosition.getPurchasePrice();
             newPosition.setPurchasePrice(position.getPurchasePrice());
             oldPosition.setPurchasePrice(position.getPurchasePrice());
-            sessionFactory.getCurrentSession().createQuery("FROM Position p WHERE user_id = " + userId).getResultList(); //???
-            sessionFactory.getCurrentSession().delete(oldPosition);
-            sessionFactory.getCurrentSession().save(newPosition);
+            cs.flush();
+            cs.delete(oldPosition);
+            cs.save(newPosition);
             newPosition.setPurchasePrice(oldPurchasePrice);
         }
         else {
             oldPosition.setPurchasePrice(position.getPurchasePrice());
-            sessionFactory.getCurrentSession().createQuery("FROM Position p WHERE user_id = " + userId).getResultList(); //???
-            sessionFactory.getCurrentSession().delete(oldPosition);
+            cs.flush();
+            cs.delete(oldPosition);
         }
     }
 
@@ -171,6 +173,10 @@ public class OrmUserDataImpl implements UserData {
 
     private void deleteOldPosition(Position oldPosition) {
         sessionFactory.getCurrentSession().delete(oldPosition);
+    }
+
+    private Session getSession() {
+        return sessionFactory.getCurrentSession();
     }
 
 }
