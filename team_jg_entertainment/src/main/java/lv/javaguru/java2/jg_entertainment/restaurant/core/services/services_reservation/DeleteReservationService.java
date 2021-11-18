@@ -7,10 +7,12 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_reservations.DeleteReservationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class DeleteReservationService {
 
     @Autowired private ReservationRepository repository;

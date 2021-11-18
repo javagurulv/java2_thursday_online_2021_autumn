@@ -11,6 +11,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_vi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@Transactional
 public class SearchVisitorsService {
 
     @Value("${search.ordering.enabled}")
@@ -26,8 +28,7 @@ public class SearchVisitorsService {
     @Value("${search.paging.enabled}")
     private boolean pagingEnabled;
 
-    @Autowired
-    private VisitorsRepository database;
+    @Autowired private VisitorsRepository database;
     @Autowired private SearchVisitorsRequestValidator validator;
 
     public SearchVisitorsResponse execute(SearchVisitorsRequest request) {
