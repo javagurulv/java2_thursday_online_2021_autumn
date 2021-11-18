@@ -14,7 +14,7 @@ public class DatabaseCleaner {
 
     public void cleaner() {
         for (String tableName : getTableNames()) {
-            String sql = "delete from" + tableName;
+            String sql = "DELETE FROM " + tableName;
             jdbcTemplate.execute(sql);
         }
     }
