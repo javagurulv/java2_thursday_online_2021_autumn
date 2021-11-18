@@ -16,10 +16,6 @@ public class GetAllMenusService {
 
     @Autowired private MenuRepository menuRepository;
 
-//    public GetAllMenusService(DatabaseMenu databaseMenu) {
-//        this.databaseMenu = databaseMenu;
-//    }
-
     public GetAllMenusResponse execute(GetAllMenusRequest request) {
         List<Menu> menus = menuRepository.getAllMenus();
         return new GetAllMenusResponse(menus);

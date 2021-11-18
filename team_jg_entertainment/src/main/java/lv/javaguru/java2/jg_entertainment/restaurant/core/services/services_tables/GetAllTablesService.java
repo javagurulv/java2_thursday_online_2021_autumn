@@ -20,5 +20,4 @@ public class GetAllTablesService {
 		List<Table> tables = tableRepository.getAllTables();
 		return new GetAllTablesResponse(tables);
 	}
-
 }

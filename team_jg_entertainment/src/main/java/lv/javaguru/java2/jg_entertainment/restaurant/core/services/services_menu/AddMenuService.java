@@ -19,22 +19,14 @@ public class AddMenuService {
     @Autowired private MenuRepository menuRepository;
     @Autowired private AddMenuValidator validator;
 
-//    public AddMenuService(DatabaseMenu databaseMenu,
-//                          AddMenuValidator validator) {
-//        this.databaseMenu = databaseMenu;
-//        this.validator = validator;
-//    }
-
     public AddMenuResponse execute(AddMenuRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (!errors.isEmpty()) {
             return new AddMenuResponse(errors);
         }
-
         Menu menu = new Menu(request.getTitle(), request.getDescription(), request.getPrice());
         menuRepository.save(menu);
 
         return new AddMenuResponse(menu);
     }
-
 }

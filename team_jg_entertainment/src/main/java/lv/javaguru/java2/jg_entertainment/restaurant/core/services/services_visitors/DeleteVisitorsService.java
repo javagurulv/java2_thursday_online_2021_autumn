@@ -25,7 +25,6 @@ public class DeleteVisitorsService {
         }
         boolean deleteId =
                 database.deleteClientWithIDAndName(request.getIdVisitor(), request.getNameVisitors());
-
         return new DeleteVisitorsResponse(deleteId);
     }
 }

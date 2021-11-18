@@ -28,15 +28,4 @@ public class AddAllVisitorsService {
         database.saveClientToRestaurantList(visitor);
         return new AddVisitorResponse(visitor);
     }
-
-//    private String phone(AddVisitorRequest request) {
-//        String string = request.getTelephone();
-//        try {
-//            long tel = Long.parseLong(s);
-//            System.out.println("long tel = " + tel);
-//        } catch (NumberFormatException numberFormatException) {
-//            System.out.println("NumberFormatException: " + numberFormatException.getMessage());
-//        }
-//       return string;
-//    }
 }

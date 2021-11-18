@@ -18,12 +18,6 @@ public class RemoveMenuService {
     @Autowired private MenuRepository menuRepository;
     @Autowired private RemoveMenuRequestValidator validator;
 
-//    public RemoveMenuService(DatabaseMenu databaseMenu,
-//                             RemoveMenuRequestValidator validator) {
-//        this.databaseMenu = databaseMenu;
-//        this.validator = validator;
-//    }
-
     public RemoveMenuResponse execute(RemoveMenuRequest request) {
              List<CoreError> errors = validator.validate(request);
         if (!errors.isEmpty()) {
@@ -33,5 +27,4 @@ public class RemoveMenuService {
         boolean isMenuRemoved = menuRepository.deleteByNr(request.getMenuNumberToRemove());
         return new RemoveMenuResponse(isMenuRemoved);
     }
-
 }

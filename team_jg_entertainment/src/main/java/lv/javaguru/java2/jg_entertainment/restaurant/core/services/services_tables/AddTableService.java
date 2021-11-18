@@ -32,5 +32,4 @@ public class AddTableService {
         tableRepository.save(table);
         return new AddTableResponse(table);
     }
-
 }
