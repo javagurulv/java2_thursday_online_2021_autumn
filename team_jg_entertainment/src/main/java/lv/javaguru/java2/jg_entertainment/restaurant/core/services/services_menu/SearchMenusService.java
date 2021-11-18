@@ -11,6 +11,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@Transactional
 public class SearchMenusService {
 
     @Value("${search.ordering.enabled}")
@@ -26,16 +28,8 @@ public class SearchMenusService {
     @Value("${search.paging.enabled}")
     private boolean pagingEnabled;
 
-    @Autowired
-    private MenuRepository menuRepository;
-    @Autowired
-    private SearchMenusRequestValidator validator;
-
-//    public SearchMenusService(DatabaseMenu databaseMenu,
-//                              SearchMenusRequestValidator validator) {
-//        this.databaseMenu = databaseMenu;
-//        this.validator = validator;
-//    }
+    @Autowired private MenuRepository menuRepository;
+    @Autowired private SearchMenusRequestValidator validator;
 
     public SearchMenusResponse execute(SearchMenusRequest request) {
         List<CoreError> errors = validator.validate(request);
@@ -46,7 +40,6 @@ public class SearchMenusService {
         List<Menu> menus = search(request);
         menus = order(menus, request.getOrderingMenu());
         menus = paging(menus, request.getPagingMenu());
-
         return new SearchMenusResponse(menus, null);
     }
 
@@ -75,10 +68,9 @@ public class SearchMenusService {
         if (request.isTitleProvided() && request.isDescriptionProvided()) {
             menus = menuRepository.findByTitleAndDescription(request.getTitle(), request.getDescription());
         }
-//->new
         if (request.isIDProvided() && !request.isTitleProvided() && !request.isDescriptionProvided()) {
             menus = menuRepository.findById(request.getIdNumberMenu());
-        } //<- new
+        }
         return menus;
     }
 
@@ -93,5 +85,4 @@ public class SearchMenusService {
             return menus;
         }
     }
-
 }

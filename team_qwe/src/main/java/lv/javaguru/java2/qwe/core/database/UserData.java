@@ -31,8 +31,4 @@ public interface UserData {
 
     void saveTradeTicket(TradeTicket ticket);
 
-    Map<String, List<String>> getUserPortfolioGroupedByIndustry(User user);
-
-    Map<String, Double> getUserInvestmentsByEachIndustry(User user);
-
 }

@@ -12,8 +12,7 @@ import java.util.List;
 @Component
 public class SearchVisitorsRequestValidator {
 
-    @Autowired
-    private SearchVisitorsRequestFieldValidator fieldValidator;
+    @Autowired private SearchVisitorsRequestFieldValidator fieldValidator;
     @Autowired private OrderingValidator orderingValidator;
     @Autowired private PagingValidator pagingValidator;
 

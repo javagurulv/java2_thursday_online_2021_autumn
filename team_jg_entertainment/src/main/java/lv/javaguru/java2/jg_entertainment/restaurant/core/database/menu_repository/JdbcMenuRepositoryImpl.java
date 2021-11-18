@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
+//@Component
 public class JdbcMenuRepositoryImpl implements MenuRepository {
 
     @Autowired private JdbcTemplate jdbcTemplate;
@@ -39,9 +39,9 @@ public class JdbcMenuRepositoryImpl implements MenuRepository {
 
     // (*new часть ->
     @Override
-    public List<Menu> findById(Long idNumber) {
+    public List<Menu> findById(Long number) {
         String sql = "SELECT * FROM menus WHERE menu_id = ?";
-        Object[] args = new Object[]{idNumber};
+        Object[] args = new Object[]{number};
         return jdbcTemplate.query(sql, args, new MenuRowMapper());
     }
     // <- досюда часть новая )

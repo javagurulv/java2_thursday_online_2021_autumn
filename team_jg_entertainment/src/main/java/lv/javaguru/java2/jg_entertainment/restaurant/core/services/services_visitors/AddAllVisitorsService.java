@@ -8,10 +8,12 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitor;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_visitors.AddVisitorValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class AddAllVisitorsService {
 
     @Autowired private VisitorsRepository database;
@@ -26,15 +28,4 @@ public class AddAllVisitorsService {
         database.saveClientToRestaurantList(visitor);
         return new AddVisitorResponse(visitor);
     }
-
-//    private String phone(AddVisitorRequest request) {
-//        String string = request.getTelephone();
-//        try {
-//            long tel = Long.parseLong(s);
-//            System.out.println("long tel = " + tel);
-//        } catch (NumberFormatException numberFormatException) {
-//            System.out.println("NumberFormatException: " + numberFormatException.getMessage());
-//        }
-//       return string;
-//    }
 }

@@ -25,14 +25,6 @@ public class AcceptanceTestForUserData {
 
     @Autowired private ApplicationContext appContext;
 
-    //;INIT=RUNSCRIPT FROM 'classpath:schema.sql'\\;RUNSCRIPT FROM 'classpath:data.sql';
-
-/*    @Before
-    public void init() {
-        jdbcTemplate.update("RUNSCRIPT FROM 'classpath:schema.sql'");
-        jdbcTemplate.update("RUNSCRIPT FROM 'classpath:data.sql'");
-    }*/
-
     @Test
     public void addUserToDatabaseTest1() {
         AddUserRequest request1 = new AddUserRequest(

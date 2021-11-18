@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@javax.persistence.Table(name = "reservations")
+@javax.persistence.Table(name = "reservation")
 public class Reservation {
 
     @Id
@@ -28,9 +28,7 @@ public class Reservation {
     @Column(name = "reservation_date", nullable = false)
     private LocalDateTime reservationDate;
 
-    private String sqlDate;/// просмотреть
-
-    public Reservation() {
+      public Reservation() {
     }
 
 
@@ -84,14 +82,6 @@ public class Reservation {
         this.reservationDate = reservationDate;
     }
 
-    public String getSqlDate() {
-        return sqlDate;
-    }
-
-    public void setSqlDate(String sqlDate) {
-        this.sqlDate = sqlDate;
-    }
-
 
     @Override
     public String toString() {
@@ -100,7 +90,6 @@ public class Reservation {
                 ", table= " + table +
                 ", menu= " + menu +
                 ", reservationDate= " + reservationDate +
-//                ", sqlDate='" + sqlDate + '\'' +
                 '}';
     }
 

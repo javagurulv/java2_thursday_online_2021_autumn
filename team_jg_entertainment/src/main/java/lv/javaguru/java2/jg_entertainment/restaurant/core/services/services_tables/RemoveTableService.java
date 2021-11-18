@@ -7,16 +7,16 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.tables.Remov
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.RemoveTableValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class RemoveTableService {
 
-    @Autowired
-    private TableRepository tableRepository;
-    @Autowired
-    private RemoveTableValidator validator;
+    @Autowired private TableRepository tableRepository;
+    @Autowired private RemoveTableValidator validator;
 
     public RemoveTableResponse execute(RemoveTableRequest request) {
 

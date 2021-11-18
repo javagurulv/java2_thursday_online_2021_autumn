@@ -44,8 +44,6 @@ public class AcceptanceTestForStockMarketOrder {
     public void shouldBuyOneStockAtMarketPrice() {
         User user = getFindUserByNameService().execute(new FindUserByNameRequest("Alexander")).getUser();
         Security security = getFindSecurityByTickerOrNameService().execute(new FindSecurityByTickerOrNameRequest("AMZN US")).getSecurity();
-        security.setMarketPrice(3525.15);
-        getDatabase().updateStock((Stock) security);
         StockMarketOrderRequest request1 = new StockMarketOrderRequest(user, security,"150",3525.15);
         StockMarketOrderResponse response1 = getService().execute(request1);
         Position position = new Position(security, 150, 3525.15);
@@ -64,10 +62,6 @@ public class AcceptanceTestForStockMarketOrder {
         Security security2 = getFindSecurityByTickerOrNameService().execute(new FindSecurityByTickerOrNameRequest("JPM US")).getSecurity();
         StockMarketOrderRequest request1 = new StockMarketOrderRequest(user, security1,"150",3525.15);
         StockMarketOrderRequest request2 = new StockMarketOrderRequest(user, security2,"755",166.91);
-        security1.setMarketPrice(3525.15);
-        security2.setMarketPrice(166.91);
-        getDatabase().updateStock((Stock) security1);
-        getDatabase().updateStock((Stock) security2);
         Position position1 = new Position(security1, 150, 3525.15);
         Position position2 = new Position(security2, 755, 166.91);
         List<Position> portfolio = List.of(position1, position2);
@@ -87,8 +81,6 @@ public class AcceptanceTestForStockMarketOrder {
         Security security = getFindSecurityByTickerOrNameService().execute(new FindSecurityByTickerOrNameRequest("AMZN US")).getSecurity();
         StockMarketOrderRequest request1 = new StockMarketOrderRequest(user, security,"150",3525.15);
         StockMarketOrderRequest request2 = new StockMarketOrderRequest(user, security,"55",3247.23);
-        security.setMarketPrice(3247.23);
-        getDatabase().updateStock((Stock) security);
         Position position1 = new Position(security, 150, 3525.15);
         Position position2 = new Position(security, 55, 3247.23);
         Position totalPosition = new Position(security, 205, 3450.59);
@@ -109,7 +101,6 @@ public class AcceptanceTestForStockMarketOrder {
         Security security = getFindSecurityByTickerOrNameService().execute(new FindSecurityByTickerOrNameRequest("MSFT US")).getSecurity();
         StockMarketOrderRequest request1 = new StockMarketOrderRequest(user, security,"-1000",325.12);
         StockMarketOrderResponse response1 = getService().execute(request1);
-
         Position position = new Position(security, -1000, 325.12);
         List<Position> portfolio = List.of();
         GetUserPortfolioResponse response2 = getGetUserPortfolioService().execute(new GetUserPortfolioRequest("John"));
@@ -125,8 +116,6 @@ public class AcceptanceTestForStockMarketOrder {
         Security security = getFindSecurityByTickerOrNameService().execute(new FindSecurityByTickerOrNameRequest("MSFT US")).getSecurity();
         StockMarketOrderRequest request1 = new StockMarketOrderRequest(user, security,"-700",325.12);
         StockMarketOrderResponse response1 = getService().execute(request1);
-        security.setMarketPrice(325.12);
-        getDatabase().updateStock((Stock) security);
         Position position = new Position(security, -700, 325.12);
         Position totalPosition = new Position(security, 300, 304.36);
         List<Position> portfolio = List.of(totalPosition);
@@ -153,18 +142,10 @@ public class AcceptanceTestForStockMarketOrder {
         getService().execute(request1);
         getService().execute(request2);
         getService().execute(request3);
-        security1.setMarketPrice(3364.91);
-        getDatabase().updateStock((Stock) security1);
         getService().execute(request4);
         getService().execute(request5);
-        security1.setMarketPrice(3621.48);
-        getDatabase().updateStock((Stock) security1);
         getService().execute(request6);
         getService().execute(request7);
-        security2.setMarketPrice(175.67);
-        security3.setMarketPrice(1125.13);
-        getDatabase().updateStock((Stock) security2);
-        getDatabase().updateStock((Stock) security3);
         Position totalPosition1 = new Position(security2, 2000, 172.36);
         Position totalPosition2 = new Position(security3, 90, 1125.13);
         List<Position> portfolio = List.of(totalPosition1, totalPosition2);

@@ -11,10 +11,12 @@ import lv.javaguru.java2.qwe.core.services.validator.GetUserTradesValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Component
+@Transactional
 public class GetUserTradesService {
 
     @Autowired private UserData userData;
@@ -32,7 +34,7 @@ public class GetUserTradesService {
             List<TradeTicket> trades = userData.getUserTrades(user1.getId());
             return new GetUserTradesResponse(user.get(), trades);
         }
-        return new GetUserTradesResponse(errors, user.get(), null);
+        return new GetUserTradesResponse(errors, null, null);
     }
 
 }

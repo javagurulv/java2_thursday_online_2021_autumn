@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public class SearchVisitorsRequestFieldValidator {
 
-    public List<CoreError> validatorSearchField(SearchVisitorsRequest request) { //+search field telephone
+    public List<CoreError> validatorSearchField(SearchVisitorsRequest request) {
 
         List<CoreError> errors = new ArrayList<>();
         if (isEmpty(request.getNameVisitors()) && isEmpty(request.getSurnameVisitors())) {

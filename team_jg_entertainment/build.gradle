@@ -13,7 +13,7 @@ dependencies {
     testImplementation 'org.junit.platform:junit-platform-runner:1.8.1'
     testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.2.0'
     compile('org.reflections:reflections:0.9.12')
-    compile('org.springframework:spring-context:5.3.12')
+    compile('org.springframework:spring-context:5.2.6.RELEASE')
     compile('mysql:mysql-connector-java:8.0.25')
     compile('org.apache.commons:commons-dbcp2:2.8.0')
     compile('org.springframework:spring-jdbc:5.2.6.RELEASE')

@@ -7,20 +7,16 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.Remove
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_menus.RemoveMenuRequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class RemoveMenuService {
 
     @Autowired private MenuRepository menuRepository;
     @Autowired private RemoveMenuRequestValidator validator;
-
-//    public RemoveMenuService(DatabaseMenu databaseMenu,
-//                             RemoveMenuRequestValidator validator) {
-//        this.databaseMenu = databaseMenu;
-//        this.validator = validator;
-//    }
 
     public RemoveMenuResponse execute(RemoveMenuRequest request) {
              List<CoreError> errors = validator.validate(request);
@@ -31,5 +27,4 @@ public class RemoveMenuService {
         boolean isMenuRemoved = menuRepository.deleteByNr(request.getMenuNumberToRemove());
         return new RemoveMenuResponse(isMenuRemoved);
     }
-
 }

@@ -6,10 +6,12 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.Sho
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class ShowListVisitorsService {
 
    @Autowired private VisitorsRepository database;

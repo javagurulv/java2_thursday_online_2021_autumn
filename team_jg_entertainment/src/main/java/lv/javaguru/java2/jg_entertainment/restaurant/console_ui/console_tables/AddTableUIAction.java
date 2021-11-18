@@ -34,7 +34,7 @@ public class AddTableUIAction implements UIAction {
                             + " " + coreError.getMessageError()));
         } else {
             System.out.println("New table id was: " + response.getNewTable().getId());
-            System.out.println("Your table: " + tableTitle + tableCapacity + " was added to list! ");
+            System.out.println("Your table: " + tableTitle + "with capacity: " + tableCapacity + " was added to list! ");
         }
 
     }

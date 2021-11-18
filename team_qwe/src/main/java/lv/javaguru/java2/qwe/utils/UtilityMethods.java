@@ -37,15 +37,6 @@ public class UtilityMethods {
     @Value("${simulator.marketPrice.period}")
     private int marketPriceSimulatorPeriod;
 
-    @Value("${simulator.date.enabled}")
-    private boolean dateSimulatorEnabled;
-
-    @Value("${simulator.date.initDelay}")
-    private int dateSimulatorInitDelay;
-
-    @Value("${simulator.date.period}")
-    private int dateSimulatorPeriod;
-
     public String[] convertToStringArray(UserData userData) {
         return userData.getAllUserList().stream()
                 .map(User::getName)
@@ -62,16 +53,6 @@ public class UtilityMethods {
             );
         }
     }
-
-/*    public void setDateSimulator(ApplicationContext context) {
-        if (dateSimulatorEnabled && dateSimulatorPeriod > 0) {
-            ScheduledExecutorService scheduledExecutorService1 = Executors.newScheduledThreadPool(1);
-            UserData userData = context.getBean(UserData.class);
-            Runnable simulator1 = () -> userData.setCurrentDate(userData.getCurrentDate().plusDays(1));
-            scheduledExecutorService1.scheduleAtFixedRate(
-                    simulator1, dateSimulatorInitDelay, dateSimulatorPeriod, TimeUnit.SECONDS);
-        }
-    }*/
 
     private void simulateMarketPrices(List<Security> list) {
         if (list.size() > 0) {

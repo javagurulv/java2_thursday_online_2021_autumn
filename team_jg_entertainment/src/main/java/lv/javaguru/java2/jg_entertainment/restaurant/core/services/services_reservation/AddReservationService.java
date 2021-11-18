@@ -14,12 +14,14 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Component
+@Transactional
 public class AddReservationService {
 
     @Autowired private VisitorsRepository visitorsRepository;

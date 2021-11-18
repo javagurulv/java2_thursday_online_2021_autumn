@@ -41,9 +41,9 @@ public class MenuRepositoryImpl implements MenuRepository {
 
     // (*new часть ->
     @Override
-    public List<Menu> findById(Long idNumber) {
+    public List<Menu> findById(Long number) {
         return menus.stream()
-                .filter(menu -> menu.getNumber().equals(idNumber))
+                .filter(menu -> menu.getNumber().equals(number))
                 .collect(Collectors.toList());
     }
     // <- досюда часть новая )

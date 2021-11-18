@@ -22,8 +22,6 @@ public class ApplicationDemo {
         getAPI().setRealMarketPriceUpdate();
         //Симуляция изменения рыночных цен!
         getUtilityMethods().setMarketPriceSimulator(applicationContext);
-        //Симуляция изменения текущей даты!
-//        getUtilityMethods().setDateSimulator(applicationContext);
 
         AppMenu appMenu = new AppMenu(applicationContext);
 

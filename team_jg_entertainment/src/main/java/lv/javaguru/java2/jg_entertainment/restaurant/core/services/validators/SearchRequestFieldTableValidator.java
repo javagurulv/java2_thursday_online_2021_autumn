@@ -13,7 +13,7 @@ public class SearchRequestFieldTableValidator {
     public List<CoreError> validatorField(SearchTableRequest request){
         List<CoreError> coreErrors = new ArrayList<>();
         if(isEmpty(request.getTitleTable())
-                && (request.getIdTable() == null)){///
+                && (request.getIdTable() == null)){
             coreErrors.add(new CoreError("titleTable", "can not be empty"));
             coreErrors.add(new CoreError("idTable", "must not be null"));
         }
