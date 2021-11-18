@@ -22,6 +22,7 @@ public class VisitExistenceForSearchValidator {
     @Autowired private ExistenceByPatientId existenceByPatientId;
     @Autowired private ExistenceByVisitIDAndDate existenceByVisitIDAndDate;
     @Autowired private ExistenceByVisitIdDoctorIdDate existenceByVisitIdDoctorIdDate;
+    @Autowired private ExistenceByVisitIdPatientIdDate existenceByVisitIdPatientIdDate;
     @Autowired private ExistenceByVisitIDAndDoctorID existenceByVisitIDAndDoctorID;
     @Autowired private ExistenceByVisitIDAndPatientID existenceByVisitIDAndPatientID;
     @Autowired private ExistenceByVisitIDDoctorIDPatientID existenceByVisitIDDoctorIDPatientID;
@@ -51,7 +52,8 @@ public class VisitExistenceForSearchValidator {
                 existenceByPatientId,
                 existenceByDate,
                 existenceByVisitIDAndDate,
-                existenceByVisitIDAndDate,
+                existenceByVisitIdDoctorIdDate,
+                existenceByVisitIdPatientIdDate,
                 existenceByVisitIDAndDoctorID,
                 existenceByVisitIDAndPatientID,
                 existenceByVisitIDDoctorIDPatientID,

@@ -27,27 +27,29 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-class ExistenceByVisitIdDoctorIdDateTest {
+class ExistenceByVisitIdPatientIdDateTest {
 
-    @Mock private GetVisitDate getVisitDate;
+    @Mock
+    private GetVisitDate getVisitDate;
     @Mock private VisitRepository repository;
-    @InjectMocks private ExistenceByVisitIdDoctorIdDate existenceByVisitIdDoctorIdDate;
+    @InjectMocks
+    private ExistenceByVisitIdPatientIdDate existenceByVisitIdPatientIdDate;
 
     @Test
     public void shouldReturnTrue() {
-        SearchVisitRequest request = new SearchVisitRequest("12", "12", "", "2023-12-12 12:00");
-        assertTrue(existenceByVisitIdDoctorIdDate.canValidate(request));
+        SearchVisitRequest request = new SearchVisitRequest("12", "", "12", "2023-12-12 12:00");
+        assertTrue(existenceByVisitIdPatientIdDate.canValidate(request));
     }
 
     @Test
     public void shouldReturnFalse() {
-        SearchVisitRequest request = new SearchVisitRequest("12", "", "12", "2023-12-12 12:00");
-        assertFalse(existenceByVisitIdDoctorIdDate.canValidate(request));
+        SearchVisitRequest request = new SearchVisitRequest("12", "12", "12", "2023-12-12 12:00");
+        assertFalse(existenceByVisitIdPatientIdDate.canValidate(request));
     }
 
     @Test
     public void shouldReturnList() {
-        SearchVisitRequest request = new SearchVisitRequest("12", "12", "", "2023-12-12 12:00");
+        SearchVisitRequest request = new SearchVisitRequest("12", "", "12", "2023-12-12 12:00");
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse(request.getVisitDate()));
 
         List<Visit> visits = new ArrayList<>();
@@ -60,14 +62,14 @@ class ExistenceByVisitIdDoctorIdDateTest {
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate())).thenReturn(date);
         Mockito.when(repository.getAllVisits()).thenReturn(visits);
 
-        Optional<CoreError> error = existenceByVisitIdDoctorIdDate.validateExistence(request);
+        Optional<CoreError> error = existenceByVisitIdPatientIdDate.validateExistence(request);
         assertTrue(error.isEmpty());
     }
 
     @Test
     public void shouldReturnError() {
-        SearchVisitRequest request = new SearchVisitRequest("12", "12", "", "2023-12-12 12:00");
-        Optional<CoreError> error = existenceByVisitIdDoctorIdDate.validateExistence(request);
+        SearchVisitRequest request = new SearchVisitRequest("12", "", "12", "2023-12-12 12:00");
+        Optional<CoreError> error = existenceByVisitIdPatientIdDate.validateExistence(request);
         assertFalse(error.isEmpty());
         assertEquals(error.get().getField(), "Visit");
         assertEquals(error.get().getDescription(), "does not exist!");

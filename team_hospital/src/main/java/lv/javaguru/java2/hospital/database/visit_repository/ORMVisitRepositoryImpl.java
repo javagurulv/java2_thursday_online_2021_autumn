@@ -166,6 +166,17 @@ public class ORMVisitRepositoryImpl implements VisitRepository {
     }
 
     @Override
+    public List<Visit> findByVisitIdPatientIdDate(Long visitID, Long patientID, LocalDateTime date) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT v FROM Visit v WHERE id = :id AND " +
+                        "patient_id = :patient_id" +
+                        " AND date = '" + getVisitDate.getVisitStringFromDate(date) +"'");
+        query.setParameter("id", visitID);
+        query.setParameter("patient_id", patientID);
+        return query.getResultList();
+    }
+
+    @Override
     public List<Visit> findByVisitIDAndDoctorIDAndPatientID(Long visitID, Long doctorID, Long patientID) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT v FROM Visit v WHERE id = :id AND " +

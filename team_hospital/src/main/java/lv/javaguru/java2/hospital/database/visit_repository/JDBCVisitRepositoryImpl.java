@@ -128,6 +128,13 @@ public class JDBCVisitRepositoryImpl implements VisitRepository {
     }
 
     @Override
+    public List<Visit> findByVisitIdPatientIdDate(Long visitID, Long patientID, LocalDateTime date) {
+        String sql = "SELECT * FROM visits WHERE id = ? AND patient_id = ? AND date = ?";
+        Object[] args = new Object[]{visitID, patientID, date};
+        return jdbcTemplate.query(sql, args, visitRowMapper);
+    }
+
+    @Override
     public List<Visit> findByVisitIDAndDoctorIDAndPatientID(Long visitID, Long doctorID, Long patientID) {
         String sql = "SELECT * FROM visits WHERE id = ? AND doctor_id = ? AND patient_id = ?";
         Object[] args = new Object[]{visitID, doctorID, patientID};
