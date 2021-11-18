@@ -1,6 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database.reservation_repository;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.EditReservationEnum;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_reservations.GetReservationDate;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -10,12 +11,14 @@ import org.springframework.stereotype.Component;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 
 @Component
 @Transactional
 public class OrmReservationRepositoryImpl implements ReservationRepository {
 
     @Autowired private SessionFactory sessionFactory;
+    @Autowired GetReservationDate getReservationDate;
 
     @Override
     public void addReservation(Reservation reservation) {
@@ -37,35 +40,56 @@ public class OrmReservationRepositoryImpl implements ReservationRepository {
                 .createQuery("SELECT r FROM Reservation r", Reservation.class)
                 .getResultList();
     }
-
+//new part
     @Override
     public boolean editReservation(Long reservationID, EditReservationEnum userInput, String changes) {
-        return false;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "UPDATE Reservation SET "
+        + userInput.toString().toUpperCase(Locale.ROOT) + " = : changes WHERE reservation_id = :reservation_id");
+        query.setParameter("reservation_id", reservationID);
+        query.setParameter("changes", changes);
+        int result = query.executeUpdate();
+        return result == 1;
     }
 
     @Override
     public List<Reservation> findByReservationId(Long id) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT r FROM Reservation r WHERE reservation_id = :reservation_id");
+        query.setParameter("reservation_id", id);
+        return query.getResultList();
     }
 
     @Override
     public List<Reservation> findByClientId(Long id) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT r FROM Reservation r WHERE id_visitor= :id_visitor");
+        query.setParameter("id_visitor", id);
+        return query.getResultList();
     }
 
     @Override
     public List<Reservation> findByTableId(Long id) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT r FROM Reservation r WHERE id_table = :id_table");
+        query.setParameter("id_table", id);
+        return query.getResultList();
     }
 
     @Override
     public List<Reservation> findByMenuId(Long id) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT r FROM Reservation r WHERE id_menu = :id_menu");
+        query.setParameter("id_menu", id);
+        return query.getResultList();
     }
 
     @Override
     public List<Reservation> findByDate(LocalDateTime date) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT r FROM Reservation r WHERE reservation_date = ' "
+        + getReservationDate.getStringDate(date) + "'");
+        return query.getResultList();
     }
 
     @Override
