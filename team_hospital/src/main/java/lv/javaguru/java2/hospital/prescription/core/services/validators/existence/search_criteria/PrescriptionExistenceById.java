@@ -14,7 +14,6 @@ public class PrescriptionExistenceById implements PrescriptionExistenceBySearchC
 
     @Autowired private PrescriptionRepository database;
 
-
     @Override
     public boolean canValidate(SearchPrescriptionRequest request) {
         return request.isPrescriptionIdProvided();
