@@ -5,7 +5,6 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_reposit
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository.VisitorsRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.AddReservationRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.CoreError;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.ReservationLongNumChecker;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.DateValidatorExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
