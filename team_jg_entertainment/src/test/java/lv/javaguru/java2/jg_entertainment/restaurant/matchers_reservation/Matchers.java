@@ -6,16 +6,16 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitor;
 import org.mockito.ArgumentMatcher;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Matchers implements ArgumentMatcher<Reservation> {
 
     private Visitor visitor;
     private Menu menu;
     private Table table;
-    private Date date;
+    private LocalDateTime date;
 
-    public Matchers(Visitor visitor, Menu menu, Table table, Date date) {
+    public Matchers(Visitor visitor, Menu menu, Table table, LocalDateTime date) {
         this.visitor = visitor;
         this.menu = menu;
         this.table = table;
