@@ -73,7 +73,21 @@ public class AddReservationServiceTest {
     }
 
     @Test
-    public void shouldReturnDateError(){
+    public void shouldReturnNotCorrectDateEnterError(){
+        AddReservationRequest request = new AddReservationRequest("10L", "20L", "30L", "10/10/2022 19:00");
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Date", "is not correct!"));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+        AddReservationResponse response = service.execute(request);
+        assertTrue(response.hasError());
+        assertEquals(response.getErrorList().size(), 1);
+        assertEquals(response.getErrorList().get(0).getField(), "Date");
+        assertEquals(response.getErrorList().get(0).getMessageError(), "is not correct!");
+        Mockito.verifyNoInteractions(databaseReservation);
+    }
+
+    @Test
+    public void shouldReturnReservedDateError(){
         AddReservationRequest request = new AddReservationRequest("10L", "20L", "30L", "10-10-2022 19:00");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "all is reserved"));
@@ -83,6 +97,48 @@ public class AddReservationServiceTest {
         assertEquals(response.getErrorList().size(), 1);
         assertEquals(response.getErrorList().get(0).getField(), "Date");
         assertEquals(response.getErrorList().get(0).getMessageError(), "all is reserved");
+        Mockito.verifyNoInteractions(databaseReservation);
+    }
+
+    @Test
+    public void shouldReturnTimeNotCorrectError(){
+        AddReservationRequest request = new AddReservationRequest("10L", "20L", "30L", "10-10-2022 19:45");
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Minutes", "is not correct!"));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+        AddReservationResponse response = service.execute(request);
+        assertTrue(response.hasError());
+        assertEquals(response.getErrorList().size(), 1);
+        assertEquals(response.getErrorList().get(0).getField(), "Minutes");
+        assertEquals(response.getErrorList().get(0).getMessageError(), "is not correct!");
+        Mockito.verifyNoInteractions(databaseReservation);
+    }
+
+    @Test
+    public void shouldReturnHourError(){
+        AddReservationRequest request = new AddReservationRequest("10L", "20L", "30L", "10-10-2022 10:00");
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Time in the date", "is not working hour!"));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+        AddReservationResponse response = service.execute(request);
+        assertTrue(response.hasError());
+        assertEquals(response.getErrorList().size(), 1);
+        assertEquals(response.getErrorList().get(0).getField(), "Time in the date");
+        assertEquals(response.getErrorList().get(0).getMessageError(), "is not working hour!");
+        Mockito.verifyNoInteractions(databaseReservation);
+    }
+
+    @Test
+    public void shouldReturnNotFutureError(){
+        AddReservationRequest request = new AddReservationRequest("10L", "20L", "30L", "10-10-1985 19:00");
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Date", "is not in the future!"));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+        AddReservationResponse response = service.execute(request);
+        assertTrue(response.hasError());
+        assertEquals(response.getErrorList().size(), 1);
+        assertEquals(response.getErrorList().get(0).getField(), "Date");
+        assertEquals(response.getErrorList().get(0).getMessageError(), "is not in the future!");
         Mockito.verifyNoInteractions(databaseReservation);
     }
 }
