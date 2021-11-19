@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.when;
@@ -69,6 +70,19 @@ public class AddReservationServiceTest {
         assertFalse(response.hasError());
         Mockito.verify(databaseReservation).addReservation(argThat(new Matchers(response.getReservation().getVisitor(),
                 response.getReservation().getMenu(), response.getReservation().getTable(), response.getReservation().getReservationDate())));
+    }
 
+    @Test
+    public void shouldReturnDateError(){
+        AddReservationRequest request = new AddReservationRequest("10L", "20L", "30L", "10-10-2022 19:00");
+        List<CoreError> errors = new ArrayList<>();
+        errors.add(new CoreError("Date", "all is reserved"));
+        Mockito.when(validator.validate(request)).thenReturn(errors);
+        AddReservationResponse response = service.execute(request);
+        assertTrue(response.hasError());
+        assertEquals(response.getErrorList().size(), 1);
+        assertEquals(response.getErrorList().get(0).getField(), "Date");
+        assertEquals(response.getErrorList().get(0).getMessageError(), "all is reserved");
+        Mockito.verifyNoInteractions(databaseReservation);
     }
 }
