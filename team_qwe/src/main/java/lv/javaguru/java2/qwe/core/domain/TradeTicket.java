@@ -34,8 +34,7 @@ public class TradeTicket {
     @Column(name = "trade_date", nullable = false)
     private LocalDateTime dateTime;
 
-    public TradeTicket() {
-    }
+    public TradeTicket() {}
 
     public TradeTicket(User user, Security security, TradeType tradeType,
                        Double quantity, Double tradePrice, LocalDateTime dateTime) {

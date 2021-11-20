@@ -17,6 +17,7 @@ import lv.javaguru.java2.qwe.core.services.user_services.StockMarketOrderService
 import lv.javaguru.java2.qwe.core.services.user_services.FindUserByNameService;
 import lv.javaguru.java2.qwe.core.services.user_services.GetUserPortfolioService;
 import org.h2.api.Trigger;
+import org.hibernate.Hibernate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -47,6 +50,7 @@ public class AcceptanceTestForStockMarketOrder {
         StockMarketOrderRequest request1 = new StockMarketOrderRequest(user, security,"150",3525.15);
         StockMarketOrderResponse response1 = getService().execute(request1);
         Position position = new Position(security, 150, 3525.15);
+        position.setUser(user);
         List<Position> portfolio = List.of(position);
         GetUserPortfolioResponse response2 = getGetUserPortfolioService().execute(new GetUserPortfolioRequest("Alexander"));
         assertEquals(position, response1.getPosition());
@@ -63,7 +67,9 @@ public class AcceptanceTestForStockMarketOrder {
         StockMarketOrderRequest request1 = new StockMarketOrderRequest(user, security1,"150",3525.15);
         StockMarketOrderRequest request2 = new StockMarketOrderRequest(user, security2,"755",166.91);
         Position position1 = new Position(security1, 150, 3525.15);
+        position1.setUser(user);
         Position position2 = new Position(security2, 755, 166.91);
+        position2.setUser(user);
         List<Position> portfolio = List.of(position1, position2);
         StockMarketOrderResponse response1 = getService().execute(request1);
         StockMarketOrderResponse response2 = getService().execute(request2);
@@ -82,8 +88,11 @@ public class AcceptanceTestForStockMarketOrder {
         StockMarketOrderRequest request1 = new StockMarketOrderRequest(user, security,"150",3525.15);
         StockMarketOrderRequest request2 = new StockMarketOrderRequest(user, security,"55",3247.23);
         Position position1 = new Position(security, 150, 3525.15);
+        position1.setUser(user);
         Position position2 = new Position(security, 55, 3247.23);
+        position2.setUser(user);
         Position totalPosition = new Position(security, 205, 3450.59);
+        totalPosition.setUser(user);
         List<Position> portfolio = List.of(totalPosition);
         StockMarketOrderResponse response1 = getService().execute(request1);
         StockMarketOrderResponse response2 = getService().execute(request2);
@@ -102,6 +111,7 @@ public class AcceptanceTestForStockMarketOrder {
         StockMarketOrderRequest request1 = new StockMarketOrderRequest(user, security,"-1000",325.12);
         StockMarketOrderResponse response1 = getService().execute(request1);
         Position position = new Position(security, -1000, 325.12);
+        position.setUser(user);
         List<Position> portfolio = List.of();
         GetUserPortfolioResponse response2 = getGetUserPortfolioService().execute(new GetUserPortfolioRequest("John"));
         assertEquals(position, response1.getPosition());
@@ -117,7 +127,9 @@ public class AcceptanceTestForStockMarketOrder {
         StockMarketOrderRequest request1 = new StockMarketOrderRequest(user, security,"-700",325.12);
         StockMarketOrderResponse response1 = getService().execute(request1);
         Position position = new Position(security, -700, 325.12);
+        position.setUser(user);
         Position totalPosition = new Position(security, 300, 304.36);
+        totalPosition.setUser(user);
         List<Position> portfolio = List.of(totalPosition);
         GetUserPortfolioResponse response2 = getGetUserPortfolioService().execute(new GetUserPortfolioRequest("John"));
         assertEquals(position, response1.getPosition());
@@ -147,11 +159,13 @@ public class AcceptanceTestForStockMarketOrder {
         getService().execute(request6);
         getService().execute(request7);
         Position totalPosition1 = new Position(security2, 2000, 172.36);
+        totalPosition1.setUser(user);
         Position totalPosition2 = new Position(security3, 90, 1125.13);
+        totalPosition2.setUser(user);
         List<Position> portfolio = List.of(totalPosition1, totalPosition2);
         GetUserPortfolioResponse response8 = getGetUserPortfolioService().execute(new GetUserPortfolioRequest("Alexander"));
         assertEquals(portfolio, response8.getPortfolio());
-        assertEquals(556947.1,
+        assertEquals(556_947.1,
                 getFindUserByNameService().execute(new FindUserByNameRequest("Alexander")).getUser().getCash(), 10);
     }
 

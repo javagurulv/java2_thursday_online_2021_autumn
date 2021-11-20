@@ -32,14 +32,16 @@ public class User {
     @Column(name = "cash", nullable = false)
     private double cash; //денежный остаток на счете
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Position> portfolio = new ArrayList<>();
+
     @Column(name = "portfolio_generation_date")
     private LocalDate portfolioGenerationDate;
 
     @Column(name = "risk_tolerance")
     private int riskTolerance;
 
-    public User() {
-    }
+    public User() {}
 
     public User(String name, int age, Type type, double initialInvestment) {
         this.name = name;
@@ -67,6 +69,14 @@ public class User {
 
     public void setRiskTolerance(int riskTolerance) {
         this.riskTolerance = riskTolerance;
+    }
+
+    public List<Position> getPortfolio() {
+        return portfolio;
+    }
+
+    public void setPortfolio(List<Position> portfolio) {
+        this.portfolio = portfolio;
     }
 
     public long getId() {
@@ -112,7 +122,6 @@ public class User {
     public void setPortfolioGenerationDate(LocalDate portfolioGenerationDate) {
         this.portfolioGenerationDate = portfolioGenerationDate;
     }
-
     /*
                     Рассчитывает насколько большой риск клиент готов взять на себя.
                     Вычисляется исходя из возраста и благосостояния. Условно, молодой
