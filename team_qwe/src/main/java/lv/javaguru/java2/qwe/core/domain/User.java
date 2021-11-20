@@ -35,6 +35,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Position> portfolio = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TradeTicket> trades = new ArrayList<>();
+
     @Column(name = "portfolio_generation_date")
     private LocalDate portfolioGenerationDate;
 
@@ -77,6 +80,14 @@ public class User {
 
     public void setPortfolio(List<Position> portfolio) {
         this.portfolio = portfolio;
+    }
+
+    public List<TradeTicket> getTrades() {
+        return trades;
+    }
+
+    public void setTrades(List<TradeTicket> trades) {
+        this.trades = trades;
     }
 
     public long getId() {

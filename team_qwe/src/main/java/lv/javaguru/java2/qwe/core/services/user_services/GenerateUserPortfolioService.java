@@ -121,7 +121,7 @@ public class GenerateUserPortfolioService {
                 .forEach(i -> userData.saveTradeTicket(new TradeTicket(
                         user, portfolio.get(i).getSecurity(), TradeType.BUY,
                         portfolio.get(i).getAmount(), portfolio.get(i).getPurchasePrice(),
-                        LocalDateTime.now())
+                        LocalDateTime.now()), user
                 ));
     }
 

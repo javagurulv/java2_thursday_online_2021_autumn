@@ -38,7 +38,7 @@ public class StockMarketOrderService {
                     Double.parseDouble(request.getQuantity()), request.getRealTimePrice(),
                     LocalDateTime.now()
             );
-            userData.saveTradeTicket(ticket);
+            userData.saveTradeTicket(ticket, user);
             return new StockMarketOrderResponse(position, ticket);
         }
         return new StockMarketOrderResponse(errors);

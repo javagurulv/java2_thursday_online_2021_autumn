@@ -74,9 +74,10 @@ public class OrmUserDataImpl implements UserData {
 
     @Override
     public List<TradeTicket> getUserTrades(Long userId) {
-        return sessionFactory.getCurrentSession()
-                .createQuery("FROM TradeTicket t WHERE user_id = " + userId, TradeTicket.class)
-                .getResultList();
+        User user =  sessionFactory.getCurrentSession()
+                .find(User.class, userId);
+        Hibernate.initialize(user.getTrades());
+        return user.getTrades();
     }
 
     @Override
@@ -103,8 +104,8 @@ public class OrmUserDataImpl implements UserData {
     }
 
     @Override
-    public void saveTradeTicket(TradeTicket ticket) {
-        sessionFactory.getCurrentSession().save(ticket);
+    public void saveTradeTicket(TradeTicket ticket, User user) {
+        user.getTrades().add(ticket);
     }
 
     private void replacePosition(Position position, Position oldPosition) {

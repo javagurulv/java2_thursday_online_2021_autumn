@@ -65,7 +65,7 @@ public class JdbcUserDataImpl implements UserData{
     }
 
 //    @Override
-    public void saveTradeTicket(TradeTicket ticket) {
+    public void saveTradeTicket(TradeTicket ticket, User user) {
 
     }
 

@@ -29,6 +29,6 @@ public interface UserData {
 
     void savePosition(Position position, User user);
 
-    void saveTradeTicket(TradeTicket ticket);
+    void saveTradeTicket(TradeTicket ticket, User user);
 
 }
