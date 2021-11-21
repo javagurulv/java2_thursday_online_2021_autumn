@@ -26,8 +26,8 @@ import lv.javaguru.java2.hospital.visit.core.services.AddVisitService;
 import lv.javaguru.java2.hospital.visit.core.services.DeleteVisitService;
 import lv.javaguru.java2.hospital.visit.core.services.ShowAllVisitService;
 import lv.javaguru.java2.hospital.visit.core.services.search_visit_service.SearchVisitService;
-import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -43,7 +43,7 @@ public class AcceptanceTest2 {
         getDatabaseCleaner().clean();
     }
 
-    @Ignore
+    @Test
     public void shouldReturnTrueIfDeleted(){
         AddPatientRequest addPatientRequest1 = new AddPatientRequest("name2", "surname2", "22223333444");
         AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
