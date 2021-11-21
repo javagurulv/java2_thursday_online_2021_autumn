@@ -4,7 +4,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
 
 import java.util.List;
 
-public class GetAllTablesResponse {
+public class GetAllTablesResponse extends CoreResponse {
 
 	private List<Table> tables;
 

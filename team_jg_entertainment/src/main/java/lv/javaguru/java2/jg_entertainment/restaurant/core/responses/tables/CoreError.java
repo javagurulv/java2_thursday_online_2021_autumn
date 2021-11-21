@@ -5,7 +5,6 @@ public class CoreError {
     private String field;
     private String messageError;
 
-
     public CoreError(String field, String messageError) {
         this.field = field;
         this.messageError = messageError;
