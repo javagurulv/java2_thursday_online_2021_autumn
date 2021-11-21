@@ -1,7 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database.reservation_repository;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.EditReservationEnum;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_reservations.GetReservationDate;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_reservations.date.GetReservationDate;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
