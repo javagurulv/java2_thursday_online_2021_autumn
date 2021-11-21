@@ -18,7 +18,7 @@ public class CheckMenuNumberFromConsole {
         try {
             getUserNumber = getNumberMenuFromConsole();
             if (getUserNumber < minNumber || getUserNumber > maxNumber) {
-                throw new Exception("Your number isn't correct, please try to press correct number from menu: ");//NumberFormatException();
+                throw new Exception("Your number isn't correct, please try to press correct number from menu: ");
             }
         } catch (Exception formatException) {
             System.out.println(formatException.getMessage());

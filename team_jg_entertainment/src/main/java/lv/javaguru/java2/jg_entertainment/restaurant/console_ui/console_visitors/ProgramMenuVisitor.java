@@ -36,10 +36,10 @@ public class ProgramMenuVisitor {
         System.out.println();
         System.out.println("Hello !");
         System.out.println("Visitors program menu, press number what do you want to do! ");
-        System.out.println("1. Add information about visitor to list of restaurant-> ");
-        System.out.println("2. Delete visitor - Enter ID that delete from list of restaurant-> ");
-        System.out.println("3. Show all visitor's in base of restaurant->");
-        System.out.println("4. Search visitor's in catalogue->");
+        System.out.println("1. ADD information about user to list of restaurant-> ");
+        System.out.println("2. DELETE user - Enter ID that delete from list of restaurant-> ");
+        System.out.println("3. SHOW all user's in base of restaurant->");
+        System.out.println("4. SEARCH user's in catalogue->");
         System.out.println("5. Choose that return in MAIN MENU:");
         System.out.println("6. Exit! ");
         System.out.println();

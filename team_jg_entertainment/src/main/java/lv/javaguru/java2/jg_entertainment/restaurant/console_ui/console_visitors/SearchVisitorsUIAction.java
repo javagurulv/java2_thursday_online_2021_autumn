@@ -13,8 +13,7 @@ import java.util.Scanner;
 @Component
 public class SearchVisitorsUIAction implements VisitorUIAction {
 
-    @Autowired
-    private SearchVisitorsService searchVisitorsService;
+    @Autowired private SearchVisitorsService searchVisitorsService;
 
     @Override
     public void execute() {

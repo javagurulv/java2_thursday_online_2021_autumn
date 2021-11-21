@@ -9,16 +9,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class ShowListWithAllVisitorsUIAction implements VisitorUIAction {
 
-    @Autowired
-    private ShowListVisitorsService getAllVisitors;
+    @Autowired private ShowListVisitorsService getAllVisitors;
 
     @Override
     public void execute() {
         System.out.println("Client's list: ");
-
         ShowAllVisitorsRequest request = new ShowAllVisitorsRequest();
         ShowAllVisitorsResponse response = getAllVisitors.execute(request);
-
         response.getNewVisitor().forEach(System.out::println);
         System.out.println("Finished! This all list restaurant visitors !");
     }

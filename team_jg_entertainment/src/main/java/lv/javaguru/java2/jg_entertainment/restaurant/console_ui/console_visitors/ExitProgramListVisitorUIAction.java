@@ -8,7 +8,6 @@ public class ExitProgramListVisitorUIAction implements VisitorUIAction {
 
     @Override
     public void execute() {
-//        RestaurantListApplication list = new RestaurantListApplication();
         System.out.println("You return in MAIN menu!");
         System.out.println("Choose action with MENU: ");
         ProgramMenu.action();

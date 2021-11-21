@@ -11,16 +11,15 @@ import java.util.Scanner;
 @Component
 public class DeleteVisitorsUIAction implements VisitorUIAction {
 
-    @Autowired
-    private DeleteVisitorsService deleteVisitors;
+    @Autowired private DeleteVisitorsService deleteVisitors;
 
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Write ID visitor's that will be deleted: ");
+        System.out.println("Write ID user's that will be deleted: ");
         Long idVisitors = Long.parseLong(scanner.nextLine());
-        System.out.println("Enter visitor's name that will be deleted: ");
+        System.out.println("Enter user's name that will be deleted: ");
         String nameVisitor = scanner.nextLine();
 
         DeleteVisitorRequest request = new DeleteVisitorRequest(idVisitors, nameVisitor);
@@ -31,9 +30,9 @@ public class DeleteVisitorsUIAction implements VisitorUIAction {
                     System.out.println("Error" + coreError.getField() + " " + coreError.getMessageError())));
         } else {
             if (deleteVisitorsResponseByID.ifIdVisitorDelete()) {
-                System.out.println("The visitor with ID number " + idVisitors + ", name " + nameVisitor + "-> was deleted from list !");
+                System.out.println("The user with ID number " + idVisitors + ", name " + nameVisitor + "-> was deleted from list !");
             } else {
-                System.out.println("Sorry, visitor's with this ID and name wasn't deleted! Check your information, and try again! ");
+                System.out.println("Sorry, user's with this ID and name wasn't deleted! Check your information, and try again! ");
             }
         }
     }

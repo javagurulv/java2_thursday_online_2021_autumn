@@ -11,15 +11,13 @@ import java.util.Scanner;
 @Component
 public class AddVisitorsUIAction implements VisitorUIAction {
 
-    @Autowired
-    private AddAllVisitorsService addAllVisitorsService;
+    @Autowired private AddAllVisitorsService addAllVisitorsService;
 
     @Override
     public void execute() {
         Scanner scanner = new Scanner((System.in));
         System.out.println("Please, enter visitor's name: ");
         String visitorsName = scanner.nextLine();
-
         System.out.println("Please, enter visitor's surname: ");
         String visitorsSurname = scanner.nextLine();
         System.out.println("Enter visitor's telephone number: ");
