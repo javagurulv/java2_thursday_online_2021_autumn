@@ -18,7 +18,7 @@ public class AddReservationUIAction implements ReservationUIAction {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Please, enter user ID: ");
-        String visitorID = scanner.nextLine();
+        String userID = scanner.nextLine();
 
         System.out.println("Please, enter menu ID: ");
         String menuID = scanner.nextLine();
@@ -29,7 +29,7 @@ public class AddReservationUIAction implements ReservationUIAction {
         System.out.println("Please, enter date when you want to reservation in format like-> yyyy-MM-dd HH:mm: ");
         String reservationDate = scanner.nextLine();
 
-        AddReservationRequest request = new AddReservationRequest(visitorID, menuID, tableID, reservationDate);
+        AddReservationRequest request = new AddReservationRequest(userID, menuID, tableID, reservationDate);
         AddReservationResponse response = service.execute(request);
 
         if (response.hasError()) {
@@ -40,7 +40,7 @@ public class AddReservationUIAction implements ReservationUIAction {
             System.out.println("Successful reservation!");
             System.out.println();
             System.out.println("Info reservation: "
-                    + " user info-> " + response.getReservation().getVisitor()
+                    + " user info-> " + response.getReservation().getUser()
                     + ", menu info-> " + response.getReservation().getMenu()
                     + ", table-> " + response.getReservation().getTable());
             System.out.println("Date reservation-> " + response.getReservation().getReservationDate()

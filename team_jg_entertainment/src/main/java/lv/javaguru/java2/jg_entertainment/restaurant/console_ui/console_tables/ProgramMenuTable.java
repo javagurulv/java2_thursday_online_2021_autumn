@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_visitors.CheckMenuNumberFromConsole;
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_users.CheckMenuNumberFromConsole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

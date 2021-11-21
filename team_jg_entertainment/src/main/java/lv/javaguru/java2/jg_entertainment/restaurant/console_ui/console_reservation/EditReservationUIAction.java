@@ -21,7 +21,7 @@ public class EditReservationUIAction implements ReservationUIAction{
                 .toUpperCase(Locale.ROOT);
         String change = "";
         switch (informChange) {
-            case "ID_VISITOR" -> change = getInformScanner.getNumberFromConsole("Enter new ID visitor:");
+            case "ID_VISITOR" -> change = getInformScanner.getNumberFromConsole("Enter new user ID:");
             case "ID_TABLE" -> change = getInformScanner.getNumberFromConsole("Enter new ID table:");
             case "ID_MENU" -> change = getInformScanner.getNumberFromConsole("Enter new ID menu:");
             case "RESERVATION_DATE" -> change = getInformScanner.getNumberFromConsole("Enter new DATE format is like-> yyyy-MM-dd HH:mm:");

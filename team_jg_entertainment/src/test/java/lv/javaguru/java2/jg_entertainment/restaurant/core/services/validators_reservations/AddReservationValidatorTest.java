@@ -2,7 +2,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_r
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.menu_repository.MenuRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_repository.TableRepository;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository.VisitorsRepository;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository.UsersRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.AddReservationRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.DateValidatorExecution;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @RunWith(MockitoJUnitRunner.class)
 public class AddReservationValidatorTest {
 
-    @Mock private VisitorsRepository databaseVisitor;
+    @Mock private UsersRepository databaseVisitor;
     @Mock private MenuRepository databaseMenu;
     @Mock private TableRepository databaseTable;
     @Mock private DateValidatorExecution dateValidatorExecution;

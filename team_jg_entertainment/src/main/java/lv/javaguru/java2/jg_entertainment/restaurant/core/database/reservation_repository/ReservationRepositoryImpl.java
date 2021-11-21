@@ -2,7 +2,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.database.reservation_
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.menu_repository.MenuRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_repository.TableRepository;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository.VisitorsRepository;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository.UsersRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.EditReservationEnum;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     private Long nextId = 1L;
     private final List<Reservation> reservationList = new ArrayList<>();
     @Autowired
-    private VisitorsRepository visitorsRepository;
+    private UsersRepository usersRepository;
     @Autowired
     private TableRepository tableRepository;
     @Autowired
@@ -69,7 +69,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
                 reservationToEdit.setTable(tableRepository.findTableById(Long.parseLong(changes)).get(0));
                 isReservationEdited = true;
             } else if (userInput.equals(EditReservationEnum.ID_VISITOR)) {
-                reservationToEdit.setVisitor(visitorsRepository.findClientById(Long.parseLong(changes)).get(0));
+                reservationToEdit.setUser(usersRepository.findUserById(Long.parseLong(changes)).get(0));
                 isReservationEdited = true;
             } else if (userInput.equals(EditReservationEnum.ID_MENU)) {
                 reservationToEdit.setMenu(menuRepository.findById(Long.parseLong(changes)).get(0));
@@ -90,9 +90,9 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public List<Reservation> findByClientId(Long id) {
+    public List<Reservation> findByUserId(Long id) {
         return reservationList.stream()
-                .filter(reservation -> Objects.equals(reservation.getVisitor().getIdClient(), id))
+                .filter(reservation -> Objects.equals(reservation.getUser().getUserId(), id))
                 .collect(Collectors.toList());
     }
 
@@ -118,25 +118,25 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public List<Reservation> findByClientIdAndTableId(Long clientId, Long tableId) {
+    public List<Reservation> findByUserIdAndTableId(Long userId, Long tableId) {
         return reservationList.stream()
-                .filter(reservation -> Objects.equals(reservation.getVisitor().getIdClient(), clientId))
+                .filter(reservation -> Objects.equals(reservation.getUser().getUserId(), userId))
                 .filter(reservation -> Objects.equals(reservation.getTable().getId(), tableId))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Reservation> findByClientIdAndMenuId(Long clientId, Long menuId) {
+    public List<Reservation> findByUserIdAndMenuId(Long userId, Long menuId) {
         return reservationList.stream()
-                .filter(reservation -> Objects.equals(reservation.getVisitor().getIdClient(), clientId))
+                .filter(reservation -> Objects.equals(reservation.getUser().getUserId(), userId))
                 .filter(reservation -> Objects.equals(reservation.getMenu().getNumber(), menuId))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Reservation> findByClientIdAndDate(Long clientId, LocalDateTime date) {
+    public List<Reservation> findByUserIdAndDate(Long userId, LocalDateTime date) {
         return reservationList.stream()
-                .filter(reservation -> Objects.equals(reservation.getVisitor().getIdClient(), clientId))
+                .filter(reservation -> Objects.equals(reservation.getUser().getUserId(), userId))
                 .filter(reservation -> reservation.getReservationDate().equals(date))
                 .collect(Collectors.toList());
     }
@@ -166,27 +166,27 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public List<Reservation> findByClientIdTableIdAndMenuId(Long clientId, Long tableId, Long menuId) {
+    public List<Reservation> findByUserIdTableIdAndMenuId(Long userId, Long tableId, Long menuId) {
         return reservationList.stream()
-                .filter(reservation -> Objects.equals(reservation.getVisitor().getIdClient(), clientId))
+                .filter(reservation -> Objects.equals(reservation.getUser().getUserId(), userId))
                 .filter(reservation -> Objects.equals(reservation.getTable().getId(), tableId))
                 .filter(reservation -> Objects.equals(reservation.getMenu().getNumber(), menuId))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Reservation> findByClientIdMenuIdAndDate(Long clientId, Long menuId, LocalDateTime date) {
+    public List<Reservation> findByUserIdMenuIdAndDate(Long userId, Long menuId, LocalDateTime date) {
         return reservationList.stream()
-                .filter(reservation -> Objects.equals(reservation.getVisitor().getIdClient(), clientId))
+                .filter(reservation -> Objects.equals(reservation.getUser().getUserId(), userId))
                 .filter(reservation -> Objects.equals(reservation.getMenu().getNumber(), menuId))
                 .filter(reservation -> reservation.getReservationDate().equals(date))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Reservation> findByClientIdTableIdAndDate(Long clientId, Long tableId, LocalDateTime date) {
+    public List<Reservation> findByUserIdTableIdAndDate(Long userId, Long tableId, LocalDateTime date) {
         return reservationList.stream()
-                .filter(reservation -> Objects.equals(reservation.getVisitor().getIdClient(), clientId))
+                .filter(reservation -> Objects.equals(reservation.getUser().getUserId(), userId))
                 .filter(reservation -> Objects.equals(reservation.getTable().getId(), tableId))
                 .filter(reservation -> reservation.getReservationDate().equals(date))
                 .collect(Collectors.toList());
@@ -202,9 +202,9 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public List<Reservation> findByClientIdTableIdMenuIdAndDate(Long clientId, Long tableId, Long menuId, LocalDateTime date) {
+    public List<Reservation> findByUserIdTableIdMenuIdAndDate(Long userId, Long tableId, Long menuId, LocalDateTime date) {
         return reservationList.stream()
-                .filter(reservation -> Objects.equals(reservation.getVisitor().getIdClient(), clientId))
+                .filter(reservation -> Objects.equals(reservation.getUser().getUserId(), userId))
                 .filter(reservation -> Objects.equals(reservation.getTable().getId(), tableId))
                 .filter(reservation -> Objects.equals(reservation.getMenu().getNumber(), menuId))
                 .filter(reservation -> Objects.equals(reservation.getReservationDate(), date))

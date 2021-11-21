@@ -18,7 +18,7 @@ public interface ReservationRepository {
 
     List<Reservation> findByReservationId(Long id);
 
-    List<Reservation> findByClientId(Long id);
+    List<Reservation> findByUserId(Long id);
 
     List<Reservation> findByTableId(Long id);
 
@@ -26,11 +26,11 @@ public interface ReservationRepository {
 
     List<Reservation> findByDate(LocalDateTime date);
 
-    List<Reservation> findByClientIdAndTableId(Long clientId, Long tableId);
+    List<Reservation> findByUserIdAndTableId(Long clientId, Long tableId);
 
-    List<Reservation> findByClientIdAndMenuId(Long clientId, Long menuId);
+    List<Reservation> findByUserIdAndMenuId(Long clientId, Long menuId);
 
-    List<Reservation> findByClientIdAndDate(Long clientId, LocalDateTime date);
+    List<Reservation> findByUserIdAndDate(Long clientId, LocalDateTime date);
 
     List<Reservation> findByTableIdAndMenuId(Long tableId, Long menuId);
 
@@ -38,14 +38,14 @@ public interface ReservationRepository {
 
     List<Reservation> findByMenuIdAndDate(Long menuId, LocalDateTime date);
 
-    List<Reservation> findByClientIdTableIdAndMenuId(Long clientId, Long tableId, Long menuId);
+    List<Reservation> findByUserIdTableIdAndMenuId(Long clientId, Long tableId, Long menuId);
 
-    List<Reservation> findByClientIdMenuIdAndDate(Long clientId, Long menuId, LocalDateTime date);
+    List<Reservation> findByUserIdMenuIdAndDate(Long clientId, Long menuId, LocalDateTime date);
 
-    List<Reservation> findByClientIdTableIdAndDate(Long clientId, Long tableId, LocalDateTime date);
+    List<Reservation> findByUserIdTableIdAndDate(Long clientId, Long tableId, LocalDateTime date);
 
     List<Reservation> findByTableIdMenuIdAndDate(Long tableId, Long menuId, LocalDateTime date);
 
-    List<Reservation> findByClientIdTableIdMenuIdAndDate(Long clientId, Long tableId, Long menuId, LocalDateTime date);
+    List<Reservation> findByUserIdTableIdMenuIdAndDate(Long clientId, Long tableId, Long menuId, LocalDateTime date);
 
 }

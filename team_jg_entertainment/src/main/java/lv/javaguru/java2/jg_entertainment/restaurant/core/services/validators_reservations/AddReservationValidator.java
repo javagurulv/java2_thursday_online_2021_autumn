@@ -2,7 +2,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_r
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.menu_repository.MenuRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_repository.TableRepository;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository.VisitorsRepository;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository.UsersRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.AddReservationRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.DateValidatorExecution;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @Component
 public class AddReservationValidator {
 
-    @Autowired private VisitorsRepository visitorDatabase;
+    @Autowired private UsersRepository userDatabase;
     @Autowired private MenuRepository menuDatabase;
     @Autowired private TableRepository tableDatabase;
     @Autowired private DateValidatorExecution dateValidator;
@@ -24,8 +24,8 @@ public class AddReservationValidator {
 
     public List<CoreError> validate(AddReservationRequest request) {
         List<CoreError> errors = new ArrayList<>();
-        validateVisitorID(request).ifPresent(errors::add);
-        validateVisitorIDParse(request).ifPresent(errors::add);
+        validateUserID(request).ifPresent(errors::add);
+        validateUserIDParse(request).ifPresent(errors::add);
         validateTableID(request).ifPresent(errors::add);
         validateTableIDParse(request).ifPresent(errors::add);
         validateMenuID(request).ifPresent(errors::add);
@@ -33,22 +33,22 @@ public class AddReservationValidator {
         validateReservationDate(request).ifPresent(errors::add);
         errors.addAll(validDateReservation(request));
 
-        validateVisitorsIfPresent(request).ifPresent(errors::add);
+        validateUsersIfPresent(request).ifPresent(errors::add);
         validateMenuIfPresent(request).ifPresent(errors::add);
         validateTableIfPresent(request).ifPresent(errors::add);
         return errors;
     }
 
-    private Optional<CoreError> validateVisitorID(AddReservationRequest request) {
-        return (request.getVisitorID() == null || request.getVisitorID().isEmpty())
-                ? Optional.of(new CoreError("Visitor ID", "Must not be empty!"))
+    private Optional<CoreError> validateUserID(AddReservationRequest request) {
+        return (request.getUserID() == null || request.getUserID().isEmpty())
+                ? Optional.of(new CoreError("User ID", "Must not be empty!"))
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateVisitorIDParse(AddReservationRequest request) {
-        return (request.getVisitorID() == null || request.getVisitorID().isEmpty())
+    private Optional<CoreError> validateUserIDParse(AddReservationRequest request) {
+        return (request.getUserID() == null || request.getUserID().isEmpty())
                 ? Optional.empty()
-                : longNumChecker.validate(request.getVisitorID(), "Visitor ID");
+                : longNumChecker.validate(request.getUserID(), "User ID");
     }
 
     private Optional<CoreError> validateTableID(AddReservationRequest request) {
@@ -87,11 +87,11 @@ public class AddReservationValidator {
                 : dateValidator.validate(request.getReservationDate());
     }
 
-    private Optional<CoreError> validateVisitorsIfPresent(AddReservationRequest request) {
-        return request.getVisitorID() == null || request.getVisitorID().isEmpty()
+    private Optional<CoreError> validateUsersIfPresent(AddReservationRequest request) {
+        return request.getUserID() == null || request.getUserID().isEmpty()
                 ? Optional.empty()
-                : visitorDatabase.findClientById(Long.valueOf(request.getVisitorID())).isEmpty()
-                ? Optional.of(new CoreError("info about visitor", "was not found"))
+                : userDatabase.findUserById(Long.valueOf(request.getUserID())).isEmpty()
+                ? Optional.of(new CoreError("info about user", "was not found"))
                 : Optional.empty();
     }
 
