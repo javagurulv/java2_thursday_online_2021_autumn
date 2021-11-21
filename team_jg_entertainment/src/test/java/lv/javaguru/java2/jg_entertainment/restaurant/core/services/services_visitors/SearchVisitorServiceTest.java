@@ -9,11 +9,13 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.Sea
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_visitors.SearchVisitorsRequestValidator;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitor;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,12 @@ public class SearchVisitorServiceTest {
     @Mock private VisitorsRepository database;
     @Mock private SearchVisitorsRequestValidator validator;
     @InjectMocks private SearchVisitorsService serviceSearch;
+
+    @BeforeEach
+    public void setUp(){
+        ReflectionTestUtils.setField(serviceSearch, "orderingEnabled", true);
+        ReflectionTestUtils.setField(serviceSearch, "pagingEnabled", true);
+    }
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidatorFails() {
