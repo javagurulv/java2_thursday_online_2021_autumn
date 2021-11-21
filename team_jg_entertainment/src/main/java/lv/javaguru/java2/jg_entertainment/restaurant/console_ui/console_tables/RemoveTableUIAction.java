@@ -11,8 +11,7 @@ import java.util.Scanner;
 @Component
 public class RemoveTableUIAction implements UIAction {
 
-    @Autowired
-    private RemoveTableService removeTableService;
+    @Autowired private RemoveTableService removeTableService;
 
     @Override
     public void execute() {
@@ -29,9 +28,9 @@ public class RemoveTableUIAction implements UIAction {
                             + coreError.getMessageError()));
         } else {
             if (response.isTableRemoved()) {
-                System.out.println("Your table: " + tableId + "find and was removed from list!");
+                System.out.println("Your table: " + tableId + " find and was removed from list!");
             } else {
-                System.out.println("Your table NOT removed from list!");
+                System.out.println("Your table WAS NOT removed from list!");
             }
         }
     }

@@ -11,8 +11,7 @@ import java.util.Scanner;
 @Component
 public class AddTableUIAction implements UIAction {
 
-    @Autowired
-    private AddTableService addTableService;
+    @Autowired private AddTableService addTableService;
 
     @Override
     public void execute() {
@@ -33,10 +32,8 @@ public class AddTableUIAction implements UIAction {
                     System.out.println("Error: " + coreError.getField()
                             + " " + coreError.getMessageError()));
         } else {
-            System.out.println("New table id was: " + response.getNewTable().getId());
-            System.out.println("Your table: " + tableTitle + "with capacity: " + tableCapacity + " was added to list! ");
+            System.out.println("New table ID was: " + response.getNewTable().getId());
+            System.out.println("Your table: " + tableTitle + ", with capacity: " + tableCapacity + "- was added to list! ");
         }
-
     }
-
 }

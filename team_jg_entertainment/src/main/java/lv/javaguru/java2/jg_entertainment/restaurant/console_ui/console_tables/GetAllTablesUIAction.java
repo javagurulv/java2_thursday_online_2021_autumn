@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class GetAllTablesUIAction implements UIAction {
 
-	@Autowired
-	private GetAllTablesService getAllTablesService;
+	@Autowired private GetAllTablesService getAllTablesService;
 
 	@Override
 	public void execute() {
