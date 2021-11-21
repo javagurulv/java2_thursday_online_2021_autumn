@@ -25,6 +25,8 @@ public class StockMarketOrderValidator {
     private final Map<Predicate<StockMarketOrderRequest>, CoreError> validator = Map.ofEntries(
             entry(request -> request.getSecurity() == null,
                     new CoreError("Security", "no security with such id in the database!")),
+            entry(request -> request.getRealTimePrice() == null,
+                    new CoreError("Real-time price", "cannot get real-time quote from API! Check connection!")),
             entry(request -> request.getUser() == null,
                     new CoreError("User", "no user with such name exists in the database!")),
             entry(request -> utils.isNotDouble(request.getQuantity()),
@@ -34,6 +36,7 @@ public class StockMarketOrderValidator {
             entry(request -> checkPresence(request) && !checkQuantity(request),
                     new CoreError("Quantity", "not enough securities to sell!")),
             entry(request -> request.getUser() != null &&
+                            request.getRealTimePrice() != null &&
                             !utils.isNotDouble(request.getQuantity()) &&
                             (Double.parseDouble(request.getQuantity()) * request.getRealTimePrice()) > request.getUser().getCash(),
                     new CoreError("Cash", "not enough money to execute this trade!"))

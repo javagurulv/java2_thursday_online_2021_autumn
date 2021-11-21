@@ -96,7 +96,8 @@ public class API {
                     .build();
             return HttpClient.newHttpClient()
                     .send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException e) {
+        }
+        catch (IOException | InterruptedException e) {
             e.printStackTrace();
             return null;
         }
