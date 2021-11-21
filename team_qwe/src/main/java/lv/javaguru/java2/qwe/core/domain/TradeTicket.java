@@ -34,8 +34,7 @@ public class TradeTicket {
     @Column(name = "trade_date", nullable = false)
     private LocalDateTime dateTime;
 
-    public TradeTicket() {
-    }
+    public TradeTicket() {}
 
     public TradeTicket(User user, Security security, TradeType tradeType,
                        Double quantity, Double tradePrice, LocalDateTime dateTime) {
@@ -92,7 +91,7 @@ public class TradeTicket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TradeTicket ticket = (TradeTicket) o;
-        return Objects.equals(user, ticket.user)
+        return user.getId() == ticket.user.getId()
                 && Objects.equals(security, ticket.security) && tradeType == ticket.tradeType
                 && Objects.equals(quantity, ticket.quantity) && Objects.equals(tradePrice, ticket.tradePrice);
     }

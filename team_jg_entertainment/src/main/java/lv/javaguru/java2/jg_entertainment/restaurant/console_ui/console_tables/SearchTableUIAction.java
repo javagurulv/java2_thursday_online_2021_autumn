@@ -13,16 +13,14 @@ import java.util.Scanner;
 @Component
 public class SearchTableUIAction implements UIAction {
 
-    @Autowired
-    private SearchTableService searchTableService;
+    @Autowired private SearchTableService searchTableService;
 
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please, enter title table: ");
         String title = scanner.nextLine();
-
-        System.out.println("Enter orderBy (only title table): ");
+        System.out.println("Enter orderBy (enter only title) table: ");
         String orderBy = scanner.nextLine();
         System.out.println("Enter orderDirection (ASCENDING || DESCENDING): ");
         String orderDirection = scanner.nextLine();
@@ -40,8 +38,8 @@ public class SearchTableUIAction implements UIAction {
         SearchTableResponse response = searchTableService.execute(request);
 
         if (response.hasError()) {
-            response.getErrorsList().forEach(coreError -> System.out.println("Errors: " +
-                    coreError.getField() + coreError.getMessageError()));
+            response.getErrorsList().forEach(coreError -> System.out.println("Errors: " + coreError.getField()
+                    + " " + coreError.getMessageError()));
         } else {
             System.out.println(response.getTables());
         }

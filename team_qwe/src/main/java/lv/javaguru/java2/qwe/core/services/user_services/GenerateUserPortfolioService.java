@@ -113,7 +113,7 @@ public class GenerateUserPortfolioService {
 
     private void addPortfolioToDatabaseSQL(List<Position> portfolio, User user) {
         IntStream.rangeClosed(0, portfolio.size() - 1)
-                .forEach(i -> userData.savePosition(portfolio.get(i), user.getId()));
+                .forEach(i -> userData.savePosition(portfolio.get(i), user));
     }
 
     private void addTradeTicketsToDatabaseSQL(List<Position> portfolio, User user) {
@@ -121,7 +121,7 @@ public class GenerateUserPortfolioService {
                 .forEach(i -> userData.saveTradeTicket(new TradeTicket(
                         user, portfolio.get(i).getSecurity(), TradeType.BUY,
                         portfolio.get(i).getAmount(), portfolio.get(i).getPurchasePrice(),
-                        LocalDateTime.now())
+                        LocalDateTime.now()), user
                 ));
     }
 

@@ -1,7 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database.reservation_repository;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.EditReservationEnum;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_reservations.GetReservationDate;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_reservations.date.GetReservationDate;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -18,7 +18,7 @@ import java.util.Locale;
 public class OrmReservationRepositoryImpl implements ReservationRepository {
 
     @Autowired private SessionFactory sessionFactory;
-    @Autowired GetReservationDate getReservationDate;
+    @Autowired private GetReservationDate getReservationDate;
 
     @Override
     public void addReservation(Reservation reservation) {
@@ -40,12 +40,12 @@ public class OrmReservationRepositoryImpl implements ReservationRepository {
                 .createQuery("SELECT r FROM Reservation r", Reservation.class)
                 .getResultList();
     }
-//new part
+
     @Override
     public boolean editReservation(Long reservationID, EditReservationEnum userInput, String changes) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "UPDATE Reservation SET "
-        + userInput.toString().toUpperCase(Locale.ROOT) + " = : changes WHERE reservation_id = :reservation_id");
+        + userInput.toString().toUpperCase(Locale.ROOT) + " = :changes WHERE reservation_id = :reservation_id");
         query.setParameter("reservation_id", reservationID);
         query.setParameter("changes", changes);
         int result = query.executeUpdate();
@@ -61,7 +61,7 @@ public class OrmReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public List<Reservation> findByClientId(Long id) {
+    public List<Reservation> findByUserId(Long id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT r FROM Reservation r WHERE id_visitor= :id_visitor");
         query.setParameter("id_visitor", id);
@@ -93,17 +93,17 @@ public class OrmReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public List<Reservation> findByClientIdAndTableId(Long clientId, Long tableId) {
+    public List<Reservation> findByUserIdAndTableId(Long clientId, Long tableId) {
         return null;
     }
 
     @Override
-    public List<Reservation> findByClientIdAndMenuId(Long clientId, Long menuId) {
+    public List<Reservation> findByUserIdAndMenuId(Long clientId, Long menuId) {
         return null;
     }
 
     @Override
-    public List<Reservation> findByClientIdAndDate(Long clientId, LocalDateTime date) {
+    public List<Reservation> findByUserIdAndDate(Long clientId, LocalDateTime date) {
         return null;
     }
 
@@ -123,17 +123,17 @@ public class OrmReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public List<Reservation> findByClientIdTableIdAndMenuId(Long clientId, Long tableId, Long menuId) {
+    public List<Reservation> findByUserIdTableIdAndMenuId(Long clientId, Long tableId, Long menuId) {
         return null;
     }
 
     @Override
-    public List<Reservation> findByClientIdMenuIdAndDate(Long clientId, Long menuId, LocalDateTime date) {
+    public List<Reservation> findByUserIdMenuIdAndDate(Long clientId, Long menuId, LocalDateTime date) {
         return null;
     }
 
     @Override
-    public List<Reservation> findByClientIdTableIdAndDate(Long clientId, Long tableId, LocalDateTime date) {
+    public List<Reservation> findByUserIdTableIdAndDate(Long clientId, Long tableId, LocalDateTime date) {
         return null;
     }
 
@@ -143,7 +143,7 @@ public class OrmReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public List<Reservation> findByClientIdTableIdMenuIdAndDate(Long clientId, Long tableId, Long menuId, LocalDateTime date) {
+    public List<Reservation> findByUserIdTableIdMenuIdAndDate(Long clientId, Long tableId, Long menuId, LocalDateTime date) {
         return null;
     }
 }

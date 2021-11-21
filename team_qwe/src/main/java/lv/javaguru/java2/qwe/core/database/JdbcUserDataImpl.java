@@ -65,7 +65,7 @@ public class JdbcUserDataImpl implements UserData{
     }
 
 //    @Override
-    public void saveTradeTicket(TradeTicket ticket) {
+    public void saveTradeTicket(TradeTicket ticket, User user) {
 
     }
 
@@ -86,7 +86,12 @@ public class JdbcUserDataImpl implements UserData{
                 "  WHERE id = ?", Double.class, userID));
     }
 
-//    @Override
+    @Override
+    public void savePosition(Position position, User user) {
+
+    }
+
+    //    @Override
     public void savePosition(Position position, Long userId) {
         jdbcTemplate.update("INSERT INTO users_positions (user_id, security_ticker, amount, purchase_price) VALUES\n" +
                 "(?, ?, ?, ?)", userId, position.getSecurity().getTicker(), position.getAmount(), position.getPurchasePrice());

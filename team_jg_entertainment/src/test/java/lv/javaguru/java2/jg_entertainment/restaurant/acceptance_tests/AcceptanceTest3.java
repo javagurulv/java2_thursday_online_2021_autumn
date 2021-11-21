@@ -2,15 +2,15 @@ package lv.javaguru.java2.jg_entertainment.restaurant.acceptance_tests;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.DatabaseCleaner;
 import lv.javaguru.java2.jg_entertainment.restaurant.configuration.RestaurantListConfiguration;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.AddVisitorRequest;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.DeleteVisitorRequest;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.visitors.ShowAllVisitorsRequest;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.AddVisitorResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.DeleteVisitorsResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.visitors.ShowAllVisitorsResponse;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.AddAllVisitorsService;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.DeleteVisitorsService;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_visitors.ShowListVisitorsService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.users.AddUserRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.users.DeleteUserRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.users.ShowAllUsersRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.users.AddUsersResponse;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.users.DeleteUsersResponse;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.users.ShowAllUsersResponse;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_users.AddAllUsersService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_users.DeleteUsersService;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_users.ShowListUsersService;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,38 +33,38 @@ public class AcceptanceTest3 {
     @Test
     @Ignore
     public void shouldDeleteUser() {
-        AddVisitorRequest addVisitor1 = new AddVisitorRequest("name", "surname", "252525");
-        AddVisitorResponse addVisitorResponse1 = addAllVisitorsService().execute(addVisitor1);
-        Long idUser1 = addVisitorResponse1.getNewVisitor().getIdClient();
+        AddUserRequest addUser1 = new AddUserRequest("name", "surname", "252525");
+        AddUsersResponse addUserResponse1 = addAllUsersService().execute(addUser1);
+        Long idUser1 = addUserResponse1.getNewUser().getUserId();
 
-        AddVisitorRequest addVisitor2 = new AddVisitorRequest("name", "surname2", "252525");
-        AddVisitorResponse response = addAllVisitorsService().execute(addVisitor2);
-        Long idUser2 = response.getNewVisitor().getIdClient();
+        AddUserRequest addUser2 = new AddUserRequest("name", "surname2", "252525");
+        AddUsersResponse response = addAllUsersService().execute(addUser2);
+        Long idUser2 = response.getNewUser().getUserId();
 
-        DeleteVisitorRequest deleteVisitorRequest = new DeleteVisitorRequest(idUser2, "name");
-        DeleteVisitorsResponse deleteVisitorsResponse = deleteVisitorsService().execute(deleteVisitorRequest);
+        DeleteUserRequest deleteUserRequest = new DeleteUserRequest(idUser2, "name");
+        DeleteUsersResponse deleteVisitorsResponse = deleteUsersService().execute(deleteUserRequest);
 
-        assertTrue(deleteVisitorsResponse.ifIdVisitorDelete());
+        assertTrue(deleteVisitorsResponse.ifUserIdDeleted());
 
-        ShowAllVisitorsResponse showUserResponse = showListVisitorsService().execute(new ShowAllVisitorsRequest());
+        ShowAllUsersResponse showUserResponse = showListUsersService().execute(new ShowAllUsersRequest());
 
-        assertEquals(showUserResponse.getNewVisitor().size(), 1);
-        assertEquals(showUserResponse.getNewVisitor().get(0).getClientName(), "name");
-        assertEquals(showUserResponse.getNewVisitor().get(0).getSurname(), "surname");
-        assertEquals(showUserResponse.getNewVisitor().get(0).getTelephoneNumber(), "252525");
+        assertEquals(showUserResponse.getNewUser().size(), 1);
+        assertEquals(showUserResponse.getNewUser().get(0).getUserName(), "name");
+        assertEquals(showUserResponse.getNewUser().get(0).getSurname(), "surname");
+        assertEquals(showUserResponse.getNewUser().get(0).getTelephoneNumber(), "252525");
     }
 
 
-    private AddAllVisitorsService addAllVisitorsService() {
-        return applicationContext.getBean(AddAllVisitorsService.class);
+    private AddAllUsersService addAllUsersService() {
+        return applicationContext.getBean(AddAllUsersService.class);
     }
 
-    private DeleteVisitorsService deleteVisitorsService() {
-        return applicationContext.getBean(DeleteVisitorsService.class);
+    private DeleteUsersService deleteUsersService() {
+        return applicationContext.getBean(DeleteUsersService.class);
     }
 
-    private ShowListVisitorsService showListVisitorsService() {
-        return applicationContext.getBean(ShowListVisitorsService.class);
+    private ShowListUsersService showListUsersService() {
+        return applicationContext.getBean(ShowListUsersService.class);
     }
 
     private DatabaseCleaner databaseCleaner() {

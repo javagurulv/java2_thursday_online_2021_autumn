@@ -12,10 +12,11 @@ public class Position {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "security_ticker", nullable = false)
     private Security security;
 
@@ -37,12 +38,12 @@ public class Position {
         this.purchasePrice = purchasePrice;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setSecurity(Security security) {
@@ -80,7 +81,8 @@ public class Position {
     @Override
     public String toString() {
         return "Position{" +
-                "security=" + security +
+                "user=" + user.getName() + "(ID: " + user.getId() + ")" +
+                ", security=" + security.getTicker() + "(" + security.getName() + ")" +
                 ", amount=" + amount +
                 ", purchasePrice=" + purchasePrice +
                 '}';
@@ -91,7 +93,8 @@ public class Position {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Position position = (Position) o;
-        return Double.compare(position.amount, amount) == 0
+        return  position.user.getId() == user.getId()
+                && Double.compare(position.amount, amount) == 0
                 && Double.compare(position.purchasePrice, purchasePrice) == 0
                 && Objects.equals(security, position.security);
     }

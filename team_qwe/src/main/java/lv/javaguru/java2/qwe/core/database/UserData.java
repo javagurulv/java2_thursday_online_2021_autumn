@@ -27,8 +27,8 @@ public interface UserData {
 
     Optional<Double> getUserCash(Long userID);
 
-    void savePosition(Position position, Long userId);
+    void savePosition(Position position, User user);
 
-    void saveTradeTicket(TradeTicket ticket);
+    void saveTradeTicket(TradeTicket ticket, User user);
 
 }

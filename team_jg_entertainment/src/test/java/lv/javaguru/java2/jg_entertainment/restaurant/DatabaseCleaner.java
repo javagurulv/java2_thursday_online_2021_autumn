@@ -21,7 +21,7 @@ public class DatabaseCleaner {
 
     private List<String> getTableNames() {
         List<String> tableNames = new ArrayList<>();
-        tableNames.add("visitors");
+        tableNames.add("users");
         tableNames.add("tables");
         tableNames.add("menu");
         tableNames.add("reservation");

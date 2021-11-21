@@ -8,7 +8,6 @@ public class ExitProgramTableListUIAction implements UIAction {
 
     @Override
     public void execute() {
-//        RestaurantListApplication list = new RestaurantListApplication();
         System.out.println("You return in main menu!");
         System.out.println("Choose action with MENU: ");
         ProgramMenu.action();

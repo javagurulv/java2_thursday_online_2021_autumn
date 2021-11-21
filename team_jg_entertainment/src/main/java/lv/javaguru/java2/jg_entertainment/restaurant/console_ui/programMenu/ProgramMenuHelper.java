@@ -18,7 +18,7 @@ public class ProgramMenuHelper {
     @Autowired
     public ProgramMenuHelper(List<Menu> menus) {
         menuNumberToTypeOfMenuMap = new HashMap<>();
-        menuNumberToTypeOfMenuMap.put(1, findMenu(menus, VisitorMenu.class));
+        menuNumberToTypeOfMenuMap.put(1, findMenu(menus, UserMenu.class));
         menuNumberToTypeOfMenuMap.put(2, findMenu(menus, TableMenu.class));
         menuNumberToTypeOfMenuMap.put(3, findMenu(menus, MenuMenu.class));
         menuNumberToTypeOfMenuMap.put(4, findMenu(menus, ReservationMenu.class));
@@ -35,7 +35,7 @@ public class ProgramMenuHelper {
     public void printMainMenu() {
         System.out.println();
         System.out.println("Hello ! MENU: ");
-        System.out.println("1--> choose action with VISITORS: ");
+        System.out.println("1--> choose action with USERS: ");
         System.out.println("2--> choose action with TABLES: ");
         System.out.println("3--> choose action with restaurant MENU: ");
         System.out.println("4--> choose action with RESERVATION: ");

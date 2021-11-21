@@ -2,10 +2,7 @@ package lv.javaguru.java2.qwe.core.services.user_services;
 
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.database.UserData;
-import lv.javaguru.java2.qwe.core.domain.Position;
-import lv.javaguru.java2.qwe.core.domain.Stock;
-import lv.javaguru.java2.qwe.core.domain.TradeTicket;
-import lv.javaguru.java2.qwe.core.domain.TradeType;
+import lv.javaguru.java2.qwe.core.domain.*;
 import lv.javaguru.java2.qwe.core.requests.user_requests.StockMarketOrderRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.StockMarketOrderResponse;
@@ -34,13 +31,14 @@ public class StockMarketOrderService {
                     Double.parseDouble(request.getQuantity()),
                     request.getRealTimePrice()
             );
-            userData.savePosition(position, request.getUser().getId());
+            User user = userData.findUserByIdOrName(request.getUser().getName()).get();
+            userData.savePosition(position, user);
             TradeTicket ticket = new TradeTicket(
                     request.getUser(), request.getSecurity(), getTradeType(request),
                     Double.parseDouble(request.getQuantity()), request.getRealTimePrice(),
                     LocalDateTime.now()
             );
-            userData.saveTradeTicket(ticket);
+            userData.saveTradeTicket(ticket, user);
             return new StockMarketOrderResponse(position, ticket);
         }
         return new StockMarketOrderResponse(errors);

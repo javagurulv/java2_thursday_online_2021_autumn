@@ -5,6 +5,7 @@ import lv.javaguru.java2.qwe.core.domain.Security;
 import lv.javaguru.java2.qwe.core.domain.TradeTicket;
 import lv.javaguru.java2.qwe.core.domain.User;
 import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -50,8 +51,6 @@ public class OrmUserDataImpl implements UserData {
                 .getResultList();
     }
 
-
-
     @Override
     public Optional<User> findUserByIdOrName(String userIdOrName) {
         try {
@@ -67,16 +66,18 @@ public class OrmUserDataImpl implements UserData {
 
     @Override
     public List<Position> getUserPortfolio(Long userId) {
-        return sessionFactory.getCurrentSession()
-                .createQuery("FROM Position p WHERE user_id = " + userId, Position.class)
-                .getResultList();
+        User user =  sessionFactory.getCurrentSession()
+                .find(User.class, userId);
+        Hibernate.initialize(user.getPortfolio());
+        return user.getPortfolio();
     }
 
     @Override
     public List<TradeTicket> getUserTrades(Long userId) {
-        return sessionFactory.getCurrentSession()
-                .createQuery("FROM TradeTicket t WHERE user_id = " + userId, TradeTicket.class)
-                .getResultList();
+        User user =  sessionFactory.getCurrentSession()
+                .find(User.class, userId);
+        Hibernate.initialize(user.getTrades());
+        return user.getTrades();
     }
 
     @Override
@@ -91,42 +92,43 @@ public class OrmUserDataImpl implements UserData {
     }
 
     @Override
-    public void savePosition(Position position, Long userId) {
-        position.setUserId(userId);
-        Optional<Position> oldPosition = getOldPosition(position.getSecurity(), userId);
+    public void savePosition(Position position, User user) {
+        position.setUser(user);
+        Optional<Position> oldPosition = getOldPosition(position.getSecurity(), user);
         if (oldPosition.isPresent()) {
             replacePosition(position, oldPosition.get());
         }
         else {
-            sessionFactory.getCurrentSession().save(position);
+            user.getPortfolio().add(position);
         }
     }
 
     @Override
-    public void saveTradeTicket(TradeTicket ticket) {
-        sessionFactory.getCurrentSession().save(ticket);
+    public void saveTradeTicket(TradeTicket ticket, User user) {
+        user.getTrades().add(ticket);
     }
 
     private void replacePosition(Position position, Position oldPosition) {
         Position newPosition = mergePositions(oldPosition, position);
         Session cs = getSession();
         if (newPosition != null && position.getAmount() > 0) {
-            cs.save(newPosition);
-            cs.delete(oldPosition);
+            position.getUser().getPortfolio().add(newPosition);
+            position.getUser().getPortfolio().remove(oldPosition);
         }
         else if (newPosition != null && position.getAmount() < 0) {
             double oldPurchasePrice = oldPosition.getPurchasePrice();
             newPosition.setPurchasePrice(position.getPurchasePrice());
             oldPosition.setPurchasePrice(position.getPurchasePrice());
             cs.flush();
-            cs.delete(oldPosition);
-            cs.save(newPosition);
+            position.getUser().getPortfolio().remove(oldPosition);
+            position.getUser().getPortfolio().add(newPosition);
+            cs.flush();
             newPosition.setPurchasePrice(oldPurchasePrice);
         }
         else {
             oldPosition.setPurchasePrice(position.getPurchasePrice());
             cs.flush();
-            cs.delete(oldPosition);
+            position.getUser().getPortfolio().remove(oldPosition);
         }
     }
 
@@ -138,10 +140,10 @@ public class OrmUserDataImpl implements UserData {
         }
     }
 
-    private Optional<Position> getOldPosition(Security security, Long userId) {
+    private Optional<Position> getOldPosition(Security security, User user) {
         try {
             return Optional.of((Position) sessionFactory.getCurrentSession().createQuery(
-                    "FROM Position p WHERE user_id = " + userId +
+                    "FROM Position p WHERE user_id = " + user.getId() +
                             " AND security_ticker = '" + security.getTicker() + "'"
             ).getSingleResult());
         }
@@ -157,7 +159,7 @@ public class OrmUserDataImpl implements UserData {
                     newPosition.getPurchasePrice() * (newPosition.getAmount() / totalQuantity));
             deleteOldPosition(oldPosition);
             Position mergedPosition = new Position(newPosition.getSecurity(), totalQuantity, newPurchasePrice);
-            mergedPosition.setUserId(oldPosition.getUserId());
+            mergedPosition.setUser(oldPosition.getUser());
             return mergedPosition;
         }
         else if (newPosition.getAmount() < 0 && oldPosition.getAmount() + newPosition.getAmount() == 0) { // если после продажи позиция полностью закрывается
@@ -166,13 +168,14 @@ public class OrmUserDataImpl implements UserData {
         else { // частичная продажа
             double totalQuantity = oldPosition.getAmount() + newPosition.getAmount();
             Position mergedPosition = new Position(newPosition.getSecurity(), totalQuantity, oldPosition.getPurchasePrice());
-            mergedPosition.setUserId(oldPosition.getUserId());
+            mergedPosition.setUser(oldPosition.getUser());
             return mergedPosition;
         }
     }
 
     private void deleteOldPosition(Position oldPosition) {
-        sessionFactory.getCurrentSession().delete(oldPosition);
+//        sessionFactory.getCurrentSession().delete(oldPosition);
+        oldPosition.getUser().getPortfolio().remove(oldPosition);
     }
 
     private Session getSession() {

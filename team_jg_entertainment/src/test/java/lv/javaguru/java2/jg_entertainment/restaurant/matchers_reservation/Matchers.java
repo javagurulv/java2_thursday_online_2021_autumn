@@ -3,20 +3,20 @@ package lv.javaguru.java2.jg_entertainment.restaurant.matchers_reservation;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
-import lv.javaguru.java2.jg_entertainment.restaurant.domain.Visitor;
+import lv.javaguru.java2.jg_entertainment.restaurant.domain.User;
 import org.mockito.ArgumentMatcher;
 
 import java.time.LocalDateTime;
 
 public class Matchers implements ArgumentMatcher<Reservation> {
 
-    private Visitor visitor;
+    private User user;
     private Menu menu;
     private Table table;
     private LocalDateTime date;
 
-    public Matchers(Visitor visitor, Menu menu, Table table, LocalDateTime date) {
-        this.visitor = visitor;
+    public Matchers(User user, Menu menu, Table table, LocalDateTime date) {
+        this.user = user;
         this.menu = menu;
         this.table = table;
         this.date = date;
@@ -24,7 +24,7 @@ public class Matchers implements ArgumentMatcher<Reservation> {
 
     @Override
     public boolean matches(Reservation reservation) {
-        return reservation.getVisitor().equals(visitor)
+        return reservation.getUser().equals(user)
                 && reservation.getMenu().equals(menu)
                 && reservation.getTable().equals(table)
                 && reservation.getReservationDate().equals(date);

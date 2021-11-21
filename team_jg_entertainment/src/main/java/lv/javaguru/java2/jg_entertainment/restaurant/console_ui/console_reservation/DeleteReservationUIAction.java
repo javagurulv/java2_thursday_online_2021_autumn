@@ -16,7 +16,7 @@ public class DeleteReservationUIAction implements ReservationUIAction {
     @Override
     public void execute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter id reservation to delete");
+        System.out.println("Enter ID reservation which need to delete: ");
         Long id = scanner.nextLong();
 
         DeleteReservationRequest request = new DeleteReservationRequest(id);
@@ -24,9 +24,9 @@ public class DeleteReservationUIAction implements ReservationUIAction {
 
         if (response.isTrue()) {
             System.out.println("Success!");
-            System.out.println("Reservation with ID" + id + " was deleted");
+            System.out.println("Reservation with ID" + id + " was deleted rom list!");
         } else {
-            System.out.println("Error! " + id + " id reservation, doesn't exist");
+            System.out.println("Error! " + id + " ID reservation, doesn't exist in list!");
         }
     }
 }

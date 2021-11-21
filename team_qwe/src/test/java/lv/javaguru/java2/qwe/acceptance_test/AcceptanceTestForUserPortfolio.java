@@ -66,7 +66,7 @@ public class AcceptanceTestForUserPortfolio {
                 new Position(new Stock("PENN US", "Penn National Gaming Inc.", "Consumer Discretionary", "USD", 67.65, 0, 2.33), 1293, 67.65)
         );
         IntStream.rangeClosed(0, portfolio.size() - 1)
-                        .forEach(i -> portfolio.get(i).setUserId(1L));
+                        .forEach(i -> portfolio.get(i).setUser(response2.getUser()));
         assertEquals(portfolio.size(), response1.getPortfolio().size());
         IntStream.rangeClosed(0, portfolio.size() - 1)
                 .forEach(i -> assertTrue(portfolio.contains(response1.getPortfolio().get(i))));

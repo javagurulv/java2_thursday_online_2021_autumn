@@ -15,7 +15,7 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "id_visitor")
-    private Visitor visitor;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "id_menu")
@@ -32,11 +32,11 @@ public class Reservation {
     }
 
 
-    public Reservation(Visitor visitor,
+    public Reservation(User user,
                        Menu menu,
                        Table table,
                        LocalDateTime reservationDate) {
-        this.visitor = visitor;
+        this.user = user;
         this.table = table;
         this.menu = menu;
         this.reservationDate = reservationDate;
@@ -50,12 +50,12 @@ public class Reservation {
         this.idReservation = idReservation;
     }
 
-    public Visitor getVisitor() {
-        return visitor;
+    public User getUser() {
+        return user;
     }
 
-    public void setVisitor(Visitor visitor) {
-        this.visitor = visitor;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Menu getMenu() {
@@ -86,7 +86,7 @@ public class Reservation {
     @Override
     public String toString() {
         return "Reservation{" +
-                " visitor= " + visitor +
+                " visitor= " + user +
                 ", table= " + table +
                 ", menu= " + menu +
                 ", reservationDate= " + reservationDate +
@@ -99,7 +99,7 @@ public class Reservation {
         if (o == null || getClass() != o.getClass()) return false;
         Reservation that = (Reservation) o;
         return Objects.equals(idReservation, that.idReservation)
-                && Objects.equals(visitor, that.visitor)
+                && Objects.equals(user, that.user)
                 && Objects.equals(table, that.table)
                 && Objects.equals(menu, that.menu)
                 && Objects.equals(reservationDate, that.reservationDate);
@@ -107,7 +107,7 @@ public class Reservation {
 
     @Override
     public int hashCode() {
-        return Objects.hash(visitor, table, menu, reservationDate);
+        return Objects.hash(user, table, menu, reservationDate);
     }
 
 }
