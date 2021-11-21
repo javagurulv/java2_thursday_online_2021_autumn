@@ -1,7 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database.reservation_repository;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.menu_repository.MenuRepository;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.reservation_repository.ReservationRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_repository.TableRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository.VisitorsRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.EditReservationEnum;
@@ -66,16 +65,16 @@ public class ReservationRepositoryImpl implements ReservationRepository {
                 .filter(clientReservation -> Objects.equals(clientReservation.getIdReservation(), reservationID)).findFirst();
         if (reservationToEditOpt.isPresent()) {
             Reservation reservationToEdit = reservationToEditOpt.get();
-            if (userInput.equals(EditReservationEnum.TABLE_ID)) {
+            if (userInput.equals(EditReservationEnum.ID_TABLE)) {
                 reservationToEdit.setTable(tableRepository.findTableById(Long.parseLong(changes)).get(0));
                 isReservationEdited = true;
-            } else if (userInput.equals(EditReservationEnum.CLIENT_ID)) {
+            } else if (userInput.equals(EditReservationEnum.ID_VISITOR)) {
                 reservationToEdit.setVisitor(visitorsRepository.findClientById(Long.parseLong(changes)).get(0));
                 isReservationEdited = true;
-            } else if (userInput.equals(EditReservationEnum.MENU_ID)) {
+            } else if (userInput.equals(EditReservationEnum.ID_MENU)) {
                 reservationToEdit.setMenu(menuRepository.findById(Long.parseLong(changes)).get(0));
                 isReservationEdited = true;
-            } else if (userInput.equals(EditReservationEnum.DATE)) {
+            } else if (userInput.equals(EditReservationEnum.RESERVATION_DATE)) {
                 reservationToEdit.setReservationDate(LocalDateTime.parse(changes));
                 isReservationEdited = true;
             }

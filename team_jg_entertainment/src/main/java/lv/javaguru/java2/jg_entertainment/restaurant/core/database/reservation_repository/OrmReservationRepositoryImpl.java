@@ -18,7 +18,7 @@ import java.util.Locale;
 public class OrmReservationRepositoryImpl implements ReservationRepository {
 
     @Autowired private SessionFactory sessionFactory;
-    @Autowired GetReservationDate getReservationDate;
+    @Autowired private GetReservationDate getReservationDate;
 
     @Override
     public void addReservation(Reservation reservation) {
@@ -40,12 +40,12 @@ public class OrmReservationRepositoryImpl implements ReservationRepository {
                 .createQuery("SELECT r FROM Reservation r", Reservation.class)
                 .getResultList();
     }
-//new part
+
     @Override
     public boolean editReservation(Long reservationID, EditReservationEnum userInput, String changes) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "UPDATE Reservation SET "
-        + userInput.toString().toUpperCase(Locale.ROOT) + " = : changes WHERE reservation_id = :reservation_id");
+        + userInput.toString().toUpperCase(Locale.ROOT) + " = :changes WHERE reservation_id = :reservation_id");
         query.setParameter("reservation_id", reservationID);
         query.setParameter("changes", changes);
         int result = query.executeUpdate();
