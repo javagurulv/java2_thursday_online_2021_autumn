@@ -2,5 +2,4 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_reserva
 
 public interface ReservationUIAction {
     void execute();
-
 }

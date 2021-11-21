@@ -11,7 +11,6 @@ import java.util.Map;
 @Component
 public class ProgramReservation {
 
-
     private Map<Integer, ReservationUIAction> menuNumberToUIActionMap;
     private CheckMenuNumberFromConsole checkNumberFromConsole = new CheckMenuNumberFromConsole();
 
@@ -24,7 +23,6 @@ public class ProgramReservation {
         menuNumberToUIActionMap.put(4, findReservationUIAction(uiActions, EditReservationUIAction.class));
         menuNumberToUIActionMap.put(5, findReservationUIAction(uiActions, ExitProgramListReservationUIAction.class));
         menuNumberToUIActionMap.put(6, findReservationUIAction(uiActions, ExitReservationUIAction.class));
-
     }
 
     private ReservationUIAction findReservationUIAction(List<ReservationUIAction> reservationUIActions, Class uiActionClass) {
@@ -44,7 +42,6 @@ public class ProgramReservation {
         System.out.println("4. CHANGE reservation!");
         System.out.println("5. Choose that return in MAIN MENU:");
         System.out.println("6. Exit!");
-
         System.out.println();
     }
 

@@ -17,13 +17,14 @@ public class EditReservationUIAction implements ReservationUIAction{
     public void execute() {
         GetQueryWithConsole getInformScanner = new GetQueryWithConsole();
         String idReservation = getInformScanner.getNumberFromConsole("Enter reservation id: ");
-        String informChange = getInformScanner.getNumberFromConsole("What do you like to change: ID_VISITOR, ID_TABLE, ID_MENU, RESERVATION_DATE ->").toUpperCase(Locale.ROOT);
+        String informChange = getInformScanner.getNumberFromConsole("What do you like to change: ID_VISITOR, ID_TABLE, ID_MENU, RESERVATION_DATE ->")
+                .toUpperCase(Locale.ROOT);
         String change = "";
         switch (informChange) {
-            case "ID_VISITOR" -> change = getInformScanner.getNumberFromConsole("Enter id visitor");
-            case "ID_TABLE" -> change = getInformScanner.getNumberFromConsole("Enter id table");
-            case "ID_MENU" -> change = getInformScanner.getNumberFromConsole("Enter id menu");
-            case "RESERVATION_DATE" -> change = getInformScanner.getNumberFromConsole("Enter neq date yyyy-MM-dd HH:mm:");
+            case "ID_VISITOR" -> change = getInformScanner.getNumberFromConsole("Enter new ID visitor:");
+            case "ID_TABLE" -> change = getInformScanner.getNumberFromConsole("Enter new ID table:");
+            case "ID_MENU" -> change = getInformScanner.getNumberFromConsole("Enter new ID menu:");
+            case "RESERVATION_DATE" -> change = getInformScanner.getNumberFromConsole("Enter new DATE format is like-> yyyy-MM-dd HH:mm:");
         }
         EditReservationRequest request = new EditReservationRequest(idReservation, informChange, change);
         EditReservationResponse response = reservationService.execute(request);
@@ -31,7 +32,7 @@ public class EditReservationUIAction implements ReservationUIAction{
             response.getErrorList().forEach(coreError -> System.out.println("Error: " + coreError.getField() + " " + coreError.getMessageError()));
             System.out.println();
         }else {
-            System.out.println("Reservation was changed! New inform: " + idReservation + " " + informChange);
+            System.out.println("Reservation was changed! New inform: " + idReservation + ", " + informChange);
         }
     }
 }
