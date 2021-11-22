@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HospitalConfiguration.class})
-@Sql({"/schema.sql"})
+@Sql({"/Schema.sql"})
 public class AcceptanceTest3 {
 
     @Autowired private DatabaseCleaner databaseCleaner;

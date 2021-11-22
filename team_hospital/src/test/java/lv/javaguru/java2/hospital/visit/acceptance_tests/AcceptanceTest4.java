@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HospitalConfiguration.class})
-@Sql({"/schema.sql"})
+@Sql({"/Schema.sql"})
 public class AcceptanceTest4 {
 
     @Autowired private DatabaseCleaner databaseCleaner;

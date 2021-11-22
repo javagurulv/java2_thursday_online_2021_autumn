@@ -31,7 +31,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {HospitalConfiguration.class})
-@Sql({"/schema.sql"})
+@Sql({"/Schema.sql"})
 public class AcceptanceTest1 {
 
     @Autowired private DatabaseCleaner databaseCleaner;
