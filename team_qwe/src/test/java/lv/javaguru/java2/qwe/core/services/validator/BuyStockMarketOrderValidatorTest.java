@@ -73,6 +73,34 @@ public class BuyStockMarketOrderValidatorTest {
     }
 
     @Test
+    public void shouldReturnRealTimePriceError1() {
+        StockMarketOrderRequest request = new StockMarketOrderRequest(
+                getAllUserListService().execute(new GetAllUserListRequest()).getList().get(0),
+                getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(1),
+                "1000",
+                null
+        );
+        List<CoreError> errorList = getValidator().validate(request);
+        assertEquals(1, errorList.size());
+        assertEquals(errorList.get(0).getField(), "Real-time price");
+        assertEquals(errorList.get(0).getMessage(), "cannot get real-time quote from API! Check connection!");
+    }
+
+    @Test
+    public void shouldReturnRealTimePriceError2() {
+        StockMarketOrderRequest request = new StockMarketOrderRequest(
+                getAllUserListService().execute(new GetAllUserListRequest()).getList().get(0),
+                getAllSecurityListService().execute(new GetAllSecurityListRequest()).getList().get(1),
+                "1000",
+                -1.
+        );
+        List<CoreError> errorList = getValidator().validate(request);
+        assertEquals(1, errorList.size());
+        assertEquals(errorList.get(0).getField(), "Real-time price");
+        assertEquals(errorList.get(0).getMessage(), "wrong format in http response data!");
+    }
+
+    @Test
     public void shouldReturnUserError() {
         StockMarketOrderRequest request = new StockMarketOrderRequest(
                 null,

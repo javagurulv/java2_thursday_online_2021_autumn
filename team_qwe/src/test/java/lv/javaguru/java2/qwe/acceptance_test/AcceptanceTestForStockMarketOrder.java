@@ -225,6 +225,34 @@ public class AcceptanceTestForStockMarketOrder {
         assertEquals(portfolio, response2.getPortfolio());
     }
 
+    @Test
+    public void shouldFailToBuyStockAtMarketPrice5() {
+        User user = getFindUserByNameService().execute(new FindUserByNameRequest("Alexander")).getUser();
+        Security security = getFindSecurityByTickerOrNameService().execute(new FindSecurityByTickerOrNameRequest("AMZN US")).getSecurity();
+        StockMarketOrderRequest request1 = new StockMarketOrderRequest(user, security,"100",null);
+        List<Position> portfolio = List.of();
+        StockMarketOrderResponse response1 = getService().execute(request1);
+        GetUserPortfolioResponse response2 = getGetUserPortfolioService().execute(new GetUserPortfolioRequest("Alexander"));
+        assertNull(response1.getPosition());
+        assertTrue(response1.hasErrors());
+        assertEquals("cannot get real-time quote from API! Check connection!", response1.getErrors().get(0).getMessage());
+        assertEquals(portfolio, response2.getPortfolio());
+    }
+
+    @Test
+    public void shouldFailToBuyStockAtMarketPrice6() {
+        User user = getFindUserByNameService().execute(new FindUserByNameRequest("Alexander")).getUser();
+        Security security = getFindSecurityByTickerOrNameService().execute(new FindSecurityByTickerOrNameRequest("AMZN US")).getSecurity();
+        StockMarketOrderRequest request1 = new StockMarketOrderRequest(user, security,"100",-1.);
+        List<Position> portfolio = List.of();
+        StockMarketOrderResponse response1 = getService().execute(request1);
+        GetUserPortfolioResponse response2 = getGetUserPortfolioService().execute(new GetUserPortfolioRequest("Alexander"));
+        assertNull(response1.getPosition());
+        assertTrue(response1.hasErrors());
+        assertEquals("wrong format in http response data!", response1.getErrors().get(0).getMessage());
+        assertEquals(portfolio, response2.getPortfolio());
+    }
+
     public static class MyTrigger2 implements Trigger {
         @Override
         public void init(Connection conn, String schemaName, String triggerName,

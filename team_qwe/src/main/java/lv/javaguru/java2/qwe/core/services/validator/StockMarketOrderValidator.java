@@ -27,6 +27,8 @@ public class StockMarketOrderValidator {
                     new CoreError("Security", "no security with such id in the database!")),
             entry(request -> request.getRealTimePrice() == null,
                     new CoreError("Real-time price", "cannot get real-time quote from API! Check connection!")),
+            entry(request -> request.getRealTimePrice() != null && request.getRealTimePrice() == -1,
+                    new CoreError("Real-time price", "wrong format in http response data!")),
             entry(request -> request.getUser() == null,
                     new CoreError("User", "no user with such name exists in the database!")),
             entry(request -> utils.isNotDouble(request.getQuantity()),
