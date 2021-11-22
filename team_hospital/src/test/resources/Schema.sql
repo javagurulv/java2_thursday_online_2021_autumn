@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS doctors CASCADE;
 DROP TABLE IF EXISTS patients CASCADE;
-DROP TABLE IF EXISTS visits CASCADE;
 DROP TABLE IF EXISTS prescriptions CASCADE;
+DROP TABLE IF EXISTS visits CASCADE;
 
 CREATE TABLE IF NOT EXISTS `doctors` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `doctors` (
   `surname` VARCHAR(100) NOT NULL,
   `speciality` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`)
-)
+);
 
 CREATE TABLE IF NOT EXISTS `patients` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `patients` (
   `surname` VARCHAR(100) NOT NULL,
   `personal_code` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`id`)
-)
+);
 
 CREATE TABLE IF NOT EXISTS `visits` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `visits` (
   PRIMARY KEY (id),
   FOREIGN KEY (`doctor_id`) REFERENCES `doctors`(`id`),
   FOREIGN KEY (`patient_id`) REFERENCES `patients`(`id`)
-)
+);
 
 CREATE TABLE IF NOT EXISTS `prescriptions` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
@@ -41,4 +41,4 @@ CREATE TABLE IF NOT EXISTS `prescriptions` (
   PRIMARY KEY (id),
   FOREIGN KEY (`doctor_id`) REFERENCES `doctors`(`id`),
   FOREIGN KEY (`patient_id`) REFERENCES `patients`(`id`)
-)
+);

@@ -3,17 +3,11 @@ package lv.javaguru.java2.hospital.visit.acceptance_tests;
 import lv.javaguru.java2.hospital.config.HospitalConfiguration;
 import lv.javaguru.java2.hospital.database_cleaner.DatabaseCleaner;
 import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
-import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.AddDoctorResponse;
-import lv.javaguru.java2.hospital.doctor.core.responses.SearchDoctorsResponse;
 import lv.javaguru.java2.hospital.doctor.core.services.AddDoctorService;
-import lv.javaguru.java2.hospital.doctor.core.services.SearchDoctorsService;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
-import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.AddPatientResponse;
-import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
 import lv.javaguru.java2.hospital.patient.core.services.AddPatientService;
-import lv.javaguru.java2.hospital.patient.core.services.search_patient_service.SearchPatientsService;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
@@ -24,99 +18,62 @@ import lv.javaguru.java2.hospital.visit.core.services.AddVisitService;
 import lv.javaguru.java2.hospital.visit.core.services.EditVisitService;
 import lv.javaguru.java2.hospital.visit.core.services.ShowAllVisitService;
 import lv.javaguru.java2.hospital.visit.core.services.search_visit_service.SearchVisitService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {HospitalConfiguration.class})
+@Sql({"/schema.sql"})
 public class AcceptanceTest3 {
-    private ApplicationContext applicationContext;
 
-    @BeforeEach
+    @Autowired private DatabaseCleaner databaseCleaner;
+    @Autowired private AddPatientService addPatientService;
+    @Autowired private AddDoctorService addDoctorService;
+    @Autowired private AddVisitService addVisitService;
+    @Autowired private SearchVisitService searchVisitService;
+    @Autowired private ShowAllVisitService showAllVisitService;
+    @Autowired private EditVisitService editVisitService;
+
+    @Before
     public void setup() {
-        applicationContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
-        getDatabaseCleaner().clean();
+        databaseCleaner.clean();
     }
 
     @Test
     public void shouldCorrectAddVisit() {
         AddPatientRequest addPatientRequest = new AddPatientRequest("name3", "surname3", "55556666777");
-        AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest);
+        AddPatientResponse addPatientResponse = addPatientService.execute(addPatientRequest);
         AddDoctorRequest addDoctorRequest = new AddDoctorRequest("name3", "surname3", "speciality3");
-        AddDoctorResponse addDoctorResponse = getAddDoctorService().execute(addDoctorRequest);
+        AddDoctorResponse addDoctorResponse = addDoctorService.execute(addDoctorRequest);
         AddDoctorRequest addDoctorRequest2 = new AddDoctorRequest("name4", "surname4", "speciality4");
-        AddDoctorResponse addDoctorResponse2 = getAddDoctorService().execute(addDoctorRequest2);
-
-        SearchPatientsResponse searchPatientsResponse = getSearchPatientsService()
-                .execute(new SearchPatientsRequest("name3", "surname3", "55556666777"));
-        SearchDoctorsResponse searchDoctorsResponse1 = getSearchDoctorsService()
-                .execute(new SearchDoctorsRequest(null, "name3", "surname3", "speciality3"));
-        SearchDoctorsResponse searchDoctorsResponse2 = getSearchDoctorsService()
-                .execute(new SearchDoctorsRequest(null, "name4", "surname4", "speciality4"));
+        AddDoctorResponse addDoctorResponse2 = addDoctorService.execute(addDoctorRequest2);
 
         AddVisitRequest request = new AddVisitRequest(
-                searchPatientsResponse.getPatientList().get(0).getId().toString(),
-                searchDoctorsResponse1.getDoctors().get(0).getId().toString(),
+                addPatientResponse.getPatient().getId().toString(),
+                addDoctorResponse.getNewDoctor().getId().toString(),
                 "2023-10-10 10:00", "description");
-        AddVisitResponse addVisitResponse = getAddVisitService().execute(request);
-
-        SearchVisitRequest searchVisitRequest1 = new SearchVisitRequest(
-                null,searchDoctorsResponse1.getDoctors().get(0).getId().toString(),
-                searchPatientsResponse.getPatientList().get(0).getId().toString(),
-                "2023-10-10 10:00");
-        SearchVisitResponse searchVisitResponse1 = getSearchVisitService().execute(searchVisitRequest1);
+        AddVisitResponse addVisitResponse = addVisitService.execute(request);
 
         EditVisitRequest editVisitRequest = new EditVisitRequest(
-                searchVisitResponse1.getVisits().get(0).getVisitID().toString(), "DOCTOR_ID",
-                searchDoctorsResponse2.getDoctors().get(0).getId().toString());
+                addVisitResponse.getPatientVisit().getVisitID().toString(), "DOCTOR_ID",
+                addDoctorResponse2.getNewDoctor().getId().toString());
 
-        EditVisitResponse editVisitResponse = getEditVisitService().execute(editVisitRequest);
+        EditVisitResponse editVisitResponse = editVisitService.execute(editVisitRequest);
 
         SearchVisitRequest searchVisitRequest2 = new SearchVisitRequest(
-                null,searchDoctorsResponse2.getDoctors().get(0).getId().toString(),
-                searchPatientsResponse.getPatientList().get(0).getId().toString(),
+                null, addDoctorResponse2.getNewDoctor().getId().toString(),
+                addPatientResponse.getPatient().getId().toString(),
                 "2023-10-10 10:00");
 
-        SearchVisitResponse searchVisitResponse2 = getSearchVisitService().execute(searchVisitRequest2);
+        SearchVisitResponse searchVisitResponse2 = searchVisitService.execute(searchVisitRequest2);
 
         assertFalse(searchVisitResponse2.getVisits().isEmpty());
-    }
-
-    private AddVisitService getAddVisitService() {
-        return applicationContext.getBean(AddVisitService.class);
-    }
-
-    private AddPatientService getAddPatienceService() {
-        return applicationContext.getBean(AddPatientService.class);
-    }
-
-    private AddDoctorService getAddDoctorService() {
-        return applicationContext.getBean(AddDoctorService.class);
-    }
-
-    private EditVisitService getEditVisitService(){
-        return applicationContext.getBean(EditVisitService.class);
-    }
-
-    private SearchPatientsService getSearchPatientsService() {
-        return applicationContext.getBean(SearchPatientsService.class);
-    }
-
-    private SearchDoctorsService getSearchDoctorsService(){
-        return applicationContext.getBean(SearchDoctorsService.class);
-    }
-
-    private SearchVisitService getSearchVisitService(){
-        return applicationContext.getBean(SearchVisitService.class);
-    }
-
-    private DatabaseCleaner getDatabaseCleaner() {
-        return applicationContext.getBean(DatabaseCleaner.class);
-    }
-
-    private ShowAllVisitService getShowAllVisitService() {
-        return applicationContext.getBean(ShowAllVisitService.class);
     }
 }
