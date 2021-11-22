@@ -174,7 +174,6 @@ public class OrmUserDataImpl implements UserData {
     }
 
     private void deleteOldPosition(Position oldPosition) {
-//        sessionFactory.getCurrentSession().delete(oldPosition);
         oldPosition.getUser().getPortfolio().remove(oldPosition);
     }
 
