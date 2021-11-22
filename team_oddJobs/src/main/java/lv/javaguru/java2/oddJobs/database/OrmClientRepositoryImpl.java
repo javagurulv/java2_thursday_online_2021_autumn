@@ -1,7 +1,7 @@
 package lv.javaguru.java2.oddJobs.database;
 
+import lv.javaguru.java2.oddJobs.database.domainInterfaces.ClientRepository;
 import lv.javaguru.java2.oddJobs.domain.Client;
-import lv.javaguru.java2.oddJobs.domain.Specialist;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

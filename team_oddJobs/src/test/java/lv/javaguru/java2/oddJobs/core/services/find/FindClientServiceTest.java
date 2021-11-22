@@ -5,7 +5,7 @@ import lv.javaguru.java2.oddJobs.core.requests.find.FindClientsRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.find.FindClientsResponse;
 import lv.javaguru.java2.oddJobs.core.validations.find.FindClientsValidator;
-import lv.javaguru.java2.oddJobs.database.ClientRepository;
+import lv.javaguru.java2.oddJobs.database.domainInterfaces.ClientRepository;
 import lv.javaguru.java2.oddJobs.domain.Client;
 import org.junit.Before;
 import org.junit.Test;
@@ -71,7 +71,7 @@ public class FindClientServiceTest {
         //given
         FindClientsRequest request = new FindClientsRequest("Name", null);
         List<Client> clients = new ArrayList<>();
-        clients.add(new Client("Name", "Surname"));
+        clients.add(new Client("Name", "Surname","personalCode","city"));
         when(clientRepository.findClientsByName("Name")).thenReturn(clients);
 
 
@@ -89,7 +89,7 @@ public class FindClientServiceTest {
         //given
         FindClientsRequest request = new FindClientsRequest(null, "Surname");
         List<Client> clients = new ArrayList<>();
-        clients.add(new Client("Name", "Surname"));
+        clients.add(new Client("Name", "Surname","personalCode","city"));
         when(clientRepository.findClientBySurname("Surname")).thenReturn(clients);
 
 

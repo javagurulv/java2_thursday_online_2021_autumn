@@ -46,11 +46,11 @@ public class AcceptanceTests1ForSpecialist {
 
     @Test
     public void FindSpecialist() {
-        AddSpecialistRequest request = new AddSpecialistRequest("Name", "Surname", "Profession");
+        AddSpecialistRequest request = new AddSpecialistRequest("Name", "Surname", "Profession","personalCode","city");
         addSpecialistService.execute(request);
-        AddSpecialistRequest request1 = new AddSpecialistRequest("Name1", "Surname1", "Profession1");
+        AddSpecialistRequest request1 = new AddSpecialistRequest("Name1", "Surname1", "Profession1","personalCode1","city1");
         addSpecialistService.execute(request1);
-        AddSpecialistRequest request2 = new AddSpecialistRequest("Name2", "Surname", "Profession2");
+        AddSpecialistRequest request2 = new AddSpecialistRequest("Name2", "Surname", "Profession2","personalCode2","city2");
         addSpecialistService.execute(request2);
 
         FindSpecialistRequest request3 = new FindSpecialistRequest(null, "Surname", null);
@@ -67,11 +67,11 @@ public class AcceptanceTests1ForSpecialist {
 
     @Test
     public void FindSpecialistOrderingAscending() {
-        AddSpecialistRequest request = new AddSpecialistRequest("Name", "Surname", "Profession");
+        AddSpecialistRequest request = new AddSpecialistRequest("Name", "Surname", "Profession","personalCode","city");
         addSpecialistService.execute(request);
-        AddSpecialistRequest request1 = new AddSpecialistRequest("Name2", "Surname", "Profession");
+        AddSpecialistRequest request1 = new AddSpecialistRequest("Name2", "Surname", "Profession","personalCode1","city");
         addSpecialistService.execute(request1);
-        AddSpecialistRequest request2 = new AddSpecialistRequest("Name1", "Surname", "Profession");
+        AddSpecialistRequest request2 = new AddSpecialistRequest("Name1", "Surname", "Profession","personalCode2","city");
         addSpecialistService.execute(request2);
 
         Ordering ordering = new Ordering("Name", "ASCENDING");
@@ -92,11 +92,11 @@ public class AcceptanceTests1ForSpecialist {
 
     @Test
     public void FindSpecialistOrderingDescending() {
-        AddSpecialistRequest request = new AddSpecialistRequest("Name", "Surname", "Profession");
+        AddSpecialistRequest request = new AddSpecialistRequest("Name", "Surname", "Profession","personalCode","city");
         addSpecialistService.execute(request);
-        AddSpecialistRequest request1 = new AddSpecialistRequest("Name2", "Surname", "Profession");
+        AddSpecialistRequest request1 = new AddSpecialistRequest("Name2", "Surname", "Profession","personalCode1","city");
         addSpecialistService.execute(request1);
-        AddSpecialistRequest request2 = new AddSpecialistRequest("Name1", "Surname", "Profession");
+        AddSpecialistRequest request2 = new AddSpecialistRequest("Name1", "Surname", "Profession","personalCode2","city");
         addSpecialistService.execute(request2);
 
         Ordering ordering = new Ordering("Name", "ASCENDING");
@@ -118,11 +118,11 @@ public class AcceptanceTests1ForSpecialist {
 
     @Test
     public void FindSpecialistPaging() {
-        AddSpecialistRequest request = new AddSpecialistRequest("Name", "Surname", "Profession");
+        AddSpecialistRequest request = new AddSpecialistRequest("Name", "Surname", "Profession","personalCode","city");
         addSpecialistService.execute(request);
-        AddSpecialistRequest request1 = new AddSpecialistRequest("Name2", "Surname", "Profession");
+        AddSpecialistRequest request1 = new AddSpecialistRequest("Name2", "Surname", "Profession","personalCode1","city");
         addSpecialistService.execute(request1);
-        AddSpecialistRequest request2 = new AddSpecialistRequest("Name1", "Surname", "Profession");
+        AddSpecialistRequest request2 = new AddSpecialistRequest("Name1", "Surname", "Profession","personalCode2","city");
         addSpecialistService.execute(request2);
 
         Ordering ordering = new Ordering("Name", "DESCENDING");

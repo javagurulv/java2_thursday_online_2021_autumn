@@ -1,6 +1,6 @@
-package lv.javaguru.java2.oddJobs.database.unused;
+package lv.javaguru.java2.oddJobs.database.unUsed;
 
-import lv.javaguru.java2.oddJobs.database.SpecialistRepository;
+import lv.javaguru.java2.oddJobs.database.domainInterfaces.SpecialistRepository;
 import lv.javaguru.java2.oddJobs.domain.Specialist;
 
 import java.util.List;

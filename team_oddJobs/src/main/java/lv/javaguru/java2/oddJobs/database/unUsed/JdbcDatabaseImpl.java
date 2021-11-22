@@ -1,4 +1,4 @@
-package lv.javaguru.java2.oddJobs.database.unused;
+package lv.javaguru.java2.oddJobs.database.unUsed;
 
 import lv.javaguru.java2.oddJobs.database.rowMapper.AdvertisementRowMapper;
 import lv.javaguru.java2.oddJobs.database.rowMapper.ClientRowMapper;

@@ -2,7 +2,7 @@ package lv.javaguru.java2.oddJobs.core.services.get;
 
 import lv.javaguru.java2.oddJobs.core.requests.get.GetAllClientsRequest;
 import lv.javaguru.java2.oddJobs.core.responce.get.GetAllClientsResponse;
-import lv.javaguru.java2.oddJobs.database.ClientRepository;
+import lv.javaguru.java2.oddJobs.database.domainInterfaces.ClientRepository;
 import lv.javaguru.java2.oddJobs.domain.Client;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,8 +31,8 @@ public class GetAllClientServiceTest {
 
         //given
         List<Client> clientsList = new ArrayList<>();
-        clientsList.add(new Client("Name","Surname"));
-        clientsList.add(new Client("Name1","Surname1"));
+        clientsList.add(new Client("Name","Surname","personalCode","city"));
+        clientsList.add(new Client("Name1","Surname1","personalCode","city"));
         when(clientRepository.getAllClients()).thenReturn(clientsList);
 
         GetAllClientsRequest request = new GetAllClientsRequest();

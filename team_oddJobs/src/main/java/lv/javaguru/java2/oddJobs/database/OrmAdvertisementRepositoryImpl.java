@@ -2,6 +2,7 @@ package lv.javaguru.java2.oddJobs.database;
 
 
 
+import lv.javaguru.java2.oddJobs.database.domainInterfaces.AdvertisementRepository;
 import lv.javaguru.java2.oddJobs.domain.Advertisement;
 
 import org.hibernate.SessionFactory;
@@ -14,7 +15,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 @Component
 @Transactional
-public class OrmAdvertisementRepositoryImpl implements AdvertisementRepository{
+public class OrmAdvertisementRepositoryImpl implements AdvertisementRepository {
 
     @Autowired
     private SessionFactory sessionFactory;

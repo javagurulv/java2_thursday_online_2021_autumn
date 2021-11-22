@@ -1,11 +1,10 @@
-package lv.javaguru.java2.oddJobs.database.unused;
+package lv.javaguru.java2.oddJobs.database.unUsed;
 
-import lv.javaguru.java2.oddJobs.database.SpecialistRepository;
+import lv.javaguru.java2.oddJobs.database.domainInterfaces.SpecialistRepository;
 import lv.javaguru.java2.oddJobs.database.rowMapper.SpecialistRowMapper;
 import lv.javaguru.java2.oddJobs.domain.Specialist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

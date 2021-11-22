@@ -26,8 +26,14 @@ public class AddClientUIAction implements UIAction {
         System.out.println("Enter your surname");
         String clientSurname = scanner.nextLine();
 
+        System.out.println("Enter your personal code");
+        String personalCode = scanner.nextLine();
 
-        AddClientRequest addClientRequest = new AddClientRequest(clientName, clientSurname);
+        System.out.println("Enter your city");
+        String city = scanner.nextLine();
+
+
+        AddClientRequest addClientRequest = new AddClientRequest(clientName, clientSurname, personalCode, city);
         AddClientResponse addClientResponse = addClientService.execute(addClientRequest);
 
         if (addClientResponse.hasErrors()) {

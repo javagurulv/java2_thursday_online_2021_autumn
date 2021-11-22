@@ -4,7 +4,7 @@ import lv.javaguru.java2.oddJobs.core.requests.remove.RemoveSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.remove.RemoveSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.validations.remove.RemoveSpecialistValidator;
-import lv.javaguru.java2.oddJobs.database.SpecialistRepository;
+import lv.javaguru.java2.oddJobs.database.domainInterfaces.SpecialistRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

@@ -1,11 +1,11 @@
 package lv.javaguru.java2.oddJobs.core.requests.add;
 
-public class AddAdvertismentRequest {
+public class AddAdvertisementRequest {
 
     private String advTitle;
     private String advDescription;
 
-    public AddAdvertismentRequest(String advTitle, String advDescription) {
+    public AddAdvertisementRequest(String advTitle, String advDescription) {
         this.advTitle = advTitle;
         this.advDescription = advDescription;
     }

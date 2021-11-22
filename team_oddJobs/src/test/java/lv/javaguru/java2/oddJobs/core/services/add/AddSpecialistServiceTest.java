@@ -7,7 +7,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 import java.util.ArrayList;
 import java.util.List;
 
-import lv.javaguru.java2.oddJobs.database.SpecialistRepository;
+import lv.javaguru.java2.oddJobs.database.domainInterfaces.SpecialistRepository;
 import org.junit.runner.RunWith;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -32,7 +32,7 @@ public class AddSpecialistServiceTest {
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
-        AddSpecialistRequest request = new AddSpecialistRequest(null, "Surname", "Profession");
+        AddSpecialistRequest request = new AddSpecialistRequest(null, "Surname", "Profession","personalCode","city");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Name", "Must not be empty!"));
         Mockito.when(validator.validate(request)).thenReturn(errors);
@@ -49,7 +49,7 @@ public class AddSpecialistServiceTest {
     @Test
     public void shouldAddSpecialistToDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        AddSpecialistRequest request = new AddSpecialistRequest("Name", "Surname", "Profession");
+        AddSpecialistRequest request = new AddSpecialistRequest("Name", "Surname", "Profession","personalCode","city");
         AddSpecialistResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         Mockito.verify(specialistRepository).addSpecialist(

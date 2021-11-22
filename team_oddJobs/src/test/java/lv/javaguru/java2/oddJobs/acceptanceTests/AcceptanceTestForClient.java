@@ -48,8 +48,8 @@ public class AcceptanceTestForClient {
     @Test
     public void shouldReturnClientsList() {
         //given
-        AddClientRequest addClientRequest0 = new AddClientRequest("Name0", "Surname0");
-        AddClientRequest addClientRequest1 = new AddClientRequest("Name1", "Surname1");
+        AddClientRequest addClientRequest0 = new AddClientRequest("Name0", "Surname0","personalCode0","city0");
+        AddClientRequest addClientRequest1 = new AddClientRequest("Name1", "Surname1","personalCode1","city0");
 
         //when
         addClientService.execute(addClientRequest0);
@@ -66,8 +66,8 @@ public class AcceptanceTestForClient {
 
     @Test
     public void shouldRemoveClientsFromList() {
-        AddClientRequest addClientRequest0 = new AddClientRequest("Name0", "Surname0");
-        AddClientRequest addClientRequest1 = new AddClientRequest("Name1", "Surname1");
+        AddClientRequest addClientRequest0 = new AddClientRequest("Name0", "Surname0","personalCode0","city0");
+        AddClientRequest addClientRequest1 = new AddClientRequest("Name1", "Surname1","personalCode0","city0");
         addClientService.execute(addClientRequest0);
         addClientService.execute(addClientRequest1);
 

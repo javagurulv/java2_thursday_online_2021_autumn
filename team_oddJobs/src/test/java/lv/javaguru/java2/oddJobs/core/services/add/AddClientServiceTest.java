@@ -4,7 +4,7 @@ import lv.javaguru.java2.oddJobs.core.requests.add.AddClientRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.add.AddClientResponse;
 import lv.javaguru.java2.oddJobs.core.validations.add.AddClientValidator;
-import lv.javaguru.java2.oddJobs.database.ClientRepository;
+import lv.javaguru.java2.oddJobs.database.domainInterfaces.ClientRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -34,7 +34,7 @@ public class AddClientServiceTest {
     public void shouldReturnErrorsWhenNameValidationFails() {
 
         //given
-        AddClientRequest request = new AddClientRequest(null, "Surname");
+        AddClientRequest request = new AddClientRequest(null, "Surname","personalCode","city");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Name", "Must not be empty!"));
         when(validator.validate(request)).thenReturn(errors);
@@ -53,7 +53,7 @@ public class AddClientServiceTest {
     public void shouldReturnErrorsWhenSurnameValidationFails() {
 
         //given
-        AddClientRequest request = new AddClientRequest("Name", null);
+        AddClientRequest request = new AddClientRequest("Name", null,"personalCode","city");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Surname", "Must not be empty!"));
         when(validator.validate(request)).thenReturn(errors);
@@ -71,7 +71,7 @@ public class AddClientServiceTest {
     }    public void shouldNotInvokeDatabaseWhenValidationFails() {
 
         //given
-        AddClientRequest request = new AddClientRequest("Name", null);
+        AddClientRequest request = new AddClientRequest("Name", null,"personalCode","city");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Surname", "Must not be empty!"));
         when(validator.validate(request)).thenReturn(errors);
@@ -93,7 +93,7 @@ public class AddClientServiceTest {
     @Test
     public void shouldAddClientToDatabase() {
         //given
-        AddClientRequest request = new AddClientRequest("Name", "Surname");
+        AddClientRequest request = new AddClientRequest("Name", "Surname","personalCode","city");
         List<CoreError> errors = new ArrayList<>();
 
         when(validator.validate(request)).thenReturn(errors);

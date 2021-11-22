@@ -1,29 +1,29 @@
-insert into Clients (clientName,clientSurname)
-values ("clientName1","clientSurname1");
+insert into Clients (clientName,clientSurname,personalCode,city)
+values ("clientName1","clientSurname1","personalCode1","city1");
 
-insert into Clients (clientName,clientSurname)
-values ("clientName2","clientSurname2");
+insert into Clients (clientName,clientSurname,personalCode,city)
+values ("clientName2","clientSurname2","personalCode2","city2");
 
-insert into Clients (clientName,clientSurname)
-values ("clientName3","clientSurname3");
+insert into Clients (clientName,clientSurname,personalCode,city)
+values ("clientName3","clientSurname3","personalCode3","city3");
 
-insert into Clients (clientId,clientName,clientSurname)
-values (10,"clientName4","clientSurname4");
+insert into Clients (clientId,clientName,clientSurname,personalCode,city)
+values (10,"clientName4","clientSurname4","personalCode4","city4");
 
-insert into Specialists(specialistName,specialistSurname,specialistProfession)
-values ("specialistName","specialistSurname","specialistProfession");
+insert into Specialists(specialistName,specialistSurname,specialistProfession,personalCode,city)
+values ("specialistName","specialistSurname","specialistProfession","personalCode","city");
 
-insert into Specialists(specialistName,specialistSurname,specialistProfession)
-values ("specialistName1","specialistSurname1","specialistProfession1");
+insert into Specialists(specialistName,specialistSurname,specialistProfession,personalCode,city)
+values ("specialistName1","specialistSurname1","specialistProfession1","personalCode1","city1");
 
-insert into Specialists(specialistName,specialistSurname,specialistProfession)
-values ("specialistName2","specialistSurname2","specialistProfession2");
+insert into Specialists(specialistName,specialistSurname,specialistProfession,personalCode,city)
+values ("specialistName2","specialistSurname2","specialistProfession2","personalCode2","city2");
 
-insert into Specialists(specialistName,specialistSurname,specialistProfession)
-values ("specialistName3","specialistSurname3","specialistProfession3");
+insert into Specialists(specialistName,specialistSurname,specialistProfession,personalCode,city)
+values ("specialistName3","specialistSurname3","specialistProfession3","personalCode3","city3");
 
-insert into Specialists(specialistId,specialistName,specialistSurname,specialistProfession)
-values (10,"specialistName4","specialistSurname4","specialistProfession4");
+insert into Specialists(specialistId,specialistName,specialistSurname,specialistProfession,personalCode,city)
+values (10,"specialistName4","specialistSurname4","specialistProfession4","personalCode4","city4");
 
 insert into Advertisements (advTitle,advDescription)
 values ("title","some text");

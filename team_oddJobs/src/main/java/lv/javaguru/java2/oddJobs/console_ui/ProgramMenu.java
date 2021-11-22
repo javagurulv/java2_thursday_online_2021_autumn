@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import lv.javaguru.java2.oddJobs.console_ui.add.AddAdvertismentUIAction;
+import lv.javaguru.java2.oddJobs.console_ui.add.AddAdvertisementUIAction;
 import lv.javaguru.java2.oddJobs.console_ui.add.AddClientUIAction;
 import lv.javaguru.java2.oddJobs.console_ui.add.AddSpecialistUIAction;
 import lv.javaguru.java2.oddJobs.console_ui.exit.ExitMenuUIAction;
@@ -28,7 +28,7 @@ public class ProgramMenu {
         menuNumberToUIActionMap = new HashMap<>();
         menuNumberToUIActionMap.put(1, findUIAction(uiActions, AddClientUIAction.class));
         menuNumberToUIActionMap.put(2, findUIAction(uiActions, AddSpecialistUIAction.class));
-        menuNumberToUIActionMap.put(3, findUIAction(uiActions, AddAdvertismentUIAction.class));
+        menuNumberToUIActionMap.put(3, findUIAction(uiActions, AddAdvertisementUIAction.class));
         menuNumberToUIActionMap.put(4, findUIAction(uiActions, FindSpecialistUIAction.class));
         menuNumberToUIActionMap.put(5, findUIAction(uiActions, FindClientsUIAction.class));
         menuNumberToUIActionMap.put(6, findUIAction(uiActions, FindAdvertisementUIAction.class));
@@ -58,7 +58,7 @@ public class ProgramMenu {
         System.out.println("7.  Show all clients");
         System.out.println("8.  Show all specialists");
         System.out.println("9.  Delete client account");
-        System.out.println("10.  Delete specialist account");
+        System.out.println("10. Delete specialist account");
         System.out.println("11. Exit");
     }
 

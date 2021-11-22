@@ -1,26 +1,25 @@
 package lv.javaguru.java2.oddJobs.database;
 
 import lv.javaguru.java2.oddJobs.domain.Specialist;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
+import javax.transaction.Transactional;
 
-public interface SpecialistRepository {
+@Component
+@Transactional
+public class SpecialistRepository {
+    @Autowired
+    private SessionFactory sessionFactory;
 
-    void addSpecialist(Specialist specialist);
 
-    boolean removeSpecialistById(Long specialistId);
+    public void save(Specialist specialist) {
+        sessionFactory.getCurrentSession().save(specialist);
+    }
 
-    boolean removeSpecialist(Long specialistId, String specialistName, String specialistSurname);
+    public Specialist findById(Long id) {
+        return sessionFactory.getCurrentSession().get(Specialist.class, id);
+    }
 
-    List<Specialist> findSpecialistById(Long specialistId);
-
-    List<Specialist> findSpecialistByName(String specialistName);
-
-    List<Specialist> findSpecialistBySurname(String specialistSurname);
-
-    List<Specialist> findSpecialistByProfession(String specialistProfession);
-
-    List<Specialist> findSpecialistByNameAndSurnameAndProfession(String specialistName, String specialistSurname, String specialistProfession);
-
-    List<Specialist> getAllSpecialist();
 }

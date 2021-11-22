@@ -6,15 +6,15 @@ import lv.javaguru.java2.oddJobs.domain.Advertisement;
 
 import java.util.List;
 
-public class AddAdvertismentResponce extends CoreResponse {
+public class AddAdvertisementResponse extends CoreResponse {
 
     private Advertisement advertisement;
 
-    public AddAdvertismentResponce(Advertisement advertisement) {
+    public AddAdvertisementResponse(Advertisement advertisement) {
         this.advertisement = advertisement;
     }
 
-    public AddAdvertismentResponce(List<CoreError> errors){
+    public AddAdvertisementResponse(List<CoreError> errors){
         super(errors);
     }
 

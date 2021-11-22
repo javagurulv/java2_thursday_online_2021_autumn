@@ -1,4 +1,4 @@
-package lv.javaguru.java2.oddJobs.database;
+package lv.javaguru.java2.oddJobs.database.domainInterfaces;
 
 import lv.javaguru.java2.oddJobs.domain.Advertisement;
 

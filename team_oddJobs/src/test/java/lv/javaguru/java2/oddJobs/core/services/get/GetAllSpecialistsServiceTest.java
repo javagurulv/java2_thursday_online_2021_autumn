@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import lv.javaguru.java2.oddJobs.database.SpecialistRepository;
+import lv.javaguru.java2.oddJobs.database.domainInterfaces.SpecialistRepository;
 import lv.javaguru.java2.oddJobs.domain.Specialist;
 import lv.javaguru.java2.oddJobs.core.requests.get.GetAllSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.responce.get.GetAllSpecialistsResponse;
@@ -29,7 +29,7 @@ public class GetAllSpecialistsServiceTest {
 
     public void shouldGetSpecialistsFromDb() {
         List<Specialist> specialists = new ArrayList<>();
-        specialists.add(new Specialist("Name", "Surname", "Profession"));
+        specialists.add(new Specialist("Name", "Surname", "Profession","personalCode","city"));
         Mockito.when(specialistRepository.getAllSpecialist()).thenReturn(specialists);
 
         GetAllSpecialistRequest request = new GetAllSpecialistRequest();

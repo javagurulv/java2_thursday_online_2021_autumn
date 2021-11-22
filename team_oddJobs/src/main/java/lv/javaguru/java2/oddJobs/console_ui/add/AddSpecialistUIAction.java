@@ -25,8 +25,12 @@ public class AddSpecialistUIAction implements UIAction {
         String surname = scanner.nextLine();
         System.out.println("Enter your profession");
         String profession = scanner.nextLine();
+        System.out.println("Enter your personal code");
+        String personalCode = scanner.nextLine();
+        System.out.println("Enter your city");
+        String city = scanner.nextLine();
 
-        AddSpecialistRequest addSpecialistRequest = new AddSpecialistRequest(name, surname, profession);
+        AddSpecialistRequest addSpecialistRequest = new AddSpecialistRequest(name, surname, profession,personalCode,city);
         AddSpecialistResponse addSpecialistResponse = addSpecialistService.execute(addSpecialistRequest);
 
         if (addSpecialistResponse.hasErrors()) {

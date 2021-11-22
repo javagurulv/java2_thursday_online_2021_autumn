@@ -1,5 +1,6 @@
 package lv.javaguru.java2.oddJobs.database;
 
+import lv.javaguru.java2.oddJobs.database.domainInterfaces.SpecialistRepository;
 import lv.javaguru.java2.oddJobs.domain.Specialist;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Component
 @Transactional
-public class OrmSpecialistRepositoryImpl implements SpecialistRepository{
+public class OrmSpecialistRepositoryImpl implements SpecialistRepository {
     @Autowired
     private SessionFactory sessionFactory;
 

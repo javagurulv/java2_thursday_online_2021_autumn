@@ -2,6 +2,7 @@ package lv.javaguru.java2.oddJobs.domain;
 
 import javax.persistence.*;
 import java.util.Objects;
+
 @Entity
 @Table(name = "Specialists")
 public class Specialist {
@@ -14,17 +15,25 @@ public class Specialist {
     @Column(name = "specialistName", nullable = false)
     private String specialistName;
 
-
     @Column(name = "specialistSurname", nullable = false)
     private String specialistSurname;
+
     @Column(name = "specialistProfession", nullable = false)
     private String specialistProfession;
 
+    @Column(name = "personalCode", nullable = false)
+    private String personalCode;
 
-    public Specialist(String specialistName, String specialistSurname, String specialistProfession) {
+    @Column(name = "city", nullable = false)
+    private String city;
+
+
+    public Specialist(String specialistName, String specialistSurname, String specialistProfession,String personalCode, String city) {
         this.specialistName = specialistName;
         this.specialistSurname = specialistSurname;
         this.specialistProfession = specialistProfession;
+        this.personalCode=personalCode;
+        this.city=city;
     }
 
     public Specialist(Long specialistId) {
@@ -71,27 +80,44 @@ public class Specialist {
         this.specialistProfession = specialistProfession;
     }
 
+    public String getPersonalCode() {
+        return personalCode;
+    }
+
+    public void setPersonalCode(String personalCode) {
+        this.personalCode = personalCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Specialist that = (Specialist) o;
-        return Objects.equals(specialistId, that.specialistId) && Objects.equals(specialistName, that.specialistName) && Objects.equals(specialistSurname, that.specialistSurname) && Objects.equals(specialistProfession, that.specialistProfession);
+        return Objects.equals(specialistId, that.specialistId) && Objects.equals(specialistName, that.specialistName) && Objects.equals(specialistSurname, that.specialistSurname) && Objects.equals(specialistProfession, that.specialistProfession) && Objects.equals(personalCode, that.personalCode) && Objects.equals(city, that.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(specialistId, specialistName, specialistSurname, specialistProfession);
+        return Objects.hash(specialistId, specialistName, specialistSurname, specialistProfession, personalCode, city);
     }
 
     @Override
     public String toString() {
         return "Specialist{" +
-                "id=" + specialistId +
-                ", name='" + specialistName + '\'' +
-                ", surname='" + specialistSurname + '\'' +
-                ", profession='" + specialistProfession + '\'' +
+                "specialistId=" + specialistId +
+                ", specialistName='" + specialistName + '\'' +
+                ", specialistSurname='" + specialistSurname + '\'' +
+                ", specialistProfession='" + specialistProfession + '\'' +
+                ", personalCode='" + personalCode + '\'' +
+                ", city='" + city + '\'' +
                 '}';
     }
-
 }

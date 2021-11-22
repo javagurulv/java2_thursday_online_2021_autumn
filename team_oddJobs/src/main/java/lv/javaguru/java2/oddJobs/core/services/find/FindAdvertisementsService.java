@@ -6,11 +6,12 @@ import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.find.FindAdvertisementResponse;
 import lv.javaguru.java2.oddJobs.core.validations.find.FindAdvertisementValidator;
-import lv.javaguru.java2.oddJobs.database.AdvertisementRepository;
+import lv.javaguru.java2.oddJobs.database.domainInterfaces.AdvertisementRepository;
 import lv.javaguru.java2.oddJobs.domain.Advertisement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@Transactional
 public class FindAdvertisementsService {
 
     @Value("${search.ordering.enabled}")
