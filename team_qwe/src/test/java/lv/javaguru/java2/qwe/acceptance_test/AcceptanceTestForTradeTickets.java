@@ -12,6 +12,8 @@ import lv.javaguru.java2.qwe.core.services.data_services.FindSecurityByTickerOrN
 import lv.javaguru.java2.qwe.core.services.user_services.FindUserByNameService;
 import lv.javaguru.java2.qwe.core.services.user_services.GetUserTradesService;
 import lv.javaguru.java2.qwe.core.services.user_services.StockMarketOrderService;
+import org.hibernate.Hibernate;
+import org.hibernate.proxy.HibernateProxy;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.assertEquals;
 
@@ -45,7 +49,14 @@ public class AcceptanceTestForTradeTickets {
                 user, security, TradeType.BUY, 150., 3525.15, LocalDateTime.now()
         ));
         assertEquals(1, response2.getTrades().size());
-        assertEquals(trades, response2.getTrades());
+        IntStream.rangeClosed(0, 0)
+                .forEach(i -> {
+                    assertEquals(trades.get(i).getUser().getId(), response2.getTrades().get(i).getUser().getId());
+                    assertEquals(trades.get(i).getSecurity().getTicker(), response2.getTrades().get(i).getSecurity().getTicker());
+                    assertEquals(trades.get(i).getTradeType(), response2.getTrades().get(i).getTradeType());
+                    assertEquals(trades.get(i).getQuantity(), response2.getTrades().get(i).getQuantity());
+                    assertEquals(trades.get(i).getTradePrice(), response2.getTrades().get(i).getTradePrice());
+                });
     }
 
     @Test
@@ -60,7 +71,14 @@ public class AcceptanceTestForTradeTickets {
                 user, security, TradeType.SELL, -500., 304.36, LocalDateTime.now()
         ));
         assertEquals(1, response2.getTrades().size());
-        assertEquals(trades, response2.getTrades());
+        IntStream.rangeClosed(0, 0)
+                .forEach(i -> {
+                    assertEquals(trades.get(i).getUser().getId(), response2.getTrades().get(i).getUser().getId());
+                    assertEquals(trades.get(i).getSecurity().getTicker(), response2.getTrades().get(i).getSecurity().getTicker());
+                    assertEquals(trades.get(i).getTradeType(), response2.getTrades().get(i).getTradeType());
+                    assertEquals(trades.get(i).getQuantity(), response2.getTrades().get(i).getQuantity());
+                    assertEquals(trades.get(i).getTradePrice(), response2.getTrades().get(i).getTradePrice());
+                });
     }
 
     @Test
@@ -97,7 +115,14 @@ public class AcceptanceTestForTradeTickets {
                 new TradeTicket(user, security3, TradeType.BUY, 90., 1125.13, LocalDateTime.now())
         );
         assertEquals(7, response8.getTrades().size());
-        assertEquals(trades, response8.getTrades());
+        IntStream.rangeClosed(0, trades.size() - 1)
+                .forEach(i -> {
+                    assertEquals(trades.get(i).getUser().getId(), response8.getTrades().get(i).getUser().getId());
+                    assertEquals(trades.get(i).getSecurity().getTicker(), response8.getTrades().get(i).getSecurity().getTicker());
+                    assertEquals(trades.get(i).getTradeType(), response8.getTrades().get(i).getTradeType());
+                    assertEquals(trades.get(i).getQuantity(), response8.getTrades().get(i).getQuantity());
+                    assertEquals(trades.get(i).getTradePrice(), response8.getTrades().get(i).getTradePrice());
+                });
     }
 
 

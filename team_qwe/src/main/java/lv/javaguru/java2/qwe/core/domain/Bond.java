@@ -81,7 +81,7 @@ public class Bond extends Security {
                 '}';
     }
 
-    @Override
+/*    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -91,6 +91,6 @@ public class Bond extends Security {
                 && Objects.equals(rating, bond.rating)
                 && Objects.equals(nominal, bond.nominal)
                 && Objects.equals(maturity, bond.maturity);
-    }
+    }*/
 
 }

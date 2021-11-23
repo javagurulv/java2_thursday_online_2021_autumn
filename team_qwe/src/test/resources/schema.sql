@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS `trades` (
   `trade_price` DOUBLE NOT NULL,
   `trade_date` DATETIME NOT NULL,
   PRIMARY KEY (`trade_id`),
-    FOREIGN KEY(`user_id`) REFERENCES `users`(`id`),
-    FOREIGN KEY(`security_ticker`) REFERENCES `stocks`(`ticker`)
+  FOREIGN KEY(`user_id`) REFERENCES `users`(`id`),
+  FOREIGN KEY(`security_ticker`) REFERENCES `stocks`(`ticker`)
 );
 CREATE TRIGGER IF NOT EXISTS ins_sec
   AFTER INSERT ON users_positions

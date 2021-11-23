@@ -1,5 +1,6 @@
 package lv.javaguru.java2.qwe.core.database;
 
+import lv.javaguru.java2.qwe.API.API;
 import lv.javaguru.java2.qwe.core.domain.Position;
 import lv.javaguru.java2.qwe.core.domain.Security;
 import lv.javaguru.java2.qwe.core.domain.TradeTicket;
@@ -17,6 +18,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 @Component
 @Transactional
@@ -24,6 +26,7 @@ public class OrmUserDataImpl implements UserData {
 
     @Autowired private SessionFactory sessionFactory;
     @Autowired private UtilityMethods utils;
+    @Autowired private API api;
 
     @Override
     public LocalDate getCurrentDate() {
@@ -69,14 +72,20 @@ public class OrmUserDataImpl implements UserData {
         User user =  sessionFactory.getCurrentSession()
                 .find(User.class, userId);
         Hibernate.initialize(user.getPortfolio());
+//        updateQuotesForPortfolio(user.getPortfolio());
         return user.getPortfolio();
     }
 
     @Override
     public List<TradeTicket> getUserTrades(Long userId) {
+        long start = System.nanoTime();
         User user =  sessionFactory.getCurrentSession()
                 .find(User.class, userId);
+        System.out.println("===============================================================================================================================================================================");
         Hibernate.initialize(user.getTrades());
+        System.out.println("===============================================================================================================================================================================");
+        long duration = (System.nanoTime() - start) / 1_000_000;
+        System.out.println("PERFORMANCE: " + duration + " ms");
         return user.getTrades();
     }
 
@@ -179,6 +188,13 @@ public class OrmUserDataImpl implements UserData {
 
     private Session getSession() {
         return sessionFactory.getCurrentSession();
+    }
+
+    private void updateQuotesForPortfolio(List<Position> portfolio) {
+        IntStream.rangeClosed(0, portfolio.size() - 1)
+                .mapToObj(i -> portfolio.get(i).getSecurity())
+                .parallel()
+                .forEach(security -> security.setMarketPrice(api.getQuote(security.getTicker())));
     }
 
 }
