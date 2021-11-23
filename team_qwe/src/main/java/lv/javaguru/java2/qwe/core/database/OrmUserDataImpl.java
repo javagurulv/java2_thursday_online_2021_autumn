@@ -78,14 +78,9 @@ public class OrmUserDataImpl implements UserData {
 
     @Override
     public List<TradeTicket> getUserTrades(Long userId) {
-        long start = System.nanoTime();
         User user =  sessionFactory.getCurrentSession()
                 .find(User.class, userId);
-        System.out.println("===============================================================================================================================================================================");
         Hibernate.initialize(user.getTrades());
-        System.out.println("===============================================================================================================================================================================");
-        long duration = (System.nanoTime() - start) / 1_000_000;
-        System.out.println("PERFORMANCE: " + duration + " ms");
         return user.getTrades();
     }
 

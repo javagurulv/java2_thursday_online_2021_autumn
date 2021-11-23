@@ -12,8 +12,6 @@ import lv.javaguru.java2.qwe.core.services.data_services.FindSecurityByTickerOrN
 import lv.javaguru.java2.qwe.core.services.user_services.FindUserByNameService;
 import lv.javaguru.java2.qwe.core.services.user_services.GetUserTradesService;
 import lv.javaguru.java2.qwe.core.services.user_services.StockMarketOrderService;
-import org.hibernate.Hibernate;
-import org.hibernate.proxy.HibernateProxy;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -124,9 +121,6 @@ public class AcceptanceTestForTradeTickets {
                     assertEquals(trades.get(i).getTradePrice(), response8.getTrades().get(i).getTradePrice());
                 });
     }
-
-
-
 
     private StockMarketOrderService getStockMarketOrderService() {
         return appContext.getBean(StockMarketOrderService.class);
