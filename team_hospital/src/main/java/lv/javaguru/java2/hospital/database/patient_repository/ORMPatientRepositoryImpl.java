@@ -51,9 +51,9 @@ public class ORMPatientRepositoryImpl implements PatientRepository {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "UPDATE Patient p SET "
                         + userInput.toString().toLowerCase(Locale.ROOT)
-                        + " = :" + input +" WHERE id = :id");
+                        + " = :input WHERE id = :id");
         query.setParameter("id", patientID);
-        query.setParameter(input, input);
+        query.setParameter("input", input);
         int result = query.executeUpdate();
         return result == 1;
     }

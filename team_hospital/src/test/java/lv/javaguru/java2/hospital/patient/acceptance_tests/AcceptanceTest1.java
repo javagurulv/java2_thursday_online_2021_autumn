@@ -7,44 +7,39 @@ import lv.javaguru.java2.hospital.patient.core.requests.ShowAllPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.ShowAllPatientsResponse;
 import lv.javaguru.java2.hospital.patient.core.services.AddPatientService;
 import lv.javaguru.java2.hospital.patient.core.services.ShowAllPatientsService;
-import org.junit.Ignore;
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {HospitalConfiguration.class})
+@Sql({"/Schema.sql"})
 public class AcceptanceTest1 {
 
-    private ApplicationContext applicationContext;
+    @Autowired private DatabaseCleaner databaseCleaner;
+    @Autowired private AddPatientService addPatientService;
+    @Autowired private ShowAllPatientsService showAllPatientsService;
 
-    @BeforeEach
+    @Before
     public void setup() {
-        applicationContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
-        getDatabaseCleaner().clean();
+        databaseCleaner.clean();
     }
 
-    @Ignore
+    @Test
     public void shouldCorrectAddPatient() {
         AddPatientRequest addPatientRequest1 = new AddPatientRequest("name", "surname", "01234567890");
-        getAddPatienceService().execute(addPatientRequest1);
+        addPatientService.execute(addPatientRequest1);
 
-        ShowAllPatientsResponse response = getShowAllPatientsService().execute(new ShowAllPatientsRequest());
+        ShowAllPatientsResponse response = showAllPatientsService.execute(new ShowAllPatientsRequest());
         assertEquals(response.getPatients().size(), 1);
         assertEquals(response.getPatients().get(0).getName(), "name");
         assertEquals(response.getPatients().get(0).getSurname(), "surname");
         assertEquals(response.getPatients().get(0).getPersonalCode(), "01234567890");
-    }
-
-    private AddPatientService getAddPatienceService() {
-        return applicationContext.getBean(AddPatientService.class);
-    }
-
-    private ShowAllPatientsService getShowAllPatientsService() {
-        return applicationContext.getBean(ShowAllPatientsService.class);
-    }
-
-    private DatabaseCleaner getDatabaseCleaner() {
-        return applicationContext.getBean(DatabaseCleaner.class);
     }
 }

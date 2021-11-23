@@ -14,63 +14,51 @@ import lv.javaguru.java2.hospital.patient.core.services.AddPatientService;
 import lv.javaguru.java2.hospital.patient.core.services.DeletePatientService;
 import lv.javaguru.java2.hospital.patient.core.services.ShowAllPatientsService;
 import lv.javaguru.java2.hospital.patient.core.services.search_patient_service.SearchPatientsService;
-import org.junit.Ignore;
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-class AcceptanceTest4 {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {HospitalConfiguration.class})
+@Sql({"/Schema.sql"})
+public class AcceptanceTest4 {
 
-    private ApplicationContext applicationContext;
+    @Autowired private DatabaseCleaner databaseCleaner;
+    @Autowired private AddPatientService addPatientService;
+    @Autowired private SearchPatientsService searchPatientsService;
+    @Autowired private DeletePatientService deletePatientService;
+    @Autowired private ShowAllPatientsService showAllPatientsService;
 
-    @BeforeEach
+    @Before
     public void setup() {
-        applicationContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
-        getDatabaseCleaner().clean();
+        databaseCleaner.clean();
     }
 
-    @Ignore
+    @Test
     public void shouldReturnCorrectPatientsListAfterDelete() {
         AddPatientRequest addPatientRequest1 = new AddPatientRequest("name1", "surname1", "11223344556");
-        AddPatientResponse addPatientResponse = getAddPatienceService().execute(addPatientRequest1);
+        AddPatientResponse addPatientResponse = addPatientService.execute(addPatientRequest1);
 
         AddPatientRequest addPatientRequest2 = new AddPatientRequest("name2", "surname2", "22334455667");
-        getAddPatienceService().execute(addPatientRequest2);
+        addPatientService.execute(addPatientRequest2);
 
         SearchPatientsRequest searchPatientsRequest = new SearchPatientsRequest("name1", "surname1", "11223344556");
-        SearchPatientsResponse searchPatientsResponse = getSearchPatientsService().execute(searchPatientsRequest);
+        SearchPatientsResponse searchPatientsResponse = searchPatientsService.execute(searchPatientsRequest);
 
         DeletePatientRequest deletePatientRequest =
                 new DeletePatientRequest(searchPatientsResponse.getPatientList().get(0).getId().toString());
-        DeletePatientResponse deletePatientResponse = getDeletePatientService().execute(deletePatientRequest);
+        DeletePatientResponse deletePatientResponse = deletePatientService.execute(deletePatientRequest);
 
-        ShowAllPatientsResponse response = getShowAllPatientsService().execute(new ShowAllPatientsRequest());
+        ShowAllPatientsResponse response = showAllPatientsService.execute(new ShowAllPatientsRequest());
         assertEquals(response.getPatients().size(), 1);
         assertEquals(response.getPatients().get(0).getName(), "name2");
         assertEquals(response.getPatients().get(0).getSurname(), "surname2");
         assertEquals(response.getPatients().get(0).getPersonalCode(), "22334455667");
-    }
-
-
-    private AddPatientService getAddPatienceService() {
-        return applicationContext.getBean(AddPatientService.class);
-    }
-
-    private DeletePatientService getDeletePatientService() {
-        return applicationContext.getBean(DeletePatientService.class);
-    }
-
-    private ShowAllPatientsService getShowAllPatientsService() {
-        return applicationContext.getBean(ShowAllPatientsService.class);
-    }
-
-    private SearchPatientsService getSearchPatientsService() {
-        return applicationContext.getBean(SearchPatientsService.class);
-    }
-
-    private DatabaseCleaner getDatabaseCleaner() {
-        return applicationContext.getBean(DatabaseCleaner.class);
     }
 }
