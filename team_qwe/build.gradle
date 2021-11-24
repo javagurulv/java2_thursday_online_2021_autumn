@@ -9,6 +9,7 @@ dependencies {
     implementation('org.springframework:spring-jdbc:5.3.13')
     implementation('org.reflections:reflections:0.10.2')
     implementation('org.springframework:spring-context:5.3.13')
+    implementation group: 'org.json', name: 'json', version: '20210307'
     testImplementation('junit:junit:4.13.2')
     testImplementation('org.mockito:mockito-core:4.0.0')
     testImplementation('org.springframework:spring-test:5.3.13')

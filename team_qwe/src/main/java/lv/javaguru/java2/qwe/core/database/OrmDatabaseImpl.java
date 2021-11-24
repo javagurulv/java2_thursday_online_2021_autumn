@@ -66,13 +66,6 @@ public class OrmDatabaseImpl implements Database{
         }
     }
 
-//    @Override
-//    public List<Security> filterStocksByMultipleParameters(String sql) {
-//        return sessionFactory.getCurrentSession()
-//                .createQuery(sql, Security.class)
-//                .getResultList();
-//    }
-
     @Override
     public List<Security> filterStocksByMultipleParameters(String sql) {
         return jdbcTemplate.query(sql, new SecurityRowMapper());

@@ -1,8 +1,11 @@
 package lv.javaguru.java2.qwe.API;
 
 import lv.javaguru.java2.qwe.core.database.Database;
+import lv.javaguru.java2.qwe.core.domain.Position;
 import lv.javaguru.java2.qwe.core.domain.Security;
 import lv.javaguru.java2.qwe.core.domain.Stock;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -14,17 +17,20 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Component
 @Transactional
 public class API {
 
-    @Autowired
-    private Database database;
+    @Autowired private Database database;
 
     @Value("${realTime.marketPrice.enabled}")
     private boolean realMarketPriceDataEnabled;
@@ -34,6 +40,9 @@ public class API {
 
     @Value("${realTime.marketPrice.period}")
     private int realMarketPricePeriod;
+
+    @Value(("${realTime.portfolio.enabled}"))
+    private boolean realTimeDataForPortfolioEnabled;
 
     public void setRealMarketPriceUpdate() {
         if (realMarketPriceDataEnabled && realMarketPricePeriod > 0) {
@@ -59,7 +68,7 @@ public class API {
         }
     }
 
-    private void updatePrice(String ticker, Double realTimePrice) {
+    private void updateSinglePrice(String ticker, Double realTimePrice) {
         Optional<Security> security = database.findSecurityByTickerOrName(ticker);
         if (security.isPresent() && realTimePrice != -1) {
             Stock stock = (Stock) security.get();
@@ -80,10 +89,30 @@ public class API {
                     .filter(line -> line.contains("regularMarketPrice"))
                     .findAny();
             String lastPrice = target.map(s -> s.substring(21)).orElse("-1");
-            updatePrice(ticker, Double.parseDouble(lastPrice));
+            updateSinglePrice(ticker, Double.parseDouble(lastPrice));
             return Double.parseDouble(lastPrice);
         } else {
             return null;
+        }
+    }
+
+    public void getQuotesForMultipleSecurities(List<Position> portfolio) {
+        if (realTimeDataForPortfolioEnabled) {
+            String[] tickers = getTickers(portfolio);
+            JSONObject[] jsonObjects = IntStream.rangeClosed(0, tickers.length - 1)
+                    .mapToObj(i -> Objects.requireNonNull(sendHttpRequestTest(tickers[i])).getJSONObject("quoteResponse"))
+                    .toArray(JSONObject[]::new);
+            JSONArray arr = IntStream.rangeClosed(0, jsonObjects.length - 1)
+                    .mapToObj(i -> jsonObjects[i].getJSONArray("result"))
+                    .reduce((JSONArray::putAll)).orElse(null);
+            IntStream.rangeClosed(0, portfolio.size() - 1)
+                    .forEach(i -> {
+                        assert arr != null;
+                        JSONObject obj = arr.getJSONObject(i);
+                        if (obj.getString("symbol").equals(portfolio.get(i).getSecurity().getTicker())) {
+                            portfolio.get(i).getSecurity().setMarketPrice(obj.getBigDecimal("regularMarketPrice").doubleValue());
+                        }
+                    });
         }
     }
 
@@ -96,11 +125,34 @@ public class API {
                     .build();
             return HttpClient.newHttpClient()
                     .send(request, HttpResponse.BodyHandlers.ofString());
-        }
-        catch (IOException | InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private static JSONObject sendHttpRequestTest(String ticker) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://yfapi.net/v6/finance/quote?region=US&lang=en&symbols=" + ticker))
+                    .header("x-api-key", "69DeXzYODO5uwFXrwj38GxFCu06P98X9vO6PgkI1") // <== ввести свой API key!
+                    .method("GET", HttpRequest.BodyPublishers.noBody())
+                    .build();
+            HttpResponse<String> response = HttpClient.newHttpClient()
+                    .send(request, HttpResponse.BodyHandlers.ofString());
+            return new JSONObject(response.body());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private String[] getTickers(List<Position> portfolio) {
+        String line = portfolio.stream()
+                .map(position -> position.getSecurity().getTicker())
+                .collect(Collectors.joining(","));
+//        String[] lines = line.split("(?<=\\G\\w+,\\w+,\\w+,\\w+,\\w+,\\w+,\\w+,\\w+,\\w+),");
+        return line.split("(?<=\\G\\w{1,4},\\w{1,4},\\w{1,4},\\w{1,4},\\w{1,4},\\w{1,4},\\w{1,4},\\w{1,4},\\w{1,4},\\w{1,4}),");
     }
 
 }

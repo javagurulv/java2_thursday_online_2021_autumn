@@ -27,6 +27,7 @@ public class OrmUserDataImpl implements UserData {
     @Autowired private SessionFactory sessionFactory;
     @Autowired private UtilityMethods utils;
     @Autowired private API api;
+    @Autowired private Database database;
 
     @Override
     public LocalDate getCurrentDate() {
@@ -72,7 +73,7 @@ public class OrmUserDataImpl implements UserData {
         User user =  sessionFactory.getCurrentSession()
                 .find(User.class, userId);
         Hibernate.initialize(user.getPortfolio());
-//        updateQuotesForPortfolio(user.getPortfolio());
+        api.getQuotesForMultipleSecurities(user.getPortfolio());
         return user.getPortfolio();
     }
 

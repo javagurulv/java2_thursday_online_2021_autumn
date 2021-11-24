@@ -26,7 +26,7 @@ public class GetUserPortfolioUIAction implements UIAction {
         printResponse(response);
     }
 
-    public void printResponse(GetUserPortfolioResponse response) {
+    private void printResponse(GetUserPortfolioResponse response) {
         if (!response.hasErrors()) {
             String userName = response.getUser().getName() + "(ID: " + response.getUser().getId() + ")";
             System.out.println("==============" + userName + "===============");
