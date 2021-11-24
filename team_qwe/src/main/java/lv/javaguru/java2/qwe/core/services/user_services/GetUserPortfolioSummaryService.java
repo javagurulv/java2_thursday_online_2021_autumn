@@ -1,6 +1,5 @@
 package lv.javaguru.java2.qwe.core.services.user_services;
 
-import lv.javaguru.java2.qwe.core.domain.Position;
 import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.domain.User;
 import lv.javaguru.java2.qwe.core.database.UserData;
@@ -35,6 +34,7 @@ public class GetUserPortfolioSummaryService {
         List<CoreError> errors = validator.validate(request);
         Optional<User> user = userData.findUserByIdOrName(request.getUserName());
         if (errors.isEmpty() && user.isPresent()) {
+            userData.getUserPortfolio(user.get().getId());
             double portfolioValue = calculatePortfolioValue(user.get());
             int amountOfPositions = calculateAmountOfPosition(user.get());
             Map<String, Double> portfolioAllocation = calculatePortfolioAllocation(user.get(), portfolioValue);
@@ -49,19 +49,19 @@ public class GetUserPortfolioSummaryService {
     }
 
     private double calculatePortfolioValue(User user) {
-        return getPortfolio(user).stream()
+        return user.getPortfolio().stream()
                 .map(position -> position.getAmount() * position.getSecurity().getMarketPrice())
                 .reduce(Double::sum).orElse(0.);
     }
 
     private int calculateAmountOfPosition(User user) {
-        return getPortfolio(user).stream()
+        return user.getPortfolio().stream()
                 .map(position -> 1)
                 .reduce(Integer::sum).orElse(0);
     }
 
     private Map<String, Double> calculatePortfolioAllocation(User user, double portfolioValue) {
-        return getPortfolio(user).stream()
+        return user.getPortfolio().stream()
                 .collect(groupingBy(position -> position.getSecurity().getIndustry(),
                         summingDouble(position ->
                                 (position.getAmount() * position.getSecurity().getMarketPrice()) / portfolioValue
@@ -69,7 +69,7 @@ public class GetUserPortfolioSummaryService {
     }
 
     private double calculateAvgWgtDividendYield(User user, double portfolioValue) {
-        return getPortfolio(user).stream()
+        return user.getPortfolio().stream()
                 .filter(position -> position.getSecurity().getClass().getSimpleName().equals("Stock"))
                 .map(position -> ((position.getAmount() * position.getSecurity().getMarketPrice()) / portfolioValue) *
                         Stream.of(position)
@@ -80,7 +80,7 @@ public class GetUserPortfolioSummaryService {
     }
 
     private double calculateAvgWgtRiskWeight(User user, double portfolioValue) {
-        return getPortfolio(user).stream()
+        return user.getPortfolio().stream()
                 .filter(position -> position.getSecurity().getClass().getSimpleName().equals("Stock"))
                 .map(position -> ((position.getAmount() * position.getSecurity().getMarketPrice()) / portfolioValue) *
                         Stream.of(position)
@@ -88,10 +88,6 @@ public class GetUserPortfolioSummaryService {
                                 .map(Stock::getRiskWeight)
                                 .findAny().orElse(0.))
                 .reduce(Double::sum).orElse(0.);
-    }
-
-    private List<Position> getPortfolio(User user) {
-        return userData.getUserPortfolio(user.getId());
     }
 
 }

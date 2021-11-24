@@ -61,6 +61,7 @@ public class GetUserPortfolioSummaryServiceTest {
                 new Position(new Stock("PFA US", "Pfizer", "Health care", "USD", 78.93, 2.18, 0.98), 1000, 78.93)
         );
         user.setPortfolioGenerationDate(LocalDate.now());
+        user.setPortfolio(portfolio);
 
         int userRiskTolerance = 5;
         double userInitialInvestment = 1_000_000;
@@ -71,7 +72,6 @@ public class GetUserPortfolioSummaryServiceTest {
         double avgWgtRiskWeight = 1.1011;
 
         Mockito.when(userData.findUserByIdOrName("Alexander")).thenReturn(Optional.of(user));
-        Mockito.when(userData.getUserPortfolio(user.getId())).thenReturn(portfolio);
 
         GetUserPortfolioSummaryResponse response = service.execute(request);
         assertFalse(response.hasErrors());
