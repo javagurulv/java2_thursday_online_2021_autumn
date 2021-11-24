@@ -27,21 +27,12 @@ public class FindSecurityByNameValidatorTest {
     }
 
     @Test
-    public void shouldReturnNameError1() {
-        FindSecurityByTickerOrNameRequest request = new FindSecurityByTickerOrNameRequest("Al");
-        List<CoreError> errorList = validator.validate(request);
-        assertEquals(errorList.size(), 1);
-        assertEquals(errorList.get(0).getField(), "Name");
-        assertEquals(errorList.get(0).getMessage(), "minimum 3 symbols required!");
-    }
-
-    @Test
     public void shouldReturnNameError2() {
         FindSecurityByTickerOrNameRequest request = new FindSecurityByTickerOrNameRequest("");
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "Name");
-        assertEquals(errorList.get(0).getMessage(), "minimum 3 symbols required!");
+        assertEquals(errorList.get(0).getMessage(), "minimum 1 symbol required!");
     }
 
 }

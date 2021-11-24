@@ -26,9 +26,6 @@ public class Position {
     @Column(name = "purchase_price", nullable = false)
     private double purchasePrice;
 
-    @Column(name = "is_trade", nullable = false)
-    private boolean isTrade = true;
-
     public Position() {
     }
 
@@ -68,14 +65,6 @@ public class Position {
 
     public double getPurchasePrice() {
         return purchasePrice;
-    }
-
-    public boolean isTrade() {
-        return isTrade;
-    }
-
-    public void setTrade(boolean trade) {
-        isTrade = trade;
     }
 
     @Override

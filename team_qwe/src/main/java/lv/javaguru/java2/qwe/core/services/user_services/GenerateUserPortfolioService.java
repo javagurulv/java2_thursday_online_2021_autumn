@@ -1,5 +1,6 @@
 package lv.javaguru.java2.qwe.core.services.user_services;
 
+import lv.javaguru.java2.qwe.API.API;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.domain.*;
@@ -8,6 +9,7 @@ import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GenerateUserPortfolioResponse;
 import lv.javaguru.java2.qwe.core.services.validator.GenerateUserPortfolioValidator;
 import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +30,8 @@ public class GenerateUserPortfolioService {
     @Autowired private Database database;
     @Autowired private GenerateUserPortfolioValidator validator;
     @Autowired private UtilityMethods utils;
+    @Autowired private API api;
+    @Autowired private SessionFactory sessionFactory;
 
     public UserData getUserData() {
         return userData;
@@ -44,6 +48,7 @@ public class GenerateUserPortfolioService {
             Map<String, Double> investmentPolicy = calculateInvestmentPolicy(user1);
             Map<String, Double> investmentPerIndustry = calculateInvestmentPerIndustry(user1, investmentPolicy);
             Map<String, List<Security>> listPerIndustry = calculateListOfSecuritiesPerIndustry(user1, investmentPerIndustry);
+            updateMarketPrices(listPerIndustry);
             List<Position> userPortfolio = generateUserPortfolio(listPerIndustry, investmentPerIndustry);
             addPortfolioToDatabaseSQL(userPortfolio, user1); // сохраняет сгенерированный портфель в базу данных
             addTradeTicketsToDatabaseSQL(userPortfolio, user1);
@@ -75,6 +80,13 @@ public class GenerateUserPortfolioService {
                                 .limit(2) // количество бумаг от каждой индустрии в портфеле клиента
                                 .collect(toList())
                 ));
+    }
+
+    private void updateMarketPrices(Map<String, List<Security>> map) {
+        List<Security> list = map.values().stream()
+                .flatMap(List::stream)
+                .collect(toList());
+        api.getQuotesForMultipleSecurities(list);
     }
 
     private List<Position> generateUserPortfolio(Map<String, List<Security>> listOfSecuritiesPerIndustry,
@@ -142,7 +154,7 @@ public class GenerateUserPortfolioService {
     }
 
     private List<Position> getPortfolio(User user) {
-        return userData.getUserPortfolio(user.getId());
+        return user.getPortfolio();
     }
 
 }

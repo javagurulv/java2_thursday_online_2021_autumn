@@ -18,6 +18,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Component
@@ -73,7 +74,7 @@ public class OrmUserDataImpl implements UserData {
         User user =  sessionFactory.getCurrentSession()
                 .find(User.class, userId);
         Hibernate.initialize(user.getPortfolio());
-        api.getQuotesForMultipleSecurities(user.getPortfolio());
+        api.getQuotesForMultipleSecurities(user.getPortfolio().stream().map(Position::getSecurity).collect(Collectors.toList()));
         return user.getPortfolio();
     }
 

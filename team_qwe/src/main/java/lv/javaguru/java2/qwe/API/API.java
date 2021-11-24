@@ -96,23 +96,29 @@ public class API {
         }
     }
 
-    public void getQuotesForMultipleSecurities(List<Position> portfolio) {
+    public void getQuotesForMultipleSecurities(List<Security> list) {
         if (realTimeDataForPortfolioEnabled) {
-            String[] tickers = getTickers(portfolio);
-            JSONObject[] jsonObjects = IntStream.rangeClosed(0, tickers.length - 1)
-                    .mapToObj(i -> Objects.requireNonNull(sendHttpRequestTest(tickers[i])).getJSONObject("quoteResponse"))
-                    .toArray(JSONObject[]::new);
-            JSONArray arr = IntStream.rangeClosed(0, jsonObjects.length - 1)
-                    .mapToObj(i -> jsonObjects[i].getJSONArray("result"))
-                    .reduce((JSONArray::putAll)).orElse(null);
-            IntStream.rangeClosed(0, portfolio.size() - 1)
-                    .forEach(i -> {
-                        assert arr != null;
-                        JSONObject obj = arr.getJSONObject(i);
-                        if (obj.getString("symbol").equals(portfolio.get(i).getSecurity().getTicker())) {
-                            portfolio.get(i).getSecurity().setMarketPrice(obj.getBigDecimal("regularMarketPrice").doubleValue());
-                        }
-                    });
+            long start = System.nanoTime();
+            String[] tickers = getTickers(list);
+            if (!tickers[0].isEmpty()) {
+                JSONObject[] jsonObjects = IntStream.rangeClosed(0, tickers.length - 1)
+                        .mapToObj(i -> Objects.requireNonNull(sendHttpRequestTest(tickers[i])).getJSONObject("quoteResponse"))
+                        .toArray(JSONObject[]::new);
+                JSONArray arr = IntStream.rangeClosed(0, jsonObjects.length - 1)
+                        .mapToObj(i -> jsonObjects[i].getJSONArray("result"))
+                        .reduce((JSONArray::putAll)).orElse(null);
+                IntStream.rangeClosed(0, list.size() - 1)
+                        .parallel()
+                        .forEach(i -> {
+                            assert arr != null;
+                            JSONObject obj = arr.getJSONObject(i);
+                            if (obj.getString("symbol").equals(list.get(i).getTicker())) {
+                                list.get(i).setMarketPrice(obj.getBigDecimal("regularMarketPrice").doubleValue());
+                            }
+                        });
+            }
+            long duration = (System.nanoTime() - start) / 1_000_000;
+            System.out.println("PERFORMANCE: " + duration + " ms");
         }
     }
 
@@ -147,9 +153,9 @@ public class API {
         }
     }
 
-    private String[] getTickers(List<Position> portfolio) {
+    private String[] getTickers(List<Security> portfolio) {
         String line = portfolio.stream()
-                .map(position -> position.getSecurity().getTicker())
+                .map(Security::getTicker)
                 .collect(Collectors.joining(","));
 //        String[] lines = line.split("(?<=\\G\\w+,\\w+,\\w+,\\w+,\\w+,\\w+,\\w+,\\w+,\\w+),");
         return line.split("(?<=\\G\\w{1,4},\\w{1,4},\\w{1,4},\\w{1,4},\\w{1,4},\\w{1,4},\\w{1,4},\\w{1,4},\\w{1,4},\\w{1,4}),");

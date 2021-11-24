@@ -15,8 +15,8 @@ import static java.util.Map.entry;
 public class FindSecurityByNameValidator {
 
     private final Map<Predicate<FindSecurityByTickerOrNameRequest>, CoreError> validator = Map.ofEntries(
-            entry(request -> request.getName().length() < 3,
-                    new CoreError("Name", "minimum 3 symbols required!"))
+            entry(request -> request.getName().length() < 1,
+                    new CoreError("Name", "minimum 1 symbol required!"))
     );
 
     public List<CoreError> validate(FindSecurityByTickerOrNameRequest request) {
