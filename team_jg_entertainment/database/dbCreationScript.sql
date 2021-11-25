@@ -99,6 +99,28 @@ UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3725' WHE
 ALTER TABLE visitors
 ADD column access_level INTEGER NOT NULL;
 
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '1' WHERE (`visitor_id` = '1001');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '2' WHERE (`visitor_id` = '1002');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '1' WHERE (`visitor_id` = '1003');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '1' WHERE (`visitor_id` = '1004');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '1' WHERE (`visitor_id` = '1005');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '2' WHERE (`visitor_id` = '1006');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '2' WHERE (`visitor_id` = '1007');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '2' WHERE (`visitor_id` = '1008');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '1' WHERE (`visitor_id` = '1009');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '1' WHERE (`visitor_id` = '1010');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '1' WHERE (`visitor_id` = '1011');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '1' WHERE (`visitor_id` = '1012');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '1' WHERE (`visitor_id` = '1013');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '1' WHERE (`visitor_id` = '1014');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '1' WHERE (`visitor_id` = '1015');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '1' WHERE (`visitor_id` = '1016');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '2' WHERE (`visitor_id` = '1017');
+UPDATE `jg_entertainment`.`visitors` SET `access_level` = '1' WHERE (`visitor_id` = '1018');
+
+ALTER TABLE visitors
+DROP access_level;
+
 
 select * from visitors;
 select * from tables;

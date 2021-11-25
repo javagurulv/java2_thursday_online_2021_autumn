@@ -27,8 +27,6 @@ public class User {
     @Column(name = "visitor_telephone_number", nullable = false)
     private String telephoneNumber;
 
-    @Column(name = "access_level", nullable = false)
-    private int accessLevel;
 
     public User() {
     }
