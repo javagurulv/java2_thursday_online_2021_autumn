@@ -96,3 +96,5 @@ UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3723' WHE
 UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3724' WHERE (`visitor_id` = '1014');
 UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3725' WHERE (`visitor_id` = '1015');
 
+ALTER TABLE visitors
+ADD column access_level INTEGER NOT NULL;
