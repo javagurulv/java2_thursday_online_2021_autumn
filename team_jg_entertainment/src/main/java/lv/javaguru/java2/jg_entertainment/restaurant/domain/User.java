@@ -12,6 +12,7 @@ import java.util.Objects;
 @Table(name = "visitors")
 public class User {
 
+
     @Id
     @Column(name = "visitor_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
