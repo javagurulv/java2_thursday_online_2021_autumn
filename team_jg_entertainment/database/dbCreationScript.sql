@@ -98,3 +98,9 @@ UPDATE `jg_entertainment`.`visitors` SET `visitor_telephone_number` = '3725' WHE
 
 ALTER TABLE visitors
 ADD column access_level INTEGER NOT NULL;
+
+
+select * from visitors;
+select * from tables;
+select * from menu;
+select * from reservation;
