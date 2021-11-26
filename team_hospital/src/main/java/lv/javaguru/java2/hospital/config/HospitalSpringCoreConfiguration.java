@@ -21,7 +21,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = "lv.javaguru.java2.hospital")
 @PropertySource(value = "classpath:application.properties")
 @EnableTransactionManagement
-public class HospitalConfiguration {
+public class HospitalSpringCoreConfiguration {
 
     @Value("${jdbc.url}")
     private String jdbcUrl;

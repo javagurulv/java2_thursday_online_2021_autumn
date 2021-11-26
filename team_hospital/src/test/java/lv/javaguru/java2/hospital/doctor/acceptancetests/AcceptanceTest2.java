@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.acceptancetests;
 
-import lv.javaguru.java2.hospital.config.HospitalConfiguration;
+import lv.javaguru.java2.hospital.config.HospitalSpringCoreConfiguration;
 import lv.javaguru.java2.hospital.database_cleaner.DatabaseCleaner;
 import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.requests.DoctorOrdering;
@@ -22,7 +22,7 @@ public class AcceptanceTest2 {
 
     @BeforeEach
     public void setup() {
-        appContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
+        appContext = new AnnotationConfigApplicationContext(HospitalSpringCoreConfiguration.class);
         getDatabaseCleaner().clean();
     }
 

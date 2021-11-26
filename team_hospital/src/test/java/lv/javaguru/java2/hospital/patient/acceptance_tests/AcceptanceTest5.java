@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.acceptance_tests;
 
-import lv.javaguru.java2.hospital.config.HospitalConfiguration;
+import lv.javaguru.java2.hospital.config.HospitalSpringCoreConfiguration;
 import lv.javaguru.java2.hospital.database_cleaner.DatabaseCleaner;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
@@ -28,7 +28,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {HospitalConfiguration.class})
+@ContextConfiguration(classes = {HospitalSpringCoreConfiguration.class})
 @Sql({"/Schema.sql"})
 public class AcceptanceTest5 {
 

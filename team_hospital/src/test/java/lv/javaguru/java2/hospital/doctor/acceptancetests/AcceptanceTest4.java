@@ -1,14 +1,12 @@
 package lv.javaguru.java2.hospital.doctor.acceptancetests;
 
-import lv.javaguru.java2.hospital.config.HospitalConfiguration;
+import lv.javaguru.java2.hospital.config.HospitalSpringCoreConfiguration;
 import lv.javaguru.java2.hospital.database_cleaner.DatabaseCleaner;
 import lv.javaguru.java2.hospital.doctor.core.requests.AddDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorRequest;
-import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.requests.ShowAllDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.AddDoctorResponse;
 import lv.javaguru.java2.hospital.doctor.core.responses.EditDoctorResponse;
-import lv.javaguru.java2.hospital.doctor.core.responses.SearchDoctorsResponse;
 import lv.javaguru.java2.hospital.doctor.core.responses.ShowAllDoctorsResponse;
 import lv.javaguru.java2.hospital.doctor.core.services.AddDoctorService;
 import lv.javaguru.java2.hospital.doctor.core.services.EditDoctorService;
@@ -16,7 +14,6 @@ import lv.javaguru.java2.hospital.doctor.core.services.SearchDoctorsService;
 import lv.javaguru.java2.hospital.doctor.core.services.ShowAllDoctorsService;
 import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -29,7 +26,7 @@ public class AcceptanceTest4 {
 
     @BeforeEach
     public void setup() {
-        appContext = new AnnotationConfigApplicationContext(HospitalConfiguration.class);
+        appContext = new AnnotationConfigApplicationContext(HospitalSpringCoreConfiguration.class);
         getDatabaseCleaner().clean();
     }
 
