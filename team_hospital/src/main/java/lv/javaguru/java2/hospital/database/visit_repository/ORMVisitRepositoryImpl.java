@@ -7,14 +7,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
 
 @Component
-@Transactional
 public class ORMVisitRepositoryImpl implements VisitRepository {
 
     @Autowired private SessionFactory sessionFactory;

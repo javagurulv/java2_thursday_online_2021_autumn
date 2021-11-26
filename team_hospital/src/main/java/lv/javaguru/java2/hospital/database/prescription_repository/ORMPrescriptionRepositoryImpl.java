@@ -3,16 +3,14 @@ package lv.javaguru.java2.hospital.database.prescription_repository;
 import lv.javaguru.java2.hospital.domain.Prescription;
 import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionEnum;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-import org.hibernate.query.Query;
 
 import java.util.List;
 import java.util.Locale;
 
 @Component
-@Transactional
 public class ORMPrescriptionRepositoryImpl implements PrescriptionRepository {
 
     @Autowired private SessionFactory sessionFactory;
