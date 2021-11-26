@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.services.validator;
 
-import lv.javaguru.java2.qwe.config.AppConfiguration;
+import lv.javaguru.java2.qwe.config.SpringCoreConfiguration;
 import lv.javaguru.java2.qwe.core.requests.data_requests.GetAllSecurityListRequest;
 import lv.javaguru.java2.qwe.core.requests.user_requests.StockMarketOrderRequest;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GetAllUserListRequest;
@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AppConfiguration.class})
+@ContextConfiguration(classes = {SpringCoreConfiguration.class})
 public class BuyStockMarketOrderValidatorTest {
 
     @Autowired private ApplicationContext appContext;

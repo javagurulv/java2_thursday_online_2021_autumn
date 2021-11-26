@@ -10,14 +10,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import lv.javaguru.java2.qwe.config.AppConfiguration;
-
-import java.sql.*;
-import java.util.Collection;
-import java.util.List;
+import lv.javaguru.java2.qwe.config.SpringCoreConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AppConfiguration.class})
+@ContextConfiguration(classes = {SpringCoreConfiguration.class})
 public class SpringContextTest {
 
     @Autowired private ApplicationContext appContext;

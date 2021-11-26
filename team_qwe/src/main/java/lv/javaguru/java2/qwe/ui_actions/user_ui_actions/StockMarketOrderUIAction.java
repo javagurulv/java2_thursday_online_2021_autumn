@@ -1,13 +1,13 @@
 package lv.javaguru.java2.qwe.ui_actions.user_ui_actions;
 
-import lv.javaguru.java2.qwe.API.API;
+import lv.javaguru.java2.qwe.core.API.API;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.requests.user_requests.StockMarketOrderRequest;
 import lv.javaguru.java2.qwe.core.responses.user_responses.StockMarketOrderResponse;
 import lv.javaguru.java2.qwe.core.services.user_services.StockMarketOrderService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
-import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import lv.javaguru.java2.qwe.core.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

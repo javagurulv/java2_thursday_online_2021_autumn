@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.services.validator;
 
-import lv.javaguru.java2.qwe.config.AppConfiguration;
+import lv.javaguru.java2.qwe.config.SpringCoreConfiguration;
 import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import org.junit.Before;
@@ -17,7 +17,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AppConfiguration.class})
+@ContextConfiguration(classes = {SpringCoreConfiguration.class})
 public class AddStockValidatorTest {
 
     @Autowired private ApplicationContext appContext;

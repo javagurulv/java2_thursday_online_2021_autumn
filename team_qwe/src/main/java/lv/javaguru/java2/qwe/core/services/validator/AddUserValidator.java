@@ -3,7 +3,7 @@ package lv.javaguru.java2.qwe.core.services.validator;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.requests.user_requests.AddUserRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
-import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import lv.javaguru.java2.qwe.core.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,6 @@
-package lv.javaguru.java2.qwe.API;
+package lv.javaguru.java2.qwe.core.API;
 
 import lv.javaguru.java2.qwe.core.database.Database;
-import lv.javaguru.java2.qwe.core.domain.Position;
 import lv.javaguru.java2.qwe.core.domain.Security;
 import lv.javaguru.java2.qwe.core.domain.Stock;
 import org.json.JSONArray;

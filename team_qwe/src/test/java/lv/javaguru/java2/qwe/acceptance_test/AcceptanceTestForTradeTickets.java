@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.acceptance_test;
 
-import lv.javaguru.java2.qwe.config.AppConfiguration;
+import lv.javaguru.java2.qwe.config.SpringCoreConfiguration;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.domain.*;
 import lv.javaguru.java2.qwe.core.requests.data_requests.FindSecurityByTickerOrNameRequest;
@@ -27,7 +27,7 @@ import java.util.stream.IntStream;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AppConfiguration.class})
+@ContextConfiguration(classes = {SpringCoreConfiguration.class})
 @Sql({"/schema.sql"})
 @Sql({"/data.sql"})
 public class AcceptanceTestForTradeTickets {

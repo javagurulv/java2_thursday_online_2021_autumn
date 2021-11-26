@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.services.validator;
 
-import lv.javaguru.java2.qwe.config.AppConfiguration;
+import lv.javaguru.java2.qwe.config.SpringCoreConfiguration;
 import lv.javaguru.java2.qwe.core.requests.user_requests.RemoveUserRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import org.junit.Before;
@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AppConfiguration.class})
+@ContextConfiguration(classes = {SpringCoreConfiguration.class})
 public class RemoveUserValidatorTest {
 
     @Autowired private ApplicationContext appContext;

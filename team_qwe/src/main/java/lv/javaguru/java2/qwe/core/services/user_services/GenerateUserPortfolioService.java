@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.core.services.user_services;
 
-import lv.javaguru.java2.qwe.API.API;
+import lv.javaguru.java2.qwe.core.API.API;
 import lv.javaguru.java2.qwe.core.database.Database;
 import lv.javaguru.java2.qwe.core.database.UserData;
 import lv.javaguru.java2.qwe.core.domain.*;
@@ -8,7 +8,7 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRe
 import lv.javaguru.java2.qwe.core.responses.CoreError;
 import lv.javaguru.java2.qwe.core.responses.user_responses.GenerateUserPortfolioResponse;
 import lv.javaguru.java2.qwe.core.services.validator.GenerateUserPortfolioValidator;
-import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import lv.javaguru.java2.qwe.core.utils.UtilityMethods;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

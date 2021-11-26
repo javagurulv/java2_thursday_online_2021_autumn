@@ -3,13 +3,12 @@ package lv.javaguru.java2.qwe.core.database;
 import lv.javaguru.java2.qwe.core.domain.Position;
 import lv.javaguru.java2.qwe.core.domain.TradeTicket;
 import lv.javaguru.java2.qwe.core.domain.User;
-import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import lv.javaguru.java2.qwe.core.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.time.LocalDate;

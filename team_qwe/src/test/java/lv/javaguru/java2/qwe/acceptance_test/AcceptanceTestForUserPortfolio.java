@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.acceptance_test;
 
-import lv.javaguru.java2.qwe.config.AppConfiguration;
+import lv.javaguru.java2.qwe.config.SpringCoreConfiguration;
 import lv.javaguru.java2.qwe.core.domain.Position;
 import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRequest;
@@ -21,14 +21,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AppConfiguration.class})
+@ContextConfiguration(classes = {SpringCoreConfiguration.class})
 @Sql({"/schema.sql"})
 @Sql({"/big_data.sql"})
 public class AcceptanceTestForUserPortfolio {

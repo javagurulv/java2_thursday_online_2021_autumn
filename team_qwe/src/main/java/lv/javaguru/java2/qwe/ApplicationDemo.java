@@ -1,18 +1,21 @@
 package lv.javaguru.java2.qwe;
 
-import lv.javaguru.java2.qwe.API.API;
-import lv.javaguru.java2.qwe.config.AppConfiguration;
+import lv.javaguru.java2.qwe.core.API.API;
 import lv.javaguru.java2.qwe.ui_actions.AppMenu;
-import lv.javaguru.java2.qwe.utils.UtilityMethods;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import lv.javaguru.java2.qwe.core.utils.UtilityMethods;
+import lv.javaguru.java2.qwe.web_ui.config.SpringWebConfiguration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.context.ConfigurableApplicationContext;
 
+@SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
 public class ApplicationDemo {
 
-    private static final ApplicationContext applicationContext =
-            new AnnotationConfigApplicationContext(AppConfiguration.class);
+    private static final ConfigurableApplicationContext applicationContext =
+            SpringApplication.run(SpringWebConfiguration.class);
 
-    public static ApplicationContext getApplicationContext() {
+    public static ConfigurableApplicationContext getApplicationContext() {
         return applicationContext;
     }
 

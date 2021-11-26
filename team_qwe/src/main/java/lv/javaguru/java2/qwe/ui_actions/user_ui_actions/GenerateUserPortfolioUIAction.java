@@ -4,7 +4,7 @@ import lv.javaguru.java2.qwe.core.requests.user_requests.GenerateUserPortfolioRe
 import lv.javaguru.java2.qwe.core.responses.user_responses.GenerateUserPortfolioResponse;
 import lv.javaguru.java2.qwe.core.services.user_services.GenerateUserPortfolioService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
-import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import lv.javaguru.java2.qwe.core.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

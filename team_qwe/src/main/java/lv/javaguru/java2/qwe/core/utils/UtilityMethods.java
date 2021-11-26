@@ -1,4 +1,4 @@
-package lv.javaguru.java2.qwe.utils;
+package lv.javaguru.java2.qwe.core.utils;
 
 import lv.javaguru.java2.qwe.core.domain.Security;
 import lv.javaguru.java2.qwe.core.domain.User;

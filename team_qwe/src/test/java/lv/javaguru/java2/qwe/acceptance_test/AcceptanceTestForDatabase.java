@@ -1,6 +1,6 @@
 package lv.javaguru.java2.qwe.acceptance_test;
 
-import lv.javaguru.java2.qwe.config.AppConfiguration;
+import lv.javaguru.java2.qwe.config.SpringCoreConfiguration;
 import lv.javaguru.java2.qwe.core.domain.Stock;
 import lv.javaguru.java2.qwe.core.requests.data_requests.*;
 import lv.javaguru.java2.qwe.core.responses.data_responses.FilterStocksByMultipleParametersResponse;
@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import static java.util.List.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {AppConfiguration.class})
+@ContextConfiguration(classes = {SpringCoreConfiguration.class})
 @Sql({"/schema.sql"})
 @Sql({"/data.sql"})
 public class AcceptanceTestForDatabase {

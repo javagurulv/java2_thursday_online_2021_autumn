@@ -4,7 +4,7 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.RemoveSecurityRequest;
 import lv.javaguru.java2.qwe.core.responses.data_responses.RemoveSecurityResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.RemoveSecurityService;
 import lv.javaguru.java2.qwe.ui_actions.UIAction;
-import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import lv.javaguru.java2.qwe.core.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

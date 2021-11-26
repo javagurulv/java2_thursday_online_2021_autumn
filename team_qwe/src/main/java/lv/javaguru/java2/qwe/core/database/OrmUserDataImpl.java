@@ -1,11 +1,11 @@
 package lv.javaguru.java2.qwe.core.database;
 
-import lv.javaguru.java2.qwe.API.API;
+import lv.javaguru.java2.qwe.core.API.API;
 import lv.javaguru.java2.qwe.core.domain.Position;
 import lv.javaguru.java2.qwe.core.domain.Security;
 import lv.javaguru.java2.qwe.core.domain.TradeTicket;
 import lv.javaguru.java2.qwe.core.domain.User;
-import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import lv.javaguru.java2.qwe.core.utils.UtilityMethods;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

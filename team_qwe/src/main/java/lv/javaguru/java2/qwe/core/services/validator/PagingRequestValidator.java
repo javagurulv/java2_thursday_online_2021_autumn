@@ -3,8 +3,7 @@ package lv.javaguru.java2.qwe.core.services.validator;
 import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 import lv.javaguru.java2.qwe.core.requests.data_requests.PagingRequest;
 import lv.javaguru.java2.qwe.core.responses.CoreError;
-import lv.javaguru.java2.qwe.utils.UtilityMethods;
-import org.springframework.stereotype.Component;
+import lv.javaguru.java2.qwe.core.utils.UtilityMethods;
 
 import java.util.List;
 import java.util.Map;

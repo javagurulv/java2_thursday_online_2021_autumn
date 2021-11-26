@@ -1,7 +1,7 @@
 package lv.javaguru.java2.qwe.ui_actions;
 
 import lv.javaguru.java2.qwe.ui_actions.user_ui_actions.*;
-import lv.javaguru.java2.qwe.utils.UtilityMethods;
+import lv.javaguru.java2.qwe.core.utils.UtilityMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
