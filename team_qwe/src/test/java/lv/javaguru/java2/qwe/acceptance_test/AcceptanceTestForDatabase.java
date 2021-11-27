@@ -66,6 +66,7 @@ public class AcceptanceTestForDatabase {
         RemoveSecurityResponse response1 = getRemoveSecurityService().execute(request);
         GetAllSecurityListResponse response2 = getAllSecurityListService().execute(new GetAllSecurityListRequest());
         assertFalse(response1.isRemoved());
+        response2.getList().forEach(System.out::println);
         assertEquals(5, response2.getList().size());
         assertEquals("Amazon.com Inc.", response2.getList().get(2).getName());
     }

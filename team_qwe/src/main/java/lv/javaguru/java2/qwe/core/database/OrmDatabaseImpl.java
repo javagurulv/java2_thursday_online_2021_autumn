@@ -38,8 +38,7 @@ public class OrmDatabaseImpl implements Database{
 
     @Override
     public boolean removeSecurity(String ticker) {
-        String sql = (ticker.contains(" ")) ? "DELETE Stock WHERE ticker = :ticker" :
-                "DELETE Bond WHERE ticker = :ticker";
+        String sql = "DELETE Stock WHERE ticker = :ticker";
         Query<?> query = sessionFactory.getCurrentSession().createQuery(sql);
         query.setParameter("ticker", ticker);
         return query.executeUpdate() == 1;

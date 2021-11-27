@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AddStockController {
 
-    @Autowired
-    private AddStockService service;
+    @Autowired private AddStockService service;
 
     @GetMapping(value = "/addStock")
     public String showAddStockPage(ModelMap modelMap) {

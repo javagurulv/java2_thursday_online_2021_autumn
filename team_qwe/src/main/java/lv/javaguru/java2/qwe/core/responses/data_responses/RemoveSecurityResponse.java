@@ -1,6 +1,8 @@
 package lv.javaguru.java2.qwe.core.responses.data_responses;
 
-public class RemoveSecurityResponse {
+import lv.javaguru.java2.qwe.core.responses.CoreResponse;
+
+public class RemoveSecurityResponse extends CoreResponse {
 
     private final boolean isRemoved;
 

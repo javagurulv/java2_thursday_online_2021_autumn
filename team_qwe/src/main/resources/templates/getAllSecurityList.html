@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>QWE Trading Application</title>
+</head>
+<style type="text/css">
+        body {
+              background-color: #8E8F92;
+              margin-left: 20%;
+              margin-right: 20%;
+              text-align: center;
+              border: 2px dotted black;
+              padding: 20px 20px 20px 20px;
+              font-family: sans-serif;
+        }
+        table {
+               border-collapse: collapse;
+               width: 100%;
+        }
+        th, td {
+                padding: 0.25rem;
+                text-align: left;
+                border: 1px solid #ccc;
+        }
+
+</style>
+<body>
+
+<h3>Show all securities in the database</h3>
+
+<table>
+    <tr>
+        <td>TICKER</td>
+        <td>NAME</td>
+        <td>INDUSTRY</td>
+        <td>CURRENCY</td>
+        <td>MARKET PRICE</td>
+        <td>DIVIDENDS</td>
+        <td>RISK WEIGHT</td>
+    </tr>
+
+    <td th:if="${securities != null}">
+        <tr th:each="security : ${securities}">
+            <td th:text="${security.ticker}"></td>
+            <td th:text="${security.name}"></td>
+            <td th:text="${security.industry}"></td>
+            <td th:text="${security.currency}"></td>
+            <td th:text="${security.marketPrice}"></td>
+            <td th:text="${security.dividends}"></td>
+            <td th:text="${security.riskWeight}"></td>
+        </tr>
+    </td>
+
+</table>
+
+<form action="/dataMenu" method="get">
+    <input type="submit" value="Return to Data menu" name="Submit"/>
+</form>
+
+</body>
+</html>

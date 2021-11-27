@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>QWE Trading Application</title>
+</head>
+<style type="text/css">
+        body {
+              background-color: #8E8F92;
+              margin-left: 20%;
+              margin-right: 20%;
+              text-align: center;
+              border: 2px dotted black;
+              padding: 20px 20px 20px 20px;
+              font-family: sans-serif;
+        }
+
+</style>
+<body>
+
+<h3>Remove security</h3>
+
+<table cellpadding="5">
+    <form action="/removeSecurity" th:object="${request}" method="post">
+        <tr>
+            <td>Ticker:</td>
+            <td><input type="text" th:field="${request.ticker}"/></td>
+        </tr>
+        <td>
+            <input type="submit" value="Remove security"/>
+            <input type="reset" value="Clear"/>
+        </td>
+    </form>
+</table>
+
+<td th:if="${isRemoved == false}">
+        <td th:text="${isRemoved}"></td>
+    </tr>
+</td>
+
+</body>
+</html>
