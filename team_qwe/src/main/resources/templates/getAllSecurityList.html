@@ -23,21 +23,31 @@
                 text-align: left;
                 border: 1px solid #ccc;
         }
+        caption {
+                font-size: 150%;
+                font-style: italic;
+                padding-bottom: 12px;
+        }
+        .center {
+                text-align: center;
+        }
+        .right {
+                text-align: right;
+        }
 
 </style>
 <body>
 
-<h3>Show all securities in the database</h3>
-
 <table>
+    <caption>Security list</caption>
     <tr>
-        <td>TICKER</td>
-        <td>NAME</td>
-        <td>INDUSTRY</td>
-        <td>CURRENCY</td>
-        <td>MARKET PRICE</td>
-        <td>DIVIDENDS</td>
-        <td>RISK WEIGHT</td>
+        <td class="center">TICKER</td>
+        <td class="center">NAME</td>
+        <td class="center">INDUSTRY</td>
+        <td class="center">CURRENCY</td>
+        <td class="center">MARKET PRICE</td>
+        <td class="center">DIVIDENDS</td>
+        <td class="center">RISK WEIGHT</td>
     </tr>
 
     <td th:if="${securities != null}">
@@ -45,17 +55,18 @@
             <td th:text="${security.ticker}"></td>
             <td th:text="${security.name}"></td>
             <td th:text="${security.industry}"></td>
-            <td th:text="${security.currency}"></td>
-            <td th:text="${security.marketPrice}"></td>
-            <td th:text="${security.dividends}"></td>
-            <td th:text="${security.riskWeight}"></td>
+            <td class="center" th:text="${security.currency}"></td>
+            <td class="right" th:text="${security.marketPrice}"></td>
+            <td class="right" th:text="${security.dividends}"></td>
+            <td class="right" th:text="${security.riskWeight}"></td>
         </tr>
     </td>
 
 </table>
 
 <form action="/dataMenu" method="get">
-    <input type="submit" value="Return to Data menu" name="Submit"/>
+    <br>
+    <input type="submit" style="font-size: 125%;" value="Return to Data menu" name="Submit"/>
 </form>
 
 </body>
