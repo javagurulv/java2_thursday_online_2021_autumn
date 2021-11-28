@@ -5,7 +5,6 @@ import lv.javaguru.java2.oddJobs.core.requests.find.Ordering;
 import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
 import lv.javaguru.java2.oddJobs.core.responce.find.FindSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.services.find.FindSpecialistService;
-import lv.javaguru.java2.oddJobs.domain.Specialist;
 import lv.javaguru.java2.oddJobs.console_ui.exit.ExitMenuUIAction;
 import lv.javaguru.java2.oddJobs.console_ui.UIAction;
 import org.springframework.beans.factory.annotation.Autowired;

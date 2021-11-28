@@ -1,6 +1,6 @@
 package lv.javaguru.java2.oddJobs.console_ui.get;
 
-import lv.javaguru.java2.oddJobs.domain.Advertisement;
+import lv.javaguru.java2.oddJobs.core.domain.Advertisement;
 import lv.javaguru.java2.oddJobs.console_ui.UIAction;
 import lv.javaguru.java2.oddJobs.core.services.get.GetAllAdvertisementsService;
 import org.springframework.beans.factory.annotation.Autowired;

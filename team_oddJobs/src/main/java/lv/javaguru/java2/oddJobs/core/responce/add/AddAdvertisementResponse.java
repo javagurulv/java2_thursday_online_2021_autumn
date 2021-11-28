@@ -2,7 +2,7 @@ package lv.javaguru.java2.oddJobs.core.responce.add;
 
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.CoreResponse;
-import lv.javaguru.java2.oddJobs.domain.Advertisement;
+import lv.javaguru.java2.oddJobs.core.domain.Advertisement;
 
 import java.util.List;
 

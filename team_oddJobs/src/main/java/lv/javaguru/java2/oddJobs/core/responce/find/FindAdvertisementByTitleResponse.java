@@ -1,6 +1,6 @@
 package lv.javaguru.java2.oddJobs.core.responce.find;
 
-import lv.javaguru.java2.oddJobs.domain.Advertisement;
+import lv.javaguru.java2.oddJobs.core.domain.Advertisement;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.CoreResponse;
 

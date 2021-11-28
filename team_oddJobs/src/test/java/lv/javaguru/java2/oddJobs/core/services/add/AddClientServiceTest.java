@@ -4,7 +4,7 @@ import lv.javaguru.java2.oddJobs.core.requests.add.AddClientRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.add.AddClientResponse;
 import lv.javaguru.java2.oddJobs.core.validations.add.AddClientValidator;
-import lv.javaguru.java2.oddJobs.database.domainInterfaces.ClientRepository;
+import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.ClientRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

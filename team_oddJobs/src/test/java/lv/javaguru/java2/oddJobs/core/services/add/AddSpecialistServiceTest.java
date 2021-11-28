@@ -7,7 +7,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 import java.util.ArrayList;
 import java.util.List;
 
-import lv.javaguru.java2.oddJobs.database.domainInterfaces.SpecialistRepository;
+import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.SpecialistRepository;
 import org.junit.runner.RunWith;
 import org.junit.Test;
 import org.mockito.InjectMocks;

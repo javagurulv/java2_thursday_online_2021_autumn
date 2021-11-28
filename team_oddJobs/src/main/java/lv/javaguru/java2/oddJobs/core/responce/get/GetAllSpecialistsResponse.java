@@ -1,6 +1,6 @@
 package lv.javaguru.java2.oddJobs.core.responce.get;
 
-import lv.javaguru.java2.oddJobs.domain.Specialist;
+import lv.javaguru.java2.oddJobs.core.domain.Specialist;
 import lv.javaguru.java2.oddJobs.core.responce.CoreResponse;
 
 import java.util.List;

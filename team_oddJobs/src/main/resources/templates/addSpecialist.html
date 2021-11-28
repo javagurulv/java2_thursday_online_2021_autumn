@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Call Boar by OddJobs">
+    <meta name="author" content="JavaGuru">
+    <title>Call Board</title>
+</head>
+
+<body>
+
+<h3>Add Specialist</h3>
+
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>Surname:</td>
+        <td>Profession:</td>
+        <td>Personal code:</td>
+        <td>City:</td>
+
+    </tr>
+
+    <tr>
+        <form action="/addSpecialist" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.specialistName}"/></td>
+            <td><input type="text" th:field="${request.specialistSurname}"/></td>
+            <td><input type="text" th:field="${request.specialistProfession}"/></td>
+            <td><input type="text" th:field="${request.personalCode}"/></td>
+            <td><input type="text" th:field="${request.city}"/></td>
+            <td>
+                <input type="submit" value="Add Specialist"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+</table>
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" />
+    </tr>
+</td>
+</body>
+
+</html>
