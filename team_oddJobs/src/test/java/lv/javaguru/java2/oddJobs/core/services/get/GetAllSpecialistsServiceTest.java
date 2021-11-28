@@ -6,8 +6,8 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import lv.javaguru.java2.oddJobs.database.domainInterfaces.SpecialistRepository;
-import lv.javaguru.java2.oddJobs.domain.Specialist;
+import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.SpecialistRepository;
+import lv.javaguru.java2.oddJobs.core.domain.Specialist;
 import lv.javaguru.java2.oddJobs.core.requests.get.GetAllSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.responce.get.GetAllSpecialistsResponse;
 import org.junit.Test;

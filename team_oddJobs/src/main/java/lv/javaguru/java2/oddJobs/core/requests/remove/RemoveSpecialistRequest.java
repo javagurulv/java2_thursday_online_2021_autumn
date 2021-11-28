@@ -12,6 +12,21 @@ public class RemoveSpecialistRequest {
         this.specialistSurname = specialistSurname;
     }
 
+    public RemoveSpecialistRequest() {
+    }
+
+    public void setSpecialistId(Long specialistId) {
+        this.specialistId = specialistId;
+    }
+
+    public void setSpecialistName(String specialistName) {
+        this.specialistName = specialistName;
+    }
+
+    public void setSpecialistSurname(String specialistSurname) {
+        this.specialistSurname = specialistSurname;
+    }
+
     public Long getSpecialistId() {
         return specialistId;
     }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Call Boar by OddJobs">
+    <meta name="author" content="JavaGuru">
+    <title>Call Board</title>
+</head>
+
+<body>
+
+<h3>Show all specialists in the list</h3>
+
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>Surname:</td>
+        <td>Profession:</td>
+        <td>Personal Code:</td>
+        <td>City:</td>
+    </tr>
+
+    <td th:if="${Specialists != null}">
+        <tr th:each="specialist : ${Specialists}">
+            <td th:text="${specialist.specialistName}" />
+            <td th:text="${specialist.specialistSurname}" />
+            <td th:text="${specialist.specialistProfession}" />
+            <td th:text="${specialist.personalCode}" />
+            <td th:text="${specialist.city}" />
+        </tr>
+    </td>
+
+</table>
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
+
+</body>
+
+</html>

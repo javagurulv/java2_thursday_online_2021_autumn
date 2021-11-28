@@ -18,6 +18,33 @@ public class FindSpecialistRequest {
 
     }
 
+    public void setSpecialistId(Long specialistId) {
+        this.specialistId = specialistId;
+    }
+
+    public void setSpecialistName(String specialistName) {
+        this.specialistName = specialistName;
+    }
+
+    public void setSpecialistSurname(String specialistSurname) {
+        this.specialistSurname = specialistSurname;
+    }
+
+    public void setSpecialistProfession(String specialistProfession) {
+        this.specialistProfession = specialistProfession;
+    }
+
+    public void setOrdering(Ordering ordering) {
+        this.ordering = ordering;
+    }
+
+    public void setPaging(Paging paging) {
+        this.paging = paging;
+    }
+
+    public FindSpecialistRequest() {
+    }
+
     public FindSpecialistRequest(String specialistName, String specialistSurname, String specialistProfession, Ordering ordering) {
         this.specialistName = specialistName;
         this.specialistSurname = specialistSurname;

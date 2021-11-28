@@ -2,8 +2,6 @@ package lv.javaguru.java2.oddJobs.core.validations.add;
 
 import lv.javaguru.java2.oddJobs.core.requests.add.AddClientRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
-import lv.javaguru.java2.oddJobs.database.domainInterfaces.ClientRepository;
-import lv.javaguru.java2.oddJobs.domain.Client;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,13 +29,13 @@ public class AddClientValidator {
     }
 
     private Optional<CoreError> validateName(AddClientRequest request) {
-        return (request.getName() == null || request.getName().isEmpty())
+        return (request.getClientName() == null || request.getClientName().isEmpty())
                 ? Optional.of(new CoreError("Name", "Must not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateSurname(AddClientRequest request) {
-        return (request.getSurname() == null || request.getSurname().isEmpty())
+        return (request.getClientSurname() == null || request.getClientSurname().isEmpty())
                 ? Optional.of(new CoreError("Surname", "Must not be empty!"))
                 : Optional.empty();
     }

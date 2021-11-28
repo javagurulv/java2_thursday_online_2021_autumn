@@ -10,11 +10,22 @@ public class AddAdvertisementRequest {
         this.advDescription = advDescription;
     }
 
+    public AddAdvertisementRequest() {
+    }
+
     public String getAdvTitle() {
         return advTitle;
     }
 
+    public void setAdvTitle(String advTitle) {
+        this.advTitle = advTitle;
+    }
+
     public String getAdvDescription() {
         return advDescription;
+    }
+
+    public void setAdvDescription(String advDescription) {
+        this.advDescription = advDescription;
     }
 }

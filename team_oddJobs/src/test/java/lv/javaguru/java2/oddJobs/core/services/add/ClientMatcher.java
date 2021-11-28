@@ -1,6 +1,6 @@
 package lv.javaguru.java2.oddJobs.core.services.add;
 
-import lv.javaguru.java2.oddJobs.domain.Client;
+import lv.javaguru.java2.oddJobs.core.domain.Client;
 import org.mockito.ArgumentMatcher;
 
 public class ClientMatcher implements ArgumentMatcher<Client> {

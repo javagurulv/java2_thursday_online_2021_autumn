@@ -1,35 +1,23 @@
 package lv.javaguru.java2.oddJobs.core.validations;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
 
-import lv.javaguru.java2.oddJobs.DatabaseCleaner;
-import lv.javaguru.java2.oddJobs.config.ApplicationConfiguration;
 import lv.javaguru.java2.oddJobs.core.requests.add.AddSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import lv.javaguru.java2.oddJobs.core.responce.add.AddSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.services.add.AddSpecialistService;
 import lv.javaguru.java2.oddJobs.core.validations.add.AddSpecialistValidator;
-import lv.javaguru.java2.oddJobs.core.validations.find.FindSpecialistsFieldValidator;
-import lv.javaguru.java2.oddJobs.database.domainInterfaces.SpecialistRepository;
-import lv.javaguru.java2.oddJobs.domain.Specialist;
-import org.hibernate.SessionFactory;
-import org.junit.Before;
+import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.SpecialistRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AddSpecialistValidatorTest {

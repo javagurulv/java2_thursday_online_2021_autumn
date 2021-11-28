@@ -1,7 +1,7 @@
 package lv.javaguru.java2.oddJobs.core.services.add;
 
 
-import lv.javaguru.java2.oddJobs.domain.Specialist;
+import lv.javaguru.java2.oddJobs.core.domain.Specialist;
 import org.mockito.ArgumentMatcher;
 
 public class SpecialistMatcher implements ArgumentMatcher<Specialist> {

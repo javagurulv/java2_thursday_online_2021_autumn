@@ -1,7 +1,7 @@
 package lv.javaguru.java2.oddJobs.core.services.find;
 
-import lv.javaguru.java2.oddJobs.database.domainInterfaces.SpecialistRepository;
-import lv.javaguru.java2.oddJobs.domain.Specialist;
+import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.SpecialistRepository;
+import lv.javaguru.java2.oddJobs.core.domain.Specialist;
 import lv.javaguru.java2.oddJobs.core.requests.find.FindSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.requests.find.Ordering;
 import lv.javaguru.java2.oddJobs.core.requests.find.Paging;

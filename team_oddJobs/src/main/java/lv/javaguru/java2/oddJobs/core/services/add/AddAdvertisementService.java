@@ -4,8 +4,8 @@ import lv.javaguru.java2.oddJobs.core.requests.add.AddAdvertisementRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.add.AddAdvertisementResponse;
 import lv.javaguru.java2.oddJobs.core.validations.add.AddAdvertisementValidator;
-import lv.javaguru.java2.oddJobs.database.domainInterfaces.AdvertisementRepository;
-import lv.javaguru.java2.oddJobs.domain.Advertisement;
+import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.AdvertisementRepository;
+import lv.javaguru.java2.oddJobs.core.domain.Advertisement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

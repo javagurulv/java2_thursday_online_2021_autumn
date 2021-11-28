@@ -3,8 +3,6 @@ package lv.javaguru.java2.oddJobs.core.validations.add;
 import lv.javaguru.java2.oddJobs.core.requests.add.AddClientRequest;
 import lv.javaguru.java2.oddJobs.core.requests.add.AddSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
-import lv.javaguru.java2.oddJobs.database.domainInterfaces.SpecialistRepository;
-import lv.javaguru.java2.oddJobs.domain.Specialist;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,9 +14,9 @@ import java.util.Optional;
 
 @Component
 public class AddSpecialistValidator {
+
     @Autowired
     private SessionFactory sessionFactory;
-
 
     public List<CoreError> validate(AddSpecialistRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -33,19 +31,19 @@ public class AddSpecialistValidator {
     }
 
     private Optional<CoreError> validateName(AddSpecialistRequest request) {
-        return (request.getName() == null || request.getName().isEmpty())
+        return (request.getSpecialistName() == null || request.getSpecialistName().isEmpty())
                 ? Optional.of(new CoreError("Name", "Must not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateSurname(AddSpecialistRequest request) {
-        return (request.getSurname() == null || request.getSurname().isEmpty())
+        return (request.getSpecialistSurname() == null || request.getSpecialistSurname().isEmpty())
                 ? Optional.of(new CoreError("Surname", "Must not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateProfession(AddSpecialistRequest request) {
-        return (request.getProfession() == null || request.getProfession().isEmpty())
+        return (request.getSpecialistProfession() == null || request.getSpecialistProfession().isEmpty())
                 ? Optional.of(new CoreError("Profession", "Must not be empty!"))
                 : Optional.empty();
     }
@@ -55,7 +53,6 @@ public class AddSpecialistValidator {
                 ? Optional.of(new CoreError("Personal code", "Must not be empty!"))
                 : Optional.empty();
     }
-
     private Optional<CoreError> validatePersonalCodeTwo(AddSpecialistRequest request) {
         Query query = sessionFactory.getCurrentSession().createQuery("select personalCode from Specialist where personalCode=:personalCode");
         query.setParameter("personalCode", request.getPersonalCode());
@@ -63,6 +60,7 @@ public class AddSpecialistValidator {
             return Optional.of(new CoreError("Personal code", "Already exist!"));
         return Optional.empty();
     }
+
 
     private Optional<CoreError> validateCity(AddSpecialistRequest request) {
         return (request.getCity() == null || request.getCity().isEmpty())

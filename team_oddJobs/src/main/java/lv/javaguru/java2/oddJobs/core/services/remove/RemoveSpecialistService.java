@@ -5,7 +5,7 @@ import lv.javaguru.java2.oddJobs.core.requests.remove.RemoveSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.responce.CoreError;
 import lv.javaguru.java2.oddJobs.core.responce.remove.RemoveSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.validations.remove.RemoveSpecialistValidator;
-import lv.javaguru.java2.oddJobs.database.domainInterfaces.SpecialistRepository;
+import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.SpecialistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
