@@ -1,8 +1,6 @@
 package lv.javaguru.java2.qwe.web_ui.controllers.database;
 
-import lv.javaguru.java2.qwe.core.requests.data_requests.AddStockRequest;
 import lv.javaguru.java2.qwe.core.requests.data_requests.RemoveSecurityRequest;
-import lv.javaguru.java2.qwe.core.responses.data_responses.AddStockResponse;
 import lv.javaguru.java2.qwe.core.responses.data_responses.RemoveSecurityResponse;
 import lv.javaguru.java2.qwe.core.services.data_services.RemoveSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +26,7 @@ public class RemoveSecurityController {
         System.out.println(request.getTicker());
         RemoveSecurityResponse response = service.execute(request);
         if (!response.isRemoved()) {
-            modelMap.addAttribute("isRemoved", false);
+            modelMap.addAttribute("isRemoved", "No security with such ticker!");
             return "removeSecurity";
         } else {
             return "redirect:/";
