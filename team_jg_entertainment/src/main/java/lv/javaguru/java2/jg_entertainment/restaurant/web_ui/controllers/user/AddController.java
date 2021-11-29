@@ -16,9 +16,9 @@ public class AddController {
     @Autowired private AddAllUsersService service;
 
     @GetMapping(value = "/addUser")
-    public String addUser(ModelMap modelMap) {
+    public String showAddUserPage(ModelMap modelMap) {
         modelMap.addAttribute("request", new AddUserRequest());
-        return "userMenu";
+        return "user/addUser";
     }
 
     @PostMapping("/addUser")
@@ -26,7 +26,7 @@ public class AddController {
         AddUsersResponse response = service.execute(request);
         if (response.hasError()) {
             modelMap.addAttribute("errors", response.getErrorsList());
-            return "addUser";
+            return "user/addUser";
         } else {
             return "redirect:/";
         }

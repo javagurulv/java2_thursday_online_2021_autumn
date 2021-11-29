@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,9 @@
     <meta name="author" content="JavaGuru">
     <title>Restaurant JG</title>
 </head>
+
 <body>
+
 <h3>Add User</h3>
 
 <table>
@@ -16,11 +18,12 @@
         <td>Surname:</td>
         <td>Telephone:</td>
     </tr>
+
     <tr>
         <form action="/addUser" th:object="${request}" method="post">
-            <td><input type="text" th:field="${request.name}"/></td>
-            <td><input type="text" th:field="${request.surname}"/></td>
-            <td><input type="text" th:field="${request.telephone}"/></td>
+            <td><input type="text" th:field="${request.Name}"/></td>
+            <td><input type="text" th:field="${request.Surname}"/></td>
+            <td><input type="text" th:field="${request.Telephone}"/></td>
             <td>
                 <input type="submit" value="Add User"/>
                 <input type="reset" value="Clear"/>
@@ -31,8 +34,8 @@
 
 <td th:if="${errors != null}">
     <tr th:each="error : ${errors}">
-        <td th:text="${error.field}" />
-        <td th:text="${error.description}" />
+        <td th:text="${error.field}"></td>
+        <td th:text="${error.description}"></td>
     </tr>
 </td>
 
@@ -40,6 +43,14 @@
     <tr th:text="${message}"></tr>
 </td>
 
+
+<form action="/" method="get">
+    <input type="submit" value="Main menu" name="Submit" />
+</form>
+
+<form action="/userMenu" method="get">
+    <input type="submit" value="User" name="Submit" />
+</form>
 
 </body>
 </html>
