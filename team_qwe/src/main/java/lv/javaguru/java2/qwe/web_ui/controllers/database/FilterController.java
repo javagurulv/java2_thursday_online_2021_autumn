@@ -53,7 +53,8 @@ public class FilterController {
                     domainTest.getRiskWeightTarget())
             );
         }
-        if (domainTest.getMarketPriceTarget() != null) {
+        if (domainTest.getMarketPriceTarget() != null || domainTest.getDividendsTarget() != null
+        || domainTest.getIndustryTarget() != null || domainTest.getRiskWeightTarget() != null) {
             List<CoreRequest> requestList = modelMap.entrySet().stream()
                     .filter(entry -> entry.getKey().equals("industry") || entry.getKey().equals("marketPrice")
                             || entry.getKey().equals("dividends") || entry.getKey().equals("riskWeight"))
@@ -74,7 +75,13 @@ public class FilterController {
             FilterStocksByMultipleParametersRequest request = new FilterStocksByMultipleParametersRequest(requestList);
             FilterStocksByMultipleParametersResponse response = service.execute(request);
 
-            modelMap.addAttribute("filtered", response.getList());
+
+            if (response.hasErrors()) {
+                modelMap.addAttribute("errors", response.getErrors());
+            }
+            else {
+                modelMap.addAttribute("filtered", response.getList());
+            }
             return "filter";
         }
         return "filter";

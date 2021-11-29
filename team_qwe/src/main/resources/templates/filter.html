@@ -54,7 +54,7 @@
     <input type="checkbox" th:field="${request.marketPrice}" name="parameter2" value="market_price"/>market price<br>
     <input type="checkbox" th:field="${request.dividends}" name="parameter3" value="dividend_yield"/>dividend yield<br>
     <input type="checkbox" th:field="${request.riskWeight}" name="parameter4" value="risk_weight"/>risk weight<br>
-    <input type="submit" style="font-size: 125%;" value="Set parameter" name="Submit"/>
+    <input type="submit" style="font-size: 100%;" value="Set parameter" name="Submit"/>
 
 </form>
 
@@ -115,7 +115,7 @@
             <input type="text" th:field="${request.riskWeightTarget}"> Risk weight<br>
         </tr>
 
-        <input type="submit" style="font-size: 125%;" value="Filter" name="Submit"/>
+        <input type="submit" style="font-size: 100%;" value="Filter" name="Submit"/>
 
     </form>
 </td>
@@ -145,6 +145,18 @@
     </td>
 
 </table>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}"></td>
+        <td th:text="${error.message}"></td>
+    </tr>
+</td>
+
+<form action="/dataMenu" method="get">
+    <br>
+    <input type="submit" style="font-size: 100%;" value="Return to Data menu" name="Submit"/>
+</form>
 
 </body>
 </html>
