@@ -5,6 +5,9 @@ public class AddPatientRequest {
     private String surname;
     private String personalCode;
 
+    public AddPatientRequest() {
+    }
+
     public AddPatientRequest(String name, String surname, String personalCode) {
         this.name = name;
         this.surname = surname;
@@ -21,5 +24,17 @@ public class AddPatientRequest {
 
     public String getPersonalCode() {
         return personalCode;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setPersonalCode(String personalCode) {
+        this.personalCode = personalCode;
     }
 }
