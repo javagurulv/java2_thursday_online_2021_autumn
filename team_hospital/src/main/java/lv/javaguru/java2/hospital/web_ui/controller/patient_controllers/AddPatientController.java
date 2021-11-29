@@ -22,7 +22,7 @@ public class AddPatientController {
     }
 
     @PostMapping("/addPatientToList")
-    public String processAddBookRequest(@ModelAttribute(value = "request") AddPatientRequest request, ModelMap modelMap) {
+    public String processEditPatientRequest(@ModelAttribute(value = "request") AddPatientRequest request, ModelMap modelMap) {
         AddPatientResponse response = addPatientService.execute(request);
         if (response.hasErrors()) {
             modelMap.addAttribute("errors", response.getErrors());

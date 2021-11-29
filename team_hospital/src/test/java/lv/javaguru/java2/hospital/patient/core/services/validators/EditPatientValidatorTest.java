@@ -53,7 +53,7 @@ class EditPatientValidatorTest {
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "ID");
-        assertEquals(errorList.get(0).getDescription(), "Must not be empty!");
+        assertEquals(errorList.get(0).getDescription(), "must not be empty!");
     }
 
     @Test
@@ -62,7 +62,7 @@ class EditPatientValidatorTest {
         List<CoreError> errorsList = validator.validate(request);
         assertEquals(errorsList.size(), 1);
         assertEquals(errorsList.get(0).getField(), "User choice");
-        assertEquals(errorsList.get(0).getDescription(), "Must not be empty!");
+        assertEquals(errorsList.get(0).getDescription(), "must not be empty!");
     }
 
     @Test
@@ -71,7 +71,7 @@ class EditPatientValidatorTest {
         List<CoreError> errorsList = validator.validate(request);
         assertEquals(errorsList.size(), 1);
         assertEquals(errorsList.get(0).getField(), "Changes");
-        assertEquals(errorsList.get(0).getDescription(), "Must not be empty!");
+        assertEquals(errorsList.get(0).getDescription(), "must not be empty!");
     }
 
     @Test public void shouldReturnEnumError(){
@@ -91,11 +91,11 @@ class EditPatientValidatorTest {
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 3);
         assertEquals(errorList.get(0).getField(), "ID");
-        assertEquals(errorList.get(0).getDescription(), "Must not be empty!");
+        assertEquals(errorList.get(0).getDescription(), "must not be empty!");
         assertEquals(errorList.get(1).getField(), "User choice");
-        assertEquals(errorList.get(1).getDescription(), "Must not be empty!");
+        assertEquals(errorList.get(1).getDescription(), "must not be empty!");
         assertEquals(errorList.get(2).getField(), "Changes");
-        assertEquals(errorList.get(2).getDescription(), "Must not be empty!");
+        assertEquals(errorList.get(2).getDescription(), "must not be empty!");
     }
 
     @Test

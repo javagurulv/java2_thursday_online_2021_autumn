@@ -20,6 +20,7 @@ public class PatientExistenceForSearchValidator {
         for (SearchValidator s : getValidators()) {
             if (s.canProcess(request)) {
                 s.process(request).ifPresent(errors::add);
+                break;
             }
         }
         return errors;

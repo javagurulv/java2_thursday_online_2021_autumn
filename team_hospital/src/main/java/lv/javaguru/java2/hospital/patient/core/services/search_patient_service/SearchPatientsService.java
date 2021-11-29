@@ -16,7 +16,7 @@ import java.util.List;
 
 @Component
 @Transactional
-public class SearchPatientsService {
+public class  SearchPatientsService {
 
     @Value("${search.ordering.enabled}")
     private boolean orderingEnabled;

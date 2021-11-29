@@ -8,6 +8,8 @@ public class SearchPatientsRequest {
     private PatientOrdering patientOrdering;
     private PatientPaging patientPaging;
 
+    public SearchPatientsRequest() {
+    }
 
     public SearchPatientsRequest(String name, String surname, String personalCode) {
         this.name = name;
@@ -49,6 +51,14 @@ public class SearchPatientsRequest {
         return personalCode;
     }
 
+    public PatientOrdering getPatientOrdering() {
+        return patientOrdering;
+    }
+
+    public PatientPaging getPatientPaging() {
+        return patientPaging;
+    }
+
     public boolean isNameProvided(){
         return this.name != null && !this.name.isEmpty();
     }
@@ -67,5 +77,25 @@ public class SearchPatientsRequest {
 
     public PatientPaging getPaging() {
         return patientPaging;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setPersonalCode(String personalCode) {
+        this.personalCode = personalCode;
+    }
+
+    public void setPatientOrdering(PatientOrdering patientOrdering) {
+        this.patientOrdering = patientOrdering;
+    }
+
+    public void setPatientPaging(PatientPaging patientPaging) {
+        this.patientPaging = patientPaging;
     }
 }
