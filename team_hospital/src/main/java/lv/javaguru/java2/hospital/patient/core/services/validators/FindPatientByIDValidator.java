@@ -26,8 +26,8 @@ public class FindPatientByIDValidator {
     }
 
     private Optional<CoreError> validateID(FindPatientByIdRequest request) {
-        return (request.getIDRequest() == null)
-                ? Optional.of(new CoreError("ID", "Must not be empty!")) : Optional.empty();
+        return (request.getIDRequest() == null || request.getIDRequest().isEmpty())
+                ? Optional.of(new CoreError("ID", "must not be empty!")) : Optional.empty();
     }
 
     private Optional<CoreError> validateNumInID(FindPatientByIdRequest request) {
@@ -36,9 +36,7 @@ public class FindPatientByIDValidator {
     }
 
     private Optional<CoreError> validatePatientExistence(FindPatientByIdRequest request) {
-        if (request.getIDRequest() == null) {
-            return Optional.empty();
-        }
-        return idValidator.existenceByID(request.getIDRequest());
+        return request.getIDRequest() == null || request.getIDRequest().isEmpty() ?
+             Optional.empty() : idValidator.existenceByID(request.getIDRequest());
     }
 }

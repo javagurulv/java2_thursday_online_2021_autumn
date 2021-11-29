@@ -49,7 +49,7 @@ public class AddPatientValidator {
     }
 
     private Optional<CoreError> validatePatientExistence(AddPatientRequest request) {
-        return request == null
+        return request.getName() == null || request.getName().isEmpty()
                 ? Optional.empty() : database.findPatientByNameSurnamePersonalCode(
                 request.getName(),
                 request.getSurname(),

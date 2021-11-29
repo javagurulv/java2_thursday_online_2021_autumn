@@ -4,10 +4,14 @@ import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
+import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.checkers.VisitLongNumChecker;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
+import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
+import lv.javaguru.java2.hospital.visit.core.services.search_visit_service.VisitSearchExecute;
 import lv.javaguru.java2.hospital.visit.core.services.validators.date_validator.DateValidatorExecution;
+import lv.javaguru.java2.hospital.visit.core.services.validators.existence_validators.VisitExistenceForAdding;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -17,6 +21,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,19 +33,18 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class AddVisitValidatorTest {
 
-    @Mock
-    PatientRepository patientRepository;
-    @Mock
-    DoctorRepository doctorRepository;
-    @Mock DateValidatorExecution dateValidator;
-    @Mock VisitLongNumChecker longNumChecker;
+    @Mock private PatientRepository patientRepository;
+    @Mock private DoctorRepository doctorRepository;
+    @Mock private DateValidatorExecution dateValidator;
+    @Mock private VisitLongNumChecker longNumChecker;
+    @Mock private VisitExistenceForAdding visitExistenceForAdding;
     @InjectMocks AddVisitValidator addVisitValidator;
 
     @Test
     public void shouldReturnPatientIDError(){
         AddVisitRequest addVisitRequest = new AddVisitRequest(
-                "",
                 "2",
+                "",
                 "12-12-21 12:00");
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
@@ -76,8 +81,8 @@ class AddVisitValidatorTest {
     @Test
     public void shouldDoctorIDError(){
         AddVisitRequest addVisitRequest = new AddVisitRequest(
-                "1",
                 "",
+                "1",
                 "12-12-21 12:00");
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
@@ -314,5 +319,34 @@ class AddVisitValidatorTest {
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertEquals(errorList.size(), 0);
         assertTrue(errorList.isEmpty());
+    }
+
+    @Test
+    public void shouldReturnVisitExistError(){
+        AddVisitRequest addVisitRequest = new AddVisitRequest(
+                "1",
+                "2",
+                "2021-12-12 12:00");
+
+        LocalDateTime dateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse("2021-12-12 12:00"));
+        List<Patient> patients = new ArrayList<>();
+        patients.add(new Patient("name", "surname", "1234"));
+        patients.get(0).setId(1L);
+        List<Doctor> doctors = new ArrayList<>();
+        doctors.add(new Doctor("name", "surname", "speciality"));
+        doctors.get(0).setId(2L);
+
+        Mockito.when(patientRepository.findById(Long.valueOf(addVisitRequest.getPatientID())))
+                .thenReturn(patients);
+        Mockito.when(doctorRepository.findById(Long.valueOf(addVisitRequest.getDoctorsID())))
+                .thenReturn(doctors);
+        Mockito.when(visitExistenceForAdding.validateExistenceForAdding(addVisitRequest))
+                .thenReturn(Optional.of(new CoreError("Visit", "already exist!")));
+
+        List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
+        assertFalse(errorList.isEmpty());
+        assertEquals(errorList.size(), 1);
+        assertEquals(errorList.get(0).getField(), "Visit");
+        assertEquals(errorList.get(0).getDescription(), "already exist!");
     }
 }

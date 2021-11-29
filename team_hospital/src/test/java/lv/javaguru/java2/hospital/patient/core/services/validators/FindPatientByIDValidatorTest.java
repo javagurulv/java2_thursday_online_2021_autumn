@@ -56,6 +56,6 @@ class FindPatientByIDValidatorTest {
         List<CoreError> errorList = validator.validate(request);
         assertEquals(errorList.size(), 1);
         assertEquals(errorList.get(0).getField(), "ID");
-        assertEquals(errorList.get(0).getDescription(), "Must not be empty!");
+        assertEquals(errorList.get(0).getDescription(), "must not be empty!");
     }
 }

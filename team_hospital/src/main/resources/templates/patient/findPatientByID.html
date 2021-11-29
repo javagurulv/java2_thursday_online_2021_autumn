@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Hospital demo project">
+    <meta name="author" content="JavaGuru">
+    <title>Hospital Repository</title>
+</head>
+
+<body>
+
+<h3>Find patient by ID</h3>
+
+<table>
+    <tr>
+        <td>ID:</td>
+    </tr>
+
+    <tr>
+        <form action="/findPatientByID" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.IDRequest}"/></td>
+            <td>
+                <input type="submit" value="Find Patient"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+</table>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.description}" />
+    </tr>
+</td>
+
+<form action="/" method="get">
+    <input type="submit" value="Main menu" name="Submit" />
+</form>
+
+<form action="/patientActions" method="get">
+    <input type="submit" value="Patient actions" name="Submit" />
+</form>
+
+</body>
+
+</html>

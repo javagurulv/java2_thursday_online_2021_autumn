@@ -46,7 +46,7 @@ class DeleteVisitServiceTest {
     public void shouldDeleteVisitWithIdFromDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         Mockito.when(visitRepository.deleteVisit(1L)).thenReturn(true);
-        DeleteVisitRequest request = new DeleteVisitRequest(1L);
+        DeleteVisitRequest request = new DeleteVisitRequest("1");
         DeleteVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertTrue(response.isTrue());

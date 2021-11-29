@@ -38,7 +38,7 @@ public class EditPatientValidator {
     }
 
     private Optional<CoreError> validatePatientID(EditPatientRequest request) {
-        return (request.getPatientID() == null)
+        return (request.getPatientID() == null || request.getPatientID().isEmpty())
                 ? Optional.of(new CoreError("ID", "Must not be empty!")) : Optional.empty();
     }
 
@@ -53,7 +53,8 @@ public class EditPatientValidator {
     }
 
     private Optional<CoreError> validatePatientExistence(EditPatientRequest request) {
-        return request.getPatientID() == null ? Optional.empty() : validator.existenceByID(request.getPatientID());
+        return request.getPatientID() == null || request.getPatientID().isEmpty()
+                ? Optional.empty() : validator.existenceByID(request.getPatientID());
     }
 
     private Optional<CoreError> validateEnum(EditPatientRequest request) {

@@ -68,7 +68,8 @@ public class AcceptanceTest2 {
 
         SearchVisitResponse searchVisitResponse = searchVisitService.execute(searchVisitRequest);
 
-        DeleteVisitRequest deleteVisitRequest = new DeleteVisitRequest(searchVisitResponse.getVisits().get(0).getVisitID());
+        DeleteVisitRequest deleteVisitRequest =
+                new DeleteVisitRequest(searchVisitResponse.getVisits().get(0).getVisitID().toString());
         DeleteVisitResponse deleteVisitResponse = deleteVisitService.execute(deleteVisitRequest);
 
         ShowAllVisitResponse showAllVisitResponse = showAllVisitService.execute(new ShowAllVisitRequest());

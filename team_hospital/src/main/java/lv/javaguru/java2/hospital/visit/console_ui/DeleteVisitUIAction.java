@@ -14,7 +14,7 @@ public class DeleteVisitUIAction implements VisitUIAction{
 
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
-        Long ID = getUserInput.getUserLongInput("Please enter visit ID to delete: ");
+        String ID = getUserInput.getUserStringInput("Please enter visit ID to delete: ");
         DeleteVisitRequest request = new DeleteVisitRequest(ID);
         DeleteVisitResponse response = visitService.execute(request);
 

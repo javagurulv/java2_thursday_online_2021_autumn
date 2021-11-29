@@ -27,7 +27,7 @@ public class DeletePatientValidator {
 
     private Optional<CoreError> validateID(DeletePatientRequest request) {
         return (request.getIdRequest() == null || request.getIdRequest().isEmpty())
-                ? Optional.of(new CoreError("ID", "Must not be empty!")) : Optional.empty();
+                ? Optional.of(new CoreError("ID", "must not be empty!")) : Optional.empty();
     }
 
     private Optional<CoreError> validateNumInID(DeletePatientRequest request) {
@@ -36,10 +36,8 @@ public class DeletePatientValidator {
     }
 
     private Optional<CoreError> validatePatientExistence(DeletePatientRequest request) {
-        if (request.getIdRequest() == null) {
-            return Optional.empty();
-        }
-        return validator.existenceByID(request.getIdRequest());
+        return request.getIdRequest() == null || request.getIdRequest().isEmpty()
+        ? Optional.empty() : validator.existenceByID(request.getIdRequest());
     }
 }
 

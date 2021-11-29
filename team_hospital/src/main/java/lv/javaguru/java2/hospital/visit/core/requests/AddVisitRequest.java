@@ -1,20 +1,20 @@
 package lv.javaguru.java2.hospital.visit.core.requests;
 
 public class AddVisitRequest {
-    private String patientID;
     private String doctorsID;
+    private String patientID;
     private String visitDate;
     private String description;
 
-    public AddVisitRequest(String patientID, String doctorsID, String visitDate) {
-        this.patientID = patientID;
+    public AddVisitRequest(String doctorsID, String patientID, String visitDate) {
         this.doctorsID = doctorsID;
+        this.patientID = patientID;
         this.visitDate = visitDate;
     }
 
-    public AddVisitRequest(String patientID, String doctorsID, String visitDate, String description) {
-        this.patientID = patientID;
+    public AddVisitRequest(String doctorsID, String patientID, String visitDate, String description) {
         this.doctorsID = doctorsID;
+        this.patientID = patientID;
         this.visitDate = visitDate;
         this.description = description;
     }

@@ -68,6 +68,6 @@ class DeletePatientValidatorTest {
         assertFalse(errors.isEmpty());
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "ID");
-        assertEquals(errors.get(0).getDescription(), "Must not be empty!");
+        assertEquals(errors.get(0).getDescription(), "must not be empty!");
     }
 }

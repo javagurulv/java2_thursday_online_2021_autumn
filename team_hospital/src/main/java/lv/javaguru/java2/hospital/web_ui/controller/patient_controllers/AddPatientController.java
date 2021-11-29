@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AddPatientController {
 
-    @Autowired
-    private AddPatientService addPatientService;
+    @Autowired private AddPatientService addPatientService;
 
     @GetMapping(value = "/addPatientToList")
     public String showAddPatientPage(ModelMap modelMap) {
@@ -27,9 +26,7 @@ public class AddPatientController {
         AddPatientResponse response = addPatientService.execute(request);
         if (response.hasErrors()) {
             modelMap.addAttribute("errors", response.getErrors());
-        }
-
-        if (!response.hasErrors()) {
+        } else if (!response.hasErrors()) {
             modelMap.addAttribute("errors", null);
             modelMap.addAttribute("message", "Successfully added!");
         }

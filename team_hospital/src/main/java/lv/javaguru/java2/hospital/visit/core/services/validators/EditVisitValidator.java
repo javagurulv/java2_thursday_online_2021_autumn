@@ -70,8 +70,8 @@ public class EditVisitValidator {
     }
 
     private List<CoreError> validateDate(EditVisitRequest request){
-        return request == null ? new ArrayList<>()
-                : request.getEditEnums().equals("DATE")
+        return request.getChanges() == null || request.getChanges().isEmpty()
+                ? new ArrayList<>() : request.getEditEnums().equals("DATE")
                 ? dateValidator.validate(request.getChanges()) : new ArrayList<>();
     }
 }

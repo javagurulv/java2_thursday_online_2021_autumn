@@ -24,6 +24,6 @@ public class DeleteVisitService {
             return new DeleteVisitResponse(errors);
         }
 
-        return new DeleteVisitResponse(visitRepository.deleteVisit(request.getId()));
+        return new DeleteVisitResponse(visitRepository.deleteVisit(Long.parseLong(request.getID())));
     }
 }

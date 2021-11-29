@@ -221,7 +221,7 @@ class AddVisitServiceTest {
         Mockito.when(patientRepository.findById(2L))
                 .thenReturn((patients));
 
-        AddVisitRequest request = new AddVisitRequest(patient.getId().toString(), doctor.getId().toString(),
+        AddVisitRequest request = new AddVisitRequest(doctor.getId().toString(), patient.getId().toString(),
                 "2021-12-21 15:00");
         AddVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());
