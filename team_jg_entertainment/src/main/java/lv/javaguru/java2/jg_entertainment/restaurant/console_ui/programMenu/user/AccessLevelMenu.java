@@ -2,16 +2,17 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.programMenu.use
 
 //
 //@Component
-//public class ProgramUserHelper {
+//public class AccessLevelMenu {
+//
 //    private Map<Integer, Menu> menuNumberToTypeOfMenuMap;
 //    private static final EnteredNumChecker enteredNumChecker = new EnteredNumChecker();
 //
 //    @Autowired
-//    public ProgramUserHelper(List<Menu> menus) {
+//    public AccessLevelMenu(List<Menu> menus) {
 //        menuNumberToTypeOfMenuMap = new HashMap<>();
-//        menuNumberToTypeOfMenuMap.put(1, findMenu(menus, MenuLevelUser.class));
-//        menuNumberToTypeOfMenuMap.put(2, findMenu(menus, ReservationMenu.class));
-//        menuNumberToTypeOfMenuMap.put(3, findMenu(menus, ExitMenu.class));
+//        menuNumberToTypeOfMenuMap.put(1, findMenu(menus, AccessLevelForPersonal.class));
+//        menuNumberToTypeOfMenuMap.put(2, findMenu(menus, AccessLevelForUser.class));
+//
 //    }
 //
 //    private Menu findMenu(List<Menu> menus, Class menusClass) {
@@ -24,8 +25,8 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.programMenu.use
 //    public void printMainMenu() {
 //        System.out.println();
 //        System.out.println("Hello ! MENU: ");
-//        System.out.println("1--> choose action with USERS: ");
-//        System.out.println("2--> choose action with RESERVATION: ");
+//        System.out.println("1--> choose action if you are PERSONAL: ");
+//        System.out.println("2--> choose action if you are USER(visitor): ");
 //        System.out.println("3--> EXIT! ");
 //        System.out.println();
 //    }
@@ -39,3 +40,4 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.programMenu.use
 //        menuNumberToTypeOfMenuMap.get(selectedMenu).execute(applicationContext);
 //    }
 //}
+//

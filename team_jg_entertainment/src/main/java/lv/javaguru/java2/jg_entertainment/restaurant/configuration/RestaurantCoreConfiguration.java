@@ -21,7 +21,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = "lv.javaguru.java2.jg_entertainment")
 @PropertySource(value = "classpath:application.properties")
 @EnableTransactionManagement
-public class RestaurantListConfiguration {
+public class RestaurantCoreConfiguration {
 
     @Value("${jdbc.url}")
     private String jdbcUrl;

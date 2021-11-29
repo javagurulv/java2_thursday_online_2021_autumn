@@ -6,6 +6,9 @@ public class AddUserRequest {
     private String surname;
     private String telephone;
 
+    public AddUserRequest() {
+    }
+
     public AddUserRequest(String name, String surname, String telephone) {
         this.name = name;
         this.surname = surname;
@@ -22,5 +25,17 @@ public class AddUserRequest {
 
     public String getTelephone() {
         return telephone;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 }
