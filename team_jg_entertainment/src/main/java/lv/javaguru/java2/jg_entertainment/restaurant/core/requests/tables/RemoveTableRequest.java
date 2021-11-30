@@ -8,6 +8,13 @@ public class RemoveTableRequest {
 		this.tableIdToRemove = tableIdToRemove;
 	}
 
+	public RemoveTableRequest() {
+	}
+
+	public void setTableIdToRemove(Long tableIdToRemove) {
+		this.tableIdToRemove = tableIdToRemove;
+	}
+
 	public Long getTableIdToRemove() {
 		return tableIdToRemove;
 	}
