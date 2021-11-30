@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="QWE finance project">
+    <meta name="author" content="Alex K">
+    <title>QWE Trading Application</title>
+</head>
+<style type="text/css">
+        body {
+              background-color: #8E8F92;
+              margin-left: 20%;
+              margin-right: 20%;
+              text-align: left;
+              border: 2px dotted black;
+              padding: 20px 20px 20px 20px;
+              font-family: sans-serif;
+        }
+</style>
+<body>
+
+<h3>Remove user</h3>
+
+<form action="/userdata/removeUser" th:object="${request}" method="post">
+    <td>Enter id or name:</td>
+    <input type="text" th:field="${request.name}"/>
+    <br>
+    <br>
+    <input type="submit" style="font-size: 100%;" value="Remove user" name="Submit"/>
+    <input type="reset" style="font-size: 100%;" value="Clear"/>
+</form>
+
+<br>
+<td th:if="${isRemoved == false}">
+<td th:text="${isRemoved}"></td>
+
+<form action="/userMenu" method="get">
+    <br>
+    <br>
+    <input type="submit" style="font-size: 100%;" value="Return to User menu" name="Submit"/>
+</form>
+
+</body>
+</html>

@@ -51,6 +51,7 @@ public class User {
         this.age = age;
         this.type = type;
         this.initialInvestment = initialInvestment;
+        setCash(initialInvestment);
         if (riskTolerance == 0) {calculateRiskTolerance();}
     }
 

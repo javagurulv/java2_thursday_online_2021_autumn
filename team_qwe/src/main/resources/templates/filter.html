@@ -91,7 +91,7 @@
                 <option value="<="><=</option>
                 <option value="=">=</option>
             </select>
-            <input type="text" th:field="${request.marketPriceTarget}"> Market price<br>
+            <input type="text" style="width: 4%;" th:field="${request.marketPriceTarget}"> Market price<br>
         </tr>
 
         <tr th:if="${request.dividends != null}">
@@ -103,7 +103,7 @@
                 <option value="<="><=</option>
                 <option value="=">=</option>
             </select>
-            <input type="text" th:field="${request.dividendsTarget}"> Dividends<br>
+            <input type="text" style="width: 4%;" th:field="${request.dividendsTarget}"> Dividends<br>
         </tr>
 
         <tr th:if="${request.riskWeight != null}">
@@ -115,7 +115,7 @@
                 <option value="<="><=</option>
                 <option value="=">=</option>
             </select>
-            <input type="text" th:field="${request.riskWeightTarget}"> Risk weight<br>
+            <input type="text" style="width: 4%;" th:field="${request.riskWeightTarget}"> Risk weight<br>
         </tr>
 
         <input type="submit" style="font-size: 100%;" value="Filter" name="Submit"/>

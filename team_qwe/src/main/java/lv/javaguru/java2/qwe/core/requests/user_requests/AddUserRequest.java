@@ -2,10 +2,12 @@ package lv.javaguru.java2.qwe.core.requests.user_requests;
 
 public class AddUserRequest {
 
-    private final String name;
-    private final String age;
-    private final String type;
-    private final String initialInvestment;
+    private String name;
+    private String age;
+    private String type;
+    private String initialInvestment;
+
+    public AddUserRequest() {}
 
     public AddUserRequest(String name, String age, String type, String initialInvestment) {
         this.name = name;
@@ -28,6 +30,22 @@ public class AddUserRequest {
 
     public String getInitialInvestment() {
         return initialInvestment;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setInitialInvestment(String initialInvestment) {
+        this.initialInvestment = initialInvestment;
     }
 
 }
