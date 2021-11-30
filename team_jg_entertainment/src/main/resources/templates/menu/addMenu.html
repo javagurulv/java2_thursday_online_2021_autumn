@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Restaurant JG demo project">
+    <meta name="author" content="JavaGuru">
+    <title>Restaurant JG</title>
+</head>
+
+<body>
+
+<h3>Add Menu to the list</h3>
+
+<table>
+    <tr>
+        <td>Title of the menu:</td>
+        <td>Description:</td>
+        <td>Price for menu per table:</td>
+    </tr>
+
+    <tr>
+        <form action="/addMenu" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.Title}"/></td>
+            <td><input type="text" th:field="${request.Description}"/></td>
+            <td><input type="text" th:field="${request.Price}"/></td>
+            <td>
+                <input type="submit" value="Add Menu"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+</table>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}"></td>
+        <td th:text="${error.description}"></td>
+    </tr>
+</td>
+
+<td th:if="${errors == null}">
+    <tr th:text="${message}"></tr>
+</td>
+
+
+<form action="/" method="get">
+    <input type="submit" value="Main menu" name="Submit" />
+</form>
+
+<form action="/menuMenu" method="get">
+    <input type="submit" value="Table" name="Submit" />
+</form>
+
+</body>
+</html>

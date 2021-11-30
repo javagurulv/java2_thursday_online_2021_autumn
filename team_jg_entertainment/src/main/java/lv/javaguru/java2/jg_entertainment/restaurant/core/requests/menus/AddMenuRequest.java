@@ -6,6 +6,9 @@ public class AddMenuRequest {
     private String description;
     private double price;
 
+    public AddMenuRequest() {
+    }
+
     public AddMenuRequest(String title, String description, Double price) {
         this.title = title;
         this.description = description;
@@ -20,7 +23,17 @@ public class AddMenuRequest {
         return description;
     }
 
-    public double getPrice() {
-        return price;
+    public double getPrice() { return price; }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
