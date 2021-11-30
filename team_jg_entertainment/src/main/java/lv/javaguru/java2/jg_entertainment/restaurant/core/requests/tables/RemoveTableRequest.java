@@ -4,12 +4,13 @@ public class RemoveTableRequest {
 
 	private Long tableIdToRemove;
 
+	public RemoveTableRequest() {
+	}
 	public RemoveTableRequest(Long tableIdToRemove) {
 		this.tableIdToRemove = tableIdToRemove;
 	}
 
-	public RemoveTableRequest() {
-	}
+
 
 	public void setTableIdToRemove(Long tableIdToRemove) {
 		this.tableIdToRemove = tableIdToRemove;
