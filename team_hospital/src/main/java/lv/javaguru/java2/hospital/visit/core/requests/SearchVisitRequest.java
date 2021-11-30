@@ -10,6 +10,9 @@ public class SearchVisitRequest {
     private VisitOrdering visitOrdering;
     private VisitPaging visitPaging;
 
+    public SearchVisitRequest() {
+    }
+
     public SearchVisitRequest(String visitId, String doctorId, String patientId, String visitDate) {
         this.visitId = visitId;
         this.doctorId = doctorId;
@@ -80,5 +83,29 @@ public class SearchVisitRequest {
 
     public VisitPaging getVisitPaging() {
         return visitPaging;
+    }
+
+    public void setVisitId(String visitId) {
+        this.visitId = visitId;
+    }
+
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    public void setVisitDate(String visitDate) {
+        this.visitDate = visitDate;
+    }
+
+    public void setVisitOrdering(VisitOrdering visitOrdering) {
+        this.visitOrdering = visitOrdering;
+    }
+
+    public void setVisitPaging(VisitPaging visitPaging) {
+        this.visitPaging = visitPaging;
     }
 }

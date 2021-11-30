@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Hospital demo project">
+    <meta name="author" content="JavaGuru">
+    <title>Hospital repository</title>
+</head>
+
+<body>
+
+<h3>Add visit to list</h3>
+
+<table>
+    <tr>
+        <td>Doctor ID:</td>
+        <td>Patient ID:</td>
+        <td>Date (yyyy-MM-dd HH:mm)</td>
+        <td>Description:</td>
+    </tr>
+
+    <tr>
+        <form action="/addVisit" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.doctorsID}"/></td>
+            <td><input type="text" th:field="${request.patientID}"/></td>
+            <td><input type="text" th:field="${request.visitDate}"/></td>
+            <td><input type="text" th:field="${request.description}"/></td>
+            <td>
+                <input type="submit" value="Add Visit"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+</table>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.description}" />
+    </tr>
+</td>
+
+<td th:if="${errors == null}">
+    <tr th:text="${message}"></tr>
+</td>
+
+<form action="/" method="get">
+    <input type="submit" value="Main menu" name="Submit" />
+</form>
+
+<form action="/visitActions" method="get">
+    <input type="submit" value="Visit actions" name="Submit" />
+</form>
+
+</body>
+
+</html>

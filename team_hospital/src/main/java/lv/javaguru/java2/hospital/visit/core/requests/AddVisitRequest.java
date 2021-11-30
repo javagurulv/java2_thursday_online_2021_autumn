@@ -6,6 +6,9 @@ public class AddVisitRequest {
     private String visitDate;
     private String description;
 
+    public AddVisitRequest() {
+    }
+
     public AddVisitRequest(String doctorsID, String patientID, String visitDate) {
         this.doctorsID = doctorsID;
         this.patientID = patientID;
@@ -33,5 +36,21 @@ public class AddVisitRequest {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setDoctorsID(String doctorsID) {
+        this.doctorsID = doctorsID;
+    }
+
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
+    }
+
+    public void setVisitDate(String visitDate) {
+        this.visitDate = visitDate;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

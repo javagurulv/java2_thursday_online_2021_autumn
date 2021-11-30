@@ -18,18 +18,19 @@ public class SearchPatientController {
     @Autowired private SearchPatientsService searchPatientsService;
 
     @GetMapping(value = "/searchPatient")
-    public String showEditPatientPage(ModelMap modelMap) {
+    public String showSearchPatientPage(ModelMap modelMap) {
         modelMap.addAttribute("request", new SearchPatientsRequest());
         return "patient/searchPatient";
     }
 
     @PostMapping("/searchPatient")
-    public String processEditPatientRequest(@ModelAttribute(value = "request") SearchPatientsRequest request, ModelMap modelMap) {
+    public String processSearchPatientRequest(@ModelAttribute(value = "request") SearchPatientsRequest request, ModelMap modelMap) {
         SearchPatientsResponse response = searchPatientsService.execute(request);
         if (response.hasErrors()) {
             modelMap.addAttribute("errors", response.getErrors());
+        } else if (!response.hasErrors()){
+            modelMap.addAttribute("patients", response.getPatientList());
         }
-        modelMap.addAttribute("patients", response.getPatientList());
         return "patient/searchPatient";
     }
 }

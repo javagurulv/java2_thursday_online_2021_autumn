@@ -1,5 +1,11 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
+import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
+import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
+import lv.javaguru.java2.hospital.domain.Doctor;
+import lv.javaguru.java2.hospital.domain.Patient;
+import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.checkers.VisitEnumChecker;
 import lv.javaguru.java2.hospital.visit.core.checkers.VisitLongNumChecker;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
@@ -15,7 +21,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +34,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class EditVisitValidatorTest {
 
+    @Mock private DoctorRepository doctorRepository;
+    @Mock private PatientRepository patientRepository;
     @Mock private DateValidatorExecution dateValidator;
     @Mock private VisitEnumChecker checker;
     @Mock private VisitExistenceByIdValidator existence;
@@ -33,10 +44,15 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnEmptyList() {
-        EditVisitRequest request = new EditVisitRequest("1", "DOCTOR_ID", "changes");
+        EditVisitRequest request = new EditVisitRequest("1", "DOCTOR_ID", "1");
+        Doctor doctor = new Doctor("name", "surname", "speciality");
+        doctor.setId(1L);
+
         Mockito.when(longNumChecker.validate(request.getVisitID(), "ID")).thenReturn(Optional.empty());
         Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.empty());
         Mockito.when(existence.validateExistenceById(1L)).thenReturn(Optional.empty());
+        Mockito.when(doctorRepository.findById(1L)).thenReturn(Collections.singletonList(doctor));
+
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
@@ -87,9 +103,14 @@ class EditVisitValidatorTest {
 
     @Test
     public void shouldReturnVisitError() {
+        Doctor doctor = new Doctor("name", "surname", "speciality");
+        doctor.setId(1L);
+
         Mockito.when(existence.validateExistenceById(12L)).thenReturn
                 (Optional.of(new CoreError("Visit", "does not exist!")));
-        EditVisitRequest request = new EditVisitRequest("12", "DOCTOR_ID", "changes");
+        Mockito.when(doctorRepository.findById(1L)).thenReturn(Collections.singletonList(doctor));
+
+        EditVisitRequest request = new EditVisitRequest("12", "DOCTOR_ID", "1");
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);

@@ -16,4 +16,12 @@ public class PatientOrdering {
     public String getOrderDirection() {
         return orderDirection;
     }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public void setOrderDirection(String orderDirection) {
+        this.orderDirection = orderDirection;
+    }
 }

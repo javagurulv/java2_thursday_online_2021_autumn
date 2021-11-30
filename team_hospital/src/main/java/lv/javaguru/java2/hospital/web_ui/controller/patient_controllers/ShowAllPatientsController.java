@@ -14,7 +14,7 @@ public class ShowAllPatientsController {
     @Autowired private ShowAllPatientsService showAllPatientsService;
 
     @GetMapping(value = "/showAllPatients")
-    public String showAllBooks(ModelMap modelMap) {
+    public String showAllPatients(ModelMap modelMap) {
         ShowAllPatientsResponse response = showAllPatientsService.execute(
                 new ShowAllPatientsRequest()
         );

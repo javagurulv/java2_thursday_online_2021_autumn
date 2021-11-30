@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Locale;
 
 @Component
 @Transactional
@@ -25,7 +26,7 @@ public class EditVisitService {
             return new EditVisitResponse(errors);
         }
         boolean isVisitEdited = database.editVisit(Long.valueOf(request.getVisitID()),
-                EditVisitEnum.valueOf(request.getEditEnums()),
+                EditVisitEnum.valueOf(request.getEditEnums().toUpperCase(Locale.ROOT)),
                 request.getChanges());
         return new EditVisitResponse(isVisitEdited);
     }
