@@ -12,6 +12,10 @@ public class AddTableRequest {
 		this.price = price;
 	}
 
+	public AddTableRequest() {
+
+	}
+
 	public String getTitle() {return title;
 	}
 
@@ -20,5 +24,17 @@ public class AddTableRequest {
 	}
 
 	public double getPrice() {return price;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setTableCapacity(int tableCapacity) {
+		this.tableCapacity = tableCapacity;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 }
