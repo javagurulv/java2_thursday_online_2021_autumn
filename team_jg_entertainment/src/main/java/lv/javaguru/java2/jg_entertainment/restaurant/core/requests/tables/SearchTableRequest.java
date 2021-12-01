@@ -48,6 +48,9 @@ public class SearchTableRequest {
         this.paging = paging;
     }
 
+    public SearchTableRequest() {
+    }
+
     public String getTitleTable() {
         return titleTable;
     }
@@ -72,5 +75,21 @@ public class SearchTableRequest {
     public boolean isIDProvided() {
         return this.idTable != null
                 && this.idTable != 0;
+    }
+
+    public void setTitleTable(String titleTable) {
+        this.titleTable = titleTable;
+    }
+
+    public void setIdTable(Long idTable) {
+        this.idTable = idTable;
+    }
+
+    public void setOrdering(OrderingTable ordering) {
+        this.ordering = ordering;
+    }
+
+    public void setPaging(PagingTable paging) {
+        this.paging = paging;
     }
 }
