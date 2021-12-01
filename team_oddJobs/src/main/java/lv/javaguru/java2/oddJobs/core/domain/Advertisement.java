@@ -68,10 +68,10 @@ public class Advertisement {
 
     @Override
     public String toString() {
-        return "AdvertisementBoard{" +
-                "boardId=" + advId +
-                ", aBoardTitle='" + advTitle + '\'' +
-                ", aBoardDescription='" + advDescription + '\'' +
+        return "Advertisement{" +
+                "advId=" + advId +
+                ", advTitle='" + advTitle + '\'' +
+                ", advDescription='" + advDescription + '\'' +
                 '}';
     }
 }

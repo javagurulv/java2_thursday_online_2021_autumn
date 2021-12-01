@@ -10,7 +10,7 @@ public class FindAdvertisementResponse extends CoreResponse {
 
     private List<Advertisement> advertisements;
 
-    public FindAdvertisementResponse(List<CoreError> errors, List<Advertisement> advertisements) {
+    public FindAdvertisementResponse(List<Advertisement> advertisements,List<CoreError> errors) {
         super(errors);
         this.advertisements = advertisements;
     }

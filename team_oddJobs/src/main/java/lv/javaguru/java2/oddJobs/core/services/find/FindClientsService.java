@@ -28,8 +28,10 @@ public class FindClientsService {
     @Value("${search.paging.enabled}")
     private boolean pagingEnabled;
 
-    @Autowired private ClientRepository clientRepository;
-    @Autowired private FindClientsValidator clientValidator;
+    @Autowired
+    private ClientRepository clientRepository;
+    @Autowired
+    private FindClientsValidator clientValidator;
 
 
     public FindClientsResponse execute(FindClientsRequest request) {

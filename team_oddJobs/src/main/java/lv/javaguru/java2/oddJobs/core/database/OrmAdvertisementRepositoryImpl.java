@@ -28,17 +28,18 @@ public class OrmAdvertisementRepositoryImpl implements AdvertisementRepository {
     @Override
     public boolean removeAdvertisement(Long advId, String advTitle) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "delete Advertisements where advId = :advId AND advTitle = :advTitle");
-        query.setParameter("advID", advId);
+                "delete Advertisement where advId = :advId AND advTitle = :advTitle");
+        query.setParameter("advId", advId);
         query.setParameter("advTitle", advTitle);
         int result = query.executeUpdate();
         return result == 1;
     }
 
+
     @Override
     public List<Advertisement> findAdvertisementByTitle(String advTitle) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "select b FROM Advertisements b where advTitle = :advTitle");
+                "select b FROM Advertisement b where advTitle = :advTitle");
         query.setParameter("advTitle", advTitle);
         return query.getResultList();
     }
@@ -46,7 +47,7 @@ public class OrmAdvertisementRepositoryImpl implements AdvertisementRepository {
     @Override
     public List<Advertisement> findAdvertisementById(Long advId) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "select b FROM Advertisements b where advId = :advId");
+                "select b FROM Advertisement b where advId = :advId");
         query.setParameter("advId", advId);
         return query.getResultList();
     }
@@ -54,7 +55,7 @@ public class OrmAdvertisementRepositoryImpl implements AdvertisementRepository {
     @Override
     public List<Advertisement> getAllAdvertisement() {
         return sessionFactory.getCurrentSession()
-                .createQuery("SELECT b FROM Advertisements b", Advertisement.class)
+                .createQuery("SELECT b FROM Advertisement b", Advertisement.class)
                 .getResultList();
     }
 }

@@ -2,8 +2,8 @@ package lv.javaguru.java2.oddJobs.console_ui.remove;
 
 import lv.javaguru.java2.oddJobs.console_ui.UIAction;
 import lv.javaguru.java2.oddJobs.core.requests.remove.RemoveAdvertismentRequest;
-import lv.javaguru.java2.oddJobs.core.responce.remove.RemoveAdvertismentResponse;
-import lv.javaguru.java2.oddJobs.core.services.remove.RemoveAdvertismentService;
+import lv.javaguru.java2.oddJobs.core.responce.remove.RemoveAdvertisementResponse;
+import lv.javaguru.java2.oddJobs.core.services.remove.RemoveAdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class RemoveAdvertismentUIAction implements UIAction {
 
     @Autowired
-    private RemoveAdvertismentService deleteAdvertismentService;
+    private RemoveAdvertisementService deleteAdvertismentService;
 
 
     @Override
@@ -27,13 +27,13 @@ public class RemoveAdvertismentUIAction implements UIAction {
 
 
         RemoveAdvertismentRequest request = new RemoveAdvertismentRequest(advertismentTitle, advertismentId);
-        RemoveAdvertismentResponse removeAdvertismentResponse = deleteAdvertismentService.execute(request);
+        RemoveAdvertisementResponse removeAdvertisementResponse = deleteAdvertismentService.execute(request);
 
-        if (removeAdvertismentResponse.hasErrors()) {
-            removeAdvertismentResponse.getErrors().forEach(coreError ->
+        if (removeAdvertisementResponse.hasErrors()) {
+            removeAdvertisementResponse.getErrors().forEach(coreError ->
                     System.out.println("Error" + coreError.getField() + " " + coreError.getMessage()));
         } else {
-            if (removeAdvertismentResponse.isAdvertismentRemoved()) {
+            if (removeAdvertisementResponse.isAdvertisementRemoved()) {
                 System.out.println("Your advertisement was deleted from board.");
             } else {
                 System.out.println("Your advertisement was not deleted from board.");

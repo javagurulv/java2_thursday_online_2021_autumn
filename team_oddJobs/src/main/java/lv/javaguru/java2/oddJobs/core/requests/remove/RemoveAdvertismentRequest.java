@@ -15,6 +15,10 @@ public class RemoveAdvertismentRequest {
     public RemoveAdvertismentRequest(String advertismentTitle, long advertismentId) {
     }
 
+    public RemoveAdvertismentRequest() {
+
+    }
+
     public Long getAdvId() {return advId;}
 
     public String getAdvTitle() {return advTitle;}
