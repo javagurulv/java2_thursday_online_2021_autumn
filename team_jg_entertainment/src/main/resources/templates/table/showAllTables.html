@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Restaurant JG demo project">
+    <meta name="author" content="JavaGuru">
+    <title>Restaurant JG</title>
+</head>
+
+<style>
+#tables {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+#tables td, #tables th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#tables tr:nth-child(even){
+background-color: #f2f2f2;
+}
+
+#tables tr:hover {
+background-color: #ddd;
+}
+
+#tables th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: left;
+  background-color: rgba(255,0,255,0.3);
+  color: white;
+}
+
+</style>
+
+
+<body>
+<h3>Show all tables</h3>
+<table id="tables">
+<tr>
+    <td>ID of the table</td>
+    <td>Title of the table</td>
+    <td>Capacity</td>
+    <td>Price per table</td>
+</tr>
+
+    <!--<tr>-->
+    <!--    <td>ID of the table:</td>-->
+    <!--    <td>Title of the table:</td>-->
+    <!--    <td>Capacity:</td>-->
+    <!--    <td>Price per table:</td>-->
+    <!--</tr>-->
+
+
+    <td th:if="${tables != null}">
+    <tr th:each="table : ${tables}">
+        <td th:text="${table.id}"></td>
+        <td th:text="${table.title}"></td>
+        <td th:text="${table.tableCapacity}"></td>
+        <td th:text="${table.price}"></td>
+    </tr>
+</td>
+</table>
+
+<form action="/" method="get">
+    <input type="submit" value="Main menu" name="Submit" />
+</form>
+
+<form action="/tableMenu" method="get">
+    <input type="submit" value="Return to tables' menu" name="Submit" />
+</form>
+
+</body>
+</html>
