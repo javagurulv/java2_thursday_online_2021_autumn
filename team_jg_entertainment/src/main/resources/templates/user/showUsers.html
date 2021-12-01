@@ -51,13 +51,6 @@ background-color: #ddd;
         <th>Telephone</th>
     </tr>
 
-    <!--<tr>-->
-    <!--    <td>Name:</td>-->
-    <!--    <td>Surname:</td>-->
-    <!--    <td>ID:</td>-->
-    <!--    <td>Telephone:</td>-->
-    <!--</tr>-->
-
     <td th:if="${visitors != null}">
         <tr th:each="visitor : ${visitors}">
             <td th:text="${visitor.userName}"></td>

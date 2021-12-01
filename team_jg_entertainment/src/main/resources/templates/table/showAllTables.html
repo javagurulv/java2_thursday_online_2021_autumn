@@ -8,6 +8,10 @@
 </head>
 
 <style>
+body {
+  background-color: linen;
+}
+
 #tables {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -37,24 +41,15 @@ background-color: #ddd;
 
 </style>
 
-
 <body>
 <h3>Show all tables</h3>
 <table id="tables">
 <tr>
-    <td>ID of the table</td>
-    <td>Title of the table</td>
-    <td>Capacity</td>
-    <td>Price per table</td>
+    <th>ID of the table</th>
+    <th>Title of the table</th>
+    <th>Capacity</th>
+    <th>Price per table</th>
 </tr>
-
-    <!--<tr>-->
-    <!--    <td>ID of the table:</td>-->
-    <!--    <td>Title of the table:</td>-->
-    <!--    <td>Capacity:</td>-->
-    <!--    <td>Price per table:</td>-->
-    <!--</tr>-->
-
 
     <td th:if="${tables != null}">
     <tr th:each="table : ${tables}">
