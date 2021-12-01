@@ -12,6 +12,7 @@ import lv.javaguru.java2.oddJobs.console_ui.exit.ExitMenuUIAction;
 import lv.javaguru.java2.oddJobs.console_ui.find.FindAdvertisementUIAction;
 import lv.javaguru.java2.oddJobs.console_ui.find.FindClientsUIAction;
 import lv.javaguru.java2.oddJobs.console_ui.find.FindSpecialistUIAction;
+import lv.javaguru.java2.oddJobs.console_ui.get.GetAllAdvertisementsUIAction;
 import lv.javaguru.java2.oddJobs.console_ui.get.GetAllClientsUIAction;
 import lv.javaguru.java2.oddJobs.console_ui.get.GetAllSpecialistUIAction;
 import lv.javaguru.java2.oddJobs.console_ui.remove.RemoveClientUIAction;
@@ -34,9 +35,10 @@ public class ProgramMenu {
         menuNumberToUIActionMap.put(6, findUIAction(uiActions, FindAdvertisementUIAction.class));
         menuNumberToUIActionMap.put(7, findUIAction(uiActions, GetAllClientsUIAction.class));
         menuNumberToUIActionMap.put(8, findUIAction(uiActions, GetAllSpecialistUIAction.class));
-        menuNumberToUIActionMap.put(9, findUIAction(uiActions, RemoveClientUIAction.class));
-        menuNumberToUIActionMap.put(10, findUIAction(uiActions, RemoveSpecialistUIAction.class));
-        menuNumberToUIActionMap.put(11, findUIAction(uiActions, ExitMenuUIAction.class));
+        menuNumberToUIActionMap.put(9, findUIAction(uiActions, GetAllAdvertisementsUIAction.class));
+        menuNumberToUIActionMap.put(10, findUIAction(uiActions, RemoveClientUIAction.class));
+        menuNumberToUIActionMap.put(11, findUIAction(uiActions, RemoveSpecialistUIAction.class));
+        menuNumberToUIActionMap.put(12, findUIAction(uiActions, ExitMenuUIAction.class));
 
     }
 
@@ -57,9 +59,10 @@ public class ProgramMenu {
         System.out.println("6.  Find advertisement by search criteria");
         System.out.println("7.  Show all clients");
         System.out.println("8.  Show all specialists");
-        System.out.println("9.  Delete client account");
-        System.out.println("10. Delete specialist account");
-        System.out.println("11. Exit");
+        System.out.println("9.  Show all advertisements");
+        System.out.println("10.  Delete client account");
+        System.out.println("11 Delete specialist account");
+        System.out.println("12. Exit");
     }
 
     public int getUserChoice() {

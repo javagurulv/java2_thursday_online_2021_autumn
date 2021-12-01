@@ -19,19 +19,19 @@ h2 {
 </style>
 
 <body>
-
-<h2>Delete menu from the list</h2>
-
+<h2>Delete USER from the list</h2>
 <table>
     <tr>
-        <td>Menu ID:</td>
+        <td>ID:</td>
+        <td>Name:</td>
     </tr>
 
     <tr>
-        <form action="/deleteMenu" th:object="${request}" method="post">
-            <td><input type="text" th:field="${request.menuNumberToRemove}"/></td>
+        <form action="/deleteUser" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.userId}"/></td>
+            <td><input type="text" th:field="${request.userName}"/></td>
             <td>
-                <input type="submit" value="Delete Menu"/>
+                <input type="submit" value="Delete User"/>
                 <input type="reset" value="Clear"/>
             </td>
         </form>
@@ -49,16 +49,15 @@ h2 {
     <tr th:text="${message}"></tr>
 </td>
 
-
 <form action="/" method="get">
     <input type="submit" value="Main menu" name="Submit"
-           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;"/>
 </form>
 
-<form action="/menuMenu" method="get">
-    <input type="submit" value="Return to Menu" name="Submit"
-           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+<form action="/userMenu" method="get">
+    <input type="submit" value="Return to User" name="Submit"
+           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;"/>
 </form>
-
 </body>
+
 </html>

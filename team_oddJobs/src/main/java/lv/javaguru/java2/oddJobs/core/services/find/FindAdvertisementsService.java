@@ -38,14 +38,14 @@ public class FindAdvertisementsService {
         List<CoreError> errors = findAdvertisementsValidator.validate(request);
 
         if (!errors.isEmpty()) {
-            return new FindAdvertisementResponse(errors, null);
+            return new FindAdvertisementResponse( null,errors);
         }
 
         List<Advertisement> advertisements = find(request);
         advertisements = ordering(advertisements, request.getOrdering());
         advertisements = paging(advertisements, request.getPaging());
 
-        return new FindAdvertisementResponse(null, advertisements);
+        return new FindAdvertisementResponse(null, errors);
     }
 
     private List<Advertisement> ordering(List<Advertisement> advertisements, Ordering ordering) {

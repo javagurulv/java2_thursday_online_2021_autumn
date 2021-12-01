@@ -3,32 +3,30 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.requests.users;
 public class SearchUsersRequest {
 
     private String userName;
-    private String UsersSurname;
-    private Long UsersId;
+    private String usersSurname;
+    private Long usersId;
     private String telephoneNumber;
 
     private Ordering ordering;
     private Paging paging;
 
-    public SearchUsersRequest(String userName,
-                              String UsersSurname) {
-        this.userName = userName;
-        this.UsersSurname = UsersSurname;
+    public SearchUsersRequest() {
     }
 
-    public SearchUsersRequest(String userName,
-                              String UsersSurname,
-                              Ordering ordering) {
+    public SearchUsersRequest(String userName, String UsersSurname) {
         this.userName = userName;
-        this.UsersSurname = UsersSurname;
+        this.usersSurname = UsersSurname;
+    }
+
+    public SearchUsersRequest(String userName, String UsersSurname, Ordering ordering) {
+        this.userName = userName;
+        this.usersSurname = UsersSurname;
         this.ordering = ordering;
     }
 
-    public SearchUsersRequest(String userName,
-                              String UsersSurname,
-                              Paging paging) {
+    public SearchUsersRequest(String userName, String UsersSurname, Paging paging) {
         this.userName = userName;
-        this.UsersSurname = UsersSurname;
+        this.usersSurname = UsersSurname;
         this.paging = paging;
     }
 
@@ -37,7 +35,7 @@ public class SearchUsersRequest {
                               Ordering ordering,
                               Paging paging) {
         this.userName = userName;
-        this.UsersSurname = UsersSurname;
+        this.usersSurname = UsersSurname;
         this.ordering = ordering;
         this.paging = paging;
     }
@@ -47,11 +45,11 @@ public class SearchUsersRequest {
     }
 
     public String getUsersSurname() {
-        return UsersSurname;
+        return usersSurname;
     }
 
     public Long getUsersId() {
-        return UsersId;
+        return usersId;
     }
 
     public String getTelephoneNumber() {
@@ -64,13 +62,13 @@ public class SearchUsersRequest {
     }
 
     public boolean isSurnameProvided() {
-        return this.UsersSurname != null
-                && !this.UsersSurname.isEmpty();
+        return this.usersSurname != null
+                && !this.usersSurname.isEmpty();
     }
 
     public boolean isIDProvided() {
-        return this.UsersId != null
-                && this.UsersId != 0;
+        return this.usersId != null
+                && this.usersId != 0;
     }
 
     public boolean isTelephoneNumberProvided() {
@@ -84,5 +82,29 @@ public class SearchUsersRequest {
 
     public Paging getPaging() {
         return paging;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setUsersSurname(String usersSurname) {
+        this.usersSurname = usersSurname;
+    }
+
+    public void setUsersId(Long usersId) {
+        this.usersId = usersId;
+    }
+
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+    }
+
+    public void setOrdering(Ordering ordering) {
+        this.ordering = ordering;
+    }
+
+    public void setPaging(Paging paging) {
+        this.paging = paging;
     }
 }
