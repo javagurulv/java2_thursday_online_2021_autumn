@@ -19,6 +19,7 @@
 
 <td th:if="${visitors != null}">
     <tr th:each="visitor : ${visitors}">
+    <tr>
         <td th:text="${visitor.userName}"></td>
         <td th:text="${visitor.surname}"></td>
         <td th:text="${visitor.telephoneNumber}"></td>
