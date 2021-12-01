@@ -13,10 +13,10 @@ public class ShowUserController {
 
     @Autowired private ShowListUsersService service;
 
-    @GetMapping(value = "/showUser")
+    @GetMapping(value = "/showUsers")
     public String showUsers(ModelMap modelMap) {
         ShowAllUsersResponse response = service.execute(new ShowAllUsersRequest());
         modelMap.addAttribute("visitors", response.getNewUser());
-        return "user/showUser";
+        return "user/showUsers";
     }
 }
