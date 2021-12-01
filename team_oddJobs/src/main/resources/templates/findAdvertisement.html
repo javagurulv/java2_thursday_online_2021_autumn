@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Call Boar by OddJobs">
+    <meta name="author" content="JavaGuru">
+    <title>Call Board</title>
+</head>
+
+<body>
+
+<h3>Find Advertisement in the list</h3>
+
+<table>
+    <tr>
+        <td>Advertisement Id:</td>
+        <td>Advertisement title:</td>
+
+
+    </tr>
+
+    <td th:if="${Advertisements != null}">
+        <tr th:each="advertisement : ${Advertisements}">
+            <td th:text="${advertisements.advId}" />
+            <td th:text="${advertisements.advTitle}" />
+        </tr>
+    </td>
+
+</table>
+
+<form action="/" method="get">
+    <input type="submit" value="Go to main page" name="Submit" />
+</form>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" />
+    </tr>
+</td>
+</body>
+
+</html>

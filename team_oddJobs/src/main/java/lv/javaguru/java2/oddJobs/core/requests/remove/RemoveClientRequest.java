@@ -17,6 +17,10 @@ public class RemoveClientRequest {
         this.clientSurname = clientSurname;
     }
 
+    public RemoveClientRequest() {
+
+    }
+
     public Long getClientId() {
         return clientId;
     }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Call Boar by OddJobs">
+    <meta name="author" content="JavaGuru">
+    <title>Call Board</title>
+</head>
+
+<body>
+
+<h3>Remove Client</h3>
+
+<table>
+    <tr>
+        <td>ID:</td>
+        <td>Name:</td>
+        <td>Surname:</td>
+
+
+
+    </tr>
+
+    <tr>
+        <form action="/removeClient" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.clientId}"/></td>
+            <td><input type="text" th:field="${request.clientName}"/></td>
+            <td><input type="text" th:field="${request.clientSurname}"/></td>
+
+
+            <td>
+                <input type="submit" value="Remove Client"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+</table>
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" />
+    </tr>
+</td>
+</body>
+
+</html>
