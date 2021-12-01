@@ -28,6 +28,8 @@ public class FindPatientByIDController {
         FindPatientByIDResponse response = findPatientByIdService.execute(request);
         if (response.hasErrors()) {
             modelMap.addAttribute("errors", response.getErrors());
+        } else if(!response.hasErrors()){
+            modelMap.addAttribute("patients", response.getPatient());
         }
         return "patient/findPatientByID";
     }
