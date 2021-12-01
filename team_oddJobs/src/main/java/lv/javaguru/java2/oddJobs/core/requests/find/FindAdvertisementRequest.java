@@ -30,6 +30,10 @@ public class FindAdvertisementRequest {
         this.paging = paging;
     }
 
+    public FindAdvertisementRequest() {
+
+    }
+
     public Long getAdvId() {
         return advId;
     }

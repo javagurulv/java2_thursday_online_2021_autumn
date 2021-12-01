@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Component
-public class RemoveAdvertismentValidator {
+public class RemoveAdvertisementValidator {
 
     public List<CoreError> validate(RemoveAdvertismentRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -17,11 +17,6 @@ public class RemoveAdvertismentValidator {
         return errors;
 
     }
-    private Optional<CoreError> validateTitle(RemoveAdvertismentRequest request) {
-        return (request.getAdvTitle() == null)
-                ? Optional.of(new CoreError("Title", "Must not be empty!"))
-                : Optional.empty();
-    }
 
     private Optional<CoreError> validateId(RemoveAdvertismentRequest request) {
         return (request.getAdvId() == null)
@@ -29,5 +24,13 @@ public class RemoveAdvertismentValidator {
                 ? Optional.of(new CoreError("Id", "Must not be empty!"))
                 : Optional.empty();
     }
+
+    private Optional<CoreError> validateTitle(RemoveAdvertismentRequest request) {
+        return (request.getAdvTitle() == null)
+                ? Optional.of(new CoreError("Title", "Must not be empty!"))
+                : Optional.empty();
+    }
+
+
 
 }

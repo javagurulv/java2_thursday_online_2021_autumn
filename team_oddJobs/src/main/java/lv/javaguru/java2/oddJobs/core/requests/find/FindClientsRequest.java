@@ -61,6 +61,10 @@ public class FindClientsRequest {
         this.clientName = clientName;
     }
 
+    public FindClientsRequest() {
+
+    }
+
     public Long getClientId() {
         return clientId;
     }
