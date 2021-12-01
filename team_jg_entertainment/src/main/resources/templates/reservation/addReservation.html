@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Restaurant JG demo project">
+    <meta name="author" content="JavaGuru">
+    <title>Restaurant JG</title>
+</head>
+
+<style>
+body {
+  background-color: linen;
+}
+h2 {
+  color: MediumVioletRed;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+</style>
+
+<body>
+
+<h2>Add Reservation</h2>
+
+<table>
+    <tr>
+        <td>User ID:</td>
+        <td>Menu ID:</td>
+        <td>Table ID:</td>
+        <td>Date (yyyy-MM-dd HH:mm):</td>
+    </tr>
+
+    <tr>
+        <form action="/addReservation" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.userID}"/></td>
+            <td><input type="text" th:field="${request.menuID}"/></td>
+            <td><input type="text" th:field="${request.tableID}"/></td>
+            <td><input type="text" th:field="${request.reservationDate}"/></td>
+            <td>
+                <input type="submit" value="Add Reservation"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+    </tr>
+</table>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}"></td>
+        <td th:text="${error.description}"></td>
+    </tr>
+</td>
+
+<td th:if="${errors == null}">
+    <tr th:text="${message}"></tr>
+</td>
+
+<form action="/" method="get">
+    <input type="submit" value="Main menu" name="Submit"
+           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+</form>
+
+<form action="/reservationMenu" method="get">
+    <input type="submit" value="Return to User" name="Submit"
+           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+</form>
+
+</body>
+</html>
