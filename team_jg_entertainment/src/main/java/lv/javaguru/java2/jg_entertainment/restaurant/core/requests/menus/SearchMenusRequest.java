@@ -34,6 +34,9 @@ public class SearchMenusRequest {
         this.pagingMenu = pagingMenu;
     }
 
+    public SearchMenusRequest() {
+    }
+
     public String getTitle() {
         return title;
     }
@@ -69,4 +72,23 @@ public class SearchMenusRequest {
     }
 
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setIdNumberMenu(Long idNumberMenu) {
+        this.idNumberMenu = idNumberMenu;
+    }
+
+    public void setOrderingMenu(OrderingMenu orderingMenu) {
+        this.orderingMenu = orderingMenu;
+    }
+
+    public void setPagingMenu(PagingMenu pagingMenu) {
+        this.pagingMenu = pagingMenu;
+    }
 }
