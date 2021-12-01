@@ -8,10 +8,14 @@
 </head>
 
 <style>
+body {
+  background-color: linen;
+}
+
 #menus {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 80%;
+  width: 100%;
 }
 
 #menus td, #menus th {
@@ -39,20 +43,13 @@ background-color: #ddd;
 
 <body>
 <h3>Show all menus available</h3>
-<table id="menu">
+<table id="menus">
     <tr>
-    <td>ID of the menu<td>
-        <td>Title</td>
-        <td>Description of the menu</td>
-        <td>Price of the menu</td>
+        <th>ID of the menu<th>
+        <th>Title</th>
+        <th>Description of the menu</th>
+        <th>Price of the menu</th>
     </tr>
-
-    <!--<tr>-->
-    <!--    <td>ID of the menu:</td>-->
-    <!--    <td>Title of the menu:</td>-->
-    <!--    <td>Description:</td>-->
-    <!--    <td>Price:</td>-->
-    <!--</tr>-->
 
     <td th:if="${menus != null}">
     <tr th:each="menu : ${menus}">
