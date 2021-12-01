@@ -28,7 +28,7 @@ public class SearchUserController {
         if (response.hasError()) {
             modelMap.addAttribute("errors", response.getErrorsList());
         } else if (!response.hasError()) {
-            modelMap.addAttribute("user", response.getUsers());
+            modelMap.addAttribute("visitors", response.getUsers());
         }
         return "user/searchUser";
     }

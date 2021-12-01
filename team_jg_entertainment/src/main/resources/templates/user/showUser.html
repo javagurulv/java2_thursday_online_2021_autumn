@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Restaurant JG demo project">
+    <meta name="author" content="JavaGuru">
+    <title>Restaurant JG</title>
+</head>
+
+<body>
+<h3>Show User</h3>
+<tr>
+    <td>Name:</td>
+    <td>Surname:</td>
+    <td>ID:</td>
+    <td>Telephone:</td>
+</tr>
+
+
+<td th:if="${visitors != null}">
+    <tr th:each="visitor : ${visitors}">
+        <td th:text="${visitor.userName}"></td>
+        <td th:text="${visitor.surname}"></td>
+        <td th:text="${visitor.telephoneNumber}"></td>
+        <td th:text="${visitor.userId}"></td>
+    </tr>
+</td>
+
+<form action="/" method="get">
+    <input type="submit" value="Main menu" name="Submit" />
+</form>
+
+<form action="/userMenu" method="get">
+    <input type="submit" value="Return to User" name="Submit" />
+</form>
+
+</body>
+</html>

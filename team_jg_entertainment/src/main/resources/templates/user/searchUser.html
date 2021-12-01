@@ -29,12 +29,12 @@
     </tr>
 </table>
 
-    <td th:if="${users != null}">
-        <tr th:each="user : ${users}">
-            <td th:text="${user.userName}"></td>
-            <td th:text="${user.usersSurname}"></td>
-            <td th:text="${user.usersId}"></td>
-            <td th:text="${user.telephoneNumber}"></td>
+    <td th:if="${visitors != null}">
+        <tr th:each="visitor : ${visitors}">
+            <td th:text="${visitor.userName}"></td>
+            <td th:text="${visitor.surname}"></td>
+            <td th:text="${visitor.userId}"></td>
+            <td th:text="${visitor.telephoneNumber}"></td>
         </tr>
     </td>
 
