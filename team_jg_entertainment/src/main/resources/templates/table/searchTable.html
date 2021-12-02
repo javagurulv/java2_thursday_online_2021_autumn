@@ -8,12 +8,12 @@
 </head>
 
 <style>
-body {
-  background-color: linen;
+    body {
+        background-color: linen;
 }
-h2 {
-  color: MediumVioletRed;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    h2 {
+        color: MediumVioletRed;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 </style>
 
@@ -30,8 +30,8 @@ h2 {
         <form action="/searchTable" th:object="${request}" method="post">
             <td><input type="text" th:field="${request.titleTable}"/></td>
             <td>
-                <input type="submit" value="Search Table"/>
-                <input type="reset" value="Clear"/>
+                <input type="submit" value="Search Table" style="color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
+                <input type="reset" value="Clear" style="color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
             </td>
         </form>
     </tr>
