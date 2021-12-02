@@ -9,27 +9,56 @@
 </head>
 
 <style>
-body {
-  background-color: linen;
+       body {
+          background-color: linen;
 }
-h2 {
-  color: white;
-  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkBlue;
+       h2 {
+          color: white;
+          text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkBlue;
+}
+       ul {
+          list-style-type: none;
+          margin-right: 10%;
+          padding: 0;
+          width: 30%;
+          background-color: linen;
+          border: -2px solid #555;
+}
+       li a {
+           display: block;
+           color: #000;
+           padding: 10px 16px;
+           text-decoration: none;
+}
+       li {
+           text-align: center;
+           border-bottom: -3px solid #555;
+}
+       li:last-child {
+           border-bottom: none;
+}
+       li a.active {
+           background-color: #04AA6D;
+           color: white;
+}
+       li a:hover:not(.active) {
+           background-color: #555;
+           color: white;
 }
 </style>
 
 <body>
 
 <h2>Restaurant MAIN MENU:</h2>
-<a href="/userMenu"><button class="/" style="color: dark;
-  text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 6px darkBlue;text-align:center;font-size:18px;width:20%;">User</button></a> <br>
-<a href="/tableMenu"><button class="/" style="color: dark;
-  text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 6px darkBlue;text-align:center;font-size:18px;width:20%;">Table</button></a> <br>
-<a href="/menuMenu"><button class="/" style="color: dark;
-  text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 6px darkBlue;text-align:center;font-size:18px;width:20%;">Menu</button></a> <br>
-<a href="/reservationMenu"><button class="/" style="color: dark;
-  text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 5px darkBlue;text-align:center;font-size:17px;width:20%;">Reservation</button></a> <br>
-
+<ul>
+    <li><a href="/userMenu"><button class="/" style="color: dark;text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 6px darkBlue;text-align:center;font-size:18px;width:20%;">User</button></a> <br></li>
+    <li><a href="/tableMenu"><button class="/" style="color: dark;
+  text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 6px darkBlue;text-align:center;font-size:18px;width:20%;">Table</button></a> <br></li>
+    <li><a href="/menuMenu"><button class="/" style="color: dark;
+  text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 6px darkBlue;text-align:center;font-size:18px;width:20%;">Menu</button></a> <br></li>
+    <li><a href="/reservationMenu"><button class="/" style="color: dark;
+  text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 5px darkBlue;text-align:center;font-size:17px;width:20%;">Reservation</button></a> <br></li>
+</ul>
 </body>
 
 </html>
