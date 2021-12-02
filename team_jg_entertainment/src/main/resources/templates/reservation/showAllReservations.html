@@ -1,10 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="description" content="Restaurant JG demo project">
+    <meta name="author" content="JavaGuru">
+    <title>Restaurant JG</title>
 </head>
+
+<style>
+body {
+  background-color: linen;
+}
+h2 {
+  color: MediumVioletRed;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+#reservations {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#reservations td, #reservations th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#reservations tr:nth-child(even){
+background-color: #f2f2f2;
+}
+
+#reservations tr:hover {
+background-color: #ddd;
+}
+
+#reservations th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgba(255,0,255,0.3);
+  color: white;
+}
+
+</style>
+
 <body>
+<h2>Show all reservations available</h2>
+<table id="reservation">
+    <tr>
+        <th>Reservation ID </th>
+        <th>Reservation is made by</th>
+        <th>Reservation date</th>
+        <th>Table reserved</th>
+        <th>Chosen menu</th>
+
+    </tr>
+
+    <td th:if="${reservations != null}">
+        <tr th:each="reservation : ${reservations}">
+            <td th:text="${reservation.idReservation}"></td>
+            <td th:text="${reservation.user}"></td>
+            <td th:text="${reservation.reservationDate}"></td>
+            <td th:text="${reservation.table}"></td>
+            <td th:text="${reservation.menu}"></td>
+
+        </tr>
+    </td>
+</table>
+
+<form action="/" method="get">
+    <input type="submit" value="Main menu" name="Submit"
+           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+</form>
+
+<form action="/reservationMenu" method="get">
+    <input type="submit" value="Return to the reservations' menu" name="Submit"
+           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+</form>
 
 </body>
 </html>
