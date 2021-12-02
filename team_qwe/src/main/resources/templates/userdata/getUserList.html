@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="QWE finance project">
+    <meta name="author" content="Alex K">
+    <title>QWE Trading Application</title>
+</head>
+<style type="text/css">
+        body {
+              background-color: #8E8F92;
+              margin-left: 20%;
+              margin-right: 20%;
+              text-align: center;
+              border: 2px dotted black;
+              padding: 20px 20px 20px 20px;
+              font-family: sans-serif;
+        }
+        table {
+               border-collapse: collapse;
+               width: 100%;
+        }
+        th, td {
+                padding: 0.25rem;
+                text-align: left;
+                border: 1px solid #ccc;
+        }
+        caption {
+                font-size: 110%;
+                font-style: italic;
+                padding-bottom: 12px;
+        }
+        .center {
+                text-align: center;
+        }
+        .right {
+                text-align: right;
+        }
+
+</style>
+<body>
+
+<h3 style="text-align: center;">Show all users</h3>
+
+<table>
+    <caption>User list</caption>
+    <tr>
+        <td class="center">ID</td>
+        <td class="center">NAME</td>
+        <td class="center">AGE</td>
+        <td class="center">TYPE</td>
+        <td class="center">INITIAL INVESTMENT</td>
+        <td class="center">CASH</td>
+        <td class="center">PORTFOLIO GENERATION DATE</td>
+        <td class="center">RISK TOLERANCE</td>
+    </tr>
+
+    <td th:if="${users != null}">
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td class="right" th:text="${user.age}"></td>
+            <td class="center" th:text="${user.type}"></td>
+            <td class="right" th:text="${user.initialInvestment}"></td>
+            <td class="right" th:text="${user.cash}"></td>
+            <td class="right" th:text="${user.portfolioGenerationDate}"></td>
+            <td class="center" th:text="${user.riskTolerance}"></td>
+        </tr>
+    </td>
+
+</table>
+
+<form action="/userMenu" method="get">
+    <br>
+    <br>
+    <input type="submit" style="font-size: 100%;" value="Return to User menu" name="Submit"/>
+</form>
+
+</body>
+</html>
