@@ -45,7 +45,7 @@ public class FindClientsRequest {
         this.paging = paging;
     }
 
-    public FindClientsRequest(long clientId, String clientName, String clientSurname, Paging paging) {
+    public FindClientsRequest(Long clientId, String clientName, String clientSurname, Paging paging) {
         this.clientId = clientId;
         this.clientName = clientName;
         this.clientSurname = clientSurname;
@@ -63,6 +63,26 @@ public class FindClientsRequest {
 
     public FindClientsRequest() {
 
+    }
+
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public void setClientSurname(String clientSurname) {
+        this.clientSurname = clientSurname;
+    }
+
+    public void setOrdering(Ordering ordering) {
+        this.ordering = ordering;
+    }
+
+    public void setPaging(Paging paging) {
+        this.paging = paging;
     }
 
     public Long getClientId() {

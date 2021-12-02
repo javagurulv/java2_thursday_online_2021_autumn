@@ -7,41 +7,75 @@
     <meta name="author" content="JavaGuru">
     <title>Call Board</title>
 </head>
+<style type="text/css">
 
+body {
+	background-image: url('https://bti.kiev.ua/wp-content/uploads/2015/03/services.png');
+	margin:2px;
+	background-size: 100%
+}
+
+
+</style>
 <body>
 
-<h3>Find specialists in the list</h3>
-
+<h3>Find Specialist</h3>
 <table>
+
     <tr>
-        <td>Name:</td>
-        <td>Surname:</td>
-        <td>Profession:</td>
+        <td >Name</td>
+        <td >Surname</td>
+        <td>Profession</td>
+
 
     </tr>
+    <tr>
+<form action="/findSpecialist" th:object="${request}" method="post">
 
-    <td th:if="${Specialists != null}">
-        <tr th:each="specialist : ${Specialists}">
-            <td th:text="${specialist.specialistName}" />
-            <td th:text="${specialist.specialistSurname}" />
-            <td th:text="${specialist.specialistProfession}" />
-            <td th:text="${specialist.personalCode}" />
-            <td th:text="${specialist.city}" />
-        </tr>
+
+    <td><input type="text" th:field="${request.specialistName}"/></td>
+    <td><input type="text" th:field="${request.specialistSurname}"/></td>
+    <td><input type="text" th:field="${request.specialistProfession}"/></td>
+
+    <td>
+        <input type="submit" value="Find specialist" />
+        <input type="reset" value="Clear"/>
     </td>
 
-</table>
 
-<form action="/" method="get">
-    <input type="submit" value="Go to main page" name="Submit" />
 </form>
+    </tr>
+</table>
+<td th:if="${Specialists != null}">
+    <table>
+
+        <td th:if="${Specialists != null}">
+            <tr th:each="specialist : ${Specialists}">
+                <td th:text="${specialist.specialistName}"></td>
+                <td th:text="${specialist.specialistSurname}"></td>
+                <td th:text="${specialist.specialistProfession}"></td>
+                <td th:text="${specialist.personalCode}"></td>
+                <td th:text="${specialist.city}"></td>
+
+            </tr>
+        </td>
+
+    </table>
+</td>
 
 <td th:if="${errors != null}">
     <tr th:each="error : ${errors}">
-        <td th:text="${error.field}" />
-        <td th:text="${error.message}" />
     </tr>
 </td>
-</body>
 
+<td th:if="${noResult != null}">
+<td th:text="${noResult}"></td>
+
+
+<form action="/" method="get">
+    <br>
+    <input type="submit" style="font-size: 100%;" value="Back to main page" name="Submit"/>
+</form>
+
+</body>
 </html>

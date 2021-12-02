@@ -45,7 +45,7 @@ public class FindAdvertisementsService {
         advertisements = ordering(advertisements, request.getOrdering());
         advertisements = paging(advertisements, request.getPaging());
 
-        return new FindAdvertisementResponse(null, errors);
+        return new FindAdvertisementResponse(advertisements, errors);
     }
 
     private List<Advertisement> ordering(List<Advertisement> advertisements, Ordering ordering) {

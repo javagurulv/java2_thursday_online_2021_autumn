@@ -34,6 +34,22 @@ public class FindAdvertisementRequest {
 
     }
 
+    public void setAdvId(Long advId) {
+        this.advId = advId;
+    }
+
+    public void setAdvTitle(String advTitle) {
+        this.advTitle = advTitle;
+    }
+
+    public void setOrdering(Ordering ordering) {
+        this.ordering = ordering;
+    }
+
+    public void setPaging(Paging paging) {
+        this.paging = paging;
+    }
+
     public Long getAdvId() {
         return advId;
     }

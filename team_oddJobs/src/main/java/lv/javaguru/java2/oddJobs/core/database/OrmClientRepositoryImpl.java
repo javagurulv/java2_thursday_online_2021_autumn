@@ -67,6 +67,16 @@ public class OrmClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
+    public List<Client> findClientByNameAndSurname(String clientName, String clientSurname) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "select b FROM Client b where clientName = :clientName AND clientSurname = :clientSurname");
+        query.setParameter("clientName", clientName);
+        query.setParameter("clientSurname", clientSurname);
+        return query.getResultList();
+    }
+
+
+    @Override
     public List<Client> findClientByIdAndNameAndSurname(Long clientId, String clientName, String clientSurname) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "select b FROM Client b where clientId = :clientId AND clientName = :clientName AND clientSurname = :clientSurname");

@@ -11,7 +11,6 @@ public class FindSpecialistRequest {
     private Paging paging;
 
     public FindSpecialistRequest(String specialistName, String specialistSurname, String specialistProfession) {
-        this.specialistId = specialistId;
         this.specialistName = specialistName;
         this.specialistSurname = specialistSurname;
         this.specialistProfession = specialistProfession;

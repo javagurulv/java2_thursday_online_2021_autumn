@@ -45,7 +45,7 @@ public class FindAdvertisementUIAction implements UIAction {
         Integer pageSize = Integer.parseInt(scanner.nextLine());
         Paging paging = new Paging(pageNumber, pageSize);
 
-        FindAdvertisementRequest request = new FindAdvertisementRequest(advId, advTitle, ordering, paging);
+        FindAdvertisementRequest request = new FindAdvertisementRequest( advId,advTitle);
         FindAdvertisementResponse response = findAdvertisementsService.execute(request);
 
         if (response.hasErrors()) {

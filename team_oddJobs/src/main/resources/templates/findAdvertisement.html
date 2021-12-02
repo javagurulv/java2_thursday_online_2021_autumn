@@ -7,38 +7,75 @@
     <meta name="author" content="JavaGuru">
     <title>Call Board</title>
 </head>
+<style type="text/css">
 
+body {
+	background-image: url('https://bti.kiev.ua/wp-content/uploads/2015/03/services.png');
+	margin:2px;
+	background-size: 100%
+}
+
+
+</style>
 <body>
 
-<h3>Find Advertisement in the list</h3>
-
+<h3>Find Advertisement</h3>
 <table>
+
     <tr>
-        <td>Advertisement Id:</td>
-        <td>Advertisement title:</td>
+        <td >Id</td>
+        <td >Title</td>
+
 
 
     </tr>
+    <tr>
+        <form action="/findAdvertisement" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.advId}"/></td>
+            <td><input type="text" th:field="${request.advTitle}"/></td>
+            <td>
 
-    <td th:if="${Advertisements != null}">
-        <tr th:each="advertisement : ${Advertisements}">
-            <td th:text="${advertisements.advId}" />
-            <td th:text="${advertisements.advTitle}" />
-        </tr>
-    </td>
+                <input type="submit" value="Find Advertisement" />
+                <input type="reset" value="Clear"/>
+            </td>
 
+
+        </form>
+    </tr>
 </table>
+<td th:if="${Advertisements != null}">
+    <table>
+        <tr>
+            <td >Id</td>
+            <td >Title</td>
 
-<form action="/" method="get">
-    <input type="submit" value="Go to main page" name="Submit" />
-</form>
+
+        </tr>
+        <td th:if="${Advertisements != null}">
+            <tr th:each="advertisement : ${Advertisements}">
+                <td th:text="${advertisement.advId}"></td>
+                <td th:text="${advertisement.advTitle }"></td>
+
+
+            </tr>
+        </td>
+
+    </table>
+</td>
 
 <td th:if="${errors != null}">
     <tr th:each="error : ${errors}">
-        <td th:text="${error.field}" />
-        <td th:text="${error.message}" />
     </tr>
 </td>
-</body>
 
+<td th:if="${noResult != null}">
+<td th:text="${noResult}"></td>
+
+
+<form action="/" method="get">
+    <br>
+    <input type="submit" style="font-size: 100%;" value="Back to main page" name="Submit"/>
+</form>
+
+</body>
 </html>

@@ -18,14 +18,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class FindSpecialistController {
-    @Autowired private FindSpecialistService findSpecialistService;
+    @Autowired
+    private FindSpecialistService findSpecialistService;
 
     @GetMapping(value = "/findSpecialist")
-    public String showFindSpecialists(ModelMap modelMap) {
-        FindSpecialistResponse response = findSpecialistService.execute(
-                new FindSpecialistRequest()
-        );
-        modelMap.addAttribute("Specialists", response.getSpecialists());
-        return "/findSpecialist";
+    public String showFindSpecialistPage(ModelMap modelMap) {
+        modelMap.addAttribute("request", new FindSpecialistRequest());
+        return "findSpecialist";
+    }
+
+    @PostMapping("/findSpecialist")
+    public String processFindSpecialistRequest(@ModelAttribute(value = "request") FindSpecialistRequest request, ModelMap modelMap) {
+        FindSpecialistResponse response = findSpecialistService.execute(request);
+        if (response.hasErrors()) {
+            modelMap.addAttribute("errors", response.getErrors());
+
+        } else if (!response.hasErrors()) {
+            modelMap.addAttribute("Specialists", response.getSpecialists());
+        }
+        return "findSpecialist";
+
     }
 }

@@ -44,7 +44,7 @@ public class OrmSpecialistRepositoryImpl implements SpecialistRepository {
     @Override
     public List<Specialist> findSpecialistById(Long specialistId) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "select b FROM Specialist b where specialistId = :SpecialistId");
+                "select b FROM Specialist b where specialistId = :specialistId");
         query.setParameter("specialistId", specialistId);
         return query.getResultList();
     }
@@ -52,7 +52,7 @@ public class OrmSpecialistRepositoryImpl implements SpecialistRepository {
     @Override
     public List<Specialist> findSpecialistByName(String specialistName) {
             Query query = sessionFactory.getCurrentSession().createQuery(
-                    "select b FROM Specialist b where specialistName = :SpecialistName");
+                    "select b FROM Specialist b where specialistName = :specialistName");
             query.setParameter("specialistName", specialistName);
             return query.getResultList();
     }
@@ -76,7 +76,7 @@ public class OrmSpecialistRepositoryImpl implements SpecialistRepository {
     @Override
     public List<Specialist> findSpecialistByNameAndSurnameAndProfession(String specialistName, String specialistSurname, String specialistProfession) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "select b FROM Specialist b where specialistName = :SpecialistName AND specialistSurname = :specialistSurname AND specialistProfession = :specialistProfession ");
+                "select b FROM Specialist b where specialistName = :specialistName AND specialistSurname = :specialistSurname AND specialistProfession = :specialistProfession ");
         query.setParameter("specialistName", specialistName);
         query.setParameter("specialistSurname", specialistSurname);
         query.setParameter("specialistProfession", specialistProfession);

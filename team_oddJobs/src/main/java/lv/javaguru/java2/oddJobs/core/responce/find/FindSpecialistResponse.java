@@ -16,6 +16,7 @@ public class FindSpecialistResponse extends CoreResponse {
         this.specialists = specialists;
     }
 
+
     public List<Specialist> getSpecialists() {
         return specialists;
     }

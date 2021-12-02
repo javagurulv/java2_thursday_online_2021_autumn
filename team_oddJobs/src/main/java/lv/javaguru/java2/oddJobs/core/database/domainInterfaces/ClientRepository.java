@@ -16,6 +16,7 @@ public interface ClientRepository {
     List<Client> findClientsByName(String clientName);
 
     List<Client> findClientBySurname(String clientSurname);
+    List<Client> findClientByNameAndSurname(String clientName, String clientSurname);
 
     List<Client> findClientByIdAndNameAndSurname(Long clientId, String clientName, String clientSurname);
 

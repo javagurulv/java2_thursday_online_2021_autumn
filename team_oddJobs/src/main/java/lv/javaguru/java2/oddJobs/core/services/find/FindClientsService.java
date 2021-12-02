@@ -87,10 +87,12 @@ public class FindClientsService {
         if (!request.isIdProvided() && !request.isNameProvided() && request.isSurnameProvide()) {
             clients = clientRepository.findClientBySurname(request.getClientSurname());
         }
+        if (request.isNameProvided() && request.isSurnameProvide())
+            clients = clientRepository.findClientByNameAndSurname(request.getClientName(),request.getClientSurname());
 
         if (request.isIdProvided() && request.isNameProvided() && request.isSurnameProvide()) {
-            clients = clientRepository.findClientByIdAndNameAndSurname(request.getClientId(), request.getClientName(), request.getClientSurname());
-        }
+                clients = clientRepository.findClientByIdAndNameAndSurname(request.getClientId(), request.getClientName(), request.getClientSurname());
+            }
         return clients;
     }
 
