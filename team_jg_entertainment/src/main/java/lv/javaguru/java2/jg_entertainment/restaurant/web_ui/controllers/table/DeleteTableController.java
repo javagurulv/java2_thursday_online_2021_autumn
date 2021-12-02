@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class DeleteTableController {
-     @Autowired
+    @Autowired
     private RemoveTableService service;
 
     @GetMapping(value = "/deleteTable")
@@ -31,4 +31,5 @@ public class DeleteTableController {
             return "redirect:/";
         }
 
-}}
+    }
+}
