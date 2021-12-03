@@ -40,7 +40,6 @@ class FindPatientByIDValidatorTest {
     @Test
     public void shouldReturnNumError() {
         FindPatientByIdRequest request = new FindPatientByIdRequest("1");
-        Mockito.when(idValidator.existenceByID(request.getIDRequest())).thenReturn(Optional.empty());
         Mockito.when(longNumChecker.validate(request.getIDRequest(), "ID"))
                 .thenReturn(Optional.of(new CoreError("ID", "must be a number!")));
         List<CoreError> errors = validator.validate(request);

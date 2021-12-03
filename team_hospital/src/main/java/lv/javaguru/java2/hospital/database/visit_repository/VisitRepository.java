@@ -45,4 +45,6 @@ public interface VisitRepository {
     List<Visit> findByVisitIDAndDoctorIDAndPatientID(Long visitID, Long doctorID, Long patientID);
 
     List<Visit> findByVisitIDDoctorIDPatientIDDate(Long visitID, Long doctorID, Long patientID, LocalDateTime date);
+
+    List<Visit> findPatientForDeleting(Long patientID);
 }

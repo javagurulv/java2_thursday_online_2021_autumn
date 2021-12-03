@@ -20,7 +20,9 @@ public class SearchPatientsValidator {
         List<CoreError> errors = fieldValidator.validate(request);
         validatePagingIfNeeded(request, errors);
         validateOrderingIfNeeded(request, errors);
-        validateFieldsForPatientExistence(request, errors);
+        if(errors.isEmpty()){
+            validateFieldsForPatientExistence(request, errors);
+        }
         return errors;
     }
 

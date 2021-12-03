@@ -81,4 +81,12 @@ public class ORMPrescriptionRepositoryImpl implements PrescriptionRepository {
         query.setParameter("patient_id", patientId);
         return query.getResultList();
     }
+
+    @Override
+    public List<Prescription> findPatientForDeleting(Long patientID) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT p FROM Prescription p WHERE patient_id = :patient_id");
+        query.setParameter("patient_id", patientID);
+        return query.getResultList();
+    }
 }

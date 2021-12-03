@@ -21,7 +21,9 @@ public class FindPatientByIDValidator {
         List<CoreError> errors = new ArrayList<>();
         validateID(request).ifPresent(errors::add);
         validateNumInID(request).ifPresent(errors::add);
-        validatePatientExistence(request).ifPresent(errors::add);
+        if(errors.isEmpty()){
+            validatePatientExistence(request).ifPresent(errors::add);
+        }
         return errors;
     }
 

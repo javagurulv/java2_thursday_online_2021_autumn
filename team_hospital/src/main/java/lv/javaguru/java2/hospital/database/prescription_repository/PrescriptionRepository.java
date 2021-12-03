@@ -22,4 +22,6 @@ public interface PrescriptionRepository {
     List<Prescription> findByPatientId(Long patientId);
 
     List<Prescription> findByDoctorAndPatientId(Long doctorId, Long patientId);
+
+    List<Prescription> findPatientForDeleting(Long patientID);
 }

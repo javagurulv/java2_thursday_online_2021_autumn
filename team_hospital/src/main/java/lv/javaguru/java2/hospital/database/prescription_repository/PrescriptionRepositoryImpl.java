@@ -95,4 +95,10 @@ public class PrescriptionRepositoryImpl implements PrescriptionRepository {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Prescription> findPatientForDeleting(Long patientID) {
+        return prescriptions.stream()
+                .filter(prescription -> prescription.getPatient().getId().equals(patientID))
+                .collect(Collectors.toList());
+    }
 }

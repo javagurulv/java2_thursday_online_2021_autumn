@@ -73,4 +73,11 @@ public class JDBCPrescriptionRepositoryImpl implements PrescriptionRepository {
         Object[] args = new Object[] {doctorId, patientId};
         return jdbcTemplate.query(sql, args, rowMapper);
     }
+
+    @Override
+    public List<Prescription> findPatientForDeleting(Long patientID) {
+        String sql = "SELECT * FROM prescriptions WHERE patient_id = ?";
+        Object[] args = new Object[] {patientID};
+        return jdbcTemplate.query(sql, args, rowMapper);
+    }
 }

@@ -185,4 +185,11 @@ public class InMemoryVisitRepositoryImpl implements VisitRepository {
                 .filter(visit -> Objects.equals(visit.getVisitDate(), date))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Visit> findPatientForDeleting(Long patientID) {
+        return visits.stream()
+                .filter(visit -> Objects.equals(visit.getPatient().getId(), patientID))
+                .collect(Collectors.toList());
+    }
 }

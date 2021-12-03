@@ -147,4 +147,11 @@ public class JDBCVisitRepositoryImpl implements VisitRepository {
         Object[] args = new Object[]{visitID, doctorID, patientID, date};
         return jdbcTemplate.query(sql, args, visitRowMapper);
     }
+
+    @Override
+    public List<Visit> findPatientForDeleting(Long patientID) {
+        String sql = "SELECT * FROM visits WHERE patient_id = ?";
+        Object[] args = new Object[]{patientID};
+        return jdbcTemplate.query(sql, args, visitRowMapper);
+    }
 }

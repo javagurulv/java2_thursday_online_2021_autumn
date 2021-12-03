@@ -198,4 +198,12 @@ public class ORMVisitRepositoryImpl implements VisitRepository {
         query.setParameter("patient_id", patientID);
         return query.getResultList();
     }
+
+    @Override
+    public List<Visit> findPatientForDeleting(Long patientID) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT v FROM Visit v WHERE patient_id = :patient_id");
+        query.setParameter("patient_id", patientID);
+        return query.getResultList();
+    }
 }

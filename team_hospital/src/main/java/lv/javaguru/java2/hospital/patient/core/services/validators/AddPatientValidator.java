@@ -24,9 +24,11 @@ public class AddPatientValidator {
         validateName(request).ifPresent(errors::add);
         validateSurname(request).ifPresent(errors::add);
         validatePersonalCode(request).ifPresent(errors::add);
-        validatePatientExistence(request).ifPresent(errors::add);
         validatePersonalCodeLength(request).ifPresent(errors::add);
         validateNumInPersonalCode(request).ifPresent(errors::add);
+        if(errors.isEmpty()){
+            validatePatientExistence(request).ifPresent(errors::add);
+        }
         return errors;
     }
 
