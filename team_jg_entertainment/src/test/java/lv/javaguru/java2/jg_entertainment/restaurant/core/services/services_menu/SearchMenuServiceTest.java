@@ -58,7 +58,6 @@ public class SearchMenuServiceTest {
         SearchMenusResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertEquals(response.getMenus().size(), 1);
-        Mockito.verifyNoInteractions(database);
     }
 
     @Test
@@ -76,6 +75,5 @@ public class SearchMenuServiceTest {
         assertFalse(response.hasErrors());
         assertEquals(response.getMenus().size(), 1);
         assertEquals(response.getMenus().get(0).getTitle(), "title");
-        Mockito.verifyNoInteractions(database);
     }
 }
