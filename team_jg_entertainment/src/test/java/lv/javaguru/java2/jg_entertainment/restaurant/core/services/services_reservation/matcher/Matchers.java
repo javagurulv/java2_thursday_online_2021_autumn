@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.matchers_reservation;
+package lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_reservation.matcher;
 
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;

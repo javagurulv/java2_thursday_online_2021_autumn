@@ -11,7 +11,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_re
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.User;
-import lv.javaguru.java2.jg_entertainment.restaurant.matchers_reservation.Matchers;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_reservation.matcher.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

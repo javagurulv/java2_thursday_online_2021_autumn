@@ -22,12 +22,9 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class RemoveTableServiceTest {
 
-    @Mock
-    private TableRepository database;
-    @Mock
-    private RemoveTableValidator validator;
-    @InjectMocks
-    private RemoveTableService service;
+    @Mock private TableRepository database;
+    @Mock private RemoveTableValidator validator;
+    @InjectMocks private RemoveTableService service;
 
     @Test
     public void shouldReturnErrorWhenTableIdNotProvided() {

@@ -5,7 +5,7 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.users.AddUser
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.users.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.users.AddUsersResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_users.AddUserValidator;
-import lv.javaguru.java2.jg_entertainment.restaurant.matchers_visitors.Matchers;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_users.matcher.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
