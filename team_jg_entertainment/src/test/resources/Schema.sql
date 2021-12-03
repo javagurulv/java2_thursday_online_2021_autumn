@@ -14,18 +14,15 @@ PRIMARY KEY (`visitor_id`)
 ALTER TABLE `visitors` ADD `page_count` INT;
 ALTER TABLE `visitors` ADD `description` VARCHAR(1000);
 
---
---CREATE TABLE IF NOT EXISTS `tables` (
---  `table_id` BIGINT NOT NULL AUTO_INCREMENT,
---  `table_title` VARCHAR(100) NOT NULL,
---  `table_capacity` BIGINT(50) NOT NULL,
---  `table_price` DOUBLE (100,00) NOT NULL,
---  PRIMARY KEY (`table_id`)
---);
---
---ALTER TABLE tables DROP table_capacity;
---ALTER TABLE tables ADD column table_capacity INTEGER(50) NOT NULL;
---
+
+CREATE TABLE IF NOT EXISTS `tables` (
+  `table_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `table_title` VARCHAR(100) NOT NULL,
+  `table_capacity` BIGINT(50) NOT NULL,
+  `table_price` INTEGER (50) NOT NULL,
+  PRIMARY KEY (`table_id`)
+);
+
 --
 --CREATE TABLE IF NOT EXISTS `menu` (
 --  `menu_id` BIGINT NOT NULL AUTO_INCREMENT,
@@ -34,7 +31,7 @@ ALTER TABLE `visitors` ADD `description` VARCHAR(1000);
 --  `menu_price` DOUBLE (100,00) NOT NULL,
 --   PRIMARY KEY (`menu_id`)
 --);
---
+
 --
 --CREATE TABLE IF NOT EXISTS `reservation` (
 --    `reservation_id` BIGINT NOT NULL AUTO_INCREMENT,
