@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = "lv.javaguru.java2.jg_entertainment")
+@ComponentScan(basePackages = "lv.javaguru.java2.jg_entertainment.restaurant.core") //.restaurant.core
 @PropertySource(value = "classpath:application.properties")
 @EnableTransactionManagement
 public class RestaurantCoreConfiguration {
