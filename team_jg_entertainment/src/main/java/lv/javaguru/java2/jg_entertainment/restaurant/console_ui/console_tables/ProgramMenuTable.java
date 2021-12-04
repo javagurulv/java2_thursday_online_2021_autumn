@@ -1,5 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables;
 
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables.exit.ExitTableUIAction;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_users.CheckMenuNumberFromConsole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,8 +22,8 @@ public class ProgramMenuTable {
         menuNumberToUIActionMap.put(2, findUIAction(uiActions, RemoveTableUIAction.class));
         menuNumberToUIActionMap.put(3, findUIAction(uiActions, SearchTableUIAction.class));
         menuNumberToUIActionMap.put(4, findUIAction(uiActions, GetAllTablesUIAction.class));
-        menuNumberToUIActionMap.put(5, findUIAction(uiActions, ExitProgramTableListUIAction.class));
-        menuNumberToUIActionMap.put(6, findUIAction(uiActions, ExitTableUIAction.class));
+       // menuNumberToUIActionMap.put(5, findUIAction(uiActions, ExitProgramTableListUIAction.class));
+        menuNumberToUIActionMap.put(5, findUIAction(uiActions, ExitTableUIAction.class));
     }
 
     private UIAction findUIAction(List<UIAction> uiActions, Class uiActionClass) {
@@ -39,13 +40,13 @@ public class ProgramMenuTable {
         System.out.println("2. Delete table from list: ");
         System.out.println("3. Search table information from list: ");
         System.out.println("4. Show all tables in the list: ");
-        System.out.println("5. Choose that return in MAIN MENU:");
-        System.out.println("6. Exit! ");
+       // System.out.println("5. Choose that return in MAIN MENU:");
+        System.out.println("5. Exit! ");
         System.out.println();
     }
 
     public int getMenuNumberFromUser() {
-        return checkNumberFromConsole.getCorrectNumberMenu(1, 6);
+        return checkNumberFromConsole.getCorrectNumberMenu(1, 5);
     }
 
     public void executeSelectMenuItem(int selectMenu) {

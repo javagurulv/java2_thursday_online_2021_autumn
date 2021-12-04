@@ -1,5 +1,6 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_users;
+package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_users.exit;
 
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_users.UserUIAction;
 import org.springframework.stereotype.Component;
 
 @Component

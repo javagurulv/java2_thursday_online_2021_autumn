@@ -1,10 +1,10 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_tables;
+package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.exit;
 
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.UIAction;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.programMenu.ProgramMenu;
-import org.springframework.stereotype.Component;
 
-@Component
-public class ExitProgramTableListUIAction implements UIAction {
+//@Component
+public class ExitToMainProgramListUIAction implements UIAction {
 
     @Override
     public void execute() {

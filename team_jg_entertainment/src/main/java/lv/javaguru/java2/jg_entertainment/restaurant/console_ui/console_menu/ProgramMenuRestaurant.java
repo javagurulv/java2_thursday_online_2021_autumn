@@ -1,6 +1,7 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu;
 
 
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_menu.exit.ExitMenuUIAction;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_users.CheckMenuNumberFromConsole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,8 +22,8 @@ public class ProgramMenuRestaurant {
             menuNumberToUIActionMap.put(1, findUIAction(uiAction, AddMenuUIAction.class));
             menuNumberToUIActionMap.put(2, findUIAction(uiAction, RemoveMenuUIAction.class));
             menuNumberToUIActionMap.put(3, findUIAction(uiAction, GetAllMenusUIAction.class));
-            menuNumberToUIActionMap.put(4, findUIAction(uiAction, ExitToMainProgramListUIAction.class));//return in main menu(RestaurantProgramList ->mainAction)
-            menuNumberToUIActionMap.put(5, findUIAction(uiAction, ExitMenuUIAction.class));
+           // menuNumberToUIActionMap.put(4, findUIAction(uiAction, ExitToMainProgramListUIAction.class));//return in main menu(RestaurantProgramList ->mainAction)
+            menuNumberToUIActionMap.put(4, findUIAction(uiAction, ExitMenuUIAction.class));
 
         }
 
@@ -38,13 +39,13 @@ public class ProgramMenuRestaurant {
             System.out.println("1. Add menu to list: ");
             System.out.println("2. Delete menu from list: ");
             System.out.println("3. Show all menus in the list: "); ///,???
-            System.out.println("4. Choose that return in MAIN MENU:");//return in main menu(RestaurantProgramList -> mainAction)
-            System.out.println("5. Exit!");
+        //    System.out.println("4. Choose that return in MAIN MENU:");//return in main menu(RestaurantProgramList -> mainAction)
+            System.out.println("4. Exit!");
             System.out.println("");
         }
 
         public int getMenuNumberFromUser() {
-            return checkNumberFromConsole.getCorrectNumberMenu(1, 5);
+            return checkNumberFromConsole.getCorrectNumberMenu(1, 4);
         }
 
         public void executeSelectMenuItem(int selectMenu) {

@@ -1,4 +1,4 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.acceptance_tests;
+package lv.javaguru.java2.jg_entertainment.restaurant.acceptance_tests.databaseCleaner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

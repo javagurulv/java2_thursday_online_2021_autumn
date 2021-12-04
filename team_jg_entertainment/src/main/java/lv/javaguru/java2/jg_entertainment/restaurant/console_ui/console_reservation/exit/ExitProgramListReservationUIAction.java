@@ -1,9 +1,9 @@
-package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_reservation;
+package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_reservation.exit;
 
+import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_reservation.ReservationUIAction;
 import lv.javaguru.java2.jg_entertainment.restaurant.console_ui.programMenu.ProgramMenu;
-import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class ExitProgramListReservationUIAction implements ReservationUIAction {
 
     @Override

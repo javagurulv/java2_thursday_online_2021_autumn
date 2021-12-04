@@ -1,5 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.acceptance_tests;
 
+import lv.javaguru.java2.jg_entertainment.restaurant.acceptance_tests.databaseCleaner.DatabaseCleaner;
 import lv.javaguru.java2.jg_entertainment.restaurant.configuration.RestaurantCoreConfiguration;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.users.AddUserRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.users.Ordering;

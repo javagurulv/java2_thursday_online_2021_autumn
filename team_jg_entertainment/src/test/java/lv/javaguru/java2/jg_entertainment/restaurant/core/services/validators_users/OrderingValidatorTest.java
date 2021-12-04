@@ -2,13 +2,13 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_u
 
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.users.Ordering;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.users.CoreError;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class OrderingValidatorTest {
+public class OrderingValidatorTest {
 
     private OrderingValidator validator = new OrderingValidator();
 
@@ -47,6 +47,4 @@ class OrderingValidatorTest {
         assertEquals(errors.get(0).getField(), "orderDirection");
         assertEquals(errors.get(0).getMessageError(), "might contain 'ASCENDING' or 'DESCENDING' only!");
     }
-
-
 }
