@@ -4,7 +4,6 @@ import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.E
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -61,6 +60,11 @@ public class JdbcReservationRepositoryImpl implements ReservationRepository {
         String sql = "SELECT * FROM reservations WHERE reservation_id = ?";
         Object[] args = new Object[]{id};
         return jdbcTemplate.query(sql, args, reservationRowMapper);
+    }
+
+    @Override
+    public List<Reservation> findByReservationIdAndDate(Long id, LocalDateTime dateTime) {
+        return null;
     }
 
     @Override

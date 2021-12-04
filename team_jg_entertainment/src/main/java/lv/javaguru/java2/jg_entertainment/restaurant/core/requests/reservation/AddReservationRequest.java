@@ -7,7 +7,8 @@ public class AddReservationRequest {
     private String tableID;
     private String reservationDate;
 
-    public AddReservationRequest(String userID, String menuID, String tableID, String reservationDate) {
+    public AddReservationRequest(String userID, String menuID,
+                                 String tableID, String reservationDate) {
         this.userID = userID;
         this.menuID = menuID;
         this.tableID = tableID;

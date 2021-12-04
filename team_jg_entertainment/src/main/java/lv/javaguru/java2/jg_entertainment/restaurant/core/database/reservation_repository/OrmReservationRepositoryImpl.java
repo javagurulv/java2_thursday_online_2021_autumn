@@ -61,6 +61,15 @@ public class OrmReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
+    public List<Reservation> findByReservationIdAndDate(Long id, LocalDateTime dateTime) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "SELECT r FROM Reservation r WHERE reservation_id = :reservation_id AND " +
+                        "reservation_date = ' " + getReservationDate.getStringDate(dateTime) + "'");
+        query.setParameter("reservation_id", id);
+        return query.getResultList();
+    }
+
+    @Override
     public List<Reservation> findByUserId(Long id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT r FROM Reservation r WHERE id_visitor= :id_visitor");

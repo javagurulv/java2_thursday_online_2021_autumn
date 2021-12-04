@@ -18,6 +18,8 @@ public interface ReservationRepository {
 
     List<Reservation> findByReservationId(Long id);
 
+    List<Reservation> findByReservationIdAndDate(Long id, LocalDateTime dateTime);
+
     List<Reservation> findByUserId(Long id);
 
     List<Reservation> findByTableId(Long id);

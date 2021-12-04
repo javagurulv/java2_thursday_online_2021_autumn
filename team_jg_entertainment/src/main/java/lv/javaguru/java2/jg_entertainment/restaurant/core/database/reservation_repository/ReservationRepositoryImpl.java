@@ -90,6 +90,11 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
+    public List<Reservation> findByReservationIdAndDate(Long id, LocalDateTime dateTime) {
+        return null;
+    }
+
+    @Override
     public List<Reservation> findByUserId(Long id) {
         return reservationList.stream()
                 .filter(reservation -> Objects.equals(reservation.getUser().getUserId(), id))
