@@ -74,14 +74,17 @@
             <td class="right" th:text="${position.amount}"></td>
             <td class="right" th:text="${position.purchasePrice}"></td>
             <td class="right" th:text="${position.security.marketPrice}"></td>
-            <td class="right" th:text="${(position.security.marketPrice * position.amount)
-            - (position.purchasePrice * position.amount)}"></td>
+            <td class="right" th:text="${T(lv.javaguru.java2.qwe.core.utils.UtilityMethods).round(
+            (position.security.marketPrice * position.amount) - (position.purchasePrice * position.amount)
+            )}"></td>
         </tr>
     </td>
 </table>
 <br>
 <tr>CASH:</tr>
-<tr th:text="${cash}"></tr>
+<tr th:each="cash : ${cash}">
+    <td th:text="${T(lv.javaguru.java2.qwe.core.utils.UtilityMethods).round(cash)}"></td>
+</tr>
 
 <form action="/userMenu" method="get">
     <br>

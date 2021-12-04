@@ -62,7 +62,7 @@
             <td class="right" th:text="${user.age}"></td>
             <td class="center" th:text="${user.type}"></td>
             <td class="right" th:text="${user.initialInvestment}"></td>
-            <td class="right" th:text="${user.cash}"></td>
+            <td class="right" th:text="${T(lv.javaguru.java2.qwe.core.utils.UtilityMethods).round(user.cash)}"></td>
             <td class="right" th:text="${user.portfolioGenerationDate}"></td>
             <td class="center" th:text="${user.riskTolerance}"></td>
         </tr>

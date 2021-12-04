@@ -121,7 +121,7 @@ public class UtilityMethods {
         return (int) amount;
     }
 
-    public double round(double amount) {
+    public static double round(Double amount) {
         return Math.round(amount * 100.) / 100.;
     }
 
