@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AddUserController {
 
-    @Autowired
-    private AddUserService service;
+    @Autowired private AddUserService service;
 
     @GetMapping(value = "/userdata/addUser")
     public String showAddStockPage(ModelMap modelMap) {

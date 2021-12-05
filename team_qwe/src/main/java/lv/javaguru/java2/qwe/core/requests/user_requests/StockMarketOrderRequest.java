@@ -6,10 +6,12 @@ import lv.javaguru.java2.qwe.core.requests.data_requests.CoreRequest;
 
 public class StockMarketOrderRequest extends CoreRequest {
 
-    private final User user;
-    private final Security security;
-    private final String quantity;
-    private final Double realTimePrice;
+    private User user;
+    private Security security;
+    private String quantity;
+    private Double realTimePrice;
+
+    public StockMarketOrderRequest() {}
 
     public StockMarketOrderRequest(User user, Security security, String quantity, Double realTimePrice) {
         this.user = user;
@@ -32,6 +34,22 @@ public class StockMarketOrderRequest extends CoreRequest {
 
     public Double getRealTimePrice() {
         return realTimePrice;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setSecurity(Security security) {
+        this.security = security;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setRealTimePrice(Double realTimePrice) {
+        this.realTimePrice = realTimePrice;
     }
 
 }
