@@ -14,4 +14,8 @@ public class DeleteDoctorRequest {
     public String getDoctorIdToDelete() {
         return doctorIdToDelete;
     }
+
+    public void setDoctorIdToDelete(String doctorIdToDelete) {
+        this.doctorIdToDelete = doctorIdToDelete;
+    }
 }
