@@ -28,7 +28,7 @@ class DoctorExistenceByIdValidatorTest {
     private DoctorExistenceByIdValidator validator;
 
     @Test public void shouldReturnDoctorsErrorWhenDoctorDoesNotExist() {
-        Optional<CoreError> errors = validator.validateExistenceById(1231L);
+        Optional<CoreError> errors = validator.validateExistenceById("1231");
         assertEquals(errors.get().getField(), "Doctor");
         assertEquals(errors.get().getMessage(), "Does not exist!");
     }
@@ -36,11 +36,11 @@ class DoctorExistenceByIdValidatorTest {
     @Test
     public void shouldReturnEmptyList() {
         Doctor doctor = new Doctor("Name145", "Surname9856", "Speciality9084");
-        Long doctorId = doctor.getId();
+        doctor.setId(14L);
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
         Mockito.when(database.getAllDoctors()).thenReturn(doctors);
-        Optional<CoreError> errors = validator.validateExistenceById(doctorId);
+        Optional<CoreError> errors = validator.validateExistenceById(doctor.getId().toString());
         assertTrue(errors.isEmpty());
     }
 }

@@ -27,7 +27,7 @@ public class EditDoctorRequestValidator {
     }
 
     private Optional<CoreError> validateId(EditDoctorRequest request) {
-        return (request.getDoctorId() == null)
+        return (request.getDoctorId() == null || request.getDoctorId().isEmpty())
                 ? Optional.of(new CoreError("id", "Must not be empty!"))
                 : Optional.empty();
     }

@@ -27,7 +27,7 @@ class DeleteDoctorRequestValidatorTest {
 
     @Test
     public void shouldReturnEmptyList() {
-        DeleteDoctorRequest request = new DeleteDoctorRequest(123L);
+        DeleteDoctorRequest request = new DeleteDoctorRequest("123");
         Mockito.when(existence.validateExistenceById(request.getDoctorIdToDelete()))
                 .thenReturn(Optional.empty());
         List<CoreError> errorList = validator.validate(request);

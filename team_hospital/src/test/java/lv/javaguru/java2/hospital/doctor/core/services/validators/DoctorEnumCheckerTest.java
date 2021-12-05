@@ -21,14 +21,14 @@ class DoctorEnumCheckerTest {
 
     @Test
     public void shouldReturnEmptyList() {
-        EditDoctorRequest request = new EditDoctorRequest(13L, "SPECIALITY", "changes");
+        EditDoctorRequest request = new EditDoctorRequest("13", "SPECIALITY", "changes");
         Optional<CoreError> error = checker.validateEnum(request.getUserInputEnum());
         assertTrue(error.isEmpty());
     }
 
     @Test
     public void shouldReturnEditErrorList() {
-        EditDoctorRequest request = new EditDoctorRequest(13L, "bla", "changes");
+        EditDoctorRequest request = new EditDoctorRequest("13", "bla", "changes");
         Optional<CoreError> error = checker.validateEnum(request.getUserInputEnum());
         assertTrue(error.isPresent());
         assertEquals(error.get().getField(), "User choice");

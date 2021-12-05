@@ -17,7 +17,7 @@ public class EditDoctorUIAction implements DoctorUIAction {
     @Override
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
-        Long id = getUserInput.getUserLongInput("Please, enter the doctor's id: ");
+        String id = getUserInput.getUserStringInput("Please, enter the doctor's id: ");
         String userInputString = getUserInput
                 .getUserStringInput("What you would like to change (NAME||SURNAME||SPECIALITY)? ")
                 .toUpperCase(Locale.ROOT);

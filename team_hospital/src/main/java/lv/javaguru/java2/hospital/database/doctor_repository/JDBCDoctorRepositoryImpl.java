@@ -26,7 +26,7 @@ public class JDBCDoctorRepositoryImpl implements DoctorRepository {
     }
 
     @Override
-    public boolean deleteDoctorById(Long id) {
+    public boolean deleteDoctorById(String  id) {
         String sql = "DELETE FROM doctors WHERE id = ?";
         Object[] args = new Object[] {id};
         return jdbcTemplate.update(sql, args) == 1;
@@ -39,7 +39,7 @@ public class JDBCDoctorRepositoryImpl implements DoctorRepository {
     }
 
     @Override
-    public boolean editDoctor(Long doctorId, Enum infoToEdit, String input) {
+    public boolean editDoctor(String doctorId, Enum infoToEdit, String input) {
         String sql = "UPDATE doctors SET "
                 + infoToEdit.toString().toLowerCase(Locale.ROOT)
                 + " = ? WHERE id = ?";

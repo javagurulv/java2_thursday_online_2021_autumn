@@ -48,12 +48,12 @@ class EditDoctorServiceTest {
 
     @Test
     public void shouldChangeDoctorName() {
-        EditDoctorRequest request = new EditDoctorRequest(1L, "Name", "NewName");
+        EditDoctorRequest request = new EditDoctorRequest("1", "Name", "NewName");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("Name", "Surname", "Speciality"));
-        Mockito.when(database.editDoctor(1L, EditDoctorEnum.NAME, "NewName")).thenReturn(true);
+        Mockito.when(database.editDoctor("1", EditDoctorEnum.NAME, "NewName")).thenReturn(true);
 
         EditDoctorResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -62,12 +62,12 @@ class EditDoctorServiceTest {
 
     @Test
     public void shouldChangeDoctorSurname() {
-        EditDoctorRequest request = new EditDoctorRequest(1L, "Surname", "NewSurname");
+        EditDoctorRequest request = new EditDoctorRequest("1", "Surname", "NewSurname");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("Name", "Surname", "Speciality"));
-        Mockito.when(database.editDoctor(1L, EditDoctorEnum.SURNAME, "NewSurname")).thenReturn(true);
+        Mockito.when(database.editDoctor("1", EditDoctorEnum.SURNAME, "NewSurname")).thenReturn(true);
 
         EditDoctorResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -76,12 +76,12 @@ class EditDoctorServiceTest {
 
     @Test
     public void shouldChangeDoctorSpeciality() {
-        EditDoctorRequest request = new EditDoctorRequest(1L, "Speciality", "NewSpeciality");
+        EditDoctorRequest request = new EditDoctorRequest("1", "Speciality", "NewSpeciality");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("Name", "Surname", "Speciality"));
-        Mockito.when(database.editDoctor(1L, EditDoctorEnum.SPECIALITY, "NewSpeciality")).thenReturn(true);
+        Mockito.when(database.editDoctor("1", EditDoctorEnum.SPECIALITY, "NewSpeciality")).thenReturn(true);
 
         EditDoctorResponse response = service.execute(request);
         assertFalse(response.hasErrors());

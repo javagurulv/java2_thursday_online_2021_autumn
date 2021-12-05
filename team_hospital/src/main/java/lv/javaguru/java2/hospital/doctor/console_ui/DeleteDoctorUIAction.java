@@ -13,7 +13,7 @@ public class DeleteDoctorUIAction implements DoctorUIAction {
 
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
-        Long id = getUserInput.getUserLongInput("Please, enter the doctor's id: ");
+        String id = getUserInput.getUserStringInput("Please, enter the doctor's id: ");
         DeleteDoctorRequest request = new DeleteDoctorRequest(id);
         DeleteDoctorResponse response = deleteDoctor.execute(request);
         if (response.hasErrors()) {

@@ -2,17 +2,17 @@ package lv.javaguru.java2.hospital.doctor.core.requests;
 
 public class EditDoctorRequest {
 
-    private Long doctorId;
+    private String doctorId;
     private String userInputEnum;
     private String changes;
 
-    public EditDoctorRequest(Long doctorId, String userInputEnum, String changes) {
+    public EditDoctorRequest(String doctorId, String userInputEnum, String changes) {
         this.doctorId = doctorId;
         this.userInputEnum = userInputEnum;
         this.changes = changes;
     }
 
-    public Long getDoctorId() {
+    public String getDoctorId() {
         return doctorId;
     }
 

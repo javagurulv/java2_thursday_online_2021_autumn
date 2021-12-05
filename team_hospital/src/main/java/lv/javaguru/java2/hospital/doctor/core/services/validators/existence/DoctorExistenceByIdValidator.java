@@ -15,9 +15,9 @@ public class DoctorExistenceByIdValidator {
     @Autowired
     private DoctorRepository database;
 
-    public Optional<CoreError> validateExistenceById(Long id) {
+    public Optional<CoreError> validateExistenceById(String id) {
         for (Doctor doctor : database.getAllDoctors()) {
-            if (Objects.equals(doctor.getId(), id)) {
+            if (doctor.getId().equals(Long.parseLong(id))) {
                 return Optional.empty();
             }
         }

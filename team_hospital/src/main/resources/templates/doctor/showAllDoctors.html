@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Hospital demo project">
+    <meta name="author" content="JavaGuru">
+    <title>Hospital Repository</title>
+</head>
+
+<body>
+
+<h3>Show all doctors in the list</h3>
+
+<table>
+    <tr>
+        <td>Id:</td>
+        <td>Name:</td>
+        <td>Surname:</td>
+        <td>Speciality:</td>
+    </tr>
+
+    <td th:if="${doctors != null}">
+        <tr th:each="doctor : ${doctors}">
+            <td th:text="${doctor.id}" />
+            <td th:text="${doctor.name}" />
+            <td th:text="${doctor.surname}" />
+            <td th:text="${doctor.speciality}" />
+        </tr>
+    </td>
+
+</table>
+
+<form action="/" method="get">
+    <input type="submit" value="Main page" name="Submit" />
+</form>
+
+<form action="/doctorActions" method="get">
+    <input type="submit" value="Go to doctors actions page" name="Submit" />
+</form>
+
+</body>
+
+</html>

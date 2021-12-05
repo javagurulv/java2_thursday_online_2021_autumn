@@ -8,11 +8,11 @@ public interface DoctorRepository {
 
     void addDoctor(Doctor doctor);
 
-    boolean deleteDoctorById(Long id);
+    boolean deleteDoctorById(String id);
 
     List<Doctor> getAllDoctors();
 
-    boolean editDoctor(Long doctorId, Enum infoToEdit, String input);
+    boolean editDoctor(String doctorId, Enum infoToEdit, String input);
 
     List<Doctor> findByName(String name);
 

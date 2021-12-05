@@ -2,13 +2,16 @@ package lv.javaguru.java2.hospital.doctor.core.requests;
 
 public class DeleteDoctorRequest {
 
-    private Long doctorIdToDelete;
+    private String doctorIdToDelete;
 
-    public DeleteDoctorRequest(Long doctorIdToDelete) {
+    public DeleteDoctorRequest() {
+    }
+
+    public DeleteDoctorRequest(String doctorIdToDelete) {
         this.doctorIdToDelete = doctorIdToDelete;
     }
 
-    public Long getDoctorIdToDelete() {
+    public String getDoctorIdToDelete() {
         return doctorIdToDelete;
     }
 }

@@ -39,7 +39,7 @@ public class AcceptanceTest3 {
 
         Long doctorId = response1.getNewDoctor().getId();
 
-        DeleteDoctorRequest request3 = new DeleteDoctorRequest(doctorId);
+        DeleteDoctorRequest request3 = new DeleteDoctorRequest(String.valueOf(doctorId));
         DeleteDoctorResponse response3 = getDeleteDoctorService().execute(request3);
 
         assertTrue(response3.isDoctorDeleted());

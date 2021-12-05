@@ -6,6 +6,9 @@ public class AddDoctorRequest {
     private String surname;
     private String speciality;
 
+    public AddDoctorRequest() {
+    }
+
     public AddDoctorRequest(String name, String surname, String speciality) {
         this.name = name;
         this.surname = surname;
@@ -22,5 +25,17 @@ public class AddDoctorRequest {
 
     public String getSpeciality() {
         return speciality;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
     }
 }

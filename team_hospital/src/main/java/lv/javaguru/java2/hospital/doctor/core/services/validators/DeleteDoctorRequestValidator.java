@@ -23,7 +23,7 @@ public class DeleteDoctorRequestValidator {
     }
 
     private Optional<CoreError> validateId(DeleteDoctorRequest request) {
-        return (request.getDoctorIdToDelete() == null)
+        return (request.getDoctorIdToDelete() == null || request.getDoctorIdToDelete().isEmpty())
                 ? Optional.of(new CoreError("id", "Must not be empty!"))
                 : Optional.empty();
     }

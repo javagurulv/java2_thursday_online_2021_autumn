@@ -37,7 +37,7 @@ public class AcceptanceTest4 {
 
         Long doctorId = response1.getNewDoctor().getId();
 
-        EditDoctorRequest request2 = new EditDoctorRequest(doctorId, "NAME", "Name1");
+        EditDoctorRequest request2 = new EditDoctorRequest(String.valueOf(doctorId), "NAME", "Name1");
         EditDoctorResponse response2 = getEditDoctorService().execute(request2);
 
         assertTrue(response2.isDoctorEdited());
@@ -57,7 +57,7 @@ public class AcceptanceTest4 {
 
         Long doctorId = response1.getNewDoctor().getId();
 
-        EditDoctorRequest request2 = new EditDoctorRequest(doctorId, "SURNAME", "Surname1");
+        EditDoctorRequest request2 = new EditDoctorRequest(String.valueOf(doctorId), "SURNAME", "Surname1");
         EditDoctorResponse response2 = getEditDoctorService().execute(request2);
 
         assertTrue(response2.isDoctorEdited());
@@ -77,7 +77,7 @@ public class AcceptanceTest4 {
 
         Long doctorId = response1.getNewDoctor().getId();
 
-        EditDoctorRequest request2 = new EditDoctorRequest(doctorId, "SPECIALITY", "Speciality1");
+        EditDoctorRequest request2 = new EditDoctorRequest(String.valueOf(doctorId), "SPECIALITY", "Speciality1");
         EditDoctorResponse response2 = getEditDoctorService().execute(request2);
 
         assertTrue(response2.isDoctorEdited());

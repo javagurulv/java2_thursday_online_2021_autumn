@@ -29,16 +29,16 @@ class EditDoctorRequestValidatorTest {
 
     @Test
     public void shouldReturnEmptyListName() {
-        EditDoctorRequest request = new EditDoctorRequest(123L, "NAME", "changes");
-        Mockito.when(existence.validateExistenceById(123L)).thenReturn(Optional.empty());
+        EditDoctorRequest request = new EditDoctorRequest("123", "NAME", "changes");
+        Mockito.when(existence.validateExistenceById("123")).thenReturn(Optional.empty());
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnEditOptionError1() {
-        EditDoctorRequest request = new EditDoctorRequest(123L, "blabla", "changes");
-        Mockito.when(existence.validateExistenceById(123L)).thenReturn(Optional.empty());
+        EditDoctorRequest request = new EditDoctorRequest("123", "blabla", "changes");
+        Mockito.when(existence.validateExistenceById("123")).thenReturn(Optional.empty());
         Mockito.when(checker.validateEnum(request.getUserInputEnum())).thenReturn(Optional.of
                 (new CoreError("User choice", "Must contain 'NAME', 'SURNAME' or 'SPECIALITY' only!")));
         List<CoreError> errorList = validator.validate(request);
@@ -50,8 +50,8 @@ class EditDoctorRequestValidatorTest {
 
     @Test
     public void shouldReturnEditOptionError2() {
-        EditDoctorRequest request = new EditDoctorRequest(123L, "", "changes");
-        Mockito.when(existence.validateExistenceById(123L)).thenReturn(Optional.empty());
+        EditDoctorRequest request = new EditDoctorRequest("123", "", "changes");
+        Mockito.when(existence.validateExistenceById("123")).thenReturn(Optional.empty());
         List<CoreError> errorList = validator.validate(request);
         System.out.println(errorList);
         assertFalse(errorList.isEmpty());
@@ -62,16 +62,16 @@ class EditDoctorRequestValidatorTest {
 
     @Test
     public void shouldReturnEmptyListSurname() {
-        EditDoctorRequest request = new EditDoctorRequest(123L, "SURNAME", "changes");
-        Mockito.when(existence.validateExistenceById(123L)).thenReturn(Optional.empty());
+        EditDoctorRequest request = new EditDoctorRequest("123", "SURNAME", "changes");
+        Mockito.when(existence.validateExistenceById("123")).thenReturn(Optional.empty());
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
 
     @Test
     public void shouldReturnEmptyListSpeciality() {
-        EditDoctorRequest request = new EditDoctorRequest(123L, "SPECIALITY", "changes");
-        Mockito.when(existence.validateExistenceById(123L)).thenReturn(Optional.empty());
+        EditDoctorRequest request = new EditDoctorRequest("123", "SPECIALITY", "changes");
+        Mockito.when(existence.validateExistenceById("123")).thenReturn(Optional.empty());
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
     }
@@ -88,8 +88,8 @@ class EditDoctorRequestValidatorTest {
 
     @Test
     public void shouldReturnChangesError() {
-        EditDoctorRequest request = new EditDoctorRequest(123L, "NAME", "");
-        Mockito.when(existence.validateExistenceById(123L)).thenReturn(Optional.empty());
+        EditDoctorRequest request = new EditDoctorRequest("123", "NAME", "");
+        Mockito.when(existence.validateExistenceById("123")).thenReturn(Optional.empty());
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);
@@ -111,8 +111,8 @@ class EditDoctorRequestValidatorTest {
 
     @Test
     public void shouldReturnDoctorError() {
-        EditDoctorRequest request = new EditDoctorRequest(54L, "NAME", "changes");
-        Mockito.when(existence.validateExistenceById(54L)).thenReturn
+        EditDoctorRequest request = new EditDoctorRequest("54", "NAME", "changes");
+        Mockito.when(existence.validateExistenceById("54")).thenReturn
                 (Optional.of(new CoreError("Doctor", "Does not exist!")));
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
