@@ -12,16 +12,12 @@
               margin-left: 20%;
               margin-right: 20%;
               text-align: left;
-              border: 2px dotted black;
+              border: 2px outset;
               padding: 20px 20px 20px 20px;
               font-family: sans-serif;
         }
-        table {
-               border-collapse: collapse;
-               width: 100%;
-        }
         th, td {
-                padding: 0.25rem;
+                padding: 5px;
                 text-align: left;
                 border: 1px solid #ccc;
         }
@@ -45,37 +41,48 @@
 <h3 style="text-align: center;">Market order for stocks</h3>
 
 <td th:if="${users != null}">
+
     <form action="/userdata/stockMarketOrder" th:object="${request}" method="post">
-
-        Choose user:
-        <select name="name">
-            <option th:each="user : ${users}" th:text="${user}"></option>
-        </select>
-        <br>
-
-        Choose trade type:
-        <select name="type">
-            <option value="BUY">BUY</option>
-            <option value="SELL">SELL</option>
-        </select>
-        <br>
-
-        Enter ticker:
-        <input type="text" name="ticker"/>
-        <br>
-
-        Enter quantity:
-        <input type="text" name="quantity"/>
-        <br>
-
-        <input type="submit" style="font-size: 100%;" value="CONFIRM TRADE" name="Submit"/>
+        <table>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <td style="text-align: right">Choose user:</td>
+                <td><select name="name" style="width: 100%; text-align: center;">
+                    <option th:each="user : ${users}" th:text="${user}"></option>
+                </select></td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Choose trade type:</td>
+                <td><select name="type" style="width: 100%; text-align: center;">
+                    <option value="BUY">BUY</option>
+                    <option value="SELL">SELL</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Enter ticker:</td>
+                <td><input type="text" name="ticker"/></td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Enter quantity:</td>
+                <td><input type="text" name="quantity"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="text-align: center"><input type="submit" style="font-size: 100%;" value="CONFIRM TRADE" name="Submit"/></td>
+            </tr>
+        </table>
     </form>
+
 </td>
 
 <td th:if="${errors != null}">
     <tr th:each="error : ${errors}">
-        <td th:text="${error.field}"></td>
+        <td th:text="${error.field} + ':'"></td>
         <td th:text="${error.message}"></td>
+        <br>
     </tr>
 </td>
 
