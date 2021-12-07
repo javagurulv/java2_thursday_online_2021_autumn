@@ -1,10 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="description" content="Restaurant JG demo project">
+    <meta name="author" content="JavaGuru">
+    <title>Restaurant JG</title>
 </head>
+
+<style>
+     body {
+         background-color: linen;
+}
+     h2 {
+         color: MediumVioletRed;
+         text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+</style>
 <body>
 
+<h2>Edit reservation </h2>
+
+<table>
+    <tr>
+        <td>Reservation ID:</td>
+        <td>Changes: ID:visitor/table/menu/date(yyyy-MM-dd HH:mm:):</td>
+        <td>Some changes:</td>
+    </tr>
+
+    <tr>
+        <form action="/editReservation" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.reservationId}"/></td>
+            <td><input type="text" th:field="${request.enumEditReservation}"/></td>
+            <td><input type="text" th:field="${request.changes}"/></td>
+            <td>
+                <input type="submit" value="Edit Reservation" style="color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
+                <input type="reset" value="Clear" style="color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
+            </td>
+        </form>
+    </tr>
+</table>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}"></td>
+        <td th:text="${error.messageError}"></td>
+    </tr>
+</td>
+
+<td th:if="${errors == null}">
+    <tr th:text="${message}"></tr>
+</td>
+
+
+<form action="/" method="get">
+    <input type="submit" value="Main menu" name="Submit"
+           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+</form>
+
+<form action="/reservationMenu" method="get">
+    <input type="submit" value="Return to reservation menu" name="Submit"
+           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+</form>
+
 </body>
+
 </html>

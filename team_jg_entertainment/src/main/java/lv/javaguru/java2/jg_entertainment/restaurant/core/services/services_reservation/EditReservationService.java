@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Locale;
 
 @Component
 @Transactional
@@ -25,7 +26,7 @@ public class EditReservationService {
             return new EditReservationResponse(errors);
         }
         boolean ifEditReservation = databaseReservation.editReservation(Long.valueOf(request.getReservationId()),
-                EditReservationEnum.valueOf(request.getEnumEditReservation()), request.getChanges());
+                EditReservationEnum.valueOf(request.getEnumEditReservation().toUpperCase(Locale.ROOT)), request.getChanges());
         return new EditReservationResponse(ifEditReservation);
     }
 }

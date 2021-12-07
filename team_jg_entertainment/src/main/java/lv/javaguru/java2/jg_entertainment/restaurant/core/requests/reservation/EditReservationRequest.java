@@ -6,6 +6,9 @@ public class EditReservationRequest {
     private String enumEditReservation;
     private String changes;
 
+    public EditReservationRequest() {
+    }
+
     public EditReservationRequest(String reservationId,
                                   String enumEditReservation,
                                   String changes) {
@@ -24,5 +27,17 @@ public class EditReservationRequest {
 
     public String getChanges() {
         return changes;
+    }
+
+    public void setReservationId(String reservationId) {
+        this.reservationId = reservationId;
+    }
+
+    public void setEnumEditReservation(String enumEditReservation) {
+        this.enumEditReservation = enumEditReservation;
+    }
+
+    public void setChanges(String changes) {
+        this.changes = changes;
     }
 }
