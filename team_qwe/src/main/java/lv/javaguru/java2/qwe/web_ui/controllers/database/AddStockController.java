@@ -15,18 +15,18 @@ public class AddStockController {
 
     @Autowired private AddStockService service;
 
-    @GetMapping(value = "/addStock")
+    @GetMapping(value = "/database/addStock")
     public String showAddStockPage(ModelMap modelMap) {
         modelMap.addAttribute("request", new AddStockRequest());
-        return "addStock";
+        return "database/addStock";
     }
 
-    @PostMapping("/addStock")
+    @PostMapping("/database/addStock")
     public String processAddStockRequest(@ModelAttribute(value = "request") AddStockRequest request, ModelMap modelMap) {
         AddStockResponse response = service.execute(request);
         if (response.hasErrors()) {
             modelMap.addAttribute("errors", response.getErrors());
-            return "addStock";
+            return "database/addStock";
         } else {
             return "redirect:/";
         }

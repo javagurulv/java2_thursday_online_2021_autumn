@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="QWE finance project">
+    <meta name="author" content="Alex K">
+    <title>QWE Trading Application</title>
+</head>
+<style type="text/css">
+        body {
+              background-color: #8E8F92;
+              margin-left: 30%;
+              margin-right: 30%;
+              text-align: center;
+              padding: 20px 20px 20px 20px;
+              font-family: sans-serif;
+        }
+        table {
+               margin-left: auto;
+               margin-right: auto;
+        }
+</style>
+<body>
+
+<fieldset>
+    <legend style="padding-bottom: 5px;">Add new stock</legend>
+    <table>
+        <form action="/database/addStock" th:object="${request}" method="post">
+            <tr>
+                <td style="text-align: left;">Ticker:</td>
+                <td><input type="text" th:field="${request.ticker}"/></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Company name:</td>
+                <td><input type="text" th:field="${request.name}"/></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Industry:</td>
+                <td><select name="industry" style="width: 100%; text-align: center;">
+                    <option value="Consumer Staples">Consumer Staples</option>
+                    <option value="Utilities">Utilities</option>
+                    <option value="Communications">Communications</option>
+                    <option value="Health Care">Health Care</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Materials">Materials</option>
+                    <option value="Energy">Energy</option>
+                    <option value="Financials">Financials</option>
+                    <option value="Real Estate">Real Estate</option>
+                    <option value="Industrials">Industrials</option>
+                    <option value="Consumer Discretionary">Consumer Discretionary</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Currency:</td>
+                <td><select name="currency" style="width: 100%; text-align: center;">
+                    <option value="USD">USD</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Market price:</td>
+                <td><input type="text" th:field="${request.marketPrice}"/></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Dividend:</td>
+                <td><input type="text" th:field="${request.dividends}"/></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Risk weight:</td>
+                <td><input type="text" th:field="${request.riskWeight}"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="text-align: right;"><input type="submit" value="Add stock"/>
+                    <input type="reset" value="Clear"/></td>
+            </tr>
+        </form>
+    </table>
+</fieldset>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field} + ':'"></td>
+        <td th:text="${error.message}"></td>
+        <br>
+    </tr>
+</td>
+<br>
+
+<form action="/dataMenu" method="get">
+    <input type="submit" style="float: right;" value="Back" name="Submit"/>
+</form>
+
+</body>
+</html>

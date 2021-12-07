@@ -25,8 +25,8 @@ public class RemoveUserController {
     @PostMapping("/userdata/removeUser")
     public String processRemoveSecurityRequest(@ModelAttribute(value = "request") RemoveUserRequest request, ModelMap modelMap) {
         RemoveUserResponse response = service.execute(request);
-        if (!response.isRemoved()) {
-            modelMap.addAttribute("isRemoved", "No user with such id or name!");
+        if (response.hasErrors()) {
+            modelMap.addAttribute("errors", response.getErrors());
             return "userdata/removeUser";
         } else {
             return "redirect:/";

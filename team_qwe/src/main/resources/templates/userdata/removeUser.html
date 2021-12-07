@@ -29,10 +29,15 @@
     <input type="submit" style="font-size: 100%;" value="Remove user" name="Submit"/>
     <input type="reset" style="font-size: 100%;" value="Clear"/>
 </form>
-
 <br>
-<td th:if="${isRemoved == false}">
-<td th:text="${isRemoved}"></td>
+
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field} + ':'"></td>
+        <td th:text="${error.message}"></td>
+        <br>
+    </tr>
+</td>
 
 <form action="/userMenu" method="get">
     <br>
