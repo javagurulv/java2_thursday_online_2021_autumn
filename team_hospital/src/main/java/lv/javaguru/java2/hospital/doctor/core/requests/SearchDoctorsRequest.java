@@ -11,6 +11,9 @@ public class SearchDoctorsRequest {
     private DoctorPaging doctorPaging;
 
 
+    public SearchDoctorsRequest() {
+    }
+
     public SearchDoctorsRequest(Long id, String name, String surname, String speciality) {
         this.id = id;
         this.name = name;
@@ -81,5 +84,37 @@ public class SearchDoctorsRequest {
 
     public DoctorPaging getPaging() {
         return doctorPaging;
+    }
+
+    public DoctorOrdering getDoctorOrdering() {
+        return doctorOrdering;
+    }
+
+    public DoctorPaging getDoctorPaging() {
+        return doctorPaging;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
+    }
+
+    public void setDoctorOrdering(DoctorOrdering doctorOrdering) {
+        this.doctorOrdering = doctorOrdering;
+    }
+
+    public void setDoctorPaging(DoctorPaging doctorPaging) {
+        this.doctorPaging = doctorPaging;
     }
 }

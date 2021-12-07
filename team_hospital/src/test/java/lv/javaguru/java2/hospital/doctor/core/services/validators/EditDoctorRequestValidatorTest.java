@@ -2,6 +2,7 @@ package lv.javaguru.java2.hospital.doctor.core.services.validators;
 
 import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
+import lv.javaguru.java2.hospital.doctor.core.services.checkers.DoctorLongNumChecker;
 import lv.javaguru.java2.hospital.doctor.core.services.validators.existence.DoctorExistenceByIdValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,6 +26,7 @@ class EditDoctorRequestValidatorTest {
     @Mock
     private DoctorExistenceByIdValidator existence;
     @Mock private DoctorEnumChecker checker;
+    @Mock private DoctorLongNumChecker numChecker;
     @InjectMocks private EditDoctorRequestValidator validator;
 
     @Test
@@ -38,7 +40,6 @@ class EditDoctorRequestValidatorTest {
     @Test
     public void shouldReturnEditOptionError1() {
         EditDoctorRequest request = new EditDoctorRequest("123", "blabla", "changes");
-        Mockito.when(existence.validateExistenceById("123")).thenReturn(Optional.empty());
         Mockito.when(checker.validateEnum(request.getUserInputEnum())).thenReturn(Optional.of
                 (new CoreError("User choice", "Must contain 'NAME', 'SURNAME' or 'SPECIALITY' only!")));
         List<CoreError> errorList = validator.validate(request);
@@ -51,7 +52,6 @@ class EditDoctorRequestValidatorTest {
     @Test
     public void shouldReturnEditOptionError2() {
         EditDoctorRequest request = new EditDoctorRequest("123", "", "changes");
-        Mockito.when(existence.validateExistenceById("123")).thenReturn(Optional.empty());
         List<CoreError> errorList = validator.validate(request);
         System.out.println(errorList);
         assertFalse(errorList.isEmpty());
@@ -89,7 +89,6 @@ class EditDoctorRequestValidatorTest {
     @Test
     public void shouldReturnChangesError() {
         EditDoctorRequest request = new EditDoctorRequest("123", "NAME", "");
-        Mockito.when(existence.validateExistenceById("123")).thenReturn(Optional.empty());
         List<CoreError> errorList = validator.validate(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.size(), 1);

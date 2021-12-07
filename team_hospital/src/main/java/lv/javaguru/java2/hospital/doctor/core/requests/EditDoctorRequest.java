@@ -6,6 +6,9 @@ public class EditDoctorRequest {
     private String userInputEnum;
     private String changes;
 
+    public EditDoctorRequest() {
+    }
+
     public EditDoctorRequest(String doctorId, String userInputEnum, String changes) {
         this.doctorId = doctorId;
         this.userInputEnum = userInputEnum;
@@ -22,5 +25,17 @@ public class EditDoctorRequest {
 
     public String getChanges() {
         return changes;
+    }
+
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public void setUserInputEnum(String userInputEnum) {
+        this.userInputEnum = userInputEnum;
+    }
+
+    public void setChanges(String changes) {
+        this.changes = changes;
     }
 }

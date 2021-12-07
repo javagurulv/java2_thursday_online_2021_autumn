@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Hospital demo project">
+    <meta name="author" content="JavaGuru">
+    <title>Hospital repository</title>
+</head>
+<body>
+<h3>Search doctor</h3>
+<table>
+    <tr>
+        <td>Doctor ID:</td>
+        <td>Doctor name:</td>
+        <td>Doctor surname:</td>
+        <td>Speciality:</td>
+    </tr>
+    <tr>
+        <form action="/searchDoctor" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.id}"/></td>
+            <td><input type="text" th:field="${request.name}"/></td>
+            <td><input type="text" th:field="${request.surname}"/></td>
+            <td><input type="text" th:field="${request.speciality}"/></td>
+            <td>
+                <input type="submit" value="Search Doctor"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+        <td th:if="${doctors != null}">
+    <tr th:each="doctor : ${doctors}">
+        <td th:text="${doctor.id}" />
+        <td th:text="${doctor.name}" />
+        <td th:text="${doctor.surname}" />
+        <td th:text="${doctor.speciality}" />
+    </tr>
+    </td>
+    </tr>
+</table>
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" />
+    </tr>
+</td>
+
+<form action="/doctorActions" method="get">
+    <input type="submit" value="Doctor actions" name="Submit" />
+</form>
+
+<form action="/" method="get">
+    <input type="submit" value="Main menu" name="Submit" />
+</form>
+
+</body>
+
+</html>

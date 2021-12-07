@@ -2,7 +2,9 @@ package lv.javaguru.java2.hospital.doctor.core.services.validators;
 
 import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
+import lv.javaguru.java2.hospital.doctor.core.services.checkers.DoctorLongNumChecker;
 import lv.javaguru.java2.hospital.doctor.core.services.validators.existence.DoctorExistenceByIdValidator;
+import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,13 +18,17 @@ public class EditDoctorRequestValidator {
     @Autowired
     private DoctorExistenceByIdValidator validator;
     @Autowired private DoctorEnumChecker checker;
+    @Autowired private DoctorLongNumChecker numChecker;
 
     public List<CoreError> validate(EditDoctorRequest request) {
         List<CoreError> errors = new ArrayList<>();
         validateId(request).ifPresent(errors::add);
-        validateDoctorExistence(request).ifPresent(errors::add);
         validateEditOption(request).ifPresent(errors::add);
         validateChanges(request).ifPresent(errors::add);
+        validateIDForNum(request).ifPresent(errors::add);
+        if(errors.isEmpty()) {
+            validateDoctorExistence(request).ifPresent(errors::add);
+        }
         return errors;
     }
 
@@ -49,5 +55,10 @@ public class EditDoctorRequestValidator {
             return Optional.empty();
         }
         return validator.validateExistenceById(request.getDoctorId());
+    }
+
+    private Optional<CoreError> validateIDForNum(EditDoctorRequest request){
+        return request.getDoctorId() == null || request.getDoctorId().isEmpty()
+                ? Optional.empty() : numChecker.validate(request.getDoctorId(), "ID");
     }
 }

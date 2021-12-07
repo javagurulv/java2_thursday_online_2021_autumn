@@ -27,7 +27,6 @@ public class AddDoctorController {
         AddDoctorResponse response = addDoctorService.execute(request);
         if (response.hasErrors()) {
             modelMap.addAttribute("errors", response.getErrors());
-
         }
         if(!response.hasErrors()) {
             modelMap.addAttribute("errors", null);

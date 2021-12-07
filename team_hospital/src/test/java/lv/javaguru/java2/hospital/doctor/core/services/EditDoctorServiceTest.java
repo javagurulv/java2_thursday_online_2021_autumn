@@ -53,7 +53,7 @@ class EditDoctorServiceTest {
 
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("Name", "Surname", "Speciality"));
-        Mockito.when(database.editDoctor("1", EditDoctorEnum.NAME, "NewName")).thenReturn(true);
+        Mockito.when(database.editDoctor(1L, EditDoctorEnum.NAME, "NewName")).thenReturn(true);
 
         EditDoctorResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -67,7 +67,7 @@ class EditDoctorServiceTest {
 
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("Name", "Surname", "Speciality"));
-        Mockito.when(database.editDoctor("1", EditDoctorEnum.SURNAME, "NewSurname")).thenReturn(true);
+        Mockito.when(database.editDoctor(1L, EditDoctorEnum.SURNAME, "NewSurname")).thenReturn(true);
 
         EditDoctorResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -81,7 +81,7 @@ class EditDoctorServiceTest {
 
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("Name", "Surname", "Speciality"));
-        Mockito.when(database.editDoctor("1", EditDoctorEnum.SPECIALITY, "NewSpeciality")).thenReturn(true);
+        Mockito.when(database.editDoctor(1L, EditDoctorEnum.SPECIALITY, "NewSpeciality")).thenReturn(true);
 
         EditDoctorResponse response = service.execute(request);
         assertFalse(response.hasErrors());

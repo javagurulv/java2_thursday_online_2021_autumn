@@ -1,7 +1,10 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators;
 
+import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
+import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.DeleteDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
+import lv.javaguru.java2.hospital.doctor.core.services.checkers.DoctorLongNumChecker;
 import lv.javaguru.java2.hospital.doctor.core.services.validators.existence.DoctorExistenceByIdValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
@@ -23,6 +26,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class DeleteDoctorRequestValidatorTest {
 
     @Mock private DoctorExistenceByIdValidator existence;
+    @Mock private DoctorLongNumChecker longNumChecker;
+    @Mock private VisitRepository visitRepository;
+    @Mock private PrescriptionRepository prescriptionRepository;
     @InjectMocks private DeleteDoctorRequestValidator validator;
 
     @Test

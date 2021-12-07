@@ -20,7 +20,7 @@ public class ORMDoctorRepositoryImpl implements DoctorRepository {
     }
 
     @Override
-    public boolean deleteDoctorById(String id) {
+    public boolean deleteDoctorById(Long id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "DELETE Doctor where id = :id");
         query.setParameter("id", id);
@@ -36,7 +36,7 @@ public class ORMDoctorRepositoryImpl implements DoctorRepository {
     }
 
     @Override
-    public boolean editDoctor(String doctorId, Enum infoToEdit, String input) {
+    public boolean editDoctor(Long doctorId, Enum infoToEdit, String input) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "UPDATE Doctor d SET "
                         + infoToEdit.toString().toLowerCase(Locale.ROOT)

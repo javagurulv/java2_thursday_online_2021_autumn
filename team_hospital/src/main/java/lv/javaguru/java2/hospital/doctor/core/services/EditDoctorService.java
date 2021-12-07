@@ -26,7 +26,7 @@ public class EditDoctorService {
             return new EditDoctorResponse(errors);
         }
 
-        boolean isDoctorEdited = database.editDoctor(request.getDoctorId(),
+        boolean isDoctorEdited = database.editDoctor(Long.parseLong(request.getDoctorId()),
                 EditDoctorEnum.valueOf(request.getUserInputEnum().toUpperCase(Locale.ROOT)), request.getChanges());
         return new EditDoctorResponse(isDoctorEdited);
     }

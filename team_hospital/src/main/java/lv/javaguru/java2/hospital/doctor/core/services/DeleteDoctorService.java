@@ -23,7 +23,7 @@ public class DeleteDoctorService {
         if (!errors.isEmpty()) {
             return new DeleteDoctorResponse(errors);
         }
-        boolean isDoctorDeleted = database.deleteDoctorById(request.getDoctorIdToDelete());
+        boolean isDoctorDeleted = database.deleteDoctorById(Long.parseLong(request.getDoctorIdToDelete()));
         return new DeleteDoctorResponse(isDoctorDeleted);
     }
 }

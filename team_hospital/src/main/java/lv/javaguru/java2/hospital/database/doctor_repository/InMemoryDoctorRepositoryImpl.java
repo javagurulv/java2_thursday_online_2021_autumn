@@ -23,7 +23,7 @@ public class InMemoryDoctorRepositoryImpl implements DoctorRepository {
 
 
     @Override
-    public boolean deleteDoctorById(String id) {
+    public boolean deleteDoctorById(Long id) {
         boolean isDoctorDeleted = false;
         Optional<Doctor> doctorToDeleteOpt = doctors.stream()
                 .filter(doctor -> doctor.getId().equals(id))
@@ -41,7 +41,7 @@ public class InMemoryDoctorRepositoryImpl implements DoctorRepository {
     }
 
     @Override
-    public boolean editDoctor(String doctorId, Enum infoToEdit, String changes) {
+    public boolean editDoctor(Long doctorId, Enum infoToEdit, String changes) {
         boolean isDoctorEdited = false;
         Optional<Doctor> doctorToEditOpt = doctors.stream()
                 .filter(doctor -> doctor.getId().equals(doctorId))
