@@ -21,6 +21,7 @@ public class DeleteUserController {
         return "user/deleteUser";
     }
 
+
     @PostMapping("/deleteUser")
     public String processDeleteUserRequest(@ModelAttribute(value = "request") DeleteUserRequest request, ModelMap modelMap) {
         DeleteUsersResponse response = service.execute(request);
