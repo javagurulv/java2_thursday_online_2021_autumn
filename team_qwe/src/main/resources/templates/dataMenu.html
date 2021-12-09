@@ -9,17 +9,15 @@
 <style type="text/css">
         body {
               background-color: #8E8F92;
-              margin-left: 20%;
-              margin-right: 20%;
+              margin-left: 30%;
+              margin-right: 30%;
               text-align: center;
-              border: 2px dotted black;
               padding: 20px 20px 20px 20px;
               font-family: sans-serif;
         }
         button {
-<!--              border: none;-->
               color: black;
-              padding: 15px 32px;
+              padding: 15px 10px;
               text-align: center;
               text-decoration: none;
               display: inline-block;
@@ -27,18 +25,50 @@
               margin: 4px 2px;
               cursor: pointer;
         }
+        table {
+               margin-left: auto;
+               margin-right: auto;
+        }
 </style>
 <body>
 
-    <h1>Data menu</h1>
+<fieldset>
+    <legend style="padding-bottom: 5px;">DATA MENU</legend>
+    <table>
 
-    <h2><a href="/database/addStock"><button class="/" style="width: 20%;">ADD STOCK</button></a></h2>
-    <h2><button class="/" style="width: 20%;">ADD BOND</button></h2>
-    <h2><a href="/removeSecurity"><button class="/" style="width: 20%;">REMOVE SECURITY</button></a></h2>
-    <h2><a href="/getAllSecurityList"><button class="/" style="width: 20%;">SHOW ALL SECURITIES</button></a></h2>
-    <h2><a href="/findSecurityByTickerOrName"><button class="/" style="width: 20%;">FIND SECURITY BY TICKER OR NAME</button></a></h2>
-    <h2><a href="/filter"><button class="/" style="width: 20%;">FILTER SECURITIES(STOCKS) BY MULTIPLE PARAMETERS</button></a></h2>
-    <h2><a href="../"><button class="/" style="width: 20%;">RETURN TO MAIN MENU</button></a></h2>
+        <tr>
+            <td><a href="/database/addStock">
+                <button class="/" style="width: 100%;">ADD STOCK</button>
+            </a></td>
+        </tr>
+        <tr>
+            <td><a href="/removeSecurity">
+                <button class="/" style="width: 100%;">REMOVE SECURITY</button>
+            </a></td>
+        </tr>
+        <tr>
+            <td><a href="/getAllSecurityList">
+                <button class="/" style="width: 100%;">SHOW ALL SECURITIES</button>
+            </a></td>
+        </tr>
+        <tr>
+            <td><a href="/findSecurityByTickerOrName">
+                <button class="/" style="width: 100%;">FIND SECURITY BY TICKER OR NAME</button>
+            </a></td>
+        </tr>
+        <tr>
+            <td><a href="/filter">
+                <button class="/" style="width: 100%;">FILTER SECURITIES(STOCKS) BY MULTIPLE PARAMETERS</button>
+            </a></td>
+        </tr>
+        <tr>
+            <td><a href="../">
+                <button class="/" style="width: 100%;">RETURN TO MAIN MENU</button>
+            </a></td>
+        </tr>
+
+    </table>
+</fieldset>
 
 </body>
 </html>

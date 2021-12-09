@@ -9,17 +9,15 @@
 <style type="text/css">
         body {
               background-color: #8E8F92;
-              margin-left: 20%;
-              margin-right: 20%;
+              margin-left: 30%;
+              margin-right: 30%;
               text-align: center;
-              border: 2px dotted black;
               padding: 20px 20px 20px 20px;
               font-family: sans-serif;
         }
         button {
-<!--              border: none;-->
               color: black;
-              padding: 15px 32px;
+              padding: 15px 10px;
               text-align: center;
               text-decoration: none;
               display: inline-block;
@@ -27,20 +25,65 @@
               margin: 4px 2px;
               cursor: pointer;
         }
+        table {
+               margin-left: auto;
+               margin-right: auto;
+        }
 </style>
 <body>
 
-<h1>User menu</h1>
+<fieldset>
+    <legend style="padding-bottom: 5px;">USER MENU</legend>
+    <table>
 
-<h2><a href="/userdata/addUser"><button class="/" style="width: 20%;">ADD NEW USER</button></a></h2>
-<h2><a href="/userdata/removeUser"><button class="/" style="width: 20%;">REMOVE USER</button></a></h2>
-<h2><a href="/userdata/getUserList"><button class="/" style="width: 20%;">SHOW USER LIST</button></a></h2>
-<h2><a href="/userdata/findUserByIdOrName"><button class="/" style="width: 20%;">FIND USER BY NAME</button></a></h2>
-<h2><a href="/userdata/generateUserPortfolio"><button class="/" style="width: 20%;">GENERATE PORTFOLIO FOR USER</button></a></h2>
-<h2><a href="/userdata/stockMarketOrder"><button class="/" style="width: 20%;">TRADE STOCKS (MARKET ORDER)</button></a></h2>
-<h2><a href="/userdata/getUserPortfolio"><button class="/" style="width: 20%;">SHOW USER PORTFOLIO</button></a></h2>
-<h2><a href="/userdata/getUserTrades"><button class="/" style="width: 20%;">SHOW USER TRADES</button></a></h2>
-<h2><a href="../"><button class="/" style="width: 20%;">RETURN TO MAIN MENU</button></a></h2>
+        <tr>
+            <td><a href="/userdata/addUser">
+                <button class="/" style="width: 100%;">ADD NEW USER</button>
+            </a></td>
+        </tr>
+        <tr>
+            <td><a href="/userdata/removeUser">
+                <button class="/" style="width: 100%;">REMOVE USER</button>
+            </a></td>
+        </tr>
+        <tr>
+            <td><a href="/userdata/getUserList">
+                <button class="/" style="width: 100%;">SHOW USER LIST</button>
+            </a></td>
+        </tr>
+        <tr>
+            <td><a href="/userdata/findUserByIdOrName">
+                <button class="/" style="width: 100%;">FIND USER BY NAME</button>
+            </a></td>
+        </tr>
+        <tr>
+            <td><a href="/userdata/generateUserPortfolio">
+                <button class="/" style="width: 100%;">GENERATE PORTFOLIO FOR USER</button>
+            </a></td>
+        </tr>
+        <tr>
+            <td><a href="/userdata/stockMarketOrder">
+                <button class="/" style="width: 100%;">TRADE STOCKS (MARKET ORDER)</button>
+            </a></td>
+        </tr>
+        <tr>
+            <td><a href="/userdata/getUserPortfolio">
+                <button class="/" style="width: 100%;">SHOW USER PORTFOLIO</button>
+            </a></td>
+        </tr>
+        <tr>
+            <td><a href="/userdata/getUserTrades">
+                <button class="/" style="width: 100%;">SHOW USER TRADES</button>
+            </a></td>
+        </tr>
+        <tr>
+            <td><a href="../">
+                <button class="/" style="width: 100%;">RETURN TO MAIN MENU</button>
+            </a></td>
+        </tr>
+
+    </table>
+</fieldset>
 
 </body>
 </html>

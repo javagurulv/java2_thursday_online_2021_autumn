@@ -9,17 +9,15 @@
 <style type="text/css">
         body {
               background-color: #8E8F92;
-              margin-left: 20%;
-              margin-right: 20%;
+              margin-left: 30%;
+              margin-right: 30%;
               text-align: center;
-              border: 2px dotted black;
               padding: 20px 20px 20px 20px;
               font-family: sans-serif;
         }
         button {
-<!--              border: none;-->
               color: black;
-              padding: 15px 32px;
+              padding: 15px 50px;
               text-align: center;
               text-decoration: none;
               display: inline-block;
@@ -27,14 +25,30 @@
               margin: 4px 2px;
               cursor: pointer;
         }
-
+        table {
+               margin-left: auto;
+               margin-right: auto;
+        }
 </style>
 <body>
 
-    <h1>Main menu</h1>
+<fieldset>
+    <legend style="padding-bottom: 5px;">MAIN MENU</legend>
+    <table>
 
-    <h2><a href="/dataMenu"><button class="/" style="width: 15%;">DATA MENU</button></a></h2>
-    <h2><a href="/userMenu"><button class="/" style="width: 15%;">USER MENU</button></a></h2>
+        <tr>
+            <td><a href="/dataMenu">
+                <button class="/" style="width: 100%;">DATA MENU</button>
+            </a></td>
+        </tr>
+        <tr>
+            <td><a href="/userMenu">
+                <button class="/" style="width: 100%;">USER MENU</button>
+            </a></td>
+        </tr>
+
+    </table>
+</fieldset>
 
 </body>
 </html>
