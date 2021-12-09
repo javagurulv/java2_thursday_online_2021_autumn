@@ -100,6 +100,18 @@ public class Prescription {
         this.quantity = quantity;
     }
 
+    public DoctorRepository getDoctorRepository() {
+        return doctorRepository;
+    }
+
+    public void setDoctorRepository(DoctorRepository doctorRepository) {
+        this.doctorRepository = doctorRepository;
+    }
+
+    public String getMedicationName() {
+        return medicationName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

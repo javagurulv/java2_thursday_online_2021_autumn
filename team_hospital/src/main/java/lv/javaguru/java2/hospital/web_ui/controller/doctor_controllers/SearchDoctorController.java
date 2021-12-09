@@ -3,8 +3,6 @@ package lv.javaguru.java2.hospital.web_ui.controller.doctor_controllers;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.SearchDoctorsResponse;
 import lv.javaguru.java2.hospital.doctor.core.services.SearchDoctorsService;
-import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
-import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

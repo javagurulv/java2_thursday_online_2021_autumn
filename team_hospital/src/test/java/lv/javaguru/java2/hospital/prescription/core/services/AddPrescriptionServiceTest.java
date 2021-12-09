@@ -40,7 +40,7 @@ class AddPrescriptionServiceTest {
     public void shouldReturnResponseWithErrorsWhenValidationFails() {
         Long doctorId = 12L;
         Long patientId = 15L;
-        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId, patientId, "MedicationName", 2);
+        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId.toString(), patientId.toString(), "MedicationName", "2");
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Doctor", "does not exist!"));
         errors.add(new CoreError("Patient", "does not exist!"));
@@ -62,7 +62,7 @@ class AddPrescriptionServiceTest {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         Long doctorId = 12L;
         Long patientId = 15L;
-        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId, patientId, "MedicationName", 2);
+        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId.toString(), patientId.toString(), "MedicationName", "2");
 
         Doctor doctor = new Doctor("DoctorName", "DoctorSurname", "DoctorSpeciality");
         doctor.setId(doctorId);

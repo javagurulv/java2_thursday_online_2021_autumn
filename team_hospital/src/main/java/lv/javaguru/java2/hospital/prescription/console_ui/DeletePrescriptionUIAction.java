@@ -15,7 +15,7 @@ public class DeletePrescriptionUIAction implements PrescriptionUIAction{
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
         Long id = getUserInput.getUserLongInput("Please enter prescription id: ");
-        DeletePrescriptionRequest request = new DeletePrescriptionRequest(id);
+        DeletePrescriptionRequest request = new DeletePrescriptionRequest(id.toString());
         DeletePrescriptionResponse response = service.execute(request);
         if (response.hasErrors()) {
             response.getErrors().forEach(coreError ->

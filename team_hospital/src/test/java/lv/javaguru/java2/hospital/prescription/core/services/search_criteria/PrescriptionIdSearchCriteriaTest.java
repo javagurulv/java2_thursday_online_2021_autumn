@@ -45,7 +45,8 @@ class PrescriptionIdSearchCriteriaTest {
         Doctor doctor = new Doctor("Name2443", "Surname15435", "Speciality894739");
         Patient patient = new Patient("Name12", "Surname13", "120445-12568");
         Prescription prescription1 = new Prescription(doctor, patient, "MedName", 1);
-        Long prescriptionId = prescription1.getId();
+        Long prescriptionId = 656L;
+        prescription1.setId(prescriptionId);
         List<Prescription> prescriptions = new ArrayList<>();
         prescriptions.add(prescription1);
         Mockito.when(database.findByPrescriptionId(prescriptionId)).thenReturn(prescriptions);

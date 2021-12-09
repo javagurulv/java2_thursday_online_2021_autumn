@@ -2,13 +2,20 @@ package lv.javaguru.java2.hospital.prescription.core.requests;
 
 public class DeletePrescriptionRequest {
 
-    private Long prescriptionIdToDelete;
+    private String prescriptionIdToDelete;
 
-    public DeletePrescriptionRequest(Long prescriptionIdToDelete) {
+    public DeletePrescriptionRequest() {
+    }
+
+    public DeletePrescriptionRequest(String prescriptionIdToDelete) {
         this.prescriptionIdToDelete = prescriptionIdToDelete;
     }
 
-    public Long getPrescriptionIdToDelete() {
+    public String getPrescriptionIdToDelete() {
         return prescriptionIdToDelete;
+    }
+
+    public void setPrescriptionIdToDelete(String prescriptionIdToDelete) {
+        this.prescriptionIdToDelete = prescriptionIdToDelete;
     }
 }

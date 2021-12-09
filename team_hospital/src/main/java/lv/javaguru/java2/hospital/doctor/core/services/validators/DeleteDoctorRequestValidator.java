@@ -41,7 +41,7 @@ public class DeleteDoctorRequestValidator {
     }
 
     private Optional<CoreError> validateDoctorExistence(DeleteDoctorRequest request) {
-        if (request.getDoctorIdToDelete() == null) {
+        if (request.getDoctorIdToDelete() == null || request.getDoctorIdToDelete().isEmpty()) {
             return Optional.empty();
         }
         return validator.validateExistenceById(request.getDoctorIdToDelete());

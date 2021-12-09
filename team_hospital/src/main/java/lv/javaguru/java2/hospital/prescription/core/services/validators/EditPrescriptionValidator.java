@@ -36,7 +36,7 @@ public class EditPrescriptionValidator {
     }
 
     private Optional<CoreError> validateRequestID(EditPrescriptionRequest request) {
-        return request.getPrescriptionID() == null ?
+        return request.getPrescriptionID() == null || request.getPrescriptionID().isEmpty()?
                 Optional.of(new CoreError("Prescription ID", "must not be empty!")) : Optional.empty();
     }
 

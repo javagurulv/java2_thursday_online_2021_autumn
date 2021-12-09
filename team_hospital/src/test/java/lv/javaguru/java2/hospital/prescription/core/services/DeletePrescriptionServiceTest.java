@@ -45,7 +45,7 @@ class DeletePrescriptionServiceTest {
     public void shouldDeletePrescriptionWithIdFromDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         Mockito.when(database.deletePrescriptionById(16L)).thenReturn(true);
-        DeletePrescriptionRequest request = new DeletePrescriptionRequest(16L);
+        DeletePrescriptionRequest request = new DeletePrescriptionRequest("16");
         DeletePrescriptionResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertTrue(response.isPrescriptionDeleted());

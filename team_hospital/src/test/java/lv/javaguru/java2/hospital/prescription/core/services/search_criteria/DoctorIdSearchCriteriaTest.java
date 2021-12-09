@@ -43,7 +43,8 @@ class DoctorIdSearchCriteriaTest {
     public void shouldReturnCorrectPrescription() {
         Doctor doctor = new Doctor("Name2443", "Surname15435", "Speciality894739");
         Patient patient = new Patient("Name12", "Surname13", "120445-12568");
-        Long doctorId = patient.getId();
+        Long doctorId = 3545L;
+        doctor.setId(doctorId);
         Prescription prescription1 = new Prescription(doctor, patient, "MedName", 1);
         Long prescriptionId = prescription1.getId();
         List<Prescription> prescriptions = new ArrayList<>();
@@ -63,7 +64,8 @@ class DoctorIdSearchCriteriaTest {
     public void shouldReturnCorrectPrescriptions() {
         Doctor doctor = new Doctor("Name2443", "Surname15435", "Speciality894739");
         Patient patient = new Patient("Name12", "Surname13", "120445-12568");
-        Long doctorId = doctor.getId();
+        Long doctorId = 3545L;
+        doctor.setId(doctorId);
         Prescription prescription1 = new Prescription(doctor, patient, "MedName1", 1);
         Prescription prescription2 = new Prescription(doctor, patient, "MedName2", 2);
         Long prescription1Id = prescription1.getId();

@@ -33,9 +33,8 @@ class AddPrescriptionValidatorTest {
 
     @Test
     public void shouldReturnDoctorIdError(){
-        Long doctorId = null;
         Long patientId = 21L;
-        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId, patientId, "MedicationName", 1);
+        AddPrescriptionRequest request = new AddPrescriptionRequest(null, patientId.toString(), "MedicationName", "1");
         Patient patient = new Patient("Patient name", "PatientSurname", "121212-12342");
         patient.setId(patientId);
         Mockito.when(patientRepository.findById(patientId)).thenReturn(Collections.singletonList(patient));
@@ -49,8 +48,7 @@ class AddPrescriptionValidatorTest {
     @Test
     public void shouldReturnPatientIdError(){
         Long doctorId = 12L;
-        Long patientId = null;
-        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId, patientId, "MedicationName", 1);
+        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId.toString(), null, "MedicationName", "1");
         Doctor doctor = new Doctor("DoctorName", "DoctorSurname", "DoctorSpeciality");
         doctor.setId(doctorId);
         List<Doctor> doctors = new ArrayList<>();
@@ -68,7 +66,7 @@ class AddPrescriptionValidatorTest {
     public void shouldReturnMedicationError(){
         Long doctorId = 12L;
         Long patientId = 15L;
-        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId, patientId, "", 1);
+        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId.toString(), patientId.toString(), "", "1");
 
         Doctor doctor = new Doctor("DoctorName", "DoctorSurname", "DoctorSpeciality");
         doctor.setId(doctorId);
@@ -90,7 +88,7 @@ class AddPrescriptionValidatorTest {
     public void shouldReturnQuantityEmptyError(){
         Long doctorId = 12L;
         Long patientId = 15L;
-        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId, patientId, "MedicationName", null);
+        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId.toString(), patientId.toString(), "MedicationName", null);
 
         Doctor doctor = new Doctor("DoctorName", "DoctorSurname", "DoctorSpeciality");
         doctor.setId(doctorId);
@@ -112,7 +110,7 @@ class AddPrescriptionValidatorTest {
     public void shouldReturnQuantityZeroError(){
         Long doctorId = 12L;
         Long patientId = 15L;
-        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId, patientId, "MedicationName", 0);
+        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId.toString(), patientId.toString(), "MedicationName", "0");
 
         Doctor doctor = new Doctor("DoctorName", "DoctorSurname", "DoctorSpeciality");
         doctor.setId(doctorId);
@@ -134,7 +132,7 @@ class AddPrescriptionValidatorTest {
     public void shouldReturnDoctorExistenceError(){
         Long doctorId = 12L;
         Long patientId = 15L;
-        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId, patientId, "MedicationName", 2);
+        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId.toString(), patientId.toString(), "MedicationName", "2");
 
         Patient patient = new Patient("Patient name", "PatientSurname", "121212-12342");
         patient.setId(patientId);
@@ -151,7 +149,7 @@ class AddPrescriptionValidatorTest {
     public void shouldReturnPatientExistenceError(){
         Long doctorId = 12L;
         Long patientId = 15L;
-        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId, patientId, "MedicationName", 1);
+        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId.toString(), patientId.toString(), "MedicationName", "1");
 
         Doctor doctor = new Doctor("DoctorName", "DoctorSurname", "DoctorSpeciality");
         doctor.setId(doctorId);
@@ -170,7 +168,7 @@ class AddPrescriptionValidatorTest {
     public void shouldReturnNoError(){
         Long doctorId = 12L;
         Long patientId = 15L;
-        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId, patientId, "MedicationName", 1);
+        AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId.toString(), patientId.toString(), "MedicationName", "1");
 
         Doctor doctor = new Doctor("DoctorName", "DoctorSurname", "DoctorSpeciality");
         doctor.setId(doctorId);

@@ -19,10 +19,10 @@ public class PrescriptionExistenceForAddValidator {
 
     public Optional<CoreError> validatePrescriptionExistence(AddPrescriptionRequest request) {
         for (Prescription prescription : database.getAllPrescriptions()) {
-            if (prescription.getDoctor().getId().equals(request.getDoctorId())
-            && prescription.getPatient().getId().equals(request.getPatientId())
+            if (prescription.getDoctor().getId().toString().equals(request.getDoctorId())
+            && prescription.getPatient().getId().toString().equals(request.getPatientId())
             && prescription.getMedication().equals(request.getMedicationName())
-            && prescription.getQuantity() == request.getQuantity()
+            && Integer.toString(prescription.getQuantity()).equals(request.getQuantity())
             && prescription.getDate().equals(LocalDate.now())) {
                 return Optional.of(new CoreError("Prescription", "Already exists!"));
             }

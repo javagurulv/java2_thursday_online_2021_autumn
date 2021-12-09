@@ -20,7 +20,7 @@ public class AddPrescriptionUIAction implements PrescriptionUIAction{
         int quantity = getUserInput.getUserNumericInput("Please enter medication quantity: ");
 
         AddPrescriptionRequest request =
-                new AddPrescriptionRequest(doctorId, patientId, medicationName, quantity);
+                new AddPrescriptionRequest(doctorId.toString(), patientId.toString(), medicationName, Integer.toString(quantity));
         AddPrescriptionResponse response = service.execute(request);
 
         System.out.println("Medication " + medicationName + " with amount of "+ quantity +

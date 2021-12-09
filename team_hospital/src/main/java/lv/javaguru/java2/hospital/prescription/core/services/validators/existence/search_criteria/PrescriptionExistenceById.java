@@ -7,6 +7,7 @@ import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
@@ -22,7 +23,7 @@ public class PrescriptionExistenceById implements PrescriptionExistenceBySearchC
     @Override
     public Optional<CoreError> validateExistence(SearchPrescriptionRequest request) {
         for (Prescription prescription : database.getAllPrescriptions()) {
-            if (prescription.getId().equals(request.getPrescriptionId())) {
+            if (Objects.equals(prescription.getId(), request.getPrescriptionId())) {
                 return Optional.empty();
             }
         }

@@ -23,7 +23,7 @@ public class DeletePrescriptionService {
         if(!errors.isEmpty()) {
             return new DeletePrescriptionResponse(errors);
         }
-        boolean isPrescriptionDeleted = database.deletePrescriptionById(request.getPrescriptionIdToDelete());
+        boolean isPrescriptionDeleted = database.deletePrescriptionById(Long.parseLong(request.getPrescriptionIdToDelete()));
         return new DeletePrescriptionResponse(isPrescriptionDeleted);
     }
 }

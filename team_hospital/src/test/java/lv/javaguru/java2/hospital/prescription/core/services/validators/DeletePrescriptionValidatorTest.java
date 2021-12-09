@@ -2,6 +2,7 @@ package lv.javaguru.java2.hospital.prescription.core.services.validators;
 
 import lv.javaguru.java2.hospital.prescription.core.requests.DeletePrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
+import lv.javaguru.java2.hospital.prescription.core.checkers.PrescriptionLongNumChecker;
 import lv.javaguru.java2.hospital.prescription.core.services.validators.existence.PrescriptionExistenceByIDValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,13 +24,14 @@ class DeletePrescriptionValidatorTest {
 
     @Mock
     private PrescriptionExistenceByIDValidator existence;
+    @Mock private PrescriptionLongNumChecker longNumChecker;
     @InjectMocks
     private DeletePrescriptionValidator validator;
 
     @Test
     public void shouldReturnEmptyList() {
-        DeletePrescriptionRequest request = new DeletePrescriptionRequest(154L);
-        Mockito.when(existence.execute(request.getPrescriptionIdToDelete())).thenReturn(Optional.empty());
+        DeletePrescriptionRequest request = new DeletePrescriptionRequest("154");
+        Mockito.when(existence.execute(Long.parseLong(request.getPrescriptionIdToDelete()))).thenReturn(Optional.empty());
         List<CoreError> errors = validator.validate(request);
         assertTrue(errors.isEmpty());
     }

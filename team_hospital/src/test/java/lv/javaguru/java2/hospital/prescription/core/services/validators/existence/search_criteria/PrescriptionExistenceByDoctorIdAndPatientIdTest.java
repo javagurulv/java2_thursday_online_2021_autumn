@@ -62,9 +62,11 @@ class PrescriptionExistenceByDoctorIdAndPatientIdTest {
         SearchPrescriptionRequest request = new SearchPrescriptionRequest(null, 15L, 18L);
         List<Prescription> prescriptions = new ArrayList<>();
         prescriptions.add(prescription);
+        System.out.println(prescriptions);
         Mockito.when(database.getAllPrescriptions()).thenReturn(prescriptions);
 
         Optional<CoreError> error = existence.validateExistence(request);
+        System.out.println(error);
         assertTrue(error.isEmpty());
     }
 

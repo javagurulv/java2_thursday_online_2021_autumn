@@ -32,18 +32,18 @@ public class AddPrescriptionService {
         }
 
         Prescription prescription = new Prescription
-                (getDoctor(request), getPatient(request), request.getMedicationName(), request.getQuantity());
+                (getDoctor(request), getPatient(request), request.getMedicationName(), Integer.parseInt(request.getQuantity()));
         database.addPrescription(prescription);
         return new AddPrescriptionResponse(prescription);
     }
 
     private Doctor getDoctor(AddPrescriptionRequest request) {
-        return doctorRepository.findById(request.getDoctorId()).get(0);
+        return doctorRepository.findById(Long.parseLong(request.getDoctorId())).get(0);
     }
 
     private Patient getPatient(AddPrescriptionRequest request) {
-        if (!patientRepository.findById(request.getPatientId()).isEmpty()) {
-            return patientRepository.findById(request.getPatientId()).get(0);
+        if (!patientRepository.findById(Long.parseLong(request.getPatientId())).isEmpty()) {
+            return patientRepository.findById(Long.parseLong(request.getPatientId())).get(0);
         }
         else return null;
     }

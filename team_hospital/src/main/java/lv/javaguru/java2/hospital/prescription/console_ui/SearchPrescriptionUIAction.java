@@ -28,7 +28,8 @@ public class SearchPrescriptionUIAction implements PrescriptionUIAction{
         Integer pageSize = getUserInput.getUserNumericInput("Enter pageSize: ");
         PrescriptionPaging paging = new PrescriptionPaging(pageNumber, pageSize);
 
-        SearchPrescriptionRequest request = new SearchPrescriptionRequest(prescriptionId, doctorId, patientId, ordering, paging);
+        SearchPrescriptionRequest request = new SearchPrescriptionRequest
+                (prescriptionId, doctorId, patientId, ordering, paging);
         SearchPrescriptionResponse response = service.execute(request);
 
         if (response.hasErrors()) {

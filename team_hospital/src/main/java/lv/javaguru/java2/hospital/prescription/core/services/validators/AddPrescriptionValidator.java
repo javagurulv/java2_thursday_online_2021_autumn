@@ -35,12 +35,12 @@ public class AddPrescriptionValidator {
     }
 
     private Optional<CoreError> validateDoctorId(AddPrescriptionRequest request) {
-        return (request.getDoctorId() == null)
+        return (request.getDoctorId() == null || request.getDoctorId().isEmpty())
                 ? Optional.of(new CoreError("Doctor id", "must not be empty!")) : Optional.empty();
     }
 
     private Optional<CoreError> validatePatientId(AddPrescriptionRequest request) {
-        return (request.getPatientId() == null)
+        return (request.getPatientId() == null || request.getPatientId().isEmpty())
                 ? Optional.of(new CoreError("Patient id", "must not be empty!")) : Optional.empty();
     }
 
@@ -52,7 +52,7 @@ public class AddPrescriptionValidator {
     private Optional<CoreError> validateQuantity(AddPrescriptionRequest request) {
         if (request.getQuantity() == null) {
             return Optional.of(new CoreError("Medication quantity", "must not be empty!"));
-        } else if (request.getQuantity() <= 0) {
+        } else if (Integer.parseInt(request.getQuantity()) <= 0) {
             return Optional.of(new CoreError("Medication quantity", "must be greater than 0!"));
         }
         return Optional.empty();
@@ -60,13 +60,13 @@ public class AddPrescriptionValidator {
 
     private Optional<CoreError> validateDoctorExistence(AddPrescriptionRequest request) {
         return request.getDoctorId() == null ? Optional.empty() :
-                doctorRepository.findById(request.getDoctorId()).isEmpty() ?
+                doctorRepository.findById(Long.parseLong(request.getDoctorId())).isEmpty() ?
                         Optional.of(new CoreError("Doctor", "does not exist!")) : Optional.empty();
     }
 
     private Optional<CoreError> validatePatientExistence(AddPrescriptionRequest request) {
         return request.getPatientId() == null ? Optional.empty() :
-                patientRepository.findById(request.getPatientId()).isEmpty() ?
+                patientRepository.findById(Long.parseLong(request.getPatientId())).isEmpty() ?
                         Optional.of(new CoreError("Patient", "does not exist!")) : Optional.empty();
     }
 

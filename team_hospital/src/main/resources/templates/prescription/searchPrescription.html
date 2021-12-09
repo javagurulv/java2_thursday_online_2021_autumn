@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Hospital demo project">
+    <meta name="author" content="JavaGuru">
+    <title>Hospital repository</title>
+</head>
+<body>
+<h3>Search prescription</h3>
+<table>
+    <tr>
+        <td>Prescription ID:</td>
+        <td>Doctor ID:</td>
+        <td>Patient ID:</td>
+    </tr>
+    <tr>
+        <form action="/searchPrescription" th:object="${request}" method="post">
+            <td><input type="text" th:field="${request.prescriptionId}"/></td>
+            <td><input type="text" th:field="${request.doctorId}"/></td>
+            <td><input type="text" th:field="${request.patientId}"/></td>
+            <td>
+                <input type="submit" value="Search Prescription"/>
+                <input type="reset" value="Clear"/>
+            </td>
+        </form>
+        <td th:if="${prescriptions != null}">
+    <tr th:each="prescription : ${prescriptions}">
+        <td th:text="${prescription.id}" />
+        <td th:text="${prescription.doctor}" />
+        <td th:text="${prescription.patient}" />
+    </tr>
+    </td>
+    </tr>
+</table>
+<td th:if="${errors != null}">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}" />
+        <td th:text="${error.message}" />
+    </tr>
+</td>
+
+<form action="/prescriptionActions" method="get">
+    <input type="submit" value="Prescription actions" name="Submit" />
+</form>
+
+<form action="/" method="get">
+    <input type="submit" value="Main menu" name="Submit" />
+</form>
+
+</body>
+
+</html>

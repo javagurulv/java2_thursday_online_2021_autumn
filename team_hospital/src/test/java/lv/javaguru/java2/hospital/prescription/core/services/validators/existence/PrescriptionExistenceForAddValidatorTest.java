@@ -39,7 +39,7 @@ class PrescriptionExistenceForAddValidatorTest {
         Prescription prescription = new Prescription(doctor, patient, "MedName1", 1);
         List<Prescription> prescriptions = new ArrayList<>();
         prescriptions.add(prescription);
-        AddPrescriptionRequest request = new AddPrescriptionRequest(646L, 945L, "MedName1", 1);
+        AddPrescriptionRequest request = new AddPrescriptionRequest("646", "945", "MedName1", "1");
         Mockito.when(database.getAllPrescriptions()).thenReturn(prescriptions);
         Optional<CoreError> errors = existence.validatePrescriptionExistence(request);
         assertFalse(errors.isEmpty());
@@ -49,7 +49,7 @@ class PrescriptionExistenceForAddValidatorTest {
 
     @Test
     public void shouldReturnEmptyList() {
-        AddPrescriptionRequest request = new AddPrescriptionRequest(646L, 945L, "MedName1", 1);
+        AddPrescriptionRequest request = new AddPrescriptionRequest("646", "945", "MedName1", "1");
         Mockito.when(database.getAllPrescriptions()).thenReturn(new ArrayList<>());
         Optional<CoreError> errors = existence.validatePrescriptionExistence(request);
         assertTrue(errors.isEmpty());

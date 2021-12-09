@@ -41,6 +41,4 @@ public class PrescriptionExistenceForSearchValidator {
                 existenceByDoctorId};
         return prescriptionExistenceBySearchCriteria;
     }
-
-
 }

@@ -13,7 +13,8 @@ import java.util.Locale;
 @Component
 public class ORMPrescriptionRepositoryImpl implements PrescriptionRepository {
 
-    @Autowired private SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Override
     public void addPrescription(Prescription prescription) {
@@ -25,9 +26,15 @@ public class ORMPrescriptionRepositoryImpl implements PrescriptionRepository {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "UPDATE Prescription p SET "
                         + prescriptionEnum.toString().toLowerCase(Locale.ROOT)
-                        + " = :" + changes +" WHERE id = :id");
+                        + " = :changes WHERE id = :id");
         query.setParameter("id", prescriptionID);
-        query.setParameter(changes, changes);
+        if(prescriptionEnum.toString().toLowerCase(Locale.ROOT).equals("patient")) {
+            query.setParameter("changes", Long.parseLong(changes));
+        } else if(prescriptionEnum.toString().toLowerCase(Locale.ROOT).equals("medication_name")) {
+            query.setParameter("changes", changes);
+        } else {
+            query.setParameter("changes", Integer.parseInt(changes));
+        }
         int result = query.executeUpdate();
         return result == 1;
     }
