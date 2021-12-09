@@ -21,6 +21,7 @@ public class AddUserController {
         return "user/addUser";
     }
 
+
     @PostMapping("/addUser")
     public String processAddUserRequest(@ModelAttribute(value = "request") AddUserRequest request, ModelMap modelMap) {
         AddUsersResponse response = service.execute(request);
