@@ -1,5 +1,7 @@
 package lv.javaguru.java2.qwe.core.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -33,9 +35,11 @@ public class User {
     private double cash; //денежный остаток на счете
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Position> portfolio = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<TradeTicket> trades = new ArrayList<>();
 
     @Column(name = "portfolio_generation_date")
