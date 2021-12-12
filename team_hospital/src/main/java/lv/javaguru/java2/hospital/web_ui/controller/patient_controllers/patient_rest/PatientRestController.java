@@ -1,4 +1,4 @@
-package lv.javaguru.java2.hospital.web_ui.controller.patient_controllers.patientRest;
+package lv.javaguru.java2.hospital.web_ui.controller.patient_controllers.patient_rest;
 
 import lv.javaguru.java2.hospital.patient.core.requests.*;
 import lv.javaguru.java2.hospital.patient.core.responses.*;
