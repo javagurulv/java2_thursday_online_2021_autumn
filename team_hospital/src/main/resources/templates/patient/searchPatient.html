@@ -18,7 +18,6 @@
         <td>Name:</td>
         <td>Surname:</td>
         <td>Personal code:</td>
-        <td>ID:</td>
     </tr>
 
     <tr>
@@ -31,6 +30,13 @@
                 <input type="reset" value="Clear"/>
             </td>
         </form>
+
+    <tr>
+        <td>Name:</td>
+        <td>Surname:</td>
+        <td>Personal code:</td>
+        <td>ID</td>
+    </tr>
 
         <td th:if="${patients != null}">
     <tr th:each="patient : ${patients}">
