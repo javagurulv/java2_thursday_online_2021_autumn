@@ -1,4 +1,4 @@
-package lv.javaguru.java2.oddJobs.core.responce;
+package lv.javaguru.java2.oddJobs.core.response;
 
 public class CoreError {
     private String field;

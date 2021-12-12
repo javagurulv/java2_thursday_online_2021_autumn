@@ -1,7 +1,7 @@
-package lv.javaguru.java2.oddJobs.core.responce.remove;
+package lv.javaguru.java2.oddJobs.core.response.remove;
 
-import lv.javaguru.java2.oddJobs.core.responce.CoreError;
-import lv.javaguru.java2.oddJobs.core.responce.CoreResponse;
+import lv.javaguru.java2.oddJobs.core.response.CoreError;
+import lv.javaguru.java2.oddJobs.core.response.CoreResponse;
 
 import java.util.List;
 

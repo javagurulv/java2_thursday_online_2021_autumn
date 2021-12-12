@@ -1,7 +1,7 @@
 package lv.javaguru.java2.oddJobs.web_ui.controllers;
 
 import lv.javaguru.java2.oddJobs.core.requests.add.AddClientRequest;
-import lv.javaguru.java2.oddJobs.core.responce.add.AddClientResponse;
+import lv.javaguru.java2.oddJobs.core.response.add.AddClientResponse;
 import lv.javaguru.java2.oddJobs.core.services.add.AddClientService;
 
 import org.springframework.beans.factory.annotation.Autowired;

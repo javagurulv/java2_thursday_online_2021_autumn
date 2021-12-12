@@ -1,8 +1,8 @@
 package lv.javaguru.java2.oddJobs.core.services.add;
 
 import lv.javaguru.java2.oddJobs.core.requests.add.AddAdvertisementRequest;
-import lv.javaguru.java2.oddJobs.core.responce.CoreError;
-import lv.javaguru.java2.oddJobs.core.responce.add.AddAdvertisementResponse;
+import lv.javaguru.java2.oddJobs.core.response.CoreError;
+import lv.javaguru.java2.oddJobs.core.response.add.AddAdvertisementResponse;
 import lv.javaguru.java2.oddJobs.core.validations.add.AddAdvertisementValidator;
 import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.AdvertisementRepository;
 import lv.javaguru.java2.oddJobs.core.domain.Advertisement;

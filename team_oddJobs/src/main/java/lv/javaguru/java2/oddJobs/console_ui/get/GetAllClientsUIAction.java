@@ -1,7 +1,7 @@
 package lv.javaguru.java2.oddJobs.console_ui.get;
 
 import lv.javaguru.java2.oddJobs.core.requests.get.GetAllClientsRequest;
-import lv.javaguru.java2.oddJobs.core.responce.get.GetAllClientsResponse;
+import lv.javaguru.java2.oddJobs.core.response.get.GetAllClientsResponse;
 import lv.javaguru.java2.oddJobs.core.services.get.GetAllClientsService;
 import lv.javaguru.java2.oddJobs.console_ui.UIAction;
 import org.springframework.beans.factory.annotation.Autowired;

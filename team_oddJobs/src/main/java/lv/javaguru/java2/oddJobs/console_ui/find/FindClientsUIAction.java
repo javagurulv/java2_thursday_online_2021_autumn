@@ -3,7 +3,7 @@ package lv.javaguru.java2.oddJobs.console_ui.find;
 import lv.javaguru.java2.oddJobs.core.requests.find.FindClientsRequest;
 import lv.javaguru.java2.oddJobs.core.requests.find.Ordering;
 import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
-import lv.javaguru.java2.oddJobs.core.responce.find.FindClientsResponse;
+import lv.javaguru.java2.oddJobs.core.response.find.FindClientsResponse;
 import lv.javaguru.java2.oddJobs.core.services.find.FindClientsService;
 import lv.javaguru.java2.oddJobs.console_ui.exit.ExitMenuUIAction;
 import lv.javaguru.java2.oddJobs.console_ui.UIAction;

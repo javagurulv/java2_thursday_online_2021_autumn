@@ -2,7 +2,7 @@ package lv.javaguru.java2.oddJobs.core.validations;
 
 
 import lv.javaguru.java2.oddJobs.core.requests.find.Ordering;
-import lv.javaguru.java2.oddJobs.core.responce.CoreError;
+import lv.javaguru.java2.oddJobs.core.response.CoreError;
 import org.junit.Test;
 
 import java.util.List;

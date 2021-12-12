@@ -2,7 +2,7 @@ package lv.javaguru.java2.oddJobs.core.services.remove;
 
 
 import lv.javaguru.java2.oddJobs.core.requests.remove.RemoveClientRequest;
-import lv.javaguru.java2.oddJobs.core.responce.CoreError;
+import lv.javaguru.java2.oddJobs.core.response.CoreError;
 import lv.javaguru.java2.oddJobs.core.validations.remove.RemoveClientValidator;
 import lv.javaguru.java2.oddJobs.core.database.unUsed.Database;
 import org.junit.Test;

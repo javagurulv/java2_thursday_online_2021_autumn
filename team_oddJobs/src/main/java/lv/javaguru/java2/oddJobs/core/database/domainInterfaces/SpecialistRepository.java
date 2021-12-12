@@ -3,6 +3,7 @@ package lv.javaguru.java2.oddJobs.core.database.domainInterfaces;
 import lv.javaguru.java2.oddJobs.core.domain.Specialist;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SpecialistRepository {
 
@@ -23,4 +24,6 @@ public interface SpecialistRepository {
     List<Specialist> findSpecialistByNameAndSurnameAndProfession(String specialistName, String specialistSurname, String specialistProfession);
 
     List<Specialist> getAllSpecialist();
+
+    Optional<Specialist>getById(Long id);
 }

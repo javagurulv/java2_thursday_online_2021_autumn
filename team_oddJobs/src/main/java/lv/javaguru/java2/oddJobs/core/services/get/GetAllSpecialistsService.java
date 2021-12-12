@@ -1,7 +1,7 @@
 package lv.javaguru.java2.oddJobs.core.services.get;
 
 import lv.javaguru.java2.oddJobs.core.requests.get.GetAllSpecialistRequest;
-import lv.javaguru.java2.oddJobs.core.responce.get.GetAllSpecialistsResponse;
+import lv.javaguru.java2.oddJobs.core.response.get.GetAllSpecialistsResponse;
 import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.SpecialistRepository;
 import lv.javaguru.java2.oddJobs.core.domain.Specialist;
 import org.springframework.beans.factory.annotation.Autowired;

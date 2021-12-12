@@ -1,11 +1,8 @@
 package lv.javaguru.java2.oddJobs.web_ui.controllers;
 
 import lv.javaguru.java2.oddJobs.core.requests.find.FindAdvertisementRequest;
-import lv.javaguru.java2.oddJobs.core.requests.find.FindClientsRequest;
-import lv.javaguru.java2.oddJobs.core.responce.find.FindAdvertisementResponse;
-import lv.javaguru.java2.oddJobs.core.responce.find.FindClientsResponse;
+import lv.javaguru.java2.oddJobs.core.response.find.FindAdvertisementResponse;
 import lv.javaguru.java2.oddJobs.core.services.find.FindAdvertisementsService;
-import lv.javaguru.java2.oddJobs.core.services.find.FindClientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

@@ -1,8 +1,8 @@
 package lv.javaguru.java2.oddJobs.core.services.remove;
 
 import lv.javaguru.java2.oddJobs.core.requests.remove.RemoveSpecialistRequest;
-import lv.javaguru.java2.oddJobs.core.responce.CoreError;
-import lv.javaguru.java2.oddJobs.core.responce.remove.RemoveSpecialistResponse;
+import lv.javaguru.java2.oddJobs.core.response.CoreError;
+import lv.javaguru.java2.oddJobs.core.response.remove.RemoveSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.validations.remove.RemoveSpecialistValidator;
 import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.SpecialistRepository;
 import org.junit.Test;

@@ -2,7 +2,7 @@ package lv.javaguru.java2.oddJobs.console_ui.add;
 
 
 import lv.javaguru.java2.oddJobs.core.requests.add.AddSpecialistRequest;
-import lv.javaguru.java2.oddJobs.core.responce.add.AddSpecialistResponse;
+import lv.javaguru.java2.oddJobs.core.response.add.AddSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.services.add.AddSpecialistService;
 import lv.javaguru.java2.oddJobs.console_ui.UIAction;
 import org.springframework.beans.factory.annotation.Autowired;

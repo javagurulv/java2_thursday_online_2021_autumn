@@ -1,7 +1,7 @@
 package lv.javaguru.java2.oddJobs.core.validations;
 
 import lv.javaguru.java2.oddJobs.core.requests.remove.RemoveSpecialistRequest;
-import lv.javaguru.java2.oddJobs.core.responce.CoreError;
+import lv.javaguru.java2.oddJobs.core.response.CoreError;
 import lv.javaguru.java2.oddJobs.core.validations.remove.RemoveSpecialistValidator;
 import org.junit.Test;
 

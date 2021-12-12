@@ -3,7 +3,7 @@ package lv.javaguru.java2.oddJobs.core.validations.find;
 import lv.javaguru.java2.oddJobs.core.requests.find.FindClientsRequest;
 import lv.javaguru.java2.oddJobs.core.requests.find.Ordering;
 import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
-import lv.javaguru.java2.oddJobs.core.responce.CoreError;
+import lv.javaguru.java2.oddJobs.core.response.CoreError;
 import lv.javaguru.java2.oddJobs.core.validations.ClientOrderingValidator;
 import lv.javaguru.java2.oddJobs.core.validations.PagingValidator;
 import org.springframework.beans.factory.annotation.Autowired;

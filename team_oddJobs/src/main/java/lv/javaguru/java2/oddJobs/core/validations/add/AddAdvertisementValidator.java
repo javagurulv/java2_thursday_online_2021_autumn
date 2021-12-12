@@ -1,6 +1,6 @@
 package lv.javaguru.java2.oddJobs.core.validations.add;
 import lv.javaguru.java2.oddJobs.core.requests.add.AddAdvertisementRequest;
-import lv.javaguru.java2.oddJobs.core.responce.CoreError;
+import lv.javaguru.java2.oddJobs.core.response.CoreError;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

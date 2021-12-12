@@ -2,7 +2,7 @@ package lv.javaguru.java2.oddJobs.console_ui.remove;
 
 
 import lv.javaguru.java2.oddJobs.core.requests.remove.RemoveClientRequest;
-import lv.javaguru.java2.oddJobs.core.responce.remove.RemoveClientResponse;
+import lv.javaguru.java2.oddJobs.core.response.remove.RemoveClientResponse;
 import lv.javaguru.java2.oddJobs.core.services.remove.RemoveClientService;
 import lv.javaguru.java2.oddJobs.console_ui.UIAction;
 import org.springframework.beans.factory.annotation.Autowired;

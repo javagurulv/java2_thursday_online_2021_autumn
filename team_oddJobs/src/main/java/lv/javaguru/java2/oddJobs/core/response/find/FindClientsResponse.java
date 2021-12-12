@@ -1,8 +1,8 @@
-package lv.javaguru.java2.oddJobs.core.responce.find;
+package lv.javaguru.java2.oddJobs.core.response.find;
 
 import lv.javaguru.java2.oddJobs.core.domain.Client;
-import lv.javaguru.java2.oddJobs.core.responce.CoreError;
-import lv.javaguru.java2.oddJobs.core.responce.CoreResponse;
+import lv.javaguru.java2.oddJobs.core.response.CoreError;
+import lv.javaguru.java2.oddJobs.core.response.CoreResponse;
 
 import java.util.List;
 

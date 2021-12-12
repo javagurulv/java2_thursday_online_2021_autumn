@@ -2,8 +2,8 @@ package lv.javaguru.java2.oddJobs.core.services.add;
 
 
 import lv.javaguru.java2.oddJobs.core.requests.add.AddSpecialistRequest;
-import lv.javaguru.java2.oddJobs.core.responce.add.AddSpecialistResponse;
-import lv.javaguru.java2.oddJobs.core.responce.CoreError;
+import lv.javaguru.java2.oddJobs.core.response.add.AddSpecialistResponse;
+import lv.javaguru.java2.oddJobs.core.response.CoreError;
 import lv.javaguru.java2.oddJobs.core.validations.add.AddSpecialistValidator;
 import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.SpecialistRepository;
 import lv.javaguru.java2.oddJobs.core.domain.Specialist;

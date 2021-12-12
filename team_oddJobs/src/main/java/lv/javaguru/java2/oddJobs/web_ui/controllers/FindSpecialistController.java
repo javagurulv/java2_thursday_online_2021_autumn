@@ -1,14 +1,8 @@
 package lv.javaguru.java2.oddJobs.web_ui.controllers;
 
-import lv.javaguru.java2.oddJobs.core.requests.add.AddSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.requests.find.FindSpecialistRequest;
-import lv.javaguru.java2.oddJobs.core.requests.get.GetAllSpecialistRequest;
-import lv.javaguru.java2.oddJobs.core.responce.add.AddSpecialistResponse;
-import lv.javaguru.java2.oddJobs.core.responce.find.FindSpecialistResponse;
-import lv.javaguru.java2.oddJobs.core.responce.get.GetAllSpecialistsResponse;
-import lv.javaguru.java2.oddJobs.core.services.add.AddSpecialistService;
+import lv.javaguru.java2.oddJobs.core.response.find.FindSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.services.find.FindSpecialistService;
-import lv.javaguru.java2.oddJobs.core.services.get.GetAllSpecialistsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

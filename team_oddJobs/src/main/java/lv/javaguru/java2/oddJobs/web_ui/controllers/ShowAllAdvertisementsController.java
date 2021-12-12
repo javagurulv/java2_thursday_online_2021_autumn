@@ -1,7 +1,7 @@
 package lv.javaguru.java2.oddJobs.web_ui.controllers;
 
 import lv.javaguru.java2.oddJobs.core.requests.get.GetAllAdvertisementRequest;
-import lv.javaguru.java2.oddJobs.core.responce.get.GetAllAdvertisementsResponse;
+import lv.javaguru.java2.oddJobs.core.response.get.GetAllAdvertisementsResponse;
 import lv.javaguru.java2.oddJobs.core.services.get.GetAllAdvertisementsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

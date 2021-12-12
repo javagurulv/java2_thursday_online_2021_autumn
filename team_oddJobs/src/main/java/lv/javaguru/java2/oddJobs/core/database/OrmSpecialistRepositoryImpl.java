@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Transactional
@@ -89,5 +90,15 @@ public class OrmSpecialistRepositoryImpl implements SpecialistRepository {
                     .createQuery("SELECT b FROM  Specialist b ", Specialist.class)
                     .getResultList();
         }
+
+    @Override
+    public Optional<Specialist> getById(Long id) {
+        Specialist specialist = sessionFactory.getCurrentSession().get(Specialist.class,id);
+        if (specialist == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(specialist);
+        }
     }
+}
 

@@ -5,7 +5,7 @@ import lv.javaguru.java2.oddJobs.core.requests.add.AddSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.requests.find.FindSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.requests.find.Ordering;
 import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
-import lv.javaguru.java2.oddJobs.core.responce.find.FindSpecialistResponse;
+import lv.javaguru.java2.oddJobs.core.response.find.FindSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.services.add.AddSpecialistService;
 import lv.javaguru.java2.oddJobs.core.services.find.FindSpecialistService;
 import lv.javaguru.java2.oddJobs.core.services.get.GetAllSpecialistsService;

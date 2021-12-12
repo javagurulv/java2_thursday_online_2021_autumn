@@ -2,9 +2,7 @@ package lv.javaguru.java2.oddJobs.web_ui.controllers;
 
 
 import lv.javaguru.java2.oddJobs.core.requests.find.FindClientsRequest;
-import lv.javaguru.java2.oddJobs.core.requests.find.FindSpecialistRequest;
-import lv.javaguru.java2.oddJobs.core.responce.find.FindClientsResponse;
-import lv.javaguru.java2.oddJobs.core.responce.find.FindSpecialistResponse;
+import lv.javaguru.java2.oddJobs.core.response.find.FindClientsResponse;
 import lv.javaguru.java2.oddJobs.core.services.find.FindClientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

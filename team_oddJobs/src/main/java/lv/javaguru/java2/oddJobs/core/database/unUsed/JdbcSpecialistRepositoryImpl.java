@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
+import java.util.Optional;
 
 //@Component
 public class JdbcSpecialistRepositoryImpl implements SpecialistRepository {
@@ -77,5 +78,10 @@ public class JdbcSpecialistRepositoryImpl implements SpecialistRepository {
     public List<Specialist> getAllSpecialist() {
         String sql = "SELECT * FROM specialists";
         return jdbcTemplate.query(sql, new SpecialistRowMapper());
+    }
+
+    @Override
+    public Optional<Specialist> getById(Long id) {
+        return Optional.empty();
     }
 }

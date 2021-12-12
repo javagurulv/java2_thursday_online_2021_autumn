@@ -1,9 +1,7 @@
 package lv.javaguru.java2.oddJobs.web_ui.controllers;
 
 import lv.javaguru.java2.oddJobs.core.requests.remove.RemoveClientRequest;
-import lv.javaguru.java2.oddJobs.core.requests.remove.RemoveSpecialistRequest;
-import lv.javaguru.java2.oddJobs.core.responce.remove.RemoveClientResponse;
-import lv.javaguru.java2.oddJobs.core.responce.remove.RemoveSpecialistResponse;
+import lv.javaguru.java2.oddJobs.core.response.remove.RemoveClientResponse;
 import lv.javaguru.java2.oddJobs.core.services.remove.RemoveClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

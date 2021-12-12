@@ -2,8 +2,8 @@ package lv.javaguru.java2.oddJobs.core.services.find;
 
 
 import lv.javaguru.java2.oddJobs.core.requests.find.FindClientsRequest;
-import lv.javaguru.java2.oddJobs.core.responce.CoreError;
-import lv.javaguru.java2.oddJobs.core.responce.find.FindClientsResponse;
+import lv.javaguru.java2.oddJobs.core.response.CoreError;
+import lv.javaguru.java2.oddJobs.core.response.find.FindClientsResponse;
 import lv.javaguru.java2.oddJobs.core.validations.find.FindClientsValidator;
 import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.ClientRepository;
 import lv.javaguru.java2.oddJobs.core.domain.Client;

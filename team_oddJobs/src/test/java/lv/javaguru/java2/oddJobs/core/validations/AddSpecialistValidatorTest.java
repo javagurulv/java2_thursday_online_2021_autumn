@@ -3,12 +3,12 @@ package lv.javaguru.java2.oddJobs.core.validations;
 import static org.junit.Assert.*;
 
 import lv.javaguru.java2.oddJobs.core.requests.add.AddSpecialistRequest;
-import lv.javaguru.java2.oddJobs.core.responce.CoreError;
+import lv.javaguru.java2.oddJobs.core.response.CoreError;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import lv.javaguru.java2.oddJobs.core.responce.add.AddSpecialistResponse;
+import lv.javaguru.java2.oddJobs.core.response.add.AddSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.services.add.AddSpecialistService;
 import lv.javaguru.java2.oddJobs.core.validations.add.AddSpecialistValidator;
 import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.SpecialistRepository;

@@ -2,10 +2,16 @@ package lv.javaguru.java2.oddJobs.core.database.unUsed;
 
 import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.SpecialistRepository;
 import lv.javaguru.java2.oddJobs.core.domain.Specialist;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 public class InMemorySpecialistRepositoryImpl implements SpecialistRepository {
+    @Autowired
+    private SessionFactory sessionFactory;
+
     @Override
     public void addSpecialist(Specialist specialist) {
 
@@ -50,4 +56,11 @@ public class InMemorySpecialistRepositoryImpl implements SpecialistRepository {
     public List<Specialist> getAllSpecialist() {
         return null;
     }
+
+    @Override
+    public Optional<Specialist> getById(Long id) {
+        return Optional.empty();
+    }
+
+
 }

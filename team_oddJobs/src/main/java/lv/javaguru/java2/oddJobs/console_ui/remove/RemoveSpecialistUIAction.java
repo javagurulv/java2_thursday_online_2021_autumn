@@ -3,7 +3,7 @@ package lv.javaguru.java2.oddJobs.console_ui.remove;
 
 import lv.javaguru.java2.oddJobs.console_ui.UIAction;
 import lv.javaguru.java2.oddJobs.core.requests.remove.RemoveSpecialistRequest;
-import lv.javaguru.java2.oddJobs.core.responce.remove.RemoveSpecialistResponse;
+import lv.javaguru.java2.oddJobs.core.response.remove.RemoveSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.services.remove.RemoveSpecialistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

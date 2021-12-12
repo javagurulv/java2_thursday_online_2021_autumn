@@ -1,7 +1,7 @@
 package lv.javaguru.java2.oddJobs.core.validations;
 
 import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
-import lv.javaguru.java2.oddJobs.core.responce.CoreError;
+import lv.javaguru.java2.oddJobs.core.response.CoreError;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
