@@ -1,6 +1,7 @@
 package lv.javaguru.java2.qwe;
 
 import lv.javaguru.java2.qwe.core.domain.Stock;
+import lv.javaguru.java2.qwe.core.domain.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,6 +24,11 @@ public class RestRequestsDemo {
 
         //Удалить акцию Alibaba
         restTemplate.delete(url, "BABA");
+
+        //найти пользователя (сложный класс, bidirectional relation)
+        String url2 = "http://localhost:8080/user/{name}";
+        User user = restTemplate.getForObject(url2, User.class, "Alexander");
+        System.out.println(user);
     }
 
 }
