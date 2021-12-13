@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="QWE finance project">
+    <meta name="author" content="Alex K">
+    <title>QWE Trading Application</title>
+</head>
+<style type="text/css">
+        body {
+              background-color: #8E8F92;
+              margin-left: 30%;
+              margin-right: 30%;
+              text-align: center;
+              padding: 20px 20px 20px 20px;
+              font-family: sans-serif;
+        }
+        table {
+               margin-left: auto;
+               margin-right: auto;
+        }
+</style>
+<body>
+
+<fieldset>
+    <legend style="padding-bottom: 5px;">REMOVE STOCK</legend>
+    <table>
+        <form action="/database/removeSecurity" th:object="${request}" method="post">
+            <tr>
+                <td style="text-align: left;">Enter ticker:</td>
+                <td><input type="text" th:field="${request.ticker}"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Remove security" name="Submit"/>
+                    <input type="reset" value="Clear"/></td>
+            </tr>
+        </form>
+    </table>
+    <br>
+    <td th:if="${isRemoved == false}">
+    <td th:text="${isRemoved}"></td>
+    <br>
+</fieldset>
+<br>
+
+<form action="/dataMenu" method="get">
+    <input type="submit" style="float: right;" value="Back" name="Submit"/>
+</form>
+
+</body>
+</html>

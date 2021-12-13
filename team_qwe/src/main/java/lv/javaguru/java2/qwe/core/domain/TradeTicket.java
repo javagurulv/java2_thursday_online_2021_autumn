@@ -16,12 +16,12 @@ public class TradeTicket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(/*fetch = FetchType.LAZY*/)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private User user;
 
-    @ManyToOne(/*fetch = FetchType.LAZY*/)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "security_ticker", nullable = false)
     private Security security;
 

@@ -28,7 +28,7 @@ public class AddStockController {
             modelMap.addAttribute("errors", response.getErrors());
             return "database/addStock";
         } else {
-            return "redirect:/";
+            return "/dataMenu";
         }
     }
 

@@ -21,7 +21,7 @@ public class ApplicationDemo {
 
     public static void main(String[] args) {
 
-        //Изменение цен акций в режиме реального времени!
+/*        //Изменение цен акций в режиме реального времени!
         getAPI().setRealMarketPriceUpdate();
         //Симуляция изменения рыночных цен!
         getUtilityMethods().setMarketPriceSimulator(applicationContext);
@@ -33,7 +33,7 @@ public class ApplicationDemo {
         while (true) {
             String type = getUtilityMethods().inputDialog("Choose operation:", "MAIN MENU", menu);
             appMenu.executeSelectedMainMenuOption(type);
-        }
+        }*/
 
     }
 

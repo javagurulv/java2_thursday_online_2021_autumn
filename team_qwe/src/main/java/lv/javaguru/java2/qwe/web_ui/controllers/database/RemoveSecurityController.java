@@ -15,21 +15,21 @@ public class RemoveSecurityController {
 
     @Autowired private RemoveSecurityService service;
 
-    @GetMapping(value = "/removeSecurity")
+    @GetMapping(value = "/database/removeSecurity")
     public String showRemoveSecurityPage(ModelMap modelMap) {
         modelMap.addAttribute("request", new RemoveSecurityRequest());
-        return "removeSecurity";
+        return "database/removeSecurity";
     }
 
-    @PostMapping("/removeSecurity")
+    @PostMapping("/database/removeSecurity")
     public String processRemoveSecurityRequest(@ModelAttribute(value = "request") RemoveSecurityRequest request, ModelMap modelMap) {
         System.out.println(request.getTicker());
         RemoveSecurityResponse response = service.execute(request);
         if (!response.isRemoved()) {
             modelMap.addAttribute("isRemoved", "No security with such ticker!");
-            return "removeSecurity";
+            return "database/removeSecurity";
         } else {
-            return "redirect:/";
+            return "/dataMenu";
         }
     }
 
