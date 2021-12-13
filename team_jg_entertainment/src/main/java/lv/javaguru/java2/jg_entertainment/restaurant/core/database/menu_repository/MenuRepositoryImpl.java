@@ -1,6 +1,5 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database.menu_repository;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.menu_repository.MenuRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
 
 import java.util.ArrayList;
@@ -19,6 +18,11 @@ public class MenuRepositoryImpl implements MenuRepository {
         menu.setNumber(nextNr);
         nextNr++;
         menus.add(menu);
+    }
+
+    @Override
+    public Optional<Menu> getById(Long menuId) {
+        return Optional.empty();
     }
 
     @Override

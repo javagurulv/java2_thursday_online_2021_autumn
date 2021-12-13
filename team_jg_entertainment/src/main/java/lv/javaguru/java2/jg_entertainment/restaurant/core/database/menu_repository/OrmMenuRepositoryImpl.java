@@ -1,6 +1,5 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database.menu_repository;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.menu_repository.MenuRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Transactional
@@ -19,6 +19,16 @@ public class OrmMenuRepositoryImpl implements MenuRepository {
     @Override
     public void save(Menu menu) {
         sessionFactory.getCurrentSession().save(menu);
+    }
+
+    @Override
+    public Optional<Menu> getById(Long menuId) {
+        Menu menu = sessionFactory.getCurrentSession().get(Menu.class, menuId);
+        if(menu == null) {
+            return Optional.empty();
+        }else {
+            return Optional.of(menu);
+        }
     }
 
     @Override

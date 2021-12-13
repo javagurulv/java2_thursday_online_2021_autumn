@@ -35,7 +35,7 @@ public class UserRestController {
     @PutMapping(path = "/{userId}",
             consumes = "application/json",
             produces = "application/json")
-    public UpdateUserResponse updateUser(@RequestBody UpdateUserRequest request){
+    public UpdateUserResponse updateUser(@RequestBody UpdateUserRequest request) {
         return updateUserService.execute(request);
     }
 
@@ -47,8 +47,8 @@ public class UserRestController {
     }
 
     @GetMapping(path = "/",
-            produces = "application/json")
-    public ShowAllUsersResponse showAllUsers(){
+            produces = "application/json")//showAllUsers
+    public ShowAllUsersResponse showAllUsers() {
         ShowAllUsersRequest request = new ShowAllUsersRequest();
         return showListUsersService.execute(request);
     }

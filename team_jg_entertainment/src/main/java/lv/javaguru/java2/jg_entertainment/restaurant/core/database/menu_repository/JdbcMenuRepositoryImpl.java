@@ -3,9 +3,9 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.database.menu_reposit
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 //@Component
 public class JdbcMenuRepositoryImpl implements MenuRepository {
@@ -22,6 +22,11 @@ public class JdbcMenuRepositoryImpl implements MenuRepository {
         Object[] args = new Object[]{menu.getTitle(), menu.getDescription(), menu.getPrice()};
         Long renewedIdCodeMenu = jdbcTemplate.queryForObject(sql, args, Long.class);
         menu.setNumber(renewedIdCodeMenu);
+    }
+
+    @Override
+    public Optional<Menu> getById(Long menuId) {
+        return Optional.empty();
     }
 
     @Override

@@ -3,11 +3,14 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.database.menu_reposit
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Menu;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface MenuRepository {
 
     void save(Menu menu);
+
+    Optional<Menu> getById(Long menuId);
 
     boolean deleteByNr(Long number);
 

@@ -11,13 +11,14 @@ import java.util.Optional;
 @Component
 public class UpdateUserRequestValidator {
 
-    public List<CoreError> validate(UpdateUserRequest request){
+    public List<CoreError> validate(UpdateUserRequest request) {
         List<CoreError> errors = new ArrayList<>();
         validateName(request).ifPresent(errors::add);
         validateSurname(request).ifPresent(errors::add);
         validateTelephone(request).ifPresent(errors::add);
         return errors;
     }
+
     private Optional<CoreError> validateName(UpdateUserRequest request) {
         return request.getNewUserName() == null || request.getNewUserName().isEmpty()
                 ? Optional.of(new CoreError("newUserName", "must not be empty!"))
