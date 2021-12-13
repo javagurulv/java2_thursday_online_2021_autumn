@@ -20,19 +20,19 @@ public class UpdateUserRequestValidator {
     }
     private Optional<CoreError> validateName(UpdateUserRequest request) {
         return request.getNewUserName() == null || request.getNewUserName().isEmpty()
-                ? Optional.of(new CoreError("newName", "must not be empty!"))
+                ? Optional.of(new CoreError("newUserName", "must not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateSurname(UpdateUserRequest request) {
-        return request.getNewSurname() == null || request.getNewSurname().isEmpty()
+        return (request.getNewSurname() == null || request.getNewSurname().isEmpty())
                 ? Optional.of(new CoreError("newSurname", "must not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<CoreError> validateTelephone(UpdateUserRequest request) {
         return request.getNewTelephoneNumber() == null || request.getNewTelephoneNumber().isEmpty()
-                ? Optional.of(new CoreError("newTelephone", "must not be empty!"))
+                ? Optional.of(new CoreError("newTelephoneNumber", "must not be empty!"))
                 : Optional.empty();
     }
 }

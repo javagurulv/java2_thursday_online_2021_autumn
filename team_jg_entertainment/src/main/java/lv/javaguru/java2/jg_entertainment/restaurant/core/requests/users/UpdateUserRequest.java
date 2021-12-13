@@ -25,4 +25,20 @@ public class UpdateUserRequest {
     public String getNewTelephoneNumber() {
         return newTelephoneNumber;
     }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public void setNewUserName(String newUserName) {
+        this.newUserName = newUserName;
+    }
+
+    public void setNewSurname(String newSurname) {
+        this.newSurname = newSurname;
+    }
+
+    public void setNewTelephoneNumber(String newTelephoneNumber) {
+        this.newTelephoneNumber = newTelephoneNumber;
+    }
 }
