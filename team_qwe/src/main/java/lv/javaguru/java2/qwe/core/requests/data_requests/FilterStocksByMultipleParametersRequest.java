@@ -4,7 +4,9 @@ import java.util.List;
 
 public class FilterStocksByMultipleParametersRequest extends CoreRequest {
 
-    private final List<CoreRequest> requestList;
+    private List<CoreRequest> requestList;
+
+    public FilterStocksByMultipleParametersRequest() {}
 
     public FilterStocksByMultipleParametersRequest(List<CoreRequest> requestList) throws NumberFormatException {
         this.requestList = requestList;
@@ -12,6 +14,10 @@ public class FilterStocksByMultipleParametersRequest extends CoreRequest {
 
     public List<CoreRequest> getRequestList() {
         return requestList;
+    }
+
+    public void setRequestList(List<CoreRequest> requestList) {
+        this.requestList = requestList;
     }
 
 }
