@@ -16,12 +16,12 @@ public class TradeTicket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(/*fetch = FetchType.LAZY*/)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(/*fetch = FetchType.LAZY*/)
     @JoinColumn(name = "security_ticker", nullable = false)
     private Security security;
 
@@ -80,7 +80,8 @@ public class TradeTicket {
     @Override
     public String toString() {
         return "TradeTicket{" +
-                "user=" + user.getName() + "(ID: " + user.getId() + ")" +
+                "user=" + user +
+//                "user=" + user.getName() + "(ID: " + user.getId() + ")" +
                 ", security=" + security.getTicker() +
                 ", tradeType=" + tradeType +
                 ", quantity=" + quantity +

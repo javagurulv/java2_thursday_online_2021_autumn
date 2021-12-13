@@ -1,8 +1,10 @@
 package lv.javaguru.java2.qwe;
 
 import lv.javaguru.java2.qwe.core.domain.Stock;
+import lv.javaguru.java2.qwe.core.domain.TradeTicket;
 import lv.javaguru.java2.qwe.core.domain.User;
 import lv.javaguru.java2.qwe.core.requests.data_requests.*;
+import lv.javaguru.java2.qwe.core.requests.user_requests.StockMarketOrderRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -49,6 +51,14 @@ public class RestRequestsDemo {
         List<?> portfolio = restTemplate.getForObject(url3, List.class, "Alexander");
         portfolio.forEach(System.out::println);
 
+        //Совершить сделки для пользователя
+        String url5 = "http://localhost:8080/user/order/";
+        StockMarketOrderRequest order1 = new StockMarketOrderRequest(user, stock, "1", 100.);
+        TradeTicket ticket1 = restTemplate.postForObject(url5, order1, TradeTicket.class);
+        System.out.println(ticket1);
+        StockMarketOrderRequest order2 = new StockMarketOrderRequest(user, stock, "-1", 100.);
+        TradeTicket ticket2 = restTemplate.postForObject(url5, order2, TradeTicket.class);
+        System.out.println(ticket2);
     }
 
 }
