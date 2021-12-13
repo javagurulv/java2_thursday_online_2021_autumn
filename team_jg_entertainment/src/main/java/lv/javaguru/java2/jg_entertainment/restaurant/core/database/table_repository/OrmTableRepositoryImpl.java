@@ -1,6 +1,5 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_repository;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_repository.TableRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Transactional
@@ -19,6 +19,16 @@ public class OrmTableRepositoryImpl implements TableRepository {
     @Override
     public void save(Table table) {
         sessionFactory.getCurrentSession().save(table);
+    }
+
+    @Override
+    public Optional<Table> getById(Long idTable) {
+        Table table = sessionFactory.getCurrentSession().get(Table.class, idTable);
+        if(table == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(table);
+        }
     }
 
     @Override

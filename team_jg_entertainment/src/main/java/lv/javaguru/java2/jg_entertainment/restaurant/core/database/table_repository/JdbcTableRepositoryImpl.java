@@ -3,9 +3,9 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_reposi
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 //@Component
 public class JdbcTableRepositoryImpl implements TableRepository {
@@ -23,6 +23,11 @@ public class JdbcTableRepositoryImpl implements TableRepository {
         Object[] args = new Object[] {table.getTitle(), table.getTableCapacity(), table.getPrice()};
         Long renewedIdCodeTable = jdbcTemplate.queryForObject(sql, args, Long.class);
         table.setId(renewedIdCodeTable);
+    }
+
+    @Override
+    public Optional<Table> getById(Long idTable) {
+        return Optional.empty();
     }
 
     @Override

@@ -1,6 +1,5 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_repository;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_repository.TableRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Table;
 
 import java.util.ArrayList;
@@ -19,6 +18,11 @@ public class TableRepositoryImpl implements TableRepository {
         table.setId(nextId);
         nextId++;
         tables.add(table);
+    }
+
+    @Override
+    public Optional<Table> getById(Long idTable) {
+        return Optional.empty();
     }
 
     @Override

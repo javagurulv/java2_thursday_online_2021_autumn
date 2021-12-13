@@ -51,6 +51,10 @@ public class SearchTableRequest {
     public SearchTableRequest() {
     }
 
+    public SearchTableRequest(String titleTable) {
+        this.titleTable = titleTable;
+    }
+
     public String getTitleTable() {
         return titleTable;
     }

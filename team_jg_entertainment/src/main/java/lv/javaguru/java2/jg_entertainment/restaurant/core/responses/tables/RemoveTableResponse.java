@@ -4,6 +4,7 @@ import java.util.List;
 
 public class RemoveTableResponse extends CoreResponse{
 
+	private Long id;
 	private boolean tableRemoved;
 
 	public RemoveTableResponse(List<CoreError> errorsList) {
@@ -14,7 +15,15 @@ public class RemoveTableResponse extends CoreResponse{
 		this.tableRemoved = tableRemoved;
 	}
 
+	public RemoveTableResponse(Long id) {
+		this.id = id;
+	}
+
 	public boolean isTableRemoved() {
 		return tableRemoved;
+	}
+
+	public Long getId() {
+		return id;
 	}
 }
