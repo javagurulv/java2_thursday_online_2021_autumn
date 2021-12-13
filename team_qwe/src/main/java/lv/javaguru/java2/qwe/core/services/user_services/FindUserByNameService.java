@@ -32,7 +32,6 @@ public class FindUserByNameService {
         Optional<User> result = userData.findUserByIdOrName(request.getUserName());
 
         if (result.isPresent()) {
-            String userJson;
             try {
                 ObjectMapper o = new ObjectMapper();
                 o.registerModule(new JavaTimeModule());

@@ -24,6 +24,11 @@ public class UsersRepositoryImpl implements UsersRepository {
     }
 
     @Override
+    public Optional<User> getById(Long userId) {
+        return Optional.empty();
+    }
+
+    @Override
     public List<User> findUsersByNameAndTelephoneNumber(String userName, String telephoneNumber) {
         return userInRestaurant.stream()
                 .filter(users -> users.getUserName().equals(userName))
@@ -72,6 +77,11 @@ public class UsersRepositoryImpl implements UsersRepository {
             visitorDeleteFromRestaurantList = userInRestaurant.remove(user);
         }
         return visitorDeleteFromRestaurantList;
+    }
+
+    @Override
+    public boolean deleteUserWithID(Long id) {
+        return false;
     }
 
     @Override

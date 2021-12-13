@@ -17,7 +17,7 @@ class AddUserValidatorTest {
         AddUserRequest request = new AddUserRequest("", "Plotnikova", "325");
         List<CoreError> coreErrorList = visitorValidator.coreErrors(request);
         assertEquals(coreErrorList.size(), 1);
-        assertEquals(coreErrorList.get(0).getField(), "name users");
+        assertEquals(coreErrorList.get(0).getField(), "name");
         assertEquals(coreErrorList.get(0).getMessageError(), "Shouldn't be empty");
     }
 

@@ -1,8 +1,6 @@
 package lv.javaguru.java2.hospital.web_ui.controller.patient_controllers;
 
-import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.requests.DeletePatientRequest;
-import lv.javaguru.java2.hospital.patient.core.responses.AddPatientResponse;
 import lv.javaguru.java2.hospital.patient.core.responses.DeletePatientResponse;
 import lv.javaguru.java2.hospital.patient.core.services.DeletePatientService;
 import org.springframework.beans.factory.annotation.Autowired;

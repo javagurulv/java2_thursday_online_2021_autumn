@@ -20,7 +20,7 @@ public class AddUserValidator {
 
     private Optional<CoreError> validatorName(AddUserRequest requestUser) {
         return (requestUser.getName() == null || requestUser.getName().isEmpty())
-                ? Optional.of(new CoreError("name users", "Shouldn't be empty"))
+                ? Optional.of(new CoreError("name", "Shouldn't be empty"))
                 : Optional.empty();
     }
 
