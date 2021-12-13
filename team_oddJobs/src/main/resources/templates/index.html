@@ -14,25 +14,53 @@ body {
 	margin:2px;
 	background-size: 100%
 }
+button {
+    height: 42px;
+	border: none;
+	background: #3a7999;
+	color: #f2f2f2;
+	padding: 10px;
+	font-size: 18px;
+	border-radius: 5px;
+	position: relative;
+	box-sizing: border-box;
+	transition: all 500ms ease;
+	margin:2px;
 
+}
+
+button:before {
+	content:'';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 42px;
+	background: rgba(255,255,255,0.3);
+	border-radius: 5px;
+	transition: all 2s ease;
+}
+button:hover:before {
+	width: 100%;
+}
 
 </style>
 <body>
 
 <h3>Program menu</h3>
 
-<a href="/addClient">Add Client</a> <br>
-<a href="/addSpecialist">Add Specialist</a> <br>
-<a href="/addAdvertisement">Add Advertisement</a> <br>
-<a href="/findClient">Find Client</a> <br>
-<a href="/findSpecialist">Find Specialist</a> <br>
-<a href="/findAdvertisement">Find Advertisement</a> <br>
-<a href="/showAllClients">Show all clients in the list</a> <br>
-<a href="/showAllSpecialists">Show all specialists in the list</a> <br>
-<a href="/showAllAdvertisements">Show all advertisements in the list</a> <br>
-<a href="/removeClient">Remove Client</a> <br>
-<a href="/removeSpecialist">Remove Specialist</a> <br>
-<a href="/removeAdvertisement">Remove Advertisement</a> <br>
+<a href="/addClient"><button class="button">Add Client</button></a> <br>
+<a href="/addSpecialist"><button class="button">Add Specialist</button></a> <br>
+<a href="/addAdvertisement"><button class="button">Add Advertisement</button></a> <br>
+<a href="/findClient"><button class="button">Find Client</button></a> <br>
+<a href="/findSpecialist"><button class="button">Find Specialist</button></a> <br>
+<a href="/findAdvertisement"><button class="button">Find Advertisement</button></a> <br>
+<a href="/showAllClients"><button class="button">Show all clients in the list</button></a> <br>
+<a href="/showAllSpecialists"><button class="button">Show all specialists in the list</button></a> <br>
+<a href="/showAllAdvertisements"><button class="button">Show all advertisements in the list</button></a> <br>
+<a href="/removeClient"><button class="button">Remove Client</button></a> <br>
+<a href="/removeSpecialist"><button class="button">Remove Specialist</button></a> <br>
+<a href="/removeAdvertisement"><button class="button">Remove Advertisement</button></a> <br>
 
 
 
