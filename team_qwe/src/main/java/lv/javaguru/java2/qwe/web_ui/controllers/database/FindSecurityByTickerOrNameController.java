@@ -15,26 +15,26 @@ public class FindSecurityByTickerOrNameController {
 
     @Autowired private FindSecurityByTickerOrNameService service;
 
-    @GetMapping(value = "/findSecurityByTickerOrName")
+    @GetMapping(value = "/database/findSecurityByTickerOrName")
     public String showFindSecurityPage(ModelMap modelMap) {
         modelMap.addAttribute("request", new FindSecurityByTickerOrNameRequest());
-        return "findSecurityByTickerOrName";
+        return "database/findSecurityByTickerOrName";
     }
 
-    @PostMapping("/findSecurityByTickerOrName")
+    @PostMapping("/database/findSecurityByTickerOrName")
     public String processFindSecurityRequest(
             @ModelAttribute(value = "request") FindSecurityByTickerOrNameRequest request, ModelMap modelMap
     ) {
         FindSecurityByTickerOrNameResponse response = service.execute(request);
         if (!response.hasErrors() && response.getSecurity() != null) {
             modelMap.addAttribute("security", response.getSecurity());
-            return "findSecurityByTickerOrName";
+            return "database/findSecurityByTickerOrName";
         } else if (response.hasErrors()) {
             modelMap.addAttribute("errors", response.getErrors());
-            return "findSecurityByTickerOrName";
+            return "database/findSecurityByTickerOrName";
         } else {
             modelMap.addAttribute("noResult", "There is no security with such name!");
-            return "findSecurityByTickerOrName";
+            return "database/findSecurityByTickerOrName";
         }
     }
 

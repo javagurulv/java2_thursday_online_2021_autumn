@@ -13,13 +13,13 @@ public class GetAllSecurityListController {
 
     @Autowired private GetAllSecurityListService service;
 
-    @GetMapping(value = "/getAllSecurityList")
+    @GetMapping(value = "/database/getAllSecurityList")
     public String showAllSecurityList(ModelMap modelMap) {
         GetAllSecurityListResponse response = service.execute(
                 new GetAllSecurityListRequest()
         );
         modelMap.addAttribute("securities", response.getList());
-        return "/getAllSecurityList";
+        return "/database/getAllSecurityList";
     }
 
 }

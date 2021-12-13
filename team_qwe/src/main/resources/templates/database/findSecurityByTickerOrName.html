@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="QWE finance project">
+    <meta name="author" content="Alex K">
+    <title>QWE Trading Application</title>
+</head>
+<style type="text/css">
+        body {
+              background-color: #8E8F92;
+              margin-left: 30%;
+              margin-right: 30%;
+              text-align: center;
+              padding: 20px 20px 20px 20px;
+              font-family: sans-serif;
+        }
+        table.table2 {
+               border-collapse: collapse;
+               width: 100%;
+        }
+        table.table2 td {
+                padding: 0.25rem;
+                border: 1px solid #ccc;
+        }
+        caption {
+                font-size: 150%;
+                font-style: italic;
+                padding-bottom: 12px;
+        }
+        .center {
+                text-align: center;
+        }
+        .right {
+                text-align: right;
+        }
+</style>
+<body>
+
+<fieldset>
+    <legend style="padding-bottom: 5px;">FIND STOCK</legend>
+    <table style="margin-left: auto; margin-right: auto;">
+        <form action="/database/findSecurityByTickerOrName" th:object="${request}" method="post">
+            <tr>
+                <td>Enter ticker or name:</td>
+                <td><input type="text" th:field="${request.name}"/></td>
+                <td><input type="submit" value="Find" name="Submit"/></td>
+            </tr>
+        </form>
+    </table>
+    <br>
+
+    <td th:if="${security != null}">
+        <table class="table2">
+            <tr>
+                <td class="center">TICKER</td>
+                <td class="center">NAME</td>
+                <td class="center">INDUSTRY</td>
+                <td class="center">CURRENCY</td>
+                <td class="center">MARKET PRICE</td>
+                <td class="center">DIVIDENDS</td>
+                <td class="center">RISK WEIGHT</td>
+            </tr>
+
+            <td th:if="${security != null}">
+                <tr th:each="security : ${security}">
+                    <td style="" th:text="${security.ticker}"></td>
+                    <td th:text="${security.name}"></td>
+                    <td th:text="${security.industry}"></td>
+                    <td class="center" th:text="${security.currency}"></td>
+                    <td class="right" th:text="${security.marketPrice}"></td>
+                    <td class="right" th:text="${security.dividends}"></td>
+                    <td class="right" th:text="${security.riskWeight}"></td>
+                </tr>
+            </td>
+
+        </table>
+    </td>
+
+    <td th:if="${errors != null}">
+        <tr th:each="error : ${errors}">
+            <td th:text="${error.field}"></td>
+            <td th:text="${error.message}"></td>
+        </tr>
+    </td>
+
+    <td th:if="${noResult != null}">
+    <td th:text="${noResult}"></td>
+
+</fieldset>
+<br>
+
+<form action="/dataMenu" method="get">
+    <input type="submit" style="float: right;" value="Back" name="Submit"/>
+</form>
+
+</body>
+</html>
