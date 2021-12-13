@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
+import java.util.Optional;
 
 //@Component
 public class JdbcUsersRepositoryImpl implements UsersRepository {
@@ -24,6 +25,11 @@ public class JdbcUsersRepositoryImpl implements UsersRepository {
         Object[] args = new Object[]{userInfo.getUserName(), userInfo.getSurname(), userInfo.getTelephoneNumber()};
         Long renewedIdCodeUser = jdbcTemplate.queryForObject(sql, args, Long.class);
         userInfo.setUserId(renewedIdCodeUser);
+    }
+
+    @Override
+    public Optional<User> getById(Long userId) {
+        return Optional.empty();
     }
 
     @Override
@@ -66,6 +72,11 @@ public class JdbcUsersRepositoryImpl implements UsersRepository {
         String sql = "DELETE FROM users WHERE visitor_id = ? AND visitor_name = ? ";
         Object[] args = new Object[]{id, userName};
         return jdbcTemplate.update(sql, args) == 1;
+    }
+
+    @Override
+    public boolean deleteUserWithID(Long id) {
+        return false;
     }
 
     @Override

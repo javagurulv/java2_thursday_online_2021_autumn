@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Transactional
@@ -18,6 +19,16 @@ public class OrmUserRepositoryImpl implements UsersRepository {
     @Override
     public void saveUserToRestaurantList(User clientInfo) {
         sessionFactory.getCurrentSession().save(clientInfo);
+    }
+
+    @Override
+    public Optional<User> getById(Long userId) {
+        User user = sessionFactory.getCurrentSession().get(User.class, userId);
+        if(user == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(user);
+        }
     }
 
     @Override
@@ -68,6 +79,15 @@ public class OrmUserRepositoryImpl implements UsersRepository {
                 .createQuery("DELETE User WHERE visitor_id = :visitor_id AND visitor_name = :visitor_name");
         query.setParameter("visitor_id", id);
         query.setParameter("visitor_name", userName);
+        int result = query.executeUpdate();
+        return result == 1;
+    }
+
+    @Override//new path
+    public boolean deleteUserWithID(Long id) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "delete User WHERE visitor_id = :visitor_id");
+        query.setParameter("visitor_id", id);
         int result = query.executeUpdate();
         return result == 1;
     }
