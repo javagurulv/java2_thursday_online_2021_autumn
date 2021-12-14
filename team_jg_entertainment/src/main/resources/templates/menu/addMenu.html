@@ -11,6 +11,10 @@
 <style>
      body {
         background-color: linen;
+        background-image: url('https://mirpps.ru/assets/media/fon-dlja-prezentacii/2018/blue-flowers-bg.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
 }
      h2 {
         color: MediumVioletRed;
@@ -26,7 +30,7 @@
     <tr>
         <td>Title of the menu:</td>
         <td>Description:</td>
-        <td>Price for menu per table:</td>
+        <td>Price per table:</td>
     </tr>
 
     <tr>
@@ -35,8 +39,8 @@
             <td><input type="text" th:field="${request.Description}"/></td>
             <td><input type="text" th:field="${request.Price}"/></td>
             <td>
-                <input type="submit" value="Add Menu" style="color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
-                <input type="reset" value="Clear" style="color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
+                <input type="submit" value="Add Menu" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
+                <input type="reset" value="Clear" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
             </td>
         </form>
     </tr>
