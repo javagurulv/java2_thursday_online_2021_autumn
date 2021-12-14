@@ -7,7 +7,7 @@ import lv.javaguru.java2.oddJobs.core.requests.find.FindAdvertisementRequest;
 import lv.javaguru.java2.oddJobs.core.requests.find.Ordering;
 import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
 import lv.javaguru.java2.oddJobs.core.response.find.FindAdvertisementResponse;
-import lv.javaguru.java2.oddJobs.core.services.find.FindAdvertisementsService;
+import lv.javaguru.java2.oddJobs.core.services.find.FindAdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class FindAdvertisementUIAction implements UIAction {
 
     @Autowired
-    private FindAdvertisementsService findAdvertisementsService;
+    private FindAdvertisementService findAdvertisementsService;
 
     @Autowired
     private ExitMenuUIAction exitMenuUIAction;

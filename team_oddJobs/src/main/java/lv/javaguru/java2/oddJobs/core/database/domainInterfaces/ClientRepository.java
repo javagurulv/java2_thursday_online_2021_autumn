@@ -1,8 +1,10 @@
 package lv.javaguru.java2.oddJobs.core.database.domainInterfaces;
 
 import lv.javaguru.java2.oddJobs.core.domain.Client;
+import lv.javaguru.java2.oddJobs.core.domain.Specialist;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClientRepository {
     void addClient(Client client);
@@ -21,4 +23,6 @@ public interface ClientRepository {
     List<Client> findClientByIdAndNameAndSurname(Long clientId, String clientName, String clientSurname);
 
     List<Client> getAllClients();
+
+    Optional<Client>getById(Long id);
 }

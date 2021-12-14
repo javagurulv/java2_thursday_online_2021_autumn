@@ -29,7 +29,7 @@ public class FindClientServiceTest {
     @Mock
     private FindClientsValidator validator;
     @InjectMocks
-    private FindClientsService service;
+    private FindClientService service;
 
     List<CoreError> errors;
 

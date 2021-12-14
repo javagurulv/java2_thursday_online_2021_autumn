@@ -5,6 +5,7 @@ package lv.javaguru.java2.oddJobs.core.database;
 import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.AdvertisementRepository;
 import lv.javaguru.java2.oddJobs.core.domain.Advertisement;
 
+import lv.javaguru.java2.oddJobs.core.domain.Specialist;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Component;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+
 @Component
 @Transactional
 public class OrmAdvertisementRepositoryImpl implements AdvertisementRepository {
@@ -57,5 +60,16 @@ public class OrmAdvertisementRepositoryImpl implements AdvertisementRepository {
         return sessionFactory.getCurrentSession()
                 .createQuery("SELECT b FROM Advertisement b", Advertisement.class)
                 .getResultList();
+    }
+
+    @Override
+    public Optional<Advertisement> getById(Long id) {
+
+        Advertisement advertisement = sessionFactory.getCurrentSession().get(Advertisement.class,id);
+        if (advertisement == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(advertisement);
+        }
     }
 }

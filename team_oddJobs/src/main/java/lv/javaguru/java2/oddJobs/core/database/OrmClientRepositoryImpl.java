@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Transactional
@@ -91,5 +92,15 @@ public class OrmClientRepositoryImpl implements ClientRepository {
         return sessionFactory.getCurrentSession()
                 .createQuery("SELECT b FROM Client b", Client.class)
                 .getResultList();
+    }
+
+    @Override
+    public Optional<Client> getById(Long id) {
+        Client client = sessionFactory.getCurrentSession().get(Client.class, id);
+        if (client == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(client);
+        }
     }
 }

@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Transactional
-public class FindClientsService {
+public class FindClientService {
 
     @Value("${search.ordering.enabled}")
     private boolean orderingEnabled;
