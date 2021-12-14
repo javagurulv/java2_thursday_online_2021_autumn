@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="QWE finance project">
+    <meta name="author" content="Alex K">
+    <title>QWE Trading Application</title>
+</head>
+<style type="text/css">
+        body {
+              background-color: #8E8F92;
+              margin-left: 20%;
+              margin-right: 20%;
+              text-align: left;
+              padding: 20px 20px 20px 20px;
+              font-family: sans-serif;
+        }
+        submit {
+              color: black;
+              padding: 15px 32px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 4px 2px;
+              cursor: pointer;
+        }
+        fieldset.fieldset1 {
+              display: inline;
+        }
+        fieldset.fieldset2 {
+              display: inline;
+        }
+        fieldset.fieldset3 {
+              text-align: center;
+              display: inline;
+        }
+        table.table3 {
+              border-collapse: collapse;
+              width: 100%;
+              margin-left: auto;
+              margin-right: auto;
+        }
+        table.table3 td {
+                padding: 0.25rem;
+                border: 1px solid #ccc;
+        }
+        caption {
+                font-size: 150%;
+                font-style: italic;
+                padding-bottom: 12px;
+        }
+        .center {
+                text-align: center;
+        }
+        .right {
+                text-align: right;
+        }
+
+</style>
+<body>
+
+<fieldset>
+    <legend style="padding-bottom: 5px;">FILTER STOCKS</legend>
+
+    <fieldset class="fieldset1">
+        <legend style="padding-bottom: 5px;">choose parameters</legend>
+        <table class="table1">
+            <form action="/database/filter" th:object="${request}" method="post">
+
+                <tr>
+                    <td><input type="checkbox" th:field="${request.industry}" name="parameter1" value="industry"/></td>
+                    <td>industry</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:field="${request.marketPrice}" name="parameter2"
+                               value="market_price"/>
+                    </td>
+                    <td>market price</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:field="${request.dividends}" name="parameter3"
+                               value="dividend_yield"/>
+                    </td>
+                    <td>dividend yield</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:field="${request.riskWeight}" name="parameter4" value="risk_weight"/>
+                    </td>
+                    <td>risk weight</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: right;"><input type="submit" value="Set parameter"
+                                                                      name="Submit"/></td>
+                </tr>
+
+            </form>
+        </table>
+    </fieldset>
+
+    <td th:if="${request.industry != null || request.marketPrice != null || request.dividends !=null || request.riskWeight != null}">
+        <fieldset>
+            <legend style="padding-bottom: 5px;">set target values</legend>
+            <table>
+                <form action="/database/filter" th:object="${request}" method="post">
+
+                    <tr th:if="${request.industry != null}">
+                        <input type="hidden" name="industry" value="industry">
+                        <select name="industry" th:field="${request.industryTarget}">
+                            <option value="Consumer Staples">Consumer Staples</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Communications">Communications</option>
+                            <option value="Health Care">Health Care</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Materials">Materials</option>
+                            <option value="Energy">Energy</option>
+                            <option value="Financials">Financials</option>
+                            <option value="Real Estate">Real Estate</option>
+                            <option value="Industrials">Industrials</option>
+                            <option value="Consumer Discretionary">Consumer Discretionary</option>
+                        </select> Industry<br>
+                    </tr>
+
+                    <tr th:if="${request.marketPrice != null}">
+                        <input type="hidden" name="marketPrice" value="market_price">
+                        <select name="marketPriceOperator" th:field="${request.marketPriceOperator}">
+                            <option value=">">></option>
+                            <option value=">=">>=</option>
+                            <option value="<"><</option>
+                            <option value="<="><=</option>
+                            <option value="=">=</option>
+                        </select>
+                        <input type="text" style="width: 4%;" th:field="${request.marketPriceTarget}"> Market price<br>
+                    </tr>
+
+                    <tr th:if="${request.dividends != null}">
+                        <input type="hidden" name="dividends" value="dividend_yield">
+                        <select name="dividendsOperator" th:field="${request.dividendsOperator}">
+                            <option value=">">></option>
+                            <option value=">=">>=</option>
+                            <option value="<"><</option>
+                            <option value="<="><=</option>
+                            <option value="=">=</option>
+                        </select>
+                        <input type="text" style="width: 4%;" th:field="${request.dividendsTarget}"> Dividends<br>
+                    </tr>
+
+                    <tr th:if="${request.riskWeight != null}">
+                        <input type="hidden" name="riskWeight" value="risk_weight">
+                        <select name="riskWeightOperator" th:field="${request.riskWeightOperator}">
+                            <option value=">">></option>
+                            <option value=">=">>=</option>
+                            <option value="<"><</option>
+                            <option value="<="><=</option>
+                            <option value="=">=</option>
+                        </select>
+                        <input type="text" style="width: 4%;" th:field="${request.riskWeightTarget}"> Risk weight<br>
+                    </tr>
+
+                    <tr>
+                        <input type="submit" value="Filter" name="Submit"/>
+                    </tr>
+
+                </form>
+            </table>
+        </fieldset>
+    </td>
+
+    <td th:if="${filtered != null}">
+        <fieldset class="fieldset3">
+            <legend style="padding-bottom: 5px;">filtered list</legend>
+            <table class="table3">
+                <tr>
+                    <td class="center">TICKER</td>
+                    <td class="center">NAME</td>
+                    <td class="center">INDUSTRY</td>
+                    <td class="center">CURRENCY</td>
+                    <td class="center">MARKET PRICE</td>
+                    <td class="center">DIVIDENDS</td>
+                    <td class="center">RISK WEIGHT</td>
+                </tr>
+
+                <tr th:each="security : ${filtered}">
+                    <td th:text="${security.ticker}"></td>
+                    <td th:text="${security.name}"></td>
+                    <td th:text="${security.industry}"></td>
+                    <td class="center" th:text="${security.currency}"></td>
+                    <td class="right" th:text="${security.marketPrice}"></td>
+                    <td class="right" th:text="${security.dividends}"></td>
+                    <td class="right" th:text="${security.riskWeight}"></td>
+                </tr>
+
+            </table>
+        </fieldset>
+    </td>
+
+    <td th:if="${errors != null}">
+        <tr th:each="error : ${errors}">
+            <br>
+            <td th:text="${error.field} + ':'"></td>
+            <td th:text="${error.message}"></td>
+        </tr>
+    </td>
+    <br>
+
+</fieldset>
+<br>
+
+<form action="/dataMenu" method="get">
+    <input type="submit" style="float: right;" value="Back" name="Submit"/>
+</form>
+
+</body>
+</html>
