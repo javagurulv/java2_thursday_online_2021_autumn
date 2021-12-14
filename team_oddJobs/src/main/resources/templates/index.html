@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="description" content="Call Boar by OddJobs">
-    <meta name="author" content="JavaGuru">
-    <title>Call Board</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="with=device-width, initial-scale=1.0">
+	<title>Odd Jobs</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200&display=swap" rel="stylesheet">
+	<link rel="stylesheet"
+		  href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
 </head>
+
+
+
 <style type="text/css">
 
 body {
@@ -46,26 +55,132 @@ button:hover:before {
 }
 
 </style>
+
 <body>
+<section class="header">
+	<nav>
+		<div class="nav-links" id="navLinks">
+			<i class="fa fa-times-circle" onclick="hideMenu()"></i>
 
-<h3>Program menu</h3>
+			<ul>
 
-<a href="/addClient"><button class="button">Add Client</button></a> <br>
-<a href="/addSpecialist"><button class="button">Add Specialist</button></a> <br>
-<a href="/addAdvertisement"><button class="button">Add Advertisement</button></a> <br>
-<a href="/findClient"><button class="button">Find Client</button></a> <br>
-<a href="/findSpecialist"><button class="button">Find Specialist</button></a> <br>
-<a href="/findAdvertisement"><button class="button">Find Advertisement</button></a> <br>
-<a href="/showAllClients"><button class="button">Show all clients in the list</button></a> <br>
-<a href="/showAllSpecialists"><button class="button">Show all specialists in the list</button></a> <br>
-<a href="/showAllAdvertisements"><button class="button">Show all advertisements in the list</button></a> <br>
-<a href="/removeClient"><button class="button">Remove Client</button></a> <br>
-<a href="/removeSpecialist"><button class="button">Remove Specialist</button></a> <br>
-<a href="/removeAdvertisement"><button class="button">Remove Advertisement</button></a> <br>
+				<li><a href="">HOME</a></li>
+				<li><a href="">ACCOUNT</a></li>
+				<li><a href="">ADVERTISEMENTS</a></li>
+				<li><a href="">CONTACT US</a></li>
+				<div class="dropdown">
+					<button class="dropbtn">CLIENT
+						<i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content">
+						<li><a href="/addClient">
+							<button class="button">Add Client</button>
+						</a></li>
+						<li><a href="/findClient">
+							<button class="button">Find Client</button>
+						</a></li>
+						<li><a href="/showAllClients">
+							<button class="button">Show all clients in the list</button>
+						</a></li>
+						<li><a href="/removeClient">
+							<button class="button">Remove Client</button>
+						</a></li>
+					</div>
+				</div>
+				<div class="dropdown">
+					<button class="dropbtn">SPECIALIST
+						<i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content">
+						<li><a href="/addSpecialist">
+							<button class="button">Add Specialist</button>
+						</a></li>
+						<li><a href="/findSpecialist">
+							<button class="button">Find Specialist</button>
+						</a></li>
+						<li><a href="/showAllSpecialists">
+							<button class="button">Show all specialists in the list</button>
+						</a></li>
+						<li><a href="/removeSpecialist">
+							<button class="button">Remove Specialist</button>
+						</a></li>
+					</div>
+				</div>
+				<div class="dropdown">
+					<button class="dropbtn">ADVERTISEMENT
+						<i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content">
+						<li><a href="/addAdvertisement">
+							<button class="button">Add Advertisement</button>
+						</a></li>
+						<li><a href="/findAdvertisement">
+							<button class="button">Find Advertisement</button>
+						</a></li>
+						<li><a href="/showAllAdvertisements">
+							<button class="button">Show all Advertisement in the list</button>
+						</a></li>
+						<li><a href="/removeAdvertisement">
+							<button class="button">Remove Advertisement</button>
+						</a></li>
+					</div>
+				</div>
+
+			</ul>
+		</div>
+		<i class="fa fa-bars" onclick="showMenu()"></i>
+	</nav>
 
 
+	<div class="text-box">
+		<h1>Odd Jobs</h1>
+		<p>
+			Are you a master of your craft? Do you know how to cook 1 minute rice in 58 seconds? Come and share you
+			skills with the rest of the world!
+			<br>Or find something that would make you a quick buck.
+		</p>
+		<a href="" class="hero-btn">Visit us to know more</a>
+	</div>
 
+</section>
+
+<!-----Reviews----->
+
+<section class="review">
+	<h1>Here are some reviews</h1>
+	<p>Some rewievs are still pending, our top monkeys are writing them as you read this!</p>
+	<div class="row">
+		<div class="review-col">
+			<h3>Excelent</h3>
+			<p>This dude fixed my grandma, now she can run!</p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="review-col">
+			<h3>Meeh, could have been better</h3>
+			<p>Guy came to fix my toilet, after he fixed it I went to test it, came out, TV and the guy was gone. 2/5,
+				not sure if would use his services again</p>
+		</div>
+	</div>
+
+</section>
+
+
+<!-----JavaScript for Toglle Menu----->
+
+<script>
+		var navLinks = document.getElementById("navLinks");
+
+		function showMenu() {
+			navLinks.style.right = "0";
+		}
+
+		function hideMenu() {
+			navLinks.style.right = "-200px";
+		}
+
+</script>
 
 </body>
-
 </html>
