@@ -29,7 +29,7 @@ public class UpdateClientService {
                 .map(client -> {
                     client.setClientName(request.getNewClientName());
                     client.setClientSurname(request.getNewClientSurname());
-                    client.setClientPersonalCode(request.getNewClientPersonalCode());
+                    client.setPersonalCode(request.getNewClientPersonalCode());
                     client.setClientCity(request.getNewClientCity());
 
                     return new  UpdateClientResponse(client);
