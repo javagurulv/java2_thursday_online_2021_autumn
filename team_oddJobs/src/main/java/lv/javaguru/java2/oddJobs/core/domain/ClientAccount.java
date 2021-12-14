@@ -6,7 +6,7 @@ public class ClientAccount extends Account {
     Client client = new Client();
     private String clientName = client.getClientName();
     private String clientSurname = client.getClientSurname();
-    private String clientCity = client.getCity();
+    private String clientCity = client.getClientCity();
 
     public ClientAccount() {
     }

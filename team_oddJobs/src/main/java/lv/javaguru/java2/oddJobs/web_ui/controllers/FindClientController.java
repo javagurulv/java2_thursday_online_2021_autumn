@@ -3,7 +3,7 @@ package lv.javaguru.java2.oddJobs.web_ui.controllers;
 
 import lv.javaguru.java2.oddJobs.core.requests.find.FindClientsRequest;
 import lv.javaguru.java2.oddJobs.core.response.find.FindClientsResponse;
-import lv.javaguru.java2.oddJobs.core.services.find.FindClientsService;
+import lv.javaguru.java2.oddJobs.core.services.find.FindClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class FindClientController {
 
-    @Autowired private FindClientsService findClientsService;
+    @Autowired private FindClientService findClientsService;
 
     @GetMapping(value = "/findClient")
     public String showClientPage(ModelMap modelMap) {

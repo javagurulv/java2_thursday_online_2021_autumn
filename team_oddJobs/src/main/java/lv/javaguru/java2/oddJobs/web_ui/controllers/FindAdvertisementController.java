@@ -2,7 +2,7 @@ package lv.javaguru.java2.oddJobs.web_ui.controllers;
 
 import lv.javaguru.java2.oddJobs.core.requests.find.FindAdvertisementRequest;
 import lv.javaguru.java2.oddJobs.core.response.find.FindAdvertisementResponse;
-import lv.javaguru.java2.oddJobs.core.services.find.FindAdvertisementsService;
+import lv.javaguru.java2.oddJobs.core.services.find.FindAdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class FindAdvertisementController {
 
     @Autowired
-    private FindAdvertisementsService findAdvertisementsService;
+    private FindAdvertisementService findAdvertisementsService;
 
     @GetMapping(value = "/findAdvertisement")
     public String showAdvertisementPage(ModelMap modelMap) {

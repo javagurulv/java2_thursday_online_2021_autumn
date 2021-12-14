@@ -4,7 +4,7 @@ import lv.javaguru.java2.oddJobs.core.requests.find.FindClientsRequest;
 import lv.javaguru.java2.oddJobs.core.requests.find.Ordering;
 import lv.javaguru.java2.oddJobs.core.requests.find.Paging;
 import lv.javaguru.java2.oddJobs.core.response.find.FindClientsResponse;
-import lv.javaguru.java2.oddJobs.core.services.find.FindClientsService;
+import lv.javaguru.java2.oddJobs.core.services.find.FindClientService;
 import lv.javaguru.java2.oddJobs.console_ui.exit.ExitMenuUIAction;
 import lv.javaguru.java2.oddJobs.console_ui.UIAction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class FindClientsUIAction implements UIAction {
 
 
     @Autowired
-    private FindClientsService findClientsService;
+    private FindClientService findClientsService;
     @Autowired
     private ExitMenuUIAction exitUIAction;
 
