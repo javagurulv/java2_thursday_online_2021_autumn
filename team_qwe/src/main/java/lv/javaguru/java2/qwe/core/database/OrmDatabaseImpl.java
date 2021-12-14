@@ -6,10 +6,12 @@ import lv.javaguru.java2.qwe.core.domain.Stock;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.cache.annotation.CacheRemove;
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -23,6 +25,7 @@ public class OrmDatabaseImpl implements Database{
     @Autowired private JdbcTemplate jdbcTemplate;
 
     @Override
+    @CacheEvict(value = "securities", allEntries = true)
     public String addStock(Stock stock) {
         return (String) sessionFactory.getCurrentSession().save(stock);
     }
@@ -38,6 +41,7 @@ public class OrmDatabaseImpl implements Database{
     }
 
     @Override
+    @CacheEvict(value = "securities", allEntries = true)
     public boolean removeSecurity(String ticker) {
         String sql = "DELETE Stock WHERE ticker = :ticker";
         Query<?> query = sessionFactory.getCurrentSession().createQuery(sql);
