@@ -6,6 +6,7 @@ import lv.javaguru.java2.qwe.core.domain.Stock;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -45,6 +46,7 @@ public class OrmDatabaseImpl implements Database{
     }
 
     @Override
+    @Cacheable(value = "securities")
     public List<Security> getAllSecurityList() {
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM Security s", Security.class)
