@@ -18,13 +18,13 @@ public class FilterController {
     private FilterStocksByMultipleParametersService service;
 
 
-    @GetMapping(value = "/filter")
+    @GetMapping(value = "/database/filter")
     public String showFilterPage(ModelMap modelMap) {
         modelMap.addAttribute("request", new DomainTest());
-        return "filter";
+        return "database/filter";
     }
 
-    @PostMapping("/filter")
+    @PostMapping("/database/filter")
     public String processFilterRequest(@ModelAttribute(value = "request") DomainTest domainTest, ModelMap modelMap) {
         if (domainTest.getIndustry() != null) {
             modelMap.addAttribute("industry",
@@ -82,9 +82,9 @@ public class FilterController {
             else {
                 modelMap.addAttribute("filtered", response.getList());
             }
-            return "filter";
+            return "database/filter";
         }
-        return "filter";
+        return "database/filter";
     }
 
 }

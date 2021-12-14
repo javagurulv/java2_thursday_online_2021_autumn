@@ -71,12 +71,20 @@ public class Client {
         this.clientSurname = clientSurname;
     }
 
-    public String getClientPersonalCode() {
+    public String getPersonalCode() {
         return personalCode;
     }
 
-    public void setClientPersonalCode(String personalCode) {
+    public void setPersonalCode(String personalCode) {
         this.personalCode = personalCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getClientCity() {
