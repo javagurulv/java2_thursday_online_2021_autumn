@@ -44,6 +44,10 @@ public class SearchReservationRequest {
         this.paging = paging;
     }
 
+    public SearchReservationRequest(String reservationId) {
+        this.reservationId = reservationId;
+    }
+
     public String getReservationId() {
         return reservationId;
     }
