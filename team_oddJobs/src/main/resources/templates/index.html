@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="with=device-width, initial-scale=1.0">
 	<title>Odd Jobs</title>
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="style.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200&display=swap" rel="stylesheet">
@@ -16,45 +16,7 @@
 
 
 
-<style type="text/css">
 
-body {
-	background-image: url('https://wallup.net/wp-content/uploads/2015/07/Multicolor-maintenance-tool.jpg');
-
-	margin:2px;
-	background-size: 100%
-}
-button {
-    height: 42px;
-	border: none;
-	background: #3a7999;
-	color: #f2f2f2;
-	padding: 10px;
-	font-size: 18px;
-	border-radius: 5px;
-	position: relative;
-	box-sizing: border-box;
-	transition: all 500ms ease;
-	margin:2px;
-
-}
-
-button:before {
-	content:'';
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 0;
-	height: 42px;
-	background: rgba(255,255,255,0.3);
-	border-radius: 5px;
-	transition: all 2s ease;
-}
-button:hover:before {
-	width: 100%;
-}
-
-</style>
 
 <body>
 <section class="header">
@@ -183,4 +145,236 @@ button:hover:before {
 </script>
 
 </body>
+
+<style type="text/css">
+	* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Roboto Slab', serif;
+}
+
+.header {
+	min-height: 100vh;
+	width: 100%;
+	background-image: linear-gradient(rgba(4, 9, 30, 0.70), rgba(4, 9, 30, 0.7)), url(banner.jpg);
+	background-position: center;
+	background-size: cover;
+	position: relative;
+}
+
+nav {
+	display: flex;
+	padding: 2% 6%;
+	justify-content: space-between;
+	align-items: center;
+}
+
+nav img {
+	width: 25px;
+
+}
+
+.nav-links {
+	flex: 1;
+	text-align: right;
+}
+
+.nav-links ul li {
+	list-style: none;
+	display: inline-block;
+	padding: 6px 6px;
+	position relative;
+}
+
+.nav-links ul li a {
+	color: #fff;
+	text-decoration: none;
+	font-size: 16px;
+}
+
+.nav-links ul li::after {
+	content: "";
+	width: 0%;
+	height: 2px;
+	background: #f44336;
+	display: block;
+	margin: auto;
+	transition: 0.5s;
+}
+
+.nav-links ul li:hover::after {
+	width: 100%;
+
+}
+
+.text-box {
+	width: 100%;
+	color: white;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+
+}
+
+.text-box h1 {
+	font-size: 78px;
+}
+
+.text-box p {
+    color: white;
+	margin: 15px 0 40px;
+	font-size: 16px;
+}
+
+
+.hero-btn {
+	display: inline-block;
+	text-decoration: none;
+	color: #fff;
+	border: 1px solid #fff;
+	padding: 12px 12px;
+	font-size: 13px;
+	background: transparent;
+	position relative;
+	cursor: pointer;
+}
+
+.hero-btn:hover {
+	border: 1px solid #f44336;
+	background: #f44336;
+	transition: 1s;
+}
+
+nav .fa {
+	display: none;
+}
+
+@media(max-width: 700px) {
+	.text-box h1 {
+		font-size: 20px;
+	}
+
+	.nav-links ul li {
+		display: block;
+	}
+
+	.nav-links {
+		position: absolute;
+		background: f44336;
+		height: 100vh;
+		width: 200px;
+		top: 0;
+		right: -200px;
+		text-align: left;
+		z-index: 2;
+		transition: 1s;
+	}
+
+	nav .fa {
+		display: block;
+		color: #fff;
+		margin: 10px;
+		font-size: 22px;
+		cursor: pointer;
+	}
+
+	.nav-links ul {
+		padding: 30px;
+	}
+
+}
+/* DROPDOWN MENU STARTS HERE */
+
+
+
+/* Links inside the navbar */
+
+
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+
+  font-size: 16px;
+  border: 16px;
+  outline: none;
+  color: white;
+  padding: 15px 16px;
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+  transition: 1s;
+  margin: auto;
+
+
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 1px;
+  box-shadow: 0px 8px 16px 0px rgba(4, 9, 30, 0.70);
+  z-index: 2;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: white;
+  padding: 6px 5px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: right;
+  font-size: 62px;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: white;
+
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+/*----- review ----*/
+
+.review {
+	width: 80%;
+	margin: auto;
+	text-align: center;
+	padding-top: 100px;
+}
+
+h1 {
+	font-size: 36px;
+	font-weight: 600;
+
+}
+
+p {
+	color: #777;
+	font-size: 14px;
+	font-weight: 300;
+	line-height: 22px;
+	padding: 10px;
+}
+</style>
 </html>
