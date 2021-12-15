@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 //@Component
 public class JDBCPrescriptionRepositoryImpl implements PrescriptionRepository {
@@ -79,5 +80,10 @@ public class JDBCPrescriptionRepositoryImpl implements PrescriptionRepository {
         String sql = "SELECT * FROM prescriptions WHERE patient_id = ?";
         Object[] args = new Object[] {patientID};
         return jdbcTemplate.query(sql, args, rowMapper);
+    }
+
+    @Override
+    public Optional<Prescription> getById(Long id) {
+        return Optional.empty();
     }
 }

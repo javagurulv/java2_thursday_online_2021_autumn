@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 @Component
 public class ORMPrescriptionRepositoryImpl implements PrescriptionRepository {
@@ -95,5 +96,15 @@ public class ORMPrescriptionRepositoryImpl implements PrescriptionRepository {
                 "SELECT p FROM Prescription p WHERE patient_id = :patient_id");
         query.setParameter("patient_id", patientID);
         return query.getResultList();
+    }
+
+    @Override
+    public Optional<Prescription> getById(Long id) {
+        Prescription prescription = sessionFactory.getCurrentSession().get(Prescription.class, id);
+        if(prescription == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(prescription);
+        }
     }
 }

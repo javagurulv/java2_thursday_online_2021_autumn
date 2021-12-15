@@ -101,4 +101,9 @@ public class PrescriptionRepositoryImpl implements PrescriptionRepository {
                 .filter(prescription -> prescription.getPatient().getId().equals(patientID))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Optional<Prescription> getById(Long id) {
+        return Optional.empty();
+    }
 }

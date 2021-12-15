@@ -3,8 +3,6 @@ package lv.javaguru.java2.hospital.web_ui.controller.doctor_controllers.rest;
 import lv.javaguru.java2.hospital.doctor.core.requests.*;
 import lv.javaguru.java2.hospital.doctor.core.responses.*;
 import lv.javaguru.java2.hospital.doctor.core.services.*;
-import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
-import lv.javaguru.java2.hospital.patient.core.responses.SearchPatientsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +26,7 @@ public class DoctorRestController {
     @PostMapping(path = "/",
             consumes = "application/json",
             produces = "application/json")
-    public AddDoctorResponse addBook(@RequestBody AddDoctorRequest request) {
+    public AddDoctorResponse addDoctor(@RequestBody AddDoctorRequest request) {
         return addDoctorService.execute(request);
     }
 

@@ -4,6 +4,7 @@ import lv.javaguru.java2.hospital.domain.Prescription;
 import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionEnum;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PrescriptionRepository {
 
@@ -24,4 +25,6 @@ public interface PrescriptionRepository {
     List<Prescription> findByDoctorAndPatientId(Long doctorId, Long patientId);
 
     List<Prescription> findPatientForDeleting(Long patientID);
+
+    public Optional<Prescription> getById(Long id);
 }
