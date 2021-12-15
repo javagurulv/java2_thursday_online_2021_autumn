@@ -33,8 +33,6 @@ public class SecurityRestController {
             consumes = "application/json",
             produces = "application/json")
     public List<Security> filterStocks(@RequestBody FilterStocksByMultipleParametersRequest request) {
-        System.out.println("RESULT:");
-        System.out.println(request.getRequestList());
         return filterStocksService.execute(request).getList();
     }
 

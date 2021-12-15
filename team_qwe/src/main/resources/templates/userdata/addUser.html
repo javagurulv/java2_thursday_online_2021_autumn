@@ -9,67 +9,66 @@
 <style type="text/css">
         body {
               background-color: #8E8F92;
-              margin-left: 20%;
-              margin-right: 20%;
+              margin-left: 30%;
+              margin-right: 30%;
               text-align: center;
-              border: 2px dotted black;
               padding: 20px 20px 20px 20px;
               font-family: sans-serif;
         }
-        submit {
-<!--              border: none;-->
-              color: black;
-              padding: 15px 32px;
-              text-align: center;
-              text-decoration: none;
-              display: inline-block;
-              font-size: 16px;
-              margin: 4px 2px;
-              cursor: pointer;
+        table {
+               margin-left: auto;
+               margin-right: auto;
         }
 </style>
 <body>
 
-<h3>Add new user</h3>
-
-<table>
-    <form action="/userdata/addUser" th:object="${request}" method="post">
-        <tr>
-            <td style="text-align: right;">Name:</td>
-            <td><input type="text" th:field="${request.name}"/></td>
-        </tr>
-        <tr>
-            <td style="text-align: right;">Age:</td>
-            <td><input type="text" th:field="${request.age}"/></td>
-        </tr>
-        <tr>
-            <td style="text-align: right;">Type:</td>
-            <td><select name="type" th:field="${request.type}">
-                <option value="LOWER_MIDDLE">LOWER_MIDDLE</option>
-                <option value="MIDDLE">MIDDLE</option>
-                <option value="UPPER_MIDDLE">UPPER_MIDDLE</option>
-                <option value="WEALTHY">WEALTHY</option>
-                <option value="SUPER_RICH">SUPER_RICH</option>
-            </select>
+<fieldset>
+    <legend style="padding-bottom: 5px;">ADD NEW USER</legend>
+    <table>
+        <form action="/userdata/addUser" th:object="${request}" method="post">
+            <tr>
+                <td style="text-align: left;">Name:</td>
+                <td><input type="text" th:field="${request.name}"/></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Age:</td>
+                <td><input type="text" th:field="${request.age}"/></td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Type:</td>
+                <td><select name="type" style="width: 100%; text-align: center;" th:field="${request.type}">
+                    <option value="LOWER_MIDDLE">LOWER_MIDDLE</option>
+                    <option value="MIDDLE">MIDDLE</option>
+                    <option value="UPPER_MIDDLE">UPPER_MIDDLE</option>
+                    <option value="WEALTHY">WEALTHY</option>
+                    <option value="SUPER_RICH">SUPER_RICH</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Initial investment:</td>
+                <td><input type="text" th:field="${request.initialInvestment}"/></td>
+            </tr>
+            <td></td>
+            <td style="text-align: right;">
+                <input type="submit" value="Add user"/>
+                <input type="reset" value="Clear"/>
             </td>
-        </tr>
-        <tr>
-            <td style="text-align: right;">Initial investment:</td>
-            <td><input type="text" th:field="${request.initialInvestment}"/></td>
-        </tr>
-        <td>
-            <input type="submit" value="Add user"/>
-            <input type="reset" value="Clear"/>
-        </td>
-    </form>
-</table>
+        </form>
+    </table>
+</fieldset>
 
 <td th:if="${errors != null}">
     <tr th:each="error : ${errors}">
-        <td th:text="${error.field}"></td>
+        <td th:text="${error.field} + ':'"></td>
         <td th:text="${error.message}"></td>
     </tr>
 </td>
+<br>
+
+<form action="/userMenu" method="get">
+    <input type="submit" style="float: right;" value="Back" name="Submit"/>
+</form>
 
 </body>
 </html>

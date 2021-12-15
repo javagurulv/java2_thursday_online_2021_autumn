@@ -11,7 +11,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.cache.annotation.CacheRemove;
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import java.util.List;
