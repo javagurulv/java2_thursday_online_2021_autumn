@@ -20,7 +20,6 @@ public class ExistenceBySurnameAndSpeciality implements DoctorExistenceBySearchC
     public boolean canValidate(SearchDoctorsRequest request) {
         return request.isSurnameProvided()
                 && request.isSpecialityProvided()
-                && !request.isIdProvided()
                 && !request.isNameProvided();
     }
 

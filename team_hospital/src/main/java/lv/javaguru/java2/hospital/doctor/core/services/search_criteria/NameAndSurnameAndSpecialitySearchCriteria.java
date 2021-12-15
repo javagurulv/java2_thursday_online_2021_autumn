@@ -18,8 +18,7 @@ public class NameAndSurnameAndSpecialitySearchCriteria implements DoctorsSearchC
     public boolean canProcess(SearchDoctorsRequest request) {
         return request.isNameProvided()
                 && request.isSurnameProvided()
-                && request.isSpecialityProvided()
-                && !request.isIdProvided();
+                && request.isSpecialityProvided();
     }
 
     @Override

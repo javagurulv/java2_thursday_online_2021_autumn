@@ -12,7 +12,7 @@ public class SearchDoctorsRequestFieldValidator {
 
     public List<CoreError> validate(SearchDoctorsRequest request) {
         List<CoreError> errors = new ArrayList<>();
-        if (isLongEmpty(request.getId()) && isStringEmpty(request.getName())
+        if (isStringEmpty(request.getName())
                 && isStringEmpty(request.getSurname()) && isStringEmpty(request.getSpeciality())) {
             errors.add(new CoreError("id", "Must not be empty!"));
             errors.add(new CoreError("name", "Must not be empty!"));
@@ -24,9 +24,5 @@ public class SearchDoctorsRequestFieldValidator {
 
     private boolean isStringEmpty(String str) {
         return str == null || str.isEmpty();
-    }
-
-    private boolean isLongEmpty(Long num) {
-        return num == null;
     }
 }

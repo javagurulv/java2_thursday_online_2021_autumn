@@ -17,7 +17,6 @@ public class SurnameSearchCriteria implements DoctorsSearchCriteria{
     @Override
     public boolean canProcess(SearchDoctorsRequest request) {
         return request.isSurnameProvided()
-                && !request.isIdProvided()
                 && !request.isNameProvided()
                 && !request.isSpecialityProvided();
     }

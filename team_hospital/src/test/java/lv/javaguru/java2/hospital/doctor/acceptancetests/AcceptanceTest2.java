@@ -34,7 +34,7 @@ public class AcceptanceTest2 {
         AddDoctorRequest request2 = new AddDoctorRequest("Name", "Surname2", "Speciality2");
         getAddDoctorService().execute(request2);
 
-        SearchDoctorsRequest request3 = new SearchDoctorsRequest(null, "Name", null, null);
+        SearchDoctorsRequest request3 = new SearchDoctorsRequest("Name", null, null);
         SearchDoctorsResponse response = getSearchDoctorsService().execute(request3);
 
         assertEquals(response.getDoctors().size(), 2);
@@ -55,7 +55,7 @@ public class AcceptanceTest2 {
         getAddDoctorService().execute(request2);
 
         DoctorOrdering doctorOrdering = new DoctorOrdering("surname", "DESCENDING");
-        SearchDoctorsRequest request3 = new SearchDoctorsRequest(null, "Name", null, null, doctorOrdering);
+        SearchDoctorsRequest request3 = new SearchDoctorsRequest(null, "Name", null, doctorOrdering, null);
         SearchDoctorsResponse response = getSearchDoctorsService().execute(request3);
 
         assertEquals(response.getDoctors().size(), 2);
@@ -76,7 +76,7 @@ public class AcceptanceTest2 {
         getAddDoctorService().execute(request2);
 
         DoctorOrdering doctorOrdering = new DoctorOrdering("surname", "ASCENDING");
-        SearchDoctorsRequest request3 = new SearchDoctorsRequest(null, "Name", null, null, doctorOrdering);
+        SearchDoctorsRequest request3 = new SearchDoctorsRequest(null, "Name", null, doctorOrdering, null);
         SearchDoctorsResponse response = getSearchDoctorsService().execute(request3);
 
         assertEquals(response.getDoctors().size(), 2);
@@ -98,7 +98,7 @@ public class AcceptanceTest2 {
 
         DoctorOrdering doctorOrdering = new DoctorOrdering("surname", "ASCENDING");
         DoctorPaging doctorPaging = new DoctorPaging(1, 1);
-        SearchDoctorsRequest request3 = new SearchDoctorsRequest(null, "Name", null, null, doctorOrdering, doctorPaging);
+        SearchDoctorsRequest request3 = new SearchDoctorsRequest("Name", null, null, doctorOrdering, doctorPaging);
         SearchDoctorsResponse response = getSearchDoctorsService().execute(request3);
 
         assertEquals(response.getDoctors().size(), 1);

@@ -18,7 +18,6 @@ public class NameAndSurnameSearchCriteria implements DoctorsSearchCriteria{
     public boolean canProcess(SearchDoctorsRequest request) {
         return request.isNameProvided()
                 && request.isSurnameProvided()
-                && !request.isIdProvided()
                 && !request.isSpecialityProvided();
     }
 

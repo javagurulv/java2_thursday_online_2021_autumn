@@ -123,4 +123,9 @@ public class InMemoryDoctorRepositoryImpl implements DoctorRepository {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Optional<Doctor> getById(Long id) {
+        return Optional.empty();
+    }
+
 }

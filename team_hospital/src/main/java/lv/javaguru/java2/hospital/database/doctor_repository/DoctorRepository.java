@@ -3,6 +3,7 @@ package lv.javaguru.java2.hospital.database.doctor_repository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DoctorRepository {
 
@@ -29,5 +30,7 @@ public interface DoctorRepository {
     List<Doctor> findBySurnameAndSpeciality(String surname, String speciality);
 
     List<Doctor> findByNameAndSurnameAndSpeciality(String name, String surname, String speciality);
+
+    Optional<Doctor> getById(Long id);
 
 }

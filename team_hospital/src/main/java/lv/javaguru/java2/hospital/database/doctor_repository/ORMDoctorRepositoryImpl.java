@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 @Component
 public class ORMDoctorRepositoryImpl implements DoctorRepository {
@@ -116,5 +117,15 @@ public class ORMDoctorRepositoryImpl implements DoctorRepository {
         query.setParameter("surname", surname);
         query.setParameter("speciality", speciality);
         return query.getResultList();
+    }
+
+    @Override
+    public Optional<Doctor> getById(Long id) {
+        Doctor doctor = sessionFactory.getCurrentSession().get(Doctor.class, id);
+        if (doctor == null) {
+            return Optional.empty();
+        } else {
+            return Optional.of(doctor);
+        }
     }
 }

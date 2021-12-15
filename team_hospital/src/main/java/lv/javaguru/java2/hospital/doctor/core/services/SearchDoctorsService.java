@@ -82,7 +82,6 @@ public class SearchDoctorsService {
 
     private DoctorsSearchCriteria[] getDoctorsSearchCriteria() {
         DoctorsSearchCriteria[] doctorsSearchCriteria = {
-                new IdSearchCriteria(database),
                 new NameAndSurnameAndSpecialitySearchCriteria(database),
                 new NameAndSurnameSearchCriteria(database),
                 new NameAndSpecialitySearchCriteria(database),

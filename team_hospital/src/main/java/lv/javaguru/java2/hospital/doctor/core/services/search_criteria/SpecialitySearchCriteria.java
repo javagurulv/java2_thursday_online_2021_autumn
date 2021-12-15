@@ -17,7 +17,6 @@ public class SpecialitySearchCriteria implements DoctorsSearchCriteria{
     @Override
     public boolean canProcess(SearchDoctorsRequest request) {
         return request.isSpecialityProvided()
-                && !request.isIdProvided()
                 && !request.isNameProvided()
                 && !request.isSurnameProvided();
     }

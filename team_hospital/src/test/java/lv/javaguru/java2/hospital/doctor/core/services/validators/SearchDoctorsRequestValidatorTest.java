@@ -34,7 +34,7 @@ public class SearchDoctorsRequestValidatorTest {
         DoctorOrdering doctorOrdering = new DoctorOrdering("name", "ASC");
 
         SearchDoctorsRequest request = new SearchDoctorsRequest(
-                1L, "name", "surname", "speciality", doctorOrdering
+                "name", "surname", "speciality", doctorOrdering
         );
 
         CoreError error = new CoreError("orderBy", "bla bla bla");
@@ -54,7 +54,6 @@ public class SearchDoctorsRequestValidatorTest {
     public void shouldNotReturnOrderingErrors() {
         DoctorOrdering doctorOrdering = new DoctorOrdering("name", "ASC");
         SearchDoctorsRequest request = new SearchDoctorsRequest(
-                1L,
                 "name",
                 "surname",
                 "speciality",
@@ -73,7 +72,6 @@ public class SearchDoctorsRequestValidatorTest {
     public void shouldNotCheckOrdering() {
         DoctorOrdering doctorOrdering = null;
         SearchDoctorsRequest request = new SearchDoctorsRequest(
-                1L,
                 "name",
                 "surname",
                 "speciality",

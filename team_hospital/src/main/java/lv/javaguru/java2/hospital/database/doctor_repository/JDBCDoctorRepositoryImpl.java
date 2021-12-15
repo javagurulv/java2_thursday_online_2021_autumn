@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 //@Component
 public class JDBCDoctorRepositoryImpl implements DoctorRepository {
@@ -101,5 +102,10 @@ public class JDBCDoctorRepositoryImpl implements DoctorRepository {
         String sql = "SELECT * FROM doctors WHERE name = ? AND surname = ? AND speciality = ?";
         Object[] args = new Object[] {name, surname, speciality};
         return jdbcTemplate.query(sql, args, doctorRowMapper);
+    }
+
+    @Override
+    public Optional<Doctor> getById(Long id) {
+        return Optional.empty();
     }
 }

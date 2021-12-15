@@ -44,7 +44,7 @@ class SearchDoctorsServiceTest {
 
     @Test
     public void shouldReturnResponseWithErrorsWhenValidatorFails() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, null, null, null);
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, null, null);
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("id", "Must not be empty!"));
         errors.add(new CoreError("name", "Must not be empty!"));
@@ -63,7 +63,7 @@ class SearchDoctorsServiceTest {
 
     @Test
     public void shouldSearchByName() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, null);
+        SearchDoctorsRequest request = new SearchDoctorsRequest("Name", null, null);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
@@ -81,7 +81,7 @@ class SearchDoctorsServiceTest {
 
     @Test
     public void shouldSearchBySurname() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, null, "Surname", null);
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Surname", null);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
@@ -99,7 +99,7 @@ class SearchDoctorsServiceTest {
 
     @Test
     public void shouldSearchByNameAndSurname() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", "Surname", null);
+        SearchDoctorsRequest request = new SearchDoctorsRequest("Name", "Surname", null);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
@@ -115,26 +115,8 @@ class SearchDoctorsServiceTest {
     }
 
     @Test
-    public void shouldSearchById() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(1L, null, null, null);
-        Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-
-        List<Doctor> doctors = new ArrayList<>();
-        doctors.add(new Doctor("Name", "Surname", "Speciality"));
-        Mockito.when(database.findById(1L)).thenReturn(doctors);
-
-        SearchDoctorsResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getDoctors().size(), 1);
-        assertEquals(response.getDoctors().get(0).getName(), "Name");
-        assertEquals(response.getDoctors().get(0).getSurname(), "Surname");
-        assertEquals(response.getDoctors().get(0).getSpeciality(), "Speciality");
-
-    }
-
-    @Test
     public void shouldSearchBySpeciality() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, null, null, "Speciality");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, null, "Speciality");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
@@ -152,7 +134,7 @@ class SearchDoctorsServiceTest {
 
     @Test
     public void shouldSearchByNameAndSpeciality() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, "Speciality");
+        SearchDoctorsRequest request = new SearchDoctorsRequest("Name", null, "Speciality");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
@@ -169,7 +151,7 @@ class SearchDoctorsServiceTest {
 
     @Test
     public void shouldSearchBySurnameAndSpeciality() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, null, "Surname", "Speciality");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Surname", "Speciality");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
@@ -186,7 +168,7 @@ class SearchDoctorsServiceTest {
 
     @Test
     public void shouldSearchByNameAndSurnameAndSpeciality() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", "Surname", "Speciality");
+        SearchDoctorsRequest request = new SearchDoctorsRequest("Name", "Surname", "Speciality");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
@@ -204,7 +186,7 @@ class SearchDoctorsServiceTest {
     @Test
     public void shouldSearchByNameWithOrderingAscending() {
         DoctorOrdering doctorOrdering = new DoctorOrdering("surname", "ASCENDING");
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, null, doctorOrdering);
+        SearchDoctorsRequest request = new SearchDoctorsRequest("Name", "", null, doctorOrdering, null);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
@@ -222,7 +204,7 @@ class SearchDoctorsServiceTest {
     @Test
     public void shouldSearchByNameWithOrderingDescending() {
         DoctorOrdering doctorOrdering = new DoctorOrdering("surname", "DESCENDING");
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, null, doctorOrdering);
+        SearchDoctorsRequest request = new SearchDoctorsRequest("Name", null, null, doctorOrdering, null);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
@@ -240,7 +222,7 @@ class SearchDoctorsServiceTest {
     @Test
     public void shouldSearchByTitleWithPagingFirstPage() {
         DoctorPaging doctorPaging = new DoctorPaging(1, 1);
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, null, doctorPaging);
+        SearchDoctorsRequest request = new SearchDoctorsRequest("Name", null, null, null, doctorPaging);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();
@@ -257,9 +239,9 @@ class SearchDoctorsServiceTest {
     }
 
     @Test
-    public void shouldSearchByTitleWithPagingSecondPage() {
+    public void shouldSearchByNameWithPagingSecondPage() {
         DoctorPaging doctorPaging = new DoctorPaging(2, 1);
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, null, doctorPaging);
+        SearchDoctorsRequest request = new SearchDoctorsRequest("Name", null, null, null, doctorPaging);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
         List<Doctor> doctors = new ArrayList<>();

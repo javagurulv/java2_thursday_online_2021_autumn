@@ -1,8 +1,6 @@
 package lv.javaguru.java2.hospital.doctor.core.requests;
 
 public class SearchDoctorsRequest {
-
-    private Long id;
     private String name;
     private String surname;
     private String speciality;
@@ -14,40 +12,32 @@ public class SearchDoctorsRequest {
     public SearchDoctorsRequest() {
     }
 
-    public SearchDoctorsRequest(Long id, String name, String surname, String speciality) {
-        this.id = id;
+    public SearchDoctorsRequest(String name, String surname, String speciality) {
         this.name = name;
         this.surname = surname;
         this.speciality = speciality;
     }
 
-    public SearchDoctorsRequest(Long id, String name, String surname, String speciality, DoctorOrdering doctorOrdering) {
-        this.id = id;
+    public SearchDoctorsRequest(String name, String surname, String speciality, DoctorOrdering doctorOrdering) {
         this.name = name;
         this.surname = surname;
         this.speciality = speciality;
         this.doctorOrdering = doctorOrdering;
     }
 
-    public SearchDoctorsRequest(Long id, String name, String surname, String speciality, DoctorPaging doctorPaging) {
-        this.id = id;
+    public SearchDoctorsRequest(String name, String surname, String speciality, DoctorPaging doctorPaging) {
         this.name = name;
         this.surname = surname;
         this.speciality = speciality;
         this.doctorPaging = doctorPaging;
     }
 
-    public SearchDoctorsRequest(Long id, String name, String surname, String speciality, DoctorOrdering doctorOrdering, DoctorPaging doctorPaging) {
-        this.id = id;
+    public SearchDoctorsRequest(String name, String surname, String speciality, DoctorOrdering doctorOrdering, DoctorPaging doctorPaging) {
         this.name = name;
         this.surname = surname;
         this.speciality = speciality;
         this.doctorOrdering = doctorOrdering;
         this.doctorPaging = doctorPaging;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getName() {
@@ -60,10 +50,6 @@ public class SearchDoctorsRequest {
 
     public String getSpeciality() {
         return speciality;
-    }
-
-    public boolean isIdProvided() {
-        return this.id != null;
     }
 
     public boolean isNameProvided() {
@@ -92,10 +78,6 @@ public class SearchDoctorsRequest {
 
     public DoctorPaging getDoctorPaging() {
         return doctorPaging;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setName(String name) {
