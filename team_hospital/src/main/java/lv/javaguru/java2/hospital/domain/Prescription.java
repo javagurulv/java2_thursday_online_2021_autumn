@@ -1,8 +1,5 @@
 package lv.javaguru.java2.hospital.domain;
 
-import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -10,8 +7,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "prescriptions")
 public class Prescription {
-
-    @Autowired @Transient private DoctorRepository doctorRepository;
 
     @Id
     @Column(name = "id")
@@ -98,14 +93,6 @@ public class Prescription {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public DoctorRepository getDoctorRepository() {
-        return doctorRepository;
-    }
-
-    public void setDoctorRepository(DoctorRepository doctorRepository) {
-        this.doctorRepository = doctorRepository;
     }
 
     public String getMedicationName() {
