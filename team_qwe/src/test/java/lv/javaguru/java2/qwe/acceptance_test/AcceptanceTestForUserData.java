@@ -37,7 +37,7 @@ public class AcceptanceTestForUserData {
     @Test
     public void addUserToDatabaseTest2() {
         AddUserRequest request = new AddUserRequest(
-                "Michael", "12", "LOWER_MIDDLE", "25000" //ошибка!
+                "Michael", "12", "LOWER_MIDDLE", "25000"
         );
         getAddUserService().execute(request);
         GetAllUserListRequest request2 = new GetAllUserListRequest();
@@ -81,7 +81,7 @@ public class AcceptanceTestForUserData {
 
     @Test
     public void removeUserFromDatabaseTest3() {
-        RemoveUserRequest request1 = new RemoveUserRequest("AlexOnder"); //ошибка!
+        RemoveUserRequest request1 = new RemoveUserRequest("AlexOnder");
         GetAllUserListRequest request2 = new GetAllUserListRequest();
         RemoveUserResponse response1 = getRemoveUserService().execute(request1);
         GetAllUserListResponse response2 = getAllUserListService().execute(request2);
@@ -109,7 +109,7 @@ public class AcceptanceTestForUserData {
 
     @Test
     public void findUserByNameTest3() {
-        FindUserByNameRequest request = new FindUserByNameRequest("Alex"); //ошибка!
+        FindUserByNameRequest request = new FindUserByNameRequest("Alex");
         FindUserByNameResponse response = getFindUserByName().execute(request);
         assertNull(response.getUser());
     }

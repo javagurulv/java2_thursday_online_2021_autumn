@@ -44,7 +44,7 @@ public class AcceptanceTestForDatabase {
     public void addSecuritiesToDatabaseTest2() {
         AddStockRequest request = new AddStockRequest(
                 "INTC US", "Intel", "Technology", "USD",
-                "53.73", "2.o5", "1.12" //ошибка!
+                "53.73", "2.o5", "1.12"
         );
         getAddStockService().execute(request);
         GetAllSecurityListResponse response = getAllSecurityListService().execute(new GetAllSecurityListRequest());
@@ -62,7 +62,7 @@ public class AcceptanceTestForDatabase {
 
     @Test
     public void removeSecuritiesFromDatabaseTest2() {
-        RemoveSecurityRequest request = new RemoveSecurityRequest("AMZN"); //ошибка!
+        RemoveSecurityRequest request = new RemoveSecurityRequest("AMZN");
         RemoveSecurityResponse response1 = getRemoveSecurityService().execute(request);
         GetAllSecurityListResponse response2 = getAllSecurityListService().execute(new GetAllSecurityListRequest());
         assertFalse(response1.isRemoved());
