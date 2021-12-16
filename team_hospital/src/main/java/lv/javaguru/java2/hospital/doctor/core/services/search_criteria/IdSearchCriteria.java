@@ -6,24 +6,21 @@ import lv.javaguru.java2.hospital.domain.Doctor;
 
 import java.util.List;
 
-public class NameAndSurnameSearchCriteria implements DoctorsSearchCriteria{
+public class IdSearchCriteria implements DoctorsSearchCriteria{
 
     private final DoctorRepository database;
 
-    public NameAndSurnameSearchCriteria(DoctorRepository database) {
+    public IdSearchCriteria(DoctorRepository database) {
         this.database = database;
     }
 
     @Override
     public boolean canProcess(SearchDoctorsRequest request) {
-        return request.isNameProvided()
-                && request.isSurnameProvided()
-                && !request.isSpecialityProvided()
-                && !request.isIdProvided();
+        return request.isIdProvided();
     }
 
     @Override
     public List<Doctor> process(SearchDoctorsRequest request) {
-        return database.findByNameAndSurname(request.getName(), request.getSurname());
+        return database.findById(request.getId());
     }
 }

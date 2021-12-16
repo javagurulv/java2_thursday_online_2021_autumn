@@ -16,6 +16,7 @@ public class SearchDoctorsUIAction implements DoctorUIAction {
     @Override
     public void execute() {
         GetUserInput getUserInput = new GetUserInput();
+        Long id = getUserInput.getUserLongInput("Enter doctor id: ");
         String name = getUserInput.getUserStringInput("Enter doctor name: ");
         String surname = getUserInput.getUserStringInput("Enter doctor surname: ");
         String speciality = getUserInput.getUserStringInput("Enter doctor speciality: ");
@@ -28,7 +29,7 @@ public class SearchDoctorsUIAction implements DoctorUIAction {
         Integer pageSize = getUserInput.getUserNumericInput("Enter pageSize: ");
         DoctorPaging doctorPaging = new DoctorPaging(pageNumber, pageSize);
 
-        SearchDoctorsRequest request = new SearchDoctorsRequest(name, surname, speciality, doctorOrdering, doctorPaging);
+        SearchDoctorsRequest request = new SearchDoctorsRequest(id, name, surname, speciality, doctorOrdering, doctorPaging);
         SearchDoctorsResponse response = searchDoctorsService.execute(request);
 
         if (response.hasErrors()) {

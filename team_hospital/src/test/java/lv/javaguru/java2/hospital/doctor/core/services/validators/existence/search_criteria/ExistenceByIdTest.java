@@ -22,28 +22,28 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-class ExistenceByNameTest {
+class ExistenceByIdTest {
 
     @Mock
     private DoctorRepository database;
     @InjectMocks
-    private ExistenceByName existence;
+    private ExistenceById existence;
 
     @Test
     public void shouldReturnTrue() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", "", "");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(964L, "", "", "");
         assertTrue(existence.canValidate(request));
     }
 
     @Test
     public void shouldReturnFalse() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "", "", "Speciality74");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name64", "Surname68543", "Speciality74");
         assertFalse(existence.canValidate(request));
     }
 
     @Test
     public void shouldReturnDoctorError() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name927", "", "");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(541L, "", "", "");
         Optional<CoreError> errorList = existence.validateExistence(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.get().getField(), "Doctor");
@@ -52,9 +52,10 @@ class ExistenceByNameTest {
 
     @Test
     public void shouldReturnEmptyList() {
-        Doctor doctor = new Doctor("Name2456", "Surname2235", "Speciality7236");
+        Doctor doctor = new Doctor("Name253", "Surname235", "Speciality746");
+        Long doctorsId = doctor.getId();
 
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name2456", "", "");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(doctorsId, "", "", "");
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
         Mockito.when(database.getAllDoctors()).thenReturn(doctors);
@@ -62,5 +63,4 @@ class ExistenceByNameTest {
         Optional<CoreError> errorList = existence.validateExistence(request);
         assertTrue(errorList.isEmpty());
     }
-
 }

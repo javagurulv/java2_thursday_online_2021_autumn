@@ -12,6 +12,7 @@ import java.util.List;
 @Component
 public class DoctorExistenceForSearchValidator {
 
+    @Autowired private ExistenceById existenceById;
     @Autowired private ExistenceByNameAndSurnameAndSpeciality existenceByNameAndSurnameAndSpeciality;
     @Autowired private ExistenceByNameAndSurname existenceByNameAndSurname;
     @Autowired private ExistenceByNameAndSpeciality existenceByNameAndSpeciality;
@@ -37,6 +38,7 @@ public class DoctorExistenceForSearchValidator {
 
     private DoctorExistenceBySearchCriteria[] getDoctorsExistenceBySearchCriteria() {
         DoctorExistenceBySearchCriteria[] doctorExistenceBySearchCriteria = {
+                existenceById,
                 existenceByNameAndSurnameAndSpeciality,
                 existenceByNameAndSurname,
                 existenceByNameAndSpeciality,

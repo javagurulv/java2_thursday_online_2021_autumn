@@ -57,10 +57,11 @@ public class DoctorRestController {
     }
 
     @GetMapping(path = "/search", produces = "application/json")
-    public SearchDoctorsResponse searchDoctorsGet(@RequestParam String name,
+    public SearchDoctorsResponse searchDoctorsGet(@RequestParam Long id,
+                                                  @RequestParam String name,
                                                     @RequestParam String surname,
                                                     @RequestParam String speciality){
-        SearchDoctorsRequest request = new SearchDoctorsRequest(name, surname, speciality);
+        SearchDoctorsRequest request = new SearchDoctorsRequest(id, name, surname, speciality);
         return searchDoctorsService.execute(request);
     }
 

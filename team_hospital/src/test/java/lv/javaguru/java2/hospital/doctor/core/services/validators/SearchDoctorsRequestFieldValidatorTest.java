@@ -13,99 +13,106 @@ class SearchDoctorsRequestFieldValidatorTest {
     private SearchDoctorsRequestFieldValidator validator = new SearchDoctorsRequestFieldValidator();
 
     @Test
+    public void shouldNotReturnErrorsWhenIdIsProvided() {
+        SearchDoctorsRequest request = new SearchDoctorsRequest(1L, null, null, null);
+        List<CoreError> errors = validator.validate(request);
+        assertEquals(errors.size(), 0);
+    }
+
+    @Test
     public void shouldNotReturnErrorsWhenNameIsProvided() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest("Name", null, null);
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, null);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorsWhenSurnameIsProvided() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Surname", null);
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, null, "Surname", null);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorsWhenSpecialityIsProvided() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, null, "Speciality");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, null, null, "Speciality");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorsWhenIdAndNameAreProvided() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest("Name", null, null);
+        SearchDoctorsRequest request = new SearchDoctorsRequest(1L, "Name", null, null);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorsWhenIdAndSurnameAreProvided() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Surname", null);
+        SearchDoctorsRequest request = new SearchDoctorsRequest(1L, null, "Surname", null);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorsWhenIdAndSpecialityAreProvided() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, null, "Speciality");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(1L, null, null, "Speciality");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorsWhenNameAndSurnameAreProvided() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest("Name", "Surname", null);
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", "Surname", null);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorsWhenNameAndSpecialityAreProvided() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest("Name", null, "Speciality");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", null, "Speciality");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorsWhenSurnameAndSpecialityAreProvided() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Surname", "Speciality");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, null, "Surname", "Speciality");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorsWhenIdAndNameAndSurnameAreProvided() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest("Name", "Surname", null);
+        SearchDoctorsRequest request = new SearchDoctorsRequest(1L, "Name", "Surname", null);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorsWhenIdAndNameAndSpecialityAreProvided() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest("Name", null, "Speciality");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(1L, "Name", null, "Speciality");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorsWhenIdAndSurnameAndSpecialityAreProvided() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Surname", "Speciality");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(1L, null, "Surname", "Speciality");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldNotReturnErrorsWhenNameAndSurnameAndSpecialityAreProvided() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest( "Name", "Surname", "Speciality");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", "Surname", "Speciality");
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 0);
     }
 
     @Test
     public void shouldReturnErrorWhenSearchFieldsAreEmpty() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(null, null, null);
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, null, null, null);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 4);
         assertEquals(errors.get(0).getField(), "id");

@@ -29,13 +29,13 @@ class SpecialitySearchCriteriaTest {
 
     @Test
     public void shouldReturnTrue() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest("", "", "Spec66");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "", "", "Spec66");
         assertTrue(searchCriteria.canProcess(request));
     }
 
     @Test
     public void shouldReturnFalse() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest("", "Surname88543", "");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "", "Surname88543", "");
         assertFalse(searchCriteria.canProcess(request));
     }
 
@@ -45,7 +45,7 @@ class SpecialitySearchCriteriaTest {
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor1);
         Mockito.when(database.findBySpeciality("Speciality31")).thenReturn(doctors);
-        SearchDoctorsRequest request = new SearchDoctorsRequest("", "", "Speciality31");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "", "", "Speciality31");
         Doctor doctor2 = searchCriteria.process(request).get(0);
         assertEquals(searchCriteria.process(request).size(), 1);
         assertEquals(doctor2.getName(), ("Name26"));
@@ -61,7 +61,7 @@ class SpecialitySearchCriteriaTest {
         doctors.add(doctor1);
         doctors.add(doctor2);
         Mockito.when(database.findBySpeciality("Speciality30")).thenReturn(doctors);
-        SearchDoctorsRequest request = new SearchDoctorsRequest("", "", "Speciality30");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null,"", "", "Speciality30");
         Doctor doctor3 = searchCriteria.process(request).get(0);
         assertEquals(searchCriteria.process(request).size(), 2);
         assertEquals(doctor3.getName(), ("Name232"));

@@ -19,6 +19,7 @@ public class ExistenceByNameAndSpeciality implements DoctorExistenceBySearchCrit
     @Override
     public boolean canValidate(SearchDoctorsRequest request) {
         return request.isNameProvided()
+                && !request.isIdProvided()
                 && request.isSpecialityProvided()
                 && !request.isSurnameProvided();
     }

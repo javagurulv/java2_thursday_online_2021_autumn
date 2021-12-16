@@ -11,24 +11,20 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Component
-public class ExistenceBySurnameAndSpeciality implements DoctorExistenceBySearchCriteria{
+public class ExistenceById implements DoctorExistenceBySearchCriteria {
 
     @Autowired
     private DoctorRepository database;
 
     @Override
     public boolean canValidate(SearchDoctorsRequest request) {
-        return request.isSurnameProvided()
-                && request.isSpecialityProvided()
-                && !request.isIdProvided()
-                && !request.isNameProvided();
+        return request.isIdProvided();
     }
 
     @Override
     public Optional<CoreError> validateExistence(SearchDoctorsRequest request) {
         for (Doctor doctor : database.getAllDoctors()) {
-            if (Objects.equals(doctor.getSurname(), request.getSurname())
-                    && Objects.equals(doctor.getSpeciality(), request.getSpeciality())) {
+            if (Objects.equals(doctor.getId(), request.getId())) {
                 return Optional.empty();
             }
         }

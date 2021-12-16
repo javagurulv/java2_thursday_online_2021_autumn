@@ -31,20 +31,20 @@ class ExistenceByNameAndSurnameAndSpecialityTest {
 
     @Test
     public void shouldReturnTrue() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest("Name", "Surname", "Speciality");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name", "Surname", "Speciality");
         assertTrue(existence.canValidate(request));
     }
 
     @Test
     public void shouldReturnFalse() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest("Name64", "Surname68543", "");
+        SearchDoctorsRequest request = new SearchDoctorsRequest(null, "Name64", "Surname68543", "");
         assertFalse(existence.canValidate(request));
     }
 
     @Test
     public void shouldReturnDoctorError() {
         SearchDoctorsRequest request = new SearchDoctorsRequest
-                ("Name156", "Surname75", "Speciality826");
+                (null, "Name156", "Surname75", "Speciality826");
         Optional<CoreError> errorList = existence.validateExistence(request);
         assertFalse(errorList.isEmpty());
         assertEquals(errorList.get().getField(), "Doctor");
@@ -56,7 +56,7 @@ class ExistenceByNameAndSurnameAndSpecialityTest {
         Doctor doctor = new Doctor("Name156", "Surname75", "Speciality826");
 
         SearchDoctorsRequest request = new SearchDoctorsRequest
-                ("Name156", "Surname75", "Speciality826");
+                (null, "Name156", "Surname75", "Speciality826");
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
         Mockito.when(database.getAllDoctors()).thenReturn(doctors);
