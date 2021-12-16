@@ -7,13 +7,13 @@ import lv.javaguru.java2.oddJobs.core.response.CoreResponse;
 import java.util.List;
 
 public class DeleteAdvertisementResponse extends CoreResponse {
-    private Advertisement deletedClientResponse;
+    private Advertisement deletedAdvertisement;
 
     public DeleteAdvertisementResponse(List<CoreError> errors) {
         super(errors);
     }
 
-    public DeleteAdvertisementResponse(Advertisement deletedClientResponse) {
-        this.deletedClientResponse = deletedClientResponse;
+    public DeleteAdvertisementResponse(Advertisement deletedAdvertisement) {
+        this.deletedAdvertisement = deletedAdvertisement;
     }
 }

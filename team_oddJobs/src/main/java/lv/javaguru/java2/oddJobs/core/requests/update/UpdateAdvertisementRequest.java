@@ -1,7 +1,7 @@
 package lv.javaguru.java2.oddJobs.core.requests.update;
 
 public class UpdateAdvertisementRequest {
-
+    private Long id;
     private String newAdvTitle;
     private String newAdvDescription;
 
@@ -14,5 +14,9 @@ public class UpdateAdvertisementRequest {
 
     public String getNewAdvDescription() {
         return newAdvDescription;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

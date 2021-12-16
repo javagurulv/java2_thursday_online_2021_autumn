@@ -13,7 +13,6 @@ public class SpecialistRepository {
     @Autowired
     private SessionFactory sessionFactory;
 
-
     public void save(Specialist specialist) {
         sessionFactory.getCurrentSession().save(specialist);
     }

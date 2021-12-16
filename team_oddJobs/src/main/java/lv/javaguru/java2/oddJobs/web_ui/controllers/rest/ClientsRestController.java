@@ -2,18 +2,14 @@ package lv.javaguru.java2.oddJobs.web_ui.controllers.rest;
 
 import lv.javaguru.java2.oddJobs.core.requests.add.AddClientRequest;
 import lv.javaguru.java2.oddJobs.core.requests.find.FindClientsRequest;
-import lv.javaguru.java2.oddJobs.core.requests.find.FindSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.requests.get.GetClientRequest;
 import lv.javaguru.java2.oddJobs.core.requests.remove.DeleteClientRequest;
 import lv.javaguru.java2.oddJobs.core.requests.update.UpdateClientRequest;
-import lv.javaguru.java2.oddJobs.core.requests.update.UpdateSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.response.add.AddClientResponse;
 import lv.javaguru.java2.oddJobs.core.response.find.FindClientsResponse;
-import lv.javaguru.java2.oddJobs.core.response.find.FindSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.response.get.GetClientResponse;
 import lv.javaguru.java2.oddJobs.core.response.remove.DeleteClientResponse;
 import lv.javaguru.java2.oddJobs.core.response.update.UpdateClientResponse;
-import lv.javaguru.java2.oddJobs.core.response.update.UpdateSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.services.add.AddClientService;
 import lv.javaguru.java2.oddJobs.core.services.find.FindClientService;
 import lv.javaguru.java2.oddJobs.core.services.get.GetClientService;
@@ -26,11 +22,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/client")
 public class ClientsRestController {
 
-    @Autowired private GetClientService getClientService;
-    @Autowired private AddClientService addClientService;
-    @Autowired private UpdateClientService clientService;
-    @Autowired private DeleteClientService deleteClientService;
-    @Autowired private FindClientService findClientsService;
+    @Autowired
+    private GetClientService getClientService;
+    @Autowired
+    private AddClientService addClientService;
+    @Autowired
+    private UpdateClientService clientService;
+    @Autowired
+    private DeleteClientService deleteClientService;
+    @Autowired
+    private FindClientService findClientsService;
 
     @GetMapping(path = "/{id}", produces = "application/json")
     public GetClientResponse getClientResponse(@PathVariable Long id) {
@@ -67,8 +68,8 @@ public class ClientsRestController {
 
     @GetMapping(path = "/search", produces = "application/json")
     public FindClientsResponse searchSpecialistGet(@RequestParam String clientName,
-                                                      @RequestParam String clientSurname) {
-        FindClientsRequest request = new FindClientsRequest(clientName,clientSurname);
+                                                   @RequestParam String clientSurname) {
+        FindClientsRequest request = new FindClientsRequest(clientName, clientSurname);
         return findClientsService.execute(request);
     }
 }

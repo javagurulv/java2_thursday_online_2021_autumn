@@ -25,6 +25,10 @@ public class Advertisement {
         this.advDescription = advDescription;
     }
 
+    public Advertisement(Long advId) {
+        this.advId = advId;
+    }
+
     public Advertisement() {
 
     }

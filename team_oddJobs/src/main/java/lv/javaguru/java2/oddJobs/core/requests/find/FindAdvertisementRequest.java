@@ -17,6 +17,10 @@ public class FindAdvertisementRequest {
         this.advTitle = advTitle;
     }
 
+    public FindAdvertisementRequest(String advTitle){
+        this.advTitle=advTitle;
+    }
+
     public FindAdvertisementRequest(Long advId, String advTitle, Ordering ordering) {
         this.advId = advId;
         this.advTitle = advTitle;

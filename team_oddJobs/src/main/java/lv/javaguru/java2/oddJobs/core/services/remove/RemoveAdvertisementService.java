@@ -23,8 +23,8 @@ public class RemoveAdvertisementService {
         if ((!errors.isEmpty())) {
             return new RemoveAdvertisementResponse(errors);
         }
-        boolean isAdvertisemetRemoved = advertisementRepository.removeAdvertisement(request.getAdvId(), request.getAdvTitle());
-        return new RemoveAdvertisementResponse(isAdvertisemetRemoved);
+        boolean isAdvertisementRemoved = advertisementRepository.removeAdvertisement(request.getAdvId(), request.getAdvTitle());
+        return new RemoveAdvertisementResponse(isAdvertisementRemoved);
 
         }
 

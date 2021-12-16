@@ -2,16 +2,9 @@ package lv.javaguru.java2.oddJobs.core.services.remove;
 
 import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.ClientRepository;
 import lv.javaguru.java2.oddJobs.core.requests.remove.DeleteClientRequest;
-import lv.javaguru.java2.oddJobs.core.requests.remove.DeleteSpecialistRequest;
-import lv.javaguru.java2.oddJobs.core.requests.remove.RemoveClientRequest;
-import lv.javaguru.java2.oddJobs.core.requests.remove.RemoveSpecialistRequest;
 import lv.javaguru.java2.oddJobs.core.response.CoreError;
 import lv.javaguru.java2.oddJobs.core.response.remove.DeleteClientResponse;
-import lv.javaguru.java2.oddJobs.core.response.remove.DeleteSpecialistResponse;
-import lv.javaguru.java2.oddJobs.core.response.remove.RemoveClientResponse;
-import lv.javaguru.java2.oddJobs.core.response.remove.RemoveSpecialistResponse;
 import lv.javaguru.java2.oddJobs.core.validations.remove.DeleteClientValidator;
-import lv.javaguru.java2.oddJobs.core.validations.remove.RemoveClientValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

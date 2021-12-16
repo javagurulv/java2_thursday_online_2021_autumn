@@ -1,15 +1,11 @@
 package lv.javaguru.java2.oddJobs.core.database;
 
 
-
 import lv.javaguru.java2.oddJobs.core.database.domainInterfaces.AdvertisementRepository;
 import lv.javaguru.java2.oddJobs.core.domain.Advertisement;
-
-import lv.javaguru.java2.oddJobs.core.domain.Specialist;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 
 import javax.persistence.Query;
 import javax.transaction.Transactional;
@@ -34,6 +30,15 @@ public class OrmAdvertisementRepositoryImpl implements AdvertisementRepository {
                 "delete Advertisement where advId = :advId AND advTitle = :advTitle");
         query.setParameter("advId", advId);
         query.setParameter("advTitle", advTitle);
+        int result = query.executeUpdate();
+        return result == 1;
+    }
+
+    @Override
+    public boolean removeAdvertisementById(Long advId) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "delete Advertisement where advId = :advId");
+        query.setParameter("advId", advId);
         int result = query.executeUpdate();
         return result == 1;
     }
@@ -65,7 +70,7 @@ public class OrmAdvertisementRepositoryImpl implements AdvertisementRepository {
     @Override
     public Optional<Advertisement> getById(Long id) {
 
-        Advertisement advertisement = sessionFactory.getCurrentSession().get(Advertisement.class,id);
+        Advertisement advertisement = sessionFactory.getCurrentSession().get(Advertisement.class, id);
         if (advertisement == null) {
             return Optional.empty();
         } else {

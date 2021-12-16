@@ -36,8 +36,8 @@ public class OrmSpecialistRepositoryImpl implements SpecialistRepository {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "delete Specialist where specialistId = :specialistId AND specialistName = :specialistName AND specialistSurname = :specialistSurname");
         query.setParameter("specialistId", specialistId);
-        query.setParameter("specialistName",specialistName);
-        query.setParameter("specialistSurname",specialistSurname);
+        query.setParameter("specialistName", specialistName);
+        query.setParameter("specialistSurname", specialistSurname);
         int result = query.executeUpdate();
         return result == 1;
     }
@@ -52,10 +52,10 @@ public class OrmSpecialistRepositoryImpl implements SpecialistRepository {
 
     @Override
     public List<Specialist> findSpecialistByName(String specialistName) {
-            Query query = sessionFactory.getCurrentSession().createQuery(
-                    "select b FROM Specialist b where specialistName = :specialistName");
-            query.setParameter("specialistName", specialistName);
-            return query.getResultList();
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "select b FROM Specialist b where specialistName = :specialistName");
+        query.setParameter("specialistName", specialistName);
+        return query.getResultList();
     }
 
     @Override
@@ -87,13 +87,13 @@ public class OrmSpecialistRepositoryImpl implements SpecialistRepository {
     @Override
     public List<Specialist> getAllSpecialist() {
         return sessionFactory.getCurrentSession()
-                    .createQuery("SELECT b FROM  Specialist b ", Specialist.class)
-                    .getResultList();
-        }
+                .createQuery("SELECT b FROM  Specialist b ", Specialist.class)
+                .getResultList();
+    }
 
     @Override
     public Optional<Specialist> getById(Long id) {
-        Specialist specialist = sessionFactory.getCurrentSession().get(Specialist.class,id);
+        Specialist specialist = sessionFactory.getCurrentSession().get(Specialist.class, id);
         if (specialist == null) {
             return Optional.empty();
         } else {

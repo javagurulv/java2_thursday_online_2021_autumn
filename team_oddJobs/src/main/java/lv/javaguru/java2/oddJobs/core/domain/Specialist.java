@@ -28,12 +28,12 @@ public class Specialist {
     private String city;
 
 
-    public Specialist(String specialistName, String specialistSurname, String specialistProfession,String personalCode, String city) {
+    public Specialist(String specialistName, String specialistSurname, String specialistProfession, String personalCode, String city) {
         this.specialistName = specialistName;
         this.specialistSurname = specialistSurname;
         this.specialistProfession = specialistProfession;
-        this.personalCode=personalCode;
-        this.city=city;
+        this.personalCode = personalCode;
+        this.city = city;
     }
 
     public Specialist(Long specialistId) {

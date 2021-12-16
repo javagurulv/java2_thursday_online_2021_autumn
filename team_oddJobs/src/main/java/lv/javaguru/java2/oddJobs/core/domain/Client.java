@@ -27,16 +27,16 @@ public class Client {
     public Client(String clientName, String clientSurname, String personalCode, String city) {
         this.clientName = clientName;
         this.clientSurname = clientSurname;
-        this.personalCode=personalCode;
-        this.city=city;
+        this.personalCode = personalCode;
+        this.city = city;
     }
 
-    public Client(Long clientId, String clientName, String clientSurname,String personalCode, String city) {
+    public Client(Long clientId, String clientName, String clientSurname, String personalCode, String city) {
         this.clientId = clientId;
         this.clientName = clientName;
         this.clientSurname = clientSurname;
-        this.personalCode=personalCode;
-        this.city=city;
+        this.personalCode = personalCode;
+        this.city = city;
     }
 
     public Client(Long clientId) {
