@@ -19,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,9 +36,9 @@ class AddPrescriptionValidatorTest {
     public void shouldReturnDoctorIdError(){
         Long patientId = 21L;
         AddPrescriptionRequest request = new AddPrescriptionRequest(null, patientId.toString(), "MedicationName", "1");
-        Patient patient = new Patient("Patient name", "PatientSurname", "121212-12342");
-        patient.setId(patientId);
-        Mockito.when(patientRepository.findById(patientId)).thenReturn(Collections.singletonList(patient));
+        Optional<Patient> patient = Optional.of(new Patient("Patient name", "PatientSurname", "121212-12342"));
+        patient.get().setId(patientId);
+        Mockito.when(patientRepository.findById(patientId)).thenReturn(patient);
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
         assertEquals(errors.size(), 1);
@@ -72,9 +73,9 @@ class AddPrescriptionValidatorTest {
         doctor.setId(doctorId);
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
-        Patient patient = new Patient("Patient name", "PatientSurname", "121212-12342");
-        patient.setId(patientId);
-        Mockito.when(patientRepository.findById(patientId)).thenReturn(Collections.singletonList(patient));
+        Optional<Patient> patient = Optional.of(new Patient("Patient name", "PatientSurname", "121212-12342"));
+        patient.get().setId(patientId);
+        Mockito.when(patientRepository.findById(patientId)).thenReturn(patient);
         Mockito.when(doctorRepository.findById(doctorId)).thenReturn(doctors);
 
         List<CoreError> errors = validator.validate(request);
@@ -94,9 +95,9 @@ class AddPrescriptionValidatorTest {
         doctor.setId(doctorId);
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
-        Patient patient = new Patient("Patient name", "PatientSurname", "121212-12342");
-        patient.setId(patientId);
-        Mockito.when(patientRepository.findById(patientId)).thenReturn(Collections.singletonList(patient));
+        Optional<Patient> patient = Optional.of(new Patient("Patient name", "PatientSurname", "121212-12342"));
+        patient.get().setId(patientId);
+        Mockito.when(patientRepository.findById(patientId)).thenReturn(patient);
         Mockito.when(doctorRepository.findById(doctorId)).thenReturn(doctors);
 
         List<CoreError> errors = validator.validate(request);
@@ -116,9 +117,9 @@ class AddPrescriptionValidatorTest {
         doctor.setId(doctorId);
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
-        Patient patient = new Patient("Patient name", "PatientSurname", "121212-12342");
-        patient.setId(patientId);
-        Mockito.when(patientRepository.findById(patientId)).thenReturn(Collections.singletonList(patient));
+        Optional<Patient> patient = Optional.of(new Patient("Patient name", "PatientSurname", "121212-12342"));
+        patient.get().setId(patientId);
+        Mockito.when(patientRepository.findById(patientId)).thenReturn(patient);
         Mockito.when(doctorRepository.findById(doctorId)).thenReturn(doctors);
 
         List<CoreError> errors = validator.validate(request);
@@ -134,9 +135,9 @@ class AddPrescriptionValidatorTest {
         Long patientId = 15L;
         AddPrescriptionRequest request = new AddPrescriptionRequest(doctorId.toString(), patientId.toString(), "MedicationName", "2");
 
-        Patient patient = new Patient("Patient name", "PatientSurname", "121212-12342");
-        patient.setId(patientId);
-        Mockito.when(patientRepository.findById(patientId)).thenReturn(Collections.singletonList(patient));
+        Optional<Patient> patient = Optional.of(new Patient("Patient name", "PatientSurname", "121212-12342"));
+        patient.get().setId(patientId);
+        Mockito.when(patientRepository.findById(patientId)).thenReturn(patient);
 
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -174,9 +175,9 @@ class AddPrescriptionValidatorTest {
         doctor.setId(doctorId);
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
-        Patient patient = new Patient("Patient name", "PatientSurname", "121212-12342");
-        patient.setId(patientId);
-        Mockito.when(patientRepository.findById(patientId)).thenReturn(Collections.singletonList(patient));
+        Optional<Patient> patient = Optional.of(new Patient("Patient name", "PatientSurname", "121212-12342"));
+        patient.get().setId(patientId);
+        Mockito.when(patientRepository.findById(patientId)).thenReturn(patient);
         Mockito.when(doctorRepository.findById(doctorId)).thenReturn(doctors);
 
         List<CoreError> errors = validator.validate(request);

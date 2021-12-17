@@ -17,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,13 +34,12 @@ class FindPatientByIdServiceTest {
         FindPatientByIdRequest request = new FindPatientByIdRequest("1");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
-        List<Patient> patients = new ArrayList<>();
-        patients.add(new Patient("name", "surname", "1234"));
-        Mockito.when(database.findById(1L)).thenReturn(patients);
+        Optional<Patient> patient = Optional.of(new Patient("name", "surname", "1234"));
+        Mockito.when(database.findById(1L)).thenReturn(patient);
 
         FindPatientByIDResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        assertEquals(response.getPatient(), patients);
+        assertEquals(response.getPatient(), patient);
     }
 
     @Test
@@ -47,13 +47,11 @@ class FindPatientByIdServiceTest {
         FindPatientByIdRequest request = new FindPatientByIdRequest("2");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
-        List<Patient> patients = new ArrayList<>();
-        patients.add(new Patient("name", "surname", "1234"));
-        Mockito.when(database.findById(2L)).thenReturn(new ArrayList<>());
+        Mockito.when(database.findById(2L)).thenReturn(Optional.empty());
 
         FindPatientByIDResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        assertEquals(response.getPatient(), new ArrayList<>());
+        assertEquals(response.getPatient(), Optional.empty());
     }
 
     @Test

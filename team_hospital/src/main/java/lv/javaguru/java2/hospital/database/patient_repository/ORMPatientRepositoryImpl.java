@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 @Component
 public class ORMPatientRepositoryImpl implements PatientRepository {
@@ -21,11 +22,12 @@ public class ORMPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> findById(Long id) {
+    public Optional<Patient> findById(Long id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT p FROM Patient p WHERE id = :id");
         query.setParameter("id", id);
-        return query.getResultList();
+        List<Patient> patient = query.getResultList();
+        return Optional.of(patient.get(0));
     }
 
     @Override

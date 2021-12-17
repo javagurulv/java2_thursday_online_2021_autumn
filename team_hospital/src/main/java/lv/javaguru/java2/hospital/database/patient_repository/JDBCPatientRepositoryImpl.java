@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 //@Component
 public class JDBCPatientRepositoryImpl implements PatientRepository {
@@ -24,10 +25,11 @@ public class JDBCPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> findById(Long id) {
+    public Optional<Patient> findById(Long id) {
         String sql = "SELECT * FROM patients WHERE id = ?";
         Object[] args = new Object[]{id};
-        return jdbcTemplate.query(sql, args, patientRowMapper);
+        List<Patient> p = jdbcTemplate.query(sql, args, patientRowMapper);
+        return Optional.of(p.get(0));
     }
 
     @Override

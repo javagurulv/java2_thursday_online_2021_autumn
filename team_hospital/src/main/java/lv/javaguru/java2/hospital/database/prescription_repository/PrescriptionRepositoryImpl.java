@@ -35,7 +35,7 @@ public class PrescriptionRepositoryImpl implements PrescriptionRepository {
         if (prescriptionToEdit.isPresent()) {
             Prescription prescription = prescriptionToEdit.get();
             if (prescriptionEnum.equals(EditPrescriptionEnum.PATIENT)) {
-                prescription.setPatient(patientRepository.findById(Long.parseLong(changes)).get(0));
+                prescription.setPatient(patientRepository.findById(Long.parseLong(changes)).get());
                 return true;
             } else if (prescriptionEnum.equals(EditPrescriptionEnum.QUANTITY)) {
                 prescription.setQuantity(Integer.parseInt(changes));

@@ -145,7 +145,7 @@ class AddVisitValidatorTest {
         doctors.add(new Doctor("name", "surname", "speciality"));
 
         Mockito.when(patientRepository.findById(Long.valueOf(addVisitRequest.getPatientID())))
-                .thenReturn(new ArrayList<>());
+                .thenReturn(Optional.empty());
         Mockito.when(doctorRepository.findById(Long.valueOf(addVisitRequest.getDoctorsID())))
                 .thenReturn(doctors);
 
@@ -163,11 +163,10 @@ class AddVisitValidatorTest {
                 "2",
                 "12-12-2021 12:00");
 
-        List<Patient> patients = new ArrayList<>();
-        patients.add(new Patient("name", "surname", "1234"));
+        Optional<Patient> patient = Optional.of(new Patient("name", "surname", "1234"));
 
         Mockito.when(patientRepository.findById(Long.valueOf(addVisitRequest.getPatientID())))
-                .thenReturn(patients);
+                .thenReturn(patient);
         Mockito.when(doctorRepository.findById(Long.valueOf(addVisitRequest.getDoctorsID())))
                 .thenReturn(new ArrayList<>());
 
@@ -306,13 +305,12 @@ class AddVisitValidatorTest {
                 "2",
                 "12-12-2021 12:00");
 
-        List<Patient> patients = new ArrayList<>();
-        patients.add(new Patient("name", "surname", "1234"));
+        Optional<Patient> patient = Optional.of(new Patient("name", "surname", "1234"));
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("name", "surname", "speciality"));
 
         Mockito.when(patientRepository.findById(Long.valueOf(addVisitRequest.getPatientID())))
-                .thenReturn(patients);
+                .thenReturn(patient);
         Mockito.when(doctorRepository.findById(Long.valueOf(addVisitRequest.getDoctorsID())))
                 .thenReturn(doctors);
 
@@ -329,15 +327,14 @@ class AddVisitValidatorTest {
                 "2021-12-12 12:00");
 
         LocalDateTime dateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse("2021-12-12 12:00"));
-        List<Patient> patients = new ArrayList<>();
-        patients.add(new Patient("name", "surname", "1234"));
-        patients.get(0).setId(1L);
+        Optional<Patient> patient = Optional.of(new Patient("name", "surname", "1234"));
+        patient.get().setId(1L);
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("name", "surname", "speciality"));
         doctors.get(0).setId(2L);
 
         Mockito.when(patientRepository.findById(Long.valueOf(addVisitRequest.getPatientID())))
-                .thenReturn(patients);
+                .thenReturn(patient);
         Mockito.when(doctorRepository.findById(Long.valueOf(addVisitRequest.getDoctorsID())))
                 .thenReturn(doctors);
         Mockito.when(visitExistenceForAdding.validateExistenceForAdding(addVisitRequest))

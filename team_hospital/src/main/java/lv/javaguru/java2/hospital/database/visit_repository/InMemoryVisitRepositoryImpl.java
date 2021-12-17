@@ -51,7 +51,7 @@ public class InMemoryVisitRepositoryImpl implements VisitRepository {
                 visitToEdit.setDoctor(doctorRepository.findById(Long.parseLong(changes)).get(0));
                 isVisitEdited = true;
             } else if (userInput.equals(EditVisitEnum.PATIENT_ID)) {
-                visitToEdit.setPatient(patientRepository.findById(Long.parseLong(changes)).get(0));
+                visitToEdit.setPatient(patientRepository.findById(Long.parseLong(changes)).get());
                 isVisitEdited = true;
             } else if (userInput.equals(EditVisitEnum.DATE)){
                 visitToEdit.setVisitDate(LocalDateTime.parse(changes));

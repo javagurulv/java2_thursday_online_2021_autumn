@@ -6,6 +6,7 @@ import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 //@Component
@@ -22,15 +23,13 @@ public class InMemoryPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> findById(Long id) {
-        List<Patient> patients = new ArrayList<>();
+    public Optional<Patient> findById(Long id) {
         for (Patient patient : patientsList) {
             if (Objects.equals(id, patient.getId())) {
-                patients.add(patient);
-                return patients;
+                return Optional.of(patient);
             }
         }
-        return new ArrayList<>();
+        return Optional.empty();
     }
 
     @Override

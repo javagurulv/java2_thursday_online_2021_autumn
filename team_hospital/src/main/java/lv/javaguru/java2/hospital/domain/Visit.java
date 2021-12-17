@@ -1,8 +1,5 @@
 package lv.javaguru.java2.hospital.domain;
 
-import lv.javaguru.java2.hospital.visit.core.services.date_converter.GetVisitDate;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

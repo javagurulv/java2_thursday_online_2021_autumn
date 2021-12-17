@@ -73,7 +73,7 @@ public class EditPrescriptionValidator {
 
     private Optional<CoreError> validatePatientExistence(EditPrescriptionRequest request){
         return !request.getEditPrescriptionEnum().equals("PATIENT")
-                ? Optional.empty() : !patientRepository.findById(Long.valueOf(request.getChanges())).isEmpty()
+                ? Optional.empty() : patientRepository.findById(Long.valueOf(request.getChanges())).isPresent()
                 ? Optional.empty() : Optional.of(new CoreError("Patient", "does not exist!"));
     }
 }

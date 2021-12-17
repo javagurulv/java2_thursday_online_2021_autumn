@@ -21,6 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -68,11 +69,9 @@ class AddPrescriptionServiceTest {
         doctor.setId(doctorId);
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
-        Patient patient = new Patient("Patient name", "PatientSurname", "121212-12342");
-        List<Patient> patients = new ArrayList<>();
-        patients.add(patient);
-        patient.setId(patientId);
-        Mockito.when(patientRepository.findById(patientId)).thenReturn(patients);
+        Optional<Patient> patient = Optional.of(new Patient("name", "surname", "1234"));
+        patient.get().setId(patientId);
+        Mockito.when(patientRepository.findById(patientId)).thenReturn(patient);
         Mockito.when(doctorRepository.findById(doctorId)).thenReturn(doctors);
 
         AddPrescriptionResponse response = service.execute(request);

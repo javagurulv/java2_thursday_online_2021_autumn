@@ -42,8 +42,8 @@ public class AddPrescriptionService {
     }
 
     private Patient getPatient(AddPrescriptionRequest request) {
-        if (!patientRepository.findById(Long.parseLong(request.getPatientId())).isEmpty()) {
-            return patientRepository.findById(Long.parseLong(request.getPatientId())).get(0);
+        if (patientRepository.findById(Long.parseLong(request.getPatientId())).isPresent()) {
+            return patientRepository.findById(Long.parseLong(request.getPatientId())).get();
         }
         else return null;
     }

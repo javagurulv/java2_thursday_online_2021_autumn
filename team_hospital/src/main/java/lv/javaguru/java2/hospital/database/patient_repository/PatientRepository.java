@@ -4,11 +4,12 @@ import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PatientRepository {
     void add(Patient patient);
 
-    List<Patient> findById(Long id);
+    Optional<Patient> findById(Long id);
 
     boolean deleteById(Long id);
 

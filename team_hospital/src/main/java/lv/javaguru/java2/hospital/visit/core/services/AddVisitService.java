@@ -33,7 +33,7 @@ public class AddVisitService {
             return new AddVisitResponse(errors);
         }
 
-        Patient patient = patientRepository.findById(Long.valueOf(request.getPatientID())).get(0);
+        Patient patient = patientRepository.findById(Long.valueOf(request.getPatientID())).get();
         Doctor doctor = doctorRepository.findById(Long.valueOf(request.getDoctorsID())).get(0);
 
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse(request.getVisitDate()));

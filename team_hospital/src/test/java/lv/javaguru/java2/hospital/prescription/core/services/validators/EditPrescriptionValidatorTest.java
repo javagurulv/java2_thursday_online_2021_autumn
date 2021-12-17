@@ -87,7 +87,7 @@ class EditPrescriptionValidatorTest {
         Mockito.when(prescriptionExistenceIDValidator.execute(Long.valueOf(request.getPrescriptionID())))
                 .thenReturn(Optional.of(new CoreError("Prescription", "does not exist!")));
         Mockito.when(patientRepository.findById(Long.valueOf(request.getChanges())))
-                .thenReturn(Collections.singletonList(new Patient("name", "surname", "speciality")));
+                .thenReturn(Optional.of(new Patient("name", "surname", "speciality")));
 
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -130,7 +130,7 @@ class EditPrescriptionValidatorTest {
         Mockito.when(prescriptionExistenceIDValidator.execute(Long.valueOf(request.getPrescriptionID())))
                 .thenReturn(Optional.empty());
         Mockito.when(patientRepository.findById(Long.valueOf(request.getChanges())))
-                .thenReturn(new ArrayList<>());
+                .thenReturn(Optional.empty());
 
         List<CoreError> errors = validator.validate(request);
         assertFalse(errors.isEmpty());
@@ -145,7 +145,7 @@ class EditPrescriptionValidatorTest {
         Mockito.when(prescriptionExistenceIDValidator.execute(Long.valueOf(request.getPrescriptionID())))
               .thenReturn(Optional.empty());
         Mockito.when(patientRepository.findById(Long.valueOf(request.getChanges())))
-                .thenReturn(Collections.singletonList(new Patient("name", "surname", "12345678901")));
+                .thenReturn(Optional.of(new Patient("name", "surname", "12345678901")));
 
         List<CoreError> errors = validator.validate(request);
         assertTrue(errors.isEmpty());

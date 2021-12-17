@@ -21,6 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -209,19 +210,17 @@ class AddVisitServiceTest {
     public void shouldAddVisitToDatabase() {
         Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
         doctor.setId(1L);
-        Patient patient = new Patient("PatientsName", "PatientsSurname", "12345678901");
-        patient.setId(2L);
-        List<Patient> patients = new ArrayList<>();
-        patients.add(patient);
+        Optional<Patient> patient = Optional.of(new Patient("PatientsName", "PatientsSurname", "12345678901"));
+        patient.get().setId(2L);
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
 
         Mockito.when(doctorRepository.findById(1L))
                 .thenReturn((doctors));
         Mockito.when(patientRepository.findById(2L))
-                .thenReturn((patients));
+                .thenReturn(patient);
 
-        AddVisitRequest request = new AddVisitRequest(doctor.getId().toString(), patient.getId().toString(),
+        AddVisitRequest request = new AddVisitRequest(doctor.getId().toString(), patient.get().getId().toString(),
                 "2021-12-21 15:00");
         AddVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());

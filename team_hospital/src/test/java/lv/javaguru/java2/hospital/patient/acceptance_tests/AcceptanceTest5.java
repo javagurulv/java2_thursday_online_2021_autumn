@@ -24,6 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -60,8 +61,8 @@ public class AcceptanceTest5 {
         FindPatientByIDResponse findPatientByIDResponse = findPatientByIdService.execute(
                 new FindPatientByIdRequest(searchPatientsResponse.getPatientList().get(0).getId().toString()));
         ShowAllPatientsResponse showAllPatientsResponse = showAllPatientsService.execute(new ShowAllPatientsRequest());
-        List<Patient> patients = new ArrayList<>();
-        patients.add(showAllPatientsResponse.getPatients().get(1));
-        assertEquals(findPatientByIDResponse.getPatient(), patients);
+        Optional<Patient> patient = Optional.ofNullable(showAllPatientsResponse.getPatients().get(1));
+
+        assertEquals(findPatientByIDResponse.getPatient(), patient);
     }
 }
