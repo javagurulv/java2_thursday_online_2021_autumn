@@ -25,15 +25,6 @@ public class JdbcReservationRepositoryImpl implements ReservationRepository {
                 reservation.getTable().getId(),
                 reservation.getReservationDate());
     }
-       /* String sql = "SELECT reservation_id FROM reservation WHERE id_visitor = ? AND id_table = ? AND id_menu = ? AND reservation_date = ?";
-        Object[] args =
-                new Object[]{reservation.getIdVisitor(),
-                        reservation.getTable(),
-                        reservation.getIdMenu(),
-                        reservation.getReservationDate()};
-        Long renewedIdCodeReservation = jdbcTemplate.queryForObject(sql, args, Long.class);
-        reservation.setIdReservation(renewedIdCodeReservation);
-    }*/
 
     @Override
     public boolean removeReservation(Long idReservation) {

@@ -14,41 +14,72 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
+        border-spacing: 15px;
+        border-collapse: separate;
 }
     h2 {
         color: MediumVioletRed;
         text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
+    input[type=text] {
+        width: 130px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: white;
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+}
+    input[type=text]:focus {
+        width: 100%;
+}
+    p {
+        font-family: "Trebuchet MS", Verdana, sans-serif;
+        list-style-position: left;
+}
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+}
+
 </style>
 
 <body>
 
-<h2>Search Menu</h2>
+<h2><big>Search Menu</big></h2>
 
 <table>
     <tr>
-        <td>Title:</td>
+        <td><big>Title:</big></td>
     </tr>
-
     <tr>
         <form action="/searchMenu" th:object="${request}" method="post">
-            <td><input type="text" th:field="${request.title}"/></td>
+            <td><input type="text" placeholder="Search....." th:field="${request.title}"/></td>
             <td>
                 <input type="submit" value="Search Menu" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
                 <input type="reset" value="Clear" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
             </td>
         </form>
     </tr>
-</table>
-
-<td th:if="${menus != null}">
-    <tr th:each="menu : ${menus}">
-        <td th:text="${menu.title}"></td>
-        <td th:text="${menu.number}"></td>
-        <td th:text="${menu.description}"></td>
-        <td th:text="${menu.price}"></td>
+    <tr>
+        <td>ID number:</td>
+        <td>Title menu:</td>
+        <td>DESCRIPTION:</td>
+        <td>PRICE:</td>
     </tr>
-</td>
+    <td th:if="${menus != null}">
+        <tr th:each="menu : ${menus}">
+            <p><td th:text="${menu.number}"></td>
+            <p><td th:text="${menu.title}"></td>
+            <p><td th:text="${menu.description}"></td>
+            <p><td th:text="${menu.price}"></td>
+        </tr>
+    </td>
+</table>
 
 <td th:if="${errors != null}">
     <tr th:each="error : ${errors}">
@@ -59,13 +90,13 @@
 
 <form action="/" method="get">
     <input type="submit" value="Main menu" name="Submit"
-           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+           style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;"/>
 </form>
-
 <form action="/menuMenu" method="get">
     <input type="submit" value="Return to the actions with menus" name="Submit"
-           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+           style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;" />
 </form>
 
 </body>
+
 </html>

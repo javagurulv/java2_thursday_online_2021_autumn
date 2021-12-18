@@ -16,6 +16,8 @@
           background-size: cover;
 }
       h2 {
+          text-align: center;
+          text-transform: uppercase;
           color: MediumVioletRed;
           text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
@@ -44,20 +46,20 @@
 </style>
 
 <body>
-<h2>Show Users</h2>
+<h2><big>Show Users</big></h2>
 <table id="users">
     <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>Surname</th>
-        <th>ID</th>
         <th>Telephone</th>
     </tr>
 
     <td th:if="${visitors != null}">
         <tr th:each="visitor : ${visitors}">
+            <td th:text="${visitor.userId}"></td>
             <td th:text="${visitor.userName}"></td>
             <td th:text="${visitor.surname}"></td>
-            <td th:text="${visitor.userId}"></td>
             <td th:text="${visitor.telephoneNumber}"></td>
         </tr>
     </td>
@@ -65,13 +67,13 @@
 
 <form action="/" method="get">
     <input type="submit" value="Main menu" name="Submit"
-           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+           style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;" />
 </form>
-
 <form action="/userMenu" method="get">
     <input type="submit" value="Return to users' menu" name="Submit"
-           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+           style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;" />
 </form>
 
 </body>
+
 </html>

@@ -23,17 +23,18 @@
 </style>
 
 <body>
-<h2>Delete USER from the list</h2>
+<h2><big>Delete USER from the list</big></h2>
 <table>
     <tr>
-        <td>ID:</td>
-        <td>Name:</td>
+        <td><big>ID:</big></td>
+        <td><big>Name:</big></td>
     </tr>
-
     <tr>
         <form action="/deleteUser" th:object="${request}" method="post">
-            <td><input type="text" th:field="${request.userId}"/></td>
-            <td><input type="text" th:field="${request.userName}"/></td>
+            <td><input type="text" placeholder="Enter ID..." th:field="${request.userId}"
+                       style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter Name..." th:field="${request.userName}"
+                       style="height:25px;width:250px"/></td>
             <td>
                 <input type="submit" value="Delete User" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
                 <input type="reset" value="Clear" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
@@ -55,13 +56,13 @@
 
 <form action="/" method="get">
     <input type="submit" value="Main menu" name="Submit"
-           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;"/>
+           style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;"/>
 </form>
-
 <form action="/userMenu" method="get">
     <input type="submit" value="Return to users' menu" name="Submit"
-           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;"/>
+           style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;"/>
 </form>
+
 </body>
 
 </html>

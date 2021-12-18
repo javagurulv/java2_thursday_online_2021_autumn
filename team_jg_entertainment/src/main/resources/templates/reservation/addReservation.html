@@ -18,27 +18,33 @@
      h2 {
         color: MediumVioletRed;
         text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        width:750px;
+        text-align:center;
+        text-indent:200px;
 }
 </style>
 
 <body>
 
-<h2>Add Reservation</h2>
+<h2><big>Add RESERVATION to the list</big></h2>
 
 <table>
     <tr>
-        <td>User ID:</td>
-        <td>Menu ID:</td>
-        <td>Table ID:</td>
-        <td>Date (yyyy-MM-dd HH:mm):</td>
+        <td><big>User ID:</big></td>
+        <td><big>Menu ID:</big></td>
+        <td><big>Table ID:</big></td>
+        <td><big>Date (yyyy-MM-dd HH:mm):</big></td>
     </tr>
-
     <tr>
         <form action="/addReservation" th:object="${request}" method="post">
-            <td><input type="text" th:field="${request.userID}"/></td>
-            <td><input type="text" th:field="${request.menuID}"/></td>
-            <td><input type="text" th:field="${request.tableID}"/></td>
-            <td><input type="text" th:field="${request.reservationDate}"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.userID}"
+                       style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.menuID}"
+                       style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.tableID}"
+                       style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.reservationDate}"
+                       style="height:25px;width:250px"/></td>
             <td>
                 <input type="submit" value="Add Reservation" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
                 <input type="reset" value="Clear" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
@@ -53,20 +59,19 @@
         <td th:text="${error.description}"></td>
     </tr>
 </td>
-
 <td th:if="${errors == null}">
     <tr th:text="${message}"></tr>
 </td>
 
 <form action="/" method="get">
     <input type="submit" value="Main menu" name="Submit"
-           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+           style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;" />
 </form>
-
 <form action="/reservationMenu" method="get">
     <input type="submit" value="Return to reservation menu" name="Submit"
-           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+           style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;" />
 </form>
 
 </body>
+
 </html>

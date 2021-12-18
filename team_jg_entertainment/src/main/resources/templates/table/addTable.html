@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="UTF-8">
@@ -19,25 +19,30 @@
     h2 {
        color: MediumVioletRed;
        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+       width:750px;
+       text-align:center;
+       text-indent:200px;
 }
 </style>
 
 <body>
 
-<h2>Add Table</h2>
+<h2><big>Add TABLE to the list</big></h2>
 
 <table>
     <tr>
-        <td>Title of the table:</td>
-        <td>Capacity:</td>
-        <td>Price per table:</td>
+        <td><big>Title of the table:</big></td>
+        <td><big>Capacity:</big></td>
+        <td><big>Price per table:</big></td>
     </tr>
-
     <tr>
         <form action="/addTable" th:object="${request}" method="post">
-            <td><input type="text" th:field="${request.Title}"/></td>
-            <td><input type="text" th:field="${request.TableCapacity}"/></td>
-            <td><input type="text" th:field="${request.Price}"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.Title}"
+                       style="height:25px;width:250px"/></td>
+            <td><input type="text" th:field="${request.TableCapacity}"
+                       style="height:25px;width:250px"/></td>
+            <td><input type="text" th:field="${request.Price}"
+                       style="height:25px;width:250px"/></td>
             <td>
                 <input type="submit" value="Add Table" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
                 <input type="reset" value="Clear" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
@@ -57,16 +62,15 @@
     <tr th:text="${message}"></tr>
 </td>
 
-
 <form action="/" method="get">
     <input type="submit" value="Main menu" name="Submit"
-           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+           style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;" />
 </form>
-
 <form action="/tableMenu" method="get">
     <input type="submit" value="Return to tables' menu" name="Submit"
-           style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:17px;" />
+           style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;" />
 </form>
 
 </body>
+
 </html>
