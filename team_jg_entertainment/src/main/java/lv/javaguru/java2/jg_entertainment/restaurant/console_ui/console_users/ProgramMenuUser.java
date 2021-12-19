@@ -22,7 +22,6 @@ public class ProgramMenuUser {
         menuNumberToUIActionMap.put(2, findUIAction(uiActions, DeleteUsersUIAction.class));
         menuNumberToUIActionMap.put(3, findUIAction(uiActions, ShowListWithAllVUsersUIAction.class));
         menuNumberToUIActionMap.put(4, findUIAction(uiActions, SearchUsersUIAction.class));
-      //  menuNumberToUIActionMap.put(5, findUIAction(uiActions, ExitProgramListUserUIAction.class));
         menuNumberToUIActionMap.put(5, findUIAction(uiActions, ExitUIAction.class));
     }
 
@@ -41,7 +40,6 @@ public class ProgramMenuUser {
         System.out.println("2. DELETE user - Enter ID that delete from list of restaurant-> ");
         System.out.println("3. SHOW all user's in base of restaurant->");
         System.out.println("4. SEARCH user's in catalogue->");
-       // System.out.println("5. Choose that return in MAIN MENU:");
         System.out.println("5. Exit! ");
         System.out.println();
     }

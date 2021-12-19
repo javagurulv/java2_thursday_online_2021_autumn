@@ -13,7 +13,6 @@ public class AddTableRequest {
 	}
 
 	public AddTableRequest() {
-
 	}
 
 	public String getTitle() {return title;

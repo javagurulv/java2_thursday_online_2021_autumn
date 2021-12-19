@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Restaurant JG demo project">
@@ -26,21 +25,24 @@
 </style>
 
 <body>
+<h2><big>Update menu information</big></h2>
 
-<h2><big>Add USER to the list</big></h2>
 <table>
     <tr>
-        <td><big>Name:</big></td>
-        <td><big>Surname:</big></td>
-        <td><big>Telephone:</big></td>
+        <td><big>Menu ID:</big></td>
+        <td><big>NEW Title:</big></td>
+        <td><big>NEW Description:</big></td>
+        <td><big>NEW Price:</big></td>
     </tr>
+
     <tr>
-        <form action="/addUser" th:object="${request}" method="post">
-            <td><input type="text" placeholder="Enter....." th:field="${request.name}" style="height:25px;width:250px"/></td>
-            <td><input type="text" placeholder="Enter....." th:field="${request.surname}" style="height:25px;width:250px"/></td>
-            <td><input type="text" placeholder="Enter....." th:field="${request.telephone}" style="height:25px;width:250px"/></td>
+        <form action="/updateMenu" th:object="${request}" method="post">
+            <td><input type="text" placeholder="Enter....." th:field="${request.menuId}" style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.newTitle}" style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.newDescription}" style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.newPrice}" style="height:25px;width:250px"/></td>
             <td>
-                <input type="submit" value="Add User" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
+                <input type="submit" value="Update Menu" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
                 <input type="reset" value="Clear" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
             </td>
         </form>
@@ -50,7 +52,7 @@
 <td th:if="${errors != null}">
     <tr th:each="error : ${errors}">
         <td th:text="${error.field}"></td>
-        <td th:text="${error.description}"></td>
+        <td th:text="${error.message}"></td>
     </tr>
 </td>
 
@@ -58,16 +60,14 @@
     <tr th:text="${message}"></tr>
 </td>
 
-
 <form action="/" method="get">
     <input type="submit" value="Main menu" name="Submit"
            style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;" />
 </form>
-<form action="/userMenu" method="get">
-    <input type="submit" value="Return to users' menu" name="Submit"
+<form action="/menuMenu" method="get">
+    <input type="submit" value="Return to menus' menu" name="Submit"
            style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;" />
 </form>
 
 </body>
-
 </html>

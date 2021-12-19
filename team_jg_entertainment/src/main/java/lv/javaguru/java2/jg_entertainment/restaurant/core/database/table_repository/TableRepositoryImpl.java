@@ -26,21 +26,21 @@ public class TableRepositoryImpl implements TableRepository {
     }
 
     @Override
-    public List<Table> findTableById(Long idTable) {///*
+    public List<Table> findTableById(Long idTable) {
         return tables.stream()
                 .filter(table -> table.getId().equals(idTable))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Table> findByTitleTable(String titleTable) {///*
+    public List<Table> findByTitleTable(String titleTable) {
         return tables.stream()
                 .filter(table -> table.getTitle().equals(titleTable))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Table> findByIdAndTitleTable(Long id, String titleTable) {///*
+    public List<Table> findByIdAndTitleTable(Long id, String titleTable) {
         return tables.stream()
                 .filter(table -> table.getId().equals(id))
                 .filter(table -> table.getTitle().equals(titleTable))

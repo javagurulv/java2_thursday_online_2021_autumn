@@ -21,7 +21,6 @@ public class DeleteReservationUIAction implements ReservationUIAction {
 
         DeleteReservationRequest request = new DeleteReservationRequest(id);
         DeleteReservationResponse response = service.execute(request);
-
         if (response.isTrue()) {
             System.out.println("Success!");
             System.out.println("Reservation with ID" + id + " was deleted rom list!");

@@ -40,8 +40,7 @@
     </tr>
     <tr>
         <form action="/searchTable" th:object="${request}" method="post">
-            <td><input type="text" placeholder="Search....." th:field="${request.titleTable}"
-                       style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Search....." th:field="${request.titleTable}" style="height:25px;width:250px"/></td>
             <td>
                 <input type="submit" value="Search Table" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
                 <input type="reset" value="Clear" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />

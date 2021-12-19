@@ -75,7 +75,8 @@ public class OrmUserRepositoryImpl implements UsersRepository {
 
     @Override
     public boolean deleteUserWithIDAndName(Long id, String userName) {
-        Query query = sessionFactory.getCurrentSession()
+        Query query = sessionFactory
+                .getCurrentSession()
                 .createQuery("DELETE User WHERE visitor_id = :visitor_id AND visitor_name = :visitor_name");
         query.setParameter("visitor_id", id);
         query.setParameter("visitor_name", userName);
@@ -83,7 +84,7 @@ public class OrmUserRepositoryImpl implements UsersRepository {
         return result == 1;
     }
 
-    @Override//new path
+    @Override
     public boolean deleteUserWithID(Long id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "delete User WHERE visitor_id = :visitor_id");

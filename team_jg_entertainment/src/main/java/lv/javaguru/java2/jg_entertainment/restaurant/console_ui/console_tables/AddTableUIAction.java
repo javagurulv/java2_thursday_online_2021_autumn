@@ -26,7 +26,6 @@ public class AddTableUIAction implements UIAction {
 
         AddTableRequest request = new AddTableRequest(tableTitle, tableCapacity, price);
         AddTableResponse response = addTableService.execute(request);
-
         if (response.hasError()) {
             response.getErrorsList().forEach(coreError ->
                     System.out.println("Error: " + coreError.getField()

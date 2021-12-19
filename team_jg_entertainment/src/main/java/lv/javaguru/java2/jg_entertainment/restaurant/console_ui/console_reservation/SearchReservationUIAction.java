@@ -37,7 +37,6 @@ public class SearchReservationUIAction implements ReservationUIAction{
         Integer pageSize = Integer.parseInt(scanner.nextLine());
 
         ReservationPaging paging = new ReservationPaging(pageNumber, pageSize);
-
         SearchReservationRequest request = new SearchReservationRequest(reservationId, userID, reservationDate, ordering, paging);
         SearchReservationResponse response = service.execute(request);
 

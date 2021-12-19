@@ -1,17 +1,17 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation;
 
-public class EditReservationRequest {
+public class UpdateReservationRequest {
 
     private String reservationId;
     private String enumEditReservation;
     private String changes;
 
-    public EditReservationRequest() {
+    public UpdateReservationRequest() {
     }
 
-    public EditReservationRequest(String reservationId,
-                                  String enumEditReservation,
-                                  String changes) {
+    public UpdateReservationRequest(String reservationId,
+                                    String enumEditReservation,
+                                    String changes) {
         this.reservationId = reservationId;
         this.enumEditReservation = enumEditReservation;
         this.changes = changes;

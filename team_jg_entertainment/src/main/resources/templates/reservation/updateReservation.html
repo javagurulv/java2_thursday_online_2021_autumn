@@ -26,17 +26,17 @@
 </style>
 <body>
 
-<h2><big>Edit reservation</big></h2>
+<h2><big>Update reservation</big></h2>
 
 <table>
     <tr>
         <td><big>Reservation ID:</big></td>
-        <td><big>Choose field to change:ID_VISITOR or ID_MENU or ID_TABLE:</big></td>
-        <td><big>Add new information:</big></td>
+        <td><big>Choose that to change:ID_VISITOR or ID_MENU or ID_TABLE:</big></td>
+        <td><big>Add NEW ID:</big></td>
     </tr>
 
     <tr>
-        <form action="/editReservation" th:object="${request}" method="post">
+        <form action="/updateReservation" th:object="${request}" method="post">
             <td><input type="text" placeholder="Enter....." th:field="${request.reservationId}"
                        style="height:25px;width:250px"/></td>
             <td><input type="text" placeholder="Enter....." th:field="${request.enumEditReservation}"
@@ -44,7 +44,7 @@
             <td><input type="text" placeholder="Enter new info...." th:field="${request.changes}"
                        style="height:25px;width:250px"/></td>
             <td>
-                <input type="submit" value="Edit Reservation" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
+                <input type="submit" value="Update Reservation" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
                 <input type="reset" value="Clear" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
             </td>
         </form>
@@ -75,5 +75,3 @@
 </body>
 
 </html>
-style="height:25px;width:250px"
-"height:25px;width:550px"

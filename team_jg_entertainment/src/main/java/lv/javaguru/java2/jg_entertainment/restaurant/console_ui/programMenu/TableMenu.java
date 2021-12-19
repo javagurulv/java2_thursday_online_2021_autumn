@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TableMenu implements Menu{
+
     @Override
     public void execute(ApplicationContext applicationContext) {
         ProgramMenuTable tableProgramMenu = applicationContext.getBean(ProgramMenuTable.class);

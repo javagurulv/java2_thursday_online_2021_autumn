@@ -21,7 +21,6 @@ public class RemoveTableUIAction implements UIAction {
         Long tableId = Long.parseLong(scanner.nextLine());
         RemoveTableRequest request = new RemoveTableRequest(tableId);
         RemoveTableResponse response = removeTableService.execute(request);
-
         if (response.hasError()) {
             response.getErrorsList().forEach(coreError ->
                     System.out.println("Error: " + coreError.getField() + " "

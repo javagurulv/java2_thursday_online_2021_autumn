@@ -2,7 +2,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.console_ui.console_reserva
 
 import java.util.Scanner;
 
-public class GetQueryWithConsole {
+public class GetUserChoosingFromConsole {
 
     public String getNumberFromConsole(String string){
         Scanner scanner = new Scanner(System.in);

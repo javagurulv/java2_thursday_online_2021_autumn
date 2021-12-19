@@ -27,21 +27,29 @@
 
 <body>
 
-<h2><big>Add USER to the list</big></h2>
+<h2><big>Update user information</big></h2>
+
 <table>
     <tr>
-        <td><big>Name:</big></td>
-        <td><big>Surname:</big></td>
-        <td><big>Telephone:</big></td>
+        <td><big>User ID:</big></td>
+        <td><big>NEW Name:</big></td>
+        <td><big>NEW Surname:</big></td>
+        <td><big>NEW Telephone:</big></td>
     </tr>
+
     <tr>
-        <form action="/addUser" th:object="${request}" method="post">
-            <td><input type="text" placeholder="Enter....." th:field="${request.name}" style="height:25px;width:250px"/></td>
-            <td><input type="text" placeholder="Enter....." th:field="${request.surname}" style="height:25px;width:250px"/></td>
-            <td><input type="text" placeholder="Enter....." th:field="${request.telephone}" style="height:25px;width:250px"/></td>
+        <form action="/updateUser" th:object="${request}" method="post">
+            <td><input type="text" placeholder="Enter....." th:field="${request.userId}"
+                       style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.newUserName}"
+                       style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.newSurname}"
+                       style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.newTelephoneNumber}"
+                       style="height:25px;width:250px"/></td>
             <td>
-                <input type="submit" value="Add User" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
-                <input type="reset" value="Clear" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
+                <input type="submit" value="Update User" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;"/>
+                <input type="reset" value="Clear" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;"/>
             </td>
         </form>
     </tr>
@@ -50,14 +58,13 @@
 <td th:if="${errors != null}">
     <tr th:each="error : ${errors}">
         <td th:text="${error.field}"></td>
-        <td th:text="${error.description}"></td>
+        <td th:text="${error.messageError}"></td>
     </tr>
 </td>
 
 <td th:if="${errors == null}">
     <tr th:text="${message}"></tr>
 </td>
-
 
 <form action="/" method="get">
     <input type="submit" value="Main menu" name="Submit"

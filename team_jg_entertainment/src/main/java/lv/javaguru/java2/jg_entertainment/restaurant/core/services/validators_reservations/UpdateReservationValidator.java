@@ -3,7 +3,7 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_r
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.menu_repository.MenuRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.table_repository.TableRepository;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.database.user_repository.UsersRepository;
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.EditReservationRequest;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.UpdateReservationRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservations.CoreError;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators.DateValidatorExecution;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 @Component
-public class EditReservationValidator {
+public class UpdateReservationValidator {
 
     @Autowired private ExistReservationValidator validator;
     @Autowired private EnumValidator enumValidator;
@@ -25,7 +25,7 @@ public class EditReservationValidator {
     @Autowired private MenuRepository menuRepository;
     @Autowired private TableRepository tableRepository;
 
-    public List<CoreError> validate(EditReservationRequest request){
+    public List<CoreError> validate(UpdateReservationRequest request){
         List<CoreError> errors = new ArrayList<>();
         validateId(request).ifPresent(errors::add);
         validateReservationID(request).ifPresent(errors::add);
@@ -42,19 +42,19 @@ public class EditReservationValidator {
         return errors;
     }
 
-    private Optional<CoreError> validateId(EditReservationRequest request){
+    private Optional<CoreError> validateId(UpdateReservationRequest request){
         return request.getReservationId() == null || request.getReservationId().isEmpty()
                 ? Optional.of(new CoreError("idReservation", "must not be empty"))
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateReservationID(EditReservationRequest request){
+    private Optional<CoreError> validateReservationID(UpdateReservationRequest request){
         return request.getReservationId() == null || request.getReservationId().isEmpty()
                 ? Optional.empty()
                 : reservationLongNumChecker.validate(request.getReservationId(), "id");
     }
 
-    private Optional<CoreError> validateChangesId(EditReservationRequest request){
+    private Optional<CoreError> validateChangesId(UpdateReservationRequest request){
         return request.getEnumEditReservation() == null || request.getEnumEditReservation().isEmpty()
                 ? Optional.empty()
                 : request.getEnumEditReservation().toUpperCase(Locale.ROOT).equals("ID_VISITOR")
@@ -64,13 +64,13 @@ public class EditReservationValidator {
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateReservationIs(EditReservationRequest request){
+    private Optional<CoreError> validateReservationIs(UpdateReservationRequest request){
         return request.getReservationId() == null || request.getReservationId().isEmpty()
                 ? Optional.empty()
                 : validator.validate(Long.valueOf(request.getReservationId()));
     }
 
-    private Optional<CoreError> validateUserIs(EditReservationRequest request){
+    private Optional<CoreError> validateUserIs(UpdateReservationRequest request){
         return request.getEnumEditReservation() == null || request.getEnumEditReservation().isEmpty()
                 ? Optional.empty()
                 : !request.getEnumEditReservation().toUpperCase(Locale.ROOT).equals("ID_VISITOR")
@@ -80,7 +80,7 @@ public class EditReservationValidator {
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateMenuIs(EditReservationRequest request){
+    private Optional<CoreError> validateMenuIs(UpdateReservationRequest request){
         return request.getEnumEditReservation() == null || request.getEnumEditReservation().isEmpty()
                 ? Optional.empty()
                 : !request.getEnumEditReservation().toUpperCase(Locale.ROOT).equals("ID_MENU")
@@ -90,7 +90,7 @@ public class EditReservationValidator {
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateTableIs(EditReservationRequest request){
+    private Optional<CoreError> validateTableIs(UpdateReservationRequest request){
         return request.getEnumEditReservation() == null || request.getEnumEditReservation().isEmpty()
                 ? Optional.empty()
                 : !request.getEnumEditReservation().toUpperCase(Locale.ROOT).equals("ID_TABLE")
@@ -100,19 +100,19 @@ public class EditReservationValidator {
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateChanges(EditReservationRequest request){
+    private Optional<CoreError> validateChanges(UpdateReservationRequest request){
         return request.getChanges() == null || request.getChanges().isEmpty()
                 ? Optional.of(new CoreError("changes", "must not be empty"))
                 : Optional.empty();
     }
 
-    private Optional<CoreError> validateEnumReservation(EditReservationRequest request){
+    private Optional<CoreError> validateEnumReservation(UpdateReservationRequest request){
         return request.getEnumEditReservation() == null || request.getEnumEditReservation().isEmpty()
                 ? Optional.of(new CoreError("edit", "must not be empty"))
                 : enumValidator.enumValidate(request.getEnumEditReservation());
     }
 
-    private List<CoreError> validateDate(EditReservationRequest request){
+    private List<CoreError> validateDate(UpdateReservationRequest request){
         return request.getChanges() == null || request.getChanges().isEmpty()
                 ? new ArrayList<>()
                 : request.getEnumEditReservation().equals("RESERVATION_DATE")

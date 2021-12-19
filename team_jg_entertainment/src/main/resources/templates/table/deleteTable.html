@@ -33,8 +33,7 @@
 
   <tr>
     <form action="/deleteTable" th:object="${request}" method="post">
-      <td><input type="text" placeholder="Enter ID..." th:field="${request.tableIdToRemove}"
-                 style="height:25px;width:250px"/></td>
+      <td><input type="text" placeholder="Enter ID..." th:field="${request.tableIdToRemove}" style="height:25px;width:250px"/></td>
       <td>
         <input type="submit" value="Delete Table" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
         <input type="reset" value="Clear" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />

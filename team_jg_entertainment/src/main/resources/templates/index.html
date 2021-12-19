@@ -6,6 +6,18 @@
     <meta name="description" content="Restaurant JG demo project">
     <meta name="author" content="JavaGuru">
     <title>Restaurant JG</title>
+    <script> window.onload = function() {
+    setInterval(function() {
+    // Seconds
+    var seconds = new Date().getSeconds();
+    document.getElementById("seconds").innerHTML = (seconds < 10 ? '0' : '') + seconds;
+    // Minutes
+    var minutes = new Date().getMinutes();
+    document.getElementById("minutes").innerHTML = (minutes < 10 ? '0' : '') + minutes;
+    // Hours
+    var hours = new Date().getHours();
+    document.getElementById("hours").innerHTML = (hours < 10 ? '0' : '') + hours;
+    }, 1000); } </script>
 </head>
 
 <style>
@@ -17,7 +29,9 @@
           background-attachment: fixed;
           background-size: cover;
 }
-       h1 {
+       h2 {
+          text-transform: uppercase;
+          text-align: absolute;
           color: white;
           text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkBlue;
 }
@@ -55,21 +69,77 @@
          opacity: 1;
          right: 0;
 }
+     .clock {
+         position: absolute;
+         top: 50%;
+         width: 99%;
+         margin: -60px auto 0 auto;
+         font-size: 60px;
+         font-family: Verdana, Arial, Sans-serif;
+         text-align: center;
+         color: #fff;
+}
+     .clock ul {
+        margin: 0 auto;
+        list-style: none;
+}
+    .clock ul li {
+        display: inline;
+}
+    .clock ul li#separator {
+       -moz-animation: myfade 1s ease infinite;
+       -webkit-animation: myfade 1s ease infinite;
+}
+    .clock ul li#separators {
+       -moz-animation: myfade 1s ease infinite;
+       -webkit-animation: myfade 1s ease infinite;
+}
+/* Animation */
+    @-webkit-keyframes myfade {
+         0% {
+    opacity: 1.0;
+}
+     50% {
+          opacity: 0;
+}
+     100% {
+          opacity: 1.0;
+  }
+}
+     @-moz-keyframes myfade {
+      0% {
+        opacity: 1.0;
+}
+      50% {
+        opacity: 0;
+        }
+      100% {
+         opacity: 1.0;
+      };
+}
+     html {
+       height: 100%;
+}
 </style>
 
 <body>
 
-<h1>Restaurant MAIN MENU:</h1>
+<h2>Restaurant MAIN MENU:</h2>
 <ul>
-    <li><a href="/userMenu"><button class="button" style="color: dark; text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 6px darkBlue;text-align:center;font-size:18px;width:20%;">User
-    </button></a> <br></li>
-    <li><a href="/tableMenu"><button class="button" style="color: dark; text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 6px darkBlue;text-align:center;font-size:18px;width:20%;">Table
-    </button></a> <br></li>
-    <li><a href="/menuMenu"><button class="button" style="color: dark;text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 6px darkBlue;text-align:center;font-size:18px;width:20%;">Menu
-    </button></a> <br></li>
-    <li><a href="/reservationMenu"><button class="button" style="color: dark; text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 5px darkBlue;text-align:center;font-size:17px;width:20%;">Reservation
-    </button></a> <br></li>
+    <li><a href="/userMenu"><button class="button" style="color: dark; text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 6px darkBlue;text-align:center;font-size:18px;width:20%;"> USER </button></a> <br></li>
+    <li><a href="/tableMenu"><button class="button" style="color: dark; text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 6px darkBlue;text-align:center;font-size:18px;width:20%;"> TABLE </button></a> <br></li>
+    <li><a href="/menuMenu"><button class="button" style="color: dark;text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 6px darkBlue;text-align:center;font-size:18px;width:20%;"> MENU </button></a> <br></li>
+    <li><a href="/reservationMenu"><button class="button" style="color: dark; text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 5px darkBlue;text-align:center;font-size:17px;width:20%;"> RESERVATION </button></a> <br></li>
 </ul>
+<div class="clock">
+    <ul>
+        <li id="hours">00</li>
+        <li id="separator">:</li>
+        <li id="minutes">00</li>
+        <li id="separators">:</li>
+        <li id="seconds">00</li>
+    </ul>
+</div>
 </body>
 
 </html>

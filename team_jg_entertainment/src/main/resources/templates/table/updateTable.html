@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Restaurant JG demo project">
+    <meta name="author" content="JavaGuru">
+    <title>Restaurant JG</title>
+</head>
+
+<style>
+      body {
+          background-color: linen;
+          background-image: url('https://oir.mobi/uploads/posts/2021-03/1616609731_1-p-letnii-fon-dlya-prezentatsii-1.jpg');
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+}
+      h2 {
+          color: MediumVioletRed;
+          text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+          width:750px;
+          text-align:center;
+          text-indent:200px;
+}
+</style>
+
+<body>
+
+<h2><big>Update table information</big></h2>
+
+<table>
+    <tr>
+        <td><big>Table ID:</big></td>
+        <td><big>NEW Title:</big></td>
+        <td><big>NEW Capacity:</big></td>
+        <td><big>NEW Price:</big></td>
+    </tr>
+
+    <tr>
+        <form action="/updateTable" th:object="${request}" method="post">
+            <td><input type="text" placeholder="Enter....." th:field="${request.id}" style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.newTitle}" style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.newTableCapacity}" style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.newPrice}" style="height:25px;width:250px"/></td>
+            <td>
+                <input type="submit" value="Update Table" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;" />
+                <input type="reset" value="Clear" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;"/>
+            </td>
+        </form>
+    </tr>
+
+    <td th:if="${errors != null}">
+        <tr th:each="error : ${errors}">
+            <td th:text="${error.field}"></td>
+            <td th:text="${error.messageError}"></td>
+        </tr>
+    </td>
+
+    <td th:if="${errors == null}">
+        <tr th:text="${message}"></tr>
+    </td>
+</table>
+
+<form action="/" method="get">
+    <input type="submit" value="Main menu" name="Submit"
+           style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;" />
+</form>
+<form action="/tableMenu" method="get">
+    <input type="submit" value="Return to tables' menu" name="Submit"
+           style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;" />
+</form>
+
+</body>
+
+</html>

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class GetAllMenusUIAction implements UIAction {
 
-        @Autowired private GetAllMenusService getAllMenus;
+    @Autowired private GetAllMenusService getAllMenus;
 
     @Override
     public void execute() {

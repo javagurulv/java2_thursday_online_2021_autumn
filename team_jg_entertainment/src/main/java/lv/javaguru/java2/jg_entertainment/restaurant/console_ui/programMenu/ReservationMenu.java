@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ReservationMenu implements Menu {
+
     @Override
     public void execute(ApplicationContext applicationContext) {
         ProgramReservation reservationProgramMenu = applicationContext.getBean(ProgramReservation.class);

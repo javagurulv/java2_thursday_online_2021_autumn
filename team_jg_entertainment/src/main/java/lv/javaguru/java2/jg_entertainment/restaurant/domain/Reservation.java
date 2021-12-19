@@ -31,7 +31,6 @@ public class Reservation {
       public Reservation() {
     }
 
-
     public Reservation(User user,
                        Menu menu,
                        Table table,
@@ -81,7 +80,6 @@ public class Reservation {
     public void setReservationDate(LocalDateTime reservationDate) {
         this.reservationDate = reservationDate;
     }
-
 
     @Override
     public String toString() {

@@ -2,15 +2,15 @@ package lv.javaguru.java2.jg_entertainment.restaurant.core.responses.reservation
 
 import java.util.List;
 
-public class EditReservationResponse extends CoreResponse{
+public class UpdateReservationResponse extends CoreResponse{
 
     private boolean editReservation;
 
-    public EditReservationResponse(List<CoreError> errorList) {
+    public UpdateReservationResponse(List<CoreError> errorList) {
         super(errorList);
     }
 
-    public EditReservationResponse(boolean editReservation) {
+    public UpdateReservationResponse(boolean editReservation) {
         this.editReservation = editReservation;
     }
 

@@ -14,7 +14,7 @@ public class ReservationRestController {
     @Autowired private DeleteReservationService deleteReservationService;
     @Autowired private ShowReservationService showReservationService;
     @Autowired private SearchReservationService searchReservationService;
-    @Autowired private EditReservationService updateReservation;
+    @Autowired private UpdateReservationService updateReservation;
 
     @PostMapping(path = "/",
             consumes = "application/json",
@@ -51,7 +51,7 @@ public class ReservationRestController {
     @PutMapping(path = "{id}",
             consumes = "application/json",
             produces = "application/json")
-    public EditReservationResponse updateReservation(@RequestBody EditReservationRequest request) {
+    public UpdateReservationResponse updateReservation(@RequestBody UpdateReservationRequest request) {
         return updateReservation.execute(request);
     }
 }

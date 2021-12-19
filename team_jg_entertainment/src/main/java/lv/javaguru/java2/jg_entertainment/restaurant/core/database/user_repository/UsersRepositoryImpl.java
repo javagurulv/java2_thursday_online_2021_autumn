@@ -91,11 +91,3 @@ public class UsersRepositoryImpl implements UsersRepository {
                 .collect(toList());
     }
 }
-
-//@Override
-//    public void deleteClientWithId(Long id) {
-//        clientInRestaurant.stream()
-//                .filter(customer -> customer.getIdClient().equals(id))
-//                .findFirst()
-//                .ifPresent(customer -> clientInRestaurant.remove(customer));
-//}

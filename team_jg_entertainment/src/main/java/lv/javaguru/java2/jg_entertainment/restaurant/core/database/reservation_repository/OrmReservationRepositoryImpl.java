@@ -1,6 +1,6 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.core.database.reservation_repository;
 
-import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.EditReservationEnum;
+import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.reservation.UpdateReservationEnum;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.validators_reservations.date.GetReservationDate;
 import lv.javaguru.java2.jg_entertainment.restaurant.domain.Reservation;
 import org.hibernate.SessionFactory;
@@ -42,7 +42,7 @@ public class OrmReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public boolean editReservation(Long reservationID, EditReservationEnum userInput, String changes) {
+    public boolean editReservation(Long reservationID, UpdateReservationEnum userInput, String changes) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "UPDATE Reservation SET "
         + userInput.toString().toUpperCase(Locale.ROOT) + " = :changes WHERE reservation_id = :reservation_id");
@@ -102,57 +102,7 @@ public class OrmReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public List<Reservation> findByUserIdAndTableId(Long clientId, Long tableId) {
-        return null;
-    }
-
-    @Override
-    public List<Reservation> findByUserIdAndMenuId(Long clientId, Long menuId) {
-        return null;
-    }
-
-    @Override
     public List<Reservation> findByUserIdAndDate(Long clientId, LocalDateTime date) {
-        return null;
-    }
-
-    @Override
-    public List<Reservation> findByTableIdAndMenuId(Long tableId, Long menuId) {
-        return null;
-    }
-
-    @Override
-    public List<Reservation> findByTableIdAndDate(Long tableId, LocalDateTime date) {
-        return null;
-    }
-
-    @Override
-    public List<Reservation> findByMenuIdAndDate(Long menuId, LocalDateTime date) {
-        return null;
-    }
-
-    @Override
-    public List<Reservation> findByUserIdTableIdAndMenuId(Long clientId, Long tableId, Long menuId) {
-        return null;
-    }
-
-    @Override
-    public List<Reservation> findByUserIdMenuIdAndDate(Long clientId, Long menuId, LocalDateTime date) {
-        return null;
-    }
-
-    @Override
-    public List<Reservation> findByUserIdTableIdAndDate(Long clientId, Long tableId, LocalDateTime date) {
-        return null;
-    }
-
-    @Override
-    public List<Reservation> findByTableIdMenuIdAndDate(Long tableId, Long menuId, LocalDateTime date) {
-        return null;
-    }
-
-    @Override
-    public List<Reservation> findByUserIdTableIdMenuIdAndDate(Long clientId, Long tableId, Long menuId, LocalDateTime date) {
         return null;
     }
 }

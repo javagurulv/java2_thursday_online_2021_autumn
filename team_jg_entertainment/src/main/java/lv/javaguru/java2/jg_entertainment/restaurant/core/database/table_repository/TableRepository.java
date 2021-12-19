@@ -11,11 +11,11 @@ public interface TableRepository {
 
     Optional<Table> getById(Long idTable);
 
-    List<Table> findTableById(Long idTable);//*
+    List<Table> findTableById(Long idTable);
 
-    List<Table> findByTitleTable(String titleTable);//*
+    List<Table> findByTitleTable(String titleTable);
 
-    List<Table> findByIdAndTitleTable(Long id, String titleTable);//*
+    List<Table> findByIdAndTitleTable(Long id, String titleTable);
 
     boolean deleteById(Long id);
 

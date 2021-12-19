@@ -14,7 +14,7 @@ import java.util.Scanner;
 @Component
 public class SearchMenusUIAction implements UIAction {
 
-   @Autowired private SearchMenusService searchMenusService;
+    @Autowired private SearchMenusService searchMenusService;
 
     @Override
     public void execute() {
@@ -45,5 +45,4 @@ public class SearchMenusUIAction implements UIAction {
             response.getMenus().forEach(Menu::toString);
         }
     }
-
 }

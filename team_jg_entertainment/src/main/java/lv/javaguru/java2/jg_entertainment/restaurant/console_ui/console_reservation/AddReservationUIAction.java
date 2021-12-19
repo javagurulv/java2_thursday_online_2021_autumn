@@ -19,13 +19,10 @@ public class AddReservationUIAction implements ReservationUIAction {
 
         System.out.println("Please, enter user ID: ");
         String userID = scanner.nextLine();
-
         System.out.println("Please, enter menu ID: ");
         String menuID = scanner.nextLine();
-
         System.out.println("Please, enter title ID: ");
         String tableID = scanner.nextLine();
-
         System.out.println("Please, enter date when you want to reservation in format like-> yyyy-MM-dd HH:mm: ");
         String reservationDate = scanner.nextLine();
 
