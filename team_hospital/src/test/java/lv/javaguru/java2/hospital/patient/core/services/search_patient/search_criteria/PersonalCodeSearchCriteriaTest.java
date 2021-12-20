@@ -45,10 +45,10 @@ class PersonalCodeSearchCriteriaTest {
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name3", "surname3", "12354-4688"));
 
-        Mockito.when(database.findPatientsByPersonalCode
+        Mockito.when(database.findByPersonalCode
                         (request.getPersonalCode()))
                 .thenReturn(patients);
-        List<Patient> patients2 = database.findPatientsByPersonalCode
+        List<Patient> patients2 = database.findByPersonalCode
                 (request.getPersonalCode());
 
         assertTrue(searchCriteria.canProcess(request));

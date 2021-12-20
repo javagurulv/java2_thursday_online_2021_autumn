@@ -2,15 +2,15 @@ package lv.javaguru.java2.hospital.patient.core.requests;
 
 public class EditPatientRequest {
     private String patientID;
-    private String userInputEnum;
+    private String fieldToChange;
     private String changes;
 
     public EditPatientRequest() {
     }
 
-    public EditPatientRequest(String patientID, String userInputEnum, String changes) {
+    public EditPatientRequest(String patientID, String fieldToChange, String changes) {
         this.patientID = patientID;
-        this.userInputEnum = userInputEnum;
+        this.fieldToChange = fieldToChange;
         this.changes = changes;
     }
 
@@ -18,8 +18,8 @@ public class EditPatientRequest {
         return patientID;
     }
 
-    public String getUserInputEnum() {
-        return userInputEnum;
+    public String getFieldToChange() {
+        return fieldToChange;
     }
 
     public String getChanges() {
@@ -30,8 +30,8 @@ public class EditPatientRequest {
         this.patientID = patientID;
     }
 
-    public void setUserInputEnum(String userInputEnum) {
-        this.userInputEnum = userInputEnum;
+    public void setFieldToChange(String fieldToChange) {
+        this.fieldToChange = fieldToChange;
     }
 
     public void setChanges(String changes) {

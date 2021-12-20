@@ -34,11 +34,10 @@ public class PrescriptionExistenceForSearchValidator {
 
 
     private PrescriptionExistenceBySearchCriteria[] getPrescriptionExistenceBySearchCriteria() {
-        PrescriptionExistenceBySearchCriteria[] prescriptionExistenceBySearchCriteria = {
+        return new PrescriptionExistenceBySearchCriteria[]{
                 existenceById,
                 existenceByDoctorIdAndPatientId,
                 existenceByPatientId,
                 existenceByDoctorId};
-        return prescriptionExistenceBySearchCriteria;
     }
 }

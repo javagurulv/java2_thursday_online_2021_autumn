@@ -1,12 +1,12 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.visit.core.checkers.VisitLongNumChecker;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
-import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
-import lv.javaguru.java2.hospital.visit.core.services.search_visit_service.VisitSearchExecute;
 import lv.javaguru.java2.hospital.visit.core.services.validators.date_validator.DateValidatorExecution;
 import lv.javaguru.java2.hospital.visit.core.services.validators.existence_validators.VisitExistenceForAdding;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,8 @@ import java.util.Optional;
 @Component
 public class AddVisitValidator {
 
-    @Autowired private PatientRepository patientRepository;
-    @Autowired private DoctorRepository doctorRepository;
+    @Autowired private JpaPatientRepository patientRepository;
+    @Autowired private JpaDoctorRepository doctorRepository;
     @Autowired private DateValidatorExecution dateValidator;
     @Autowired private VisitLongNumChecker longNumChecker;
     @Autowired private VisitExistenceForAdding visitExistenceForAdding;

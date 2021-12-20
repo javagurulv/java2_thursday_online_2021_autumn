@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.ShowAllVisitRequest;
@@ -14,10 +15,10 @@ import java.util.List;
 @Transactional
 public class ShowAllVisitService {
 
-    @Autowired private VisitRepository database;
+    @Autowired private JpaVisitRepository database;
 
     public ShowAllVisitResponse execute(ShowAllVisitRequest request) {
-        List<Visit> visits = database.getAllVisits();
+        List<Visit> visits = database.findAll();
         return new ShowAllVisitResponse(visits);
     }
 }

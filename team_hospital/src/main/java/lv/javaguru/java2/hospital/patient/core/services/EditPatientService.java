@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
-import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
@@ -17,7 +17,7 @@ import java.util.Locale;
 @Transactional
 public class EditPatientService {
 
-    @Autowired private PatientRepository database;
+    @Autowired private JpaPatientRepository database;
     @Autowired private EditPatientValidator validator;
 
     public EditPatientResponse execute(EditPatientRequest request) {
@@ -25,13 +25,14 @@ public class EditPatientService {
         if (!errors.isEmpty()) {
             return new EditPatientResponse(errors);
         } else {
-            database.editActions(
-                    Long.valueOf(request.getPatientID()),
-                    EditPatientEnum.valueOf(request.getUserInputEnum().toUpperCase(Locale.ROOT)),
-                    request.getChanges());
+            switch (request.getFieldToChange().toLowerCase(Locale.ROOT)) {
+                case "name" -> database.editPatientName(Long.valueOf(request.getPatientID()), request.getChanges());
+                case "surname" -> database.editPatientSurname(Long.valueOf(request.getPatientID()), request.getChanges());
+                case "personal_code" -> database.editPatientPersonalCode(Long.valueOf(request.getPatientID()), request.getChanges());
+            }
             return new EditPatientResponse(
                     Long.parseLong(request.getPatientID()),
-                    EditPatientEnum.valueOf(request.getUserInputEnum().toUpperCase(Locale.ROOT)),
+                    EditPatientEnum.valueOf(request.getFieldToChange().toUpperCase(Locale.ROOT)),
                     request.getChanges()
                     );
         }

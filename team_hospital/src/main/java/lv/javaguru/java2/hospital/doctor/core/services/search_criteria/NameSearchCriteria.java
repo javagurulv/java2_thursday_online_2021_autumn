@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.core.services.search_criteria;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.domain.Doctor;
 
@@ -8,9 +9,9 @@ import java.util.List;
 
 public class NameSearchCriteria implements DoctorsSearchCriteria {
 
-    private final DoctorRepository database;
+    private final JpaDoctorRepository database;
 
-    public NameSearchCriteria(DoctorRepository database) {
+    public NameSearchCriteria(JpaDoctorRepository database) {
         this.database = database;
     }
 

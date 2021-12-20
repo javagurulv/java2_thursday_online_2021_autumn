@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
@@ -15,7 +16,7 @@ import java.util.Optional;
 public class AddPatientValidator {
 
     @Autowired
-    private PatientRepository database;
+    private JpaPatientRepository database;
     @Autowired
     private PersonalCodeChecker personalCodeChecker;
 
@@ -52,7 +53,7 @@ public class AddPatientValidator {
 
     private Optional<CoreError> validatePatientExistence(AddPatientRequest request) {
         return request.getName() == null || request.getName().isEmpty()
-                ? Optional.empty() : database.findPatientByNameSurnamePersonalCode(
+                ? Optional.empty() : database.findByNameAndSurnameAndPersonalCode(
                 request.getName(),
                 request.getSurname(),
                 request.getPersonalCode()).isEmpty()

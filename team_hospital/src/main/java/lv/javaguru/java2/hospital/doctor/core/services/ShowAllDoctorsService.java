@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.ShowAllDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.ShowAllDoctorsResponse;
 import lv.javaguru.java2.hospital.domain.Doctor;
@@ -14,10 +15,10 @@ import java.util.List;
 @Transactional
 public class ShowAllDoctorsService {
 
-    @Autowired private DoctorRepository database;
+    @Autowired private JpaDoctorRepository database;
 
     public ShowAllDoctorsResponse execute(ShowAllDoctorsRequest request) {
-        List<Doctor> doctors = database.getAllDoctors();
+        List<Doctor> doctors = database.findAll();
         return new ShowAllDoctorsResponse(doctors);
     }
 }

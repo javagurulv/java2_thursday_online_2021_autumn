@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.date_validator;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
@@ -13,9 +14,9 @@ import java.util.Optional;
 public class DateExistenceValidator implements DateValidator {
 
     private GetVisitDate getVisitDate;
-    private VisitRepository database;
+    private JpaVisitRepository database;
 
-    public DateExistenceValidator(GetVisitDate getVisitDate, VisitRepository database) {
+    public DateExistenceValidator(GetVisitDate getVisitDate, JpaVisitRepository database) {
         this.getVisitDate = getVisitDate;
         this.database = database;
     }
@@ -23,7 +24,7 @@ public class DateExistenceValidator implements DateValidator {
     @Override
     public Optional<CoreError> validate(String date) {
         LocalDateTime dateTime = getVisitDate.getVisitDateFromString(date);
-        for (Visit d : database.getAllVisits()) {
+        for (Visit d : database.findAll()) {
             if (d.getVisitDate().isEqual(dateTime)) {
                 return Optional.of(new CoreError("Date", "already is busy!"));
             }

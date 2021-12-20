@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
@@ -24,8 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @RunWith(JUnitPlatform.class)
 public class PatientExistenceByIDValidatorTest {
 
-    @Mock
-    PatientRepository database;
+    @Mock JpaPatientRepository database;
     @InjectMocks PatientExistenceByIDValidator validator;
 
     @Test
@@ -41,7 +41,7 @@ public class PatientExistenceByIDValidatorTest {
         patient.setId(136L);
         List<Patient> patients = new ArrayList<>();
         patients.add(patient);
-        Mockito.when(database.getAllPatients()).thenReturn(patients);
+        Mockito.when(database.findAll()).thenReturn(patients);
         Optional<CoreError> error = validator.existenceByID(patient.getId().toString());
         assertTrue(error.isEmpty());
     }

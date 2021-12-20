@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.search_visit_service;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
@@ -23,7 +24,7 @@ public class SearchVisitService {
     @Value("${search.paging.enabled}")
     @Autowired private boolean pagingEnabled;
 
-    @Autowired private VisitRepository visitRepository;
+    @Autowired private JpaVisitRepository visitRepository;
     @Autowired private SearchVisitValidator validator;
     @Autowired private VisitSearchExecute search;
     @Autowired private VisitOrderingExecute ordering;

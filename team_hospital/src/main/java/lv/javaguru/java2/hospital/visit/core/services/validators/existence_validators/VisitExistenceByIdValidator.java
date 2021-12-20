@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.existence_validators;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
@@ -12,10 +13,10 @@ import java.util.Optional;
 public class VisitExistenceByIdValidator {
 
     @Autowired
-    private VisitRepository database;
+    private JpaVisitRepository database;
 
     public Optional<CoreError> validateExistenceById(Long id) {
-        for (Visit visit : database.getAllVisits()) {
+        for (Visit visit : database.findAll()) {
             if (visit.getVisitID().equals(id)) {
                 return Optional.empty();
             }

@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.requests.DeleteVisitRequest;
@@ -25,7 +26,7 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(JUnitPlatform.class)
 class DeleteVisitServiceTest {
 
-    @Mock private VisitRepository visitRepository;
+    @Mock private JpaVisitRepository visitRepository;
     @Mock private DeleteVisitValidator validator;
     @InjectMocks private DeleteVisitService service;
 
@@ -45,7 +46,6 @@ class DeleteVisitServiceTest {
     @Test
     public void shouldDeleteVisitWithIdFromDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
-        Mockito.when(visitRepository.deleteVisit(1L)).thenReturn(true);
         DeleteVisitRequest request = new DeleteVisitRequest("1");
         DeleteVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());

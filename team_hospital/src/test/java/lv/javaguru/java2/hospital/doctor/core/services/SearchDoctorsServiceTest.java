@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.DoctorOrdering;
 import lv.javaguru.java2.hospital.doctor.core.requests.DoctorPaging;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
@@ -30,7 +31,7 @@ import static org.mockito.ArgumentMatchers.any;
 class SearchDoctorsServiceTest {
 
     @Mock
-    private DoctorRepository database;
+    private JpaDoctorRepository database;
     @Mock
     private SearchDoctorsRequestValidator validator;
     @InjectMocks
@@ -112,24 +113,6 @@ class SearchDoctorsServiceTest {
         assertEquals(response.getDoctors().get(0).getName(), "Name");
         assertEquals(response.getDoctors().get(0).getSurname(), "Surname");
         assertEquals(response.getDoctors().get(0).getSpeciality(), "Speciality");
-    }
-
-    @Test
-    public void shouldSearchById() {
-        SearchDoctorsRequest request = new SearchDoctorsRequest(1L, null, null, null);
-        Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-
-        List<Doctor> doctors = new ArrayList<>();
-        doctors.add(new Doctor("Name", "Surname", "Speciality"));
-        Mockito.when(database.findById(1L)).thenReturn(doctors);
-
-        SearchDoctorsResponse response = service.execute(request);
-        assertFalse(response.hasErrors());
-        assertEquals(response.getDoctors().size(), 1);
-        assertEquals(response.getDoctors().get(0).getName(), "Name");
-        assertEquals(response.getDoctors().get(0).getSurname(), "Surname");
-        assertEquals(response.getDoctors().get(0).getSpeciality(), "Speciality");
-
     }
 
     @Test

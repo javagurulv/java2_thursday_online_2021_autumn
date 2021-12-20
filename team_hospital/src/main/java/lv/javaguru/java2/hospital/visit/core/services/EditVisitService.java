@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
-import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitEnum;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
@@ -17,17 +17,35 @@ import java.util.Locale;
 @Transactional
 public class EditVisitService {
 
-    @Autowired private VisitRepository database;
-    @Autowired private EditVisitValidator validator;
+    @Autowired
+    private JpaVisitRepository database;
+    @Autowired
+    private EditVisitValidator validator;
 
     public EditVisitResponse execute(EditVisitRequest request) {
         List<CoreError> errors = validator.validate(request);
         if (!errors.isEmpty()) {
             return new EditVisitResponse(errors);
+        } else {
+            switch (request.getFieldToChange().toLowerCase(Locale.ROOT)) {
+                case "patient_id" -> {
+                    database.editVisitPatient(Long.valueOf(request.getVisitID()), request.getChanges());
+                    return new EditVisitResponse(true);
+                }
+                case "doctor_id" -> {
+                    database.editVisitDoctor(Long.valueOf(request.getVisitID()), request.getChanges());
+                    return new EditVisitResponse(true);
+                }
+                case "date" -> {
+                    database.editVisitDate(Long.valueOf(request.getVisitID()), request.getChanges());
+                    return new EditVisitResponse(true);
+                }
+                case "description" -> {
+                    database.editVisitDescription(Long.valueOf(request.getVisitID()), request.getChanges());
+                    return new EditVisitResponse(true);
+                }
+            }
         }
-        boolean isVisitEdited = database.editVisit(Long.valueOf(request.getVisitID()),
-                EditVisitEnum.valueOf(request.getEditEnums().toUpperCase(Locale.ROOT)),
-                request.getChanges());
-        return new EditVisitResponse(isVisitEdited);
+        return new EditVisitResponse(false);
     }
 }

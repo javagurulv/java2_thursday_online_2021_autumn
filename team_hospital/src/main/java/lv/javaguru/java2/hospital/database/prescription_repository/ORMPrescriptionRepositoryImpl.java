@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-@Component
+//@Component
 public class ORMPrescriptionRepositoryImpl implements PrescriptionRepository {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void addPrescription(Prescription prescription) {
+    public void save(Prescription prescription) {
         sessionFactory.getCurrentSession().save(prescription);
     }
 
@@ -41,14 +41,14 @@ public class ORMPrescriptionRepositoryImpl implements PrescriptionRepository {
     }
 
     @Override
-    public List<Prescription> getAllPrescriptions() {
+    public List<Prescription> findAll() {
         return sessionFactory.getCurrentSession()
                 .createQuery("SELECT p FROM Prescription p", Prescription.class)
                 .getResultList();
     }
 
     @Override
-    public boolean deletePrescriptionById(Long id) {
+    public boolean deleteById(Long id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "DELETE Prescription where id = :id");
         query.setParameter("id", id);
@@ -57,7 +57,7 @@ public class ORMPrescriptionRepositoryImpl implements PrescriptionRepository {
     }
 
     @Override
-    public List<Prescription> findByPrescriptionId(Long prescriptionId) {
+    public List<Prescription> findById(Long prescriptionId) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT p FROM Prescription p WHERE id = :id");
         query.setParameter("id", prescriptionId);
@@ -81,7 +81,7 @@ public class ORMPrescriptionRepositoryImpl implements PrescriptionRepository {
     }
 
     @Override
-    public List<Prescription> findByDoctorAndPatientId(Long doctorId, Long patientId) {
+    public List<Prescription> findByDoctorIdAndPatientId(Long doctorId, Long patientId) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT p FROM Prescription p WHERE doctor_id = :doctor_id AND " +
                         "patient_id = :patient_id");
@@ -91,20 +91,10 @@ public class ORMPrescriptionRepositoryImpl implements PrescriptionRepository {
     }
 
     @Override
-    public List<Prescription> findPatientForDeleting(Long patientID) {
+    public List<Prescription> getById(Long id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "SELECT p FROM Prescription p WHERE patient_id = :patient_id");
-        query.setParameter("patient_id", patientID);
+                "SELECT p FROM Prescription p WHERE id = :id");
+        query.setParameter("id", id);
         return query.getResultList();
-    }
-
-    @Override
-    public Optional<Prescription> getById(Long id) {
-        Prescription prescription = sessionFactory.getCurrentSession().get(Prescription.class, id);
-        if(prescription == null) {
-            return Optional.empty();
-        } else {
-            return Optional.of(prescription);
-        }
     }
 }

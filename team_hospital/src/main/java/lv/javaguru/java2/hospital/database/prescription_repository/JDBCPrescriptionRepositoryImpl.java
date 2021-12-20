@@ -17,7 +17,7 @@ public class JDBCPrescriptionRepositoryImpl implements PrescriptionRepository {
     @Autowired private PrescriptionRowMapper rowMapper;
 
     @Override
-    public void addPrescription(Prescription prescription) {
+    public void save(Prescription prescription) {
         jdbcTemplate.update(
                 "INSERT INTO prescriptions (doctor_id, patient_id, medication_name, quantity, date, valid_till) " +
                         "VALUES (?, ?, ?, ?, ?, ?)",
@@ -35,20 +35,20 @@ public class JDBCPrescriptionRepositoryImpl implements PrescriptionRepository {
     }
 
     @Override
-    public List<Prescription> getAllPrescriptions() {
+    public List<Prescription> findAll() {
         String sql = "SELECT * FROM prescriptions";
         return jdbcTemplate.query(sql, rowMapper);
     }
 
     @Override
-    public boolean deletePrescriptionById(Long id) {
+    public boolean deleteById(Long id) {
         String sql = "DELETE FROM prescriptions WHERE id = ?";
         Object[] args = new Object[] {id};
         return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
-    public List<Prescription> findByPrescriptionId(Long prescriptionId) {
+    public List<Prescription> findById(Long prescriptionId) {
         String sql = "SELECT * FROM prescriptions WHERE id = ?";
         Object[] args = new Object[] {prescriptionId};
         return jdbcTemplate.query(sql, args, rowMapper);
@@ -69,21 +69,16 @@ public class JDBCPrescriptionRepositoryImpl implements PrescriptionRepository {
     }
 
     @Override
-    public List<Prescription> findByDoctorAndPatientId(Long doctorId, Long patientId) {
+    public List<Prescription> findByDoctorIdAndPatientId(Long doctorId, Long patientId) {
         String sql = "SELECT * FROM prescriptions WHERE doctor_id = ? AND patient_id = ?";
         Object[] args = new Object[] {doctorId, patientId};
         return jdbcTemplate.query(sql, args, rowMapper);
     }
 
     @Override
-    public List<Prescription> findPatientForDeleting(Long patientID) {
-        String sql = "SELECT * FROM prescriptions WHERE patient_id = ?";
-        Object[] args = new Object[] {patientID};
+    public List<Prescription> getById(Long id) {
+        String sql = "SELECT * FROM prescriptions WHERE id = ?";
+        Object[] args = new Object[] {id};
         return jdbcTemplate.query(sql, args, rowMapper);
-    }
-
-    @Override
-    public Optional<Prescription> getById(Long id) {
-        return Optional.empty();
     }
 }

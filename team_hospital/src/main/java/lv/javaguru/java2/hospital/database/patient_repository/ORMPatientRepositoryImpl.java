@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-@Component
+//@Component
 public class ORMPatientRepositoryImpl implements PatientRepository {
 
     @Autowired private SessionFactory sessionFactory;
 
     @Override
-    public void add(Patient patient) {
+    public void save(Patient patient) {
         sessionFactory.getCurrentSession().save(patient);
     }
 
@@ -40,17 +40,17 @@ public class ORMPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> getAllPatients() {
+    public List<Patient> findAll() {
         return sessionFactory.getCurrentSession()
                 .createQuery("SELECT p FROM Patient p", Patient.class)
                 .getResultList();
     }
 
     @Override
-    public boolean editActions(Long patientID, EditPatientEnum userInput, String input) {
+    public boolean editPatient(Long patientID, String userInput, String input) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "UPDATE Patient p SET "
-                        + userInput.toString().toLowerCase(Locale.ROOT)
+                        + userInput.toLowerCase(Locale.ROOT)
                         + " = :input WHERE id = :id");
         query.setParameter("id", patientID);
         query.setParameter("input", input);
@@ -59,7 +59,7 @@ public class ORMPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> findPatientsByName(String name) {
+    public List<Patient> findByName(String name) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT p FROM Patient p WHERE name = :name");
         query.setParameter("name", name);
@@ -67,7 +67,7 @@ public class ORMPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> findPatientsBySurname(String surname) {
+    public List<Patient> findBySurname(String surname) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT p FROM Patient p WHERE surname = :surname");
         query.setParameter("surname", surname);
@@ -75,7 +75,7 @@ public class ORMPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> findPatientsByPersonalCode(String personalCode) {
+    public List<Patient> findByPersonalCode(String personalCode) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT p FROM Patient p WHERE personal_code = :personal_code");
         query.setParameter("personal_code", personalCode);
@@ -83,7 +83,7 @@ public class ORMPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> findPatientsByNameAndSurname(String name, String surname) {
+    public List<Patient> findByNameAndSurname(String name, String surname) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT p FROM Patient p WHERE name = :name AND surname = :surname");
         query.setParameter("name", name);
@@ -92,7 +92,7 @@ public class ORMPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> findPatientsByNameAndPersonalCode(String name, String personal_code) {
+    public List<Patient> findByNameAndPersonalCode(String name, String personal_code) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT p FROM Patient p WHERE name = :name AND personal_code = :personal_code");
         query.setParameter("name", name);
@@ -101,7 +101,7 @@ public class ORMPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> findPatientsBySurnameAndPersonalCode(String surname, String personal_code) {
+    public List<Patient> findBySurnameAndPersonalCode(String surname, String personal_code) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT p FROM Patient p WHERE surname = :surname AND personal_code = :personal_code");
         query.setParameter("surname", surname);
@@ -110,7 +110,7 @@ public class ORMPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> findPatientByNameSurnamePersonalCode(String name, String surname, String personal_code) {
+    public List<Patient> findByNameAndSurnameAndPersonalCode(String name, String surname, String personal_code) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT p FROM Patient p WHERE name = :name AND surname = :surname AND personal_code = :personal_code");
         query.setParameter("name", name);

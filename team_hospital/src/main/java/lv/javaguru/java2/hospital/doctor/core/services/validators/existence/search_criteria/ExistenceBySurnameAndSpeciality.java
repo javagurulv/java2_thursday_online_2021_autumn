@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators.existence.search_criteria;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.domain.Doctor;
@@ -14,7 +15,7 @@ import java.util.Optional;
 public class ExistenceBySurnameAndSpeciality implements DoctorExistenceBySearchCriteria{
 
     @Autowired
-    private DoctorRepository database;
+    private JpaDoctorRepository database;
 
     @Override
     public boolean canValidate(SearchDoctorsRequest request) {
@@ -26,7 +27,7 @@ public class ExistenceBySurnameAndSpeciality implements DoctorExistenceBySearchC
 
     @Override
     public Optional<CoreError> validateExistence(SearchDoctorsRequest request) {
-        for (Doctor doctor : database.getAllDoctors()) {
+        for (Doctor doctor : database.findAll()) {
             if (Objects.equals(doctor.getSurname(), request.getSurname())
                     && Objects.equals(doctor.getSpeciality(), request.getSpeciality())) {
                 return Optional.empty();

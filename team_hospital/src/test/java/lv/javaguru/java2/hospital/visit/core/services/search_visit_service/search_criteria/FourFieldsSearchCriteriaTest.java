@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.search_visit_service.search_criteria;
 
-import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Visit;
@@ -29,7 +29,7 @@ class FourFieldsSearchCriteriaTest {
     @Mock
     GetVisitDate getVisitDate;
     @Mock
-    private VisitRepository database;
+    private JpaVisitRepository database;
     @InjectMocks
     private FourFieldsSearchCriteria searchCriteria;
 
@@ -63,7 +63,7 @@ class FourFieldsSearchCriteriaTest {
         SearchVisitRequest request = new SearchVisitRequest
                 (visits.get(0).getVisitID().toString(), visits.get(0).getDoctor().getId().toString(),
                         visits.get(0).getPatient().getId().toString(), "2021-12-27 15:00");
-        Mockito.when(database.findByVisitIDDoctorIDPatientIDDate(visits.get(0).getVisitID(), visits.get(0).getDoctor().getId(),
+        Mockito.when(database.findByIdAndDoctorIdAndPatientIdAndDate(visits.get(0).getVisitID(), visits.get(0).getDoctor().getId(),
                 visits.get(0).getPatient().getId(), visits.get(0).getVisitDate())).thenReturn(visits);
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate()))
                 .thenReturn(date);

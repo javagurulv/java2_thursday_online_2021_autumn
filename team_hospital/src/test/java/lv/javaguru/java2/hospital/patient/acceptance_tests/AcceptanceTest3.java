@@ -45,7 +45,7 @@ public class AcceptanceTest3 {
         SearchPatientsResponse searchPatientsResponse1 = searchPatientsService.execute(searchPatientsRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(searchPatientsResponse1.getPatientList().get(0).getId().toString(),
-                "NAME", "NewName");
+                "name", "NewName");
         EditPatientResponse editPatientResponse = editPatientService.execute(editPatientRequest);
 
 		SearchPatientsRequest searchPatientsRequest2 = new SearchPatientsRequest("NewName", "surname", "");
@@ -65,7 +65,7 @@ public class AcceptanceTest3 {
         SearchPatientsResponse searchPatientsResponse1 = searchPatientsService.execute(searchPatientsRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(searchPatientsResponse1.getPatientList().get(0).getId().toString(),
-                "SURNAME", "NewSurname");
+                "surname", "NewSurname");
         EditPatientResponse editPatientResponse = editPatientService.execute(editPatientRequest);
 
 		SearchPatientsRequest searchPatientsRequest2 = new SearchPatientsRequest("name10", "NewSurname", "");
@@ -82,7 +82,7 @@ public class AcceptanceTest3 {
         AddPatientResponse addPatientResponse = addPatientService.execute(addPatientRequest1);
 
         EditPatientRequest editPatientRequest = new EditPatientRequest(addPatientResponse.getPatient().getId().toString(),
-                "PERSONAL_CODE", "44556677889");
+                "personal_code", "44556677889");
         EditPatientResponse editPatientResponse = editPatientService.execute(editPatientRequest);
 
 		SearchPatientsRequest searchPatientsRequest2 = new SearchPatientsRequest("name11", "surname", "");

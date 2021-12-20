@@ -46,10 +46,10 @@ public class NameSearchCriteriaTest {
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name1", "surname1", "1234"));
 
-        Mockito.when(database.findPatientsByName(request.getName()))
+        Mockito.when(database.findByName(request.getName()))
                 .thenReturn(patients);
         List<Patient> patients2 = database
-                .findPatientsByName(request.getName());
+                .findByName(request.getName());
 
         assertTrue(searchCriteria.canProcess(request));
         Assertions.assertEquals(patients2.get(0).getName(), "name1");

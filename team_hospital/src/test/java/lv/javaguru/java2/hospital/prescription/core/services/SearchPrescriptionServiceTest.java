@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPrescriptionRepository;
 import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -32,7 +33,7 @@ import static org.mockito.ArgumentMatchers.any;
 class SearchPrescriptionServiceTest {
 
     @Mock
-    private PrescriptionRepository database;
+    private JpaPrescriptionRepository database;
     @Mock
     private SearchPrescriptionValidator validator;
     @InjectMocks
@@ -68,7 +69,7 @@ class SearchPrescriptionServiceTest {
 
         SearchPrescriptionRequest request = new SearchPrescriptionRequest(98L, null, null);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        Mockito.when(database.findByPrescriptionId(98L)).thenReturn(prescriptions);
+        Mockito.when(database.getById(98L)).thenReturn(prescriptions);
 
         SearchPrescriptionResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -139,7 +140,7 @@ class SearchPrescriptionServiceTest {
 
         SearchPrescriptionRequest request = new SearchPrescriptionRequest(null, 72L, 298L);
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
-        Mockito.when(database.findByDoctorAndPatientId(72L, 298L)).thenReturn(prescriptions);
+        Mockito.when(database.findByDoctorIdAndPatientId(72L, 298L)).thenReturn(prescriptions);
 
         SearchPrescriptionResponse response = service.execute(request);
         assertFalse(response.hasErrors());

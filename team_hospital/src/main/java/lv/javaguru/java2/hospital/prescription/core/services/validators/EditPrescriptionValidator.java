@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.prescription.core.checkers.PrescriptionLongNumChecker;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.prescription.core.requests.EditPrescriptionRequest;
@@ -15,7 +16,7 @@ import java.util.Optional;
 @Component
 public class EditPrescriptionValidator {
 
-    @Autowired private PatientRepository patientRepository;
+    @Autowired private JpaPatientRepository patientRepository;
     @Autowired private PrescriptionExistenceByIDValidator prescriptionExistenceByIDValidator;
     @Autowired private PrescriptionEnumChecker enumChecker;
     @Autowired private PrescriptionLongNumChecker longNumChecker;

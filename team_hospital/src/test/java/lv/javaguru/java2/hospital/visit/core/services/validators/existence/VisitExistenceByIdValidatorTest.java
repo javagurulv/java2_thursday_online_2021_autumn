@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.existence;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -28,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @RunWith(JUnitPlatform.class)
 class VisitExistenceByIdValidatorTest {
 
-    @Mock private VisitRepository database;
+    @Mock private JpaVisitRepository database;
     @InjectMocks private VisitExistenceByIdValidator validator;
 
     @Test
@@ -51,7 +52,7 @@ class VisitExistenceByIdValidatorTest {
         Long visitId = 165L;
         visits.get(0).setVisitID(visitId);
 
-        Mockito.when(database.getAllVisits()).thenReturn(visits);
+        Mockito.when(database.findAll()).thenReturn(visits);
         Optional<CoreError> errors = validator.validateExistenceById(visitId);
         assertTrue(errors.isEmpty());
     }

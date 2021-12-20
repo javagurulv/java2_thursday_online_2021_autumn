@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPrescriptionRepository;
 import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -25,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ShowAllPrescriptionServiceTest {
 
     @Mock
-    private PrescriptionRepository database;
+    private JpaPrescriptionRepository database;
     @InjectMocks
     private ShowAllPrescriptionService service;
 
@@ -36,7 +37,7 @@ class ShowAllPrescriptionServiceTest {
         List<Prescription> prescriptions = new ArrayList<>();
         prescriptions.add(new Prescription(doctor, patient, "Drug1", 1));
         prescriptions.add(new Prescription(doctor, patient, "Drug2", 2));
-        Mockito.when(database.getAllPrescriptions()).thenReturn(prescriptions);
+        Mockito.when(database.findAll()).thenReturn(prescriptions);
         ShowAllPrescriptionRequest request = new ShowAllPrescriptionRequest();
         ShowAllPrescriptionResponse response = service.execute(request);
         assertFalse(response.hasErrors());

@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.search_visit_service.search_criteria;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -26,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DoctorIdPatientIdSearchCriteriaTest {
 
     @Mock
-    VisitRepository database;
+    JpaVisitRepository database;
     @InjectMocks
     DoctorIdPatientIdSearchCriteria searchCriteria;
 

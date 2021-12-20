@@ -22,14 +22,14 @@ class PatientEnumCheckerTest {
     @Test
     public void shouldReturnEmptyList() {
         EditPatientRequest request = new EditPatientRequest("166", "SURNAME", "changes");
-        Optional<CoreError> error = checker.validateEnum(request.getUserInputEnum());
+        Optional<CoreError> error = checker.validateEnum(request.getFieldToChange());
         assertTrue(error.isEmpty());
     }
 
     @Test
     public void shouldReturnEditErrorList() {
         EditPatientRequest request = new EditPatientRequest("166", "bla", "changes");
-        Optional<CoreError> error = checker.validateEnum(request.getUserInputEnum());
+        Optional<CoreError> error = checker.validateEnum(request.getFieldToChange());
         assertTrue(error.isPresent());
         assertEquals(error.get().getField(), "User choice");
         assertEquals(error.get().getDescription(), "must be NAME, SURNAME OR PERSONAL_CODE");

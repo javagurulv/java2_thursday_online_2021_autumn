@@ -1,5 +1,7 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPrescriptionRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
@@ -32,8 +34,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class DeletePatientValidatorTest {
 
-    @Mock private PrescriptionRepository prescriptionRepository;
-    @Mock private VisitRepository visitRepository;
+    @Mock private JpaPrescriptionRepository prescriptionRepository;
+    @Mock private JpaVisitRepository visitRepository;
     @Mock private PatientLongNumChecker longNumChecker;
     @Mock private PatientExistenceByIDValidator existenceValidator;
     @InjectMocks private DeletePatientValidator validator;
@@ -92,8 +94,8 @@ class DeletePatientValidatorTest {
         visits.add(new Visit(doctor, patient, dateTime));
         visits.get(0).setVisitID(1L);
 
-        Mockito.when(prescriptionRepository.findPatientForDeleting(patient.getId())).thenReturn(new ArrayList<>());
-        Mockito.when(visitRepository.findPatientForDeleting(patient.getId())).thenReturn(visits);
+        Mockito.when(prescriptionRepository.findByPatientId(patient.getId())).thenReturn(new ArrayList<>());
+        Mockito.when(visitRepository.findByPatientId(patient.getId())).thenReturn(visits);
 
         DeletePatientRequest request = new DeletePatientRequest("1");
         List<CoreError> errors = validator.validate(request);
@@ -113,8 +115,8 @@ class DeletePatientValidatorTest {
         prescriptions.add(new Prescription(doctor, patient, "medication_name", 10));
         prescriptions.get(0).setId(1L);
 
-        Mockito.when(prescriptionRepository.findPatientForDeleting(patient.getId())).thenReturn(prescriptions);
-        Mockito.when(visitRepository.findPatientForDeleting(patient.getId())).thenReturn(new ArrayList<>());
+        Mockito.when(prescriptionRepository.findByPatientId(patient.getId())).thenReturn(prescriptions);
+        Mockito.when(visitRepository.findByPatientId(patient.getId())).thenReturn(new ArrayList<>());
 
         DeletePatientRequest request = new DeletePatientRequest("1");
         List<CoreError> errors = validator.validate(request);

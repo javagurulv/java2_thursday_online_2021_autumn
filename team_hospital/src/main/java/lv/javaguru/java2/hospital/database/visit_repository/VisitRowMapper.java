@@ -18,7 +18,7 @@ public class VisitRowMapper implements RowMapper<Visit> {
     public Visit mapRow(ResultSet rs, int rowNum) throws SQLException {
         Visit visit = new Visit();
         visit.setVisitID(rs.getLong("id"));
-        visit.setDoctor(doctorRepository.findById(rs.getLong("doctor_id")).get(0));
+        visit.setDoctor(doctorRepository.getById(rs.getLong("doctor_id")).get(0));
         visit.setPatient(patientRepository.findById(rs.getLong("patient_id")).get());
         visit.setVisitDate(rs.getTimestamp("date").toLocalDateTime());
         visit.setDescription(rs.getString("description"));

@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.search_patient_service;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
@@ -24,7 +25,7 @@ public class  SearchPatientsService {
     @Value("${search.paging.enabled}")
     private boolean pagingEnabled;
 
-    @Autowired private PatientRepository patientRepository;
+    @Autowired private JpaPatientRepository patientRepository;
     @Autowired private SearchPatientsValidator validator;
     @Autowired private PatientSearch search;
     @Autowired private Ordering ordering;

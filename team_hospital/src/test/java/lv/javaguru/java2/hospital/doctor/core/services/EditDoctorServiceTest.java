@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorEnum;
 import lv.javaguru.java2.hospital.doctor.core.requests.EditDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
@@ -26,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EditDoctorServiceTest {
 
     @Mock
-    private DoctorRepository database;
+    private JpaDoctorRepository database;
     @Mock
     private EditDoctorRequestValidator validator;
     @InjectMocks

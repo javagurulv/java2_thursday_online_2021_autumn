@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.FindPatientByIdRequest;
@@ -26,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class FindPatientByIdServiceTest {
 
     @Mock private FindPatientByIDValidator validator;
-    @Mock private PatientRepository database;
+    @Mock private JpaPatientRepository database;
     @InjectMocks private FindPatientByIdService service;
 
     @Test

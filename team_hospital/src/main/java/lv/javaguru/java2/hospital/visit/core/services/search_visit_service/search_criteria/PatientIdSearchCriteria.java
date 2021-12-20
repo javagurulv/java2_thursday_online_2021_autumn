@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.search_visit_service.search_criteria;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
@@ -8,9 +9,9 @@ import java.util.List;
 
 public class PatientIdSearchCriteria implements VisitsSearchCriteria{
 
-    private final VisitRepository database;
+    private final JpaVisitRepository database;
 
-    public PatientIdSearchCriteria(VisitRepository database) {
+    public PatientIdSearchCriteria(JpaVisitRepository database) {
         this.database = database;
     }
 

@@ -43,10 +43,10 @@ class SurnameSearchCriteriaTest {
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("Name8745", "Surname1268", "985-65691"));
 
-        Mockito.when(database.findPatientsBySurname(request.getSurname()))
+        Mockito.when(database.findBySurname(request.getSurname()))
                 .thenReturn(patients);
         List<Patient> patients2 = database
-                .findPatientsBySurname(request.getSurname());
+                .findBySurname(request.getSurname());
         assertTrue(searchCriteria.canProcess(request));
 
         assertEquals(patients2.get(0).getName(), "Name8745");

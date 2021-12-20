@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.DoctorOrdering;
 import lv.javaguru.java2.hospital.doctor.core.requests.DoctorPaging;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
@@ -30,7 +31,7 @@ public class SearchDoctorsService {
     @Value("${search.paging.enabled}")
     private boolean pagingEnabled;
 
-    @Autowired private DoctorRepository database;
+    @Autowired private JpaDoctorRepository database;
     @Autowired private SearchDoctorsRequestValidator validator;
 
     public SearchDoctorsResponse execute(SearchDoctorsRequest request) {
@@ -81,8 +82,7 @@ public class SearchDoctorsService {
     }
 
     private DoctorsSearchCriteria[] getDoctorsSearchCriteria() {
-        DoctorsSearchCriteria[] doctorsSearchCriteria = {
-                new IdSearchCriteria(database),
+        return new DoctorsSearchCriteria[]{
                 new NameAndSurnameAndSpecialitySearchCriteria(database),
                 new NameAndSurnameSearchCriteria(database),
                 new NameAndSpecialitySearchCriteria(database),
@@ -90,7 +90,6 @@ public class SearchDoctorsService {
                 new NameSearchCriteria(database),
                 new SurnameSearchCriteria(database),
                 new SpecialitySearchCriteria(database)};
-        return doctorsSearchCriteria;
     }
 
     private List<Doctor> paging(List<Doctor> doctors, DoctorPaging doctorPaging) {

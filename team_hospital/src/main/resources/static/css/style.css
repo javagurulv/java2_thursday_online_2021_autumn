@@ -1,0 +1,118 @@
+h3{
+  font-size: 30px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+a {
+  color: rgba(255,255,255);
+  &:hover,
+  &:focus {
+    color: rgba(4,106,56,1);
+  }
+}
+
+body {
+    text-align: center;
+	margin: 0;
+	background: linear-gradient(45deg, #49a09d, #5f2c82);
+	font-family: sans-serif;
+	font-weight: 100;
+}
+
+table {
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+	border-collapse: collapse;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+td {
+	padding: 10px;
+	background-color: rgba(255,255,255,0.2);
+	color: #fff;
+	text-align: center;
+    vertical-align: middle;
+}
+
+th {
+	text-align: center;
+}
+
+form{
+padding-top: 5px;
+}
+tr{
+color: #fff;
+}
+
+input[type="submit"] {
+	font: inherit;
+	padding: 0.5em;
+	font-weight: 500;
+	background-color: #6658d3;
+	border-radius: 6px;
+	color: #FFF;
+	border: 1;
+	&:focus {
+		outline: 1;
+	}
+}
+input[type="reset"] {
+	font: inherit;
+	padding: 0.5em;
+	font-weight: 500;
+	background-color: #6658d3;
+	border-radius: 6px;
+	color: #FFF;
+	border: 1;
+	&:focus {
+		outline: 1;
+	    }
+    }
+}
+
+.input-text {
+	display: flex;
+	flex-direction: column-reverse;
+	position: relative;
+	padding-top: 1.5rem;
+	&+.input {
+		margin-top: 1.5rem;
+	}
+}
+
+.input-label {
+	color: #8597a3;
+	position: absolute;
+	top: 1.5rem;
+	transition: .25s ease;
+}
+
+.input-field {
+	border: 0;
+	z-index: 1;
+	background-color: transparent;
+	border-bottom: 2px solid #eee;
+	font: inherit;
+	font-size: 1.125rem;
+	padding: .25rem 0;
+	&:focus, &:valid {
+		outline: 0;
+		border-bottom-color: #6658d3;
+		&+.input-label {
+			color: #6658d3;
+			transform: translateY(-1.5rem);
+		}
+	}
+}

@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.date_validator;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -26,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class DateExistenceValidatorTest {
 
-    @Mock private VisitRepository database;
+    @Mock private JpaVisitRepository database;
     @Mock private GetVisitDate getVisitDate;
     @InjectMocks DateExistenceValidator validator;
 
@@ -44,7 +45,7 @@ class DateExistenceValidatorTest {
 
         Mockito.when(getVisitDate.getVisitDateFromString(date))
                 .thenReturn(LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(date)));
-        Mockito.when(database.getAllVisits()).thenReturn(visits);
+        Mockito.when(database.findAll()).thenReturn(visits);
 
         Optional<CoreError> error = validator.validate(date);
         assertFalse(error.isEmpty());
@@ -65,7 +66,7 @@ class DateExistenceValidatorTest {
 
         Mockito.when(getVisitDate.getVisitDateFromString(date))
                 .thenReturn(LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse("25-12-2025 13:00")));
-        Mockito.when(database.getAllVisits()).thenReturn(visits);
+        Mockito.when(database.findAll()).thenReturn(visits);
 
         Optional<CoreError> error = validator.validate(date);
         assertTrue(error.isEmpty());

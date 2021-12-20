@@ -1,10 +1,7 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
-import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
-import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
-import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
-import lv.javaguru.java2.hospital.domain.Patient;
-import lv.javaguru.java2.hospital.prescription.core.services.search_criteria.DoctorIdSearchCriteria;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.visit.core.checkers.VisitEnumChecker;
 import lv.javaguru.java2.hospital.visit.core.checkers.VisitLongNumChecker;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
@@ -26,8 +23,8 @@ public class EditVisitValidator {
     @Autowired private VisitEnumChecker visitEnumChecker;
     @Autowired private DateValidatorExecution dateValidator;
     @Autowired private VisitLongNumChecker longNumChecker;
-    @Autowired private PatientRepository patientRepository;
-    @Autowired private DoctorRepository doctorRepository;
+    @Autowired private JpaPatientRepository patientRepository;
+    @Autowired private JpaDoctorRepository doctorRepository;
 
     public List<CoreError> validate(EditVisitRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -57,9 +54,9 @@ public class EditVisitValidator {
     }
 
     private Optional<CoreError> validateChangesIDParse(EditVisitRequest request){
-        return (request.getEditEnums() == null || request.getEditEnums().isEmpty())
-                ? Optional.empty() : request.getEditEnums().toUpperCase(Locale.ROOT).equals("DOCTOR_ID")
-                || request.getEditEnums().toUpperCase(Locale.ROOT).equals("PATIENT_ID")
+        return (request.getFieldToChange() == null || request.getFieldToChange().isEmpty())
+                ? Optional.empty() : request.getFieldToChange().toUpperCase(Locale.ROOT).equals("DOCTOR_ID")
+                || request.getFieldToChange().toUpperCase(Locale.ROOT).equals("PATIENT_ID")
                 ? longNumChecker.validate(request.getChanges(), "ID in changes") : Optional.empty();
     }
 
@@ -75,27 +72,27 @@ public class EditVisitValidator {
     }
 
     private Optional<CoreError> validateEnum(EditVisitRequest request){
-        return (request.getEditEnums() == null || request.getEditEnums().isEmpty())
+        return (request.getFieldToChange() == null || request.getFieldToChange().isEmpty())
                 ? Optional.of(new CoreError("Edit option", "must not be empty!"))
-                : visitEnumChecker.validateEnum(request.getEditEnums());
+                : visitEnumChecker.validateEnum(request.getFieldToChange());
     }
 
     private List<CoreError> validateDate(EditVisitRequest request){
         return request.getChanges() == null || request.getChanges().isEmpty()
-                ? new ArrayList<>() : request.getEditEnums().equals("DATE")
+                ? new ArrayList<>() : request.getFieldToChange().equals("DATE")
                 ? dateValidator.validate(request.getChanges()) : new ArrayList<>();
     }
 
     private Optional<CoreError> validateDoctorExistence(EditVisitRequest request){
-        return (request.getEditEnums() == null || request.getEditEnums().isEmpty())
-                ? Optional.empty() : !request.getEditEnums().toUpperCase(Locale.ROOT).equals("DOCTOR_ID")
+        return (request.getFieldToChange() == null || request.getFieldToChange().isEmpty())
+                ? Optional.empty() : !request.getFieldToChange().toUpperCase(Locale.ROOT).equals("DOCTOR_ID")
                 ? Optional.empty() : doctorRepository.findById(Long.parseLong(request.getChanges())).isEmpty()
                 ? Optional.of(new CoreError("Doctor", "does not exist!")) : Optional.empty();
     }
 
     private Optional<CoreError> validatePatientExistence(EditVisitRequest request){
-        return (request.getEditEnums() == null || request.getEditEnums().isEmpty())
-                ? Optional.empty() : !request.getEditEnums().toUpperCase(Locale.ROOT).equals("PATIENT_ID")
+        return (request.getFieldToChange() == null || request.getFieldToChange().isEmpty())
+                ? Optional.empty() : !request.getFieldToChange().toUpperCase(Locale.ROOT).equals("PATIENT_ID")
                 ? Optional.empty() : patientRepository.findById(Long.parseLong(request.getChanges())).isEmpty()
                 ? Optional.of(new CoreError("Patient", "does not exist!")) : Optional.empty();
     }

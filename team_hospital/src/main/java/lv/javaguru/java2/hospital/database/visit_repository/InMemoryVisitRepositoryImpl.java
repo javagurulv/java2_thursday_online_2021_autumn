@@ -23,19 +23,19 @@ public class InMemoryVisitRepositoryImpl implements VisitRepository {
     private DoctorRepository doctorRepository;
 
     @Override
-    public void recordVisit(Visit visit) {
+    public void save(Visit visit) {
         visit.setVisitID(nextId);
         nextId++;
         visits.add(visit);
     }
 
     @Override
-    public boolean deleteVisit(Long id) {
+    public boolean deleteById(Long id) {
         return visits.removeIf(p -> p.getVisitID().equals(id));
     }
 
     @Override
-    public List<Visit> getAllVisits() {
+    public List<Visit> findAll() {
         return visits;
     }
 
@@ -48,7 +48,7 @@ public class InMemoryVisitRepositoryImpl implements VisitRepository {
         if (visitToEditOpt.isPresent()) {
             Visit visitToEdit = visitToEditOpt.get();
             if (userInput.equals(EditVisitEnum.DOCTOR_ID)) {
-                visitToEdit.setDoctor(doctorRepository.findById(Long.parseLong(changes)).get(0));
+                visitToEdit.setDoctor(doctorRepository.getById(Long.parseLong(changes)).get(0));
                 isVisitEdited = true;
             } else if (userInput.equals(EditVisitEnum.PATIENT_ID)) {
                 visitToEdit.setPatient(patientRepository.findById(Long.parseLong(changes)).get());
@@ -65,7 +65,7 @@ public class InMemoryVisitRepositoryImpl implements VisitRepository {
     }
 
     @Override
-    public List<Visit> findByVisitId(Long id) {
+    public List<Visit> findById(Long id) {
         return visits.stream()
                 .filter(visit -> Objects.equals(visit.getVisitID(), id))
                 .collect(Collectors.toList());
@@ -168,7 +168,7 @@ public class InMemoryVisitRepositoryImpl implements VisitRepository {
     }
 
     @Override
-    public List<Visit> findByVisitIDAndDoctorIDAndPatientID(Long visitID, Long doctorID, Long patientID) {
+    public List<Visit> findByVisitIdAndDoctorIdAndPatientId(Long visitID, Long doctorID, Long patientID) {
         return visits.stream()
                 .filter(visit -> Objects.equals(visit.getVisitID(), visitID))
                 .filter(visit -> Objects.equals(visit.getDoctor().getId(), doctorID))
@@ -177,7 +177,7 @@ public class InMemoryVisitRepositoryImpl implements VisitRepository {
     }
 
     @Override
-    public List<Visit> findByVisitIDDoctorIDPatientIDDate(Long visitID, Long doctorID, Long patientID, LocalDateTime date) {
+    public List<Visit> findByVisitIdAndDoctorIdAndPatientIdAndDate(Long visitID, Long doctorID, Long patientID, LocalDateTime date) {
         return visits.stream()
                 .filter(visit -> Objects.equals(visit.getVisitID(), visitID))
                 .filter(visit -> Objects.equals(visit.getDoctor().getId(), doctorID))

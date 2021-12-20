@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.existence_validators.search_criteria_validators;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
@@ -13,7 +14,7 @@ import java.util.Optional;
 @Component
 public class ExistenceByDoctorIdPatientIdDate implements VisitExistenceBySearchCriteria{
 
-    @Autowired private VisitRepository database;
+    @Autowired private JpaVisitRepository database;
     @Autowired private GetVisitDate getVisitDate;
 
     @Override
@@ -27,7 +28,7 @@ public class ExistenceByDoctorIdPatientIdDate implements VisitExistenceBySearchC
     @Override
     public Optional<CoreError> validateExistence(SearchVisitRequest request) {
 
-        for (Visit visit : database.getAllVisits()) {
+        for (Visit visit : database.findAll()) {
             if (visit.getDoctor().getId().equals(Long.parseLong(request.getDoctorId()))
             && visit.getPatient().getId().equals(Long.parseLong(request.getPatientId()))
             && visit.getVisitDate().equals(getVisitDate.getVisitDateFromString(request.getVisitDate()))) {

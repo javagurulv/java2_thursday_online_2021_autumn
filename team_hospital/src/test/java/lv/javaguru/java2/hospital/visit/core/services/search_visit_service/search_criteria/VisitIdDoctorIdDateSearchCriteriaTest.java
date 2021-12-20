@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.search_visit_service.search_criteria;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -28,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class VisitIdDoctorIdDateSearchCriteriaTest {
 
     @Mock private GetVisitDate getVisitDate;
-    @Mock private VisitRepository database;
+    @Mock private JpaVisitRepository database;
     @InjectMocks private VisitIdDoctorIdDateSearchCriteria searchCriteria;
 
     @Test

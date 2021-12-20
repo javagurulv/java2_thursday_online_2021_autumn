@@ -23,7 +23,7 @@
     <tr>
         <form action="/editPatient" th:object="${request}" method="post">
             <td><input type="text" th:field="${request.patientID}"/></td>
-            <td><input type="text" th:field="${request.userInputEnum}"/></td>
+            <td><input type="text" th:field="${request.fieldToChange}"/></td>
             <td><input type="text" th:field="${request.changes}"/></td>
             <td>
                 <input type="submit" value="Edit Patient"/>

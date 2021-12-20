@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.date_validator;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
 import lv.javaguru.java2.hospital.visit.core.services.date_converter.GetVisitDate;
@@ -12,7 +13,7 @@ import java.util.List;
 @Component
 public class DateValidatorExecution {
 
-    @Autowired private VisitRepository database;
+    @Autowired private JpaVisitRepository database;
     @Autowired private DateFormatValidator dateFormatValidator;
     @Autowired private GetVisitDate getVisitDate;
 

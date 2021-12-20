@@ -1,6 +1,9 @@
 package lv.javaguru.java2.hospital.prescription.core.services;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaPrescriptionRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
@@ -20,9 +23,9 @@ import java.util.List;
 @Transactional
 public class AddPrescriptionService {
 
-    @Autowired private PrescriptionRepository database;
-    @Autowired private PatientRepository patientRepository;
-    @Autowired private DoctorRepository doctorRepository;
+    @Autowired private JpaPrescriptionRepository database;
+    @Autowired private JpaPatientRepository patientRepository;
+    @Autowired private JpaDoctorRepository doctorRepository;
     @Autowired private AddPrescriptionValidator validator;
 
     public AddPrescriptionResponse execute(AddPrescriptionRequest request) {
@@ -33,12 +36,12 @@ public class AddPrescriptionService {
 
         Prescription prescription = new Prescription
                 (getDoctor(request), getPatient(request), request.getMedicationName(), Integer.parseInt(request.getQuantity()));
-        database.addPrescription(prescription);
+        database.save(prescription);
         return new AddPrescriptionResponse(prescription);
     }
 
     private Doctor getDoctor(AddPrescriptionRequest request) {
-        return doctorRepository.findById(Long.parseLong(request.getDoctorId())).get(0);
+        return doctorRepository.findById(Long.parseLong(request.getDoctorId())).get();
     }
 
     private Patient getPatient(AddPrescriptionRequest request) {

@@ -1,5 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPrescriptionRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.DeleteDoctorRequest;
@@ -27,8 +29,8 @@ class DeleteDoctorRequestValidatorTest {
 
     @Mock private DoctorExistenceByIdValidator existence;
     @Mock private DoctorLongNumChecker longNumChecker;
-    @Mock private VisitRepository visitRepository;
-    @Mock private PrescriptionRepository prescriptionRepository;
+    @Mock private JpaVisitRepository visitRepository;
+    @Mock private JpaPrescriptionRepository prescriptionRepository;
     @InjectMocks private DeleteDoctorRequestValidator validator;
 
     @Test

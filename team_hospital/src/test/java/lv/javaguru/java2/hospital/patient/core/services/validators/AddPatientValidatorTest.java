@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
@@ -25,14 +26,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class AddPatientValidatorTest {
 
     @Mock private PersonalCodeChecker personalCodeChecker;
-    @Mock private PatientRepository database;
+    @Mock private JpaPatientRepository database;
     @InjectMocks private AddPatientValidator validator;
 
     @Test
     public void shouldReturnEmptyList() {
         AddPatientRequest request =
                 new AddPatientRequest("Name", "Surname", "12345678901");
-        Mockito.when(database.findPatientByNameSurnamePersonalCode(
+        Mockito.when(database.findByNameAndSurnameAndPersonalCode(
                 request.getName(),
                 request.getSurname(),
                 request.getPersonalCode())).thenReturn(new ArrayList<>());
@@ -90,7 +91,7 @@ class AddPatientValidatorTest {
                 new AddPatientRequest("Name", "Surname", "45678901234");
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
-        Mockito.when(database.findPatientByNameSurnamePersonalCode(
+        Mockito.when(database.findByNameAndSurnameAndPersonalCode(
                 request.getName(),
                 request.getSurname(),
                 request.getPersonalCode())).thenReturn(patients);

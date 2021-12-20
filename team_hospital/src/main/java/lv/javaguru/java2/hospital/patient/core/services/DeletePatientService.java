@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.patient.core.requests.DeletePatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
@@ -15,7 +16,7 @@ import java.util.List;
 @Transactional
 public class DeletePatientService {
 
-    @Autowired private PatientRepository database;
+    @Autowired private JpaPatientRepository database;
     @Autowired private DeletePatientValidator validator;
 
     public DeletePatientResponse execute(DeletePatientRequest request) {
@@ -23,7 +24,7 @@ public class DeletePatientService {
         if (!errors.isEmpty()) {
             return new DeletePatientResponse(errors);
         }
-        database.deleteById(Long.valueOf(request.getIdRequest()));
+        database.deleteById(Long.parseLong(request.getIdRequest()));
         return new DeletePatientResponse(Long.parseLong(request.getIdRequest()));
     }
 }

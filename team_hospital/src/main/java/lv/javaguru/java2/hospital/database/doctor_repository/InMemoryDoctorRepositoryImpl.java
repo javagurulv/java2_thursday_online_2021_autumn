@@ -15,7 +15,7 @@ public class InMemoryDoctorRepositoryImpl implements DoctorRepository {
     private List<Doctor> doctors = new ArrayList<>();
 
     @Override
-    public void addDoctor(Doctor doctor) {
+    public void save(Doctor doctor) {
         doctor.setId(nextId);
         nextId++;
         doctors.add(doctor);
@@ -23,7 +23,7 @@ public class InMemoryDoctorRepositoryImpl implements DoctorRepository {
 
 
     @Override
-    public boolean deleteDoctorById(Long id) {
+    public boolean deleteById(Long id) {
         boolean isDoctorDeleted = false;
         Optional<Doctor> doctorToDeleteOpt = doctors.stream()
                 .filter(doctor -> doctor.getId().equals(id))
@@ -36,7 +36,7 @@ public class InMemoryDoctorRepositoryImpl implements DoctorRepository {
     }
 
     @Override
-    public List<Doctor> getAllDoctors() {
+    public List<Doctor> findAll() {
         return doctors;
     }
 
@@ -85,7 +85,7 @@ public class InMemoryDoctorRepositoryImpl implements DoctorRepository {
     }
 
     @Override
-    public List<Doctor> findById(Long id) {
+    public List<Doctor> getById(Long id) {
         return doctors.stream()
                 .filter(doctor -> doctor.getId() == id)
                 .collect(Collectors.toList());
@@ -124,7 +124,7 @@ public class InMemoryDoctorRepositoryImpl implements DoctorRepository {
     }
 
     @Override
-    public Optional<Doctor> getById(Long id) {
+    public Optional<Doctor> findById(Long id) {
         return Optional.empty();
     }
 

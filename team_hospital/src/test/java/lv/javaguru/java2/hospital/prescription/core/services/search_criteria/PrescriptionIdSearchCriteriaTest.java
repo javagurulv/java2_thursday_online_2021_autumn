@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services.search_criteria;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPrescriptionRepository;
 import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -24,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PrescriptionIdSearchCriteriaTest {
 
     @Mock
-    private PrescriptionRepository database;
+    private JpaPrescriptionRepository database;
     @InjectMocks
     private PrescriptionIdSearchCriteria searchCriteria;
 
@@ -49,7 +50,7 @@ class PrescriptionIdSearchCriteriaTest {
         prescription1.setId(prescriptionId);
         List<Prescription> prescriptions = new ArrayList<>();
         prescriptions.add(prescription1);
-        Mockito.when(database.findByPrescriptionId(prescriptionId)).thenReturn(prescriptions);
+        Mockito.when(database.getById(prescriptionId)).thenReturn(prescriptions);
         SearchPrescriptionRequest request = new SearchPrescriptionRequest(prescriptionId, null, null);
         Prescription prescription2 = searchCriteria.process(request).get(0);
         assertEquals(searchCriteria.process(request).size(), 1);

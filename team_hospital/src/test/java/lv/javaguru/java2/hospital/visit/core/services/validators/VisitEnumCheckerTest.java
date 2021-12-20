@@ -23,14 +23,14 @@ class VisitEnumCheckerTest {
     @Test
     public void shouldReturnEmptyList() {
         EditVisitRequest request = new EditVisitRequest("12", "DESCRIPTION", "changes");
-        Optional<CoreError> error = checker.validateEnum(request.getEditEnums());
+        Optional<CoreError> error = checker.validateEnum(request.getFieldToChange());
         assertTrue(error.isEmpty());
     }
 
     @Test
     public void shouldReturnEditErrorList() {
         EditVisitRequest request = new EditVisitRequest("12", "blabla", "changes");
-        Optional<CoreError> error = checker.validateEnum(request.getEditEnums());
+        Optional<CoreError> error = checker.validateEnum(request.getFieldToChange());
         assertTrue(error.isPresent());
         assertEquals(error.get().getField(), "Edit option");
         assertEquals(error.get().getDescription(), "must be DOCTOR_ID, PATIENT_ID, DATE OR DESCRIPTION!");

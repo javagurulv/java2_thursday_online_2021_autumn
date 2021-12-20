@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
-import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientEnum;
 import lv.javaguru.java2.hospital.patient.core.requests.EditPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EditPatientServiceTest {
 
     @Mock private EditPatientValidator validator;
-    @Mock private PatientRepository database;
+    @Mock private JpaPatientRepository database;
     @InjectMocks private EditPatientService service;
 
     @Test
@@ -33,7 +33,7 @@ public class EditPatientServiceTest {
         EditPatientRequest request = new EditPatientRequest("1", "NAME", "NewName");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
-        Mockito.when(database.editActions(1L, EditPatientEnum.NAME, "NewName")).thenReturn(true);
+        //Mockito.when(database.editPatient(1L, EditPatientEnum.NAME, "NewName")).thenReturn(true);
 
         EditPatientResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -45,7 +45,7 @@ public class EditPatientServiceTest {
         EditPatientRequest request = new EditPatientRequest("1", "SURNAME", "NewSurname");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
-        Mockito.when(database.editActions(1L, EditPatientEnum.SURNAME, "NewSurname")).thenReturn(true);
+        //Mockito.when(database.editPatient(1L, EditPatientEnum.SURNAME, "NewSurname")).thenReturn(true);
 
         EditPatientResponse response = service.execute(request);
         assertFalse(response.hasErrors());
@@ -57,8 +57,8 @@ public class EditPatientServiceTest {
         EditPatientRequest request = new EditPatientRequest("1", "PERSONAL_CODE", "12345678901");
         Mockito.when(validator.validate(request)).thenReturn(new ArrayList<>());
 
-        Mockito.when(database.editActions(
-                Long.valueOf(request.getPatientID()), EditPatientEnum.PERSONAL_CODE, "12345678901")).thenReturn(true);
+        //Mockito.when(database.editPatient(
+                //Long.valueOf(request.getPatientID()), EditPatientEnum.PERSONAL_CODE, "12345678901")).thenReturn(true);
 
         EditPatientResponse response = service.execute(request);
         assertFalse(response.hasErrors());

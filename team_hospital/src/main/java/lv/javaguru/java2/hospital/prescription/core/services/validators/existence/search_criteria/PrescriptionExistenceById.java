@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators.existence.search_criteria;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPrescriptionRepository;
 import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Prescription;
 import lv.javaguru.java2.hospital.prescription.core.requests.SearchPrescriptionRequest;
@@ -13,7 +14,7 @@ import java.util.Optional;
 @Component
 public class PrescriptionExistenceById implements PrescriptionExistenceBySearchCriteria{
 
-    @Autowired private PrescriptionRepository database;
+    @Autowired private JpaPrescriptionRepository database;
 
     @Override
     public boolean canValidate(SearchPrescriptionRequest request) {
@@ -22,7 +23,7 @@ public class PrescriptionExistenceById implements PrescriptionExistenceBySearchC
 
     @Override
     public Optional<CoreError> validateExistence(SearchPrescriptionRequest request) {
-        for (Prescription prescription : database.getAllPrescriptions()) {
+        for (Prescription prescription : database.findAll()) {
             if (Objects.equals(prescription.getId(), request.getPrescriptionId())) {
                 return Optional.empty();
             }

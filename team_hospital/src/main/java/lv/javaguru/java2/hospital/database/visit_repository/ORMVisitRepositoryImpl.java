@@ -12,19 +12,19 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
 
-@Component
+//@Component
 public class ORMVisitRepositoryImpl implements VisitRepository {
 
     @Autowired private SessionFactory sessionFactory;
     @Autowired private GetVisitDate getVisitDate;
 
     @Override
-    public void recordVisit(Visit visit) {
+    public void save(Visit visit) {
         sessionFactory.getCurrentSession().save(visit);
     }
 
     @Override
-    public boolean deleteVisit(Long id) {
+    public boolean deleteById(Long id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "DELETE Visit where id = :id");
         query.setParameter("id", id);
@@ -33,7 +33,7 @@ public class ORMVisitRepositoryImpl implements VisitRepository {
     }
 
     @Override
-    public List<Visit> getAllVisits() {
+    public List<Visit> findAll() {
         return sessionFactory.getCurrentSession()
                 .createQuery("SELECT v FROM Visit v", Visit.class)
                 .getResultList();
@@ -52,7 +52,7 @@ public class ORMVisitRepositoryImpl implements VisitRepository {
     }
 
     @Override
-    public List<Visit> findByVisitId(Long id) {
+    public List<Visit> findById(Long id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT v FROM Visit v WHERE id = :id");
         query.setParameter("id", id);
@@ -175,7 +175,7 @@ public class ORMVisitRepositoryImpl implements VisitRepository {
     }
 
     @Override
-    public List<Visit> findByVisitIDAndDoctorIDAndPatientID(Long visitID, Long doctorID, Long patientID) {
+    public List<Visit> findByVisitIdAndDoctorIdAndPatientId(Long visitID, Long doctorID, Long patientID) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT v FROM Visit v WHERE id = :id AND " +
                         "doctor_id = :doctor_id AND " +
@@ -187,7 +187,7 @@ public class ORMVisitRepositoryImpl implements VisitRepository {
     }
 
     @Override
-    public List<Visit> findByVisitIDDoctorIDPatientIDDate(Long visitID, Long doctorID, Long patientID, LocalDateTime date) {
+    public List<Visit> findByVisitIdAndDoctorIdAndPatientIdAndDate(Long visitID, Long doctorID, Long patientID, LocalDateTime date) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT v FROM Visit v WHERE id = :id AND " +
                         "doctor_id = :doctor_id AND " +

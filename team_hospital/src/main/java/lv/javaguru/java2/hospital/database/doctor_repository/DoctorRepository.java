@@ -7,11 +7,11 @@ import java.util.Optional;
 
 public interface DoctorRepository {
 
-    void addDoctor(Doctor doctor);
+    void save(Doctor doctor);
 
-    boolean deleteDoctorById(Long id);
+    boolean deleteById(Long id);
 
-    List<Doctor> getAllDoctors();
+    List<Doctor> findAll();
 
     boolean editDoctor(Long doctorId, Enum infoToEdit, String input);
 
@@ -21,7 +21,7 @@ public interface DoctorRepository {
 
     List<Doctor> findByNameAndSurname(String name, String surname);
 
-    List<Doctor> findById(Long id);
+    List<Doctor> getById(Long id);
 
     List<Doctor> findBySpeciality(String speciality);
 
@@ -31,6 +31,5 @@ public interface DoctorRepository {
 
     List<Doctor> findByNameAndSurnameAndSpeciality(String name, String surname, String speciality);
 
-    Optional<Doctor> getById(Long id);
-
+    Optional<Doctor> findById(Long id);
 }

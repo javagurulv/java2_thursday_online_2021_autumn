@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -31,7 +32,7 @@ class ExistenceByDoctorIdPatientIdDateTest {
 
     @Mock private GetVisitDate getVisitDate;
     @Mock
-    private VisitRepository database;
+    private JpaVisitRepository database;
     @InjectMocks
     private ExistenceByDoctorIdPatientIdDate existence;
 
@@ -72,7 +73,7 @@ class ExistenceByDoctorIdPatientIdDateTest {
         LocalDateTime localDateTime =
                 LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(request.getVisitDate()));
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate())).thenReturn(localDateTime);
-        Mockito.when(database.getAllVisits()).thenReturn(visits);
+        Mockito.when(database.findAll()).thenReturn(visits);
         Optional<CoreError> error = existence.validateExistence(request);
         System.out.println(error);
         assertTrue(error.isEmpty());

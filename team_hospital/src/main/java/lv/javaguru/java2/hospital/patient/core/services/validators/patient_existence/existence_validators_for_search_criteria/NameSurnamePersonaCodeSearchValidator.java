@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators.patient_existence.existence_validators_for_search_criteria;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
@@ -11,9 +12,9 @@ import java.util.Optional;
 @Component
 public class NameSurnamePersonaCodeSearchValidator implements SearchValidator {
 
-    private PatientRepository database;
+    private JpaPatientRepository database;
 
-    public NameSurnamePersonaCodeSearchValidator(PatientRepository database) {
+    public NameSurnamePersonaCodeSearchValidator(JpaPatientRepository database) {
         this.database = database;
     }
 
@@ -26,7 +27,7 @@ public class NameSurnamePersonaCodeSearchValidator implements SearchValidator {
 
     @Override
     public Optional<CoreError> process(SearchPatientsRequest request) {
-        for (Patient p : database.getAllPatients()) {
+        for (Patient p : database.findAll()) {
             if (p.getName().equals(request.getName())
                     && p.getSurname().equals(request.getSurname())
                     && p.getPersonalCode().equals(request.getPersonalCode())) {

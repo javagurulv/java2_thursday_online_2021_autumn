@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -28,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class ShowAllVisitServiceTest {
 
     @Mock
-    VisitRepository database;
+    JpaVisitRepository database;
     @InjectMocks
     ShowAllVisitService service;
 
@@ -41,7 +42,7 @@ class ShowAllVisitServiceTest {
         patient.setId(2L);
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse("21-12-2021 15:00"));
         visits.add(new Visit(doctor, patient, date));
-        Mockito.when(database.getAllVisits()).thenReturn(visits);
+        Mockito.when(database.findAll()).thenReturn(visits);
         ShowAllVisitRequest request = new ShowAllVisitRequest();
         ShowAllVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());

@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.ShowAllDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.ShowAllDoctorsResponse;
 import lv.javaguru.java2.hospital.domain.Doctor;
@@ -24,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class ShowAllDoctorsServiceTest {
 
     @Mock
-    private DoctorRepository database;
+    private JpaDoctorRepository database;
     @InjectMocks
     private ShowAllDoctorsService service;
 
@@ -32,7 +33,7 @@ class ShowAllDoctorsServiceTest {
     public void shouldGetDoctorsFromDb() {
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(new Doctor("Name", "Surname", "Speciality"));
-        Mockito.when(database.getAllDoctors()).thenReturn(doctors);
+        Mockito.when(database.findAll()).thenReturn(doctors);
         ShowAllDoctorsRequest request = new ShowAllDoctorsRequest();
         ShowAllDoctorsResponse response = service.execute(request);
         assertFalse(response.hasErrors());

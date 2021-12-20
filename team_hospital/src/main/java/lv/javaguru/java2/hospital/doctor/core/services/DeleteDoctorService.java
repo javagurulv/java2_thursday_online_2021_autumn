@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.DeleteDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.doctor.core.responses.DeleteDoctorResponse;
@@ -15,7 +16,7 @@ import java.util.List;
 @Transactional
 public class DeleteDoctorService {
 
-    @Autowired private DoctorRepository database;
+    @Autowired private JpaDoctorRepository database;
     @Autowired private DeleteDoctorRequestValidator validator;
 
     public DeleteDoctorResponse execute(DeleteDoctorRequest request) {
@@ -23,7 +24,7 @@ public class DeleteDoctorService {
         if (!errors.isEmpty()) {
             return new DeleteDoctorResponse(errors);
         }
-        boolean isDoctorDeleted = database.deleteDoctorById(Long.parseLong(request.getDoctorIdToDelete()));
-        return new DeleteDoctorResponse(isDoctorDeleted);
+        database.deleteById(Long.parseLong(request.getDoctorIdToDelete()));
+        return new DeleteDoctorResponse(true);
     }
 }

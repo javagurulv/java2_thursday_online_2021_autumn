@@ -1,5 +1,7 @@
 package lv.javaguru.java2.hospital.prescription.core.services;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaPrescriptionRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -20,8 +22,8 @@ import java.util.Optional;
 @Transactional
 public class EditPrescriptionService {
 
-    private @Autowired PrescriptionRepository prescriptionRepository;
-    private @Autowired PatientRepository patientRepository;
+    private @Autowired JpaPrescriptionRepository prescriptionRepository;
+    private @Autowired JpaPatientRepository patientRepository;
     private @Autowired EditPrescriptionValidator validator;
 
     public EditPrescriptionResponse execute(EditPrescriptionRequest request){
@@ -32,7 +34,7 @@ public class EditPrescriptionService {
         }
 
         // find Prescription
-		Optional<Prescription> prescriptionOptional = prescriptionRepository.getById(Long.parseLong(request.getPrescriptionID()));
+		Optional<Prescription> prescriptionOptional = prescriptionRepository.findById(Long.parseLong(request.getPrescriptionID()));
 		if (prescriptionOptional.isPresent()) {
 			Prescription prescription = prescriptionOptional.get();
 

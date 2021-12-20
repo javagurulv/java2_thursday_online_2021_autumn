@@ -8,15 +8,15 @@ import java.util.List;
 
 public interface VisitRepository {
 
-    void recordVisit(Visit visit);
+    void save(Visit visit);
 
-    boolean deleteVisit(Long id);
+    boolean deleteById(Long id);
 
-    List<Visit> getAllVisits();
+    List<Visit> findAll();
 
     boolean editVisit(Long visitId, EditVisitEnum userInput, String changes);
 
-    List<Visit> findByVisitId(Long id);
+    List<Visit> findById(Long id);
 
     List<Visit> findByDoctorId(Long id);
 
@@ -42,9 +42,9 @@ public interface VisitRepository {
 
     List<Visit> findByVisitIdPatientIdDate(Long visitID, Long patientID, LocalDateTime date);
 
-    List<Visit> findByVisitIDAndDoctorIDAndPatientID(Long visitID, Long doctorID, Long patientID);
+    List<Visit> findByVisitIdAndDoctorIdAndPatientId(Long visitID, Long doctorID, Long patientID);
 
-    List<Visit> findByVisitIDDoctorIDPatientIDDate(Long visitID, Long doctorID, Long patientID, LocalDateTime date);
+    List<Visit> findByVisitIdAndDoctorIdAndPatientIdAndDate(Long visitID, Long doctorID, Long patientID, LocalDateTime date);
 
     List<Visit> findPatientForDeleting(Long patientID);
 }

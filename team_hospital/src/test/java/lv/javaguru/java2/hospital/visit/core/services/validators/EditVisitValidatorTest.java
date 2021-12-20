@@ -1,11 +1,8 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
-import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
-import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
-import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
-import lv.javaguru.java2.hospital.domain.Patient;
-import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.checkers.VisitEnumChecker;
 import lv.javaguru.java2.hospital.visit.core.checkers.VisitLongNumChecker;
 import lv.javaguru.java2.hospital.visit.core.requests.EditVisitRequest;
@@ -21,8 +18,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,8 +29,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class EditVisitValidatorTest {
 
-    @Mock private DoctorRepository doctorRepository;
-    @Mock private PatientRepository patientRepository;
+    @Mock private JpaDoctorRepository doctorRepository;
+    @Mock private JpaPatientRepository patientRepository;
     @Mock private DateValidatorExecution dateValidator;
     @Mock private VisitEnumChecker checker;
     @Mock private VisitExistenceByIdValidator existence;
@@ -49,9 +44,9 @@ class EditVisitValidatorTest {
         doctor.setId(1L);
 
         Mockito.when(longNumChecker.validate(request.getVisitID(), "ID")).thenReturn(Optional.empty());
-        Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.empty());
+        Mockito.when(checker.validateEnum(request.getFieldToChange())).thenReturn(Optional.empty());
         Mockito.when(existence.validateExistenceById(1L)).thenReturn(Optional.empty());
-        Mockito.when(doctorRepository.findById(1L)).thenReturn(Collections.singletonList(doctor));
+        Mockito.when(doctorRepository.findById(1L)).thenReturn(Optional.of(doctor));
 
         List<CoreError> errorList = validator.validate(request);
         assertTrue(errorList.isEmpty());
@@ -108,7 +103,7 @@ class EditVisitValidatorTest {
 
         Mockito.when(existence.validateExistenceById(12L)).thenReturn
                 (Optional.of(new CoreError("Visit", "does not exist!")));
-        Mockito.when(doctorRepository.findById(1L)).thenReturn(Collections.singletonList(doctor));
+        Mockito.when(doctorRepository.findById(1L)).thenReturn(Optional.of(doctor));
 
         EditVisitRequest request = new EditVisitRequest("12", "DOCTOR_ID", "1");
         List<CoreError> errorList = validator.validate(request);
@@ -131,7 +126,7 @@ class EditVisitValidatorTest {
     @Test
     public void shouldReturnEnumErrorInvalidInput() {
         EditVisitRequest request = new EditVisitRequest("11", "ENUM", "changes");
-        Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.of(
+        Mockito.when(checker.validateEnum(request.getFieldToChange())).thenReturn(Optional.of(
                 new CoreError("Edit option", "must be DOCTOR_ID, PATIENT_ID, DATE OR DESCRIPTION!")
         ));
         List<CoreError> errorList = validator.validate(request);
@@ -147,7 +142,7 @@ class EditVisitValidatorTest {
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "input is incorrect!"));
 
-        Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.empty());
+        Mockito.when(checker.validateEnum(request.getFieldToChange())).thenReturn(Optional.empty());
         Mockito.when(dateValidator.validate(request.getChanges())).thenReturn(errors);
 
         List<CoreError> errorList = validator.validate(request);
@@ -163,7 +158,7 @@ class EditVisitValidatorTest {
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not in the future!"));
 
-        Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.empty());
+        Mockito.when(checker.validateEnum(request.getFieldToChange())).thenReturn(Optional.empty());
         Mockito.when(dateValidator.validate(request.getChanges())).thenReturn(errors);
 
         List<CoreError> errorList = validator.validate(request);
@@ -179,7 +174,7 @@ class EditVisitValidatorTest {
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not working day!"));
 
-        Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.empty());
+        Mockito.when(checker.validateEnum(request.getFieldToChange())).thenReturn(Optional.empty());
         Mockito.when(dateValidator.validate(request.getChanges())).thenReturn(errors);
 
         List<CoreError> errorList = validator.validate(request);
@@ -195,7 +190,7 @@ class EditVisitValidatorTest {
         List<CoreError> errors = new ArrayList<>();
         errors.add(new CoreError("Date", "is not working hour!"));
 
-        Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.empty());
+        Mockito.when(checker.validateEnum(request.getFieldToChange())).thenReturn(Optional.empty());
         Mockito.when(dateValidator.validate(request.getChanges())).thenReturn(errors);
 
         List<CoreError> errorList = validator.validate(request);
@@ -213,7 +208,7 @@ class EditVisitValidatorTest {
         errors.add(new CoreError("Date", "is not working day!"));
         errors.add(new CoreError("Date", "is not working hour!"));
 
-        Mockito.when(checker.validateEnum(request.getEditEnums())).thenReturn(Optional.empty());
+        Mockito.when(checker.validateEnum(request.getFieldToChange())).thenReturn(Optional.empty());
         Mockito.when(dateValidator.validate(request.getChanges())).thenReturn(errors);
 
         List<CoreError> errorList = validator.validate(request);

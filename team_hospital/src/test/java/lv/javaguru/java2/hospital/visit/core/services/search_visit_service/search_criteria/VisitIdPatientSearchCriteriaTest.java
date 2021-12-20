@@ -1,6 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.search_visit_service.search_criteria;
 
-import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.domain.Visit;
@@ -28,7 +28,7 @@ class VisitIdPatientSearchCriteriaTest {
 
 
     @Mock
-    private VisitRepository database;
+    private JpaVisitRepository database;
     @InjectMocks
     private VisitIdPatientSearchCriteria searchCriteria;
 
@@ -58,7 +58,7 @@ class VisitIdPatientSearchCriteriaTest {
         visits.add(new Visit(doctor, patient, date));
         visits.get(0).setVisitID(1L);
 
-        Mockito.when(database.findByVisitIdAndPatientId(visits.get(0).getVisitID(), visits.get(0).getPatient().getId()))
+        Mockito.when(database.findByIdAndPatientId(visits.get(0).getVisitID(), visits.get(0).getPatient().getId()))
                 .thenReturn(visits);
         SearchVisitRequest request = new SearchVisitRequest
                 (visits.get(0).getVisitID().toString(), null, visits.get(0).getPatient().getId().toString(), null);

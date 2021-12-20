@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPrescriptionRepository;
 import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.prescription.core.requests.DeletePrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
@@ -15,7 +16,7 @@ import java.util.List;
 @Transactional
 public class DeletePrescriptionService {
 
-    @Autowired private PrescriptionRepository database;
+    @Autowired private JpaPrescriptionRepository database;
     @Autowired private DeletePrescriptionValidator validator;
 
     public DeletePrescriptionResponse execute(DeletePrescriptionRequest request) {
@@ -23,7 +24,7 @@ public class DeletePrescriptionService {
         if(!errors.isEmpty()) {
             return new DeletePrescriptionResponse(errors);
         }
-        boolean isPrescriptionDeleted = database.deletePrescriptionById(Long.parseLong(request.getPrescriptionIdToDelete()));
-        return new DeletePrescriptionResponse(isPrescriptionDeleted);
+        database.deleteById(Long.parseLong(request.getPrescriptionIdToDelete()));
+        return new DeletePrescriptionResponse(true);
     }
 }

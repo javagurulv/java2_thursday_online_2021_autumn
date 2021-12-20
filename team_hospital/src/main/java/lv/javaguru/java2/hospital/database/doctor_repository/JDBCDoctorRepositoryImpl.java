@@ -15,7 +15,7 @@ public class JDBCDoctorRepositoryImpl implements DoctorRepository {
     @Autowired private DoctorRowMapper doctorRowMapper;
 
     @Override
-    public void addDoctor(Doctor doctor) {
+    public void save(Doctor doctor) {
         jdbcTemplate.update(
                 "INSERT INTO doctors (name, surname, speciality) " +
                         "VALUES (?, ?, ?)",
@@ -27,14 +27,14 @@ public class JDBCDoctorRepositoryImpl implements DoctorRepository {
     }
 
     @Override
-    public boolean deleteDoctorById(Long  id) {
+    public boolean deleteById(Long  id) {
         String sql = "DELETE FROM doctors WHERE id = ?";
         Object[] args = new Object[] {id};
         return jdbcTemplate.update(sql, args) == 1;
     }
 
     @Override
-    public List<Doctor> getAllDoctors() {
+    public List<Doctor> findAll() {
         String sql = "SELECT * FROM doctors";
         return jdbcTemplate.query(sql, doctorRowMapper);
     }
@@ -70,7 +70,7 @@ public class JDBCDoctorRepositoryImpl implements DoctorRepository {
     }
 
     @Override
-    public List<Doctor> findById(Long id) {
+    public List<Doctor> getById(Long id) {
         String sql = "SELECT * FROM doctors WHERE id = ?";
         Object[] args = new Object[] {id};
         return jdbcTemplate.query(sql, args, doctorRowMapper);
@@ -105,7 +105,7 @@ public class JDBCDoctorRepositoryImpl implements DoctorRepository {
     }
 
     @Override
-    public Optional<Doctor> getById(Long id) {
+    public Optional<Doctor> findById(Long id) {
         return Optional.empty();
     }
 }

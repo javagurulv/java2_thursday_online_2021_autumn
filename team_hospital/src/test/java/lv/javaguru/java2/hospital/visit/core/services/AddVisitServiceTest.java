@@ -1,6 +1,9 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
@@ -30,10 +33,10 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(JUnitPlatform.class)
 class AddVisitServiceTest {
 
-    @Mock private PatientRepository patientRepository;
-    @Mock private DoctorRepository doctorRepository;
+    @Mock private JpaPatientRepository patientRepository;
+    @Mock private JpaDoctorRepository doctorRepository;
     @Mock private AddVisitValidator validator;
-    @Mock private VisitRepository visitRepository;
+    @Mock private JpaVisitRepository visitRepository;
     @InjectMocks private AddVisitService service;
 
     @Test
@@ -208,23 +211,23 @@ class AddVisitServiceTest {
 
     @Test
     public void shouldAddVisitToDatabase() {
-        Doctor doctor = new Doctor("DoctorsName", "DoctorsSurname", "Speciality");
-        doctor.setId(1L);
-        Optional<Patient> patient = Optional.of(new Patient("PatientsName", "PatientsSurname", "12345678901"));
+        Optional<Doctor> doctor =
+                Optional.of(new Doctor("DoctorsName", "DoctorsSurname", "Speciality"));
+        doctor.get().setId(1L);
+        Optional<Patient> patient =
+                Optional.of(new Patient("PatientsName", "PatientsSurname", "12345678901"));
         patient.get().setId(2L);
-        List<Doctor> doctors = new ArrayList<>();
-        doctors.add(doctor);
 
         Mockito.when(doctorRepository.findById(1L))
-                .thenReturn((doctors));
+                .thenReturn(doctor);
         Mockito.when(patientRepository.findById(2L))
                 .thenReturn(patient);
 
-        AddVisitRequest request = new AddVisitRequest(doctor.getId().toString(), patient.get().getId().toString(),
+        AddVisitRequest request = new AddVisitRequest(doctor.get().getId().toString(), patient.get().getId().toString(),
                 "2021-12-21 15:00");
         AddVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());
-        Mockito.verify(visitRepository).recordVisit(argThat(
+        Mockito.verify(visitRepository).save(argThat(
                 new VisitMatcher(response.getPatientVisit().getDoctor(),
                         response.getPatientVisit().getPatient(),
                         response.getPatientVisit().getVisitDate())));

@@ -8,23 +8,21 @@ import java.util.Optional;
 
 public interface PrescriptionRepository {
 
-    void addPrescription(Prescription prescription);
+    void save(Prescription prescription);
 
     boolean editPrescription(Long prescriptionID, EditPrescriptionEnum prescriptionEnum, String changes);
 
-    List<Prescription> getAllPrescriptions();
+    List<Prescription> findAll();
 
-    boolean deletePrescriptionById(Long id);
+    boolean deleteById(Long id);
 
-    List<Prescription> findByPrescriptionId(Long prescriptionId);
+    List<Prescription> findById(Long prescriptionId);
 
     List<Prescription> findByDoctorId(Long doctorId);
 
     List<Prescription> findByPatientId(Long patientId);
 
-    List<Prescription> findByDoctorAndPatientId(Long doctorId, Long patientId);
+    List<Prescription> findByDoctorIdAndPatientId(Long doctorId, Long patientId);
 
-    List<Prescription> findPatientForDeleting(Long patientID);
-
-    public Optional<Prescription> getById(Long id);
+    List<Prescription> getById(Long id);
 }

@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators.existence;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPrescriptionRepository;
 import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -26,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PrescriptionExistenceForAddValidatorTest {
 
     @Mock
-    private PrescriptionRepository database;
+    private JpaPrescriptionRepository database;
     @InjectMocks
     PrescriptionExistenceForAddValidator existence;
 
@@ -40,7 +41,7 @@ class PrescriptionExistenceForAddValidatorTest {
         List<Prescription> prescriptions = new ArrayList<>();
         prescriptions.add(prescription);
         AddPrescriptionRequest request = new AddPrescriptionRequest("646", "945", "MedName1", "1");
-        Mockito.when(database.getAllPrescriptions()).thenReturn(prescriptions);
+        Mockito.when(database.findAll()).thenReturn(prescriptions);
         Optional<CoreError> errors = existence.validatePrescriptionExistence(request);
         assertFalse(errors.isEmpty());
         assertEquals(errors.get().getField(), "Prescription");
@@ -50,7 +51,7 @@ class PrescriptionExistenceForAddValidatorTest {
     @Test
     public void shouldReturnEmptyList() {
         AddPrescriptionRequest request = new AddPrescriptionRequest("646", "945", "MedName1", "1");
-        Mockito.when(database.getAllPrescriptions()).thenReturn(new ArrayList<>());
+        Mockito.when(database.findAll()).thenReturn(new ArrayList<>());
         Optional<CoreError> errors = existence.validatePrescriptionExistence(request);
         assertTrue(errors.isEmpty());
     }

@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.core.services;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.GetDoctorRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.doctor.core.responses.GetDoctorResponse;
@@ -15,7 +16,7 @@ import java.util.List;
 @Transactional
 public class GetDoctorService {
 
-    @Autowired private DoctorRepository doctorRepository;
+    @Autowired private JpaDoctorRepository doctorRepository;
     @Autowired private GetDoctorValidator validator;
 
     public GetDoctorResponse execute(GetDoctorRequest request) {
@@ -23,7 +24,7 @@ public class GetDoctorService {
         if(!errors.isEmpty()) {
             return new GetDoctorResponse(errors);
         }
-        return doctorRepository.getById(request.getId())
+        return doctorRepository.findById(request.getId())
                 .map(GetDoctorResponse::new)
                 .orElseGet(() -> {
                     errors.add(new CoreError("id", "Not found!"));

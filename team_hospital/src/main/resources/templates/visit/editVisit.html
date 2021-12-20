@@ -6,7 +6,7 @@
     <meta name="description" content="Hospital demo project">
     <meta name="author" content="JavaGuru">
     <title>Hospital repository</title>
-    <link href="/static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet"/>
+    <link href="/static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 
 <body>
@@ -23,7 +23,7 @@
     <tr>
         <form action="/editVisit" th:object="${request}" method="post">
             <td><input type="text" th:field="${request.visitID}"/></td>
-            <td><input type="text" th:field="${request.editEnums}"/></td>
+            <td><input type="text" th:field="${request.fieldToChange}"/></td>
             <td><input type="text" th:field="${request.changes}"/></td>
             <td>
                 <input type="submit" value="Edit Visit"/>

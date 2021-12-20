@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.existence_validators;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -29,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class VisitExistenceForAddingTest {
 
     @Mock private GetVisitDate getVisitDate;
-    @Mock private VisitRepository visitRepository;
+    @Mock private JpaVisitRepository visitRepository;
     @InjectMocks VisitExistenceForAdding visitExistenceForAdding;
 
     @Test
@@ -46,7 +47,7 @@ class VisitExistenceForAddingTest {
         visits.get(0).getPatient().setId(2L);
 
         Mockito.when(getVisitDate.getVisitDateFromString(addVisitRequest.getVisitDate())).thenReturn(date);
-        Mockito.when(visitRepository.getAllVisits()).thenReturn(visits);
+        Mockito.when(visitRepository.findAll()).thenReturn(visits);
 
         Optional<CoreError> error = visitExistenceForAdding.validateExistenceForAdding(addVisitRequest);
         assertFalse(error.isEmpty());
@@ -58,7 +59,7 @@ class VisitExistenceForAddingTest {
     public void shouldNotReturnError(){
         AddVisitRequest addVisitRequest = new AddVisitRequest("1", "2", "2022-12-12 12:00");
 
-        Mockito.when(visitRepository.getAllVisits()).thenReturn(new ArrayList<>());
+        Mockito.when(visitRepository.findAll()).thenReturn(new ArrayList<>());
 
         Optional<CoreError> error = visitExistenceForAdding.validateExistenceForAdding(addVisitRequest);
         assertTrue(error.isEmpty());

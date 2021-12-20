@@ -10,18 +10,18 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-@Component
+//@Component
 public class ORMDoctorRepositoryImpl implements DoctorRepository {
 
     @Autowired private SessionFactory sessionFactory;
 
     @Override
-    public void addDoctor(Doctor doctor) {
+    public void save(Doctor doctor) {
         sessionFactory.getCurrentSession().save(doctor);
     }
 
     @Override
-    public boolean deleteDoctorById(Long id) {
+    public boolean deleteById(Long id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "DELETE Doctor where id = :id");
         query.setParameter("id", id);
@@ -30,7 +30,7 @@ public class ORMDoctorRepositoryImpl implements DoctorRepository {
     }
 
     @Override
-    public List<Doctor> getAllDoctors() {
+    public List<Doctor> findAll() {
         return sessionFactory.getCurrentSession()
                 .createQuery("SELECT d FROM Doctor d", Doctor.class)
                 .getResultList();
@@ -74,7 +74,7 @@ public class ORMDoctorRepositoryImpl implements DoctorRepository {
     }
 
     @Override
-    public List<Doctor> findById(Long id) {
+    public List<Doctor> getById(Long id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "SELECT d FROM Doctor d WHERE id = :id");
         query.setParameter("id", id);
@@ -120,7 +120,7 @@ public class ORMDoctorRepositoryImpl implements DoctorRepository {
     }
 
     @Override
-    public Optional<Doctor> getById(Long id) {
+    public Optional<Doctor> findById(Long id) {
         Doctor doctor = sessionFactory.getCurrentSession().get(Doctor.class, id);
         if (doctor == null) {
             return Optional.empty();

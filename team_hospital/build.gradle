@@ -14,17 +14,20 @@ dependencies {
     compile('org.apache.commons:commons-dbcp2:2.8.0')
     compile('org.hibernate:hibernate-core:5.4.25.Final')
 
-    compile('org.springframework.boot:spring-boot-starter-web:2.4.1') {
+    compile('org.springframework.boot:spring-boot-starter-web:2.4.2') {
         exclude (group: 'ch.qos.logback', module: 'logback-classic')
     }
 
-    compile('org.springframework.boot:spring-boot-starter-thymeleaf:2.4.1') {
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf:2.4.2') {
         exclude (group: 'ch.qos.logback', module: 'logback-classic')
     }
 
-    compile('org.springframework.boot:spring-boot-starter-data-jpa:2.4.1') {
+    compile('org.springframework.boot:spring-boot-starter-data-jpa:2.4.2') {
         exclude (group: 'ch.qos.logback', module: 'logback-classic')
     }
+
+    compile('org.slf4j:slf4j-api:1.7.32')
+    compile('org.slf4j:slf4j-log4j12:1.7.32')
 
     testCompile('junit:junit:4.13.1')
     testCompile('com.h2database:h2:1.4.200')

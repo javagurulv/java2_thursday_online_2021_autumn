@@ -1,15 +1,14 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
-import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.checkers.VisitLongNumChecker;
 import lv.javaguru.java2.hospital.visit.core.requests.AddVisitRequest;
-import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
 import lv.javaguru.java2.hospital.visit.core.responses.CoreError;
-import lv.javaguru.java2.hospital.visit.core.services.search_visit_service.VisitSearchExecute;
 import lv.javaguru.java2.hospital.visit.core.services.validators.date_validator.DateValidatorExecution;
 import lv.javaguru.java2.hospital.visit.core.services.validators.existence_validators.VisitExistenceForAdding;
 import org.junit.jupiter.api.Test;
@@ -33,8 +32,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class AddVisitValidatorTest {
 
-    @Mock private PatientRepository patientRepository;
-    @Mock private DoctorRepository doctorRepository;
+    @Mock private JpaPatientRepository patientRepository;
+    @Mock private JpaDoctorRepository doctorRepository;
     @Mock private DateValidatorExecution dateValidator;
     @Mock private VisitLongNumChecker longNumChecker;
     @Mock private VisitExistenceForAdding visitExistenceForAdding;
@@ -141,8 +140,7 @@ class AddVisitValidatorTest {
                 "2",
                 "12-12-2021 12:00");
 
-        List<Doctor> doctors = new ArrayList<>();
-        doctors.add(new Doctor("name", "surname", "speciality"));
+        Optional<Doctor> doctors = Optional.of(new Doctor("name", "surname", "speciality"));
 
         Mockito.when(patientRepository.findById(Long.valueOf(addVisitRequest.getPatientID())))
                 .thenReturn(Optional.empty());
@@ -168,7 +166,7 @@ class AddVisitValidatorTest {
         Mockito.when(patientRepository.findById(Long.valueOf(addVisitRequest.getPatientID())))
                 .thenReturn(patient);
         Mockito.when(doctorRepository.findById(Long.valueOf(addVisitRequest.getDoctorsID())))
-                .thenReturn(new ArrayList<>());
+                .thenReturn(Optional.empty());
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertFalse(errorList.isEmpty());
@@ -306,13 +304,12 @@ class AddVisitValidatorTest {
                 "12-12-2021 12:00");
 
         Optional<Patient> patient = Optional.of(new Patient("name", "surname", "1234"));
-        List<Doctor> doctors = new ArrayList<>();
-        doctors.add(new Doctor("name", "surname", "speciality"));
+        Optional<Doctor> doctor = Optional.of(new Doctor("name", "surname", "speciality"));
 
         Mockito.when(patientRepository.findById(Long.valueOf(addVisitRequest.getPatientID())))
                 .thenReturn(patient);
         Mockito.when(doctorRepository.findById(Long.valueOf(addVisitRequest.getDoctorsID())))
-                .thenReturn(doctors);
+                .thenReturn(doctor);
 
         List<CoreError> errorList = addVisitValidator.validate(addVisitRequest);
         assertEquals(errorList.size(), 0);
@@ -329,9 +326,8 @@ class AddVisitValidatorTest {
         LocalDateTime dateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse("2021-12-12 12:00"));
         Optional<Patient> patient = Optional.of(new Patient("name", "surname", "1234"));
         patient.get().setId(1L);
-        List<Doctor> doctors = new ArrayList<>();
-        doctors.add(new Doctor("name", "surname", "speciality"));
-        doctors.get(0).setId(2L);
+        Optional<Doctor> doctors = Optional.of(new Doctor("name", "surname", "speciality"));
+        doctors.get().setId(2L);
 
         Mockito.when(patientRepository.findById(Long.valueOf(addVisitRequest.getPatientID())))
                 .thenReturn(patient);

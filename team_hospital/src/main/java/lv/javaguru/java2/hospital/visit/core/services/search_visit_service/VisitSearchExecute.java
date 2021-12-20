@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.search_visit_service;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Visit;
 import lv.javaguru.java2.hospital.visit.core.requests.SearchVisitRequest;
@@ -15,7 +16,7 @@ import java.util.List;
 public class VisitSearchExecute {
 
     @Autowired private GetVisitDate getVisitDate;
-    @Autowired private VisitRepository visitRepository;
+    @Autowired private JpaVisitRepository visitRepository;
 
     public List<Visit> execute(SearchVisitRequest request) {
         List<Visit> visits = new ArrayList<>();

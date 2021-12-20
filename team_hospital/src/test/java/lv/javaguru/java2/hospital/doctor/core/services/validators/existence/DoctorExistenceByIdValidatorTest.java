@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators.existence;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @RunWith(JUnitPlatform.class)
 class DoctorExistenceByIdValidatorTest {
 
-    @Mock private DoctorRepository database;
+    @Mock private JpaDoctorRepository database;
     @InjectMocks
     private DoctorExistenceByIdValidator validator;
 
@@ -39,7 +40,7 @@ class DoctorExistenceByIdValidatorTest {
         doctor.setId(14L);
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
-        Mockito.when(database.getAllDoctors()).thenReturn(doctors);
+        Mockito.when(database.findAll()).thenReturn(doctors);
         Optional<CoreError> errors = validator.validateExistenceById(doctor.getId().toString());
         assertTrue(errors.isEmpty());
     }

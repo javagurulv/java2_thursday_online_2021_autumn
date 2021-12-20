@@ -16,7 +16,7 @@ public class InMemoryPatientRepositoryImpl implements PatientRepository {
     private final List<Patient> patientsList = new ArrayList<>();
 
     @Override
-    public void add(Patient patient) {
+    public void save(Patient patient) {
         patient.setId(nextId);
         nextId++;
         patientsList.add(patient);
@@ -38,21 +38,21 @@ public class InMemoryPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> getAllPatients() {
+    public List<Patient> findAll() {
         return patientsList;
     }
 
     @Override
-    public boolean editActions(Long patientID, EditPatientEnum userInput, String input) {
+    public boolean editPatient(Long patientID, String userInput, String input) {
         for (Patient patient : patientsList) {
             if (Objects.equals(patient.getId(), patientID)) {
-                if (EditPatientEnum.NAME.equals(userInput)) {
+                if ("name".equals(userInput)) {
                     patient.setName(input);
                     return true;
-                } else if (EditPatientEnum.SURNAME.equals(userInput)) {
+                } else if ("surname".equals(userInput)) {
                     patient.setSurname(input);
                     return true;
-                } else if (EditPatientEnum.PERSONAL_CODE.equals(userInput)) {
+                } else if ("personal_code".equals(userInput)) {
                     patient.setPersonalCode(input);
                     return true;
                 }
@@ -62,28 +62,28 @@ public class InMemoryPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> findPatientsByName(String name) {
+    public List<Patient> findByName(String name) {
         return patientsList.stream()
                 .filter(patient -> patient.getName().equals(name))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Patient> findPatientsBySurname(String surname) {
+    public List<Patient> findBySurname(String surname) {
         return patientsList.stream()
                 .filter(patient -> patient.getSurname().equals(surname))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Patient> findPatientsByPersonalCode(String personalCode) {
+    public List<Patient> findByPersonalCode(String personalCode) {
         return patientsList.stream()
                 .filter(patient -> patient.getPersonalCode().equals(personalCode))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Patient> findPatientsByNameAndSurname(String name, String surname) {
+    public List<Patient> findByNameAndSurname(String name, String surname) {
         List<Patient> list = new ArrayList<>();
         for (Patient patient : patientsList) {
             if (name.equals(patient.getName())
@@ -95,7 +95,7 @@ public class InMemoryPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> findPatientsByNameAndPersonalCode(String name, String personal_code) {
+    public List<Patient> findByNameAndPersonalCode(String name, String personal_code) {
         List<Patient> list = new ArrayList<>();
         for (Patient patient : patientsList) {
             if (name.equals(patient.getName())
@@ -108,7 +108,7 @@ public class InMemoryPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> findPatientsBySurnameAndPersonalCode(String surname, String personal_code) {
+    public List<Patient> findBySurnameAndPersonalCode(String surname, String personal_code) {
         List<Patient> list = new ArrayList<>();
         for (Patient patient : patientsList) {
             if (surname.equals(patient.getSurname())
@@ -121,7 +121,7 @@ public class InMemoryPatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> findPatientByNameSurnamePersonalCode(String name, String surname, String personal_code) {
+    public List<Patient> findByNameAndSurnameAndPersonalCode(String name, String surname, String personal_code) {
         List<Patient> list = new ArrayList<>();
         for (Patient p : patientsList) {
             if (p.getName().equals(name)

@@ -1,6 +1,8 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.prescription.core.requests.AddPrescriptionRequest;
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
@@ -16,9 +18,9 @@ import java.util.Optional;
 public class AddPrescriptionValidator {
 
     @Autowired
-    private PatientRepository patientRepository;
+    private JpaPatientRepository patientRepository;
     @Autowired
-    private DoctorRepository doctorRepository;
+    private JpaDoctorRepository doctorRepository;
     @Autowired
     private PrescriptionExistenceForAddValidator existence;
 

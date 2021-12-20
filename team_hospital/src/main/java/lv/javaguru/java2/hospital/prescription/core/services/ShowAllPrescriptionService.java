@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPrescriptionRepository;
 import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Prescription;
 import lv.javaguru.java2.hospital.prescription.core.requests.ShowAllPrescriptionRequest;
@@ -14,10 +15,10 @@ import java.util.List;
 @Transactional
 public class ShowAllPrescriptionService {
 
-    @Autowired private PrescriptionRepository database;
+    @Autowired private JpaPrescriptionRepository database;
 
     public ShowAllPrescriptionResponse execute(ShowAllPrescriptionRequest request) {
-        List<Prescription> prescriptions = database.getAllPrescriptions();
+        List<Prescription> prescriptions = database.findAll();
         return new ShowAllPrescriptionResponse(prescriptions);
     }
 }

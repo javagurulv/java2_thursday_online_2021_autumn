@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -30,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EditVisitServiceTest {
 
     @Mock
-    private VisitRepository database;
+    private JpaVisitRepository database;
     @Mock
     private EditVisitValidator validator;
     @InjectMocks
@@ -98,7 +99,6 @@ class EditVisitServiceTest {
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse("21-12-2021 15:00"));
         visits.add(new Visit(doctor1, patient, date));
 
-        Mockito.when(database.editVisit(1L, EditVisitEnum.DOCTOR_ID, "123")).thenReturn(true);
         EditVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertTrue(response.isVisitEdited());
@@ -119,7 +119,6 @@ class EditVisitServiceTest {
         LocalDateTime date = LocalDateTime.parse("21-12-2021 15:00", formatter);
         visits.add(new Visit(doctor, patient1, date));
 
-        Mockito.when(database.editVisit(1L, EditVisitEnum.PATIENT_ID, "123")).thenReturn(true);
         EditVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertTrue(response.isVisitEdited());
@@ -140,7 +139,6 @@ class EditVisitServiceTest {
         LocalDateTime date = LocalDateTime.parse("21-12-2021 15:00", formatter);
         visits.add(new Visit(doctor, patient, date));
 
-        Mockito.when(database.editVisit(1L, EditVisitEnum.DATE, "23-12-2021 15:00")).thenReturn(true);
         EditVisitResponse response = service.execute(request);
         assertFalse(response.hasErrors());
         assertTrue(response.isVisitEdited());

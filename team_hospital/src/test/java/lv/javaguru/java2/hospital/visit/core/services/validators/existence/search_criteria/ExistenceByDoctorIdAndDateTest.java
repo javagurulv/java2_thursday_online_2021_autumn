@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.visit.core.services.validators.existence.search_criteria;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -31,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ExistenceByDoctorIdAndDateTest {
 
     @Mock private GetVisitDate getVisitDate;
-    @Mock private VisitRepository database;
+    @Mock private JpaVisitRepository database;
     @InjectMocks private ExistenceByDoctorIdAndDate existence;
 
     @Test
@@ -67,7 +68,7 @@ class ExistenceByDoctorIdAndDateTest {
         SearchVisitRequest request = new SearchVisitRequest(null, doctor.getId().toString(), null, "27-12-2021 16:00");
         LocalDateTime localDateTime = LocalDateTime.from(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").parse(request.getVisitDate()));
         Mockito.when(getVisitDate.getVisitDateFromString(request.getVisitDate())).thenReturn(localDateTime);
-        Mockito.when(database.getAllVisits()).thenReturn(visits);
+        Mockito.when(database.findAll()).thenReturn(visits);
         Optional<CoreError> error = existence.validateExistence(request);
         assertTrue(error.isEmpty());
     }

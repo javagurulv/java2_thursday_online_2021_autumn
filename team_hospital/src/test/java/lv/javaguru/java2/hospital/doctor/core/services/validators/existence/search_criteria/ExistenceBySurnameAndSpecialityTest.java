@@ -1,6 +1,7 @@
 package lv.javaguru.java2.hospital.doctor.core.services.validators.existence.search_criteria;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
 import lv.javaguru.java2.hospital.doctor.core.requests.SearchDoctorsRequest;
 import lv.javaguru.java2.hospital.doctor.core.responses.CoreError;
 import lv.javaguru.java2.hospital.domain.Doctor;
@@ -26,7 +27,7 @@ class ExistenceBySurnameAndSpecialityTest {
 
 
     @Mock
-    private DoctorRepository database;
+    private JpaDoctorRepository database;
     @InjectMocks
     private ExistenceBySurnameAndSpeciality existence;
 
@@ -58,7 +59,7 @@ class ExistenceBySurnameAndSpecialityTest {
         SearchDoctorsRequest request = new SearchDoctorsRequest(null, "", "Surname23", "Speciality5");
         List<Doctor> doctors = new ArrayList<>();
         doctors.add(doctor);
-        Mockito.when(database.getAllDoctors()).thenReturn(doctors);
+        Mockito.when(database.findAll()).thenReturn(doctors);
 
         Optional<CoreError> errorList = existence.validateExistence(request);
         assertTrue(errorList.isEmpty());

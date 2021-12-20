@@ -21,7 +21,7 @@ public class PrescriptionRepositoryImpl implements PrescriptionRepository {
     @Autowired private DoctorRepository doctorRepository;
 
     @Override
-    public void addPrescription(Prescription prescription) {
+    public void save(Prescription prescription) {
         prescription.setId(nextId);
         nextId++;
         prescriptions.add(prescription);
@@ -49,12 +49,12 @@ public class PrescriptionRepositoryImpl implements PrescriptionRepository {
     }
 
     @Override
-    public List<Prescription> getAllPrescriptions() {
+    public List<Prescription> findAll() {
         return prescriptions;
     }
 
     @Override
-    public boolean deletePrescriptionById(Long id) {
+    public boolean deleteById(Long id) {
         boolean isPrescriptionDeleted = false;
         Optional<Prescription> prescriptionToDeleteOpt = prescriptions.stream()
                 .filter(prescription -> prescription.getId() == id)
@@ -67,7 +67,7 @@ public class PrescriptionRepositoryImpl implements PrescriptionRepository {
     }
 
     @Override
-    public List<Prescription> findByPrescriptionId(Long prescriptionId) {
+    public List<Prescription> findById(Long prescriptionId) {
         return prescriptions.stream()
                 .filter(prescription -> prescription.getId().equals(prescriptionId))
                 .collect(Collectors.toList());
@@ -88,7 +88,7 @@ public class PrescriptionRepositoryImpl implements PrescriptionRepository {
     }
 
     @Override
-    public List<Prescription> findByDoctorAndPatientId(Long doctorId, Long patientId) {
+    public List<Prescription> findByDoctorIdAndPatientId(Long doctorId, Long patientId) {
         return prescriptions.stream()
                 .filter(prescription -> prescription.getDoctor().getId().equals(doctorId))
                 .filter(prescription -> prescription.getPatient().getId().equals(patientId))
@@ -96,14 +96,7 @@ public class PrescriptionRepositoryImpl implements PrescriptionRepository {
     }
 
     @Override
-    public List<Prescription> findPatientForDeleting(Long patientID) {
-        return prescriptions.stream()
-                .filter(prescription -> prescription.getPatient().getId().equals(patientID))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public Optional<Prescription> getById(Long id) {
-        return Optional.empty();
+    public List<Prescription> getById(Long id) {
+        return new ArrayList<>();
     }
 }

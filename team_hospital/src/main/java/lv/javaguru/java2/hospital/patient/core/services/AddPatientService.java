@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
@@ -16,7 +17,7 @@ import java.util.List;
 @Transactional
 public class AddPatientService {
 
-    @Autowired private PatientRepository database;
+    @Autowired private JpaPatientRepository database;
     @Autowired private AddPatientValidator validator;
 
     public AddPatientResponse execute(AddPatientRequest request) {
@@ -25,7 +26,7 @@ public class AddPatientService {
             return new AddPatientResponse(errors);
         }
         Patient patient = new Patient(request.getName(), request.getSurname(), request.getPersonalCode());
-        database.add(patient);
+        database.save(patient);
         return new AddPatientResponse(patient);
     }
 }

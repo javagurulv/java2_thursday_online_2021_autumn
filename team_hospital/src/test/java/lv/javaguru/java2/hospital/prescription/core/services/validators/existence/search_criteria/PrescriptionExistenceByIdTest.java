@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators.existence.search_criteria;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPrescriptionRepository;
 import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -25,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class PrescriptionExistenceByIdTest {
 
-    @Mock private PrescriptionRepository database;
+    @Mock private JpaPrescriptionRepository database;
     @InjectMocks private PrescriptionExistenceById existence;
 
     @Test
@@ -59,7 +60,7 @@ class PrescriptionExistenceByIdTest {
         SearchPrescriptionRequest request = new SearchPrescriptionRequest(45L, null, null);
         List<Prescription> prescriptions = new ArrayList<>();
         prescriptions.add(prescription);
-        Mockito.when(database.getAllPrescriptions()).thenReturn(prescriptions);
+        Mockito.when(database.findAll()).thenReturn(prescriptions);
 
         Optional<CoreError> error = existence.validateExistence(request);
         assertTrue(error.isEmpty());

@@ -46,7 +46,7 @@ public class EditPatientValidator {
     }
 
     private Optional<CoreError> validateUserChoice(EditPatientRequest request) {
-        return (request.getUserInputEnum() == null || request.getUserInputEnum().isEmpty())
+        return (request.getFieldToChange() == null || request.getFieldToChange().isEmpty())
                 ? Optional.of(new CoreError("User choice", "must not be empty!")) : Optional.empty();
     }
 
@@ -61,19 +61,19 @@ public class EditPatientValidator {
     }
 
     private Optional<CoreError> validateEnum(EditPatientRequest request) {
-        return (request.getUserInputEnum() == null || request.getUserInputEnum().isEmpty())
-                ? Optional.empty() : checker.validateEnum(request.getUserInputEnum());
+        return (request.getFieldToChange() == null || request.getFieldToChange().isEmpty())
+                ? Optional.empty() : checker.validateEnum(request.getFieldToChange());
     }
 
     private Optional<CoreError> validateNumInPersonalCode(EditPatientRequest request) {
-        return request.getUserInputEnum() == null || request.getUserInputEnum().isEmpty()
-                ? Optional.empty() : !request.getUserInputEnum().toUpperCase(Locale.ROOT).equals("PERSONAL_CODE")
+        return request.getFieldToChange() == null || request.getFieldToChange().isEmpty()
+                ? Optional.empty() : !request.getFieldToChange().toUpperCase(Locale.ROOT).equals("PERSONAL_CODE")
                 ? Optional.empty() : personalCodeChecker.execute(request.getChanges());
     }
 
     private Optional<CoreError> validatePersonalCodeLength(EditPatientRequest request) {
-        return request.getUserInputEnum() == null || request.getUserInputEnum().isEmpty()
-                ? Optional.empty() : !request.getUserInputEnum().toUpperCase(Locale.ROOT).equals("PERSONAL_CODE")
+        return request.getFieldToChange() == null || request.getFieldToChange().isEmpty()
+                ? Optional.empty() : !request.getFieldToChange().toUpperCase(Locale.ROOT).equals("PERSONAL_CODE")
                 ? Optional.empty() : request.getChanges().length() == 11
                 ? Optional.empty() : Optional.of(new CoreError("Personal code", "must consist of 11 numbers!"));
     }

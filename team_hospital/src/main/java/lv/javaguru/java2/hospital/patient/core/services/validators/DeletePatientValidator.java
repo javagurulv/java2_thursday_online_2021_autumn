@@ -1,5 +1,7 @@
 package lv.javaguru.java2.hospital.patient.core.services.validators;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPrescriptionRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.patient.core.requests.DeletePatientRequest;
@@ -18,8 +20,8 @@ public class DeletePatientValidator {
 
     @Autowired private PatientLongNumChecker longNumChecker;
     @Autowired private PatientExistenceByIDValidator validator;
-    @Autowired private VisitRepository visitRepository;
-    @Autowired private PrescriptionRepository prescriptionRepository;
+    @Autowired private JpaVisitRepository visitRepository;
+    @Autowired private JpaPrescriptionRepository prescriptionRepository;
 
     public List<CoreError> validate(DeletePatientRequest request) {
         List<CoreError> errors = new ArrayList<>();
@@ -51,13 +53,13 @@ public class DeletePatientValidator {
 
     private Optional<CoreError> validatePatientExistenceInVisits(DeletePatientRequest request){
         return request.getIdRequest() == null || request.getIdRequest().isEmpty()
-                ? Optional.empty() : visitRepository.findPatientForDeleting(Long.valueOf(request.getIdRequest())).isEmpty()
+                ? Optional.empty() : visitRepository.findByPatientId(Long.valueOf(request.getIdRequest())).isEmpty()
                 ? Optional.empty() : Optional.of(new CoreError("Patient", "is in visits list, can`t delete him!"));
     }
 
     private Optional<CoreError> validatePatientExistenceInPrescriptions(DeletePatientRequest request){
         return request.getIdRequest() == null || request.getIdRequest().isEmpty()
-                ? Optional.empty() : prescriptionRepository.findPatientForDeleting(Long.valueOf(request.getIdRequest())).isEmpty()
+                ? Optional.empty() : prescriptionRepository.findByPatientId(Long.valueOf(request.getIdRequest())).isEmpty()
                 ? Optional.empty() : Optional.of(new CoreError("Patient", "is in prescriptions list, can`t delete him!"));
     }
 }

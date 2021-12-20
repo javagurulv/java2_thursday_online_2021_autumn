@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.patient.core.requests.AddPatientRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.AddPatientResponse;
@@ -26,7 +27,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 @RunWith(JUnitPlatform.class)
 class AddPatientServiceTest {
 
-    @Mock private PatientRepository patientRepository;
+    @Mock private JpaPatientRepository patientRepository;
     @Mock private AddPatientValidator validator;
     @InjectMocks private AddPatientService addPatientService;
 
@@ -133,6 +134,6 @@ class AddPatientServiceTest {
         AddPatientRequest request = new AddPatientRequest("name", "surname", "12345678901");
         AddPatientResponse response = addPatientService.execute(request);
         assertFalse(response.hasErrors());
-        Mockito.verify(patientRepository).add(argThat(new PatientMatcher("name", "surname", "12345678901")));
+        Mockito.verify(patientRepository).save(argThat(new PatientMatcher("name", "surname", "12345678901")));
     }
 }

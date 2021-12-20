@@ -44,11 +44,11 @@ public class NameSurnamePersonalCodeSearchCriteriaTest {
         List<Patient> patients = new ArrayList<>();
         patients.add(new Patient("name", "surname", "1234"));
 
-        Mockito.when(database.findPatientByNameSurnamePersonalCode
+        Mockito.when(database.findByNameAndSurnameAndPersonalCode
                 (request.getName(), request.getSurname(), request.getPersonalCode()))
                 .thenReturn(patients);
         List<Patient> patients2 = database
-                .findPatientByNameSurnamePersonalCode(request.getName(), request.getSurname(), request.getPersonalCode());
+                .findByNameAndSurnameAndPersonalCode(request.getName(), request.getSurname(), request.getPersonalCode());
 
         assertTrue(searchCriteria.canProcess(request));
         assertEquals(patients2.get(0).getName(), "name");

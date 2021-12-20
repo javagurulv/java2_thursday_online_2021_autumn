@@ -1,6 +1,9 @@
 package lv.javaguru.java2.hospital.visit.core.services;
 
 import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
+import lv.javaguru.java2.hospital.database.jpa.JpaVisitRepository;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.database.visit_repository.VisitRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
@@ -22,10 +25,10 @@ import java.util.List;
 @Transactional
 public class AddVisitService {
 
-    @Autowired private VisitRepository visitRepository;
+    @Autowired private JpaVisitRepository visitRepository;
     @Autowired private AddVisitValidator validator;
-    @Autowired private PatientRepository patientRepository;
-    @Autowired private DoctorRepository doctorRepository;
+    @Autowired private JpaPatientRepository patientRepository;
+    @Autowired private JpaDoctorRepository doctorRepository;
 
     public AddVisitResponse execute(AddVisitRequest request) {
         List<CoreError> errors = validator.validate(request);
@@ -34,12 +37,12 @@ public class AddVisitService {
         }
 
         Patient patient = patientRepository.findById(Long.valueOf(request.getPatientID())).get();
-        Doctor doctor = doctorRepository.findById(Long.valueOf(request.getDoctorsID())).get(0);
+        Doctor doctor = doctorRepository.findById(Long.valueOf(request.getDoctorsID())).get();
 
         LocalDateTime date = LocalDateTime.from(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").parse(request.getVisitDate()));
         Visit visit = new Visit(doctor, patient, date, request.getDescription());
 
-        visitRepository.recordVisit(visit);
+        visitRepository.save(visit);
         return new AddVisitResponse(visit);
     }
 }
