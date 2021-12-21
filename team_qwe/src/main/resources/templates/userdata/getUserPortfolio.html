@@ -9,26 +9,21 @@
 <style type="text/css">
         body {
               background-color: #8E8F92;
-              margin-left: 20%;
-              margin-right: 20%;
+              margin-left: 30%;
+              margin-right: 30%;
               text-align: center;
-              border: 2px dotted black;
               padding: 20px 20px 20px 20px;
               font-family: sans-serif;
         }
-        table {
+        table.table2 {
                border-collapse: collapse;
                width: 100%;
+               margin-left: auto;
+               margin-right: auto;
         }
-        th, td {
+        table.table2 td {
                 padding: 0.25rem;
-                text-align: left;
                 border: 1px solid #ccc;
-        }
-        caption {
-                font-size: 110%;
-                font-style: italic;
-                padding-bottom: 12px;
         }
         .center {
                 text-align: center;
@@ -36,60 +31,61 @@
         .right {
                 text-align: right;
         }
-        .left {
-                text-align: left;
-        }
-
 </style>
 <body>
 
-<h3 style="text-align: center;">Show user portfolio</h3>
-
-<td th:if="${users != null}">
-    <form action="/userdata/getUserPortfolio" th:object="${request}" method="post">
-        <select name="request">
-            <option th:each="user : ${users}" th:text="${user}"></option>
-        </select>
-        <br>
-        <br>
-        <input type="submit" style="font-size: 100%;" value="Select" name="Submit"/>
-    </form>
-</td>
-
-<table>
-    <caption th:text="${request.userName}"></caption>
-    <tr>
-        <td class="center">TICKER</td>
-        <td class="center">NAME</td>
-        <td class="center">AMOUNT</td>
-        <td class="center">PURCHASE PRICE</td>
-        <td class="center">MARKET PRICE</td>
-        <td class="center">PROFIT&LOSS</td>
-    </tr>
+<fieldset>
+    <legend style="padding-bottom: 5px;">SHOW USER PORTFOLIO</legend>
+    <td th:if="${users != null}">
+        <table style="margin-left: auto; margin-right: auto;">
+            <form action="/userdata/getUserPortfolio" th:object="${request}" method="post">
+                <tr>
+                    <td>Choose user:</td>
+                    <td><select name="request">
+                        <option th:each="user : ${users}" th:text="${user}"></option>
+                    </select></td>
+                    <td><input type="submit" value="Select" name="Submit"/></td>
+                </tr>
+            </form>
+        </table>
+    </td>
 
     <td th:if="${portfolio != null}">
-        <tr th:each="position : ${portfolio}">
-            <td th:text="${position.security.ticker}"></td>
-            <td th:text="${position.security.name}"></td>
-            <td class="right" th:text="${position.amount}"></td>
-            <td class="right" th:text="${position.purchasePrice}"></td>
-            <td class="right" th:text="${position.security.marketPrice}"></td>
-            <td class="right" th:text="${T(lv.javaguru.java2.qwe.core.utils.UtilityMethods).round(
+        <table class="table2">
+            <caption th:text="${request.userName}"></caption>
+            <tr>
+                <td class="center">TICKER</td>
+                <td class="center">NAME</td>
+                <td class="center">AMOUNT</td>
+                <td class="center">PURCHASE PRICE</td>
+                <td class="center">MARKET PRICE</td>
+                <td class="center">PROFIT&LOSS</td>
+            </tr>
+
+            <td th:if="${portfolio != null}">
+                <tr th:each="position : ${portfolio}">
+                    <td th:text="${position.security.ticker}"></td>
+                    <td th:text="${position.security.name}"></td>
+                    <td class="right" th:text="${position.amount}"></td>
+                    <td class="right" th:text="${position.purchasePrice}"></td>
+                    <td class="right" th:text="${position.security.marketPrice}"></td>
+                    <td class="right" th:text="${T(lv.javaguru.java2.qwe.core.utils.UtilityMethods).round(
             (position.security.marketPrice * position.amount) - (position.purchasePrice * position.amount)
             )}"></td>
-        </tr>
+                </tr>
+            </td>
+        </table>
     </td>
-</table>
+    <br>
+    <tr>CASH:</tr>
+    <tr th:each="cash : ${cash}">
+        <td th:text="${T(lv.javaguru.java2.qwe.core.utils.UtilityMethods).round(cash)}"></td>
+    </tr>
+</fieldset>
 <br>
-<tr>CASH:</tr>
-<tr th:each="cash : ${cash}">
-    <td th:text="${T(lv.javaguru.java2.qwe.core.utils.UtilityMethods).round(cash)}"></td>
-</tr>
 
 <form action="/userMenu" method="get">
-    <br>
-    <br>
-    <input type="submit" style="font-size: 100%;" value="Return to User menu" name="Submit"/>
+    <input type="submit" style="float: right;" value="Back" name="Submit"/>
 </form>
 
 </body>
