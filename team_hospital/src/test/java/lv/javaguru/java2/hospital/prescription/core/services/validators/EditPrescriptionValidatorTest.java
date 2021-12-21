@@ -1,5 +1,6 @@
 package lv.javaguru.java2.hospital.prescription.core.services.validators;
 
+import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.prescription.core.checkers.PrescriptionLongNumChecker;
 import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
@@ -27,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(JUnitPlatform.class)
 class EditPrescriptionValidatorTest {
 
-    @Mock private PatientRepository patientRepository;
+    @Mock private JpaPatientRepository patientRepository;
     @Mock private PrescriptionExistenceByIDValidator prescriptionExistenceIDValidator;
     @Mock private PrescriptionLongNumChecker prescriptionLongNumChecker;
     @Mock private PrescriptionEnumChecker enumChecker;
@@ -82,7 +83,7 @@ class EditPrescriptionValidatorTest {
         assertEquals(errors.get(0).getMessage(), "must not be empty!");
     }
 
-    @Ignore
+    @Test
     public void shouldReturnPrescriptionExistenceError(){
         EditPrescriptionRequest request = new EditPrescriptionRequest("1", "PATIENT", "2");
         Mockito.when(prescriptionExistenceIDValidator.execute(Long.valueOf(request.getPrescriptionID())))
@@ -125,7 +126,7 @@ class EditPrescriptionValidatorTest {
         assertEquals(errors.get(0).getMessage(), "must be a number!");
     }
 
-    @Ignore
+    @Test
     public void shouldReturnPatientExistenceError(){
         EditPrescriptionRequest request = new EditPrescriptionRequest("1", "PATIENT", "2");
         Mockito.when(prescriptionExistenceIDValidator.execute(Long.valueOf(request.getPrescriptionID())))
@@ -140,7 +141,7 @@ class EditPrescriptionValidatorTest {
         assertEquals(errors.get(0).getMessage(), "does not exist!");
     }
 
-    @Ignore
+    @Test
     public void shouldNotReturnError(){
         EditPrescriptionRequest request = new EditPrescriptionRequest("1", "PATIENT", "2");
         Mockito.when(prescriptionExistenceIDValidator.execute(Long.valueOf(request.getPrescriptionID())))

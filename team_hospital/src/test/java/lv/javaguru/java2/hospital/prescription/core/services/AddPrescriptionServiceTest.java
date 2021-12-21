@@ -1,11 +1,8 @@
 package lv.javaguru.java2.hospital.prescription.core.services;
 
-import lv.javaguru.java2.hospital.database.doctor_repository.DoctorRepository;
 import lv.javaguru.java2.hospital.database.jpa.JpaDoctorRepository;
 import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
 import lv.javaguru.java2.hospital.database.jpa.JpaPrescriptionRepository;
-import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
-import lv.javaguru.java2.hospital.database.prescription_repository.PrescriptionRepository;
 import lv.javaguru.java2.hospital.domain.Doctor;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.prescription.core.requests.AddPrescriptionRequest;
@@ -13,7 +10,6 @@ import lv.javaguru.java2.hospital.prescription.core.responses.AddPrescriptionRes
 import lv.javaguru.java2.hospital.prescription.core.responses.CoreError;
 import lv.javaguru.java2.hospital.prescription.core.services.validators.AddPrescriptionValidator;
 import lv.javaguru.java2.hospital.prescription.matchers.PrescriptionMatcher;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -62,8 +58,8 @@ class AddPrescriptionServiceTest {
         Mockito.verifyNoMoreInteractions(database);
     }
 
-    @Ignore
-    public void shouldAddVisitToDatabase() {
+    @Test
+    public void shouldAddPrescriptionToDatabase() {
         Mockito.when(validator.validate(any())).thenReturn(new ArrayList<>());
         Long doctorId = 12L;
         Long patientId = 15L;
@@ -71,13 +67,12 @@ class AddPrescriptionServiceTest {
 
         Doctor doctor = new Doctor("DoctorName", "DoctorSurname", "DoctorSpeciality");
         doctor.setId(doctorId);
-        List<Doctor> doctors = new ArrayList<>();
-        doctors.add(doctor);
+        Optional<Doctor> doctors = Optional.of(doctor);
         Optional<Patient> patient = Optional.of(new Patient("name", "surname", "1234"));
         patient.get().setId(patientId);
 
         Mockito.when(patientRepository.findById(patientId)).thenReturn(patient);
-        Mockito.when(doctorRepository.getById(doctorId)).thenReturn(doctors);
+        Mockito.when(doctorRepository.findById(doctorId)).thenReturn(doctors);
 
         AddPrescriptionResponse response = service.execute(request);
         assertFalse(response.hasErrors());
