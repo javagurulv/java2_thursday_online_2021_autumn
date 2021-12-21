@@ -24,6 +24,10 @@ public class UpdateReservationService {
         List<CoreError> errors = validator.validate(request);
         if (!errors.isEmpty()) {
             return new UpdateReservationResponse(errors);
+              //  } else {
+            //          switch (request.getFieldToChange().toLowerCase(Locale.ROOT)) {
+             //              case "visitor_id" -> {
+
         }
         boolean ifEditReservation = databaseReservation.editReservation(Long.valueOf(request.getReservationId()),
                 UpdateReservationEnum.valueOf(request.getEnumEditReservation().toUpperCase(Locale.ROOT)), request.getChanges());
