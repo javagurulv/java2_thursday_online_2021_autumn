@@ -13,6 +13,12 @@ public class DomainTest {
     private String riskWeight;
     private String riskWeightOperator;
     private String riskWeightTarget;
+    private String ordering;
+    private String orderBy;
+    private String orderDirection;
+    private String paging;
+    private String pageNumber;
+    private String pageSize;
 
     public String getIndustry() {
         return industry;
@@ -100,6 +106,54 @@ public class DomainTest {
 
     public void setRiskWeightTarget(String riskWeightTarget) {
         this.riskWeightTarget = riskWeightTarget;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public String getOrderDirection() {
+        return orderDirection;
+    }
+
+    public void setOrderDirection(String orderDirection) {
+        this.orderDirection = orderDirection;
+    }
+
+    public String getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(String pageNumber) {
+        this.pageNumber = pageNumber;
+    }
+
+    public String getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(String pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public String getOrdering() {
+        return ordering;
+    }
+
+    public void setOrdering(String ordering) {
+        this.ordering = ordering;
+    }
+
+    public String getPaging() {
+        return paging;
+    }
+
+    public void setPaging(String paging) {
+        this.paging = paging;
     }
 
 }

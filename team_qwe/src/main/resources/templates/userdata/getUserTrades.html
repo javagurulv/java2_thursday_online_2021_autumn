@@ -79,7 +79,7 @@
                 <td class="right" th:text="${trade.quantity}"></td>
                 <td class="right" th:text="${trade.tradePrice}"></td>
                 <td class="right" th:text="${T(lv.javaguru.java2.qwe.core.utils.UtilityMethods)
-                .round(trade.quantity * trade.tradePrice)}"></td>
+                .round(-trade.quantity * trade.tradePrice)}"></td>
                 <td class="right" th:text="${trade.dateTime}"></td>
             </tr>
         </td>

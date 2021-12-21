@@ -89,6 +89,16 @@
                     <td>risk weight</td>
                 </tr>
                 <tr>
+                    <td><input type="checkbox" th:field="${request.ordering}" name="parameter5" value="ordering"/>
+                    </td>
+                    <td>ordering</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" th:field="${request.paging}" name="parameter6" value="paging"/>
+                    </td>
+                    <td>paging</td>
+                </tr>
+                <tr>
                     <td colspan="2" style="text-align: right;"><input type="submit" value="Set parameter"
                                                                       name="Submit"/></td>
                 </tr>
@@ -161,6 +171,36 @@
                         </select></td>
                         <td><input type="text" style="width: 30%;" th:field="${request.riskWeightTarget}"></td>
                     </tr>
+
+                    <tr th:if="${request.ordering != null}">
+                        <input type="hidden" name="ordering" value="ordering">
+                        <td>Sort By</td>
+                        <td><select name="orderBy" th:field="${request.orderBy}">
+                            <option value="ticker">Ticker</option>
+                            <option value="name">Name</option>
+                            <option value="industry">Industry</option>
+                            <option value="market_price">Market price</option>
+                            <option value="dividend_yield">Dividend yield</option>
+                            <option value="risk_weight">Risk weight</option>
+                        </select></td>
+                        <td><select name="orderDirection" th:field="${request.orderDirection}">
+                            <option value="ASC">Ascending</option>
+                            <option value="DESC">Descending</option>
+                        </select></td>
+                    </tr>
+
+                    <tr th:if="${request.paging != null}">
+                        <input type="hidden" name="paging" value="paging">
+                        <td>Page number</td>
+                        <td><input type="text" style="width: 30%;" th:field="${request.pageNumber}"></td>
+                    </tr>
+
+                    <tr th:if="${request.paging != null}">
+                        <input type="hidden" name="paging" value="paging">
+                        <td>Stocks per page</td>
+                        <td><input type="text" style="width: 30%;" th:field="${request.pageSize}"></td>
+                    </tr>
+
                     <tr>
                         <td></td>
                         <td></td>

@@ -14,8 +14,7 @@ import java.util.stream.Collectors;
 @Controller
 public class FilterController {
 
-    @Autowired
-    private FilterStocksByMultipleParametersService service;
+    @Autowired private FilterStocksByMultipleParametersService service;
 
 
     @GetMapping(value = "/database/filter")
@@ -34,9 +33,9 @@ public class FilterController {
         }
         if (domainTest.getMarketPrice() != null) {
             modelMap.addAttribute("marketPrice", new FilterStocksByAnyDoubleParameterRequest(
-                            "market_price",
-                            domainTest.getMarketPriceOperator(),
-                            domainTest.getMarketPriceTarget())
+                    "market_price",
+                    domainTest.getMarketPriceOperator(),
+                    domainTest.getMarketPriceTarget())
             );
         }
         if (domainTest.getDividends() != null) {
@@ -53,11 +52,24 @@ public class FilterController {
                     domainTest.getRiskWeightTarget())
             );
         }
+        if (domainTest.getOrderBy() != null && domainTest.getOrderDirection() != null) {
+            modelMap.addAttribute("ordering", new OrderingRequest(
+                    domainTest.getOrderBy(), domainTest.getOrderDirection()
+            ));
+        }
+        if (domainTest.getPageNumber() != null && domainTest.getPageSize() != null) {
+            modelMap.addAttribute("paging", new PagingRequest(
+                    domainTest.getPageNumber(), domainTest.getPageSize()
+            ));
+        }
+
+
         if (domainTest.getMarketPriceTarget() != null || domainTest.getDividendsTarget() != null
-        || domainTest.getIndustryTarget() != null || domainTest.getRiskWeightTarget() != null) {
+                || domainTest.getIndustryTarget() != null || domainTest.getRiskWeightTarget() != null) {
             List<CoreRequest> requestList = modelMap.entrySet().stream()
                     .filter(entry -> entry.getKey().equals("industry") || entry.getKey().equals("marketPrice")
-                            || entry.getKey().equals("dividends") || entry.getKey().equals("riskWeight"))
+                            || entry.getKey().equals("dividends") || entry.getKey().equals("riskWeight")
+                            || entry.getKey().equals("ordering") || entry.getKey().equals("paging"))
                     .map(entry -> {
                         if (entry.getKey().equals("industry")) {
                             return (FilterStocksByIndustryRequest) entry.getValue();
@@ -68,7 +80,13 @@ public class FilterController {
                         if (entry.getKey().equals("dividends")) {
                             return (FilterStocksByAnyDoubleParameterRequest) entry.getValue();
                         }
-                        return (FilterStocksByAnyDoubleParameterRequest) entry.getValue();
+                        if (entry.getKey().equals("riskWeight")) {
+                            return (FilterStocksByAnyDoubleParameterRequest) entry.getValue();
+                        }
+                        if (entry.getKey().equals("ordering")) {
+                            return (OrderingRequest) entry.getValue();
+                        }
+                        return (PagingRequest) entry.getValue();
                     })
                     .collect(Collectors.toList());
 
@@ -78,8 +96,7 @@ public class FilterController {
 
             if (response.hasErrors()) {
                 modelMap.addAttribute("errors", response.getErrors());
-            }
-            else {
+            } else {
                 modelMap.addAttribute("filtered", response.getList());
             }
             return "database/filter";
