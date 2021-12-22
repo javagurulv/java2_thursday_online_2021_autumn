@@ -2,7 +2,9 @@ package lv.javaguru.java2.qwe.core.requests.user_requests;
 
 public class GetUserPortfolioSummaryRequest {
 
-    private final String userName;
+    private String userName;
+
+    public GetUserPortfolioSummaryRequest() {}
 
     public GetUserPortfolioSummaryRequest(String userName) {
         this.userName = userName;
@@ -10,6 +12,10 @@ public class GetUserPortfolioSummaryRequest {
 
     public String getUserName() {
         return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
 }

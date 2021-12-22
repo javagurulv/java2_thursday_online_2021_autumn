@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="QWE finance project">
+    <meta name="author" content="Alex K">
+    <title>QWE Trading Application</title>
+</head>
+<style type="text/css">
+        body {
+              background-color: #8E8F92;
+              margin-left: 30%;
+              margin-right: 30%;
+              text-align: center;
+              padding: 20px 20px 20px 20px;
+              font-family: sans-serif;
+        }
+        table {
+               margin-left: auto;
+               margin-right: auto;
+        }
+        table.table2 {
+               width: 25%;
+               margin-left: auto;
+               margin-right: auto;
+        }
+        table.table2 td {
+                padding: 0.25rem;
+                border: 1px solid #ccc;
+        }
+        .center {
+                text-align: center;
+        }
+        .right {
+                text-align: right;
+        }
+        .left {
+                text-align: left;
+        }
+        fieldset.fieldset2 {
+              display: inline;
+        }
+</style>
+<body>
+
+<fieldset>
+    <legend style="padding-bottom: 5px;">SHOW USER PORTFOLIO SUMMARY</legend>
+    <td th:if="${users != null}">
+        <table style="margin-left: auto; margin-right: auto;">
+            <form action="/userdata/getUserPortfolioSummary" th:object="${request}" method="post">
+                <tr>
+                    <td>Choose user:</td>
+                    <td><select name="request">
+                        <option th:each="user : ${users}" th:text="${user}"></option>
+                    </select></td>
+                    <td><input type="submit" value="Select" name="Submit"/></td>
+                </tr>
+            </form>
+        </table>
+    </td>
+
+    <td th:if="${summary != null}">
+        <fieldset class="fieldset2">
+            <legend style="padding-bottom: 5px;" th:text="${request.userName}"></legend>
+            <table>
+                <tr>
+                    <td class="right">Risk Tolerance:</td>
+                    <td class="left" th:text="${summary.userRiskTolerance}"></td>
+                </tr>
+                <tr>
+                    <td class="right">Initial Investment:</td>
+                    <td class="left"
+                        th:text="${T(lv.javaguru.java2.qwe.core.utils.UtilityMethods).round(summary.userInitialInvestment)}"></td>
+                </tr>
+                <tr>
+                    <td class="right">Portfolio Generation Date:</td>
+                    <td class="left" th:text="${summary.portfolioGenerationDate}"></td>
+                </tr>
+                <tr>
+                    <td class="right">Portfolio Value:</td>
+                    <td class="left"
+                        th:text="${T(lv.javaguru.java2.qwe.core.utils.UtilityMethods).round(summary.portfolioValue)}"></td>
+                </tr>
+                <tr>
+                    <td class="right">Number of Positions:</td>
+                    <td class="left" th:text="${summary.amountOfPositions}"></td>
+                </tr>
+                <tr>
+                    <td class="right">Portfolio Dividend Yield:</td>
+                    <td class="left"
+                        th:text="${T(lv.javaguru.java2.qwe.core.utils.UtilityMethods).round(summary.avgWgtDividendYield)}"></td>
+                </tr>
+                <tr>
+                    <td class="right">Portfolio Risk Weight:</td>
+                    <td class="left"
+                        th:text="${T(lv.javaguru.java2.qwe.core.utils.UtilityMethods).round(summary.avgWgtRiskWeight)}"></td>
+                </tr>
+            </table>
+        </fieldset>
+        <br>
+        <fieldset class="fieldset2">
+            <legend style="padding-bottom: 5px;">Portfolio allocation</legend>
+            <table>
+                <tr th:each="sector : ${summary.portfolioAllocation}">
+                    <td class="right" th:text="${sector.key} + ':'"></td>
+                    <td th:text="${T(lv.javaguru.java2.qwe.core.utils.UtilityMethods).round(sector.value * 100)} + '%'"></td>
+                </tr>
+            </table>
+        </fieldset>
+    </td>
+
+    <td th:if="${errors != null}">
+        <br>
+        <tr th:each="error : ${errors}">
+            <td th:text="${error.field} + ':'"></td>
+            <td th:text="${error.message}"></td>
+        </tr>
+    </td>
+
+</fieldset>
+<br>
+
+<form action="/userMenu" method="get">
+    <input type="submit" style="float: right;" value="Back" name="Submit"/>
+</form>
+
+</body>
+</html>

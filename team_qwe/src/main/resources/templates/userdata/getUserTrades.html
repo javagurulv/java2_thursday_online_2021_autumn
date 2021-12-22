@@ -9,26 +9,21 @@
 <style type="text/css">
         body {
               background-color: #8E8F92;
-              margin-left: 20%;
-              margin-right: 20%;
+              margin-left: 30%;
+              margin-right: 30%;
               text-align: center;
-              border: 2px dotted black;
               padding: 20px 20px 20px 20px;
               font-family: sans-serif;
         }
-        table {
+        table.table2 {
                border-collapse: collapse;
                width: 100%;
+               margin-left: auto;
+               margin-right: auto;
         }
-        th, td {
+        table.table2 td {
                 padding: 0.25rem;
-                text-align: left;
                 border: 1px solid #ccc;
-        }
-        caption {
-                font-size: 110%;
-                font-style: italic;
-                padding-bottom: 12px;
         }
         .center {
                 text-align: center;
@@ -36,55 +31,56 @@
         .right {
                 text-align: right;
         }
-        .left {
-                text-align: left;
-        }
 </style>
 <body>
 
-<h3 style="text-align: center;">Show user trades</h3>
+<fieldset>
+    <legend style="padding-bottom: 5px;">SHOW USER TRADES</legend>
+    <td th:if="${users != null}">
+        <table style="margin-left: auto; margin-right: auto;">
+            <form action="/userdata/getUserTrades" th:object="${request}" method="post">
+                <tr>
+                    <td>Choose user:</td>
+                    <td><select name="request">
+                        <option th:each="user : ${users}" th:text="${user}"></option>
+                    </select></td>
+                    <td><input type="submit" value="Select" name="Submit"/></td>
+                </tr>
+            </form>
+        </table>
+    </td>
 
-<td th:if="${users != null}">
-    <form action="/userdata/getUserTrades" th:object="${request}" method="post">
-        <select name="request">
-            <option th:each="user : ${users}" th:text="${user}"></option>
-        </select>
-        <br>
-        <br>
-        <input type="submit" style="font-size: 100%;" value="Select" name="Submit"/>
-    </form>
-</td>
-<br>
-
-<td th:if="${trades != null}">
-    <table>
-        <caption th:text="${request.userName}"></caption>
-        <tr>
-            <td class="center">TRADE ID</td>
-            <td class="center">USER NAME</td>
-            <td class="center">SECURITY TICKER</td>
-            <td class="center">TRADE TYPE</td>
-            <td class="center">QUANTITY</td>
-            <td class="center">TRADE PRICE</td>
-            <td class="center">TRADE AMOUNT</td>
-            <td class="center">TRADE DATE AND TIME</td>
-        </tr>
-
-        <td>
-            <tr th:each="trade : ${trades}">
-                <td th:text="${trade.id}"></td>
-                <td th:text="${trade.user.name}"></td>
-                <td th:text="${trade.security.ticker}"></td>
-                <td th:text="${trade.tradeType}"></td>
-                <td class="right" th:text="${trade.quantity}"></td>
-                <td class="right" th:text="${trade.tradePrice}"></td>
-                <td class="right" th:text="${T(lv.javaguru.java2.qwe.core.utils.UtilityMethods)
-                .round(-trade.quantity * trade.tradePrice)}"></td>
-                <td class="right" th:text="${trade.dateTime}"></td>
+    <td th:if="${trades != null}">
+        <table class="table2">
+            <caption th:text="${request.userName}"></caption>
+            <tr>
+                <td class="center">TRADE ID</td>
+                <td class="center">USER NAME</td>
+                <td class="center">SECURITY TICKER</td>
+                <td class="center">TRADE TYPE</td>
+                <td class="center">QUANTITY</td>
+                <td class="center">TRADE PRICE</td>
+                <td class="center">TRADE AMOUNT</td>
+                <td class="center">TRADE DATE AND TIME</td>
             </tr>
-        </td>
-    </table>
-</td>
+
+            <td>
+                <tr th:each="trade : ${trades}">
+                    <td th:text="${trade.id}"></td>
+                    <td th:text="${trade.user.name}"></td>
+                    <td th:text="${trade.security.ticker}"></td>
+                    <td th:text="${trade.tradeType}"></td>
+                    <td class="right" th:text="${trade.quantity}"></td>
+                    <td class="right" th:text="${trade.tradePrice}"></td>
+                    <td class="right" th:text="${T(lv.javaguru.java2.qwe.core.utils.UtilityMethods)
+                .round(-trade.quantity * trade.tradePrice)}"></td>
+                    <td class="right" th:text="${trade.dateTime}"></td>
+                </tr>
+            </td>
+        </table>
+    </td>
+</fieldset>
+<br>
 
 <td th:if="${errors != null}">
     <tr th:each="error : ${errors}">
@@ -95,9 +91,7 @@
 </td>
 
 <form action="/userMenu" method="get">
-    <br>
-    <br>
-    <input type="submit" style="font-size: 100%;" value="Return to User menu" name="Submit"/>
+    <input type="submit" style="float: right;" value="Back" name="Submit"/>
 </form>
 
 </body>

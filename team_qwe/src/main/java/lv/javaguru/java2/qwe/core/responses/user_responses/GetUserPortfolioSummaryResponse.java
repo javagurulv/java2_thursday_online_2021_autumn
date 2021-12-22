@@ -9,7 +9,6 @@ import java.util.Map;
 
 public class GetUserPortfolioSummaryResponse extends CoreResponse {
 
-
     private int userRiskTolerance;
     private double userInitialInvestment;
     private LocalDate portfolioGenerationDate;

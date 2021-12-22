@@ -9,22 +9,15 @@
 <style type="text/css">
         body {
               background-color: #8E8F92;
-              margin-left: 20%;
-              margin-right: 20%;
-              text-align: left;
-              border: 2px outset;
+              margin-left: 30%;
+              margin-right: 30%;
+              text-align: center;
               padding: 20px 20px 20px 20px;
               font-family: sans-serif;
         }
-        th, td {
-                padding: 5px;
-                text-align: left;
-                border: 1px solid #ccc;
-        }
-        caption {
-                font-size: 110%;
-                font-style: italic;
-                padding-bottom: 12px;
+        table {
+               margin-left: auto;
+               margin-right: auto;
         }
         .center {
                 text-align: center;
@@ -35,73 +28,79 @@
         .left {
                 text-align: left;
         }
+        fieldset {
+              display: inline;
+        }
 </style>
 <body>
 
-<h3 style="text-align: center;">Market order for stocks</h3>
+<fieldset>
+    <legend style="padding-bottom: 5px;">MARKET ORDER</legend>
 
-<td th:if="${users != null}">
+    <td th:if="${users != null}">
 
-    <form action="/userdata/stockMarketOrder" th:object="${request}" method="post">
-        <table>
-            <tr>
-                <th></th>
-                <th></th>
-            </tr>
-            <tr>
-                <td style="text-align: right">Choose user:</td>
-                <td><select name="name" style="width: 100%; text-align: center;">
-                    <option th:each="user : ${users}" th:text="${user}"></option>
-                </select></td>
-            </tr>
-            <tr>
-                <td style="text-align: right">Choose trade type:</td>
-                <td><select name="type" style="width: 100%; text-align: center;">
-                    <option value="BUY">BUY</option>
-                    <option value="SELL">SELL</option>
-                </select></td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Enter ticker:</td>
-                <td><input type="text" name="ticker"/></td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Enter quantity:</td>
-                <td><input type="text" name="quantity"/></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td style="text-align: center;"><input type="submit" style="font-size: 100%;" value="CONFIRM TRADE" name="Submit"/></td>
-            </tr>
-        </table>
-    </form>
+        <form action="/userdata/stockMarketOrder" th:object="${request}" method="post">
+            <table>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td style="text-align: right">Choose user:</td>
+                    <td><select name="name" style="width: 100%; text-align: center;">
+                        <option th:each="user : ${users}" th:text="${user}"></option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">Choose trade type:</td>
+                    <td><select name="type" style="width: 100%; text-align: center;">
+                        <option value="BUY">BUY</option>
+                        <option value="SELL">SELL</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Enter ticker:</td>
+                    <td><input type="text" name="ticker"/></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Enter quantity:</td>
+                    <td><input type="text" name="quantity"/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style="text-align: center;"><input type="submit" style="font-size: 100%;" value="CONFIRM TRADE"
+                                                           name="Submit"/></td>
+                </tr>
+            </table>
+        </form>
 
-</td>
+    </td>
 
-<td th:if="${errors != null}">
-    <tr th:each="error : ${errors}">
-        <td th:text="${error.field} + ':'"></td>
-        <td th:text="${error.message}"></td>
-        <br>
-    </tr>
-</td>
 
-<td th:if="${buyTrade != null}">
-    <tr th:each="trade : ${buyTrade}">
-        <td th:text="${buyTrade}"></td>
-    </tr>
-</td>
+    <td th:if="${errors != null}">
+        <tr th:each="error : ${errors}">
+            <td th:text="${error.field} + ':'"></td>
+            <td th:text="${error.message}"></td>
+            <br>
+        </tr>
+    </td>
 
-<td th:if="${sellTrade != null}">
-    <tr th:each="trade : ${sellTrade}">
-        <td th:text="${sellTrade}"></td>
-    </tr>
-</td>
+    <td th:if="${buyTrade != null}">
+        <tr th:each="trade : ${buyTrade}">
+            <td th:text="${buyTrade}"></td>
+        </tr>
+    </td>
 
+    <td th:if="${sellTrade != null}">
+        <tr th:each="trade : ${sellTrade}">
+            <td th:text="${sellTrade}"></td>
+        </tr>
+    </td>
+</fieldset>
+<br>
 
 <form action="/userMenu" method="get">
-    <br>
-    <input type="submit" style="font-size: 100%;" value="Return to User menu" name="Submit"/>
+    <input type="submit" style="float: right;" value="Back" name="Submit"/>
 </form>
 
 </body>
