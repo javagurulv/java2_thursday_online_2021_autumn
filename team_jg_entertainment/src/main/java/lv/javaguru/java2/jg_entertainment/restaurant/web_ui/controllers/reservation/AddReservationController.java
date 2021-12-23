@@ -27,8 +27,11 @@ public class AddReservationController {
         if (response.hasError()) {
             modelMap.addAttribute("errors", response.getErrorList());
             return "reservation/addReservation";
-        } else {
-            return "redirect:/";
+        } if (!response.hasError()) {
+            modelMap.addAttribute("errors", null);
+            modelMap.addAttribute("message", "Reservation was added!");
+            return "reservation/addReservation";
         }
+            return "redirect:/";
     }
 }

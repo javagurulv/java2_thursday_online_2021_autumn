@@ -15,26 +15,25 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
-}
+    }
     h2 {
         color: MediumVioletRed;
         text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
+    }
     p {
         font-family: "Trebuchet MS", Verdana, sans-serif;
         list-style-position: left;
-}
+    }
     th, td {
         padding: 8px;
         text-align: left;
         border-bottom: 1px solid #ddd;
-}
+    }
 </style>
 
 <body>
 
 <h2><big>Search user</big></h2>
-
 <table>
     <tr>
         <td><big>Name:</big></td>
@@ -67,12 +66,12 @@
 
 </table>
 
-<td th:if="${errors != null}">
+<big><td th:if="${errors != null}">
     <tr th:each="error : ${errors}">
         <td th:text="${error.field}"></td>
         <td th:text="${error.description}"></td>
     </tr>
-</td>
+</td></big>
 
 <form action="/" method="get">
     <input type="submit" value="Main menu" name="Submit"

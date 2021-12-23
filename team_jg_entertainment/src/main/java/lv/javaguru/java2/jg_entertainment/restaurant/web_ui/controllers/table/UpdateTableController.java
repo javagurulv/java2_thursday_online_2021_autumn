@@ -27,8 +27,12 @@ public class UpdateTableController {
         if (response.hasError()) {
             modelMap.addAttribute("errors", response.getErrorsList());
             return "table/updateTable";
-        } else {
-            return "redirect:/";
         }
+        if (!response.hasError()) {
+            modelMap.addAttribute("errors", null);
+            modelMap.addAttribute("message", "Reservation was updated!");
+            return "table/updateTable";
+        }
+        return "redirect:/";
     }
 }

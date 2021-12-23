@@ -1,4 +1,5 @@
 package lv.javaguru.java2.jg_entertainment.restaurant.web_ui.controllers.menu;
+
 import lv.javaguru.java2.jg_entertainment.restaurant.core.requests.menus.AddMenuRequest;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.responses.menus.AddMenuResponse;
 import lv.javaguru.java2.jg_entertainment.restaurant.core.services.services_menu.AddMenuService;
@@ -12,8 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AddMenuController {
 
-    @Autowired
-    private AddMenuService service;
+    @Autowired private AddMenuService service;
 
     @GetMapping(value = "/addMenu")
     public String showAddTablePage(ModelMap modelMap) {
@@ -27,8 +27,12 @@ public class AddMenuController {
         if (response.hasErrors()) {
             modelMap.addAttribute("errors", response.getErrors());
             return "menu/addMenu";
-        } else {
-            return "redirect:/";
         }
+        if (!response.hasErrors()) {
+            modelMap.addAttribute("errors", null);
+            modelMap.addAttribute("message", "Menu was added!");
+            return "menu/addMenu";
+        }
+        return "redirect:/";
     }
 }

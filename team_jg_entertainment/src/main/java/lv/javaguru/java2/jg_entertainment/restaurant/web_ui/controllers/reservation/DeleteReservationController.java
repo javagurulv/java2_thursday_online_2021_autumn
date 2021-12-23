@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class DeleteReservationController {
 
-    @Autowired
-    private DeleteReservationService service;
+    @Autowired private DeleteReservationService service;
 
     @GetMapping(value = "/deleteReservation")
     public String showDeleteReservationPage(ModelMap modelMap) {
@@ -28,9 +27,12 @@ public class DeleteReservationController {
         if (response.hasError()) {
             modelMap.addAttribute("errors", response.getErrorList());
             return "reservation/deleteReservation";
-        } else {
-            return "redirect:/";
         }
-
+        if (!response.hasError()) {
+            modelMap.addAttribute("errors", null);
+            modelMap.addAttribute("message", "Reservation was deleted!");
+            return "reservation/deleteReservation";
+        }
+        return "redirect:/";
     }
 }

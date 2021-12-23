@@ -14,16 +14,16 @@
          background-repeat: no-repeat;
          background-attachment: fixed;
          background-size: cover;
-}
+     }
      h2 {
          color: MediumVioletRed;
          text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
          width:750px;
          text-align:center;
          text-indent:200px;
-
-}
+     }
 </style>
+
 <body>
 
 <h2><big>Update reservation</big></h2>
@@ -34,7 +34,6 @@
         <td><big>Choose that to change:ID_VISITOR or ID_MENU or ID_TABLE:</big></td>
         <td><big>Add NEW ID:</big></td>
     </tr>
-
     <tr>
         <form action="/updateReservation" th:object="${request}" method="post">
             <td><input type="text" placeholder="Enter....." th:field="${request.reservationId}"
@@ -51,17 +50,16 @@
     </tr>
 </table>
 
-<td th:if="${errors != null}">
+<big><td th:if="${errors != null}">
     <tr th:each="error : ${errors}">
         <td th:text="${error.field}"></td>
         <td th:text="${error.messageError}"></td>
     </tr>
-</td>
+</td></big>
 
-<td th:if="${errors == null}">
+<big><td th:if="${errors == null}">
     <tr th:text="${message}"></tr>
-</td>
-
+</td></big>
 
 <form action="/" method="get">
     <input type="submit" value="Main menu" name="Submit"

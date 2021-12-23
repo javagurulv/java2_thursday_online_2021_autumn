@@ -28,13 +28,13 @@
           background-repeat: no-repeat;
           background-attachment: fixed;
           background-size: cover;
-}
+       }
        h2 {
           text-transform: uppercase;
           text-align: absolute;
           color: white;
           text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkBlue;
-}
+       }
        .button {
           border-radius: 4px;
           background-color: #f4511e;
@@ -47,79 +47,61 @@
           transition: all 0.5s;
           cursor: pointer;
           margin: 1px;
-}
-      .button span {
+       }
+       .button span {
           cursor: pointer;
           display: inline-block;
           position: relative;
           transition: 0.5s;
-}
-      .button span:after {
-         content: '\00bb';
-         position: absolute;
-         opacity: 0;
-         top: 0;
-         right: -20px;
-         transition: 0.5s;
-}
-     .button:hover span {
-         padding-right: 25px;
-}
-     .button:hover span:after {
-         opacity: 1;
-         right: 0;
-}
-     .clock {
-         position: absolute;
-         top: 50%;
-         width: 99%;
-         margin: -60px auto 0 auto;
-         font-size: 60px;
-         font-family: Verdana, Arial, Sans-serif;
-         text-align: center;
-         color: #fff;
-}
-     .clock ul {
-        margin: 0 auto;
-        list-style: none;
-}
-    .clock ul li {
-        display: inline;
-}
-    .clock ul li#separator {
-       -moz-animation: myfade 1s ease infinite;
-       -webkit-animation: myfade 1s ease infinite;
-}
-    .clock ul li#separators {
-       -moz-animation: myfade 1s ease infinite;
-       -webkit-animation: myfade 1s ease infinite;
-}
-/* Animation */
-    @-webkit-keyframes myfade {
-         0% {
-    opacity: 1.0;
-}
-     50% {
+       }
+       .button span:after {
+          content: '\00bb';
+          position: absolute;
           opacity: 0;
-}
-     100% {
-          opacity: 1.0;
-  }
-}
-     @-moz-keyframes myfade {
-      0% {
-        opacity: 1.0;
-}
-      50% {
-        opacity: 0;
-        }
-      100% {
-         opacity: 1.0;
-      };
-}
-     html {
-       height: 100%;
-}
+          top: 0;
+          right: -20px;
+          transition: 0.5s;
+       }
+       .button:hover span {
+          padding-right: 25px;
+       }
+       .button:hover span:after {
+          opacity: 1;
+         right: 0;
+       }
+       .clock {
+          position: absolute;
+          top: 50%;
+          width: 99%;
+          margin: -60px auto 0 auto;
+          font-size: 60px;
+          font-family: Verdana, Arial, Sans-serif;
+          text-align: center;
+          color: #fff;
+       }
+       .clock ul {
+           margin: 0 auto;
+           list-style: none;
+       }
+       .clock ul li {
+          display: inline;
+       }
+       .clock ul li#separator {
+           -moz-animation: myfade 1s ease infinite;
+           -webkit-animation: myfade 1s ease infinite;
+       }
+       .clock ul li#separators {
+           -moz-animation: myfade 1s ease infinite;
+           -webkit-animation: myfade 1s ease infinite;
+       }
+        /* Animation */
+       @-webkit-keyframes myfade { 0% { opacity: 1.0;
+       } 50% { opacity: 0;  }
+        100% { opacity: 1.0;  } }
+       @-moz-keyframes myfade { 0% { opacity: 1.0; }
+         50% { opacity: 0; }
+         100% { opacity: 1.0; }; }
+         html { height: 100%; }
 </style>
 
 <body>

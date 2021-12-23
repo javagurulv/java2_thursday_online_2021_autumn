@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class DeleteTableController {
-    @Autowired
-    private RemoveTableService service;
+
+    @Autowired private RemoveTableService service;
 
     @GetMapping(value = "/deleteTable")
     public String showDeleteTablePage(ModelMap modelMap) {
@@ -22,14 +22,17 @@ public class DeleteTableController {
     }
 
     @PostMapping("/deleteTable")
-    public String processDeleteTableRequest(@ModelAttribute(value = "request") RemoveTableRequest request, ModelMap modelMap) {
+    public String processDeleteTableRequest(@ModelAttribute(value = "request")
+                                                        RemoveTableRequest request, ModelMap modelMap) {
         RemoveTableResponse response = service.execute(request);
         if (response.hasError()) {
             modelMap.addAttribute("errors", response.getErrorsList());
             return "table/deleteTable";
-        } else {
-            return "redirect:/";
         }
-
+        if (!response.hasError()) {
+            modelMap.addAttribute("message", "Table was deleted!");
+            return "table/deleteTable";
+        }
+        return "redirect:/";
     }
 }

@@ -21,15 +21,18 @@ public class DeleteUserController {
         return "user/deleteUser";
     }
 
-
     @PostMapping("/deleteUser")
     public String processDeleteUserRequest(@ModelAttribute(value = "request") DeleteUserRequest request, ModelMap modelMap) {
         DeleteUsersResponse response = service.execute(request);
         if (response.hasError()) {
             modelMap.addAttribute("errors", response.getErrorsList());
             return "user/deleteUser";
-        } else {
-            return "redirect:/";
         }
+        if (!response.hasError()) {
+            modelMap.addAttribute("errors", null);
+            modelMap.addAttribute("message", "User was deleted!");
+            return "user/deleteUser";
+        }
+        return "redirect:/";
     }
 }

@@ -15,14 +15,14 @@
           background-repeat: no-repeat;
           background-attachment: fixed;
           background-size: cover;
-}
+      }
       h2 {
           color: MediumVioletRed;
           text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
           width:750px;
           text-align:center;
           text-indent:200px;
-}
+      }
 </style>
 
 <body>
@@ -36,17 +36,12 @@
         <td><big>NEW Surname:</big></td>
         <td><big>NEW Telephone:</big></td>
     </tr>
-
     <tr>
         <form action="/updateUser" th:object="${request}" method="post">
-            <td><input type="text" placeholder="Enter....." th:field="${request.userId}"
-                       style="height:25px;width:250px"/></td>
-            <td><input type="text" placeholder="Enter....." th:field="${request.newUserName}"
-                       style="height:25px;width:250px"/></td>
-            <td><input type="text" placeholder="Enter....." th:field="${request.newSurname}"
-                       style="height:25px;width:250px"/></td>
-            <td><input type="text" placeholder="Enter....." th:field="${request.newTelephoneNumber}"
-                       style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.userId}" style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.newUserName}" style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.newSurname}" style="height:25px;width:250px"/></td>
+            <td><input type="text" placeholder="Enter....." th:field="${request.newTelephoneNumber}" style="height:25px;width:250px"/></td>
             <td>
                 <input type="submit" value="Update User" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;"/>
                 <input type="reset" value="Clear" style="border-radius: 12px; color:MediumVioletRed;text-align:center;font-size:17px;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;"/>
@@ -55,24 +50,22 @@
     </tr>
 </table>
 
-<td th:if="${errors != null}">
+<big><td th:if="${errors != null}">
     <tr th:each="error : ${errors}">
         <td th:text="${error.field}"></td>
         <td th:text="${error.messageError}"></td>
     </tr>
-</td>
+</td></big>
 
-<td th:if="${errors == null}">
+<big><td th:if="${errors == null}">
     <tr th:text="${message}"></tr>
-</td>
+</td></big>
 
 <form action="/" method="get">
-    <input type="submit" value="Main menu" name="Submit"
-           style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;" />
+    <input type="submit" value="Main menu" name="Submit" style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;" />
 </form>
 <form action="/userMenu" method="get">
-    <input type="submit" value="Return to users' menu" name="Submit"
-           style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;" />
+    <input type="submit" value="Return to users' menu" name="Submit" style="margin: 5px; top: 50px; left: 50px; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 6px darkBlue; font-size:20px;" />
 </form>
 
 </body>

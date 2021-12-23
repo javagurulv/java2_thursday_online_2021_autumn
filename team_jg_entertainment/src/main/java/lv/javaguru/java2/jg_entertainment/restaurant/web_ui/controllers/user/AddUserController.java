@@ -21,15 +21,19 @@ public class AddUserController {
         return "user/addUser";
     }
 
-
     @PostMapping("/addUser")
-    public String processAddUserRequest(@ModelAttribute(value = "request") AddUserRequest request, ModelMap modelMap) {
+    public String processAddUserRequest(@ModelAttribute(value = "request")
+                                                    AddUserRequest request, ModelMap modelMap) {
         AddUsersResponse response = service.execute(request);
         if (response.hasError()) {
             modelMap.addAttribute("errors", response.getErrorsList());
             return "user/addUser";
-        } else {
-            return "redirect:/";
         }
+        if (!response.hasError()) {
+            modelMap.addAttribute("errors", null);
+            modelMap.addAttribute("message", "User was added!");
+            return "user/addUser";
+        }
+        return "redirect:/";
     }
 }

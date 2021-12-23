@@ -27,8 +27,12 @@ public class UpdateMenuController {
         if (response.hasErrors()) {
             modelMap.addAttribute("errors", response.getErrors());
             return "menu/updateMenu";
-        } else {
-            return "redirect:/";
         }
+        if (!response.hasErrors()) {
+            modelMap.addAttribute("errors", null);
+            modelMap.addAttribute("message", "Menu was updated!");
+            return "menu/updateMenu";
+        }
+        return "redirect:/";
     }
 }

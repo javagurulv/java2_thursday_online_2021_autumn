@@ -22,13 +22,18 @@ public class UpdateUserController {
     }
 
     @PostMapping("/updateUser")
-    public String processUpdateUserRequest(@ModelAttribute(value = "request") UpdateUserRequest request, ModelMap modelMap) {
+    public String processUpdateUserRequest(@ModelAttribute(value = "request")
+                                                       UpdateUserRequest request, ModelMap modelMap) {
         UpdateUserResponse response = service.execute(request);
         if (response.hasError()) {
             modelMap.addAttribute("errors", response.getErrorsList());
             return "user/updateUser";
-        } else {
-            return "redirect:/";
         }
+        if (!response.hasError()) {
+            modelMap.addAttribute("errors", null);
+            modelMap.addAttribute("message", "User was updated!");
+            return "user/updateUser";
+        }
+        return "redirect:/";
     }
 }

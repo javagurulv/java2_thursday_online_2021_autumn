@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AddTableController {
 
-    @Autowired
-    private AddTableService service;
+    @Autowired private AddTableService service;
 
     @GetMapping(value = "/addTable")
     public String showAddTablePage(ModelMap modelMap) {
@@ -28,9 +27,13 @@ public class AddTableController {
         if (response.hasError()) {
             modelMap.addAttribute("errors", response.getErrorsList());
             return "table/addTable";
-        } else {
-            return "redirect:/";
         }
+        if (!response.hasError()) {
+            modelMap.addAttribute("message", "Table was added!");
+            return "table/addTable";
+        }
+        return "redirect:/";
     }
 }
+
 
