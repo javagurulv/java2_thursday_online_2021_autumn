@@ -32,4 +32,16 @@ public class RemoveClientRequest {
     public String getClientSurname() {
         return clientSurname;
     }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public void setClientSurname(String clientSurname) {
+        this.clientSurname = clientSurname;
+    }
+
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
+    }
 }

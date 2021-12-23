@@ -89,6 +89,9 @@ public class FindSpecialistService {
         if (!request.isNameProvided() && !request.isSurnameProvided() && request.isProfessionProvided()) {
             specialists = specialistRepository.findSpecialistByProfession(request.getSpecialistProfession());
         }
+        if (request.isNameProvided() && request.isSurnameProvided()) {
+            specialists = specialistRepository.findSpecialistByNameAndSurname(request.getSpecialistName(), request.getSpecialistSurname());
+        }
         if (request.isNameProvided() && request.isSurnameProvided() && request.isProfessionProvided()) {
             specialists = specialistRepository.findSpecialistByNameAndSurnameAndProfession(request.getSpecialistName(), request.getSpecialistSurname(), request.getSpecialistProfession());
         }

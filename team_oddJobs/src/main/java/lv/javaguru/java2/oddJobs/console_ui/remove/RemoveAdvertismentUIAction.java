@@ -26,7 +26,7 @@ public class RemoveAdvertismentUIAction implements UIAction {
         String advertismentTitle = scanner.nextLine();
 
 
-        RemoveAdvertismentRequest request = new RemoveAdvertismentRequest(advertismentTitle, advertismentId);
+        RemoveAdvertismentRequest request = new RemoveAdvertismentRequest(advertismentId,advertismentTitle);
         RemoveAdvertisementResponse removeAdvertisementResponse = deleteAdvertismentService.execute(request);
 
         if (removeAdvertisementResponse.hasErrors()) {

@@ -20,7 +20,7 @@ public class RemoveAdvertisementService {
 
     public RemoveAdvertisementResponse execute (RemoveAdvertismentRequest request){
         List<CoreError> errors =validator.validate(request);
-        if ((!errors.isEmpty())) {
+        if (!errors.isEmpty()) {
             return new RemoveAdvertisementResponse(errors);
         }
         boolean isAdvertisementRemoved = advertisementRepository.removeAdvertisement(request.getAdvId(), request.getAdvTitle());

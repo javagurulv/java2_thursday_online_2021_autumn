@@ -2,30 +2,35 @@ package lv.javaguru.java2.oddJobs.core.requests.remove;
 
 public class RemoveAdvertismentRequest {
 
-    private String advTitle;
-    private String advDescription;
     private Long advId;
+    private String advTitle;
 
-    public RemoveAdvertismentRequest (String advTitle, String advDescription, Long advId) {
-        this.advDescription = advDescription;
-        this.advTitle = advTitle;
+
+    public RemoveAdvertismentRequest(Long advId, String advTitle) {
         this.advId = advId;
-    }
-
-    public RemoveAdvertismentRequest(String advertismentTitle, long advertismentId) {
+        this.advTitle = advTitle;
     }
 
     public RemoveAdvertismentRequest() {
 
     }
 
-    public Long getAdvId() {return advId;}
 
-    public String getAdvTitle() {return advTitle;}
-
-    public String getAdvDescription() {return advDescription;}
-
-
+    public Long getAdvId() {
+        return advId;
     }
+
+    public void setAdvId(Long advId) {
+        this.advId = advId;
+    }
+
+    public String getAdvTitle() {
+        return advTitle;
+    }
+
+    public void setAdvTitle(String advTitle) {
+        this.advTitle = advTitle;
+    }
+}
 
 

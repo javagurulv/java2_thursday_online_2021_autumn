@@ -68,6 +68,13 @@ public class JdbcSpecialistRepositoryImpl implements SpecialistRepository {
     }
 
     @Override
+    public List<Specialist> findSpecialistByNameAndSurname(String specialistName, String specialistSurname) {
+        String sql = "SELECT * FROM specialists WHERE specialistName = ? AND specialistSurname = ?";
+        Object[] args = new Object[]{specialistName, specialistSurname};
+        return jdbcTemplate.query(sql, args, new SpecialistRowMapper());
+    }
+
+    @Override
     public List<Specialist> findSpecialistByNameAndSurnameAndProfession(String specialistName, String specialistSurname, String specialistProfession) {
         String sql = "SELECT * FROM specialists WHERE specialistName = ? AND specialistSurname = ? AND specialistProfession = ? ";
         Object[] args = new Object[]{specialistName, specialistSurname, specialistProfession};

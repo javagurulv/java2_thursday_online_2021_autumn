@@ -23,6 +23,7 @@ body {
 
 <table>
     <tr>
+        <td>ID:</td>
         <td>Name:</td>
         <td>Surname:</td>
         <td>Profession:</td>
@@ -32,6 +33,7 @@ body {
 
     <td th:if="${Specialists != null}">
         <tr th:each="specialist : ${Specialists}">
+            <td th:text="${specialist.specialistId}" />
             <td th:text="${specialist.specialistName}" />
             <td th:text="${specialist.specialistSurname}" />
             <td th:text="${specialist.specialistProfession}" />

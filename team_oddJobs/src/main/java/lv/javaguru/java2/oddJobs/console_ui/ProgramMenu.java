@@ -60,8 +60,8 @@ public class ProgramMenu {
         System.out.println("7.  Show all clients");
         System.out.println("8.  Show all specialists");
         System.out.println("9.  Show all advertisements");
-        System.out.println("10.  Delete client account");
-        System.out.println("11 Delete specialist account");
+        System.out.println("10. Delete client account");
+        System.out.println("11  Delete specialist account");
         System.out.println("12. Exit");
     }
 

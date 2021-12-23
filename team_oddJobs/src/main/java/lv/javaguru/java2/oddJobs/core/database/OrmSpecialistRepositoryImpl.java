@@ -73,7 +73,14 @@ public class OrmSpecialistRepositoryImpl implements SpecialistRepository {
         query.setParameter("specialistProfession", specialistProfession);
         return query.getResultList();
     }
-
+    @Override
+    public List<Specialist> findSpecialistByNameAndSurname(String specialistName, String specialistSurname) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "select b FROM Specialist b where specialistName = :specialistName AND specialistSurname = :specialistSurname");
+        query.setParameter("specialistName", specialistName);
+        query.setParameter("specialistSurname", specialistSurname);
+        return query.getResultList();
+    }
     @Override
     public List<Specialist> findSpecialistByNameAndSurnameAndProfession(String specialistName, String specialistSurname, String specialistProfession) {
         Query query = sessionFactory.getCurrentSession().createQuery(

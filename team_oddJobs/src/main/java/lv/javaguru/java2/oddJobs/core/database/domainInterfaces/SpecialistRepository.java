@@ -21,6 +21,8 @@ public interface SpecialistRepository {
 
     List<Specialist> findSpecialistByProfession(String specialistProfession);
 
+    List<Specialist> findSpecialistByNameAndSurname(String specialistName, String specialistSurname);
+
     List<Specialist> findSpecialistByNameAndSurnameAndProfession(String specialistName, String specialistSurname, String specialistProfession);
 
     List<Specialist> getAllSpecialist();

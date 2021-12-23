@@ -48,6 +48,11 @@ public class InMemorySpecialistRepositoryImpl implements SpecialistRepository {
     }
 
     @Override
+    public List<Specialist> findSpecialistByNameAndSurname(String specialistName, String specialistSurname) {
+        return null;
+    }
+
+    @Override
     public List<Specialist> findSpecialistByNameAndSurnameAndProfession(String specialistName, String specialistSurname, String specialistProfession) {
         return null;
     }

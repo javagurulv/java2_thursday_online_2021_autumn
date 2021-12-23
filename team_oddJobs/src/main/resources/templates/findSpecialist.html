@@ -48,6 +48,15 @@ body {
 </table>
 <td th:if="${Specialists != null}">
     <table>
+        <tr>
+            <td >Id</td>
+            <td >Name</td>
+            <td >Surname</td>
+            <td >Profession</td>
+            <td >Personal code</td>
+            <td >City</td>
+
+        </tr>
 
         <td th:if="${Specialists != null}">
             <tr th:each="specialist : ${Specialists}">
@@ -75,7 +84,6 @@ body {
 <form action="/" method="get">
     <br>
     <input type="submit" style="font-size: 100%;" value="Back to main page" name="Submit"/>
-    <input type="reset" value="Reset"/>
 
 </form>
 
