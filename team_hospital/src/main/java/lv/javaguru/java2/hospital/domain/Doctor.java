@@ -77,11 +77,10 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "doctor_actions.Doctor{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", speciality='" + speciality + '\'' +
-                '}';
+        return "Doctor:" +
+                " id = " + id +
+                ", name = " + name  +
+                ", surname= " + surname +
+                ", speciality = " + speciality + ".";
     }
 }

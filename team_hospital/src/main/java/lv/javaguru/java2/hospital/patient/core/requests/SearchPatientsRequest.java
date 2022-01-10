@@ -4,6 +4,10 @@ public class SearchPatientsRequest {
     private String name;
     private String surname;
     private String personalCode;
+    private String orderBy;
+    private String orderDirection;
+    private String pageNumber;
+    private String pageSize;
 
     private PatientOrdering patientOrdering;
     private PatientPaging patientPaging;
@@ -37,6 +41,18 @@ public class SearchPatientsRequest {
         this.personalCode = personalCode;
         this.patientOrdering = patientOrdering;
         this.patientPaging = patientPaging;
+    }
+
+    public SearchPatientsRequest(String name, String surname, String personalCode,
+                                 String orderBy, String orderDirection,
+                                 String pageNumber, String pageSize) {
+        this.name = name;
+        this.surname = surname;
+        this.personalCode = personalCode;
+        this.orderBy = orderBy;
+        this.orderDirection = orderDirection;
+        this.pageNumber = pageNumber;
+        this.pageSize = pageSize;
     }
 
     public String getName() {
@@ -97,5 +113,37 @@ public class SearchPatientsRequest {
 
     public void setPatientPaging(PatientPaging patientPaging) {
         this.patientPaging = patientPaging;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public String getOrderDirection() {
+        return orderDirection;
+    }
+
+    public void setOrderDirection(String orderDirection) {
+        this.orderDirection = orderDirection;
+    }
+
+    public String getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(String pageNumber) {
+        this.pageNumber = pageNumber;
+    }
+
+    public String getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(String pageSize) {
+        this.pageSize = pageSize;
     }
 }

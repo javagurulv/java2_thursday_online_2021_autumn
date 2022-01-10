@@ -18,7 +18,7 @@ public class SearchPatientsRequestFieldValidator {
         validateSurname(request).ifPresent(errors::add);
         validatePersonalCode(request).ifPresent(errors::add);
         return errors.size() >= 3
-                ? Collections.singletonList(new CoreError("At least one field", "must be filled!"))
+                ? Collections.singletonList(new CoreError("At least one field (Name||Surname||PersonalCode)", "must be filled!"))
                 : new ArrayList<>();
     }
 

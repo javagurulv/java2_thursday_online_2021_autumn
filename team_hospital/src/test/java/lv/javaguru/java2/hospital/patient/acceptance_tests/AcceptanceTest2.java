@@ -67,7 +67,7 @@ public class AcceptanceTest2 {
         PatientOrdering patientOrdering = new PatientOrdering("surname", "descending");
 
         SearchPatientsRequest searchPatientsRequest =
-                new SearchPatientsRequest("name4", "", "", patientOrdering);
+                new SearchPatientsRequest("name4", "", "", "surname", "descending", "", "");
         SearchPatientsResponse searchPatientsResponse = searchPatientsService.execute(searchPatientsRequest);
 
         assertEquals(searchPatientsResponse.getPatientList().size(), 3);
@@ -146,11 +146,9 @@ public class AcceptanceTest2 {
         AddPatientRequest addPatientRequest3 = new AddPatientRequest("name7", "surname3", "45678901234");
         addPatientService.execute(addPatientRequest3);
 
-        PatientOrdering patientOrdering = new PatientOrdering("surname", "ascending");
-        PatientPaging patientPaging = new PatientPaging(3, 1);
-
         SearchPatientsRequest searchPatientsRequest =
-                new SearchPatientsRequest("name7", "", "", patientOrdering, patientPaging);
+                new SearchPatientsRequest("name7", "", "", "surname", "ascending",
+                        "3","1");
         SearchPatientsResponse searchPatientsResponse = searchPatientsService.execute(searchPatientsRequest);
 
         assertEquals(searchPatientsResponse.getPatientList().size(), 1);

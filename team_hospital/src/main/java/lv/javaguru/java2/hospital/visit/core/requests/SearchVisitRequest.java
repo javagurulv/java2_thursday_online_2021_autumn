@@ -6,6 +6,10 @@ public class SearchVisitRequest {
     private String doctorId;
     private String patientId;
     private String visitDate;
+    private String orderBy;
+    private String orderDirection;
+    private String pageNumber;
+    private String pageSize;
 
     private VisitOrdering visitOrdering;
     private VisitPaging visitPaging;
@@ -43,6 +47,18 @@ public class SearchVisitRequest {
         this.visitDate = visitDate;
         this.visitOrdering = visitOrdering;
         this.visitPaging = visitPaging;
+    }
+
+    public SearchVisitRequest(String visitId, String doctorId, String patientId, String visitDate,
+                              String orderBy, String orderDirection, String pageNumber, String pageSize) {
+        this.visitId = visitId;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
+        this.visitDate = visitDate;
+        this.orderBy = orderBy;
+        this.orderDirection = orderDirection;
+        this.pageNumber = pageNumber;
+        this.pageSize = pageSize;
     }
 
     public boolean isVisitIdProvided() {
@@ -107,5 +123,37 @@ public class SearchVisitRequest {
 
     public void setVisitPaging(VisitPaging visitPaging) {
         this.visitPaging = visitPaging;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public String getOrderDirection() {
+        return orderDirection;
+    }
+
+    public void setOrderDirection(String orderDirection) {
+        this.orderDirection = orderDirection;
+    }
+
+    public String getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(String pageNumber) {
+        this.pageNumber = pageNumber;
+    }
+
+    public String getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(String pageSize) {
+        this.pageSize = pageSize;
     }
 }

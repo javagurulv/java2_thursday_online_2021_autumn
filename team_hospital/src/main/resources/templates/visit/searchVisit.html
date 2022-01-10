@@ -19,6 +19,10 @@
         <td>Doctor ID:</td>
         <td>Patient ID:</td>
         <td>Date:</td>
+        <td>Order by:</td>
+        <td>Order direction:</td>
+        <td>Page number:</td>
+        <td>Page size:</td>
     </tr>
 
     <tr>
@@ -27,6 +31,10 @@
             <td><input type="text" th:field="${request.doctorId}"/></td>
             <td><input type="text" th:field="${request.patientId}"/></td>
             <td><input type="text" th:field="${request.visitDate}"/></td>
+            <td><input type="text" th:field="${request.orderBy}"/></td>
+            <td><input type="text" th:field="${request.orderDirection}"/></td>
+            <td><input type="text" th:field="${request.pageNumber}"/></td>
+            <td><input type="text" th:field="${request.pageSize}"/></td>
             <td>
                 <input type="submit" value="Search Visit"/>
                 <input type="reset" value="Clear"/>

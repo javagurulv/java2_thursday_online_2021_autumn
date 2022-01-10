@@ -34,7 +34,9 @@ public class FindPatientByIDController {
         if (response.hasErrors()) {
             modelMap.addAttribute("errors", response.getErrors());
         } else if(!response.hasErrors()){
-            modelMap.addAttribute("patients", response.getPatient());
+            List<Patient> patients = new ArrayList<>();
+            patients.add(response.getPatient().get());
+            modelMap.addAttribute("patients", patients);
         }
         return "patient/findPatientByID";
     }

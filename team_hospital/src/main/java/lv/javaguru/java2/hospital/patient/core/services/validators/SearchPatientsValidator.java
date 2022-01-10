@@ -27,15 +27,15 @@ public class SearchPatientsValidator {
     }
 
     private void validatePagingIfNeeded(SearchPatientsRequest request, List<CoreError> errors) {
-        if (request.getPaging() != null) {
-            List<CoreError> pagingErrors = pagingValidator.validate(request.getPaging());
+        if (!request.getName().isEmpty() || !request.getSurname().isEmpty() || !request.getPersonalCode().isEmpty()) {
+            List<CoreError> pagingErrors = pagingValidator.validate(request);
             errors.addAll(pagingErrors);
         }
     }
 
     private void validateOrderingIfNeeded(SearchPatientsRequest request, List<CoreError> errors) {
-        if (request.getOrdering() != null) {
-            List<CoreError> orderingErrors = orderingValidator.validate(request.getOrdering());
+        if (!request.getName().isEmpty() || !request.getSurname().isEmpty() || !request.getPersonalCode().isEmpty()) {
+            List<CoreError> orderingErrors = orderingValidator.validate(request);
             errors.addAll(orderingErrors);
         }
     }

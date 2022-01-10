@@ -1,7 +1,6 @@
 package lv.javaguru.java2.hospital.patient.core.services.search_patient_service;
 
 import lv.javaguru.java2.hospital.database.jpa.JpaPatientRepository;
-import lv.javaguru.java2.hospital.database.patient_repository.PatientRepository;
 import lv.javaguru.java2.hospital.domain.Patient;
 import lv.javaguru.java2.hospital.patient.core.requests.SearchPatientsRequest;
 import lv.javaguru.java2.hospital.patient.core.responses.CoreError;
@@ -28,8 +27,8 @@ public class  SearchPatientsService {
     @Autowired private JpaPatientRepository patientRepository;
     @Autowired private SearchPatientsValidator validator;
     @Autowired private PatientSearch search;
-    @Autowired private Ordering ordering;
-    @Autowired private Paging paging;
+    @Autowired private PatientOrderingExecute patientOrderingExecute;
+    @Autowired private PatientPagingExecute patientPagingExecute;
 
     public SearchPatientsResponse execute(SearchPatientsRequest request) {
         List<CoreError> errors = validator.validate(request);
@@ -39,9 +38,9 @@ public class  SearchPatientsService {
 
         List<Patient> patients = search.execute(request);
 
-        patients = ordering.execute(patients, request.getOrdering(), orderingEnabled);
+        patients = patientOrderingExecute.execute(patients, request, orderingEnabled);
 
-        patients = paging.execute(patients, request.getPaging(), pagingEnabled);
+        patients = patientPagingExecute.execute(patients, request, pagingEnabled);
 
         return new SearchPatientsResponse(null, patients);
     }

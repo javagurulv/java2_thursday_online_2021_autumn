@@ -51,7 +51,7 @@ class SearchPatientsRequestFieldValidatorTest {
         SearchPatientsRequest request = new SearchPatientsRequest(null, null, null);
         List<CoreError> errors = validator.validate(request);
         assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "At least one field");
+        assertEquals(errors.get(0).getField(), "At least one field (Name||Surname||PersonalCode)");
         assertEquals(errors.get(0).getDescription(), "must be filled!");
     }
 }

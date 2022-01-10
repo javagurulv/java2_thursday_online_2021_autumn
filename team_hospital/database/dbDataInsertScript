@@ -70,6 +70,18 @@ VALUES (1002, 1002, '2023-01-03 14:00', "Visit to the pediatrician");
 INSERT INTO visits (doctor_id, patient_id, date, description)
 VALUES (1008, 1006, '2023-01-04 16:00', "Visit to the cardiologist");
 
+INSERT INTO visits (doctor_id, patient_id, date, description)
+VALUES (1002, 1006, '2023-03-17 12:00', "Visit to the pediatrician");
+
+INSERT INTO visits (doctor_id, patient_id, date, description)
+VALUES (1001, 1006, '2023-05-12 14:00', "Visit to the orthopedist");
+
+INSERT INTO visits (doctor_id, patient_id, date, description)
+VALUES (1010, 1006, '2023-07-21 09:00', "Visit to the otolaryngology");
+
+INSERT INTO visits (doctor_id, patient_id, date, description)
+VALUES (1004, 1006, '2023-09-12 10:00', "Visit to the neurosurgery");
+
 
 INSERT INTO prescriptions (doctor_id, patient_id, medication_name, quantity, date, valid_till)
 VALUES (1001, 1001, "Prednisone", 1, CURDATE(), ADDDATE(CURDATE(), INTERVAL 2 MONTH));

@@ -38,8 +38,10 @@ public class SearchVisitService {
         }
 
         List<Visit> visits = search.execute(request);
-        visits = ordering.execute(visits, request.getVisitOrdering(), orderingEnabled);
-        visits = paging.execute(visits, request.getVisitPaging(), pagingEnabled);
+
+        visits = ordering.execute(visits, request, orderingEnabled);
+
+        visits = paging.execute(visits, request, pagingEnabled);
 
         return new SearchVisitResponse(visits, null);
     }
