@@ -16,10 +16,10 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="doctor_id" type="BIGINT">
-                <constraints nullable="false"/>
+                <constraints nullable="false" foreignKeyName="fk_visit_doctor" references="doctors(id)"/>
             </column>
             <column name="patient_id" type="BIGINT">
-                <constraints nullable="false"/>
+                <constraints nullable="false" foreignKeyName="fk_visit_patient" references="patients(id)"/>
             </column>
             <column name="date" type="TIMESTAMP">
                 <constraints nullable="false"/>

@@ -16,10 +16,10 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="doctor_id" type="BIGINT">
-                <constraints nullable="false"/>
+                <constraints nullable="false" foreignKeyName="fk_prescription_doctor" references="doctors(id)"/>
             </column>
             <column name="patient_id" type="BIGINT">
-                <constraints nullable="false"/>
+                <constraints nullable="false" foreignKeyName="fk_prescription_patient" references="patients(id)"/>
             </column>
             <column name="medication_name" type="VARCHAR(200)">
                 <constraints nullable="false"/>

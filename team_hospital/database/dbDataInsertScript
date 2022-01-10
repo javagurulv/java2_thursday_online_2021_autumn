@@ -1,11 +1,11 @@
-INSERT INTO doctors(name, surname, speciality)
-VALUES ("Abdu", "William", "Orthopedics");
+INSERT INTO doctors(id, name, surname, speciality)
+VALUES (1001, "Abdu", "William", "Orthopedics");
 
-INSERT INTO doctors(name, surname, speciality)
-VALUES ("Abbott", "Myles", "Pediatrics");
+INSERT INTO doctors(id, name, surname, speciality)
+VALUES (1002, "Abbott", "Myles", "Pediatrics");
 
-INSERT INTO doctors(name, surname, speciality)
-VALUES ("Abbas", "Fouad", "Gynecology");
+INSERT INTO doctors(id, name, surname, speciality)
+VALUES (1003, "Abbas", "Fouad", "Gynecology");
 
 INSERT INTO doctors(id, name, surname, speciality)
 VALUES (1004, "Abbed", "Khalid", "Neurosurgery");
@@ -30,14 +30,14 @@ VALUES (1010, "Mona", "Abaza", "Otolaryngology");
 
 
 
-INSERT INTO patients (name, surname, personal_code)
-VALUES ("John", "Dorian", "11112222333");
+INSERT INTO patients (id, name, surname, personal_code)
+VALUES (1001, "John", "Dorian", "11112222333");
 
-INSERT INTO patients (name, surname, personal_code)
-VALUES ("Elliot", "Reid", "22223333444");
+INSERT INTO patients (id, name, surname, personal_code)
+VALUES (1002, "Elliot", "Reid", "22223333444");
 
-INSERT INTO patients (name, surname, personal_code)
-VALUES ("Christopher", "Turk", "33334444555");
+INSERT INTO patients (id, name, surname, personal_code)
+VALUES (1003, "Christopher", "Turk", "33334444555");
 
 INSERT INTO patients
 VALUES (1004, "Percival", "Cox", "44445555666");
@@ -69,18 +69,6 @@ VALUES (1002, 1002, '2023-01-03 14:00', "Visit to the pediatrician");
 
 INSERT INTO visits (doctor_id, patient_id, date, description)
 VALUES (1008, 1006, '2023-01-04 16:00', "Visit to the cardiologist");
-
-INSERT INTO visits (doctor_id, patient_id, date, description)
-VALUES (1002, 1006, '2023-03-17 12:00', "Visit to the pediatrician");
-
-INSERT INTO visits (doctor_id, patient_id, date, description)
-VALUES (1001, 1006, '2023-05-12 14:00', "Visit to the orthopedist");
-
-INSERT INTO visits (doctor_id, patient_id, date, description)
-VALUES (1010, 1006, '2023-07-21 09:00', "Visit to the otolaryngology");
-
-INSERT INTO visits (doctor_id, patient_id, date, description)
-VALUES (1004, 1006, '2023-09-12 10:00', "Visit to the neurosurgery");
 
 
 INSERT INTO prescriptions (doctor_id, patient_id, medication_name, quantity, date, valid_till)
